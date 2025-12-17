@@ -44,10 +44,11 @@ Tips, techniques, and patterns for maximizing productivity with GitHub Copilot.
 
 ## 🚀 Getting Started
 
-1. **Prerequisites**: Ensure you have a GitHub Copilot license (Individual, Business, or Enterprise)
-2. **Choose Your Path**: Start with Module 1 or jump to specific modules based on your needs
-3. **Practice**: Complete exercises in each module to reinforce learning
-4. **Explore**: Try features in your actual development workflow
+1. **Choose Your Path**: Check out [Learning Paths](./LEARNING_PATHS.md) to find the best route based on your role and goals
+2. **Prerequisites**: Ensure you have a GitHub Copilot license (Individual, Business, or Enterprise)
+3. **Start Learning**: Begin with Module 1 or jump to specific modules based on your needs
+4. **Practice**: Complete exercises in each module to reinforce learning
+5. **Explore**: Try features in your actual development workflow
 
 ## 📖 How to Use This Repository
 
@@ -58,6 +59,7 @@ Tips, techniques, and patterns for maximizing productivity with GitHub Copilot.
 
 ## 📑 Additional Resources
 
+- **[Learning Paths](./LEARNING_PATHS.md)** - Customized learning routes based on your role and experience
 - **[Quick Reference Guide](./QUICK_REFERENCE.md)** - Keyboard shortcuts, commands, and quick tips
 - **[Additional Resources](./RESOURCES.md)** - Comprehensive list of external resources, videos, and documentation
 
