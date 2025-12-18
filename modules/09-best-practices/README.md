@@ -24,6 +24,8 @@ Wrap up with concise checklists and patterns to sustain quality, speed, and safe
 
 ## 📚 Content
 
+> 💡 **Philosophy Connection**: The "Markdown Whisperer" era is about building **maintainable systems through clarity**. As discussed in [Module 0, Part B](../00-orientation/README.md#part-b-why-this-training-exists--the-evolution-of-enterprise-programming), clarity today prevents chaos tomorrow. These best practices ensure AI assistance makes your codebase better over time, not just faster in the moment.
+
 ### Prompt Checklist
 
 - Goal, Constraints, Context, Output

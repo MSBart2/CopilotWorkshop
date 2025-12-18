@@ -26,6 +26,8 @@ Copilot improves as your context improves. In this module, you’ll give Copilot
 
 ## 📚 Content
 
+> 💡 **Philosophy Connection**: Remember the "Markdown Whisperer" mindset from [Module 0, Part B](../00-orientation/README.md#part-b-why-this-training-exists--the-evolution-of-enterprise-programming)? Documentation isn't an afterthought—it's **leverage**. The files you create here amplify your team's knowledge and make Copilot dramatically more effective.
+
 ### What Counts as Context
 
 - Open files and selections

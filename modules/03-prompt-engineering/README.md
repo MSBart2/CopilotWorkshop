@@ -25,6 +25,8 @@ Great prompts are clear, constrained, and contextual. This module gives you ligh
 
 ## 📚 Content
 
+> 💡 **Philosophy Connection**: In the AI era, **clear intent is the bottleneck**. As explained in [Module 0, Part B](../00-orientation/README.md#part-b-why-this-training-exists--the-evolution-of-enterprise-programming), the skill hierarchy has shifted—the developers who excel aren't those who memorize syntax, but those who can articulate exactly what they want. This module teaches you that skill.
+
 ### A Minimal Prompt Structure
 
 1. Goal: the outcome you want
