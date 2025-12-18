@@ -1,0 +1,7 @@
+{
+  "name": "@techmart/common-types",
+  "version": "1.0.0",
+  "description": "Shared type definitions for TechMart platform",
+  "main": "index.js",
+  "private": true
+}

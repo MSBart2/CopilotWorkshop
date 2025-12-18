@@ -19,106 +19,19 @@ This training embraces the evolution from **"Syntax Wizards"** to **"Markdown Wh
 
 ## Personas
 
-When creating exercises, examples, or narratives, use these personas to make content relatable. Each persona represents a real archetype of developers who will take this training.
+When creating exercises, examples, or narratives, use the training personas to make content relatable. Each persona represents a real archetype of professionals who will take this training.
 
-### Sarah — The Skeptical Senior (15 years experience)
+**📖 For full persona details, read:** [modules/00-orientation/PERSONAS.md](../modules/00-orientation/PERSONAS.md)
 
-**Background:**
+The personas include:
 
-- Senior developer at a financial services company
-- Survived multiple technology hype cycles
-- Deep expertise in established languages (C#, Java)
-- Values proven approaches over trendy tools
-
-**Goals:**
-
-- Verify that Copilot delivers real value, not just hype
-- Find ways to accelerate her work without compromising quality
-- Maintain her relevance while embracing new tools
-
-**Fears:**
-
-- Wasting time on tools that don't deliver
-- Losing the craftsmanship aspect of coding
-- Being forced to change workflows that already work
-
-**Voice in exercises:** Skeptical but open-minded. Needs to be convinced with concrete demonstrations, not promises.
-
----
-
-### Marcus — The DevOps Developer (5 years experience)
-
-**Background:**
-
-- Started career during the DevOps/container revolution
-- Comfortable with YAML, Docker, Kubernetes, CI/CD pipelines
-- Writing business logic feels slower than infrastructure work
-- Learns by doing, prefers practical examples
-
-**Goals:**
-
-- Write application code as confidently as he writes infrastructure code
-- Become a more well-rounded developer
-- Move faster on the business logic that blocks his DevOps work
-
-**Fears:**
-
-- Being seen as "just an ops person"
-- Missing patterns that senior developers know intuitively
-- Falling behind on application development best practices
-
-**Voice in exercises:** Eager to learn, appreciates practical tips, responds well to "here's the workflow" guidance.
-
----
-
-### Priya — The Recent Graduate (1 year experience)
-
-**Background:**
-
-- Coding bootcamp graduate, first enterprise job
-- Solid JavaScript fundamentals, but production code is overwhelming
-- Has seen async/await but never used it confidently
-- Afraid to ask "basic" questions
-
-**Goals:**
-
-- Learn quickly without appearing incompetent
-- Build confidence in understanding complex codebases
-- Find resources that explain concepts without judgment
-
-**Fears:**
-
-- Being exposed as not knowing enough
-- Asking too many questions and annoying teammates
-- Making mistakes that reveal her inexperience
-
-**Voice in exercises:** Curious, relieved when things click, appreciates patient explanations and judgment-free learning.
-
----
-
-### David — The Seasoned Architect (20 years experience)
-
-**Background:**
-
-- Staff engineer, has seen technologies come and go
-- Built his career on syntax mastery and deep language knowledge
-- Remembers when knowing obscure language corners made you invaluable
-- Skeptical of tools that claim to replace expertise
-
-**Goals:**
-
-- Understand if Copilot is genuinely useful or just fancy autocomplete
-- Find ways AI can enhance (not replace) his architectural thinking
-- Stay current without abandoning hard-earned expertise
-
-**Fears:**
-
-- **That AI will make his expertise obsolete** — If anyone can generate code, what's his value?
-- **Being replaced by junior developers with AI tools** — Will companies decide they don't need expensive senior engineers?
-- **Losing the craft** — Programming as an intellectual pursuit, not just prompt engineering
-- **His knowledge becoming a liability** — Patterns he knows deeply might be "automated away"
-
-**Voice in exercises:** Evaluative, analytical, impressed by genuine capability, dismissive of hype. Needs to see that Copilot respects and augments expertise rather than replacing it.
+- **Sarah** — The Skeptical Senior (15 years) — needs concrete demonstrations, not promises
+- **Marcus** — The DevOps Developer (5 years) — eager to learn application development patterns
+- **Priya** — The Recent Graduate (1 year) — appreciates patient, judgment-free explanations
+- **David** — The Seasoned Architect (20 years) — needs to see AI augments rather than replaces expertise
+- **Elena** — The Quality Champion (8 years) — insists on understanding what's being tested and why
+- **Rafael** — The Product Visionary (10 years) — connects technical work to business value
+- **Jordan** — The DevOps Expert (12 years) — automation-first, insists on understanding the "why"
 
 ---
 
@@ -176,6 +89,9 @@ Example framing:
 - **For Marcus-style content:** Focus on practical workflows, connect to DevOps concepts he knows
 - **For Sarah-style content:** Get to the point, show ROI, respect her time
 - **For David-style content:** Technical depth, architectural implications, respect for complexity
+- **For Elena-style content:** Emphasize test coverage, edge cases, and quality validation; show how AI-generated tests need human review for completeness
+- **For Rafael-style content:** Connect technical work to business value, prioritization, and stakeholder communication; bridge the gap between requirements and implementation
+- **For Jordan-style content:** Focus on automation, CI/CD pipelines, and infrastructure as code; emphasize security review and understanding deployment implications
 
 ### 6. Link to Official Documentation
 
@@ -205,6 +121,14 @@ Each module should follow this pattern:
 
 [Persona context]
 
+#### ❌ The "Before" — What Frustration Looks Like
+
+[Describe a realistic scenario showing the pain point, inefficiency, or failure the persona experiences WITHOUT the skill/tool being taught. This creates contrast and motivation.]
+
+Example:
+
+> [Persona] spent 45 minutes manually writing boilerplate code, only to realize they missed an edge case. The code review caught three more issues they hadn't considered.
+
 #### 🎯 Objective
 
 [Clear, single-sentence goal]
@@ -217,6 +141,14 @@ Each module should follow this pattern:
 
 [Checkbox list of verifiable outcomes]
 
+#### ✨ The "After" — The Improved Experience
+
+[Highlight the concrete improvement achieved by completing the exercise. Quantify when possible (time saved, errors avoided, coverage increased). Connect back to the "Before" scenario.]
+
+Example:
+
+> With Copilot, [Persona] generated the same boilerplate in 2 minutes, and the AI suggested the edge case handling upfront. The code review passed on the first try.
+
 #### 📚 Official Docs
 
 - [GitHub Docs: …](https://docs.github.com/...)
@@ -224,7 +156,7 @@ Each module should follow this pattern:
 
 #### 💭 [Persona]'s Reaction
 
-[Emotional beat]
+[Emotional beat reflecting the transformation from frustration to success]
 
 #### 🚀 Challenge Extension
 
@@ -332,6 +264,9 @@ Before finalizing any module or exercise:
 - [ ] Would Priya feel safe asking questions?
 - [ ] Would Sarah feel her time was well spent?
 - [ ] Would Marcus feel more confident with application code?
+- [ ] Would Elena feel confident that test quality isn't sacrificed for speed?
+- [ ] Would Rafael feel enabled to make better prioritization decisions?
+- [ ] Would Jordan feel his automation expertise is enhanced, not bypassed?
 
 ---
 
@@ -345,6 +280,6 @@ This training exists to help developers at all levels embrace AI-assisted develo
 4. **Celebrate human judgment** — AI is a tool; wisdom is human
 5. **Build confidence progressively** — From skepticism to capability
 
-When in doubt, ask: "Would this make David feel valued, Priya feel safe, Sarah feel respected, and Marcus feel empowered?"
+When in doubt, ask: "Would this make David feel valued, Priya feel safe, Sarah feel respected, Marcus feel empowered, Elena feel confident in quality, Rafael feel enabled to deliver value, and Jordan feel his automation expertise is enhanced?"
 
 If yes, you're on the right track.

@@ -1,0 +1,32 @@
+{
+  "name": "ecommerce-platform",
+  "version": "1.0.0",
+  "description": "TechMart E-Commerce Platform - A realistic multi-service architecture for learning",
+  "private": true,
+  "workspaces": [
+    "shared/*",
+    "services/*"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm run install:services",
+    "install:services": "npm install --workspaces",
+    "start:user": "npm start --workspace=services/user-service",
+    "start:order": "npm start --workspace=services/order-service",
+    "start:inventory": "npm start --workspace=services/inventory-service",
+    "start:payment": "npm start --workspace=services/payment-service",
+    "start:notification": "npm start --workspace=services/notification-service",
+    "start:all": "concurrently \"npm:start:user\" \"npm:start:order\" \"npm:start:inventory\" \"npm:start:payment\" \"npm:start:notification\"",
+    "test": "npm test --workspaces --if-present",
+    "test:user": "npm test --workspace=services/user-service",
+    "test:order": "npm test --workspace=services/order-service",
+    "test:inventory": "npm test --workspace=services/inventory-service",
+    "test:payment": "npm test --workspace=services/payment-service",
+    "test:notification": "npm test --workspace=services/notification-service"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

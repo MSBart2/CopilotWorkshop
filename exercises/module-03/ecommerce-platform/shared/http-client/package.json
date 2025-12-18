@@ -1,0 +1,7 @@
+{
+  "name": "@techmart/http-client",
+  "version": "1.0.0",
+  "description": "HTTP client for TechMart platform inter-service calls",
+  "main": "index.js",
+  "private": true
+}

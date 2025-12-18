@@ -45,75 +45,6 @@ Install, connect, and try the core chat flow. You’ll run your first explain/fi
 
 ---
 
-## 🔨 Exercises
-
-### Exercise 1: “Explain and Improve” (Priya)
-
-#### 🎯 Objective
-
-Use `/explain` and `/fix` on a small function.
-
-#### 📋 Steps
-
-1. Open any function in your repo.
-2. Select it and run `/explain`.
-3. Ask: “Suggest a safer version with better names; keep the signature.”
-4. Apply minimal changes.
-
-#### ✅ Success Criteria
-
-- [ ] You understand the function’s behavior
-- [ ] You apply a small, readable improvement
-
-#### 📚 Official Docs
-
-- Copilot Chat in VS Code: https://code.visualstudio.com/docs/copilot/copilot-chat
-
-#### 💭 Priya
-
-“Explaining first reduced my uncertainty before making a change.”
-
----
-
-### Exercise 2: “Generate Tests” (Sarah)
-
-#### 🎯 Objective
-
-Use `/tests` to propose tests; refine them to match your standards.
-
-#### 📋 Steps
-
-1. With a unit under test open, run `/tests`.
-2. Ask: “Match our test framework and naming in docs/PATTERNS.md.”
-3. Keep tests small and focused; add edge cases.
-
-#### ✅ Success Criteria
-
-- [ ] Tests match your project’s framework and naming
-- [ ] Edge cases are covered
-
-#### 📚 Official Docs
-
-- Slash commands: https://code.visualstudio.com/docs/copilot/copilot-chat#_slash-commands
-
-#### 💭 Sarah
-
-“This is faster, but I still enforce our standards.”
-
----
-
-## 🧠 Key Takeaways
-
-- Mentions and slash commands are the fastest way to good answers
-- Explain before you change; test early
-- Keep diffs small and intentional
-
----
-
-## ➡️ Next Steps
-
-Go to Module 2: modules/02-context-and-configuration/README.md
-
 # Module 1: Getting Started with GitHub Copilot
 
 ## 📖 Overview
@@ -317,13 +248,11 @@ Verify your Copilot installation and experience your first AI-assisted suggestio
    - You should see a Copilot icon (looks like two sparkles or a small robot)
    - If it has a line through it, click it and select "Enable"
 
-2. **Create a test file**
+2. **Open the test file**
 
-   - Create a new file: `first-test.py`
-   - Type the following and press Enter:
-     ```python
-     def calculate_compound_interest(principal, rate, time, n):
-     ```
+   - Open the file: [`src/utils/finance.js`](../../src/utils/finance.js)
+   - Find the commented `calculateCompoundInterest` function signature
+   - Uncomment and start typing to see Copilot's suggestion
 
 3. **Watch the magic**
 
@@ -353,14 +282,12 @@ _"Okay, that was... actually impressive. It knew the compound interest formula. 
 
 #### 🚀 Challenge Extension
 
-Try these signatures and see what Copilot suggests:
+Try these signatures and see what Copilot suggests (add them to [`src/utils/finance.js`](../../src/utils/finance.js)):
 
-```python
-def validate_credit_card_number(card_number):
+```javascript
+// function calculateLoanAmortization(principal, annualRate, years) {
 
-def calculate_loan_amortization(principal, annual_rate, years):
-
-def mask_sensitive_data(text, fields_to_mask):
+// function calculateSimpleInterest(principal, rate, time) {
 ```
 
 **Reflection:** How close were the suggestions to what you would have written?
@@ -383,35 +310,37 @@ Learn to guide Copilot using comments as intent declarations.
 
 #### 📋 Steps
 
-1. **Create a new file**
+1. **Open the order service file**
 
-   - Create: `order-processor.js`
+   - Open: [`src/services/order-service.js`](../../src/services/order-service.js)
 
 2. **Write comments first, code second**
 
-   - Type the following comment and press Enter twice:
+   - Find the `createOrder` method TODO and add a comment above it:
      ```javascript
-     // Function to calculate the total price of an order
-     // Takes an array of items, each with price and quantity
-     // Applies a discount percentage if provided
-     // Returns the final total rounded to 2 decimal places
+     // Function to create a new order
+     // Takes customerId, items array, and optional customer for discounts
+     // Validates the order before creation
+     // Calculates total using pricing service if customer provided
+     // Returns the created order or throws validation error
      ```
 
 3. **Let Copilot generate**
 
-   - Start typing: `function calculateOrderTotal(`
+   - Start typing the method implementation: `async createOrder(customerId, items, customer = null) {`
    - Wait for Copilot's suggestion
    - Press `Tab` to accept
 
 4. **Iterate with more comments**
-   - Below the function, add:
+   - Find the `validateOrder` method TODO and add:
      ```javascript
-     // Function to validate an order before processing
-     // Checks that all items have positive quantities
+     // Function to validate an order's items
+     // Checks that items array is not empty
+     // Checks that all quantities are positive
      // Checks that all prices are valid numbers
      // Returns an object with isValid boolean and errors array
      ```
-   - Start the function signature and let Copilot complete it
+   - Start the method implementation and let Copilot complete it
 
 #### ✅ Success Criteria
 
@@ -485,19 +414,9 @@ Use Copilot Chat to learn concepts, get explanations, and generate code through 
    - See how it builds on the previous response
 
 5. **Try inline chat**
-   - Create a file `temp.js` and paste this code:
-     ```javascript
-     function processItems(items) {
-       var result = [];
-       for (var i = 0; i < items.length; i++) {
-         if (items[i].active == true) {
-           result.push(items[i].name.toUpperCase());
-         }
-       }
-       return result;
-     }
-     ```
-   - Select the entire function
+   - Open the file [`src/utils/data-processor.js`](../../src/utils/data-processor.js)
+   - This file contains old-style ES5 JavaScript that needs modernizing
+   - Select the entire `processItems` function
    - Press `Ctrl+I` / `Cmd+I` for inline chat
    - Type: _"Modernize this to ES6+ with arrow functions and array methods"_
    - Review the suggested changes
@@ -521,28 +440,11 @@ _"I just learned more in 10 minutes than I did in a week of being afraid to ask 
 
 #### 🚀 Challenge Extension
 
-**Debug with Chat:** Paste this buggy code into a file and ask Copilot Chat to find the bugs:
+**Debug with Chat:** Open the [`src/utils/data-processor.js`](../../src/utils/data-processor.js) file and ask Copilot Chat to find potential bugs in the `calculateSum` function:
 
-```javascript
-function calculateAverage(numbers) {
-  let sum = 0;
-  for (let i = 0; i <= numbers.length; i++) {
-    sum += numbers[i];
-  }
-  return sum / numbers.length;
-}
-
-// This returns NaN - why?
-console.log(calculateAverage([1, 2, 3, 4, 5]));
-```
-
-Ask: _"Why does this function return NaN? Explain the bug and fix it."_
+Ask: _"Are there any potential bugs in the calculateSum function if passed an empty array or non-numeric values? Explain and fix."_
 
 ---
-
-## ➡️ Next Steps
-
-Continue to [Module 2: Context and Configuration — Teaching Copilot Your Way](../02-context-and-configuration/README.md) to shape Copilot’s behavior with custom instructions and workspace context.
 
 ### Exercise 4: Context is Everything — "The Connected Codebase"
 
@@ -558,106 +460,50 @@ Understand how Copilot uses context from open files to generate more relevant su
 
 #### 📋 Steps
 
-1. **Create a project structure**
+1. **Open the project files**
 
-   Create these three files:
+   The exercise files are in the `/src` directory:
 
-   **File 1: `models/customer.js`**
+   **File 1:** [`src/models/customer.js`](../../src/models/customer.js) — Customer entity with tier and membership info
 
-   ```javascript
-   /**
-    * Customer entity for the CRM system
-    * @property {string} id - Unique identifier
-    * @property {string} name - Customer's full name
-    * @property {string} email - Primary email address
-    * @property {string} tier - Membership tier: 'bronze', 'silver', 'gold', 'platinum'
-    * @property {Date} memberSince - Date of first purchase
-    */
-   class Customer {
-     constructor(id, name, email, tier, memberSince) {
-       this.id = id;
-       this.name = name;
-       this.email = email;
-       this.tier = tier;
-       this.memberSince = memberSince;
-     }
-
-     getYearsAsMember() {
-       const now = new Date();
-       return Math.floor(
-         (now - this.memberSince) / (365.25 * 24 * 60 * 60 * 1000)
-       );
-     }
-   }
-
-   module.exports = Customer;
-   ```
-
-   **File 2: `config/discounts.js`**
-
-   ```javascript
-   /**
-    * Discount configuration for customer tiers
-    * Percentages are expressed as decimals (0.10 = 10%)
-    */
-   const TIER_DISCOUNTS = {
-     bronze: 0.05,
-     silver: 0.1,
-     gold: 0.15,
-     platinum: 0.25,
-   };
-
-   const LOYALTY_BONUS = {
-     yearsRequired: 5,
-     additionalDiscount: 0.05,
-   };
-
-   module.exports = { TIER_DISCOUNTS, LOYALTY_BONUS };
-   ```
+   **File 2:** [`src/config/discounts.js`](../../src/config/discounts.js) — Discount configuration for tiers
 
 2. **Keep both files open in VS Code tabs**
 
    - This is crucial—Copilot uses open files for context
 
-3. **Create the service file**
+3. **Open the service file**
 
-   Create: `services/pricing-service.js`
+   Open: [`src/services/pricing-service.js`](../../src/services/pricing-service.js)
 
-   ```javascript
-   const Customer = require('../models/customer');
-   const { TIER_DISCOUNTS, LOYALTY_BONUS } = require('../config/discounts');
-
-   /**
-    * Pricing service for calculating customer-specific prices
-    */
-   class PricingService {
-
-       // Start typing here and let Copilot complete
-   ```
+   This file has TODO comments for methods you'll implement.
 
 4. **Let Copilot generate methods**
 
-   - With your cursor inside the class, type:
+   - With your cursor inside the class, find the `calculateTierDiscount` TODO and uncomment it:
+     ```javascript
+     /**
+      * Get the base discount percentage for a customer's tier
+      * @param {string} tier - Customer tier: 'bronze', 'silver', 'gold', 'platinum'
+      * @returns {number} Discount percentage as decimal (e.g., 0.10 for 10%)
+      */
+     calculateTierDiscount(tier) {
+     ```
+   - Let Copilot complete the method
+   - Notice how it uses `TIER_DISCOUNTS` from the config file
+
+5. **Add another method**
+   - Find the `calculateCustomerDiscount` TODO and uncomment it:
      ```javascript
      /**
       * Calculate the discount percentage for a customer
       * based on their tier and loyalty years
+      * @param {Customer} customer - The customer object
+      * @returns {number} Total discount percentage as decimal
       */
      calculateCustomerDiscount(customer) {
      ```
-   - Let Copilot complete the method
-   - Notice how it uses `TIER_DISCOUNTS` and `LOYALTY_BONUS` from the config file
-   - Notice how it calls `customer.getYearsAsMember()` from the Customer class
-
-5. **Add another method**
-   - Type:
-     ```javascript
-     /**
-      * Calculate the final price for a customer
-      */
-     calculateFinalPrice(customer, basePrice) {
-     ```
-   - Observe how Copilot connects the dots
+   - Observe how Copilot connects the dots between Customer class and LOYALTY_BONUS
 
 #### ✅ Success Criteria
 
@@ -687,6 +533,169 @@ _"Okay, I'm convinced. This isn't autocomplete—it actually understands the pro
 
 ---
 
+### Exercise 5: Explain and Improve — "Understanding Before Changing"
+
+**Tier**: 🆓 Free
+**Primary Persona**: Priya (Recent Graduate)
+**Time**: 5 minutes
+
+#### 📖 The Story
+
+**Priya** has found a function she needs to modify, but she's not entirely sure what it does. Rather than guessing and potentially breaking something, she uses Copilot to understand the code first.
+
+#### 🎯 Objective
+
+Use `/explain` to understand code, then `/fix` to improve it safely.
+
+#### 📋 Steps
+
+1. Open any function in your project (or use [`src/services/order-service.js`](../../src/services/order-service.js))
+2. Select the function body
+3. Run `/explain` in Copilot Chat
+4. Read the explanation to understand the logic
+5. Ask: "Suggest a safer version with better variable names; keep the function signature"
+6. Review the suggestion and apply if appropriate
+
+#### ✅ Success Criteria
+
+- [ ] You understand the function's behavior before modifying
+- [ ] Copilot explained the logic clearly
+- [ ] You received an improved version with better naming
+
+#### 📚 Official Docs
+
+- [Copilot Chat in VS Code](https://code.visualstudio.com/docs/copilot/copilot-chat)
+- [Slash commands reference](https://code.visualstudio.com/docs/copilot/copilot-chat#_slash-commands)
+
+#### 💭 Priya's Realization
+
+_"Explaining first reduced my uncertainty before making any changes. I'm not guessing anymore—I understand, then I improve."_
+
+---
+
+### Exercise 6: Next Edit Suggestions — "Copilot Reads Your Mind"
+
+**Tier**: 🆓 Free
+**Primary Persona**: Priya (Recent Graduate)
+**Time**: 15-20 minutes
+
+#### 📖 The Story
+
+**Priya has been loving Copilot's inline suggestions**, but she's noticed a pattern in her workflow. Every time she writes a function, she follows it with predictable work:
+
+- Add a corresponding test
+- Update the related documentation
+- Create a sibling function with a similar pattern
+- Add JSDoc comments matching other functions
+
+It's not hard work, but it's tedious. And it feels like Copilot should be able to predict these follow-up edits—they're so predictable that Priya herself could script them.
+
+Turns out, Copilot can. **Next Edit Suggestions** predicts what you'll want to change next, based on what you just changed.
+
+#### 🎯 Objective
+
+Enable and use Next Edit Suggestions to let Copilot predict and offer logical follow-up edits after you make changes.
+
+#### 📋 Before: Manual Follow-Up Edits
+
+Experience the repetitive pattern:
+
+1. Open the validators file: [`src/validators/email-validator.js`](../../src/validators/email-validator.js)
+
+   The file already has a basic `isValidEmail` function. Notice the TODO comments for additional functions.
+
+2. Now you need to implement `validateEmail()` with detailed results
+3. Then you need to implement `normalizeEmail()`
+4. Then you need to update the exports
+
+**Notice the friction**: Each follow-up is predictable, but you have to do it manually.
+
+#### 📋 After: Next Edit Suggestions
+
+Let Copilot predict your next moves:
+
+**Step 1: Enable Next Edit Suggestions**
+
+1. Open VS Code Settings (Ctrl+,)
+2. Search for "Copilot next edit"
+3. Find `GitHub Copilot: Enable Next Edit Suggestions`
+4. Set to `enabled` (or `enabledByDefault`)
+
+**Step 2: Experience the Magic**
+
+1. Open the validators file: [`src/validators/email-validator.js`](../../src/validators/email-validator.js)
+2. Position your cursor after the `isValidEmail` function
+3. **Wait a moment** — Copilot analyzes your recent edit
+4. Look for a **dimmed suggestion** appearing below your cursor
+5. The suggestion should offer something like `validateEmail()` with detailed results
+
+**Step 3: Accept the Flow**
+
+1. If you see a next edit suggestion, press **Tab** to accept
+2. After accepting, wait again — Copilot may suggest the next logical edit
+3. Continue the flow: `validateEmail` → `normalizeEmail` → `getEmailDomain` → updated exports
+
+**Step 4: Understand the Trigger**
+
+Next Edit Suggestions activate when:
+
+- You've just completed an edit
+- There's a predictable "next step" based on patterns
+- You pause briefly after your edit
+
+They appear as:
+
+- Dimmed/ghost text (like regular suggestions)
+- Sometimes with a small indicator showing "next edit"
+
+#### 📋 Practice: The Test File Flow
+
+Try this workflow:
+
+1. Open the test file: [`src/__tests__/order-validator.test.js`](../../src/__tests__/order-validator.test.js)
+
+   The file already has some basic tests for `validateItems`.
+
+2. After the existing tests, position cursor after the closing `});` of a describe block
+3. Wait for Next Edit Suggestions
+4. Copilot should suggest additional test cases (matching the validator patterns)
+5. Accept and continue the flow
+
+#### ✅ Success Criteria
+
+- [ ] Enabled Next Edit Suggestions in VS Code settings
+- [ ] Received at least one "next edit" suggestion after completing code
+- [ ] Accepted a suggestion that followed the pattern of existing code
+- [ ] Observed the difference between regular inline suggestions and next edit suggestions
+- [ ] Completed a multi-function file using the next edit flow
+
+#### 📚 Official Docs
+
+- [VS Code: Next Edit Suggestions](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
+- [GitHub Docs: Copilot Features](https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features)
+
+#### 💭 Priya's Delight
+
+_"It's like Copilot knows what I'm going to do next! I wrote validateEmail, and it offered validatePhone with the same style. Then validateUrl. Then the tests. The repetitive parts just... disappear. I'm not typing boilerplate anymore—I'm just approving good ideas."_
+
+#### 🚀 Challenge Extension
+
+**Pattern Propagation Experiment:**
+
+1. Create a class with one method that has specific formatting:
+
+   - Custom error handling
+   - Logging statements
+   - Specific return format
+
+2. After completing the first method, let Next Edit Suggestions offer the second
+
+3. Check: Does it match your custom patterns, or generic patterns?
+
+4. **Document**: How does the style of your first method influence suggestions for subsequent methods?
+
+---
+
 ## 📝 Key Takeaways
 
 | Concept                        | What You Learned                                                             |
@@ -712,7 +721,7 @@ The common thread: **Copilot amplifies clarity**. The better you express what yo
 
 ## ➡️ Next Steps
 
-Continue to [Module 2: Context and Configuration](../02-context-and-configuration/README.md) to learn how to customize Copilot's behavior, create documentation agents, and make Copilot follow your team's rules.
+Continue to [Module 2: Clarity as a Foundation](../02-clarity-as-a-foundation/README.md) to learn how to provide clear context and configure Copilot to follow your team's standards.
 
 ---
 
