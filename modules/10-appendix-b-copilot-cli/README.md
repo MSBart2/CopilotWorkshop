@@ -939,4 +939,4 @@ You've completed Appendix B! You now have full Copilot capabilities in any termi
 
 **CI/CD Integration:**
 - [GitHub Actions documentation](https://docs.github.com/en/actions)
-- [Automating with Copilot CLI](https://github.blog/ai-and-ml/github-copilot/)
+- [GitHub Copilot CLI: How to get started](https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-how-to-get-started/)
