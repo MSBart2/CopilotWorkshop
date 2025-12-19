@@ -1,24 +1,33 @@
-# Appendix B: Copilot in the CLI
+# Appendix B: GitHub Copilot CLI
 
-> **Core Philosophy**: Clarity beats cleverness—even in the terminal. Clear questions get clear commands. Your terminal becomes a conversation partner, not a memorization test.
+> **Core Philosophy**: Clarity beats cleverness—even in the terminal. Your terminal becomes a conversation partner that can read, write, and execute code. AI-assisted development now follows you everywhere.
 
 ## 📖 Overview
 
-GitHub Copilot in the CLI extends AI assistance beyond your editor into your terminal. Instead of memorizing hundreds of commands with obscure flags, you can describe what you want in plain English and get executable commands—with explanations.
+GitHub Copilot CLI is a **terminal-native AI agent** that brings the full power of Copilot directly to your command line. Unlike simple command suggestion tools, Copilot CLI is an autonomous assistant that can:
 
-This appendix covers installing, configuring, and using Copilot CLI for command suggestions, explanations, and shell workflow automation.
+- **Read and write files** in your project
+- **Execute shell commands** with your approval
+- **Understand project context** through file mentions and workspace awareness
+- **Use natural language** for any coding, debugging, or automation task
+- **Work interactively** or **programmatically** in CI/CD pipelines
 
-**Why CLI?** Even developers who live in VS Code spend significant time in the terminal. Git operations, Docker management, Kubernetes commands, file manipulation—these workflows benefit from AI assistance too.
+This is the same AI that powers VS Code Copilot—now available everywhere you have a terminal.
+
+**Why CLI?** Because developers don't always have VS Code open. SSH sessions, headless servers, CI/CD pipelines, quick fixes on unfamiliar machines—Copilot CLI ensures AI assistance follows you everywhere.
 
 ## Prerequisites
 
-- GitHub CLI (`gh`) installed
-- Copilot subscription (Free, Pro, Business, or Enterprise)
-- A terminal you're comfortable using
+- **Node.js v22** or higher
+- **npm v10** or higher
+- Copilot subscription (**Pro**, **Pro+**, **Business**, or **Enterprise**)
+- A terminal you're comfortable using (bash, zsh, PowerShell)
+
+> **Note**: This is the new standalone GitHub Copilot CLI (`copilot` command), not the legacy `gh copilot` extension. If you've used `gh copilot suggest` before, the new CLI offers significantly more capabilities.
 
 ## Estimated Time
 
-- 50–60 minutes
+- 60–75 minutes
 
 ---
 
@@ -26,11 +35,13 @@ This appendix covers installing, configuring, and using Copilot CLI for command 
 
 By the end of this appendix, you will:
 
-- Install and configure GitHub Copilot CLI extension
-- Use `gh copilot suggest` to get command suggestions from natural language
-- Use `gh copilot explain` to understand unfamiliar commands
-- Automate common shell and git workflows with Copilot assistance
-- Know when CLI Copilot helps vs. when to use other tools
+- Install and authenticate GitHub Copilot CLI
+- Use **interactive mode** for conversational AI assistance in the terminal
+- Reference files and context using **mentions** and **context variables**
+- Master **slash commands** for session management (`/model`, `/share`, `/clear`)
+- Execute shell commands directly from Copilot using **shell mode** (`!`)
+- Use **programmatic mode** (`-p`) for automation and CI/CD integration
+- Understand when to use CLI vs. VS Code vs. Copilot Chat
 
 ---
 
@@ -38,677 +49,894 @@ By the end of this appendix, you will:
 
 ### What is GitHub Copilot CLI?
 
-GitHub Copilot CLI is an extension to the GitHub CLI (`gh`) that brings AI assistance to your terminal:
+GitHub Copilot CLI is a standalone terminal application that brings an AI agent to your command line:
 
 ```bash
-# Instead of googling "how to find large files in git history"
-gh copilot suggest "find the 10 largest files ever committed to this repo"
-# Returns: git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | ...
+# Start an interactive session
+copilot
+
+# Ask anything in natural language
+> Add error handling to the fetchUser function in src/api.ts
+
+# Reference files directly
+> Explain what @src/config.ts does
+
+# Execute shell commands without leaving Copilot
+> !npm test
+
+# Switch AI models
+> /model claude-sonnet-4
 ```
 
-### Two Core Commands
+### Interactive vs. Programmatic Mode
 
-| Command | Purpose | When to Use |
-|---------|---------|-------------|
-| `gh copilot suggest` | Generate a command from description | "I want to do X but don't know the command" |
-| `gh copilot explain` | Explain what a command does | "What does this command I found online do?" |
+| Mode | How to Start | Use Case |
+|------|--------------|----------|
+| **Interactive** | `copilot` | Conversational coding, debugging, learning |
+| **Programmatic** | `copilot -p "prompt"` | Automation, CI/CD, scripts |
+
+### Key Capabilities
+
+| Feature | Description | Example |
+|---------|-------------|---------|
+| **File Mentions** | Reference any file in context | `@src/index.ts` |
+| **Shell Mode** | Execute commands | `!npm run build` |
+| **Slash Commands** | Control session | `/model`, `/share`, `/clear` |
+| **Natural Language** | Describe what you want | "Add tests for the auth module" |
+| **Code Generation** | Create complete files | "Create a REST API endpoint for users" |
+| **Code Explanation** | Understand existing code | "Explain the caching logic in @cache.ts" |
 
 ### The Terminal Clarity Principle
 
 Just like in VS Code, **clarity of intent** determines quality of results:
 
-```bash
+```
 # Vague → might not get what you need
-gh copilot suggest "docker stuff"
+> docker stuff
 
 # Clear → gets exactly what you need
-gh copilot suggest "remove all stopped docker containers and unused images"
+> Create a Dockerfile for this Node.js project that uses multi-stage builds,
+  runs as non-root user, and optimizes for production
 ```
 
 ---
 
 ## 🔨 Exercises
 
-### Exercise 1: CLI Installation & Setup — "Your Terminal, Now Smarter"
+### Exercise 1: CLI Installation & Setup — "Your Terminal, Now an AI Partner"
 
-**Tier**: 🆓 Free  
+**Tier**: 🆓 Free (with Copilot Pro subscription)  
 **Primary Persona**: Jordan (DevOps Expert)  
 **Time**: 10-15 minutes
 
 #### 📖 The Story
 
-**Jordan** automates everything—if it can be scripted, it should be. But even he admits that remembering every `kubectl`, `docker`, and `terraform` flag is impossible. "I just want to describe what I need and get the command," he thinks.
+**Jordan** automates everything—if it can be scripted, it should be. But SSH sessions, remote servers, and CI/CD environments don't have VS Code. "I need Copilot everywhere, not just in my editor," he thinks.
 
-Today he's setting up Copilot CLI to do exactly that.
+Today he's setting up GitHub Copilot CLI to bring AI assistance to every terminal he uses.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
 Without Copilot CLI:
-- Constantly switching to browser to look up command syntax
-- Stack Overflow tabs multiply as commands get complex
-- Typos in long commands cause mysterious failures
-- Copy-pasting commands you don't fully understand
+- VS Code not available? No AI assistance
+- SSH into a server? Back to memorizing commands
+- CI/CD pipelines? No intelligent code generation
+- Quick terminal tasks? No context-aware help
 
 #### 🎯 Objective
 
-Install and configure GitHub Copilot CLI, verifying it works with a test command.
+Install GitHub Copilot CLI and authenticate with your GitHub account.
 
 #### 📋 Steps
 
-1. **Verify GitHub CLI is installed**
+1. **Verify Node.js version**
 
    ```bash
-   gh --version
-   # Should show version 2.x or higher
+   node --version
+   # Should show v22.x or higher
    ```
 
-   If not installed:
+   If not installed or outdated:
    ```bash
-   # macOS
-   brew install gh
+   # macOS (using Homebrew)
+   brew install node@22
    
    # Ubuntu/Debian
-   sudo apt install gh
+   curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+   sudo apt-get install -y nodejs
    
    # Windows
-   winget install GitHub.cli
+   winget install OpenJS.NodeJS.LTS
    ```
 
-2. **Authenticate with GitHub CLI**
+2. **Install Copilot CLI**
+
+   **Option A: npm (all platforms)**
+   ```bash
+   npm install -g @github/copilot
+   ```
+
+   **Option B: Homebrew (macOS/Linux)**
+   ```bash
+   brew install copilot-cli
+   ```
+
+   **Option C: WinGet (Windows)**
+   ```bash
+   winget install GitHub.CopilotCLI
+   ```
+
+3. **Start Copilot CLI**
 
    ```bash
-   gh auth login
+   copilot
+   ```
+
+4. **Authenticate with GitHub**
+
+   On first launch, Copilot CLI will prompt you to log in:
+   ```
+   > /login
    ```
    
-   Follow the prompts to authenticate via browser or token.
+   Follow the browser-based authentication flow:
+   - A URL will be displayed
+   - Open it in your browser
+   - Enter the code shown in the terminal
+   - Authorize Copilot CLI with your GitHub account
 
-3. **Install the Copilot CLI extension**
+5. **Trust the current directory**
 
-   ```bash
-   gh extension install github/gh-copilot
+   When working in a new project, Copilot will ask if you trust the directory:
+   - Select "Trust for this session" for temporary work
+   - Select "Remember trust" for projects you work on regularly
+
+6. **Test with a simple prompt**
+
    ```
-
-4. **Verify installation**
-
-   ```bash
-   gh copilot --help
-   ```
-   
-   You should see available commands: `suggest`, `explain`, etc.
-
-5. **Test with a simple suggestion**
-
-   ```bash
-   gh copilot suggest "list all files modified in the last 24 hours"
+   > What files are in this directory?
    ```
    
-   Copilot should return a command like:
-   ```bash
-   find . -type f -mtime -1
+   Copilot will use its tools to explore and answer your question.
+
+7. **Verify slash commands work**
+
    ```
-
-6. **Configure shell integration (optional but recommended)**
-
-   For bash:
-   ```bash
-   echo 'eval "$(gh copilot alias -- bash)"' >> ~/.bashrc
-   source ~/.bashrc
+   > /model show
    ```
    
-   For zsh:
-   ```bash
-   echo 'eval "$(gh copilot alias -- zsh)"' >> ~/.zshrc
-   source ~/.zshrc
-   ```
-   
-   This enables shorter aliases: `ghcs` (suggest) and `ghce` (explain).
+   You should see available AI models.
 
 #### ✅ Success Criteria
 
-- [ ] GitHub CLI installed and authenticated
-- [ ] Copilot extension installed
-- [ ] `gh copilot suggest` returns a command
-- [ ] (Optional) Shell aliases configured
+- [ ] Node.js v22+ installed
+- [ ] Copilot CLI installed (`copilot` command works)
+- [ ] Authenticated with GitHub account
+- [ ] Successfully sent a prompt and received a response
+- [ ] `/model show` displays available models
 
 #### ✨ The "After" — The Improved Experience
 
 With Copilot CLI installed:
-- Describe what you want, get the command
-- Stay in your terminal flow
-- Learn commands as you use them
-- No more context-switching to browsers
+- AI assistance in any terminal (SSH, local, CI/CD)
+- Same powerful capabilities as VS Code Copilot
+- File manipulation, code generation, debugging—all from the command line
+- Works with your existing workflow, not against it
 
 #### 📚 Official Docs
 
-- [GitHub CLI installation](https://cli.github.com/manual/installation)
-- [GitHub Copilot in the CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli)
-- [Installing gh extensions](https://cli.github.com/manual/gh_extension_install)
+- [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
 
 #### 💭 Jordan's Reaction
 
-_"Five minutes to install, and now my terminal understands English. Every DevOps engineer should do this on day one."_
+_"Five minutes to install, and now I have an AI agent in every terminal I open. SSH sessions, CI runners, remote servers—Copilot goes everywhere I go."_
 
 ---
 
-### Exercise 2: Command Suggestions — "What's the Command?"
+### Exercise 2: Interactive Mode — "Conversational AI in Your Terminal"
 
-**Tier**: 🆓 Free  
+**Tier**: 🆓 Free (with Copilot Pro subscription)  
 **Primary Persona**: Marcus (DevOps Developer)  
-**Time**: 10-15 minutes
+**Time**: 15-20 minutes
 
 #### 📖 The Story
 
-**Marcus** knows Docker and Kubernetes from his DevOps work, but application development brings unfamiliar tools. Today he needs to work with `npm`, `curl`, and `jq`—commands he uses occasionally but never remembers the syntax for.
+**Marcus** knows Docker and Kubernetes from his DevOps work, but application development brings unfamiliar codebases. Today he needs to understand a Node.js project, make some changes, and write tests—all from his terminal because he's SSH'd into a dev server.
 
-Instead of tab-hopping to Stack Overflow, he'll ask Copilot.
+Instead of struggling without VS Code, he'll use Copilot CLI's interactive mode.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Without command suggestions:
-- "How do I pretty-print JSON with curl again?"
-- 15 minutes down a Stack Overflow rabbit hole
-- Copy-paste a command that almost works
-- Spend another 10 minutes debugging flags
+Without interactive Copilot:
+- Can't understand unfamiliar code without an IDE
+- No AI help when SSH'd into remote machines
+- Manual code editing with vim feels tedious
+- Context-switching between terminal and editor
 
 #### 🎯 Objective
 
-Use `gh copilot suggest` to get commands for various tasks, learning the patterns for effective suggestions.
+Use Copilot CLI in interactive mode to explore a codebase, understand code, and make changes—all through natural language conversation.
 
 #### 📋 Steps
 
-1. **Start with a simple request**
+1. **Start an interactive session**
 
+   Navigate to a project directory and start Copilot:
    ```bash
-   gh copilot suggest "show disk usage sorted by size"
+   cd ~/your-project
+   copilot
+   ```
+
+2. **Explore the codebase**
+
+   Ask about the project structure:
+   ```
+   > What is this project? Give me a high-level overview.
    ```
    
-   Observe: Copilot shows the command and asks if you want to run it.
+   Copilot will read files and provide a summary.
 
-2. **Get more specific for better results**
+3. **Reference specific files with mentions**
 
-   Compare:
-   ```bash
-   # Less specific
-   gh copilot suggest "list processes"
-   
-   # More specific  
-   gh copilot suggest "list top 10 processes by memory usage"
+   Use `@` to bring specific files into context:
    ```
-
-3. **Specify the tool when you have a preference**
-
-   ```bash
-   gh copilot suggest "using curl, make a POST request to https://api.example.com/data with JSON body"
-   ```
-
-4. **Handle multi-step operations**
-
-   ```bash
-   gh copilot suggest "find all .log files larger than 100MB and compress them"
+   > Explain what @src/index.ts does
    ```
    
-   Copilot often chains commands with pipes or loops.
+   Or reference multiple files:
+   ```
+   > Compare @src/api/users.ts and @src/api/products.ts
+   ```
 
-5. **Learn from suggestions**
+4. **Ask follow-up questions**
 
-   After getting a command:
-   - Don't just run it—read it
-   - Ask for explanation if unclear: `gh copilot explain "<command>"`
-   - Modify to fit your exact needs
+   The conversation maintains context:
+   ```
+   > How does authentication work in this project?
+   > What middleware is being used?
+   > Are there any security concerns?
+   ```
 
-6. **Practice with different tool categories**
+5. **Request code changes**
 
-   Try suggestions for:
-   - **Git**: "show commits from last week by author name"
-   - **Docker**: "remove all images not used by any container"
-   - **Network**: "test if port 8080 is open on localhost"
-   - **Files**: "find duplicate files in current directory"
+   Ask Copilot to modify code:
+   ```
+   > Add input validation to the createUser function in @src/api/users.ts
+   ```
+   
+   Copilot will:
+   - Show the proposed changes
+   - Ask for your approval before applying
+   - Execute the file modifications
+
+6. **Generate new code**
+
+   Create new files through conversation:
+   ```
+   > Create a new API endpoint for products that supports CRUD operations.
+     Follow the patterns used in @src/api/users.ts
+   ```
+
+7. **Review changes before accepting**
+
+   Copilot always asks for approval before:
+   - Writing files
+   - Running commands
+   - Making modifications
+   
+   You can:
+   - Accept the change
+   - Ask for modifications
+   - Reject and try a different approach
+
+8. **Use context variables for precision**
+
+   Reference specific elements:
+   ```
+   > Explain #function:handleError in @src/utils.ts
+   > What does #class:UserService do?
+   ```
 
 #### ✅ Success Criteria
 
-- [ ] Got suggestions for at least 5 different tasks
-- [ ] Observed how specificity improves results
-- [ ] Successfully ran at least one suggested command
-- [ ] Used explanation to understand an unfamiliar command
+- [ ] Started an interactive Copilot session
+- [ ] Asked about and understood the project structure
+- [ ] Referenced specific files using `@` mentions
+- [ ] Had a multi-turn conversation that maintained context
+- [ ] Requested a code change and reviewed before accepting
+- [ ] Generated new code that follows project patterns
 
 #### ✨ The "After" — The Improved Experience
 
-With command suggestions:
-- Describe intent, get working commands
-- Learn new tools without leaving terminal
-- Build confidence with unfamiliar commands
-- Specificity in requests = accuracy in results
+With interactive mode:
+- Full AI coding capabilities in any terminal
+- Natural conversation about complex codebases
+- File mentions provide precise context
+- Changes require approval—you stay in control
+- Same power as VS Code Copilot, anywhere
 
 #### 📚 Official Docs
 
-- [GitHub Copilot CLI suggest](https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli#getting-command-suggestions)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [GitHub Copilot CLI 101](https://github.blog/ai-and-ml/github-copilot-cli-101-how-to-use-github-copilot-from-the-command-line/)
 
 #### 💭 Marcus's Insight
 
-_"I know infrastructure tools cold, but application stuff always sends me to Google. Now I describe what I need and get the command. It's like having a senior developer on call for syntax questions."_
+_"I'm SSH'd into a dev server with no IDE, and I can still have a full conversation with an AI about the codebase. It reads files, suggests changes, asks for my approval—this is what I needed for those late-night prod issues."_
+
+#### 🚀 Challenge Extension
+
+Try a more complex multi-step task:
+```
+> I need to refactor the authentication module:
+  1. Extract the token validation into a separate utility
+  2. Add proper error handling with custom exception types  
+  3. Write unit tests for the new utilities
+  4. Update the existing code to use the new utilities
+```
 
 ---
 
-### Exercise 3: Command Explanation — "What Does This Do?"
+### Exercise 3: Slash Commands — "Controlling Your AI Session"
 
-**Tier**: 🆓 Free  
+**Tier**: 🆓 Free (with Copilot Pro subscription)  
 **Primary Persona**: Priya (Recent Graduate)  
 **Time**: 10-15 minutes
 
 #### 📖 The Story
 
-**Priya** found a command in the project wiki for cleaning up the development environment. It looks like this:
+**Priya** started using Copilot CLI and loves the conversational interface. But she noticed some commands start with `/`—like `/model` and `/clear`. She's curious what these do and worried she's missing important features.
 
-```bash
-docker system prune -a --volumes -f && find . -name "node_modules" -type d -prune -exec rm -rf {} +
-```
-
-She's not comfortable running something she doesn't understand. But asking feels like admitting she should already know this.
-
-With `gh copilot explain`, she can learn without feeling judged.
+With slash commands, she'll learn to control her AI sessions like a pro.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Without command explanation:
-- Copy-paste commands from wikis/Stack Overflow
-- Cross fingers and hope they're safe
-- Spend 30 minutes Googling each flag
-- Or worse—skip learning and stay confused
+Without knowing slash commands:
+- Stuck with default AI model when another might be better
+- No way to save useful conversations
+- Chat history grows unbounded, slowing things down
+- Can't check usage or switch context efficiently
 
 #### 🎯 Objective
 
-Use `gh copilot explain` to understand unfamiliar commands, building confidence and knowledge.
+Master slash commands to control Copilot CLI sessions—model selection, session management, and sharing.
 
 #### 📋 Steps
 
-1. **Explain a command you found online**
+1. **Start Copilot CLI**
 
    ```bash
-   gh copilot explain "docker system prune -a --volumes -f"
+   copilot
+   ```
+
+2. **View available models**
+
+   ```
+   > /model show
    ```
    
-   Read the breakdown of what each flag does.
+   You'll see a list of available AI models:
+   - `gpt-4o` — Balanced performance
+   - `claude-sonnet-4` — Strong reasoning
+   - `gemini-2.5-pro` — Fast and capable
+   - And others depending on your subscription
 
-2. **Understand complex pipelines**
+3. **Switch to a different model**
 
-   ```bash
-   gh copilot explain "find . -name '*.log' -mtime +30 -exec rm {} \;"
+   ```
+   > /model claude-sonnet-4
    ```
    
-   Copilot breaks down: find command, name pattern, modification time, exec action.
+   Now all responses will use Claude. Try asking the same question with different models to see how responses vary.
 
-3. **Demystify one-liners**
+4. **Check your session usage**
 
-   ```bash
-   gh copilot explain "awk '{sum+=$1} END {print sum}' numbers.txt"
+   ```
+   > /usage
    ```
    
-   Learn what awk does and how this specific pattern works.
+   See statistics about your current session:
+   - Tokens used
+   - Number of messages
+   - Session duration
 
-4. **Understand git commands**
+5. **Clear conversation context**
 
-   ```bash
-   gh copilot explain "git rebase -i HEAD~5"
+   When starting a new task:
+   ```
+   > /clear
    ```
    
-   Learn about interactive rebase without fear.
+   This resets the conversation, removing previous context. Useful when:
+   - Switching to an unrelated task
+   - Context is getting too large
+   - You want a fresh start
 
-5. **Check commands before running**
+6. **Share your session**
 
-   Before running any command you found online:
-   ```bash
-   gh copilot explain "<command you're about to run>"
+   After a useful conversation:
+   ```
+   > /share
    ```
    
-   This habit prevents accidents and builds knowledge.
+   Options:
+   - Save as Markdown file locally
+   - Create a GitHub Gist
+   - Copy to clipboard
+   
+   Great for documenting solutions or sharing with teammates.
 
-6. **Build a personal learning habit**
+7. **Get help on available commands**
 
-   Every time you encounter an unfamiliar command:
-   1. Explain it before running
-   2. Understand each part
-   3. Run with confidence
-   4. Remember it better because you understood it
+   ```
+   > /help
+   ```
+   
+   See all available slash commands and their descriptions.
+
+8. **Manage session styling**
+
+   ```
+   > /session
+   ```
+   
+   View and configure session display options.
 
 #### ✅ Success Criteria
 
-- [ ] Explained at least 3 unfamiliar commands
-- [ ] Understood a complex pipeline (pipes, flags, redirects)
-- [ ] Feel more confident reading shell commands
-- [ ] Established a habit: explain before run
+- [ ] Listed available AI models with `/model show`
+- [ ] Switched between at least two different models
+- [ ] Checked session usage with `/usage`
+- [ ] Cleared context with `/clear`
+- [ ] Saved a conversation with `/share`
+- [ ] Used `/help` to explore other commands
 
 #### ✨ The "After" — The Improved Experience
 
-With command explanation:
-- Understand commands before running them
-- Learn flags and patterns incrementally
-- Build knowledge without fear of asking "basic" questions
-- Transform copy-paste into comprehension
+With slash commands mastered:
+- Choose the right AI model for each task
+- Keep sessions clean and focused
+- Save and share valuable conversations
+- Professional-level control over AI interactions
 
 #### 📚 Official Docs
 
-- [GitHub Copilot CLI explain](https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli#getting-command-explanations)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [GitHub Copilot CLI: How to get started](https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-how-to-get-started/)
 
 #### 💭 Priya's Realization
 
-_"I used to copy commands and hope for the best. Now I understand every command before I run it. Each explanation is a mini-lesson. I'm learning faster than I ever did from documentation."_
+_"The slash commands are like settings for my AI assistant. I can switch brains, save conversations, and start fresh whenever I need to. It's not just chatting—I'm actually controlling the AI."_
+
+#### 🚀 Challenge Extension
+
+Create a workflow using multiple models:
+1. Use GPT-4o to brainstorm approaches to a problem
+2. Switch to Claude to review and critique the approach  
+3. Use the best approach with your preferred model to implement
+4. Share the final conversation as documentation
 
 ---
 
-### Exercise 4: Shell Scripting with Copilot — "Automate the Tedious"
+### Exercise 4: Shell Mode — "Execute Without Leaving Copilot"
 
-**Tier**: 🆓 Free  
+**Tier**: 🆓 Free (with Copilot Pro subscription)  
 **Primary Persona**: Jordan (DevOps Expert)  
 **Time**: 15-20 minutes
 
 #### 📖 The Story
 
-**Jordan** needs to create a deployment preparation script: check prerequisites, validate configuration, run tests, and stage artifacts. He's written hundreds of these scripts, but they're tedious to write from scratch every time.
+**Jordan** loves that Copilot CLI can help with code, but he's constantly exiting Copilot to run shell commands—build the code, run tests, check git status. Every context switch breaks his flow.
 
-Let's use Copilot to accelerate shell script creation.
+Then he discovers shell mode: prefix any command with `!` and Copilot executes it inline.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Without AI assistance:
-- Writing boilerplate error handling from scratch
-- Remembering syntax for bash conditionals
-- Looking up how to parse command-line arguments
-- Testing edge cases you forgot to handle
+Without shell mode:
+- Exit Copilot → Run command → Re-enter Copilot
+- Lose conversation context with each exit
+- Manual copy-paste of command outputs
+- Fragmented workflow between AI and shell
 
 #### 🎯 Objective
 
-Use Copilot CLI to generate and understand shell script components.
+Use shell mode (`!`) to execute commands directly within Copilot CLI, maintaining conversation context while running tests, builds, and other shell operations.
 
 #### 📋 Steps
 
-1. **Generate script structure**
+1. **Start Copilot CLI in a project**
 
    ```bash
-   gh copilot suggest "bash script template with error handling and logging"
-   ```
-   
-   Get a starting point with proper structure.
-
-2. **Add argument parsing**
-
-   ```bash
-   gh copilot suggest "bash function to parse --env and --version command line arguments"
+   cd ~/your-project
+   copilot
    ```
 
-3. **Create validation logic**
+2. **Run a simple shell command**
 
-   ```bash
-   gh copilot suggest "bash function to check if docker, kubectl, and aws cli are installed"
+   Prefix with `!`:
    ```
-
-4. **Build the complete script**
-
-   Combine suggestions into a script (`deploy-prep.sh`):
-
-   ```bash
-   #!/bin/bash
-   set -euo pipefail
-   
-   # Logging (from suggestion)
-   log() {
-       echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1"
-   }
-   
-   # Prerequisite check (from suggestion)
-   check_prereqs() {
-       # Copilot-generated validation
-   }
-   
-   # Argument parsing (from suggestion)
-   parse_args() {
-       # Copilot-generated parsing
-   }
-   
-   # Main logic
-   main() {
-       log "Starting deployment preparation"
-       check_prereqs
-       parse_args "$@"
-       log "Preparation complete"
-   }
-   
-   main "$@"
-   ```
-
-5. **Understand and customize**
-
-   For any generated section you don't understand:
-   ```bash
-   gh copilot explain "set -euo pipefail"
+   > !ls -la
    ```
    
-   - `set -e`: Exit on error
-   - `set -u`: Error on undefined variables
-   - `set -o pipefail`: Catch errors in pipelines
+   The output appears in your Copilot session.
 
-6. **Test incrementally**
+3. **Check git status without leaving**
 
-   Run script sections as you add them:
-   ```bash
-   bash -n deploy-prep.sh  # Syntax check
-   bash -x deploy-prep.sh  # Debug mode
+   ```
+   > !git status
+   ```
+   
+   Then ask Copilot about the output:
+   ```
+   > What changes are staged?
+   ```
+
+4. **Run tests and discuss results**
+
+   ```
+   > !npm test
+   ```
+   
+   If tests fail:
+   ```
+   > Can you help me fix the failing tests?
+   ```
+   
+   Copilot has the test output in context.
+
+5. **Build and troubleshoot**
+
+   ```
+   > !npm run build
+   ```
+   
+   If there are errors:
+   ```
+   > What's causing these build errors? How do I fix them?
+   ```
+
+6. **Create a development workflow**
+
+   Combine shell commands with AI assistance:
+   ```
+   > Let's implement a new feature. First, show me the current branch.
+   > !git branch --show-current
+   > Good, now let's create a feature branch.
+   > !git checkout -b feature/add-logging
+   > Now let's add logging to @src/api/users.ts
+   ```
+
+7. **Use shell mode for exploration**
+
+   ```
+   > !find . -name "*.test.ts" | head -10
+   > What testing patterns are used in these test files?
+   ```
+
+8. **Combine with code changes**
+
+   ```
+   > Add input validation to the createUser function
+   [Copilot makes changes]
+   > !npm test -- --grep "createUser"
+   > The tests pass. Let's commit this.
+   > !git add . && git commit -m "Add input validation to createUser"
    ```
 
 #### ✅ Success Criteria
 
-- [ ] Generated at least 3 shell script components
-- [ ] Combined them into a working script
-- [ ] Used explain to understand unfamiliar syntax
-- [ ] Script runs without errors
+- [ ] Executed shell commands using `!` prefix
+- [ ] Ran tests and had Copilot analyze the results
+- [ ] Used shell output as context for AI assistance
+- [ ] Combined shell mode with code changes
+- [ ] Completed a mini-workflow (git + code + test) without leaving Copilot
 
 #### ✨ The "After" — The Improved Experience
 
-With Copilot for scripting:
-- Generate boilerplate quickly
-- Learn bash patterns through usage
-- Build reliable scripts faster
-- Focus on logic, not syntax
+With shell mode:
+- One unified interface for coding and shell operations
+- Command outputs become AI context automatically
+- Seamless workflow: code → test → fix → commit
+- Never lose conversation context to run a command
 
 #### 📚 Official Docs
 
-- [GitHub Copilot in the CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli)
-- [Bash reference manual](https://www.gnu.org/software/bash/manual/bash.html)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [GitHub Copilot CLI 101](https://github.blog/ai-and-ml/github-copilot-cli-101-how-to-use-github-copilot-from-the-command-line/)
 
 #### 💭 Jordan's Verdict
 
-_"I've written thousands of shell scripts. Copilot doesn't replace my experience—it accelerates it. I describe what I need, it gives me the syntax, I validate and customize. What used to take an hour takes fifteen minutes."_
+_"Shell mode is the feature I didn't know I needed. My workflow used to be: ask AI, exit, run command, re-enter AI, paste output. Now it's one continuous conversation. The AI sees everything I see."_
+
+#### 🚀 Challenge Extension
+
+Create an automated debugging workflow:
+```
+> !npm test
+> Analyze the failing tests and fix them one by one.
+> After each fix, run !npm test to verify.
+> Continue until all tests pass.
+```
 
 ---
 
-### Exercise 5: Git Workflow Automation — "Git Without the Guesswork"
+### Exercise 5: Programmatic Mode — "AI in Your Pipelines"
 
-**Tier**: 🆓 Free  
-**Primary Persona**: Marcus (DevOps Developer)  
+**Tier**: 🆓 Free (with Copilot Pro subscription)  
+**Primary Persona**: Jordan (DevOps Expert)  
 **Time**: 15-20 minutes
 
 #### 📖 The Story
 
-**Marcus** is comfortable with `git add`, `git commit`, and `git push`. But advanced git operations—rebasing, cherry-picking, finding specific commits, cleaning up history—send him straight to Google.
+**Jordan** sees the potential of Copilot CLI for his CI/CD pipelines. Imagine: automated code review comments, intelligent test failure analysis, security audit summaries—all powered by AI. But interactive mode won't work in CI.
 
-Today he's learning to use Copilot CLI for git workflows that used to intimidate him.
+That's where programmatic mode comes in: one-shot prompts with the `-p` flag.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Without git assistance:
-- Fear of rebasing and messing up history
-- "How do I undo that commit?" → 20 min of searching
-- Complex git log queries are trial and error
-- Cherry-picking feels risky
+Without AI in CI/CD:
+- Cryptic test failure messages require manual investigation
+- No automated code quality insights
+- Security scans produce long reports nobody reads
+- Build failures mean scrolling through endless logs
 
 #### 🎯 Objective
 
-Use Copilot CLI to perform advanced git operations with confidence.
+Use Copilot CLI's programmatic mode (`-p`) to integrate AI assistance into automation scripts and CI/CD pipelines.
 
 #### 📋 Steps
 
-1. **Find specific commits**
+1. **Basic programmatic usage**
 
+   Instead of interactive mode, pass your prompt directly:
    ```bash
-   gh copilot suggest "git log showing only commits that modified the README file in the last month"
+   copilot -p "Explain what a Dockerfile does in one paragraph"
    ```
    
-   Result: `git log --since="1 month ago" -- README.md`
+   Copilot responds and exits—perfect for scripts.
 
-2. **Undo operations safely**
-
-   ```bash
-   gh copilot suggest "undo the last commit but keep the changes staged"
-   ```
-   
-   Result: `git reset --soft HEAD~1`
-   
-   Always understand before running:
-   ```bash
-   gh copilot explain "git reset --soft HEAD~1"
-   ```
-
-3. **Clean up commit history**
+2. **Analyze files programmatically**
 
    ```bash
-   gh copilot suggest "squash the last 3 commits into one"
+   copilot -p "Review @src/api/auth.ts for security vulnerabilities"
    ```
    
-   Copilot explains interactive rebase approach.
+   Get instant code review without an interactive session.
 
-4. **Work with branches**
+3. **Process command output**
+
+   Pipe output to Copilot for analysis:
+   ```bash
+   npm test 2>&1 | copilot -p "Analyze these test results and summarize any failures"
+   ```
+
+4. **Create a test failure analyzer script**
+
+   Create `analyze-tests.sh`:
+   ```bash
+   #!/bin/bash
+   # Run tests and analyze failures with AI
+   
+   TEST_OUTPUT=$(npm test 2>&1)
+   EXIT_CODE=$?
+   
+   if [ $EXIT_CODE -ne 0 ]; then
+       echo "Tests failed. Analyzing with Copilot..."
+       echo "$TEST_OUTPUT" | copilot -p "Analyze these test failures and suggest fixes"
+   else
+       echo "All tests passed!"
+   fi
+   ```
+
+5. **Security audit automation**
 
    ```bash
-   gh copilot suggest "list all branches that have been merged into main"
-   ```
-   
-   Then:
-   ```bash
-   gh copilot suggest "delete all local branches that have been merged into main"
+   copilot -p "Audit @src/api/ for common security issues: SQL injection, XSS, auth bypass. Provide a summary report."
    ```
 
-5. **Cherry-pick with confidence**
+6. **Documentation generation**
 
    ```bash
-   gh copilot suggest "apply commit abc123 from feature-branch to current branch"
+   copilot -p "Generate API documentation for @src/api/users.ts in OpenAPI format"
    ```
+
+7. **GitHub Actions integration**
+
+   Create `.github/workflows/ai-review.yml`:
+   ```yaml
+   name: AI Code Review
+   on: pull_request
    
-   Learn cherry-pick syntax and options.
+   jobs:
+     review:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v4
+         
+         - name: Setup Node.js
+           uses: actions/setup-node@v4
+           with:
+             node-version: '22'
+         
+         - name: Install Copilot CLI
+           run: npm install -g @github/copilot
+         
+         - name: Run AI Review
+           run: |
+             copilot -p "Review the changes in this PR for:
+               1. Code quality issues
+               2. Potential bugs
+               3. Security concerns
+               Provide a summary suitable for a PR comment."
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   ```
 
-6. **Create useful git aliases**
+8. **Control tool permissions**
 
+   For CI/CD safety, control what Copilot can do:
    ```bash
-   gh copilot suggest "git alias for pretty log with graph and colors"
-   ```
+   # Allow all tools (file read/write, shell execution)
+   copilot -p "Fix the linting errors" --allow-all-tools
    
-   Add to your `.gitconfig` for permanent shortcuts.
-
-7. **Build a personal git cheatsheet**
-
-   As you discover useful commands, save them:
-   ```markdown
-   # My Git Commands (from Copilot)
-   
-   ## Undo last commit, keep changes
-   git reset --soft HEAD~1
-   
-   ## Find commits by file
-   git log -- <filename>
-   
-   ## Pretty log
-   git log --oneline --graph --decorate
+   # Deny specific dangerous commands
+   copilot -p "Clean up the project" --deny-command "rm -rf"
    ```
 
 #### ✅ Success Criteria
 
-- [ ] Found commits with specific criteria
-- [ ] Performed a safe undo operation
-- [ ] Understood a command before running it
-- [ ] Created at least one useful git alias
-- [ ] Feel more confident with advanced git
+- [ ] Ran Copilot with `-p` flag successfully
+- [ ] Analyzed a file for issues programmatically
+- [ ] Created a script that uses Copilot for analysis
+- [ ] Understand how to integrate with CI/CD
+- [ ] Know how to control tool permissions for safety
 
 #### ✨ The "After" — The Improved Experience
 
-With Copilot for git:
-- Advanced operations become approachable
-- Understand before you run
-- Build expertise incrementally
-- Git becomes a tool, not a source of anxiety
+With programmatic mode:
+- AI-powered CI/CD pipelines
+- Automated code review and analysis
+- Intelligent test failure diagnosis
+- One-shot prompts perfect for automation
 
 #### 📚 Official Docs
 
-- [GitHub Copilot in the CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli)
-- [Git documentation](https://git-scm.com/doc)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
 
-#### 💭 Marcus's Insight
+#### 💭 Jordan's Insight
 
-_"I avoided advanced git because I was afraid of breaking things. Now I ask Copilot, understand the command, and run it confidently. My git skills have improved more in a week than in the past year."_
+_"Programmatic mode changes everything. Now my CI pipelines have AI superpowers. Test failures get analyzed automatically, security scans produce human-readable summaries, and PR reviews include intelligent insights. AI isn't just for coding—it's for my entire DevOps workflow."_
+
+#### 🚀 Challenge Extension
+
+Create a comprehensive PR analysis workflow:
+```bash
+#!/bin/bash
+# ai-pr-review.sh
+
+# Get changed files
+CHANGED_FILES=$(git diff --name-only origin/main)
+
+# Security review
+copilot -p "Review these files for security issues: $CHANGED_FILES"
+
+# Performance analysis
+copilot -p "Check for performance concerns in: $CHANGED_FILES"
+
+# Test coverage suggestions
+copilot -p "What tests should be added for changes in: $CHANGED_FILES"
+```
 
 ---
 
 ## 📝 Key Takeaways
 
-### The CLI Copilot Workflow
+### The Copilot CLI Workflow
 
 ```
 ┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
-│  Describe Need  │ ───► │  Get Suggestion │ ───► │ Understand It   │
-│  (Plain English)│      │  (Copilot)      │      │ (explain)       │
+│ Start Session   │ ───► │ Natural Language│ ───► │ Review Changes  │
+│ (copilot)       │      │ Conversation    │      │ (approve/reject)│
 └─────────────────┘      └─────────────────┘      └─────────────────┘
-                                                          │
-                                                          ▼
-                                                  ┌─────────────────┐
-                                                  │  Run & Learn    │
-                                                  │  (with conf.)   │
-                                                  └─────────────────┘
+        │                        │                        │
+        │  ┌─────────────────────┼────────────────────────┤
+        ▼  ▼                     ▼                        ▼
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│ /model, /share  │      │ @file mentions  │      │ Shell mode (!)  │
+│ /clear, /usage  │      │ #context vars   │      │ Run commands    │
+└─────────────────┘      └─────────────────┘      └─────────────────┘
 ```
 
-### When to Use CLI Copilot
+### Two Modes for Different Needs
 
-| ✅ Great For | ❌ Not Ideal For |
-|--------------|------------------|
-| Unfamiliar command syntax | Commands you know well |
-| Complex flag combinations | Simple, muscle-memory commands |
-| Learning new tools | Time-critical emergencies |
-| Understanding found commands | Offline environments |
-| Shell script generation | |
+| Mode | Command | Use Case | When to Use |
+|------|---------|----------|-------------|
+| **Interactive** | `copilot` | Conversational coding | Daily development, exploration, debugging |
+| **Programmatic** | `copilot -p "..."` | Automation | CI/CD, scripts, one-shot tasks |
+
+### Essential Commands Quick Reference
+
+```bash
+# Start interactive session
+copilot
+
+# Programmatic mode (one-shot)
+copilot -p "your prompt"
+
+# Inside interactive session:
+/login              # Authenticate
+/model show         # List available models
+/model <name>       # Switch model
+/clear              # Clear conversation
+/share              # Save session
+/usage              # View stats
+/help               # See all commands
+
+# Shell mode (run commands)
+!ls -la             # Execute shell command
+!npm test           # Run tests
+!git status         # Check git
+
+# File mentions
+@src/file.ts        # Reference specific file
+@package.json       # Bring config into context
+```
+
+### When to Use Copilot CLI vs. Other Tools
+
+| ✅ Copilot CLI Excels At | ❌ Consider Other Tools |
+|--------------------------|------------------------|
+| SSH/remote sessions without IDE | Complex IDE refactoring (VS Code) |
+| CI/CD pipeline integration | Visual debugging (VS Code) |
+| Quick terminal-based coding | Large-scale multi-file changes (VS Code) |
+| Automation and scripting | Real-time collaboration (Live Share) |
+| Server-side development | Graphical diff review (GitHub.com) |
+| Headless/container environments | |
 
 ### The Learning Loop
 
-Every interaction with Copilot CLI is a learning opportunity:
+Every interaction with Copilot CLI builds your skills:
 
-1. **Suggest** → Get the command
-2. **Explain** → Understand it
-3. **Run** → Execute with confidence
-4. **Remember** → Build knowledge over time
+1. **Ask** → Natural language prompt
+2. **Review** → Understand proposed changes
+3. **Approve** → Apply with confidence
+4. **Iterate** → Refine with follow-up prompts
 
 ---
 
 ## ➡️ Next Steps
 
-You've completed Appendix B! You now have Copilot assistance in your terminal alongside your editor.
+You've completed Appendix B! You now have full Copilot capabilities in any terminal, anywhere.
 
 **To continue learning:**
 - Return to [Module 00: Orientation](../00-orientation/README.md) for a refresher
 - Explore [Appendix A: Copilot on the Web](../09-appendix-a-copilot-web/README.md)
-- Practice daily: use `suggest` and `explain` whenever you encounter unfamiliar commands
+- Check out [Module 07: Agent Fundamentals](../07-agent-fundamentals/README.md) for custom agents
 
 **Build the habit:**
-- Before Googling a command, try `gh copilot suggest`
-- Before running unfamiliar commands, use `gh copilot explain`
-- Save useful commands to a personal cheatsheet
+- Use `copilot` whenever you're in a terminal without VS Code
+- Try programmatic mode for repetitive analysis tasks
+- Integrate AI into your CI/CD pipelines
+- Combine shell mode (`!`) with AI assistance for seamless workflows
 
 ---
 
 ## 🔗 Additional Resources
 
 **GitHub Copilot CLI:**
-- [GitHub Copilot in the CLI documentation](https://docs.github.com/en/copilot/github-copilot-in-the-cli)
-- [GitHub CLI manual](https://cli.github.com/manual/)
+- [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
+- [GitHub Copilot CLI: How to get started](https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-how-to-get-started/)
+- [GitHub Copilot CLI 101](https://github.blog/ai-and-ml/github-copilot-cli-101-how-to-use-github-copilot-from-the-command-line/)
 
-**Shell Scripting:**
-- [Bash reference manual](https://www.gnu.org/software/bash/manual/bash.html)
-- [ShellCheck - shell script analysis](https://www.shellcheck.net/)
+**Custom Agents and MCP:**
+- [Custom Agents in Copilot CLI](https://github.blog/changelog/2025-10-28-github-copilot-cli-use-custom-agents-and-delegate-to-copilot-coding-agent/)
+- [Extending Copilot with MCP](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/extend-coding-agent-with-mcp)
 
-**Git:**
-- [Pro Git book](https://git-scm.com/book/en/v2)
-- [Git documentation](https://git-scm.com/doc)
+**CI/CD Integration:**
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [GitHub Copilot CLI: How to get started](https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-how-to-get-started/)
