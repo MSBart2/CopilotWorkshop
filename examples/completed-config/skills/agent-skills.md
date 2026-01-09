@@ -1,6 +1,6 @@
 # FanHub Agent Skills Library
 
-> Agent Skills teach GitHub Copilot domain-specific knowledge. This library contains skills for TV show data validation, product requirements, and FanHub development workflows.
+> Agent Skills teach GitHub Copilot domain-specific knowledge. This library contains skills for bug reproduction testing, product requirements, and FanHub development workflows.
 
 ## What Are Agent Skills?
 
@@ -33,21 +33,21 @@ Skills are part of an [open standard](https://github.com/agentskills/agentskills
 
 This library contains three production-ready skills for FanHub development. Each skill is stored in its own directory with a `SKILL.md` file following the [Agent Skills open standard](https://agentskills.io).
 
-### 1. TV Show Data Validator
+### 1. Bug Reproduction Test Generator
 
-**Location**: `tv-show-data-validator/SKILL.md`
+**Location**: `bug-reproduction-test-generator/SKILL.md`
 
-**Purpose**: Validates TV show data (characters, episodes, shows) against FanHub schema requirements.
+**Purpose**: Generates failing tests that reproduce reported bugs in FanHub. Follows test-driven debugging principles—write a failing test first, then fix the bug.
 
 **Key Features**:
-- Character validation (required fields, status enums, foreign keys)
-- Episode validation (season/episode uniqueness, proper numbering)
-- Show validation (status values, premiere years)
-- Common error detection patterns
+- Bug reproduction test structure (describe/it blocks, Arrange/Act/Assert)
+- Common bug categories (data integrity, null references, query errors, business logic)
+- FanHub schema knowledge for realistic test data
+- Test patterns that demonstrate the bug exists (should FAIL initially)
 
-**Use this when**: Creating database seed data, writing API handlers, generating test fixtures, or validating request/response bodies.
+**Use this when**: A bug report comes in, reproducing issues before fixing them, preventing regression, or debugging data integrity problems.
 
-[View Full Skill →](tv-show-data-validator/SKILL.md)
+[View Full Skill →](bug-reproduction-test-generator/SKILL.md)
 
 ---
 
@@ -176,7 +176,7 @@ cp -r /tmp/skills/debugging .github/skills/
 
 | Skill | Owner | Last Review |
 |-------|-------|-------------|
-| tv-show-data-validator | Elena | [Date] |
+| bug-reproduction-test-generator | Elena | [Date] |
 | feature-requirements | Rafael | [Date] |
 | api-endpoint-design | David | [Date] |
 
@@ -193,7 +193,7 @@ Verify skills work correctly:
 ```
 @workspace Create a new character object for Eleven from Stranger Things
 
-# Expected: Copilot applies tv-show-data-validator skill automatically
+# Expected: Copilot applies bug-reproduction-test-generator skill automatically
 # and includes all required fields with proper validation
 ```
 
