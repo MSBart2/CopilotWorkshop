@@ -5,7 +5,6 @@ This folder contains reference implementations for everything you'll build in th
 - ✅ **Check your work** — Compare your output to the reference
 - ✅ **Get unstuck** — See what "done" looks like
 - ✅ **Fast-track learning** — Copy configs if you want to skip ahead
-- ✅ **Find inspiration** — See how to adapt patterns for different shows
 
 ---
 
@@ -13,7 +12,7 @@ This folder contains reference implementations for everything you'll build in th
 
 ```
 examples/
-├── completed-config/          # Full "finished" state (generic)
+├── completed-config/          # Full "finished" state
 │   ├── .github/
 │   │   ├── copilot-instructions.md    # Repository instructions
 │   │   ├── prompts/                    # Custom prompt templates
@@ -22,17 +21,14 @@ examples/
 │   │   └── ARCHITECTURE.md
 │   ├── visual-context/                 # Using images with Copilot
 │   │   └── README.md
-│   └── skills/                         # Claude extended capabilities
-│       └── claude-skills.md
+│   └── skills/                         # Agent Skills examples
+│       └── agent-skills.md
 │
-├── show-themes/               # Show-specific examples
-│   ├── the-office/
-│   ├── stranger-things/
-│   └── breaking-bad/
-│
-└── quick-start/               # Minimal templates
-    ├── minimal-instructions.md
-    └── full-template.md
+└── module-10/                 # Enterprise patterns templates
+    ├── org-instructions-template.md
+    ├── COPILOT-REVIEW-GUIDE.md
+    ├── TEAM-ONBOARDING.md
+    └── quarterly-report-template.md
 ```
 
 ---
@@ -43,17 +39,18 @@ examples/
 |--------|---------|-----------------|----------------|
 | **Module 1** | Repository Instructions | `copilot-instructions.md` | [completed-config/.github/copilot-instructions.md](completed-config/.github/copilot-instructions.md) |
 | **Module 1** | Documentation | `ARCHITECTURE.md` | [completed-config/docs/ARCHITECTURE.md](completed-config/docs/ARCHITECTURE.md) |
-| **Module 2** | Custom Prompts | Test prompt files | [completed-config/.github/prompts/](completed-config/.github/prompts/) |
-| **Module 3** | Custom Agents | Agent configuration files | [completed-config/.github/agents/](completed-config/.github/agents/) |
-| **Module 4** | Custom Instructions | File-scoped instructions | [completed-config/.github/instructions/](completed-config/.github/instructions/) |
+| **Module 3** | Custom Prompts | Prompt files | [completed-config/.github/prompts/](completed-config/.github/prompts/) |
+| **Module 4** | Custom Agents | Agent configuration files | [completed-config/.github/agents/](completed-config/.github/agents/) |
+| **Module 5** | Custom Instructions | File-scoped instructions | [completed-config/.github/instructions/](completed-config/.github/instructions/) |
+| **Module 6** | Agent Skills | Domain-specific skills | [completed-config/skills/agent-skills.md](completed-config/skills/agent-skills.md) |
+| **Module 10** | Enterprise Patterns | Org templates | [module-10/](module-10/) |
 | **Appendix** | Visual Context | Using images with Copilot | [completed-config/visual-context/README.md](completed-config/visual-context/README.md) |
-| **Appendix** | Show Theming | Theme customization | [show-themes/](show-themes/) |
 
 ---
 
-## 🎯 The 4 Customization Features
+## 🎯 The Key Customization Features
 
-This workshop teaches four ways to customize GitHub Copilot:
+This workshop teaches multiple ways to customize GitHub Copilot:
 
 | # | Feature | What It Does | Example |
 |---|---------|--------------|---------|
@@ -61,6 +58,7 @@ This workshop teaches four ways to customize GitHub Copilot:
 | 2 | **Custom Prompts** | Reusable prompt templates with variables | [prompts/](completed-config/.github/prompts/) |
 | 3 | **Custom Agents** | Specialized AI assistants for specific tasks | [agents/](completed-config/.github/agents/) |
 | 4 | **Custom Instructions** | File-scoped context via `applyTo` patterns | [instructions/](completed-config/.github/instructions/) |
+| 5 | **Agent Skills** | Domain-specific knowledge Copilot loads automatically | [skills/](completed-config/skills/) |
 
 ---
 
@@ -70,23 +68,7 @@ This workshop teaches four ways to customize GitHub Copilot:
 Follow the modules and create everything yourself. Use examples only to check your work.
 
 ### Option 2: Copy and Customize
-Copy `completed-config/.github/` to your FanHub project, then customize for your show.
-
-### Option 3: Use a Show Theme
-Copy one of the `show-themes/` folders if you're building for The Office, Stranger Things, or Breaking Bad.
-
----
-
-## 📝 How Examples Are Organized
-
-### Generic Examples (`completed-config/`)
-These use placeholder content like `[YOUR_SHOW]` that you'd replace with your chosen show. They demonstrate the structure and patterns without being tied to a specific theme.
-
-### Show-Specific Examples (`show-themes/`)
-Fully themed examples for popular shows. Copy these directly if you're building for that show, or use them as inspiration for your own theme.
-
-### Quick Start Templates (`quick-start/`)
-Minimal and comprehensive templates you can copy as starting points.
+Copy `completed-config/.github/` to your FanHub project, then customize for your chosen show.
 
 ---
 
