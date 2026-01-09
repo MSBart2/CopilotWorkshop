@@ -63,3 +63,4 @@ The current appendices (Copilot Web and Copilot CLI) should be moved earlier in 
 - [ ] Review Debug View exercise placement (currently in Module 5, consider Module 1)
 - [ ] Verify all persona references are consistent
 - [ ] Add missing "Official Docs" sections where needed
+- [ ] Check root README.md for "full auth" promise and verify FanHub actually implements it
