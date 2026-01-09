@@ -2,7 +2,7 @@
 
 > **Purpose**: Master tracking document for creating before/after learning exercises covering all VS Code Copilot documentation topics.
 >
-> **Last Updated**: December 18, 2025
+> **Last Updated**: January 9, 2026
 >
 > **Session Continuity**: This document tracks progress across multiple sessions. Update checkboxes as exercises are completed.
 
@@ -36,6 +36,11 @@
 | 22  | Custom Agents          | ✅ Complete | Module 07, Ex 6   | 💼   |
 | 23  | Language Models        | ✅ Complete | Module 07, Ex 2   | 🆓   |
 | 24  | MCP                    | ✅ Complete | Module 07, Ex 3   | 🆓   |
+| 25  | Org Instructions       | ✅ Complete | Module 10, Ex 1   | 💼   |
+| 26  | Code Review Standards  | ✅ Complete | Module 10, Ex 2   | 🆓   |
+| 27  | Copilot Spaces         | ✅ Complete | Module 10, Ex 3   | 🏢   |
+| 28  | Usage Metrics          | ✅ Complete | Module 10, Ex 4   | 💼   |
+| 29  | Team Onboarding        | ✅ Complete | Module 10, Ex 5   | 🆓   |
 
 **Legend**: 🆓 Free tier | 💼 Business tier | 🏢 Enterprise tier
 
@@ -68,6 +73,14 @@ Module 06 (Agents & Tools)
 Module 06 (Collaborative)
     └── Module 06, Ex 5 (Prompt Files) [ENHANCE]
     └── Module 08, Ex 4 (Prompt Examples)
+
+Module 09 (Agentic SDLC)
+    └── Module 10 (Enterprise Patterns)
+            └── Module 10, Ex 1 (Org Instructions) [💼]
+            └── Module 10, Ex 2 (Code Review Standards) [🆓]
+            └── Module 10, Ex 3 (Copilot Spaces) [🏢]
+            └── Module 10, Ex 4 (Usage Metrics) [💼]
+            └── Module 10, Ex 5 (Team Onboarding) [🆓]
 ```
 
 ---
