@@ -336,6 +336,12 @@ Through structured planning, David discovered:
 
 **Key insight**: The deeper your expertise, the better your AI customizations become.
 
+#### 📚 Official Docs
+
+- [GitHub Docs: Using GitHub Copilot Chat](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)
+- [VS Code: Copilot Customization](https://code.visualstudio.com/docs/copilot/copilot-customization)
+- [GitHub Docs: About customizing Copilot](https://docs.github.com/en/copilot/customizing-copilot/about-customizing-github-copilot)
+
 #### 💭 David's Transformation
 
 *"I was worried AI would make my architectural knowledge obsolete. But I realize now—my 20 years of experience is what makes me able to design AI tools that actually understand architecture. The expertise isn't obsolete, it's the competitive advantage."*
@@ -474,6 +480,12 @@ Marcus has systematized AI collaboration for the team:
 
 **Key insight**: DevOps thinking (systematic, repeatable, improvable) applies perfectly to AI tool adoption.
 
+#### 📚 Official Docs
+
+- [GitHub Docs: Best practices for prompting GitHub Copilot Chat](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
+- [VS Code: Copilot Chat](https://code.visualstudio.com/docs/copilot/copilot-chat)
+- [GitHub Docs: Getting started with Copilot Chat](https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-ides/using-github-copilot-chat-in-your-ide)
+
 #### 💭 Marcus's Evolution
 
 *"This is what I love about DevOps thinking—you take something that works and you make it systematic. Plan mode isn't just a tool, it's a practice. And practices can be engineered for better outcomes."*
@@ -577,6 +589,12 @@ The FanHub team now has:
 - **Systematic workflows** that scale across team members
 - **Foundation** for all future AI customization work
 - **Confidence** in their ability to leverage AI effectively
+
+#### 📚 Official Docs
+
+- [GitHub Docs: Using GitHub Copilot Chat in your IDE](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)
+- [VS Code: Copilot Chat Context](https://code.visualstudio.com/docs/copilot/copilot-chat#_chat-context)
+- [GitHub Docs: Using chat participants](https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-ides/using-github-copilot-chat-in-your-ide#using-chat-participants)
 
 ---
 
