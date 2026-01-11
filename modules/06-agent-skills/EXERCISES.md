@@ -512,6 +512,12 @@ Now when a bug report comes in:
 
 **Value unlocked**: Elena can reproduce bugs 10x faster, spending her expertise on test strategy rather than boilerplate.
 
+#### 📚 Official Docs
+
+- [VS Code: Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+- [Agent Skills Open Standard](https://agentskills.io)
+- [GitHub Docs: Creating agent skills](https://docs.github.com/en/copilot/customizing-copilot/using-agent-skills-for-github-copilot)
+
 #### 💭 Elena's Transformation
 
 *"This is what I've been missing! The skill captures our testing workflow—how to structure tests, what to assert, how to reference bugs. Now when a user reports 'page shows wrong data,' I just describe the issue and Copilot writes a failing test that proves the bug exists. My 8 years of testing experience is encoded in this skill."*
@@ -709,6 +715,12 @@ Rafael's product requirements are now:
 - Developer: ✅ Ships polished feature matching product standards
 
 **Value unlocked**: Product standards become executable. Rafael speaks user needs, the skill ensures technical excellence. No more "forgot to add analytics" in code review.
+
+#### 📚 Official Docs
+
+- [Agent Skills Open Standard](https://agentskills.io)
+- [VS Code: Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+- [GitHub Docs: Using agent skills](https://docs.github.com/en/copilot/customizing-copilot/using-agent-skills-for-github-copilot)
 
 #### 💭 Rafael's Transformation
 
@@ -1064,6 +1076,12 @@ The FanHub team now has:
 - **Community connection** leveraging and contributing skills
 
 **Key insight**: Skills are most powerful when part of a systematic strategy, not ad-hoc additions.
+
+#### 📚 Official Docs
+
+- [VS Code: Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+- [Anthropic Skills Repository](https://github.com/anthropics/skills)
+- [Agent Skills Open Standard](https://agentskills.io)
 
 #### 💭 Team Reflection
 
