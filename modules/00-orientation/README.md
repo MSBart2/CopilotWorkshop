@@ -17,9 +17,15 @@ But first, you need to see the problem. You need to _feel_ the frustration of wo
 ## Prerequisites
 
 - **VS Code** with **GitHub Copilot** and **GitHub Copilot Chat** enabled
+  - [Download VS Code](https://code.visualstudio.com/download)
+  - [Install GitHub Copilot extension](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+  - [Install GitHub Copilot Chat extension](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
 - **Docker Desktop** installed and running (for the FanHub starter app)
+  - [Download Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - **Node.js 18+** installed
+  - [Download Node.js](https://nodejs.org/)
 - A **GitHub account** with Copilot access (Individual, Business, or Enterprise)
+  - [Get GitHub Copilot](https://github.com/features/copilot)
 - **Read the [Training Personas](PERSONAS.md)** — Meet the team you'll be working with
 
 ## Estimated Time
@@ -252,6 +258,8 @@ AI collaboration is a dialogue, not a transaction. The best results come from ge
 ## 🗺️ The Copilot Customization Map
 
 Throughout this training, you'll learn five ways to customize GitHub Copilot. Here's your roadmap—refer back to this when deciding which tool to use.
+
+> 📚 **Learn more**: [GitHub Docs: Customizing GitHub Copilot](https://docs.github.com/en/copilot/customizing-copilot)
 
 ### When to Use What
 
