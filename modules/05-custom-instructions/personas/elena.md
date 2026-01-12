@@ -1,8 +1,10 @@
 # Elena's Path: Custom Instructions
 
-## 🎯 Your Focus: Automating QA Standards
+## 🎯 Your Focus: Fixing the Character Detail Tests
 
-Elena, this module transforms your 8 years of QA expertise into **automatic testing standards**. Instead of writing the same review comments over and over, you'll create instructions that ensure every generated test follows your patterns—proper structure, edge case coverage, and meaningful assertions.
+> 🧵 **The Golden Thread**: In Module 04, the team used agent mode to build Character Detail v2. You're now reviewing the generated tests—and they have inconsistencies. This module transforms your 8 years of QA expertise into **automatic testing standards** that would have prevented these issues.
+
+Elena, instead of writing the same review comments over and over, you'll create instructions that ensure every generated test follows your patterns—proper structure, edge case coverage, and meaningful assertions.
 
 **Your exercises**: 5.1 (Testing Instructions)  
 **Time**: ~25 minutes  
@@ -15,62 +17,83 @@ Elena, this module transforms your 8 years of QA expertise into **automatic test
 ```
 Elena's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "I write the same review comments on every PR"                 │
+│  "The Character Detail tests from Module 04 are inconsistent"   │
 │                         ↓                                       │
-│  Creates testing.instructions.md with comprehensive patterns   │
+│  Creates testing.instructions.md with comprehensive patterns    │
 │                         ↓                                       │
-│  "AI generates tests that already follow our standards."        │
+│  "The NEXT feature's tests will be right from the start."       │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Exercise 5.1: Testing Instructions — "Elena's Quality Standards"
+## Exercise 5.1: Testing Instructions — "The Character Detail Tests Need Help"
+
+> 🧵 **The Golden Thread Continues**: The agent built Character Detail v2 in Module 04—including tests. Your review reveals inconsistencies that custom instructions could have prevented.
 
 ### 📖 The Story
 
-**Elena** (QA Engineer, 8 years) reviews the team's tests and notices inconsistencies:
+**Elena** (QA Engineer, 8 years) opens `CharacterDetail.test.js` to review the tests that the agent generated in Module 04. The feature works, but the tests have problems:
+
 - Some tests use `describe/it`, others use `test`
-- Mocking approaches vary wildly
-- Coverage of edge cases is hit-or-miss
-- Some tests are testing implementation, not behavior
+- The API mocking is inconsistent—some tests mock at module level, some inline
+- Happy path is covered, but edge cases are spotty
+- One test actually tests implementation details rather than behavior
 
-*"I could review every test, or..."* Elena pauses. *"I could teach Copilot our testing standards."*
+*"The agent followed our general coding standards,"* Elena notes, *"but it didn't know our testing standards. Every time I review generated tests, I'm catching the same issues."*
 
-### ❌ The "Before" — What Frustration Looks Like
+### ❌ The "Before" — What the Agent Generated
 
-Elena's Monday morning code review:
+Look at the Character Detail tests from Module 04. Without testing-specific instructions:
 
-**PR #42: Add user service tests**
+```javascript
+// Inconsistent patterns from Module 04's agent output
+test('renders character name', () => {  // Uses 'test' instead of 'it'
+  render(<CharacterDetail id="1" />);
+  expect(screen.getByText('Walter White')).toBeInTheDocument();
+});
 
-Elena's review comments (again):
-- "Please use `describe/it` blocks, not flat `test` calls"
-- "You're mocking internal helpers—mock the external dependency instead"
-- "Where's the error case test? What if the user doesn't exist?"
-- "This assertion tests implementation details, not behavior"
+describe('CharacterDetail', () => {
+  it('should fetch character data', async () => {
+    // No mock setup visible—where's axios mocked?
+    const { result } = renderHook(() => useCharacter('1'));
+    await waitFor(() => expect(result.current.data).toBeDefined());
+  });
+  
+  // Missing: What if the character has no episodes?
+  // Missing: What if the API returns 404?
+  // Missing: What if network fails?
+});
+```
 
-**PR #43: Add auth middleware tests**
+**Elena's review comments (the same ones she always writes):**
+- "Please use `describe/it` blocks consistently, not mix with `test`"
+- "Mock axios at module level for consistency"
+- "Where's the error case test? What if the character doesn't exist?"
+- "Test edge case: character with no episodes"
 
-Elena's review comments (the same ones):
-- "Please use `describe/it` blocks..."
-- "You're mocking internal helpers..."
-- "Where's the error case test..."
-
-*"I've written these exact comments 47 times this quarter,"* Elena calculates. *"My expertise is being consumed by repetition, not strategy."*
+*"I've written these exact comments 47 times this quarter,"* Elena calculates.
 
 ### 🎯 Objective
 
-Create custom instructions that automatically activate for all test files.
+Create custom instructions that automatically activate for all test files, ensuring consistent quality for future features.
 
 ### 📋 Steps
 
-1. **Create the instructions directory**
+1. **Review the Character Detail tests** (if you completed Module 04)
+   
+   Open the test file created in Module 04 and identify inconsistencies:
+   - What testing patterns did the agent use?
+   - Are error cases covered?
+   - Is mocking consistent?
+
+2. **Create the instructions directory**
    
    ```bash
    mkdir -p .github/instructions
    ```
 
-2. **Create testing instructions**
+3. **Create testing instructions**
    
    Create: `.github/instructions/testing.instructions.md`
    
@@ -79,7 +102,7 @@ Create custom instructions that automatically activate for all test files.
    applyTo: "**/*.test.{js,ts,jsx,tsx}"
    ---
    
-   # Testing Standards
+   # Testing Standards for FanHub
    
    When generating or modifying test files, follow these standards.
    
@@ -97,6 +120,14 @@ Create custom instructions that automatically activate for all test files.
    2. **Edge cases** — Boundary conditions, empty inputs, max values
    3. **Error handling** — Invalid inputs, failures, exceptions
    4. **Integration points** — Mocked external dependencies
+   
+   ## FanHub-Specific Test Patterns
+   
+   For character/episode/show data:
+   - Test with complete data AND partial data (missing optional fields)
+   - Test empty arrays (character with no episodes, show with no quotes)
+   - Test loading states and error states
+   - Test "not found" scenarios (404 responses)
    
    ## Mocking Standards
    

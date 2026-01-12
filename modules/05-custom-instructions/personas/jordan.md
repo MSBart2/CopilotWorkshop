@@ -1,8 +1,10 @@
 # Jordan's Path: Custom Instructions
 
-## 🎯 Your Focus: Security and DevOps Patterns by Default
+## 🎯 Your Focus: Shipping Character Detail v2 Securely
 
-Jordan, this module lets you do what you've always wanted—make security and DevOps best practices **automatic**. Instead of being the "did you run as non-root?" reviewer on every PR, you'll create instructions that ensure Dockerfiles, GitHub Actions, and infrastructure code follow your patterns from the start.
+> 🧵 **The Golden Thread**: The Character Detail v2 feature from Module 04 is ready to deploy—but the Dockerfile hasn't been touched since the contractor left. It has security issues. This module lets you do what you've always wanted—make security and DevOps best practices **automatic**.
+
+Jordan, instead of being the "did you run as non-root?" reviewer on every PR, you'll create instructions that ensure Dockerfiles, GitHub Actions, and infrastructure code follow your patterns from the start.
 
 **Your exercises**: 5.3 (Infrastructure Instructions)  
 **Time**: ~25 minutes  
@@ -15,38 +17,52 @@ Jordan, this module lets you do what you've always wanted—make security and De
 ```
 Jordan's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "Developers mean well, but they don't know Docker security"    │
+│  "Character Detail v2 is ready—but the Dockerfile is insecure" │
 │                         ↓                                       │
 │  Creates infrastructure.instructions.md with security patterns  │
 │                         ↓                                       │
-│  "Every developer gets my 12 years of 'always run as non-root'" │
+│  "Every feature gets secure deployment from the start."         │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Exercise 5.3: Infrastructure Instructions — "Jordan's DevOps Patterns"
+## Exercise 5.3: Infrastructure Instructions — "Shipping Character Detail v2"
+
+> 🧵 **The Golden Thread Continues**: The Character Detail v2 feature is ready—but now you need to deploy it. The existing Dockerfile hasn't been updated since the contractor left, and it has security issues.
 
 ### 📖 The Story
 
-**Jordan** (Platform Engineer, 12 years) maintains the CI/CD pipelines, Dockerfiles, and infrastructure config. These files need specialized knowledge:
-- Dockerfiles have security best practices
-- GitHub Actions have workflow patterns
-- Terraform has module conventions
+**Jordan** (Platform Engineer, 12 years) gets the green light to deploy Character Detail v2 to staging. He opens the project's Dockerfile and groans.
 
-*"Application developers mean well, but they don't know Docker security. I want Copilot to enforce our infra patterns automatically."*
+*"This Dockerfile is from the contractor days,"* Jordan explains. *"It runs as root, uses the `latest` tag, no health check, no multi-stage build. It'll work, but it's a security incident waiting to happen."*
 
-### ❌ The "Before" — What Frustration Looks Like
+The team realizes they need to fix the Dockerfile before deploying their new feature. But Jordan has a broader concern:
 
-**Last Week's Incident Report:**
+*"I can fix this manually, but what about next time? When the agent generates infrastructure changes, it won't know our security requirements."*
 
-A PR merged with a Dockerfile that:
-- Used `FROM node:latest` (unpinned version)
-- Ran as root user
-- Had no health check
-- Included dev dependencies in production image
+### ❌ The "Before" — The Contractor's Dockerfile
 
-Jordan was on vacation. The PR looked small. Security scan caught it... in production.
+Look at the current `fanhub/backend/Dockerfile`:
+
+```dockerfile
+# Contractor's original Dockerfile - security issues
+FROM node:latest
+
+WORKDIR /app
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+**The problems:**
+- Uses `latest` tag (unpinned version)
+- Runs as root user (security risk)
+- No multi-stage build (image bloat)
+- No health check (orchestrator can't monitor)
+- Copies everything including dev dependencies
+- No `.dockerignore` awareness
 
 **Jordan's Typical PR Comments:**
 - "Please pin the base image version"
@@ -54,11 +70,11 @@ Jordan was on vacation. The PR looked small. Security scan caught it... in produ
 - "Include a HEALTHCHECK instruction"
 - "Use multi-stage build to exclude dev dependencies"
 
-*"I've written these comments hundreds of times,"* Jordan sighs. *"If only the AI knew this from the start."*
+*"I've written these comments hundreds of times,"* Jordan sighs.
 
 ### 🎯 Objective
 
-Create specialized instructions for infrastructure and deployment files.
+Create specialized instructions for infrastructure and deployment files, then use them to fix the Dockerfile for Character Detail v2 deployment.
 
 ### 📋 Steps
 
@@ -77,13 +93,13 @@ Create specialized instructions for infrastructure and deployment files.
      - "**/*.tf"
    ---
    
-   # Infrastructure & DevOps Standards
+   # Infrastructure & DevOps Standards for FanHub
    
    When generating or modifying infrastructure files, follow these security and operational best practices.
    
    ## Dockerfile Best Practices
    
-   ### Security
+   ### Security (Required)
    
    ```dockerfile
    # ✅ Use specific version tags, not 'latest'

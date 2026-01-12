@@ -1,11 +1,13 @@
 # Priya's Path: Custom Instructions
 
-## 🎯 Your Focus: Learning Patterns That Stick
+## 🎯 Your Focus: Building the EpisodeAppearances Component
+
+> 🧵 **The Golden Thread**: Character Detail v2 shows episode appearances—but the component structure is inconsistent. You'll build the `EpisodeAppearances` component properly using React instructions that ensure every future component follows the same patterns.
 
 Priya, this module shows you how to capture best practices so you (and the whole team) benefit from them forever. You've been learning React patterns—now you'll encode them into instructions that help Copilot generate consistent, high-quality components. This isn't just about AI; it's about documenting expertise in a way that teaches as it assists.
 
 **Your exercises**: 5.4 (React Component Instructions)  
-**Time**: ~20 minutes  
+**Time**: ~25 minutes  
 **Theme**: From learning patterns to encoding patterns
 
 ---
@@ -15,50 +17,67 @@ Priya, this module shows you how to capture best practices so you (and the whole
 ```
 Priya's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "Six months ago I didn't know these React patterns"            │
+│  "The CharacterDetail component is good, but EpisodeList is..."│
 │                         ↓                                       │
 │  Creates react-components.instructions.md with David's help     │
 │                         ↓                                       │
-│  "Now they're encoded in our repo, helping everyone."           │
+│  "Now I'm building EpisodeAppearances with consistent patterns" │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Exercise 5.4: React Component Instructions — "Priya's Component Patterns"
+## Exercise 5.4: React Component Instructions — "The Episode Appearances Component"
+
+> 🧵 **The Golden Thread Continues**: Character Detail v2 shows episode appearances—but the component structure is inconsistent. You'll build the `EpisodeAppearances` component properly with React instructions.
 
 ### 📖 The Story
 
-The FanHub frontend has inconsistencies: some components use hooks properly, some don't. Some have proper TypeScript types, some use `any`. Some handle loading states, some don't.
+**Priya** (Junior Developer, 1 year) is excited. The Character Detail v2 feature from Module 04 is live, but users want more—they want to click on an episode to see details. She's been assigned to build the `EpisodeAppearances` component that makes episodes clickable.
 
-**Priya** has been learning React best practices and wants to ensure consistency. With guidance from David, she creates component instructions.
+But first, she reviews the existing components the agent generated in Module 04.
 
-### ❌ The "Before" — What Frustration Looks Like
+*"Some components handle loading states, some don't,"* Priya notices. *"Some have TypeScript types, some use `any`. The CharacterDetail component is good, but the EpisodeList inside it is... different."*
 
-Priya looks at the FanHub frontend codebase:
+**David** (Staff Engineer, 20 years) sees an opportunity: *"You've been learning React best practices, Priya. What if you captured those patterns in instructions?"*
 
-**Header.jsx**: 
-- Uses function component ✓
-- Has loading state ✓
-- Uses styled-components ✓
+### ❌ The "Before" — Inconsistent Components
 
-**EpisodeList.js**:
-- Uses function component ✓
-- No loading state ✗
-- Uses inline styles ✗
+Look at the components from Module 04:
 
-**About.jsx**:
-- Has class component ✗
-- Uses `any` types ✗
-- Has embedded `<style>` tags ✗
+```jsx
+// Inconsistent patterns from agent-generated components
+const CharacterDetail = ({ id }) => {  // No TypeScript types
+  const [data, setData] = useState();  // No initial state type
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    fetchCharacter(id).then(setData);  // No error handling!
+  }, []);  // Missing dependency
+  
+  if (loading) return <div>Loading...</div>;  // Basic, no spinner
+  
+  return (
+    <div style={{ padding: '20px' }}>  {/* Inline styles */}
+      <h1>{data.name}</h1>
+      {/* What if data.episodes is undefined? */}
+      {data.episodes.map(ep => <div key={ep.id}>{ep.title}</div>)}
+    </div>
+  );
+};
+```
 
-*"Every component is different,"* Priya realizes. *"How am I supposed to know what's 'right'?"*
-
-When she asks Copilot to generate a new component, it picks up random patterns from the codebase—sometimes good, sometimes bad.
+**The problems:**
+- No TypeScript interfaces
+- Missing error handling
+- Incomplete useEffect dependencies
+- Inline styles instead of styled-components
+- No empty state handling
+- No loading component (just text)
 
 ### 🎯 Objective
 
-Create instructions that provide React/TypeScript expertise for component files.
+Create instructions that provide React/TypeScript expertise for component files, then use them to build the `EpisodeAppearances` component properly.
 
 ### 📋 Steps
 
@@ -74,7 +93,7 @@ Create instructions that provide React/TypeScript expertise for component files.
      - "**/components/**"
    ---
    
-   # React Component Standards
+   # React Component Standards for FanHub
    
    When generating or modifying React components, follow these patterns.
    
@@ -83,17 +102,26 @@ Create instructions that provide React/TypeScript expertise for component files.
    ```typescript
    // 1. Imports (external, then internal, then styles)
    import React, { useState, useEffect, useCallback } from 'react';
-   import { useQuery } from '@tanstack/react-query';
+   import { Link } from 'react-router-dom';
    
-   import { Button } from '@/components/ui';
-   import { useAuth } from '@/hooks/useAuth';
+   import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+   import { ErrorMessage } from '@/components/ui/ErrorMessage';
+   import { useCharacterEpisodes } from '@/hooks/useCharacterEpisodes';
    
-   import { Container, Title } from './MyComponent.styles';
+   import { Container, EpisodeCard } from './EpisodeAppearances.styles';
    
-   // 2. Types/Interfaces
-   interface MyComponentProps {
-     id: string;
-     onUpdate?: (data: Data) => void;
+   // 2. Types/Interfaces (required for FanHub)
+   interface Episode {
+     id: number;
+     title: string;
+     seasonNumber: number;
+     episodeNumber: number;
+   }
+   
+   interface EpisodeAppearancesProps {
+     characterId: number;
+     showId: number;
+     onEpisodeClick?: (episodeId: number) => void;
      className?: string;
    }
    
