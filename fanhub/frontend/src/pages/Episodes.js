@@ -47,6 +47,9 @@ const pageStyles = {
   },
 };
 
+let episodeCache = null;
+let cacheTimestamp = null;
+
 // Functional component with hooks
 const Episodes = () => {
   const [episodes, setEpisodes] = useState([]);
@@ -71,6 +74,15 @@ const Episodes = () => {
 
   // Load episodes
   const loadEpisodes = useCallback(async (seasonId = null) => {
+    // Attempt to use cache (but cache doesn't account for seasonId!)
+    const now = Date.now();
+    if (episodeCache && cacheTimestamp && (now - cacheTimestamp) < 30000) {
+      // BUG: Using cached data regardless of which season was requested
+      setEpisodes(episodeCache);
+      setLoading(false);
+      return;
+    }
+    
     try {
       setLoading(true);
       setError(null);
@@ -84,6 +96,11 @@ const Episodes = () => {
       
       // Handle different response formats (backend inconsistency!)
       const data = response.data.data || response.data;
+      
+      // Update cache (but doesn't track which season this is for!)
+      episodeCache = data;
+      cacheTimestamp = Date.now();
+      
       setEpisodes(data);
       
       // Only extract seasons on initial load

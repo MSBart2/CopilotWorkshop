@@ -165,6 +165,382 @@ Example:
 
 ---
 
+## Module File Structure (Three-Tier Navigation)
+
+Each module should use a **three-tier navigation pattern** that enables self-paced learning, role-based identification, and both quick reference and deep learning paths.
+
+### Required Files
+
+```
+modules/XX-module-name/
+├── README.md          # Navigation hub (~130-150 lines)
+├── EXERCISES.md       # Full content with all exercises (~700-800 lines)
+└── personas/          # Individual persona journey files (~200-220 lines each)
+    ├── persona1.md
+    ├── persona2.md
+    └── ...
+```
+
+### README.md Template (Navigation Hub)
+
+The README serves as a **navigation hub**, not the full content. Follow this exact section order:
+
+```markdown
+# Module N: [Title]
+
+## ⏰ [Time in Story Arc] — [Thematic Subtitle]
+
+> *"Quote that captures the module's pain point or key insight."*  
+> — [Persona], [brief context of their situation]
+
+---
+
+## 📖 The Story
+
+[Narrative context connecting to previous modules. Open with recap, use persona names 
+with role descriptions, bullet current pain points, end with challenge quote and mission.]
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, you will:
+
+- [Verb] [measurable outcome]
+- [Verb] [measurable outcome]
+- [Verb] [measurable outcome]
+
+**Time**: ~XX minutes (or follow your persona's focused path for less)  
+**Featured Personas**: [Name] ([Role]), [Name] ([Role])
+
+---
+
+## 🧠 Mindful Moment: [Philosophical Theme]
+
+[Conceptual framing that connects the technical skill to broader thinking]
+
+---
+
+## 📚 Key Concepts
+
+### [Concept 1]
+[Explanation]
+
+### [Concept 2]
+[Explanation]
+
+---
+
+## 🎯 Choose Your Path
+
+### Option 1: Follow Your Persona
+[Links to persona files with time estimates]
+
+### Option 2: Experience the Full Story
+[Link to EXERCISES.md]
+
+### Option 3: Quick Navigator
+
+| Exercise | Lead Persona | Time | Topic |
+|----------|--------------|------|-------|
+| [N.1](EXERCISES.md#exercise-n1-title) | [Name] | XX min | [Description] |
+| [N.2](EXERCISES.md#exercise-n2-title) | [Name] | XX min | [Description] |
+
+---
+
+## 📚 Official Documentation
+
+- [VS Code Docs: Topic](url)
+- [GitHub Docs: Topic](url)
+
+---
+
+## ➡️ Next Up
+
+**[Module N+1: Title](../XX-next-module/README.md)** — [Preview description with quote]
+
+---
+
+## ✅ Module Checklist
+
+- [ ] [Verification item]
+- [ ] [Verification item]
+- [ ] [Verification item]
+```
+
+### EXERCISES.md Template (Full Content)
+
+The EXERCISES file contains the **complete content** including all exercises with full detail.
+
+**Required Sections (in order):**
+
+1. **Header** — Same title, time marker, and opening quote as README
+2. **📖 Story So Far** — Slightly expanded recap of previous modules
+3. **💡 Callout Box** — Integration note connecting to previous module's artifacts
+4. **🎯 Learning Objectives** — Same as README
+5. **🧠 Mindful Moment** — Same as README  
+6. **📚 Key Concepts** — Same as README (can be expanded)
+7. **🔨 Exercises** — All exercises with full content (see Exercise Structure above)
+8. **🌐 Bonus Section** — Optional advanced content
+9. **🔗 Compounding Value** — What artifacts were created + how they connect to future modules
+10. **🧠 Mindful Moment** — Closing reflection
+11. **✅ Module Checklist** — Same as README
+12. **📚 Official Documentation** — Links
+13. **➡️ Next Up** — Module transition
+14. **🎭 Behind the Scenes** — Optional technical deep-dive
+
+### Persona File Template (Focused Journey)
+
+Each persona file provides a **focused path** through the module from that persona's perspective.
+
+```markdown
+# [Persona]'s Journey: Module N - [Topic]
+
+> **Your role**: [Role description]  
+> **Time**: [XX] minutes ([variant: focused/full])  
+> **Transformation**: From [before state] to [after state]
+
+---
+
+## 📖 Your Story in This Module
+
+[2-3 paragraphs in second person ("you") establishing context and motivation]
+
+---
+
+## 🎯 Your Exercises
+
+### Exercise N.X: [Title] ⭐ *You lead this one*
+
+**Your role**: [What you do]  
+**Time**: [XX] minutes  
+**[View full exercise →](../EXERCISES.md#exercise-nx-title)**
+
+**What you'll create:**
+- [Artifact 1]
+- [Artifact 2]
+
+**Your "before" pain:**
+[Description of frustration]
+
+**Your "after" win:**
+[Description of improvement]
+
+**Your transformation moment:**
+> *"[Quote capturing the insight]"*
+
+### Exercise N.Y: [Title] 🤝 *Team collaboration*
+
+[Same structure but with collaboration marker]
+
+---
+
+## 🔗 Connections to Your Work
+
+### Skills You're Building
+- **[Skill]**: [Brief description]
+
+### How This Helps Your Real Work
+[2-3 paragraphs connecting to their actual job]
+
+### Artifacts You Create
+- `path/to/artifact.md`
+
+---
+
+## 💭 Your Transformation Arc
+
+**Before this module (your fears):**
+- 😰 [Fear 1]
+- 😰 [Fear 2]
+
+**After this module (your achievements):**
+- ✅ [Achievement 1]
+- ✅ [Achievement 2]
+
+**Key insight:**
+> *"[Profound realization quote]"*
+
+---
+
+## 🚀 Quick Start Guide
+
+**If you're short on time ([XX] minutes):**
+1. [Step]
+2. [Step]
+
+**If you have full time ([XX] minutes):**
+1. [Step]
+2. [Step]
+
+---
+
+## 📊 Your Success Metrics
+
+| Metric | Before | After |
+|--------|--------|-------|
+| **[Metric name]** | [Value] | [Value] |
+
+---
+
+## ➡️ Continue Your Journey
+
+### Within This Module
+- [View all exercises](../EXERCISES.md) for full team story
+- [[Other persona]'s path](other.md) to see their perspective
+
+### Next Module
+Your next appearance: **[Module X: Topic](../../XX-module/personas/name.md)**
+```
+
+---
+
+## Emoji Vocabulary (Consistent Usage)
+
+Use these emojis consistently across all modules to create a unified visual language:
+
+| Emoji | Purpose | Example Usage |
+|-------|---------|---------------|
+| ⏰ | Time markers | `## ⏰ 10:30 AM — The Prompt Problem` |
+| 📖 | Story/narrative sections | `## 📖 The Story` |
+| 🎯 | Objectives, goals, exercises | `## 🎯 Learning Objectives` |
+| 🧠 | Mindful moments (philosophical) | `## 🧠 Mindful Moment: Clarity Over Cleverness` |
+| 📚 | Key concepts, documentation | `## 📚 Key Concepts` |
+| 🔨 | Exercises section header | `## 🔨 Exercises` |
+| ❌ | "Before" frustration | `#### ❌ The "Before" — What Frustration Looks Like` |
+| ✨ | "After" improvement | `#### ✨ The "After" — The Improved Experience` |
+| ✅ | Success criteria, checklists | `#### ✅ Success Criteria` |
+| 💭 | Persona thoughts/reactions | `#### 💭 Elena's Realization` |
+| 🚀 | Challenge extensions, quick starts | `#### 🚀 Challenge Extension` |
+| 🔗 | Connections, cross-references | `## 🔗 Compounding Value` |
+| ➡️ | Next steps, navigation | `## ➡️ Next Up` |
+| 💡 | Tip callouts | `💡 **Pro Tip**: ...` |
+| 🌐 | Bonus/web-related content | `## 🌐 Bonus: Advanced Techniques` |
+| 📊 | Metrics tables | `## 📊 Success Metrics` |
+| 🎭 | Behind the scenes | `## 🎭 Behind the Scenes` |
+| ⭐ | Lead exercise marker (personas) | `⭐ *You lead this one*` |
+| 🤝 | Collaboration marker (personas) | `🤝 *Team collaboration*` |
+| 😰 | Fear/before state | `- 😰 Worried that...` |
+
+---
+
+## Before/After Metrics Requirements
+
+The ❌ "Before" and ✨ "After" sections must include **concrete, quantifiable metrics** — not abstract statements.
+
+### ❌ Bad Examples (Too Abstract)
+
+```markdown
+#### ✨ The "After"
+With custom prompts, Elena saves time and gets better results.
+```
+
+### ✅ Good Examples (Concrete Metrics)
+
+```markdown
+#### ✨ The "After" — The Improved Experience
+
+Elena's prompt generates a complete test suite in under 2 minutes.
+
+**Time saved per test file**: ~15 minutes  
+**Edge case coverage gained**: 40% more scenarios identified  
+**Code review cycles reduced**: From 3 rounds to 1
+```
+
+Always include at least one of:
+- **Time saved** — Specific duration (minutes, hours)
+- **Errors avoided** — Specific count or percentage
+- **Coverage increased** — Percentage improvement
+- **Iterations reduced** — From X to Y
+
+---
+
+## Cross-Reference Patterns
+
+### Exercises ↔ Personas
+
+1. **In exercises**, include a "Supporting Cast" section:
+   ```markdown
+   **Supporting Cast**: 
+   - **Marcus** handles the deployment configuration
+   - **Elena** reviews the test coverage
+   ```
+
+2. **In persona files**, mark exercise roles:
+   - `⭐ *You lead this one*` — Primary exercise owner
+   - `🤝 *Team collaboration*` — Supporting role
+
+3. **Always link both directions**:
+   - Exercise → Persona file: `See [Elena's perspective](personas/elena.md)`
+   - Persona → Exercise: `[View full exercise →](../EXERCISES.md#exercise-31-title)`
+
+### Module Continuity
+
+1. **Story So Far** — Every EXERCISES.md opens with recap:
+   ```markdown
+   ## 📖 Story So Far
+   
+   In **Module 1**, the team discovered repository instructions...
+   In **Module 2**, they learned plan mode thinking...
+   Now, in **Module 3**, they face a new challenge...
+   ```
+
+2. **Next Up** — Every README and EXERCISES.md ends with preview:
+   ```markdown
+   ## ➡️ Next Up
+   
+   **[Module 4: Custom Agents](../04-custom-agents/README.md)**
+   
+   > *"What if we could create specialized AI personas for different tasks?"*
+   > — David, imagining architectural review agents
+   ```
+
+3. **Persona continuity** — Each persona file links to their next appearance:
+   ```markdown
+   ### Next Module
+   Your next appearance: **[Module 6: Agent Skills](../../06-agent-skills/personas/elena.md)**
+   ```
+
+### Documentation References
+
+1. **In prompts/exercises** — Reference project docs:
+   ```markdown
+   Reference our architecture from `docs/ARCHITECTURE.md` and follow 
+   patterns established in `.github/copilot-instructions.md`.
+   ```
+
+2. **In Official Docs sections** — Use this order:
+   - VS Code docs first
+   - GitHub Docs second  
+   - Microsoft Learn third
+   - Maximum 3-4 links per section
+
+---
+
+## Section Separators
+
+Use `---` (horizontal rule) between **ALL major sections** to create clear visual rhythm:
+
+```markdown
+## 📖 The Story
+
+[Content]
+
+---
+
+## 🎯 Learning Objectives
+
+[Content]
+
+---
+
+## 📚 Key Concepts
+```
+
+This consistent separation improves scannability and creates predictable document structure.
+
+---
+
 ## Tone and Voice
 
 ### Overall Training Voice
@@ -252,14 +628,31 @@ standards. My experience isn't obsolete—it's the filter that catches what AI m
 
 Before finalizing any module or exercise:
 
+### Module Structure
+- [ ] Does the module use the three-tier navigation pattern (README → EXERCISES → personas/)?
+- [ ] Does README.md serve as a navigation hub (~130-150 lines) with "Choose Your Path" options?
+- [ ] Does EXERCISES.md contain the full content (~700-800 lines)?
+- [ ] Does each featured persona have a dedicated journey file (~200-220 lines)?
+- [ ] Are `---` separators used between ALL major sections?
+- [ ] Does the module include "Story So Far" and "Next Up" sections for continuity?
+
+### Persona Integration
 - [ ] Does it feature at least one persona in a relatable scenario?
 - [ ] Does each exercise include an "Official Docs" subsection with 1–3 links to GitHub/Microsoft documentation relevant to the topic?
 - [ ] Does it address both hopes AND fears appropriate to the personas used?
-- [ ] Does it demonstrate value concretely, not abstractly?
-- [ ] Does it respect expertise while embracing new tools?
 - [ ] Does it include emotional beats (persona reactions)?
+- [ ] Are exercises marked with ⭐ (lead) or 🤝 (collaboration) in persona files?
+- [ ] Do persona files include transformation arcs (😰 fears → ✅ achievements)?
+
+### Content Quality
+- [ ] Does it demonstrate value concretely, not abstractly?
+- [ ] Do Before/After sections include **concrete metrics** (time saved, errors avoided, % improvement)?
+- [ ] Does it respect expertise while embracing new tools?
 - [ ] Does it progress from simple to complex?
 - [ ] Does it connect to the "Markdown Whisperer" philosophy (clarity over cleverness)?
+- [ ] Is emoji usage consistent with the Emoji Vocabulary table?
+
+### Persona Validation
 - [ ] Would David feel his expertise is respected?
 - [ ] Would Priya feel safe asking questions?
 - [ ] Would Sarah feel her time was well spent?
