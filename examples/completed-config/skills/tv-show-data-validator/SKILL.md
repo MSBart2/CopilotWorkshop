@@ -1,244 +1,227 @@
 ---
-name: bug-reproduction-test-generator
-description: Generates failing tests that reproduce reported bugs in FanHub. Use when a bug report comes in and you need to create a test that demonstrates the issue before fixing it. Follows FanHub's testing patterns and data integrity rules.
+name: tv-show-data-validator
+description: Validates TV show data against FanHub's domain rules. Use when working with show, character, episode, or quote data to ensure data integrity and business rule compliance.
+level: 2
 ---
 
-# Bug Reproduction Test Generator
+# TV Show Data Validator
 
-This skill helps you write failing tests that reproduce reported bugs in the FanHub application. Following test-driven debugging principles, creating a failing test first ensures the bug is properly understood and the fix can be verified.
+This skill helps validate TV show data against FanHub's domain rules and business logic. It ensures data integrity across the shows, characters, episodes, and quotes that make up the FanHub application.
 
 ## When to Use This Skill
 
 Use this skill when:
-- A bug report comes in from users or QA
-- You need to reproduce an issue before fixing it
-- You want to prevent regression by capturing the bug in a test
-- You're debugging data integrity issues or unexpected behavior
+- Creating or updating TV show data
+- Validating data imports or migrations
+- Writing tests that need valid test data
+- Reviewing data integrity issues
+- Building features that work with the TV show domain model
 
-## FanHub Testing Patterns
+## FanHub Data Model
 
-### Test Structure
-All FanHub tests follow this pattern:
+### Entity Relationships
 
-```javascript
-describe('[Feature] - Bug: [Brief Description]', () => {
-  beforeEach(() => {
-    // Set up test database state
-  });
-
-  it('should [expected behavior] - Bug #[issue-number]', async () => {
-    // Arrange: Set up the specific conditions that trigger the bug
-    // Act: Perform the action that causes the issue
-    // Assert: Verify the bug occurs (test should FAIL initially)
-  });
-});
+```
+Shows (1) ─────────────────────────> (N) Seasons
+  │                                        │
+  │                                        v
+  │─────────────────────────────────> (N) Episodes
+  │                                        │
+  │                                        │
+  └─────> (N) Characters <────────────────┘
+                │                    (many-to-many)
+                │
+                v
+          (N) Quotes ─────────────> Episodes
 ```
 
-### Common Bug Categories
+### Core Entities
 
-#### 1. Data Integrity Issues
-**Symptoms**: Duplicate records, orphaned foreign keys, constraint violations
+#### Shows
+- **Required fields**: `title`, `start_year`
+- **Optional fields**: `end_year`, `genre`, `description`, `network`, `status`
+- **Constraints**:
+  - `title` must be unique
+  - `start_year` must be between 1950 and current year
+  - `end_year` must be >= `start_year` (if provided)
+  - `status` must be: 'running', 'ended', 'cancelled', or 'upcoming'
 
-**Test Pattern**:
-```javascript
-describe('Characters API - Bug: Duplicate character records', () => {
-  it('should return only unique characters per show - Bug #142', async () => {
-    // Arrange: Seed database with duplicate character
-    await db.characters.insert({
-      name: 'Jesse Pinkman',
-      show_id: 1,
-      actor_name: 'Aaron Paul'
-    });
-    await db.characters.insert({
-      name: 'Jesse Pinkman', // Duplicate!
-      show_id: 1,
-      actor_name: 'Aaron Paul'
-    });
+#### Characters
+- **Required fields**: `name`, `show_id`
+- **Optional fields**: `actor_name`, `status`, `bio`, `is_main_character`
+- **Constraints**:
+  - `name` + `show_id` must be unique (no duplicate characters per show)
+  - `status` must be: 'alive', 'deceased', or 'unknown'
+  - `bio` should not exceed 2000 characters
+  - `show_id` must reference an existing show
 
-    // Act: Query for characters
-    const response = await request(app).get('/api/shows/1/characters');
-    
-    // Assert: Should only return one Jesse Pinkman
-    const jessePinkman = response.body.filter(c => c.name === 'Jesse Pinkman');
-    expect(jessePinkman).toHaveLength(1); // FAILS - returns 2!
-  });
-});
+#### Episodes
+- **Required fields**: `title`, `show_id`, `season_number`, `episode_number`
+- **Optional fields**: `air_date`, `synopsis`, `runtime_minutes`, `director`, `writer`
+- **Constraints**:
+  - `show_id` + `season_number` + `episode_number` must be unique
+  - `season_number` must be >= 1
+  - `episode_number` must be >= 1
+  - `runtime_minutes` should be between 1 and 300
+  - `air_date` should not be in the future (unless show status is 'upcoming')
+
+#### Quotes
+- **Required fields**: `quote_text`, `show_id`
+- **Optional fields**: `character_id`, `episode_id`, `speaker_context`
+- **Constraints**:
+  - `character_id` must reference an existing character (if provided)
+  - `episode_id` must reference an existing episode (if provided)
+  - `quote_text` should not exceed 1000 characters
+  - If `character_id` is provided, character must belong to the same show
+
+## Validation Rules
+
+### Cross-Entity Validation
+
+1. **Character-Show Consistency**
+   ```
+   INVALID: Character references show_id=5, but that show doesn't exist
+   VALID: Character's show_id matches an existing show
+   ```
+
+2. **Quote-Character Consistency**
+   ```
+   INVALID: Quote has show_id=1 but character_id references character from show_id=2
+   VALID: Quote's character belongs to the same show as the quote
+   ```
+
+3. **Episode-Season Consistency**
+   ```
+   INVALID: Episode references season_number=3 but show only has 2 seasons
+   VALID: Episode's season exists for that show
+   ```
+
+4. **No Duplicate Characters Per Show**
+   ```
+   INVALID: Two characters named "Walter White" in Breaking Bad
+   VALID: "Walter White" in Breaking Bad and "Walter White" in a different show
+   ```
+
+### Data Quality Rules
+
+1. **Related Characters**
+   - Related characters should never include duplicates from the same show
+   - A character cannot be related to themselves
+   - Related character relationships should be bidirectional
+
+2. **Episode Ordering**
+   - Episodes within a season should have sequential episode numbers
+   - No gaps in episode numbering (1, 2, 3... not 1, 3, 5)
+   - Season numbers should be sequential (1, 2, 3... not 1, 3)
+
+3. **Quote Attribution**
+   - Quotes with `character_id` should have proper attribution
+   - Quotes without `character_id` should have `speaker_context` for context
+   - Famous quotes should be verified for accuracy
+
+## Validation Examples
+
+### Valid Data
+
+```json
+{
+  "show": {
+    "title": "Breaking Bad",
+    "start_year": 2008,
+    "end_year": 2013,
+    "status": "ended",
+    "genre": "Drama"
+  },
+  "character": {
+    "name": "Walter White",
+    "show_id": 1,
+    "actor_name": "Bryan Cranston",
+    "status": "deceased",
+    "is_main_character": true
+  },
+  "episode": {
+    "title": "Pilot",
+    "show_id": 1,
+    "season_number": 1,
+    "episode_number": 1,
+    "air_date": "2008-01-20",
+    "runtime_minutes": 58
+  },
+  "quote": {
+    "quote_text": "I am the one who knocks!",
+    "show_id": 1,
+    "character_id": 1,
+    "episode_id": 35
+  }
+}
 ```
 
-#### 2. Null Reference Errors
-**Symptoms**: "Cannot read property of null", crashes when data is missing
+### Invalid Data (with explanations)
 
-**Test Pattern**:
-```javascript
-describe('Quotes API - Bug: Crash with deleted character', () => {
-  it('should handle quotes for deleted characters gracefully - Bug #156', async () => {
-    // Arrange: Create quote, then delete character
-    const character = await db.characters.insert({ name: 'Test', show_id: 1 });
-    await db.quotes.insert({
-      quote_text: 'Test quote',
-      character_id: character.id,
-      show_id: 1
-    });
-    await db.characters.delete(character.id);
-
-    // Act: Try to get quote
-    const response = await request(app).get(`/api/quotes/${quote.id}`);
-    
-    // Assert: Should return 200 with null character, not crash
-    expect(response.status).toBe(200); // FAILS - returns 500!
-  });
-});
+```json
+{
+  "character": {
+    "name": "Jesse Pinkman",
+    "show_id": 1,
+    "status": "retired"  // ❌ Invalid status - must be alive/deceased/unknown
+  },
+  "episode": {
+    "title": "Future Episode",
+    "show_id": 1,
+    "season_number": 1,
+    "episode_number": 1,
+    "air_date": "2099-01-01"  // ❌ Future date for ended show
+  },
+  "quote": {
+    "quote_text": "Famous quote",
+    "show_id": 1,
+    "character_id": 999  // ❌ References non-existent character
+  }
+}
 ```
 
-#### 3. Incorrect Query Results
-**Symptoms**: API returns wrong data, missing records, or unexpected filtering
+## Common Validation Scenarios
 
-**Test Pattern**:
-```javascript
-describe('Episodes API - Bug: Season filter not working', () => {
-  it('should return only episodes from specified season - Bug #178', async () => {
-    // Arrange: Create episodes across seasons
-    await db.episodes.insert([
-      { title: 'S1E1', season_number: 1, episode_number: 1, show_id: 1 },
-      { title: 'S2E1', season_number: 2, episode_number: 1, show_id: 1 }
-    ]);
+### Scenario 1: Importing Show Data
 
-    // Act: Request only season 1
-    const response = await request(app).get('/api/episodes?season=1');
-    
-    // Assert: Should only return season 1 episodes
-    expect(response.body.every(ep => ep.season_number === 1)).toBe(true);
-    // FAILS - returns episodes from all seasons!
-  });
-});
-```
+When importing TV show data from external sources:
 
-#### 4. Business Logic Errors
-**Symptoms**: Data doesn't follow business rules, invalid states allowed
+1. Validate show exists or create it first
+2. Create seasons in order
+3. Create episodes with valid season references
+4. Create characters with valid show references
+5. Create quotes with valid character AND episode references
 
-**Test Pattern**:
-```javascript
-describe('Characters API - Bug: Allows invalid status values', () => {
-  it('should reject character with invalid status - Bug #189', async () => {
-    // Arrange: Attempt to create character with invalid status
-    const invalidCharacter = {
-      name: 'New Character',
-      show_id: 1,
-      status: 'retired' // Invalid! Should be 'alive', 'deceased', or 'unknown'
-    };
+### Scenario 2: Character Detail Feature
 
-    // Act: Try to create character
-    const response = await request(app)
-      .post('/api/characters')
-      .send(invalidCharacter);
-    
-    // Assert: Should return 400 Bad Request
-    expect(response.status).toBe(400); // FAILS - returns 201!
-    expect(response.body.error).toContain('Invalid status');
-  });
-});
-```
+When building character detail pages:
 
-## FanHub Schema Constraints
+1. Verify character exists and belongs to valid show
+2. Related characters should not include duplicates
+3. Related characters must belong to the same show
+4. All linked quotes must reference valid episodes
+5. Episode appearances should be in chronological order
 
-When writing bug reproduction tests, keep these schema rules in mind:
+### Scenario 3: Episode Detail Feature
 
-### Characters
-- `name` (required): String
-- `show_id` (required): Integer, must reference existing show
-- `actor_name` (optional): String
-- `status` (optional): Must be 'alive', 'deceased', or 'unknown'
-- `bio` (optional): Text
-- `is_main_character` (optional): Boolean
+When building episode detail pages:
 
-### Episodes
-- `title` (required): String
-- `show_id` (required): Integer, must reference existing show
-- `season_id` (required): Integer, must reference existing season
-- `episode_number` (required): Integer
-- `season_number + episode_number` must be unique per show
+1. Verify episode exists with valid show/season
+2. Character appearances must all belong to the episode's show
+3. Quotes must reference this specific episode
+4. Previous/next episode links must be valid
 
-### Quotes
-- `quote_text` (required): String
-- `show_id` (required): Integer, must reference existing show
-- `character_id` (optional): Integer, must reference existing character if provided
-- `episode_id` (optional): Integer, must reference existing episode if provided
+## Integration with Other Skills
 
-## Effective Bug Reproduction Tips
-
-1. **Isolate the issue**: Create minimal test data that triggers the bug
-2. **Document expected vs. actual**: Comment what SHOULD happen vs. what DOES happen
-3. **Include bug report context**: Reference the issue number and user report
-4. **Test should FAIL initially**: Confirm the bug exists before fixing
-5. **Verify the fix**: After fixing, test should PASS
-
-## Example: Complete Bug Reproduction Flow
-
-```javascript
-/**
- * Bug Report #142: User reports seeing duplicate "Jesse Pinkman" entries
- * when viewing Breaking Bad characters. Investigation shows database
- * has two records with the same name.
- * 
- * Expected: One Jesse Pinkman record per show
- * Actual: Multiple records with identical names allowed
- */
-
-describe('Characters API - Bug: Duplicate character names in same show', () => {
-  let breakingBadId;
-
-  beforeEach(async () => {
-    // Set up Breaking Bad show
-    const show = await db.shows.insert({
-      title: 'Breaking Bad',
-      start_year: 2008
-    });
-    breakingBadId = show.id;
-  });
-
-  it('should prevent duplicate character names within same show - Bug #142', async () => {
-    // Arrange: Create first Jesse Pinkman
-    const first = await request(app)
-      .post('/api/characters')
-      .send({
-        name: 'Jesse Pinkman',
-        show_id: breakingBadId,
-        actor_name: 'Aaron Paul'
-      });
-    expect(first.status).toBe(201);
-
-    // Act: Attempt to create duplicate
-    const duplicate = await request(app)
-      .post('/api/characters')
-      .send({
-        name: 'Jesse Pinkman', // Same name!
-        show_id: breakingBadId,
-        actor_name: 'Aaron Paul'
-      });
-    
-    // Assert: Should reject duplicate
-    expect(duplicate.status).toBe(400); // FAILS - returns 201!
-    expect(duplicate.body.error).toContain('Character already exists');
-
-    // Verify only one Jesse exists
-    const characters = await db.characters.findByShow(breakingBadId);
-    const jesseRecords = characters.filter(c => c.name === 'Jesse Pinkman');
-    expect(jesseRecords).toHaveLength(1); // FAILS - length is 2!
-  });
-});
-```
+This skill works alongside:
+- **bug-reproduction-test-generator**: Provides schema knowledge for writing valid test data
+- **feature-requirements**: Ensures features respect data model constraints
+- **effort-estimator**: Understanding data complexity informs effort estimates
 
 ## When NOT to Use This Skill
 
 Don't use this skill for:
-- Writing regular feature tests (use standard test generation patterns)
-- Testing happy paths (this is for reproducing FAILURES)
-- Performance testing or load testing
-- Integration tests that aren't bug-specific
-
-For those scenarios, use the appropriate test generation prompts or patterns instead.
-- Creating database seed data
-- Writing API endpoint handlers
-- Generating test fixtures
-- Validating API request/response bodies
-- Implementing data import/export functionality
+- General code style or formatting questions
+- Non-FanHub domain data validation
+- Authentication or authorization logic
+- Performance optimization

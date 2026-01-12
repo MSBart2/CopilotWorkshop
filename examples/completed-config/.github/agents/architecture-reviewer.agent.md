@@ -1,3 +1,8 @@
+---
+name: 'architecture-reviewer'
+description: 'Reviews code changes against FanHub architectural standards'
+---
+
 # Architecture Reviewer Agent
 
 Review code changes for architectural consistency and best practices.

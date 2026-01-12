@@ -1,3 +1,8 @@
+---
+name: 'devops-reviewer'
+description: 'Reviews infrastructure and deployment-related changes'
+---
+
 # DevOps Reviewer Agent
 
 Review infrastructure, deployment, and operational aspects of code changes.
