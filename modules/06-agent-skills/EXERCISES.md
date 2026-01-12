@@ -90,18 +90,31 @@ Do you want this applied AUTOMATICALLY?
 
 ## 📖 The Story So Far
 
-The FanHub team has built an impressive AI collaboration toolkit:
+The FanHub team has built an impressive AI collaboration toolkit—and a real feature:
+
 - **Module 1**: Repository instructions and architecture documentation
-- **Module 2**: Agent plan mode for systematic thinking
+- **Module 2**: Agent plan mode for systematic thinking  
 - **Module 3**: Custom prompts for reusable workflows
-- **Module 4**: Custom agents for autonomous tasks
-- **Module 5**: Custom instructions for file-scoped context
+- **Module 4**: Custom agents that built **Character Detail v2**—with episodes, quotes, related characters, and favorites
+- **Module 5**: Custom instructions that would have made Character Detail v2's tests, API routes, and components even better
 
-But Elena notices a gap: *"We have general coding standards, but nothing that captures our bug reproduction patterns. When a user reports 'character page shows wrong data,' I want Copilot to help me write a failing test that demonstrates the issue before we fix it."*
+Character Detail v2 shipped last sprint. Users love it. But then the bug reports start coming in:
 
-Rafael agrees: *"Our product requirements are domain-specific. Skills could encode testing patterns so Copilot applies them consistently when reproducing bugs."*
+> **Bug #142**: "The Breaking Bad character page shows duplicate 'Jesse Pinkman' entries in the related characters section."
 
-**This module's mission**: Create specialized Agent Skills that teach Copilot how to reproduce bugs systematically and write effective failing tests.
+> **Bug #147**: "Clicking a quote shows 'Episode not found' even though the episode exists."
+
+Elena opens the first bug report and sighs. *"I need to write a failing test that reproduces this duplicate character issue. But every time I do this, I re-explain our testing patterns to Copilot from scratch."*
+
+She looks at the Character Detail v2 code—the same code the agent built in Module 04. *"The agent knew our code patterns from instructions. But it doesn't know our **domain** patterns—like how characters relate to episodes, or why duplicate entries are invalid. That's not about code style, it's about **business logic**."*
+
+Rafael adds: *"And when stakeholders ask for the next feature—Episode Detail pages—I have to guess at effort. What if Copilot could estimate based on how long Character Detail v2 actually took?"*
+
+**This module's mission**: Create specialized Agent Skills that encode **domain knowledge**—the business rules, data relationships, and validation patterns that Copilot needs to understand FanHub's TV show data model.
+
+---
+
+💡 **Golden Thread Continuation**: In Module 05, you created custom instructions for *code patterns* (tests, Docker, React). In this module, you'll create skills for *domain patterns*—the TV show data rules that determine whether Character Detail v2's output is semantically correct, not just syntactically valid.
 
 ---
 
@@ -360,19 +373,19 @@ Without a skill, Elena has to manually guide Copilot through the testing pattern
 
 ```
 @workspace Write a test that:
-1. Seeds the database with duplicate character records
-2. Calls GET /api/characters?show_id=1
+1. Seeds the database with character relationships that create duplicates
+2. Calls GET /api/characters/:id/related (the Character Detail v2 endpoint)
 3. Asserts we get duplicate entries (test should FAIL)
 4. Uses describe/it structure
 5. Includes setup and teardown
-6. References bug report number
+6. References Bug #142
 ```
 
-This takes 5-10 minutes of back-and-forth every time a bug comes in.
+This takes 5-10 minutes of back-and-forth every time a bug comes in. And Elena has to re-explain the *domain context*—that related characters should never have duplicates from the same show.
 
 #### 🎯 Objective
 
-Create a Bug Reproduction Test Generator skill that teaches Copilot how to write effective failing tests from bug reports.
+Create a Bug Reproduction Test Generator skill that teaches Copilot how to write effective failing tests from bug reports—starting with Bug #142 from Character Detail v2.
 
 #### 📋 Steps
 
@@ -446,25 +459,26 @@ Create a Bug Reproduction Test Generator skill that teaches Copilot how to write
    - How to assert the failure (test should FAIL initially)
    - How to document expected vs. actual behavior
 
-4. **Test the skill with a realistic bug report**
+4. **Test the skill with Bug #142 from Character Detail v2**
    
-   Now give Copilot a real bug report and see the skill in action:
+   Now give Copilot the actual bug report and see the skill in action:
    
    ```
-   @workspace A user reports: "The Breaking Bad character page shows duplicate 'Jesse Pinkman' entries."
+   @workspace Bug #142: "The Breaking Bad character page shows duplicate 'Jesse Pinkman' 
+   entries in the related characters section."
    
    Write a failing test that reproduces this bug. The test should:
-   - Query the characters API for Breaking Bad (show_id: 1)
-   - Assert that each character name appears only once
-   - Include bug report reference
+   - Call GET /api/characters/:id/related (the Character Detail v2 endpoint)
+   - Assert that each related character appears only once
+   - Include Bug #142 reference
    ```
    
    **Expected**: Copilot should automatically:
    - Use describe/it structure from the skill
-   - Set up test data with duplicate Jesse Pinkman records
+   - Set up test data that creates duplicate relationships
    - Write assertions that FAIL (catching the bug)
    - Include the Arrange/Act/Assert pattern
-   - Reference the bug report in comments
+   - Reference Bug #142 in comments
 
 5. **Verify the skill is being used**
    
@@ -476,17 +490,18 @@ Create a Bug Reproduction Test Generator skill that teaches Copilot how to write
    
    Copilot should mention the bug-reproduction-test-generator skill.
 
-6. **Test with a different bug category**
+6. **Test with Bug #147 — a different bug category**
    
-   Try another bug type to see skill versatility:
+   Try the other Character Detail v2 bug to see skill versatility:
    
    ```
-   @workspace Write a test that reproduces this bug: "API crashes when fetching 
-   quotes for a deleted character. Expected: Should return empty array or handle 
-   gracefully. Actual: 500 error."
+   @workspace Bug #147: "Clicking a quote on the Character Detail page shows 
+   'Episode not found' even though the episode exists in the database."
+   
+   Write a failing test that reproduces this bug.
    ```
    
-   The skill should guide Copilot to create a null reference error test.
+   The skill should guide Copilot to create a test for the broken quote-to-episode relationship.
 
 #### ✅ Success Criteria
 
@@ -524,27 +539,59 @@ Now when a bug report comes in:
 
 ---
 
-### Exercise 6.3: Create Domain-Specific Skills — "Rafael's Product Requirements Skill"
+### Exercise 6.3: Create Domain-Specific Skills — "What Character Detail v2 Was Missing"
+
+> 🧵 **The Golden Thread**: Remember when the agent built Character Detail v2 in Module 04? It generated code that *worked*—but Rafael now realizes it was missing product standards. This skill ensures the next feature gets them automatically.
 
 #### 📖 The Story
 
-**Rafael** (Product Visionary, 10 years) has been watching Elena's success with the bug reproduction skill. He realizes that skills could encode product requirements in a way that bridges the gap between business needs and technical implementation.
+**Rafael** (Product Visionary, 10 years) reviews the Character Detail v2 code from Module 04. The feature works, users love it—but something's bothering him.
 
-*"We have requirements documents that developers read once and forget,"* Rafael reflects. *"What if those requirements lived in skills? Then Copilot would apply them automatically."*
+*"The agent built a working feature,"* Rafael says, *"but it didn't include our product standards. No error boundaries. Basic spinners instead of skeleton screens. No analytics tracking. No toast notifications on favorites."*
 
-Rafael wants to create a skill that ensures all FanHub features meet product standards.
+Elena nods: *"My testing instructions in Module 05 would have caught the test inconsistencies. But those are code patterns. What about product patterns?"*
 
-#### ❌ The "Before" — What Frustration Looks Like
+Rafael realizes the gap: *"Custom instructions trigger on file patterns—`*.test.js` or `Dockerfile`. But product requirements should apply based on **what you're building**, not what file you're in. When someone asks for a feature, Copilot should automatically add error boundaries, loading states, analytics..."*
 
-Rafael writes requirements like:
+That's exactly what skills do: they activate based on **conversation topic**, not file patterns.
+
+*"If we had this skill before Module 04,"* Rafael reflects, *"Character Detail v2 would have shipped with all our product standards built in."*
+
+#### ❌ The "Before" — What Character Detail v2 Was Missing
+
+Look at what the agent generated in Module 04:
+
+```jsx
+// Character Detail v2 - generated by agent in Module 04
+function CharacterDetail({ characterId }) {
+  const [character, setCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);  // Just a boolean
+  
+  if (loading) return <div>Loading...</div>;  // ❌ Basic spinner, not skeleton
+  // ❌ No error boundary wrapping this component
+  // ❌ No analytics tracking on page view
+  // ❌ No toast on favorite/unfavorite
+  
+  return (
+    <div>
+      <h1>{character.name}</h1>
+      {/* Feature works, but misses product standards */}
+    </div>
+  );
+}
+```
+
+Rafael's product requirements say:
 - "All public pages must include error boundaries"
 - "Loading states should show skeleton screens, not spinners"
 - "User actions must include success/error toast notifications"
 - "Analytics tracking on all user interactions"
 
-But developers forget these requirements, and they don't appear until code review—wasting time and causing rework.
+But developers don't remember these, and they don't appear until code review—wasting time and causing rework.
 
 #### 🎯 Objective
+
+Create a Feature Requirements Skill that encodes product standards Copilot applies **automatically** when building features—so the next feature gets what Character Detail v2 missed.
 
 Create a Feature Requirements Skill that encodes product standards Copilot applies when building new features.
 
@@ -728,42 +775,48 @@ Rafael's product requirements are now:
 
 ---
 
-### Exercise 6.4: Effort Estimator Skill — "Rafael Makes Informed Tradeoffs"
+### Exercise 6.4: Effort Estimator Skill — "What's Next After Character Detail?"
+
+> 🧵 **The Golden Thread**: Character Detail v2 shipped. Users love it. Now stakeholders want Episode Detail pages. But how long will that take? Rafael doesn't want to guess again.
 
 #### 📖 The Story
 
-**Rafael** just left a brutal stakeholder meeting. He has 10 feature requests, and his boss asked: *"Which should we build first?"*
+**Rafael** just left a stakeholder meeting. The success of Character Detail v2 has everyone excited. Now they want more:
 
-Without technical knowledge, Rafael guessed: *"The search feature seems simple, right? It's just a text box."*
+- *"Episode Detail pages would be amazing!"*
+- *"Can we add show recommendations?"*
+- *"What about user reviews?"*
 
-**Marcus** (sitting beside him) winces: *"Search needs database indexing, relevance ranking, autocomplete with debouncing, pagination, highlighting... that's 2-3 weeks of work, minimum."*
+Rafael's boss asks: *"Character Detail v2 took a sprint. Episode Detail should be similar, right? Can we commit to next sprint?"*
 
-**Rafael's face falls**: *"I just told my boss we'd ship it next week. I promised stakeholders..."*
+**Marcus** (sitting beside him) winces: *"Episode Detail is actually more complex. Episodes have transcripts, multiple characters per episode, air dates, streaming links... Character Detail had one character with related data. Episodes have many-to-many relationships."*
 
-Later, Rafael reflects: *"I need AI to help me understand technical complexity BEFORE I commit to stakeholders. I can't keep making promises I can't keep."*
+**Rafael's face falls**: *"I almost promised stakeholders we'd ship Episode Detail in one sprint, just like Character Detail..."*
+
+Later, Rafael reflects: *"I need AI to help me understand technical complexity BEFORE I commit to stakeholders. Character Detail v2 taught me features aren't as simple as they look."*
 
 **Supporting Cast**: Marcus helps Rafael understand what makes features complex from an engineering perspective.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Rafael's stakeholder meeting backlog:
+Rafael's post-Character-Detail backlog:
 
-1. "Add character favorites" → Rafael thinks: *Easy, it's just a heart icon*
-2. "Implement full-text search" → Rafael thinks: *Simple, one text input*
-3. "Add quote sharing to social media" → Rafael thinks: *Social share buttons, 1 day?*
-4. "Create admin dashboard for content moderation" → Rafael thinks: *Admin pages, maybe a week?*
+1. "Episode Detail pages" → Rafael thinks: *Similar to Character Detail, one sprint*
+2. "Show recommendations based on favorites" → Rafael thinks: *Just suggest similar shows, 1 week?*
+3. "User reviews and ratings" → Rafael thinks: *A form and some stars, maybe a week*
+4. "Full-text search across everything" → Rafael thinks: *A search box, 3-4 days?*
 
 Rafael prioritizes based on business value alone:
-- **P0**: Search (high user demand, "seems simple")
-- **P1**: Admin dashboard (compliance requirement)
-- **P2**: Social sharing
-- **P3**: Favorites
+- **P0**: Episode Detail (natural next step after Character Detail)
+- **P1**: Search (most requested)
+- **P2**: Reviews (user engagement)
+- **P3**: Recommendations
 
 **Reality check from Marcus**:
-- Search: 2-3 weeks (complex)
-- Admin dashboard: 3-4 weeks (auth, roles, moderation workflows)
-- Social sharing: 3-5 days (just API integration)
-- Favorites: 1 week (backend + frontend + persistence)
+- Episode Detail: 2 sprints (many-to-many relationships, transcripts, streaming links)
+- Search: 2-3 weeks (indexing, relevance, autocomplete)
+- Reviews: 2-3 weeks (moderation, spam prevention, authentication)
+- Recommendations: 1-2 sprints (algorithm, data pipeline, ML integration)
 
 Rafael's estimate: "3 weeks total"  
 Actual effort: "8-10 weeks total"
@@ -849,35 +902,41 @@ Create an Effort Estimator skill that analyzes feature descriptions and provides
    - **Total**: Small (2-3 days)
    - **Risks**: Minimal
 
-4. **Test the skill with Rafael's backlog**
+4. **Test the skill with Episode Detail — the next feature after Character Detail v2**
    
    With the skill installed, ask Copilot:
    ```
-   Estimate the technical effort for these features:
+   Estimate the technical effort for Episode Detail pages.
    
-   1. "Users want to favorite quotes and view them on a dedicated favorites page"
-   2. "Users want to search across all shows, characters, and quotes with autocomplete"
-   3. "Users want to share quotes to Twitter, Facebook, and Instagram"
-   4. "Admins need a dashboard to moderate user-submitted content with approval workflow"
+   The feature should:
+   - Show episode information (title, air date, synopsis, runtime)
+   - Display all characters appearing in that episode (many-to-many)
+   - Show memorable quotes from the episode
+   - Link to streaming services where available
+   - Include previous/next episode navigation
+   
+   We already built Character Detail v2 (single character with episodes, quotes, related characters).
+   Compare this to Episode Detail complexity and estimate effort.
    ```
    
    Copilot should automatically use the Effort Estimator skill and provide:
-   - Size estimate for each
-   - Technical breakdown
-   - Risk assessment
-   - Prioritization recommendations
+   - Size estimate with reasoning ("Larger than Character Detail because...")
+   - Technical breakdown by layer
+   - Risk assessment (many-to-many relationships, external streaming APIs)
+   - Comparison to Character Detail v2
 
-5. **Create a prioritization matrix**
+5. **Create a prioritization matrix for post-Character Detail features**
    
    Ask Copilot to help Rafael prioritize:
    ```
-   Using the effort estimates, help me create a prioritization matrix.
+   Using the effort estimates, help me create a prioritization matrix for our 
+   post-Character Detail v2 backlog.
    
    Business Value (Rafael's input):
-   - Favorites: Medium (nice-to-have)
+   - Episode Detail: High (natural next step, users asking for it)
    - Search: High (most requested feature)
-   - Social sharing: Low (marketing team request)
-   - Admin moderation: High (compliance requirement)
+   - Reviews: Medium (user engagement, but moderation concerns)
+   - Recommendations: Low (nice-to-have, requires ML)
    
    Create a 2x2 matrix: Business Value vs. Technical Effort
    Recommend which to build first for a 4-week sprint.
@@ -899,16 +958,15 @@ Create an Effort Estimator skill that analyzes feature descriptions and provides
 Rafael's new stakeholder meeting workflow:
 
 **Before the skill:**
-- Stakeholder: "How long will search take?"
-- Rafael: "Uh... a week? Maybe two?"
-- Stakeholder: "Great, let's commit to next sprint."
-- Rafael: *Fingers crossed*
+- Stakeholder: "How long will Episode Detail take? Character Detail was one sprint."
+- Rafael: "Uh... probably the same? One sprint?"
+- Marcus: *facepalm* "Episode Detail has many-to-many relationships..."
 
 **After the skill:**
-- Stakeholder: "How long will search take?"
+- Stakeholder: "How long will Episode Detail take?"
 - Rafael: *Asks Copilot with effort estimator skill*
-- Rafael: "Search is a Large feature—2-3 weeks. It requires backend indexing, frontend autocomplete, and performance optimization. However, social sharing is Small—just 2-3 days. We could ship social sharing THIS sprint and start search next sprint."
-- Stakeholder: "That makes sense. Let's do the quick win first."
+- Rafael: "Episode Detail is larger than Character Detail—2 sprints. Character Detail had one-to-many relationships; Episode Detail has many-to-many (multiple characters per episode). However, if we scope down to basic episode info without streaming links, we could ship MVP in one sprint."
+- Stakeholder: "MVP sounds good. Let's do that."
 - Rafael: *Confident, informed, credible*
 
 **Value unlocked:**
@@ -930,10 +988,11 @@ Rafael's new stakeholder meeting workflow:
 #### 🚀 Challenge Extension
 
 Enhance the effort estimator to:
-- Compare similar features you've built in the past ("Favorites is like Watchlist, which took 6 days")
+- Compare similar features you've built ("Episode Detail has parallels to Character Detail, which took X days")
 - Factor in team capacity ("With 2 frontend developers, estimate delivery date")
-- Suggest MVP vs. full-featured versions ("Ship basic search in 1 week, add advanced filters later")
+- Suggest MVP vs. full-featured versions ("Ship basic Episode Detail in 1 sprint, add streaming links later")
 - Track actual vs. estimated effort to improve future estimates
+- Flag when estimates diverge significantly from similar past work
 
 ---
 
@@ -1093,6 +1152,23 @@ The FanHub team now has:
 ---
 
 ## 🎯 Module Summary
+
+### 🧵 The Golden Thread: From Code Patterns to Domain Knowledge
+
+| Module | What We Built | Pattern Type |
+|--------|--------------|--------------|
+| **Module 01** | `copilot-instructions.md` | Repository-wide context |
+| **Module 03** | `*.prompt.md` files | Reusable task templates |
+| **Module 04** | **Character Detail v2** | The feature itself |
+| **Module 05** | `*.instructions.md` | File-pattern code rules |
+| **Module 06** | `SKILL.md` in `.github/skills/` | **Domain knowledge** |
+
+**The key insight**: Module 05's custom instructions activate by *file pattern* (`.test.js` → testing rules). Module 06's skills activate by *conversation topic* (asking about bugs → bug reproduction patterns).
+
+Character Detail v2 revealed:
+- **Code patterns** we needed (fixed in Module 05)
+- **Domain patterns** we needed (fixed in Module 06)
+- **What's next** after Character Detail (Episode Detail, estimated in Exercise 6.4)
 
 ### Key Takeaways
 

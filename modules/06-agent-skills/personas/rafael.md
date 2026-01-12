@@ -1,12 +1,14 @@
 # Rafael's Path: Agent Skills
 
-## 🎯 Your Focus: Bridging Product and Engineering Through Domain Skills
+## 🎯 Your Focus: What Character Detail v2 Was Missing
 
-Rafael, this module helps you create skills that translate **product thinking into technical execution**. Your Feature Requirements skill and Effort Estimator skill will bridge the gap between stakeholder requests and development work—giving you credible estimates instead of guesses.
+Rafael, Character Detail v2 shipped—and it works! But looking at the code, you realize something: the agent built a *functional* feature, not a *polished* one. No error boundaries. Basic spinners instead of skeleton screens. No analytics tracking.
+
+This module helps you create skills that encode **product standards as domain knowledge**. Your Feature Requirements skill will ensure the next feature—Episode Detail—gets what Character Detail v2 missed.
 
 **Your exercises**: 6.3 (Feature Requirements), 6.4 (Effort Estimator)  
 **Time**: ~50 minutes  
-**Theme**: From stakeholder requests to actionable specifications with realistic estimates
+**Theme**: From forgotten product standards to automatic engineering excellence
 
 ---
 
@@ -15,38 +17,70 @@ Rafael, this module helps you create skills that translate **product thinking in
 ```
 Rafael's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "I spend hours translating product ideas into tech specs"      │
+│  "Character Detail v2 works, but it's missing product polish"  │
 │                         ↓                                       │
 │  Creates feature-requirements skill                             │
 │                         ↓                                       │
+│  "What about Episode Detail? How long will that take?"          │
+│                         ↓                                       │
 │  Creates effort-estimator skill                                 │
 │                         ↓                                       │
-│  "I describe the feature, Copilot generates the spec with       │
-│   realistic effort estimates based on our actual codebase."     │
+│  "Episode Detail will include all our standards AND I know      │
+│   the realistic effort before committing to stakeholders."      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
+## 🧵 The Golden Thread: Your Role
+
+In **Module 05**, custom instructions activated by file pattern (`.test.js` → testing rules). But your product standards aren't about file types—they're about *what you're building*.
+
+When someone asks Copilot to "create a feature for browsing episodes," the feature-requirements skill automatically applies:
+- Error boundaries ✅
+- Skeleton screens ✅
+- Analytics tracking ✅
+- Accessibility standards ✅
+
+If you'd had this skill before Module 04, Character Detail v2 would have shipped with all these built in.
+
+---
+
 ## Exercise 6.3: Build the Feature Requirements Skill
+
+> 🧵 **The Golden Thread**: Look at what Character Detail v2 was missing. This skill ensures the next feature gets it right.
 
 ### 📖 The Story
 
-**Rafael** realizes that translating stakeholder requests into technical specifications takes significant time—and often misses edge cases that engineers catch later.
+**Rafael** reviews the Character Detail v2 code from Module 04. The feature works, users love it—but something's bothering him.
 
-*"Every feature request I write goes through multiple revision cycles,"* Rafael explains. *"The engineers find gaps, we go back and forth, and it adds days to every sprint. What if Copilot understood our feature documentation standards?"*
+*"The agent built a working feature,"* Rafael says, *"but it didn't include our product standards. No error boundaries. Basic spinners instead of skeleton screens. No analytics tracking. No toast notifications on favorites."*
 
-### ❌ The "Before" — What Frustration Looks Like
+*"If we had this skill before Module 04,"* Rafael reflects, *"Character Detail v2 would have shipped with all our product standards built in."*
 
-A stakeholder requests: *"Let users create custom watchlists of shows they want to follow."*
+### ❌ The "Before" — What Character Detail v2 Was Missing
 
-Rafael spends 2 hours writing a spec, only to have the engineering team ask:
-- "What happens when a user tries to add a show that doesn't exist?"
-- "Is there a limit to how many shows can be in a watchlist?"
-- "Should watchlists be private or shareable?"
-- "What happens to the watchlist if a show is removed from the platform?"
+Look at what the agent generated in Module 04:
 
-Every feature goes through 3-4 revision cycles because the initial spec didn't anticipate these questions.
+```jsx
+// Character Detail v2 - generated by agent in Module 04
+function CharacterDetail({ characterId }) {
+  const [character, setCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);  // Just a boolean
+  
+  if (loading) return <div>Loading...</div>;  // ❌ Basic spinner, not skeleton
+  // ❌ No error boundary wrapping this component
+  // ❌ No analytics tracking on page view
+  // ❌ No toast on favorite/unfavorite
+  
+  return (
+    <div>
+      <h1>{character.name}</h1>
+      {/* Feature works, but misses product standards */}
+    </div>
+  );
+}
+```
 
 ### 🎯 Objective
 
@@ -152,19 +186,29 @@ The skill catches edge cases upfront:
 
 ## Exercise 6.4: Create the Effort Estimator Skill
 
+> 🧵 **The Golden Thread**: Character Detail v2 shipped. Stakeholders want Episode Detail next. But how long will that take? Rafael doesn't want to guess again.
+
 ### 📖 The Story
 
-**Rafael** struggles with effort estimation. Stakeholders want to know how long features will take, but without deep codebase knowledge, he's often guessing.
+**Rafael** just left a stakeholder meeting. The success of Character Detail v2 has everyone excited:
 
-*"I can estimate product complexity,"* Rafael admits, *"but I can't estimate technical complexity. The team says 'it depends on how the current code is structured.' What if Copilot could analyze our actual codebase?"*
+- *"Episode Detail pages would be amazing!"*
+- *"Can we add show recommendations?"*  
+- *"What about user reviews?"*
+
+Rafael's boss asks: *"Character Detail v2 took a sprint. Episode Detail should be similar, right? Can we commit to next sprint?"*
+
+**Marcus** winces: *"Episode Detail is actually more complex. Episodes have transcripts, multiple characters per episode, air dates, streaming links... Character Detail had one character with related data. Episodes have many-to-many relationships."*
+
+*"I almost promised stakeholders we'd ship Episode Detail in one sprint, just like Character Detail..."* Rafael shudders.
 
 ### ❌ The "Before" — What Frustration Looks Like
 
-Stakeholder asks: *"How long will the watchlist feature take?"*
+Stakeholder asks: *"Episode Detail should be like Character Detail, right? One sprint?"*
 
-Rafael guesses: "Probably 2-3 sprints?"
+Rafael guesses: "Probably similar?"
 
-Reality: The feature touches authentication, database schema, and the recommendation system. Actual effort: 5 sprints.
+Reality: Episode Detail has many-to-many relationships (multiple characters per episode), streaming API integrations, and transcript handling. Actual effort: 2 sprints, not 1.
 
 This happens repeatedly:
 - Product underestimates technical complexity
@@ -173,7 +217,7 @@ This happens repeatedly:
 
 ### 🎯 Objective
 
-Create an Effort Estimator skill that analyzes the codebase and provides realistic effort estimates with complexity breakdowns.
+Create an Effort Estimator skill that analyzes features against your codebase—so you can compare Episode Detail to Character Detail v2 and give stakeholders realistic estimates.
 
 ### 📋 Steps
 
@@ -224,20 +268,25 @@ Create an Effort Estimator skill that analyzes the codebase and provides realist
    
    Save to `.github/skills/effort-estimator/SKILL.md`
 
-4. **Test with the watchlist feature**
+4. **Test with Episode Detail — the next feature after Character Detail v2**
    
    ```
-   @workspace Estimate the effort to implement: "Let users create custom 
-   watchlists of shows they want to follow."
+   @workspace Estimate the effort for Episode Detail pages.
    
-   Analyze the current codebase and provide a detailed breakdown.
+   The feature should:
+   - Show episode information (title, air date, synopsis, runtime)
+   - Display all characters appearing in that episode (many-to-many)
+   - Show memorable quotes from the episode
+   - Link to streaming services where available
+   - Include previous/next episode navigation
+   
+   Compare to Character Detail v2 complexity and estimate effort.
    ```
    
    **Expected output**:
-   - Story point estimate with reasoning
+   - Size estimate with reasoning ("Larger than Character Detail because...")
    - Breakdown: frontend, backend, testing, documentation
-   - Files that need modification
-   - New files that need creation
+   - Comparison to Character Detail v2
    - Risks and dependencies
 
 5. **Compare with a simpler feature**
@@ -260,8 +309,14 @@ Create an Effort Estimator skill that analyzes the codebase and provides realist
 
 ### ✨ The "After" — The Improved Experience
 
-**Before the skill**: "I think it's about 3 sprints" (guessing)  
-**After the skill**: "Based on codebase analysis: L-sized feature, 5-8 story points, with specific breakdown by area and identified risks"
+**Before the skill**: 
+- Stakeholder: "Episode Detail should be like Character Detail, right?"
+- Rafael: "I think so... one sprint?"
+
+**After the skill**: 
+- Stakeholder: "Episode Detail should be like Character Detail, right?"
+- Rafael: *Uses effort estimator skill*
+- Rafael: "Episode Detail is larger—2 sprints. Character Detail had one-to-many relationships; Episode Detail has many-to-many (multiple characters per episode). We could ship MVP in one sprint without streaming links."
 
 | Metric | Before | After |
 |--------|--------|-------|
@@ -297,10 +352,17 @@ Create an Effort Estimator skill that analyzes the codebase and provides realist
 ```
 .github/skills/
 ├── feature-requirements/
-│   └── SKILL.md    # Spec generation with edge cases
+│   └── SKILL.md    # What Character Detail v2 was missing
 └── effort-estimator/
-    └── SKILL.md    # Codebase-aware estimates
+    └── SKILL.md    # Episode Detail vs Character Detail comparison
 ```
+
+### 🧵 Your Golden Thread Journey
+
+| Module | What You Created | Character Detail Connection |
+|--------|-----------------|---------------------------|
+| **Module 06** | `feature-requirements` skill | Standards Character Detail v2 missed |
+| **Module 06** | `effort-estimator` skill | Estimate Episode Detail (next feature) |
 
 ### The Product Visionary's Win
 

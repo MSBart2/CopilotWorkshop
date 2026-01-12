@@ -1,12 +1,14 @@
 # Elena's Path: Agent Skills
 
-## 🎯 Your Focus: Encoding Testing Expertise into Executable Skills
+## 🎯 Your Focus: Fixing the Character Detail v2 Bugs
 
-Elena, this module transforms your 8 years of QA expertise into **executable domain knowledge**. You'll create skills that teach Copilot how to reproduce bugs systematically—instead of explaining your testing patterns every time, the skill does it automatically.
+Elena, Character Detail v2 shipped—and the bug reports are rolling in. Bug #142: *"Duplicate Jesse Pinkman entries."* Bug #147: *"Quote shows 'Episode not found.'"* 
+
+This module transforms your 8 years of QA expertise into **executable domain knowledge**. You'll create a skill that helps reproduce these bugs systematically—starting with the very bugs that Character Detail v2 introduced.
 
 **Your exercises**: 6.1 (Explore Skills), 6.2 (Bug Reproduction Skill)  
 **Time**: ~45 minutes  
-**Theme**: From repetitive explanations to automatic expertise
+**Theme**: From re-explaining testing patterns to automatic bug reproduction
 
 ---
 
@@ -15,13 +17,28 @@ Elena, this module transforms your 8 years of QA expertise into **executable dom
 ```
 Elena's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "I spend half my time reproducing bugs before writing tests"   │
+│  Bug #142 arrives: "Duplicate Jesse Pinkman in related chars"   │
+│                         ↓                                       │
+│  "I have to re-explain our testing patterns every time..."      │
 │                         ↓                                       │
 │  Creates bug-reproduction-test-generator skill                  │
 │                         ↓                                       │
-│  "Describe the bug, Copilot writes the failing test."           │
+│  "Describe Bug #142, Copilot writes the failing test."          │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 🧵 The Golden Thread: Your Role
+
+In **Module 05**, you created `testing.instructions.md`—code patterns for test files. Those help with *how* tests are written.
+
+But Bug #142 isn't about code patterns. It's about **domain knowledge**:
+- Related characters should never have duplicates from the same show
+- Quotes must reference valid episodes
+- Character relationships follow specific business rules
+
+Skills encode this domain knowledge so Copilot understands FanHub's data model, not just its code conventions.
 
 ---
 
@@ -96,35 +113,39 @@ Explore community skills to understand skill structure and identify patterns tha
 
 ---
 
-## Exercise 6.2: Create Your First Skill — "The Bug Reproduction Test Generator"
+## Exercise 6.2: Create Your First Skill — "The Character Detail Bug"
+
+> 🧵 **The Golden Thread**: Bug #142 came from Character Detail v2—the feature the agent built in Module 04. Now you'll create a skill that helps reproduce this bug and future bugs systematically.
 
 ### 📖 The Story
 
-**Elena** is ready to build the team's first custom skill. Based on her research, she's designing a skill that helps write failing tests from bug reports.
+**Elena** stares at Bug #142: *"The Breaking Bad character page shows duplicate 'Jesse Pinkman' entries in the related characters section."*
 
-**Rafael** joins in: *"This is perfect. Our testing patterns can live in a skill. Then when a user reports 'character page shows duplicate data,' Copilot will know how to write a test that demonstrates the issue."*
+She opens the Character Detail v2 code from Module 04. The `RelatedCharacters` component fetches data from `/api/characters/:id/related`. Somewhere in that chain—database, API, or frontend—duplicates are sneaking through.
+
+**Rafael** joins in: *"This is perfect. Our bug reproduction patterns can live in a skill. Then when the next Character Detail bug comes in, Copilot will know exactly how to write the failing test."*
 
 ### ❌ The "Before" — What Frustration Looks Like
 
-A bug report comes in: *"User sees duplicate 'Jesse Pinkman' entries on the Breaking Bad character page."*
+Bug #142 sits in the queue: *"Duplicate 'Jesse Pinkman' entries on the Breaking Bad character page."*
 
 Without a skill, Elena has to manually guide Copilot through the testing pattern:
 
 ```
 @workspace Write a test that:
-1. Seeds the database with duplicate character records
-2. Calls GET /api/characters?show_id=1
+1. Seeds the database with character relationships that create duplicates
+2. Calls GET /api/characters/:id/related (the Character Detail v2 endpoint)
 3. Asserts we get duplicate entries (test should FAIL)
 4. Uses describe/it structure
 5. Includes setup and teardown
-6. References bug report number
+6. References Bug #142
 ```
 
-This takes 5-10 minutes of back-and-forth every time a bug comes in.
+This takes 5-10 minutes of back-and-forth every time a bug comes in. And she has to re-explain the *domain context*—that related characters should never have duplicates from the same show.
 
 ### 🎯 Objective
 
-Create a Bug Reproduction Test Generator skill that teaches Copilot how to write effective failing tests from bug reports.
+Create a Bug Reproduction Test Generator skill that teaches Copilot how to write effective failing tests—starting with Bug #142 from Character Detail v2.
 
 ### 📋 Steps
 
@@ -241,8 +262,15 @@ Now when a bug report comes in:
 ```
 .github/skills/
 └── bug-reproduction-test-generator/
-    └── SKILL.md    # Your 8 years of QA expertise
+    └── SKILL.md    # Your 8 years of QA expertise, triggered by Bug #142
 ```
+
+### 🧵 Your Golden Thread Journey
+
+| Module | What You Created | Character Detail Connection |
+|--------|-----------------|---------------------------|
+| **Module 05** | `testing.instructions.md` | Would have improved Character Detail v2's tests |
+| **Module 06** | `bug-reproduction-test-generator` skill | Reproduces Bug #142 from Character Detail v2 |
 
 ### The Quality Champion's Win
 

@@ -2,8 +2,22 @@
 
 ## ⏰ Monday 4:00 PM — Teaching Copilot Your Domain
 
-> *"Bug reports come in, and I spend half my time reproducing issues before I can even write a test. How do I teach Copilot our testing patterns so it can help me create failing tests faster?"*  
-> — Elena, wanting systematic bug reproduction workflows
+> *"Character Detail v2 shipped. Users love it. But now the bug reports are coming in, and I'm re-explaining our testing patterns every single time. How do I teach Copilot our domain knowledge—not just code patterns, but business rules?"*  
+> — Elena, staring at Bug #142 from the feature the team just shipped
+
+---
+
+## 🧵 The Golden Thread: From Code Patterns to Domain Knowledge
+
+**Character Detail v2** from Module 04 was a breakthrough. The agent built a complete feature. Module 05's custom instructions would have made the code even better.
+
+But now users are finding bugs:
+- Bug #142: *"Duplicate Jesse Pinkman entries in related characters"*
+- Bug #147: *"Quote shows 'Episode not found' for valid episode"*
+
+These aren't code pattern problems—they're **domain knowledge** problems. The agent didn't know that related characters should never have duplicates from the same show, or that quotes must reference valid episodes.
+
+**This module's mission**: Create Agent Skills that encode FanHub's business rules—the TV show data model, bug reproduction workflows, and product standards that Copilot needs to truly understand your domain.
 
 ---
 
@@ -61,9 +75,9 @@ Best for: First-time learners, instructor-led sessions
 | Exercise | Focus | Time |
 |----------|-------|------|
 | [6.1](EXERCISES.md#exercise-61-understand-skills-through-examples--elena-explores-the-ecosystem) | Explore Skills | 20m |
-| [6.2](EXERCISES.md#exercise-62-create-your-first-skill--the-bug-reproduction-test-generator) | Bug Repro Skill | 25m |
-| [6.3](EXERCISES.md#exercise-63-create-domain-specific-skills--rafaels-product-requirements-skill) | Requirements Skill | 25m |
-| [6.4](EXERCISES.md#exercise-64-effort-estimator-skill--rafael-makes-informed-tradeoffs) | Effort Estimator | 20m |
+| [6.2](EXERCISES.md#exercise-62-create-your-first-skill--the-character-detail-bug) | Character Detail Bug | 25m |
+| [6.3](EXERCISES.md#exercise-63-create-domain-specific-skills--what-character-detail-v2-was-missing) | What Was Missing | 25m |
+| [6.4](EXERCISES.md#exercise-64-effort-estimator-skill--whats-next-after-character-detail) | Episode Detail Effort | 20m |
 
 </td>
 </tr>
