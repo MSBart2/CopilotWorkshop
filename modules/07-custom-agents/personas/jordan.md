@@ -25,7 +25,7 @@ Jordan's Arc:
 
 ---
 
-## Exercise 4.2: Create the DevOps Reviewer Agent — "Jordan's Infrastructure Guardian"
+## Exercise 7.2: Create the DevOps Reviewer Agent — "Jordan's Infrastructure Guardian"
 
 ### 📖 The Story
 
@@ -222,4 +222,4 @@ This is the natural extension of your automation philosophy.
 
 **Next for Jordan**: [Module 9: Copilot CLI](../09-copilot-cli/README.md) — Bring agentic capabilities to your terminal and CI/CD pipelines.
 
-**Also relevant**: [Module 7: MCP Servers](../07-mcp-servers/README.md) — Connect agents to external monitoring and deployment services.
+**Also relevant**: [Module 6: MCP Servers](../06-mcp-servers/README.md) — Connect agents to external monitoring and deployment services.

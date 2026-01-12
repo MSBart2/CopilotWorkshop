@@ -181,7 +181,7 @@ Track these to prove prompt value:
 - [Marcus's path](marcus.md) to see how developers use your plans
 
 ### Next Module
-Your next appearance: **[Module 6: Agent Skills](../../06-agent-skills/personas/rafael.md)**
+Your next appearance: **[Module 5: Agent Skills](../../05-agent-skills/personas/rafael.md)**
 
 **What's next for you**: You'll create an "Effort Estimator" skill that helps you give stakeholders informed estimates before committing to timelines. Plus, a "Feature Requirements" skill that automatically enforces your product standards when developers build features.
 

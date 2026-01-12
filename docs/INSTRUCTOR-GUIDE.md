@@ -20,30 +20,34 @@
 
 ### What This Workshop Teaches
 
-The FanHub workshop teaches developers to customize and optimize GitHub Copilot through four key features:
+The FanHub workshop teaches developers to customize and optimize GitHub Copilot through seven key features:
 
-1. **Repository Instructions** (`.github/copilot-instructions.md`)
-2. **Custom Prompts** (`.github/prompts/`)
-3. **Custom Agents** (autonomous task specialists)
-4. **Custom Instructions** (`.github/instructions/` with `applyTo` patterns)
+1. **Repository Instructions** (`.github/copilot-instructions.md`) — Project-wide context
+2. **Custom Prompts** (`.github/prompts/`) — Reusable task templates
+3. **Custom Instructions** (`.github/instructions/` with `applyTo` patterns) — File-scoped rules
+4. **Agent Skills** (`.github/skills/`) — Domain-specific knowledge
+5. **MCP Servers** (`.vscode/mcp.json`) — External system access (databases, APIs)
+6. **Custom Agents** — Autonomous task specialists with full context
+7. **Multi-interface workflows** — VS Code, GitHub Web, CLI integration
 
 ### The Narrative
 
-Participants follow a team of seven personas building a TV show fan site in an 8-hour sprint. The story creates emotional investment and demonstrates realistic scenarios.
+Participants follow a team of seven personas building a TV show fan site in an 8-10 hour sprint. The story creates emotional investment and demonstrates realistic scenarios.
 
 **Key narrative beats:**
 - **Module 0**: The challenge is set (Copilot struggles without context)
 - **Module 1**: First "wow" moment (same question, better answer)
-- **Module 3**: Agents unlock parallel work
-- **Module 5**: All features compound, ship it, reflect
+- **Modules 3-6**: Build layers of context (prompts, instructions, skills, MCP)
+- **Module 7**: THE PAYOFF — Agent builds with ALL context
+- **Module 10**: Orchestrate everything, ship it, reflect
 
 ### Target Audience
 
 | Audience | Time Investment | Focus |
 |----------|----------------|-------|
-| Individual developers | 7-8 hours | All modules |
-| Team workshops | 4-6 hours | Modules 1-5 |
-| Team leads | 3 hours | Modules 1, 2, 4 |
+| Individual developers | 8-10 hours | All modules (0-11) |
+| Team workshops | 5-6 hours | Modules 1-7 (core customization) |
+| Team leads | 3 hours | Modules 1, 2, 4, 7 |
 | Quick overview | 2 hours | Modules 1, 2 |
 
 ---
@@ -154,7 +158,25 @@ gh auth status
 
 ---
 
-### Module 2: Context & Prompts (90 minutes)
+### Module 2: Agent Plan Mode (60 minutes)
+
+**Purpose**: Teach structured thinking for AI collaboration.
+
+**Key demonstration**: Show plan mode creating a systematic approach before implementation.
+
+**Instructor actions:**
+1. Demonstrate plan mode thinking
+2. Work through the Character Detail page systematically
+3. Show how planning reduces iteration
+
+**What to emphasize:**
+- Plan before executing
+- Systematic thinking improves AI results
+- First-try success vs. multiple attempts
+
+---
+
+### Module 3: Custom Prompts (60 minutes)
 
 **Purpose**: Build reusable prompt library.
 
@@ -164,7 +186,6 @@ gh auth status
 1. Create test-generation.md prompt (Elena's workflow)
 2. Create spec-to-code.md prompt (Rafael's workflow)
 3. Demonstrate using prompts with different files
-4. Build the Episode Guide feature as a group
 
 **What to emphasize:**
 - Prompts are "solved problems that stay solved"
@@ -172,30 +193,6 @@ gh auth status
 - Rafael's product expertise encoded in templates
 
 **Exercise variation**: Have participants create prompts for their own common tasks.
-
----
-
-### Module 3: Custom Agents (90 minutes)
-
-**Purpose**: Introduce autonomous AI assistance.
-
-**Key demonstration**: Start a background agent, work on something else, check results.
-
-**Instructor actions:**
-1. Demonstrate Agent Mode (Exercise 3.1)
-2. Create the architecture-reviewer agent (Exercise 3.2)
-3. Show Copilot CLI (Exercise 3.3)
-4. **If Enterprise tier**: Demonstrate background agents
-
-**What to emphasize:**
-- Agents handle multi-step tasks autonomously
-- Human review remains essential
-- Background agents enable parallel work
-
-**Jordan's concern to address**: "What if agents make mistakes?"
-- Answer: Agents propose, humans approve
-- Checkpoints let you review before changes apply
-- Jordan's expertise guides what agents should do
 
 ---
 
@@ -215,31 +212,90 @@ gh auth status
 - Instructions activate without prompting
 - File patterns match the right context to the right files
 - Institutional knowledge is codified, not lost
+- Building toward Module 7's payoff
 
 **Elena's validation**: Testing patterns ensure consistent test quality across the team.
 
 ---
 
-### Module 5: Agentic SDLC (90 minutes)
+### Module 5: Agent Skills (75 minutes)
 
-**Purpose**: See parallel development with multiple agent interfaces.
+**Purpose**: Encode domain-specific knowledge that Copilot loads automatically.
 
-**Key demonstration**: Run VS Code Agent Mode, GitHub Web Coding Agent, and Copilot CLI simultaneously.
+**Key demonstration**: Show a skill activating when discussing relevant topics.
 
 **Instructor actions:**
-1. Start search feature in VS Code (Exercise 5.1)
-2. Kick off analytics PR via GitHub Web (Exercise 5.2)
-3. Run CLI infrastructure tasks (Exercise 5.3)
-4. Merge and integrate (Exercise 5.4)
+1. Create TV Show Data Validator skill (Exercise 5.1)
+2. Create Bug Reproduction Test Generator skill (Exercise 5.2)
+3. Demonstrate skills activating automatically based on conversation topic
 
 **What to emphasize:**
-- This is the payoff of Modules 1-4
-- Different interfaces for different task types
-- Parallel > Sequential for productivity
+- Skills activate by **topic**, not file pattern
+- Domain expertise becomes reusable
+- Skills + Instructions = comprehensive context
+- Building toward Module 7's payoff
 
-**Honest moment**: Point out where AI still needs guidance. Show that ~50% is AI, ~50% is human for complex features.
+**Key distinction**: Custom Instructions activate on file patterns (`*.test.js`), Skills activate on conversation topics ("validate this character data").
 
-**Closing the workshop**: Module 5 now includes the ship and retrospective content. After Exercise 5.4, facilitate a brief team discussion:
+---
+
+### Module 6: MCP Servers (45 minutes)
+
+**Purpose**: Connect Copilot to external systems (databases, APIs).
+
+**Key demonstration**: Copilot querying the database to find duplicate records.
+
+**Instructor actions:**
+1. Configure SQLite MCP server
+2. Watch Copilot discover database issues automatically
+3. Show how MCP + Skills combine for powerful workflows
+
+**What to emphasize:**
+- MCP extends what Copilot can DO (not just know)
+- Skills = knowledge, MCP = capabilities
+- Security considerations for MCP trust
+- This is the last piece before the agent payoff
+
+---
+
+### Module 7: Custom Agents — THE PAYOFF (60 minutes)
+
+**Purpose**: See autonomous agents leverage ALL context built in Modules 1-6.
+
+**⭐ This is the culmination module.** Everything leads here.
+
+**Key demonstration**: Agent builds Character Detail v2 with full context—and it works!
+
+**Instructor actions:**
+1. **Critical moment**: Launch agent to build Character Detail v2
+2. Watch it use: architecture docs, instructions, skills, MCP
+3. Show the dramatic difference from Module 0
+4. Create custom reviewer agents (Exercise 7.2)
+5. Let the room celebrate the payoff
+
+**What to emphasize:**
+- This is WHY we built all that context
+- Agent isn't magic—it's effective because of YOUR setup
+- Context compounds: each layer makes agents smarter
+
+**Sarah's conversion**: "I was skeptical all day. But this... this is real."
+
+**David's validation**: "The agent followed our architecture. It didn't just generate code—it generated code that fits our system."
+
+---
+
+### Module 8-10: Advanced Topics (Optional, 90 minutes total)
+
+**Module 8: Copilot Web** — Using Copilot on github.com
+**Module 9: Copilot CLI** — Terminal automation
+**Module 10: Agentic SDLC** — Orchestrating everything together
+
+**Instructor actions:**
+1. Demonstrate GitHub Copilot Coding Agent for PR creation
+2. Show Copilot CLI for terminal workflows
+3. Run parallel agents across interfaces
+
+**Closing the workshop**: Module 10 includes the ship and retrospective content. Facilitate a brief team discussion:
 - What surprised you?
 - What worked better than expected?
 - What was harder than expected?
@@ -307,7 +363,7 @@ Copilot is IDE-integrated, codebase-aware, and customizable. ChatGPT is general-
 
 ### "What if we don't have Enterprise features?"
 
-Modules 1-5 work with Free/Individual tier. Background agents require Enterprise, but the core workflow is universal.
+Modules 1-7 work with Free/Individual tier. Background agents require Enterprise, but the core customization workflow is universal. MCP servers work with all tiers.
 
 ### "How do we maintain the customizations?"
 
@@ -358,12 +414,13 @@ AI output varies. Emphasize:
 | Module | Participant Should Be Able To... |
 |--------|--------------------------------|
 | 1 | Create and use copilot-instructions.md |
-| 2 | Write and use custom prompt files |
-| 3 | Use Agent Mode and understand when to apply it |
-| 4 | Use images as context for code generation |
-| 5 | Combine multiple customizations effectively |
-| 6 | Generate tests and documentation |
-| 7 | Articulate what they learned |
+| 2 | Use plan mode for systematic AI collaboration |
+| 3 | Write and use custom prompt files |
+| 4 | Create file-scoped custom instructions |
+| 5 | Create agent skills for domain knowledge |
+| 6 | Configure MCP servers for database access |
+| 7 | Use agents with full context (THE PAYOFF) |
+| 8-10 | Use Copilot across web, CLI, and orchestrated workflows |
 
 ### Feedback Collection
 
@@ -412,8 +469,11 @@ copilot explain "command"
 |------|---------|
 | `.github/copilot-instructions.md` | Repository-wide AI instructions |
 | `.github/prompts/*.md` | Reusable prompt templates |
+| `.github/instructions/*.instructions.md` | File-scoped custom instructions |
+| `.github/skills/*/SKILL.md` | Domain-specific agent skills |
+| `.vscode/mcp.json` | MCP server configuration |
+| `.github/agents/*.agent.md` | Custom agent definitions |
 | `docs/ARCHITECTURE.md` | System documentation for AI context |
-| `src/theme.js` | Extracted color palette |
 
 ### Resources
 
@@ -428,9 +488,29 @@ copilot explain "command"
 The FanHub workshop succeeds when participants:
 
 1. **Experience** the transformation, not just hear about it
-2. **Create** artifacts they can use in their real projects
-3. **Understand** when AI helps and when human judgment is essential
-4. **Leave** with a plan to apply what they learned
+2. **Build** context layers that compound (instructions → prompts → custom instructions → skills → MCP)
+3. **Witness** the payoff in Module 7 when agents use ALL the context
+4. **Understand** when AI helps and when human judgment is essential
+5. **Leave** with artifacts they can use in their real projects
+
+### The Payoff Matters
+
+Module 7 is the emotional climax. Everything before it builds anticipation:
+- "When we build the agent, it will use these patterns"
+- "The agent will have access to this domain knowledge"
+- "The agent will be able to query the database"
+
+Then in Module 7, it all comes together. **Don't rush this moment.**
+
+### The Story Arc
+
+| Module | Narrative Beat |
+|--------|---------------|
+| 0-1 | Setup: Experience the problem, first improvement |
+| 2-3 | Rising action: Build systematic approaches |
+| 4-6 | Building context: Each layer adds capability |
+| **7** | **Climax: THE PAYOFF** |
+| 8-10 | Resolution: Extend to other interfaces, ship |
 
 The story is the vehicle. The transformation is real. Your job is to guide them through it.
 

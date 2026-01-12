@@ -247,4 +247,4 @@ copilot -p "your task description" \
 
 **Next for Jordan**: [Module 10: Agentic SDLC](../10-agentic-sdlc/README.md) — See how CLI automation fits into the full development lifecycle.
 
-**Also relevant**: [Module 7: MCP Servers](../07-mcp-servers/README.md) — Extend Copilot CLI with MCP servers for database and system access.
+**Also relevant**: [Module 6: MCP Servers](../06-mcp-servers/README.md) — Extend Copilot CLI with MCP servers for database and system access.

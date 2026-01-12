@@ -1,55 +1,71 @@
-# Module 4: Custom Agents — Exercises
+# Module 7: Custom Agents — THE PAYOFF
 
-> **📖 Full Narrative Experience**: This file contains all exercises in story order, following the FanHub team through Monday afternoon as they graduate from interactive chat to autonomous agents.
+> **📖 Full Narrative Experience**: This file contains all exercises in story order, following the FanHub team as they FINALLY see what an autonomous agent can do with ALL context in place.
 
 ---
 
-## ⏰ Monday 1:30 PM — Autonomous Assistance
+## ⏰ Monday 5:00 PM — The Moment Everything Clicks
 
-> *"I've been asking Copilot questions all morning. What if I could tell it: 'Go solve this problem, and let me know when you're done?'"*  
-> — David, imagining a world where AI handles the tedious parts
+> *"We've spent all day building context—instructions, prompts, custom instructions, skills, MCP connections. Now let's see what an agent can do with ALL of that in place."*  
+> — David, ready for the payoff
 
 ---
 
 ## 📖 The Story So Far
 
-The team has built an impressive foundation:
-- **Module 1**: Architecture docs and team standards (`copilot-instructions.md`)
-- **Module 2**: Structured planning with agent plan mode—and that Character Detail page is finally working
-- **Module 3**: A prompt library for tests, specs, and feature planning
+**Think about what the team has built today:**
 
-But there's a pattern emerging: Even with great prompts and planning, someone has to manually orchestrate each step. The Character Detail page from Module 02? It works, but it's basic. Users want more—episode appearances, quotes, related characters. That means touching frontend, backend, and tests. Again.
+| Module | What You Added | What Copilot Gained |
+|--------|---------------|---------------------|
+| **Module 1** | Repository Instructions | Project context |
+| **Module 2** | Plan Mode | Systematic thinking |
+| **Module 3** | Custom Prompts | Task templates |
+| **Module 4** | Custom Instructions | File-specific patterns |
+| **Module 5** | Agent Skills | Domain expertise |
+| **Module 6** | MCP Servers | External system access |
 
-*"What if Copilot could do all of that automatically?"* Jordan asks. As a platform engineer, he's built pipelines that automate everything. Manual steps are a code smell to him.
+The Character Detail page from Module 2 still works, but it's basic—just name, photo, and bio. Users want more: episode appearances, quotes, related characters, favorites.
 
-**This module's mission**: Graduate from interactive chat to autonomous agents. You'll take that same Character Detail page and let an agent implement the rich version—demonstrating how all your context investment pays off.
+In the old world, this would mean manually implementing changes across frontend, backend, and tests.
+
+**But now?** The agent has EVERYTHING it needs:
+- Architecture knowledge from `docs/ARCHITECTURE.md`
+- Coding standards from `.github/copilot-instructions.md`
+- File-specific patterns from custom instructions
+- Domain expertise from agent skills
+- Database access from MCP
+
+*"It's payoff time,"* Sarah announces. *"Let's see if all this setup was worth it."*
 
 ---
 
-💡 **Plan Mode Integration**: You'll use plan mode to design agent personalities, capabilities, and workflows before creating custom agents. The systematic thinking from Module 2 makes agent design more effective.
+💡 **The Payoff Equation**: Instructions + Prompts + Custom Instructions + Skills + MCP = Agent that builds complete features correctly.
 
 ---
 
 ## 🔨 Exercises
 
-### Exercise 4.1: Character Detail v2 — "The Golden Thread: Agent Implementation"
+### Exercise 7.1: Character Detail v2 — "The Golden Thread PAYOFF"
 
-> 🧵 **The Golden Thread Continues**: In Modules 00-02, you planned and manually implemented a basic Character Detail page. Now see what happens when you give that same requirement to an **agent** with all your context in place.
+> 🧵 **The Golden Thread CULMINATES**: In Modules 0-2, you planned and manually implemented a basic Character Detail page. In Modules 3-6, you built context layers. Now see what happens when you give that same requirement to an **agent** with ALL your context in place.
 
 #### 📖 The Story
 
-**Marcus** (DevOps Developer, 5 years) looks at the Character Detail page the team built in Module 02. It works, but it's basic—just name, photo, and bio.
+**Marcus** (DevOps Developer, 5 years) looks at the Character Detail page the team built earlier today. It works, but it's basic—just name, photo, and bio.
 
 *"Users are asking for more,"* Rafael reports. *"They want to see which episodes a character appears in, their best quotes, and related characters from the same show."*
 
-In the old world, this would mean:
-1. Plan the feature (Module 02 ✓)
-2. Manually implement frontend component
-3. Manually add backend endpoint for related data
-4. Manually write tests
-5. Debug integration issues
+**David** (Architect, 20 years) has a challenge: *"Let's see what happens when we give this to an agent with ALL the context we've built today. This is the real test."*
 
-*"We have all the context now,"* Marcus realizes. *"ARCHITECTURE.md, copilot-instructions.md, our planning templates. What if we just... let the agent do it?"*
+The agent now has:
+- ✅ Architecture patterns (Module 1)
+- ✅ Systematic thinking (Module 2)
+- ✅ Task templates (Module 3)
+- ✅ File-specific patterns (Module 4)
+- ✅ Domain expertise (Module 5)
+- ✅ Database access (Module 6)
+
+*"If this works,"* Sarah says, *"I'll admit all that setup was worth it."*
 
 #### ❌ The "Before" — Manual Multi-File Implementation
 
@@ -69,7 +85,7 @@ Even with great planning, implementing a cross-layer feature meant:
 
 #### 🎯 Objective
 
-Use Agent Mode to implement a rich Character Detail page that touches frontend, backend, and tests—demonstrating how context compounds with autonomous agents.
+Use Agent Mode to implement Character Detail v2—demonstrating how ALL your context investment pays off in autonomous agent effectiveness.
 
 #### 📋 Steps
 
@@ -154,16 +170,23 @@ Use Agent Mode to implement a rich Character Detail page that touches frontend, 
 | **01** | ARCHITECTURE.md | Manual + Chat | Better structure |
 | **01b** | + Instructions | Manual + Chat | Consistent patterns |
 | **02** | + Plan Mode | Plan → Manual | First-try basic page |
-| **04** | All context | **Agent Mode** | **Rich feature, multiple files, minimal intervention** |
+| **3** | + Prompts | Task templates | Reusable workflows |
+| **4** | + Custom Instructions | File patterns | Auto-activating rules |
+| **5** | + Skills | Domain expertise | Context-aware help |
+| **6** | + MCP | Database access | Real data queries |
+| **7** | ALL CONTEXT | **Agent Mode** | **Rich feature, multi-file, AMAZING results** |
 
 **The lesson**: Every module's investment compounds. The agent isn't magic—it's effective because you gave it:
 - Architecture knowledge (where things go)
 - Coding standards (how things should look)  
+- Domain expertise (what's valid)
+- Database access (what data exists)
 - Planning discipline (clear requirements)
 
 **Time comparison**:
 - Manual implementation of rich feature: 2-3 hours
-- Agent with good context: 15-20 minutes + review
+- Agent WITHOUT context (Module 0): Chaos, wrong patterns
+- Agent WITH full context (Module 7): 15-20 minutes + review
 
 #### 📚 Official Docs
 
@@ -176,7 +199,7 @@ Use Agent Mode to implement a rich Character Detail page that touches frontend, 
 
 #### 🎭 Team Celebration
 
-**Sarah**: *"Remember Module 00? I was ready to dismiss Copilot entirely. Now look at this—cross-layer feature, proper patterns, tests included."*
+**Sarah**: *"Remember Module 0? I was ready to dismiss Copilot entirely. Now look at this—cross-layer feature, proper patterns, tests included."*
 
 **David**: *"The agent followed our architecture. It didn't just generate code—it generated code that fits our system. That's the difference."*
 
@@ -184,7 +207,7 @@ Use Agent Mode to implement a rich Character Detail page that touches frontend, 
 
 ---
 
-### Exercise 4.2: Create a Custom Agent — "David's Architecture Reviewer"
+### Exercise 7.2: Create a Custom Agent — "David's Architecture Reviewer"
 
 #### 📖 The Story
 
@@ -394,7 +417,7 @@ David's code review workflow transforms:
 
 ---
 
-### Exercise 4.3: Background Agents — "The Refactor Task"
+### Exercise 7.3: Background Agents — "The Refactor Task"
 
 #### 📖 The Story
 
@@ -500,38 +523,47 @@ Large refactors with agents:
 ## 🔗 Compounding Value
 
 **What we created in this module:**
-- Rich Character Detail page (Golden Thread culmination)
+- **Character Detail v2** — Rich feature with episodes, quotes, related characters, favorites
 - `architecture-reviewer.agent.md` — Custom review agent
 - `devops-reviewer.agent.md` — Infrastructure review agent
 
-**Artifacts from previous modules we used:**
-- `docs/ARCHITECTURE.md` — Referenced by agents
-- `.github/copilot-instructions.md` — Agent behavior patterns
-- `docs/character-detail-challenge.md` — Tracking progress across modules
-- Prompt library — Foundation for agent instructions
+**Artifacts from ALL previous modules we used:**
+- `docs/ARCHITECTURE.md` — Referenced by agents (Module 1)
+- `.github/copilot-instructions.md` — Agent behavior patterns (Module 1)
+- Plan mode thinking — Clear requirements (Module 2)
+- Custom prompts — Task templates (Module 3)
+- Custom instructions — File patterns (Module 4)
+- Agent Skills — Domain expertise (Module 5)
+- MCP Servers — Database access (Module 6)
 
-**How this helps in future modules:**
+**The Payoff Demonstrated:**
 
-| Module | How Today's Work Helps |
-|--------|----------------------|
-| Module 5 | Instructions work with agent-reviewed code |
-| Module 6 | Agent skills build on agent concepts |
+| Without Context | With Full Context |
+|-----------------|-------------------|
+| Generic suggestions | Project-specific patterns |
+| Guesses at structure | Follows architecture |
+| Invalid data | Database-verified data |
+| Manual iterations | First-try success |
 
 ---
 
-## 🧵 The Golden Thread: Complete
+## 🧵 The Golden Thread: COMPLETE
 
 You've now completed the **Character Detail Challenge** across the full arc:
 
 | Module | Context | Approach | Result |
 |--------|---------|----------|--------|
-| **00** | Nothing | Direct ask | Chaos, 3+ attempts |
-| **01a** | ARCHITECTURE.md | Direct ask | Better structure |
-| **01b** | + Instructions | Direct ask | Consistent patterns |
-| **02** | + Plan Mode | Plan → Manual | First-try basic page |
-| **04** | All context | **Agent Mode** | **Rich feature, multi-file, minimal intervention** |
+| **0** | Nothing | Direct ask | Chaos, 3+ attempts |
+| **1a** | ARCHITECTURE.md | Direct ask | Better structure |
+| **1b** | + Instructions | Direct ask | Consistent patterns |
+| **2** | + Plan Mode | Plan → Manual | First-try basic page |
+| **3-6** | Building context | Prompts, Instructions, Skills, MCP | Foundation complete |
+| **7** | ALL CONTEXT | **Agent Mode** | **Rich feature, AMAZING results** |
 
-**The lesson**: Context compounds. Documentation + Instructions + Planning = Agents that actually work.
+**The lesson**: Context compounds. Documentation + Instructions + Skills + MCP = Agents that actually work.
+
+> *"I was skeptical all day. But this... this is real. The agent built a complete feature using every piece of context we created. This isn't hype—this is the future of development."*  
+> — Sarah, finally convinced
 
 ---
 
@@ -573,6 +605,7 @@ Agents have access to "tools" that let them:
 - Edit existing files
 - Run terminal commands
 - Search the web (with permission)
+- **Query databases via MCP** (configured in Module 6!)
 
 MCP extends these tools to external services.
 
@@ -594,7 +627,8 @@ This is the balance: autonomous enough to be useful, controlled enough to be saf
 | Persona | Before | After |
 |---------|--------|-------|
 | **Marcus** | Manual orchestration between AI suggestions | Delegates complete tasks, reviews results |
-| **David** | Reviews same criteria manually on every PR | Executable checklists, reviews the review |
+| **David** | 20 years of expertise felt threatened | Sees AI amplifies his architectural knowledge |
+| **Sarah** | Skeptical of AI hype | Convinced after seeing real results |
 | **Jordan** | Infrastructure expertise siloed | DevOps reviewer agent shares his knowledge |
 
 ### Artifacts Created
@@ -603,12 +637,33 @@ This is the balance: autonomous enough to be useful, controlled enough to be saf
 fanhub/.github/agents/
 ├── architecture-reviewer.agent.md    # David's comprehensive reviewer
 └── devops-reviewer.agent.md          # Jordan's infrastructure reviewer
+
+fanhub/frontend/src/
+└── components/CharacterDetail.jsx    # Character Detail v2 - THE PAYOFF!
 ```
 
 ### Time Investment → Value Gained
 
 | Exercise | Time | Ongoing Value |
 |----------|------|---------------|
-| 4.1 Character Detail v2 | 25 min | See how context compounds with agents |
-| 4.2 Custom Agents | 20 min | 15-30 min saved per PR review |
-| 4.3 Background Agents | 15 min | Days saved on large refactors |
+| 7.1 Character Detail v2 | 25 min | Proves context investment pays off |
+| 7.2 Custom Agents | 20 min | 15-30 min saved per PR review |
+| 7.3 Background Agents | 15 min | Days saved on large refactors |
+
+---
+
+## ➡️ Next Steps
+
+**🎉 Congratulations!** You've completed the core customization arc. You've built:
+- Repository context
+- Systematic planning
+- Custom prompts
+- Custom instructions
+- Agent skills
+- MCP servers
+- **And seen the payoff with autonomous agents!**
+
+**Continue to**: [Module 8: Copilot Web](../08-copilot-web/README.md) — Explore Copilot beyond VS Code
+
+> *"We built something real today. An actual feature, with an autonomous agent, using all the context we created. This is what AI-assisted development looks like when done right."*  
+> — Sarah, finally convinced

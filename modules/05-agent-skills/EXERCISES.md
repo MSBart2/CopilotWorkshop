@@ -1,9 +1,9 @@
-# Module 6: Agent Skills
+# Module 5: Agent Skills
 
-## ⏰ Monday 4:00 PM — Teaching Copilot Your Domain
+## ⏰ Monday 3:30 PM — Teaching Copilot Your Domain
 
-> *"Bug reports come in, and I spend half my time reproducing issues before I can even write a test. How do I teach Copilot our testing patterns so it can help me create failing tests faster?"*  
-> — Elena, wanting systematic bug reproduction workflows
+> *"Custom instructions tell Copilot how to write tests, but they don't tell it what makes valid TV show data. How do I teach Copilot our business rules—not just code patterns, but domain knowledge?"*  
+> — Elena, thinking ahead to Character Detail v2's data model
 
 ---
 
@@ -56,7 +56,7 @@ This means skills you create are **portable**—they work across all GitHub Copi
 | **You trigger it by** | Nothing—always on | Opening matching files | Running `/prompt-name` | Typing `@agent-name` | Just asking—Copilot decides |
 | **Scope** | Whole repository | Specific file types | Specific task | Role-based workflow | Specialized knowledge |
 | **Best for** | Project context | File-type consistency | Repeatability | Autonomy | Expertise |
-| **Module** | 1 | 5 | 3 | 4 | 6 |
+| **Module** | 1 | 4 | 3 | 7 | 5 |
 
 ### Real-World Analogy
 
@@ -90,31 +90,30 @@ Do you want this applied AUTOMATICALLY?
 
 ## 📖 The Story So Far
 
-The FanHub team has built an impressive AI collaboration toolkit—and a real feature:
+The FanHub team has built an impressive AI collaboration toolkit:
 
 - **Module 1**: Repository instructions and architecture documentation
 - **Module 2**: Agent plan mode for systematic thinking  
 - **Module 3**: Custom prompts for reusable workflows
-- **Module 4**: Custom agents that built **Character Detail v2**—with episodes, quotes, related characters, and favorites
-- **Module 5**: Custom instructions that would have made Character Detail v2's tests, API routes, and components even better
+- **Module 4**: Custom instructions for file-specific expertise (tests, routes, components, infrastructure)
 
-Character Detail v2 shipped last sprint. Users love it. But then the bug reports start coming in:
+The team has created custom instructions for file-specific patterns. But Elena notices a gap.
 
-> **Bug #142**: "The Breaking Bad character page shows duplicate 'Jesse Pinkman' entries in the related characters section."
+*"Our testing instructions tell Copilot HOW to write tests,"* Elena explains. *"But they don't tell it WHAT makes valid TV show data. When the agent builds Character Detail v2 in Module 07, it'll know our code style—but will it know that related characters shouldn't have duplicates?"*
 
-> **Bug #147**: "Clicking a quote shows 'Episode not found' even though the episode exists."
+She opens the FanHub data schema. *"There are domain rules that aren't about code patterns at all:"*
 
-Elena opens the first bug report and sighs. *"I need to write a failing test that reproduces this duplicate character issue. But every time I do this, I re-explain our testing patterns to Copilot from scratch."*
+- *"Characters can appear in multiple episodes, but never duplicated within the same show"*
+- *"Quotes must reference valid episode IDs"*  
+- *"Character biographies should not exceed 2000 characters"*
 
-She looks at the Character Detail v2 code—the same code the agent built in Module 04. *"The agent knew our code patterns from instructions. But it doesn't know our **domain** patterns—like how characters relate to episodes, or why duplicate entries are invalid. That's not about code style, it's about **business logic**."*
+Rafael adds: *"And when stakeholders ask about the next feature—Episode Detail pages—I have to guess at effort. What if Copilot could estimate based on similar features?"*
 
-Rafael adds: *"And when stakeholders ask for the next feature—Episode Detail pages—I have to guess at effort. What if Copilot could estimate based on how long Character Detail v2 actually took?"*
-
-**This module's mission**: Create specialized Agent Skills that encode **domain knowledge**—the business rules, data relationships, and validation patterns that Copilot needs to understand FanHub's TV show data model.
+**This module's mission**: Create specialized Agent Skills that encode **domain knowledge**—the business rules, data relationships, and validation patterns that Copilot needs to understand FanHub's TV show data model. These skills will activate by conversation topic, not file pattern.
 
 ---
 
-💡 **Golden Thread Continuation**: In Module 05, you created custom instructions for *code patterns* (tests, Docker, React). In this module, you'll create skills for *domain patterns*—the TV show data rules that determine whether Character Detail v2's output is semantically correct, not just syntactically valid.
+💡 **Golden Thread Continuation**: In Module 04, you created custom instructions for *code patterns* (tests, Docker, React). In this module, you'll create skills for *domain patterns*—the TV show data rules that will make Character Detail v2's output semantically correct when we build it in Module 07.
 
 ---
 
@@ -213,7 +212,7 @@ You don't have to build every skill from scratch. Leverage existing skills:
 
 ## 🔨 Exercises
 
-### Exercise 6.1: Understand Skills Through Examples — "Elena Explores the Ecosystem"
+### Exercise 5.1: Understand Skills Through Examples — "Elena Explores the Ecosystem"
 
 #### 📖 The Story
 
@@ -355,7 +354,7 @@ Elena now understands:
 
 ---
 
-### Exercise 6.2: Create Your First Skill — "The Bug Reproduction Test Generator"
+### Exercise 5.2: Create Your First Skill — "The Bug Reproduction Test Generator"
 
 #### 📖 The Story
 
@@ -539,30 +538,30 @@ Now when a bug report comes in:
 
 ---
 
-### Exercise 6.3: Create Domain-Specific Skills — "What Character Detail v2 Was Missing"
+### Exercise 5.3: Create Domain-Specific Skills — "What Character Detail v2 Will Need"
 
-> 🧵 **The Golden Thread**: Remember when the agent built Character Detail v2 in Module 04? It generated code that *worked*—but Rafael now realizes it was missing product standards. This skill ensures the next feature gets them automatically.
+> 🧵 **The Golden Thread**: When the agent builds Character Detail v2 in Module 07, it should follow FanHub's product standards. Rafael creates a skill that ensures features get error boundaries, loading states, and analytics automatically.
 
 #### 📖 The Story
 
-**Rafael** (Product Visionary, 10 years) reviews the Character Detail v2 code from Module 04. The feature works, users love it—but something's bothering him.
+**Rafael** (Product Visionary, 10 years) is thinking ahead to Character Detail v2. He knows what good features need—and wants to make sure the agent gets it right.
 
-*"The agent built a working feature,"* Rafael says, *"but it didn't include our product standards. No error boundaries. Basic spinners instead of skeleton screens. No analytics tracking. No toast notifications on favorites."*
+*"When we build Character Detail v2,"* Rafael says, *"it needs to follow our product standards. Error boundaries. Skeleton screens instead of basic spinners. Analytics tracking. Toast notifications on favorites."*
 
-Elena nods: *"My testing instructions in Module 05 would have caught the test inconsistencies. But those are code patterns. What about product patterns?"*
+Elena nods: *"My testing instructions in Module 04 apply when you're editing test files. But product requirements should apply based on **what you're building**, not what file you're in."*
 
-Rafael realizes the gap: *"Custom instructions trigger on file patterns—`*.test.js` or `Dockerfile`. But product requirements should apply based on **what you're building**, not what file you're in. When someone asks for a feature, Copilot should automatically add error boundaries, loading states, analytics..."*
+Rafael realizes the gap: *"Custom instructions trigger on file patterns—`*.test.js` or `Dockerfile`. But product requirements should apply when someone asks to 'add a feature' or 'build a new page.' When someone mentions features, Copilot should automatically remember our product standards."*
 
 That's exactly what skills do: they activate based on **conversation topic**, not file patterns.
 
-*"If we had this skill before Module 04,"* Rafael reflects, *"Character Detail v2 would have shipped with all our product standards built in."*
+*"With this skill,"* Rafael says, *"Character Detail v2 will ship with all our product standards built in from the start."*
 
-#### ❌ The "Before" — What Character Detail v2 Was Missing
+#### ❌ The "Before" — What We Want to Prevent
 
-Look at what the agent generated in Module 04:
+Without a feature requirements skill, an agent would generate:
 
 ```jsx
-// Character Detail v2 - generated by agent in Module 04
+// Basic feature without product standards (what we want to prevent)
 function CharacterDetail({ characterId }) {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);  // Just a boolean
@@ -775,7 +774,7 @@ Rafael's product requirements are now:
 
 ---
 
-### Exercise 6.4: Effort Estimator Skill — "What's Next After Character Detail?"
+### Exercise 5.4: Effort Estimator Skill — "What's Next After Character Detail?"
 
 > 🧵 **The Golden Thread**: Character Detail v2 shipped. Users love it. Now stakeholders want Episode Detail pages. But how long will that take? Rafael doesn't want to guess again.
 
@@ -996,7 +995,7 @@ Enhance the effort estimator to:
 
 ---
 
-### Exercise 6.5: Skills Library Strategy — "Building Your Team's Skill Ecosystem"
+### Exercise 5.5: Skills Library Strategy — "Building Your Team's Skill Ecosystem"
 
 #### 📖 The Story
 
@@ -1153,22 +1152,23 @@ The FanHub team now has:
 
 ## 🎯 Module Summary
 
-### 🧵 The Golden Thread: From Code Patterns to Domain Knowledge
+### 🧵 The Golden Thread: Building Toward Module 07
 
 | Module | What We Built | Pattern Type |
 |--------|--------------|--------------|
 | **Module 01** | `copilot-instructions.md` | Repository-wide context |
 | **Module 03** | `*.prompt.md` files | Reusable task templates |
-| **Module 04** | **Character Detail v2** | The feature itself |
-| **Module 05** | `*.instructions.md` | File-pattern code rules |
-| **Module 06** | `SKILL.md` in `.github/skills/` | **Domain knowledge** |
+| **Module 04** | `*.instructions.md` | File-pattern code rules |
+| **Module 05** | `SKILL.md` in `.github/skills/` | **Domain knowledge** |
+| **Module 06** | MCP connections | External system access |
+| **Module 07** | **Character Detail v2** | THE PAYOFF—full-context agent |
 
-**The key insight**: Module 05's custom instructions activate by *file pattern* (`.test.js` → testing rules). Module 06's skills activate by *conversation topic* (asking about bugs → bug reproduction patterns).
+**The key insight**: Module 04's custom instructions activate by *file pattern* (`.test.js` → testing rules). Module 05's skills activate by *conversation topic* (asking about "character data" → data validation patterns).
 
-Character Detail v2 revealed:
-- **Code patterns** we needed (fixed in Module 05)
-- **Domain patterns** we needed (fixed in Module 06)
-- **What's next** after Character Detail (Episode Detail, estimated in Exercise 6.4)
+**When the agent builds Character Detail v2 in Module 07, it will have:**
+- **Code patterns** from custom instructions (Module 04)
+- **Domain knowledge** from skills (Module 05)
+- **External data access** from MCP (Module 06)
 
 ### Key Takeaways
 
@@ -1193,11 +1193,13 @@ Character Detail v2 revealed:
 ┌─────────────────────────────────────┐
 │  Instructions (.github/)            │  ← Always loaded, broad standards
 ├─────────────────────────────────────┤
-│  Skills (.github/skills/)           │  ← Loaded when relevant, domain expertise
+│  Custom Instructions (Module 04)    │  ← File-pattern code rules
 ├─────────────────────────────────────┤
-│  Prompts (.github/prompts/)         │  ← Manually invoked, specific templates
+│  Skills (Module 05)                 │  ← Topic-based domain expertise
 ├─────────────────────────────────────┤
-│  Agents (custom configurations)     │  ← Autonomous tasks, multi-step workflows
+│  Prompts (Module 03)                │  ← Manually invoked, specific templates
+├─────────────────────────────────────┤
+│  Agents (Module 07)                 │  ← THE PAYOFF: full-context automation
 └─────────────────────────────────────┘
 ```
 
@@ -1212,13 +1214,26 @@ In **Module 7: MCP Servers**, you'll learn how to connect Copilot to external sy
 ## ⏱️ Time Check
 
 **Expected Duration**: 90 minutes
-- Exercise 6.1: Explore Community Skills (20 minutes)
-- Exercise 6.2: Bug Reproduction Test Generator (25 minutes)
-- Exercise 6.3: Feature Requirements Skill (25 minutes)
-- Exercise 6.4: Skills Library Strategy (20 minutes)
+- Exercise 5.1: Explore Community Skills (20 minutes)
+- Exercise 5.2: Bug Reproduction Test Generator (25 minutes)
+- Exercise 5.3: Feature Requirements Skill (25 minutes)
+- Exercise 5.4: Skills Library Strategy (20 minutes)
 
 **If running ahead**: Create additional domain-specific skills for your project  
-**If running behind**: Focus on Exercise 6.2 (Bug Reproduction) and 6.4 (Strategy), skim the others
+**If running behind**: Focus on Exercise 5.2 (Data Validation) and 5.4 (Strategy), skim the others
+
+---
+
+## ➡️ Next Up
+
+**[Module 6: MCP Servers](../06-mcp-servers/README.md)** (Monday 4:30 PM)
+
+Skills encode knowledge, but what if Copilot could query your actual database to validate data? MCP (Model Context Protocol) connects Copilot to external systems—databases, APIs, and deployment infrastructure.
+
+When the agent builds Character Detail v2 in Module 07, it will have:
+- ✅ Custom instructions (code patterns)
+- ✅ Agent skills (domain knowledge)
+- 🔜 MCP connections (live data access)
 
 ---
 

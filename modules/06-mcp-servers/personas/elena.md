@@ -25,7 +25,7 @@ Elena's Arc:
 
 ---
 
-## Exercise 7.1: Your First Database Query — "Elena Discovers the Duplicate"
+## Exercise 6.1: Your First Database Query — "Elena Discovers the Duplicate"
 
 ### 📖 The Story
 
@@ -218,4 +218,4 @@ The orchestration is automatic—you describe a bug and Copilot figures out how 
 
 **Next for Elena**: [Module 10: Agentic SDLC](../10-agentic-sdlc/README.md) — See how MCP-enabled testing fits into the full development lifecycle.
 
-**Also relevant**: [Module 6: Agent Skills](../06-agent-skills/README.md) — Your Bug Reproduction skill works alongside MCP for complete coverage.
+**Also relevant**: [Module 5: Agent Skills](../05-agent-skills/README.md) — Your Bug Reproduction skill works alongside MCP for complete coverage.

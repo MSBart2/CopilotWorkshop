@@ -120,4 +120,4 @@ By the end of this module, you will:
 
 Continue to [Module 9: GitHub Copilot CLI](../09-copilot-cli/README.md) to learn about using Copilot from the command line.
 
-**Review if needed**: [Module 7: MCP Servers](../07-mcp-servers/README.md) — External system access
+**Review if needed**: [Module 6: MCP Servers](../06-mcp-servers/README.md) — External system access

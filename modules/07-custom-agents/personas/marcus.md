@@ -25,7 +25,7 @@ Marcus's Arc:
 
 ---
 
-## Exercise 4.1: Your First Agent Workflow — "Marcus Goes Autonomous"
+## Exercise 7.1: Your First Agent Workflow — "Marcus Goes Autonomous"
 
 ### 📖 The Story
 
@@ -210,6 +210,6 @@ With Agent Mode, you can now tackle application code as confidently as infrastru
 
 ## ➡️ Continue Your Journey
 
-**Recommended next**: [Module 5: Custom Instructions](../05-custom-instructions/README.md) — Learn how file-scoped instructions make agents even more context-aware.
+**Recommended next**: [Module 8: Custom Instructions](../08-copilot-web/README.md) — Learn how file-scoped instructions make agents even more context-aware.
 
 **Also relevant**: [Module 8: Copilot Web](../08-copilot-web/README.md) — When GitHub.com is your workspace, not VS Code.

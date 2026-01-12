@@ -489,7 +489,7 @@ Always include at least one of:
    ```markdown
    ## ➡️ Next Up
    
-   **[Module 4: Custom Agents](../04-custom-agents/README.md)**
+   **[Module 4: Custom Instructions](../04-custom-instructions/README.md)**
    
    > *"What if we could create specialized AI personas for different tasks?"*
    > — David, imagining architectural review agents
@@ -498,7 +498,7 @@ Always include at least one of:
 3. **Persona continuity** — Each persona file links to their next appearance:
    ```markdown
    ### Next Module
-   Your next appearance: **[Module 6: Agent Skills](../../06-agent-skills/personas/elena.md)**
+   Your next appearance: **[Module 5: Agent Skills](../../05-agent-skills/personas/elena.md)**
    ```
 
 ### Documentation References

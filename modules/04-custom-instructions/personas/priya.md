@@ -2,11 +2,11 @@
 
 ## 🎯 Your Focus: Building the EpisodeAppearances Component
 
-> 🧵 **The Golden Thread**: Character Detail v2 shows episode appearances—but the component structure is inconsistent. You'll build the `EpisodeAppearances` component properly using React instructions that ensure every future component follows the same patterns.
+> 🧵 **The Golden Thread**: Character Detail v2 will show episode appearances—and you want those components to be consistent. You'll build the `EpisodeAppearances` component properly using React instructions that ensure every future component follows the same patterns.
 
 Priya, this module shows you how to capture best practices so you (and the whole team) benefit from them forever. You've been learning React patterns—now you'll encode them into instructions that help Copilot generate consistent, high-quality components. This isn't just about AI; it's about documenting expertise in a way that teaches as it assists.
 
-**Your exercises**: 5.4 (React Component Instructions)  
+**Your exercises**: 4.4 (React Component Instructions)  
 **Time**: ~25 minutes  
 **Theme**: From learning patterns to encoding patterns
 
@@ -17,36 +17,36 @@ Priya, this module shows you how to capture best practices so you (and the whole
 ```
 Priya's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "The CharacterDetail component is good, but EpisodeList is..."│
+│  "Without React instructions, the agent will generate chaos"   │
 │                         ↓                                       │
 │  Creates react-components.instructions.md with David's help     │
 │                         ↓                                       │
-│  "Now I'm building EpisodeAppearances with consistent patterns" │
+│  "Character Detail v2's components will be consistent!"         │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Exercise 5.4: React Component Instructions — "The Episode Appearances Component"
+## Exercise 4.4: React Component Instructions — "The Episode Appearances Component"
 
-> 🧵 **The Golden Thread Continues**: Character Detail v2 shows episode appearances—but the component structure is inconsistent. You'll build the `EpisodeAppearances` component properly with React instructions.
+> 🧵 **The Golden Thread Continues**: Character Detail v2 will show episode appearances—and you want those components to be excellent from the start.
 
 ### 📖 The Story
 
-**Priya** (Junior Developer, 1 year) is excited. The Character Detail v2 feature from Module 04 is live, but users want more—they want to click on an episode to see details. She's been assigned to build the `EpisodeAppearances` component that makes episodes clickable.
+**Priya** (Junior Developer, 1 year) is thinking ahead. The Character Detail v2 feature will show a character's episode appearances, and users will want to click on an episode to see details. She's going to build the `EpisodeAppearances` component.
 
-But first, she reviews the existing components the agent generated in Module 04.
+First, she reviews the existing components in the codebase.
 
-*"Some components handle loading states, some don't,"* Priya notices. *"Some have TypeScript types, some use `any`. The CharacterDetail component is good, but the EpisodeList inside it is... different."*
+*"Some components handle loading states, some don't,"* Priya notices. *"Some have TypeScript types, some use `any`. Without consistent patterns, the agent will generate inconsistent components for Character Detail v2."*
 
 **David** (Staff Engineer, 20 years) sees an opportunity: *"You've been learning React best practices, Priya. What if you captured those patterns in instructions?"*
 
-### ❌ The "Before" — Inconsistent Components
+### ❌ The "Before" — What the Agent Would Generate
 
-Look at the components from Module 04:
+Without React-specific instructions, an agent would generate:
 
 ```jsx
-// Inconsistent patterns from agent-generated components
+// Inconsistent patterns (what we want to prevent)
 const CharacterDetail = ({ id }) => {  // No TypeScript types
   const [data, setData] = useState();  // No initial state type
   const [loading, setLoading] = useState(true);
@@ -67,7 +67,7 @@ const CharacterDetail = ({ id }) => {  // No TypeScript types
 };
 ```
 
-**The problems:**
+**The problems we're preventing:**
 - No TypeScript interfaces
 - Missing error handling
 - Incomplete useEffect dependencies
@@ -77,7 +77,7 @@ const CharacterDetail = ({ id }) => {  // No TypeScript types
 
 ### 🎯 Objective
 
-Create instructions that provide React/TypeScript expertise for component files, then use them to build the `EpisodeAppearances` component properly.
+Create instructions that provide React/TypeScript expertise for component files, then use them to build the `EpisodeAppearances` component properly—which will be used in Character Detail v2.
 
 ### 📋 Steps
 
@@ -380,6 +380,6 @@ You're not just consuming knowledge—you're **contributing** to how the team ca
 
 ## ➡️ Continue Your Journey
 
-**Next for Priya**: [Module 6: Agent Skills](../06-agent-skills/README.md) — See how Elena's testing skills work with your component patterns.
+**Next for Priya**: [Module 5: Agent Skills](../../05-agent-skills/README.md) — See how Elena's testing skills work with your component patterns.
 
-**Also relevant**: [Module 3: Custom Prompts](../03-custom-prompts/README.md) — Create reusable prompts for common component patterns you encounter.
+**The Payoff**: [Module 7: Custom Agents](../../07-custom-agents/README.md) — Watch your React instructions activate when the agent builds Character Detail v2!

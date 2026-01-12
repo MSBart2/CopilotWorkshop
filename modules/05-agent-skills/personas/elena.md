@@ -31,7 +31,7 @@ Elena's Arc:
 
 ## 🧵 The Golden Thread: Your Role
 
-In **Module 05**, you created `testing.instructions.md`—code patterns for test files. Those help with *how* tests are written.
+In **Module 04**, you created `testing.instructions.md`—code patterns for test files. Those help with *how* tests are written.
 
 But Bug #142 isn't about code patterns. It's about **domain knowledge**:
 - Related characters should never have duplicates from the same show
@@ -42,7 +42,7 @@ Skills encode this domain knowledge so Copilot understands FanHub's data model, 
 
 ---
 
-## Exercise 6.1: Understand Skills Through Examples
+## Exercise 5.1: Understand Skills Through Examples
 
 ### 📖 The Story
 
@@ -113,7 +113,7 @@ Explore community skills to understand skill structure and identify patterns tha
 
 ---
 
-## Exercise 6.2: Create Your First Skill — "The Character Detail Bug"
+## Exercise 5.2: Create Your First Skill — "The Character Detail Bug"
 
 > 🧵 **The Golden Thread**: Bug #142 came from Character Detail v2—the feature the agent built in Module 04. Now you'll create a skill that helps reproduce this bug and future bugs systematically.
 
@@ -269,8 +269,8 @@ Now when a bug report comes in:
 
 | Module | What You Created | Character Detail Connection |
 |--------|-----------------|---------------------------|
-| **Module 05** | `testing.instructions.md` | Would have improved Character Detail v2's tests |
-| **Module 06** | `bug-reproduction-test-generator` skill | Reproduces Bug #142 from Character Detail v2 |
+| **Module 04** | `testing.instructions.md` | Would have improved Character Detail v2's tests |
+| **Module 05** | `bug-reproduction-test-generator` skill | Reproduces Bug #142 from Character Detail v2 |
 
 ### The Quality Champion's Win
 
@@ -286,4 +286,4 @@ Your testing expertise isn't locked in your head anymore—it's:
 
 **Next for Elena**: [Module 10: Agentic SDLC](../10-agentic-sdlc/README.md) — See how your bug reproduction skill integrates into the full development lifecycle.
 
-**Also relevant**: [Module 5: Custom Instructions](../05-custom-instructions/README.md) — Your `testing.instructions.md` works alongside this skill for comprehensive test coverage.
+**Also relevant**: [Module 4: Custom Instructions](../04-custom-instructions/README.md) — Your `testing.instructions.md` works alongside this skill for comprehensive test coverage.

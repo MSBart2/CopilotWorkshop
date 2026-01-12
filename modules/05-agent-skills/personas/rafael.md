@@ -34,7 +34,7 @@ Rafael's Arc:
 
 ## 🧵 The Golden Thread: Your Role
 
-In **Module 05**, custom instructions activated by file pattern (`.test.js` → testing rules). But your product standards aren't about file types—they're about *what you're building*.
+In **Module 04**, custom instructions activated by file pattern (`.test.js` → testing rules). But your product standards aren't about file types—they're about *what you're building*.
 
 When someone asks Copilot to "create a feature for browsing episodes," the feature-requirements skill automatically applies:
 - Error boundaries ✅
@@ -46,7 +46,7 @@ If you'd had this skill before Module 04, Character Detail v2 would have shipped
 
 ---
 
-## Exercise 6.3: Build the Feature Requirements Skill
+## Exercise 5.3: Build the Feature Requirements Skill
 
 > 🧵 **The Golden Thread**: Look at what Character Detail v2 was missing. This skill ensures the next feature gets it right.
 
@@ -184,7 +184,7 @@ The skill catches edge cases upfront:
 
 ---
 
-## Exercise 6.4: Create the Effort Estimator Skill
+## Exercise 5.4: Create the Effort Estimator Skill
 
 > 🧵 **The Golden Thread**: Character Detail v2 shipped. Stakeholders want Episode Detail next. But how long will that take? Rafael doesn't want to guess again.
 
@@ -361,8 +361,8 @@ Create an Effort Estimator skill that analyzes features against your codebase—
 
 | Module | What You Created | Character Detail Connection |
 |--------|-----------------|---------------------------|
-| **Module 06** | `feature-requirements` skill | Standards Character Detail v2 missed |
-| **Module 06** | `effort-estimator` skill | Estimate Episode Detail (next feature) |
+| **Module 05** | `feature-requirements` skill | Standards Character Detail v2 missed |
+| **Module 05** | `effort-estimator` skill | Estimate Episode Detail (next feature) |
 
 ### The Product Visionary's Win
 
@@ -385,4 +385,4 @@ Your Feature Requirements skill integrates with:
 
 **Next for Rafael**: [Module 10: Agentic SDLC](../10-agentic-sdlc/README.md) — See how your requirements and estimation skills integrate into the full development lifecycle.
 
-**Also relevant**: [Module 4: Custom Agents](../04-custom-agents/README.md) — Create agents that validate your specifications against code quality standards.
+**Also relevant**: [Module 7: Custom Agents](../07-custom-agents/README.md) — Create agents that validate your specifications against code quality standards.

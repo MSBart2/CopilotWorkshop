@@ -152,7 +152,7 @@ As a DevOps developer, you've focused on infrastructure. But modern DevOps means
 - [Elena's path](elena.md) to see testing patterns
 
 ### Next Module
-Your next appearance: **[Module 4: Custom Agents](../../04-custom-agents/personas/marcus.md)**
+Your next appearance: **[Module 4: Custom Instructions](../../04-custom-instructions/personas/marcus.md)**
 
 **What's next for you**: You'll see how agents can automate DevOps tasks and application development. Your comfort zone (automation) meets application code.
 

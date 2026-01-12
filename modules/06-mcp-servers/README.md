@@ -1,9 +1,9 @@
-# Module 7: MCP Servers — Extending Copilot's Reach
+# Module 6: MCP Servers — Extending Copilot's Reach
 
-## ⏰ Monday 5:00 PM — Giving Copilot Hands
+## ⏰ Monday 4:30 PM — Giving Copilot Hands
 
-> *"The validator skill knows our data FORMAT is correct, but it can't check if the character actually EXISTS in our database. Copilot is flying blind."*  
-> — Elena, hitting the limits of knowledge without action
+> *"The validator skill knows our data FORMAT is correct, but it can't check if the character actually EXISTS in our database. For Character Detail v2 to work perfectly, Copilot needs to SEE our actual data."*  
+> — Elena, thinking ahead to Module 07
 
 ---
 
@@ -12,10 +12,10 @@
 ### The Problem: Copilot Can't See Beyond Your Editor
 
 You've taught Copilot a lot:
-- **Instructions** tell it your coding standards
-- **Prompts** give it task templates  
-- **Agents** let it work autonomously
-- **Skills** provide domain expertise
+- **Instructions** (Module 01) tell it your coding standards
+- **Custom Instructions** (Module 04) give it file-specific patterns
+- **Skills** (Module 05) provide domain expertise
+- **Prompts** (Module 03) give it task templates  
 
 But there's a fundamental limitation: **Copilot can only read files in your editor.**
 
@@ -104,13 +104,13 @@ VS Code prompts you to confirm trust before starting any MCP server.
 
 | Exercise | Persona | Focus | Time |
 |----------|---------|-------|------|
-| 7.1 | Elena | First database query — discover duplicates | 15 min |
-| 7.5 | Team | Integrating MCP into workflow | 20 min |
+| 6.1 | Elena | First database query — discover duplicates | 15 min |
+| 6.5 | Team | Integrating MCP into workflow | 20 min |
 
 ### Quick Links
 
-- [Exercise 7.1: Your First Database Query](./EXERCISES.md#exercise-71-your-first-database-query--elena-discovers-the-duplicate) — Elena gives Copilot database access
-- [Exercise 7.5: Integrating MCP Into Workflow](./EXERCISES.md#exercise-75-integrating-mcp-into-your-workflow--the-complete-picture) — Complete picture
+- [Exercise 6.1: Your First Database Query](./EXERCISES.md#exercise-61-your-first-database-query--elena-discovers-the-duplicate) — Elena gives Copilot database access
+- [Exercise 6.5: Integrating MCP Into Workflow](./EXERCISES.md#exercise-65-integrating-mcp-into-your-workflow--the-complete-picture) — Complete picture
 
 ---
 
@@ -197,8 +197,11 @@ Different roles can focus on different aspects of MCP:
 
 ## ➡️ Next Steps
 
-You've given Copilot hands to reach external systems!
+You've given Copilot hands to reach external systems! **Now comes THE PAYOFF.**
 
-**Continue to**: [Module 8: Copilot Web](../08-copilot-web/README.md) — Using Copilot in browser-based development
+**Continue to**: [Module 7: Custom Agents](../07-custom-agents/README.md) — With ALL context in place (instructions, skills, MCP), watch an autonomous agent build Character Detail v2 with full power
 
-**Review if needed**: [Module 6: Agent Skills](../06-agent-skills/README.md) — Skills work together with MCP for complete workflows
+> *"We've spent all day building context. Now let's see what an agent can do with ALL of that in place."*  
+> — David, ready for the payoff
+
+**Review if needed**: [Module 5: Agent Skills](../05-agent-skills/README.md) — Skills work together with MCP for complete workflows

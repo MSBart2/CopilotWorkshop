@@ -183,7 +183,7 @@ Track these to prove prompt value:
 - [Jordan's path](jordan.md) to see git automation
 
 ### Next Module
-Your next appearance: **[Module 5: Custom Instructions](../../05-custom-instructions/personas/elena.md)**
+Your next appearance: **[Module 4: Custom Instructions](../../04-custom-instructions/personas/elena.md)**
 
 **What's next for you**: You'll create file-specific instructions that automatically activate when someone opens a test file. Your testing standards will apply without anyone invoking a prompt—they'll just be there.
 

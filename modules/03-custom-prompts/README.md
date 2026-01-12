@@ -136,7 +136,7 @@ Jump directly to specific exercises:
 
 ## ➡️ Next Up
 
-**[Module 4: Custom Agents](../04-custom-agents/README.md)** (Monday 1:30 PM)
+**[Module 4: Custom Instructions](../04-custom-instructions/README.md)** (Monday 2:00 PM)
 
 The team has patterns, documentation, and prompts. Now it's time to let Copilot work autonomously. David will create an Architecture Reviewer agent, Jordan will build DevOps automation, and we'll explore how agents can run in the background while you work on other things.
 

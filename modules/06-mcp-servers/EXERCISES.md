@@ -1,4 +1,4 @@
-# Module 7: MCP Servers — Extending Copilot's Reach
+# Module 6: MCP Servers — Extending Copilot's Reach
 
 ## ⏰ Monday 5:00 PM — Giving Copilot Hands
 
@@ -97,9 +97,9 @@ The FanHub team has built impressive AI collaboration:
 - **Module 1**: Repository instructions for project context
 - **Module 2**: Agent plan mode for systematic thinking
 - **Module 3**: Custom prompts for reusable workflows
-- **Module 4**: Custom agents for autonomous tasks
-- **Module 5**: Custom instructions for file-scoped context
-- **Module 6**: Agent Skills for domain expertise
+- **Module 3**: Custom agents for autonomous tasks
+- **Module 3**: Custom instructions for file-scoped context
+- **Module 3**: Agent Skills for domain expertise
 
 **Elena** is proud of her Bug Reproduction Test Generator skill. It structures tests beautifully—describe blocks, assertions, proper Arrange/Act/Assert. But she's hitting a wall:
 
@@ -173,7 +173,7 @@ VS Code prompts you to confirm trust before starting any MCP server. Always:
 
 ## 🔨 Exercises
 
-### Exercise 7.1: Your First Database Query — "Elena Discovers the Duplicate"
+### Exercise 6.1: Your First Database Query — "Elena Discovers the Duplicate"
 
 #### 📖 The Story
 
@@ -416,7 +416,7 @@ Watch Copilot catch: ❌ show_id doesn't exist, ❌ invalid status enum. All wit
 
 ---
 
-### Exercise 7.5: Integrating MCP Into Your Workflow — "The Complete Picture"
+### Exercise 6.5: Integrating MCP Into Your Workflow — "The Complete Picture"
 
 #### 📖 The Story
 
@@ -671,6 +671,27 @@ The FanHub team now has:
 - **MCP Protocol**: [modelcontextprotocol.io](https://modelcontextprotocol.io/)
 - **Server Registry**: [github.com/mcp](https://github.com/mcp)
 - **Server Examples**: [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
+
+---
+
+## ➡️ Next Steps
+
+You've given Copilot hands to reach external systems! **Now comes THE PAYOFF.**
+
+**Continue to**: [Module 7: Custom Agents](../07-custom-agents/README.md) — THE PAYOFF
+
+With ALL context now in place:
+- ✅ **Repository Instructions** — Project context (Module 1)
+- ✅ **Plan Mode** — Systematic thinking (Module 2)
+- ✅ **Custom Prompts** — Task templates (Module 3)
+- ✅ **Custom Instructions** — File-specific patterns (Module 4)
+- ✅ **Agent Skills** — Domain expertise (Module 5)
+- ✅ **MCP Servers** — External system access (Module 6)
+
+Now let's see what an **autonomous agent** can do with ALL of that in place!
+
+> *"We've spent all day building context—instructions, prompts, custom instructions, skills, MCP connections. Now let's see what an agent can do with ALL of that in place."*  
+> — David, ready for the payoff
 
 ---
 

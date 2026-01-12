@@ -48,7 +48,7 @@ You've built pipelines, Terraform modules, and deployment automation. But Copilo
 
 ---
 
-## Exercise 7.5: Integrating MCP Into Your Workflow
+## Exercise 6.5: Integrating MCP Into Your Workflow
 
 ### 📖 The Story
 
@@ -276,4 +276,4 @@ Context-Aware Recommendation
 
 **Next for Jordan**: [Module 9: Copilot CLI](../09-copilot-cli/README.md) — Command-line AI assistance for shell workflows.
 
-**Also relevant**: [Module 5: Custom Instructions](../05-custom-instructions/README.md) — Your infrastructure patterns work alongside MCP for complete coverage.
+**Also relevant**: [Module 5: Custom Instructions](../04-custom-instructions/README.md) — Your infrastructure patterns work alongside MCP for complete coverage.

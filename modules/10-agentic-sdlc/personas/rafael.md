@@ -224,7 +224,7 @@ Backlog → Prioritize → Decompose → Assign Interfaces → Monitor → Ship
 **Completed the workshop!** You've gone from requirements writer to execution enabler.
 
 **Review your journey**:
-- [Module 6: Agent Skills](../06-agent-skills/README.md) — Your feature requirements + effort estimator skills
+- [Module 5: Agent Skills](../05-agent-skills/README.md) — Your feature requirements + effort estimator skills
 - [Module 3: Custom Prompts](../03-custom-prompts/README.md) — Reusable specification workflows
 
 **Apply to your real work**:

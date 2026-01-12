@@ -25,7 +25,7 @@ David's Arc:
 
 ---
 
-## Exercise 4.2: Create a Custom Agent — "David's Architecture Reviewer"
+## Exercise 7.2: Create a Custom Agent — "David's Architecture Reviewer"
 
 ### 📖 The Story
 
@@ -275,7 +275,7 @@ The agent doesn't replace David's expertise—it **encodes** it. His 20 years of
 
 ---
 
-## Exercise 4.3: Background Agents — "The Refactor Task" (Enterprise)
+## Exercise 7.3: Background Agents — "The Refactor Task" (Enterprise)
 
 ### 📖 The Story
 
@@ -427,6 +427,6 @@ The agent can run your checklist faster than you can. But it can't:
 
 ## ➡️ Continue Your Journey
 
-**Next for David**: [Module 7: MCP Servers](../07-mcp-servers/README.md) — Connect agents to external data sources and enterprise systems.
+**Next for David**: [Module 6: MCP Servers](../06-mcp-servers/README.md) — Connect agents to external data sources and enterprise systems.
 
 **Also relevant**: [Module 10: Agentic SDLC](../10-agentic-sdlc/README.md) — See how your review agents integrate into the full development lifecycle.

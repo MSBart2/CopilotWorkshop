@@ -205,4 +205,4 @@ Every time you use Copilot to structure an issue, you're learning the patterns s
 
 **Next for Priya**: [Module 9: Copilot CLI](../09-copilot-cli/README.md) — Command-line AI assistance for shell commands you're still learning.
 
-**Also relevant**: [Module 5: Custom Instructions](../05-custom-instructions/README.md) — Your React component instructions help Copilot understand FanHub's patterns.
+**Also relevant**: [Module 4: Custom Instructions](../04-custom-instructions/README.md) — Your React component instructions help Copilot understand FanHub's patterns.

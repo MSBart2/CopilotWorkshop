@@ -160,7 +160,7 @@ Track these to prove prompt value:
 - [Rafael's path](rafael.md) to see requirements automation
 
 ### Next Module
-Your next appearance: **[Module 4: Custom Agents](../../04-custom-agents/personas/jordan.md)**
+Your next appearance: **[Module 4: Custom Instructions](../../04-custom-instructions/personas/jordan.md)**
 
 **What's next for you**: You'll build autonomous agents that handle complex DevOps workflows. If prompts are intelligent automation, agents are autonomous automation.
 

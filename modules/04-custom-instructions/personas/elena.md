@@ -1,12 +1,12 @@
 # Elena's Path: Custom Instructions
 
-## 🎯 Your Focus: Fixing the Character Detail Tests
+## 🎯 Your Focus: Preparing for Character Detail v2 Tests
 
-> 🧵 **The Golden Thread**: In Module 04, the team used agent mode to build Character Detail v2. You're now reviewing the generated tests—and they have inconsistencies. This module transforms your 8 years of QA expertise into **automatic testing standards** that would have prevented these issues.
+> 🧵 **The Golden Thread**: In Module 07, the team will use agent mode to build Character Detail v2. You're preparing now—creating testing instructions that will ensure the generated tests are excellent from the start. This module transforms your 8 years of QA expertise into **automatic testing standards**.
 
 Elena, instead of writing the same review comments over and over, you'll create instructions that ensure every generated test follows your patterns—proper structure, edge case coverage, and meaningful assertions.
 
-**Your exercises**: 5.1 (Testing Instructions)  
+**Your exercises**: 4.1 (Testing Instructions)  
 **Time**: ~25 minutes  
 **Theme**: From repetitive feedback to encoded expertise
 
@@ -17,37 +17,34 @@ Elena, instead of writing the same review comments over and over, you'll create 
 ```
 Elena's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "The Character Detail tests from Module 04 are inconsistent"   │
+│  "Without testing instructions, the agent will generate chaos"  │
 │                         ↓                                       │
 │  Creates testing.instructions.md with comprehensive patterns    │
 │                         ↓                                       │
-│  "The NEXT feature's tests will be right from the start."       │
+│  "Character Detail v2's tests will be excellent from the start" │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Exercise 5.1: Testing Instructions — "The Character Detail Tests Need Help"
+## Exercise 4.1: Testing Instructions — "The Character Detail Tests Will Need Help"
 
-> 🧵 **The Golden Thread Continues**: The agent built Character Detail v2 in Module 04—including tests. Your review reveals inconsistencies that custom instructions could have prevented.
+> 🧵 **The Golden Thread Continues**: The agent will build Character Detail v2 in Module 07—including tests. Your instructions will ensure those tests are excellent from the start.
 
 ### 📖 The Story
 
-**Elena** (QA Engineer, 8 years) opens `CharacterDetail.test.js` to review the tests that the agent generated in Module 04. The feature works, but the tests have problems:
+**Elena** (QA Engineer, 8 years) is thinking ahead about the Character Detail v2 feature. It's going to be complex—character data, episodes, quotes, related characters, favorites. The tests will need to be comprehensive.
 
-- Some tests use `describe/it`, others use `test`
-- The API mocking is inconsistent—some tests mock at module level, some inline
-- Happy path is covered, but edge cases are spotty
-- One test actually tests implementation details rather than behavior
+*"Without testing-specific guidance, the agent will generate inconsistent tests,"* Elena predicts. *"Some will use `describe/it`, others will use `test`. Mocking will be all over the place. Edge cases will be spotty."*
 
-*"The agent followed our general coding standards,"* Elena notes, *"but it didn't know our testing standards. Every time I review generated tests, I'm catching the same issues."*
+She opens existing test files to assess the baseline. *"I could review every test manually after the agent generates them, or..."* Elena pauses. *"I could teach Copilot our testing standards so Character Detail v2 comes out right the first time."*
 
-### ❌ The "Before" — What the Agent Generated
+### ❌ The "Before" — What the Agent Would Generate
 
-Look at the Character Detail tests from Module 04. Without testing-specific instructions:
+Without testing-specific instructions, an agent would generate:
 
 ```javascript
-// Inconsistent patterns from Module 04's agent output
+// Inconsistent patterns (what we want to prevent)
 test('renders character name', () => {  // Uses 'test' instead of 'it'
   render(<CharacterDetail id="1" />);
   expect(screen.getByText('Walter White')).toBeInTheDocument();
@@ -66,7 +63,7 @@ describe('CharacterDetail', () => {
 });
 ```
 
-**Elena's review comments (the same ones she always writes):**
+**Elena's typical review comments (the same ones she always writes):**
 - "Please use `describe/it` blocks consistently, not mix with `test`"
 - "Mock axios at module level for consistency"
 - "Where's the error case test? What if the character doesn't exist?"
@@ -76,14 +73,14 @@ describe('CharacterDetail', () => {
 
 ### 🎯 Objective
 
-Create custom instructions that automatically activate for all test files, ensuring consistent quality for future features.
+Create custom instructions that automatically activate for all test files, ensuring consistent quality for Character Detail v2 and all future features.
 
 ### 📋 Steps
 
-1. **Review the Character Detail tests** (if you completed Module 04)
+1. **Review existing tests** to understand the baseline
    
-   Open the test file created in Module 04 and identify inconsistencies:
-   - What testing patterns did the agent use?
+   Look at existing test files in FanHub and identify:
+   - What testing patterns are currently used?
    - Are error cases covered?
    - Is mocking consistent?
 
@@ -314,6 +311,6 @@ Your role isn't diminished—it's **elevated**. Instead of being the "use descri
 
 ## ➡️ Continue Your Journey
 
-**Next for Elena**: [Module 6: Agent Skills](../06-agent-skills/README.md) — Create reusable skills for test generation, edge case analysis, and coverage reporting.
+**Next for Elena**: [Module 5: Agent Skills](../../05-agent-skills/README.md) — Create reusable skills for test generation, edge case analysis, and coverage reporting.
 
-**Also relevant**: [Module 4: Custom Agents](../04-custom-agents/README.md) — Build testing agents that can run comprehensive test suites autonomously.
+**The Payoff**: [Module 7: Custom Agents](../../07-custom-agents/README.md) — Watch your testing instructions activate when the agent builds Character Detail v2!

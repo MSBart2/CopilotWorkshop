@@ -1,12 +1,12 @@
 # Jordan's Path: Custom Instructions
 
-## 🎯 Your Focus: Shipping Character Detail v2 Securely
+## 🎯 Your Focus: Preparing to Ship Character Detail v2 Securely
 
-> 🧵 **The Golden Thread**: The Character Detail v2 feature from Module 04 is ready to deploy—but the Dockerfile hasn't been touched since the contractor left. It has security issues. This module lets you do what you've always wanted—make security and DevOps best practices **automatic**.
+> 🧵 **The Golden Thread**: When Character Detail v2 is built in Module 07, it will need to be deployed. The Dockerfile hasn't been touched since the contractor left—it has security issues. This module lets you do what you've always wanted—make security and DevOps best practices **automatic**.
 
 Jordan, instead of being the "did you run as non-root?" reviewer on every PR, you'll create instructions that ensure Dockerfiles, GitHub Actions, and infrastructure code follow your patterns from the start.
 
-**Your exercises**: 5.3 (Infrastructure Instructions)  
+**Your exercises**: 4.3 (Infrastructure Instructions)  
 **Time**: ~25 minutes  
 **Theme**: Security and operational excellence by default
 
@@ -17,29 +17,29 @@ Jordan, instead of being the "did you run as non-root?" reviewer on every PR, yo
 ```
 Jordan's Arc:
 ┌─────────────────────────────────────────────────────────────────┐
-│  "Character Detail v2 is ready—but the Dockerfile is insecure" │
+│  "When we deploy Character Detail v2, the Dockerfile needs work"│
 │                         ↓                                       │
 │  Creates infrastructure.instructions.md with security patterns  │
 │                         ↓                                       │
-│  "Every feature gets secure deployment from the start."         │
+│  "Character Detail v2 will deploy securely from the start."     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Exercise 5.3: Infrastructure Instructions — "Shipping Character Detail v2"
+## Exercise 4.3: Infrastructure Instructions — "Preparing to Ship Character Detail v2"
 
-> 🧵 **The Golden Thread Continues**: The Character Detail v2 feature is ready—but now you need to deploy it. The existing Dockerfile hasn't been updated since the contractor left, and it has security issues.
+> 🧵 **The Golden Thread Continues**: When Character Detail v2 is ready in Module 07, you'll need to deploy it. Let's fix the infrastructure now so deployment goes smoothly.
 
 ### 📖 The Story
 
-**Jordan** (Platform Engineer, 12 years) gets the green light to deploy Character Detail v2 to staging. He opens the project's Dockerfile and groans.
+**Jordan** (Platform Engineer, 12 years) is thinking ahead to deploying Character Detail v2. He opens the project's Dockerfile and groans.
 
 *"This Dockerfile is from the contractor days,"* Jordan explains. *"It runs as root, uses the `latest` tag, no health check, no multi-stage build. It'll work, but it's a security incident waiting to happen."*
 
-The team realizes they need to fix the Dockerfile before deploying their new feature. But Jordan has a broader concern:
+The team realizes they need to fix the Dockerfile before they even build Character Detail v2. But Jordan has a broader concern:
 
-*"I can fix this manually, but what about next time? When the agent generates infrastructure changes, it won't know our security requirements."*
+*"I can fix this manually, but what about when the agent generates infrastructure changes in Module 07? I want Copilot to enforce our infra patterns automatically."*
 
 ### ❌ The "Before" — The Contractor's Dockerfile
 
@@ -74,7 +74,7 @@ CMD ["npm", "start"]
 
 ### 🎯 Objective
 
-Create specialized instructions for infrastructure and deployment files, then use them to fix the Dockerfile for Character Detail v2 deployment.
+Create specialized instructions for infrastructure and deployment files, then use them to fix the Dockerfile in preparation for Character Detail v2 deployment.
 
 ### 📋 Steps
 
@@ -376,6 +376,6 @@ You're no longer the bottleneck—you're the **force multiplier**:
 
 ## ➡️ Continue Your Journey
 
-**Next for Jordan**: [Module 9: Copilot CLI](../09-copilot-cli/README.md) — Bring AI-assisted automation to your terminal and CI/CD pipelines.
+**Next for Jordan**: [Module 5: Agent Skills](../../05-agent-skills/README.md) — Create skills that complement your infrastructure instructions.
 
-**Also relevant**: [Module 4: Custom Agents](../04-custom-agents/README.md) — Your `devops-reviewer.agent.md` complements these instructions with active review capabilities.
+**The Payoff**: [Module 7: Custom Agents](../../07-custom-agents/README.md) — Watch your infrastructure instructions activate when the agent deploys Character Detail v2!

@@ -1,38 +1,37 @@
-# Module 5: Custom Instructions — Exercises
+# Module 4: Custom Instructions — Exercises
 
 > **📖 Full Narrative Experience**: This file contains all exercises in story order, following the FanHub team through Monday afternoon as they create context-aware expertise that automatically activates based on file patterns.
 
 ---
 
-## ⏰ Monday 3:00 PM — Context-Aware Expertise
+## ⏰ Monday 2:30 PM — Context-Aware Expertise
 
-> *"The Character Detail v2 feature touched tests, API routes, Docker configs, and React components. Each file type needed different expertise. Can Copilot switch contexts automatically?"*  
-> — Elena, realizing the pattern after reviewing Module 04's output
+> *"The Character Detail v2 feature will touch tests, API routes, Docker configs, and React components. Each file type needs different expertise. Can we prepare Copilot to switch contexts automatically?"*  
+> — Elena, planning ahead after the prompts work from Module 03
 
 ---
 
 ## 📖 The Story So Far
 
-The FanHub team has built solid foundations—and a real feature:
+The FanHub team has built solid foundations:
 
 - **Module 1**: Repository-wide instructions in `.github/copilot-instructions.md`
 - **Module 2**: Structured planning with agent plan mode for systematic workflows
 - **Module 3**: Reusable prompts for common workflows
-- **Module 4**: **Character Detail v2**—an agent-implemented feature with episodes, quotes, related characters, and favorites
 
-The Character Detail v2 feature from Module 04 was a breakthrough. The agent created backend endpoints, frontend components, and tests—all following the team's patterns. But Elena notices something as she reviews the generated code.
+The team is preparing for the big feature: Character Detail v2—a rich page with episodes, quotes, related characters, and favorites. It will touch backend endpoints, frontend components, tests, and infrastructure.
 
-*"The tests the agent wrote are... fine. But they're inconsistent,"* Elena says, scrolling through `CharacterDetail.test.js`. *"Some mock axios at the module level, some don't. Some test error cases, some skip them entirely."*
+*"Custom prompts are great when you remember to use them,"* Elena observes. *"But what about patterns that should apply every time you touch a specific file type? I don't want to remember to invoke a prompt every time I edit a test."*
 
-Jordan chimes in: *"Same with the Dockerfile updates. The agent followed our patterns from `copilot-instructions.md`, but it didn't know our Docker security requirements—running as non-root, using specific image tags."*
+Jordan agrees: *"Same with the Dockerfile. The one the contractor left has security issues. When we finally build Character Detail v2, I want the agent to know our Docker security requirements automatically."*
 
 David realizes the pattern: *"Our repository instructions give Copilot general context. But different file types need specialized expertise. Tests need Elena's QA patterns. Dockerfiles need Jordan's security checklist. What if we could create instructions that activate automatically based on what file you're working in?"*
 
-**This module's mission**: Create specialized instruction files that provide contextual expertise based on file patterns—ensuring that every file type in FanHub gets the right expertise automatically.
+**This module's mission**: Create specialized instruction files that provide contextual expertise based on file patterns—ensuring that every file type in FanHub gets the right expertise automatically. When we build Character Detail v2 in Module 07, all these instructions will activate together.
 
 ---
 
-💡 **Golden Thread Continuation**: In this module, you'll create custom instructions that would have made the Character Detail v2 output even better. By the end, your next agent-implemented feature will benefit from specialized context for tests, API routes, infrastructure, and React components.
+💡 **Golden Thread Preparation**: In this module, you'll create custom instructions that will make the Character Detail v2 output excellent from the start. By the end, the agent in Module 07 will have specialized context for tests, API routes, infrastructure, and React components—all activating automatically.
 
 ---
 
@@ -42,31 +41,26 @@ David realizes the pattern: *"Our repository instructions give Copilot general c
 
 ## 🔨 Exercises
 
-### Exercise 5.1: Testing Instructions — "The Character Detail Tests Need Help"
+### Exercise 4.1: Testing Instructions — "The Character Detail Tests Will Need Help"
 
-> 🧵 **The Golden Thread Continues**: The agent built Character Detail v2 in Module 04—including tests. But Elena's review reveals inconsistencies that custom instructions could have prevented.
+> 🧵 **The Golden Thread Continues**: The agent will build Character Detail v2 in Module 07—including tests. Elena wants to make sure those tests are excellent from the start.
 
 #### 📖 The Story
 
-**Elena** (QA Engineer, 8 years) opens `CharacterDetail.test.js` to review the tests that the agent generated in Module 04. The feature works, but the tests have problems:
+**Elena** (QA Engineer, 8 years) is thinking ahead about the Character Detail v2 feature. It's going to be complex—character data, episodes, quotes, related characters, favorites. The tests will need to be comprehensive.
 
-- Some tests use `describe/it`, others use `test`
-- The API mocking is inconsistent—some tests mock at module level, some inline
-- Happy path is covered, but edge cases are spotty
-- One test actually tests implementation details (checking if a specific function was called) rather than behavior
+*"Without testing-specific guidance, the agent will generate inconsistent tests,"* Elena predicts. *"Some will use `describe/it`, others will use `test`. Mocking will be all over the place. Edge cases will be spotty."*
 
-*"The agent followed our general coding standards,"* Elena notes, *"but it didn't know our testing standards. Every time I review generated tests, I'm catching the same issues."*
-
-She looks at the test file and sighs. *"I could review every test manually, or..."* Elena pauses. *"I could teach Copilot our testing standards so the next feature comes out right the first time."*
+She opens the existing test files in FanHub to assess the baseline. *"I could review every test manually after the agent generates them, or..."* Elena pauses. *"I could teach Copilot our testing standards so Character Detail v2 comes out right the first time."*
 
 **Supporting Cast**: Priya watches Elena work and learns testing patterns she didn't know before.
 
-#### ❌ The "Before" — What the Agent Generated
+#### ❌ The "Before" — What the Agent Would Generate
 
-Look at the Character Detail tests from Module 04. Without testing-specific instructions, the agent generated:
+Without testing-specific instructions, an agent would generate:
 
 ```javascript
-// Inconsistent patterns from Module 04's agent output
+// Inconsistent patterns (what we want to prevent)
 test('renders character name', () => {  // Uses 'test' instead of 'it'
   render(<CharacterDetail id="1" />);
   expect(screen.getByText('Walter White')).toBeInTheDocument();
@@ -85,7 +79,7 @@ describe('CharacterDetail', () => {
 });
 ```
 
-**The problems:**
+**The problems we're preventing:**
 - Mixed `test` and `describe/it` patterns
 - Mocking approach varies between tests
 - Edge cases not covered (no episodes, API errors)
@@ -93,14 +87,14 @@ describe('CharacterDetail', () => {
 
 #### 🎯 Objective
 
-Create custom instructions that automatically activate for all test files, ensuring consistent quality for future features.
+Create custom instructions that automatically activate for all test files, ensuring consistent quality for Character Detail v2 and all future features.
 
 #### 📋 Steps
 
-1. **Review the Character Detail tests** (if you completed Module 04)
+1. **Review existing tests** to understand the baseline
    
-   Open the test file created in Module 04 and identify inconsistencies:
-   - What testing patterns did the agent use?
+   Look at existing test files in FanHub and identify:
+   - What testing patterns are currently used?
    - Are error cases covered?
    - Is mocking consistent?
 
@@ -240,9 +234,9 @@ Create custom instructions that automatically activate for all test files, ensur
    
    Observe: The generated tests should follow your specified patterns—`describe/it` structure, module-level mocking, error scenarios included.
 
-5. **Compare to Module 04's output**
+5. **Verify the pattern**
    
-   Notice how the new tests are more consistent than what the agent originally generated.
+   Notice how the tests are now consistent with Elena's QA standards.
 
 #### ✅ Success Criteria
 
@@ -255,13 +249,13 @@ Create custom instructions that automatically activate for all test files, ensur
 
 #### ✨ The "After" — The Improved Experience
 
-**Before (Module 04)**: Agent generated tests with inconsistent patterns  
+**Before (without instructions)**: Agent would generate tests with inconsistent patterns  
 **After**: Every test file gets Elena's QA expertise automatically
 
 **Time saved per test file**: 10-15 minutes of review and revision  
 **Consistency gain**: 100%—all tests follow the same structure
 
-**The Golden Thread payoff**: If you had these instructions before Module 04, the Character Detail tests would have been consistent from the start.
+**The Golden Thread payoff**: When the agent builds Character Detail v2 in Module 07, these instructions will activate automatically—tests will be excellent from the start.
 
 #### 📚 Official Docs
 
@@ -270,29 +264,27 @@ Create custom instructions that automatically activate for all test files, ensur
 
 #### 💭 Elena's Relief
 
-*"I reviewed the Character Detail tests from Module 04 and found a dozen inconsistencies. With these instructions, the NEXT feature's tests will be right from the start. I'm not repeating myself anymore."*
+*"I used to spend hours reviewing and fixing test inconsistencies. With these instructions, Character Detail v2's tests will be right from the start. I'm not repeating myself anymore."*
 
 #### 🚀 Challenge Extension
 
-Regenerate the Character Detail tests from Module 04 with your new testing instructions active. Compare the output to the original—what's different?
+Generate tests for an existing component with your new testing instructions active. Notice how the output immediately follows your patterns.
 
 ---
 
-### Exercise 5.2: API Route Instructions — "The Quote of the Day Endpoint"
+### Exercise 4.2: API Route Instructions — "The Quote of the Day Endpoint"
 
-> 🧵 **The Golden Thread Continues**: Character Detail v2 added a `/characters/:id/full` endpoint. Now Rafael wants a "Quote of the Day" feature—and David notices the quotes routes don't follow REST conventions consistently.
+> 🧵 **The Golden Thread Continues**: Character Detail v2 will add a `/characters/:id/full` endpoint. Rafael also wants a "Quote of the Day" feature—and David wants the API routes to follow REST conventions from the start.
 
 #### 📖 The Story
 
-**Rafael** (Product Manager, 10 years) has been watching user feedback on Character Detail v2. Users love the character quotes feature. Now he wants to expand it.
+**Rafael** (Product Manager, 10 years) is thinking ahead about Character Detail v2. *"What if we also had a 'Quote of the Day' on the homepage?"* he suggests. *"Random quote from any show, with a link to the character who said it. Great for engagement."*
 
-*"What if we had a 'Quote of the Day' on the homepage?"* Rafael suggests. *"Random quote from any show, with a link to the character who said it. Great for engagement."*
+**David** (Staff Engineer, 20 years) opens `routes/quotes.js` to assess the current state. He frowns.
 
-**David** (Staff Engineer, 20 years) opens `routes/quotes.js` to assess the work. He frowns.
+*"Look at this..."* David points to the code. *"No consistent response format. No proper error codes. When a quote isn't found, it returns a 200 with an empty object instead of a 404."*
 
-*"The quotes endpoint we added in Module 04 returns data, but look at this..."* David points to the code. *"No consistent response format. No proper error codes. When a quote isn't found, it returns a 200 with an empty object instead of a 404."*
-
-*"The agent followed our general instructions,"* David explains, *"but API routes need specialized REST expertise. Different HTTP methods, proper status codes, consistent error responses. I've been reviewing routes for 20 years—let's encode that knowledge."*
+*"Without specialized instructions,"* David explains, *"the agent will follow our general patterns but miss REST conventions. Different HTTP methods, proper status codes, consistent error responses—I've been reviewing routes for 20 years. Let's encode that knowledge."*
 
 **Supporting Cast**: Marcus learns REST conventions by seeing David's patterns applied automatically.
 
@@ -516,7 +508,7 @@ Create path-based instructions that provide REST API expertise for route files, 
 **Consistency gain**: 100%—every API route follows the same conventions  
 **Review time saved**: Routes pass review on first try
 
-**The Golden Thread payoff**: The Quote of the Day feature follows patterns that would have improved the `/characters/:id/full` endpoint from Module 04.
+**The Golden Thread payoff**: The Quote of the Day feature follows REST patterns that will also apply to the `/characters/:id/full` endpoint in Module 07.
 
 #### 📚 Official Docs
 
@@ -524,27 +516,27 @@ Create path-based instructions that provide REST API expertise for route files, 
 
 #### 💭 David's Satisfaction
 
-*"I've reviewed thousands of API routes in my career. 'Use 404 for not found, not 200 with empty object.' Now that knowledge is encoded. The Quote of the Day endpoint came out perfect on the first try."*
+*"I've reviewed thousands of API routes in my career. 'Use 404 for not found, not 200 with empty object.' Now that knowledge is encoded. The Quote of the Day endpoint came out perfect on the first try—and Character Detail v2's endpoints will too."*
 
 #### 🚀 Challenge Extension
 
-Look at the `/characters/:id/full` endpoint from Module 04. Does it follow the REST conventions in your new instructions? What would you change?
+Look at the existing routes in `routes/`. Do they follow the REST conventions in your new instructions? What would you change?
 
 ---
 
-### Exercise 5.3: Infrastructure Instructions — "Shipping Character Detail v2"
+### Exercise 4.3: Infrastructure Instructions — "Preparing to Ship Character Detail v2"
 
-> 🧵 **The Golden Thread Continues**: The Character Detail v2 feature is ready—but now Jordan needs to deploy it. The existing Dockerfile hasn't been updated since the contractor left, and it has security issues.
+> 🧵 **The Golden Thread Continues**: When Character Detail v2 is ready, Jordan will need to deploy it. The existing Dockerfile hasn't been updated since the contractor left, and it has security issues. Let's fix that now.
 
 #### 📖 The Story
 
-**Jordan** (Platform Engineer, 12 years) gets the green light to deploy Character Detail v2 to staging. He opens the project's Dockerfile and groans.
+**Jordan** (Platform Engineer, 12 years) is thinking ahead to deploying Character Detail v2. He opens the project's Dockerfile and groans.
 
 *"This Dockerfile is from the contractor days,"* Jordan explains. *"It runs as root, uses the `latest` tag, no health check, no multi-stage build. It'll work, but it's a security incident waiting to happen."*
 
-The team realizes they need to fix the Dockerfile before deploying their new feature. But Jordan has a broader concern:
+The team realizes they need to fix the Dockerfile before they even build Character Detail v2. But Jordan has a broader concern:
 
-*"I can fix this manually, but what about next time? When the agent generates infrastructure changes, it won't know our security requirements. I want Copilot to enforce our infra patterns automatically."*
+*"I can fix this manually, but what about when the agent generates infrastructure changes in Module 07? I want Copilot to enforce our infra patterns automatically."*
 
 **Supporting Cast**: Marcus learns Docker security patterns by watching Jordan's instructions in action.
 
@@ -573,7 +565,7 @@ CMD ["npm", "start"]
 
 #### 🎯 Objective
 
-Create specialized instructions for infrastructure and deployment files, then use them to fix the Dockerfile for Character Detail v2 deployment.
+Create specialized instructions for infrastructure and deployment files, then use them to fix the Dockerfile in preparation for Character Detail v2 deployment.
 
 #### 📋 Steps
 
@@ -772,7 +764,7 @@ Create specialized instructions for infrastructure and deployment files, then us
 **Security improvement**: Infrastructure files are secure by default  
 **Review time saved**: Infrastructure passes security review on first try
 
-**The Golden Thread payoff**: Character Detail v2 deploys with proper security—and every future feature gets the same treatment.
+**The Golden Thread payoff**: When Character Detail v2 deploys in Module 07, it will have proper security from the start—and every future feature gets the same treatment.
 
 #### 📚 Official Docs
 
@@ -782,7 +774,7 @@ Create specialized instructions for infrastructure and deployment files, then us
 
 #### 💭 Jordan's Relief
 
-*"The contractor's Dockerfile was a ticking time bomb. Now it's secure, optimized, and every future infrastructure change will follow these patterns. I'm not the bottleneck for every security review anymore."*
+*"The contractor's Dockerfile was a ticking time bomb. Now it's secure, optimized, and the agent will follow these patterns when building Character Detail v2 in Module 07. I'm not the bottleneck for every security review anymore."*
 
 #### 🚀 Challenge Extension
 
@@ -790,30 +782,30 @@ Create a `docker-compose.yml` for local development that includes the backend, f
 
 ---
 
-### Exercise 5.4: React Component Instructions — "The Episode Appearances Component"
+### Exercise 4.4: React Component Instructions — "The Episode Appearances Component"
 
-> 🧵 **The Golden Thread Continues**: Character Detail v2 shows episode appearances—but the component structure is inconsistent. Priya builds the `EpisodeAppearances` component properly with React instructions.
+> 🧵 **The Golden Thread Continues**: Character Detail v2 will show episode appearances—and Priya wants those components to be consistent. She builds the `EpisodeAppearances` component properly with React instructions.
 
 #### 📖 The Story
 
-**Priya** (Junior Developer, 1 year) is excited. The Character Detail v2 feature from Module 04 is live, but users want more—they want to click on an episode to see details. She's been assigned to build the `EpisodeAppearances` component that makes episodes clickable.
+**Priya** (Junior Developer, 1 year) is thinking ahead. The Character Detail v2 feature will show a character's episode appearances, and users will want to click on an episode to see details. She's going to build the `EpisodeAppearances` component.
 
-But first, she reviews the existing components the agent generated in Module 04.
+First, she reviews the existing components in the codebase.
 
-*"Some components handle loading states, some don't,"* Priya notices. *"Some have TypeScript types, some use `any`. The CharacterDetail component is good, but the EpisodeList inside it is... different."*
+*"Some components handle loading states, some don't,"* Priya notices. *"Some have TypeScript types, some use `any`. Without consistent patterns, the agent will generate inconsistent components for Character Detail v2."*
 
-**David** (Staff Engineer, 20 years) sees an opportunity: *"You've been learning React best practices, Priya. What if you captured those patterns in instructions? Then every component—including the one you're about to build—follows the same standards."*
+**David** (Staff Engineer, 20 years) sees an opportunity: *"You've been learning React best practices, Priya. What if you captured those patterns in instructions? Then every component the agent generates—including for Character Detail v2—follows the same standards."*
 
 Priya realizes: the patterns she's learned aren't just for her code. They can help the whole team—and the AI.
 
 **Supporting Cast**: Elena reviews Priya's component for testing patterns compatibility.
 
-#### ❌ The "Before" — Inconsistent Components
+#### ❌ The "Before" — What the Agent Would Generate
 
-Look at the components from Module 04:
+Without React-specific instructions, an agent would generate:
 
 ```jsx
-// Inconsistent patterns from agent-generated components
+// Inconsistent patterns (what we want to prevent)
 const CharacterDetail = ({ id }) => {  // No TypeScript types
   const [data, setData] = useState();  // No initial state type
   const [loading, setLoading] = useState(true);
@@ -834,7 +826,7 @@ const CharacterDetail = ({ id }) => {  // No TypeScript types
 };
 ```
 
-**The problems:**
+**The problems we're preventing:**
 - No TypeScript interfaces
 - Missing error handling
 - Incomplete useEffect dependencies
@@ -844,7 +836,7 @@ const CharacterDetail = ({ id }) => {  // No TypeScript types
 
 #### 🎯 Objective
 
-Create instructions that provide React/TypeScript expertise for component files, then use them to build the `EpisodeAppearances` component properly.
+Create instructions that provide React/TypeScript expertise for component files, then use them to build the `EpisodeAppearances` component properly—which will be used in Character Detail v2.
 
 #### 📋 Steps
 
@@ -1015,12 +1007,12 @@ Create instructions that provide React/TypeScript expertise for component files,
    - Uses styled-components (no inline styles)
    - Has proper accessibility attributes
 
-4. **Integrate with Character Detail**
+4. **Integrate with CharacterList**
    
-   The EpisodeAppearances component should plug into the CharacterDetail page from Module 04:
+   The EpisodeAppearances component can plug into existing pages:
    
    ```
-   Show me how to integrate EpisodeAppearances into the CharacterDetail component
+   Show me how to integrate EpisodeAppearances into the existing pages
    ```
 
 #### ✅ Success Criteria
@@ -1036,13 +1028,13 @@ Create instructions that provide React/TypeScript expertise for component files,
 
 #### ✨ The "After" — The Improved Experience
 
-**Before (Module 04)**: Agent-generated components with inconsistent patterns  
+**Before (without instructions)**: Agent would generate components with inconsistent patterns  
 **After**: Every component follows Priya's learned best practices automatically
 
 **Consistency gain**: All components handle loading/error/empty states  
 **Code review time**: Components pass review on first try
 
-**The Golden Thread payoff**: The EpisodeAppearances component completes the Character Detail v2 feature—and every future component will be consistent.
+**The Golden Thread payoff**: When Character Detail v2 is built in Module 07, every component will be consistent from the start.
 
 #### 📚 Official Docs
 
@@ -1057,13 +1049,13 @@ Create instructions that provide React/TypeScript expertise for component files,
 
 #### 🚀 Challenge Extension
 
-Look at the CharacterDetail component from Module 04. Does it follow your new React instructions? What would you change to make it consistent?
+Look at the existing components in the codebase. Do they follow your new React instructions? What would you change to make them consistent?
 
 ---
 
 ## 🔗 Compounding Value
 
-> 🧵 **The Golden Thread Complete**: Every instruction file you created in this module would have improved the Character Detail v2 output from Module 04—and will improve every future feature.
+> 🧵 **The Golden Thread Continues**: Every instruction file you created in this module will make Character Detail v2 excellent when we build it in Module 07—and will improve every future feature.
 
 **What we created in this module:**
 
@@ -1075,25 +1067,25 @@ Look at the CharacterDetail component from Module 04. Does it follow your new Re
 └── react-components.instructions.md # Priya's React standards
 ```
 
-**How instructions combine with Character Detail:**
+**How instructions will combine with Character Detail v2:**
 
-When editing `CharacterDetail.test.jsx`:
+When the agent edits `CharacterDetail.test.jsx` in Module 07:
 1. Repository instructions (always) ✓
 2. React component instructions (`**/*.jsx`) ✓
 3. Testing instructions (`**/*.test.jsx`) ✓
 
 Copilot gets **combined context** from all matching files.
 
-**The Module 04 → Module 05 connection:**
+**Building toward Module 07:**
 
-| Module 04 Output | Module 05 Improvement |
-|------------------|----------------------|
-| CharacterDetail tests (inconsistent) | Testing instructions ensure consistency |
-| `/characters/:id/full` endpoint | API route instructions enforce REST patterns |
-| Contractor's Dockerfile | Infrastructure instructions fix security |
-| Agent-generated components | React instructions ensure proper patterns |
+| Module 04 Preparation | Module 07 Payoff |
+|----------------------|------------------|
+| Testing instructions | CharacterDetail tests will be consistent from the start |
+| API route instructions | `/characters/:id/full` endpoint will follow REST patterns |
+| Infrastructure instructions | Deployment will be secure from the start |
+| React component instructions | Components will handle all states properly |
 
-**The next feature will be better**: When you use agent mode again (Module 06+), every generated file will benefit from specialized instructions.
+**The next feature will be amazing**: When the agent builds Character Detail v2 in Module 07, every generated file will benefit from specialized instructions.
 
 ---
 
@@ -1151,14 +1143,16 @@ If instructions don't seem to activate:
 | **01** | Architecture + repo instructions | General context improves everything |
 | **02** | Plan mode workflow | Thinking before doing |
 | **03** | Prompt library | Reusable patterns |
-| **04** | **Character Detail v2** (agent) | Agents + context = powerful |
-| **05** | **Custom instructions** | Specialized context per file type |
+| **04** | **Custom instructions** | Specialized context per file type |
+| **05** | Agent Skills (next) | Domain-specific capabilities |
+| **06** | MCP Servers (next) | External tool integration |
+| **07** | **Character Detail v2** (agent) | THE PAYOFF—agents + full context |
 
 ### Key Transformations
 
 | Persona | Before | After |
 |---------|--------|-------|
-| **Elena** | Reviewing inconsistent agent-generated tests | Testing standards auto-enforced |
+| **Elena** | Worried about inconsistent tests | Testing standards auto-enforced |
 | **David** | REST expertise locked in his head | API routes get REST context automatically |
 | **Jordan** | Security gaps in contractor's Dockerfile | Infrastructure secure by default |
 | **Priya** | Inconsistent component patterns | React best practices built-in |
@@ -1177,18 +1171,18 @@ backend/
 ├── Dockerfile                       # Security-hardened (updated)
 
 frontend/
-└── components/EpisodeAppearances/   # New component for Character Detail
+└── components/EpisodeAppearances/   # New component (prepared for Character Detail v2)
 ```
 
 ### Time Investment → Value Gained
 
 | Exercise | Time | Golden Thread Connection | Ongoing Value |
 |----------|------|-------------------------|---------------|
-| 5.1 Testing | 20 min | Fix Character Detail tests | 10-15 min saved per test file |
-| 5.2 API Routes | 25 min | Quote of the Day feature | REST compliance automatic |
-| 5.3 Infrastructure | 25 min | Deploy Character Detail v2 | Security patterns built-in |
-| 5.4 Components | 25 min | EpisodeAppearances component | React best practices enforced |
+| 4.1 Testing | 20 min | Prepare for Character Detail tests | 10-15 min saved per test file |
+| 4.2 API Routes | 25 min | Quote of the Day feature | REST compliance automatic |
+| 4.3 Infrastructure | 25 min | Prepare to deploy Character Detail v2 | Security patterns built-in |
+| 4.4 Components | 25 min | EpisodeAppearances component | React best practices enforced |
 
 ### What's Next?
 
-Your custom instructions are ready. In **Module 06: Agent Skills**, you'll see how these instructions combine with specialized skills to create even more powerful AI assistance—and the golden thread continues as you extend Character Detail v2 with advanced features.
+Your custom instructions are ready. In **Module 05: Agent Skills**, you'll create domain-specific skills that activate by conversation topic—complementing the file-based instructions you just built. Both will combine when we build Character Detail v2 in Module 07.

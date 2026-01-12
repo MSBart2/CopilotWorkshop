@@ -165,7 +165,7 @@ Everything converges at sprint end
 
 **Review your journey**:
 - [Module 9: Copilot CLI](../09-copilot-cli/README.md) — Deep dive on CLI automation
-- [Module 7: MCP Servers](../07-mcp-servers/README.md) — Extend CLI with data access
+- [Module 6: MCP Servers](../06-mcp-servers/README.md) — Extend CLI with data access
 
 **Apply to your real work**:
 1. Identify infrastructure tasks that can run in parallel with features

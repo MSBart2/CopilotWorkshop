@@ -167,8 +167,8 @@ Your infrastructure mindset now applies to features:
 **Completed the workshop!** You've mastered interactive agent development.
 
 **Review your journey**:
-- [Module 4: Custom Agents](../04-custom-agents/README.md) — Create specialized agents
-- [Module 5: Custom Instructions](../05-custom-instructions/README.md) — File-scoped patterns
+- [Module 7: Custom Agents](../07-custom-agents/README.md) — Create specialized agents
+- [Module 4: Custom Instructions](../04-custom-instructions/README.md) — File-scoped patterns
 
 **Apply to your real work**:
 1. Use Agent Mode for complex features that need iteration

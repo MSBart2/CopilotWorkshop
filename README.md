@@ -45,13 +45,13 @@
 1. **Document architecture** and establish team standards (watch suggestions improve instantly)
 2. **Master plan mode** for structured thinking and systematic AI collaboration
 3. **Build a prompt library** for reusable workflows
-4. **Create custom agents** that understand the architecture
-5. **Add custom instructions** for context-aware code generation
-6. **Encode domain expertise** with Agent Skills that Copilot loads automatically
-7. **Connect to external systems** via MCP for database queries, API calls, and deployment awareness
+4. **Add custom instructions** for context-aware code generation
+5. **Encode domain expertise** with Agent Skills that Copilot loads automatically
+6. **Connect to external systems** via MCP for database queries, API calls, and deployment awareness
+7. **Unleash autonomous agents** that leverage ALL the context you've built — THE PAYOFF
 8. **Integrate web and CLI workflows** for comprehensive AI assistance
-8. **Orchestrate everything together** with agentic development lifecycle
-9. **Ship and reflect** on the transformation
+9. **Orchestrate everything together** with agentic development lifecycle
+10. **Ship and reflect** on the transformation
 
 Each module builds on the previous. Each customization compounds. By the end, you'll have a production app and a completely transformed understanding of AI-assisted development.
 
@@ -146,41 +146,41 @@ Elena creates reusable test prompts. Rafael builds spec-to-code templates. The t
 **The transformation**: Manual → Automated  
 **Featured**: Elena, Rafael
 
-### Module 4: Custom Agents (90 min)
+### Module 4: Custom Instructions (90 min)
 **Monday 1:30 PM**
 
-David creates an "Architecture Reviewer" custom agent designed through plan mode. Jordan builds a "DevOps Helper" agent. Background agents introduced—start a large refactor and work on something else while it runs.
-
-**You'll learn**: Custom agents, agent design through planning, background agents, MCP integration  
-**The transformation**: Sequential → Parallel  
-**Featured**: David, Jordan
-
-### Module 5: Custom Instructions (90 min)
-**Monday 3:00 PM**
-
-Team creates file-scoped instructions using `applyTo` patterns, analyzed through plan mode. Testing standards automatically apply to test files. API route conventions apply to API files. Infrastructure patterns apply to DevOps configs.
+Team creates file-scoped instructions using `applyTo` patterns, analyzed through plan mode. Testing standards automatically apply to test files. API route conventions apply to API files. Infrastructure patterns apply to DevOps configs. The team is building toward giving an autonomous agent everything it needs.
 
 **You'll learn**: Custom instructions, `applyTo` patterns, file-scoped context, codebase analysis  
 **The transformation**: Generic → Context-aware  
 **Featured**: Elena, Marcus, Jordan, Priya
 
-### Module 6: Agent Skills (90 min)
-**Monday 4:00 PM**
+### Module 5: Agent Skills (90 min)
+**Monday 3:00 PM**
 
-Elena and Rafael teach Copilot FanHub's domain expertise through Agent Skills. Explore the anthropics/skills and github/awesome-copilot communities. Create TV Show Data Validator and Feature Requirements skills that encode domain knowledge Copilot loads automatically.
+Elena and Rafael teach Copilot FanHub's domain expertise through Agent Skills. Explore the anthropics/skills and github/awesome-copilot communities. Create bug reproduction and feature requirements skills that encode domain knowledge Copilot loads automatically. The agent will need this domain knowledge.
 
 **You'll learn**: Agent Skills (.github/skills/), SKILL.md format, domain expertise encoding, community skills  
 **The transformation**: Generic knowledge → Domain expertise  
 **Featured**: Elena, Rafael
 
-### Module 7: MCP Servers (75 min)
-**Monday 5:00 PM**
+### Module 6: MCP Servers (75 min)
+**Monday 4:00 PM**
 
-Elena's data validator can't verify against real data—it knows the RULES but can't check the DATABASE. Jordan shows the team how MCP (Model Context Protocol) connects Copilot to external systems. Connect to SQLite for data validation, GitHub for deployment awareness.
+Elena's data validator can't verify against real data—it knows the RULES but can't check the DATABASE. Jordan shows the team how MCP (Model Context Protocol) connects Copilot to external systems. Connect to SQLite for data validation, GitHub for deployment awareness. Now the agent can access real data.
 
 **You'll learn**: MCP architecture, server configuration, database connectivity, security governance  
 **The transformation**: Knowledge only → Knowledge + action  
 **Featured**: Jordan, Elena, David
+
+### Module 7: Custom Agents — THE PAYOFF (90 min)
+**Monday 5:00 PM**
+
+**Everything comes together.** The team has built repository instructions, custom prompts, file-scoped instructions, domain skills, AND MCP database access. Now David creates an autonomous agent to build **Character Detail v2**—a rich character page with episodes, quotes, related characters, and favorites. Watch the agent leverage ALL the context you've built. The result? Production-quality code on the first try.
+
+**You'll learn**: Custom agents, agent design through planning, background agents, seeing the full customization payoff  
+**The transformation**: Sequential → Autonomous excellence  
+**Featured**: David, Marcus, Jordan
 
 ### Module 8: Copilot Web (90 min)
 **Monday 5:30 PM**

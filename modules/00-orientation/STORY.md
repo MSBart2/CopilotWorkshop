@@ -126,13 +126,14 @@ The single-day constraint creates urgency and focus. Each module represents roug
 | 9:00 AM | 0: Orientation | Challenge issued | Anxiety, skepticism |
 | 10:00 AM | 1: Repository Instructions | First breakthrough | Hope emerges |
 | 10:30 AM | 2: Agent Plan Mode | Systematic thinking | Confidence builds |
-| 11:30 AM | 3: Custom Prompts | Expertise capture | Team alignment |
-| 1:00 PM | 4: Custom Agents | Autonomous help | Excitement |
-| 2:30 PM | 5: Custom Instructions | Context automation | Flow state |
-| 4:00 PM | 6: Agent Skills | Domain mastery | Mastery |
-| 5:00 PM | 7: Copilot Web | Workflow integration | Team sync |
-| 5:30 PM | 8: Copilot CLI | Terminal automation | Power |
-| 6:00 PM | 9: Agentic SDLC | Ship and reflect | Transformation |
+| 12:00 PM | 3: Custom Prompts | Expertise capture | Team alignment |
+| 1:30 PM | 4: Custom Instructions | Context automation | Flow state |
+| 3:00 PM | 5: Agent Skills | Domain mastery | Building anticipation |
+| 4:00 PM | 6: MCP Servers | External connections | Growing excitement |
+| 5:00 PM | 7: Custom Agents | **THE PAYOFF** — Agent builds with full context | Triumph |
+| 5:30 PM | 8: Copilot Web | Workflow integration | Team sync |
+| 6:00 PM | 9: Copilot CLI | Terminal automation | Power |
+| 7:00 PM | 10: Agentic SDLC | Ship and reflect | Transformation |
 
 ### Pacing Principles
 

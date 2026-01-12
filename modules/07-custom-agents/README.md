@@ -1,9 +1,28 @@
-# Module 4: Custom Agents
+# Module 7: Custom Agents — THE PAYOFF
 
-## ⏰ Monday 1:30 PM — Autonomous Assistance
+## ⏰ Monday 5:00 PM — The Moment Everything Clicks
 
-> *"I've been asking Copilot questions all morning. What if I could tell it: 'Go solve this problem, and let me know when you're done?'"*  
-> — David, imagining a world where AI handles the tedious parts
+> *"We've spent all day building context—instructions, prompts, custom instructions, skills, MCP connections. Now let's see what an agent can do with ALL of that in place."*  
+> — David, ready for the payoff
+
+---
+
+## 🎉 This Is the Payoff
+
+**Think about what you've built today:**
+
+| Module | What You Added | What Copilot Gained |
+|--------|---------------|---------------------|
+| **Module 1** | Repository Instructions | Project context |
+| **Module 2** | Plan Mode | Systematic thinking |
+| **Module 3** | Custom Prompts | Task templates |
+| **Module 4** | Custom Instructions | File-specific patterns |
+| **Module 5** | Agent Skills | Domain expertise |
+| **Module 6** | MCP Servers | External system access |
+
+**Now, in Module 7**, you'll create an autonomous agent that uses **ALL of this** to build the Character Detail v2 feature—episodes, quotes, related characters, favorites.
+
+Early this morning, Copilot gave generic suggestions. Now? Watch what happens when an agent has complete context.
 
 ---
 
@@ -12,10 +31,10 @@
 By the end of this module, you will:
 
 - Understand the difference between Chat, Edit, and Agent modes
-- Create custom agents with specialized capabilities
-- Use MCP (Model Context Protocol) for extended functionality
-- Experience Copilot CLI for terminal workflows
-- Run background agents on complex tasks
+- Create custom agents with specialized capabilities  
+- Experience the "payoff" of layered customization
+- Use agent mode with full context (instructions + skills + MCP)
+- Watch an agent build a complete feature autonomously
 
 **Time**: ~60 minutes  
 **Personas**: David (Architect), Jordan (Platform Engineer), Marcus (DevOps)
@@ -63,9 +82,9 @@ Best for: First-time learners, instructor-led sessions
 
 | Exercise | Focus | Time |
 |----------|-------|------|
-| [4.1](EXERCISES.md#exercise-41-character-detail-v2--the-golden-thread-agent-implementation) | Golden Thread + Agent Mode | 25m |
-| [4.2](EXERCISES.md#exercise-42-create-a-custom-agent--davids-architecture-reviewer) | Custom Agents | 20m |
-| [4.3](EXERCISES.md#exercise-43-background-agents--the-refactor-task) | Background Agents | 15m |
+| [7.1](EXERCISES.md#exercise-71-character-detail-v2--the-golden-thread-payoff) | Golden Thread PAYOFF | 25m |
+| [7.2](EXERCISES.md#exercise-72-create-a-custom-agent--davids-architecture-reviewer) | Custom Agents | 20m |
+| [7.3](EXERCISES.md#exercise-73-background-agents--the-refactor-task) | Background Agents | 15m |
 
 </td>
 </tr>
@@ -101,22 +120,14 @@ You can create specialized agents that:
 - Use designated tools and capabilities
 - Focus on particular domains (testing, security, DevOps)
 
-### MCP (Model Context Protocol)
+### The Payoff Formula
 
-MCP extends what agents can do:
-- Connect to external data sources
-- Run specialized tools
-- Access services beyond the code editor
+```
+Agent + Instructions + Skills + MCP = AMAZING Results
+```
 
-### Copilot CLI
-
-The new Copilot CLI brings AI agent capabilities to your terminal:
-- **Interactive mode** — Start with `copilot` for conversations
-- **Task execution** — Make file changes, run commands, create PRs
-- **GitHub integration** — Work with issues, PRs, and workflows
-- **Programmatic mode** — Use `-p` for scripted automation
-
-> 📘 See [Module 9: GitHub Copilot CLI](../09-copilot-cli/README.md) for full coverage.
+**Without context** (Module 1): Agent makes generic suggestions  
+**With full context** (Module 7): Agent builds complete features correctly
 
 ---
 
@@ -156,6 +167,7 @@ Agents have access to "tools" that let them:
 - Edit existing files
 - Run terminal commands
 - Search the web (with permission)
+- **Query databases via MCP** (configured in Module 6!)
 
 ### Trust Boundaries
 
@@ -170,10 +182,11 @@ This is the balance: autonomous enough to be useful, controlled enough to be saf
 
 ## ✅ Module Checklist
 
-Before moving to Module 5, verify:
+Before moving to Module 8, verify:
 
 - [ ] Understand the difference between Chat, Edit, and Agent modes
 - [ ] Successfully used Agent Mode for a complete task
+- [ ] Witnessed the "payoff" — agent using full context to build Character Detail v2
 - [ ] Created at least one custom agent
 - [ ] Understand when to use agents vs interactive chat
 - [ ] Reviewed agent-generated code before accepting
@@ -186,11 +199,15 @@ Before moving to Module 5, verify:
 - Experience with Agent Mode workflows
 - `architecture-reviewer.agent.md` — Custom review agent
 - `devops-reviewer.agent.md` — Infrastructure review agent
+- **Character Detail v2** — The golden thread feature, built with full context
 
 **Artifacts from previous modules we use:**
-- `docs/ARCHITECTURE.md` — Referenced by agents
-- `.github/copilot-instructions.md` — Agent behavior patterns
-- Prompt library — Foundation for agent instructions
+- `docs/ARCHITECTURE.md` — Referenced by agents (Module 1)
+- `.github/copilot-instructions.md` — Agent behavior patterns (Module 1)
+- Custom prompts — Foundation for agent instructions (Module 3)
+- Custom instructions — File-specific patterns (Module 4)
+- Agent Skills — Domain expertise (Module 5)
+- MCP servers — Database access (Module 6)
 
 ---
 
@@ -205,6 +222,9 @@ Before moving to Module 5, verify:
 
 ## ➡️ Next Up
 
-**[Module 5: Custom Instructions](../05-custom-instructions/README.md)** (Monday 2:30 PM)
+**[Module 8: Copilot Web](../08-copilot-web/README.md)** (Monday 6:00 PM)
 
-The backend is solid. Standards are established. Agents are working. Now it's time to add file-scoped intelligence—instructions that activate automatically based on file patterns.
+The FanHub feature is complete! Now let's explore how Copilot works beyond VS Code—in github.com, web workflows, and browser-based development.
+
+> *"We built something real today. An actual feature, with an autonomous agent, using all the context we created. This is what AI-assisted development looks like when done right."*  
+> — Sarah, finally convinced
