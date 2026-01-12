@@ -17,7 +17,7 @@ By the end of this module, you will:
 - Experience Copilot CLI for terminal workflows
 - Run background agents on complex tasks
 
-**Time**: ~90 minutes  
+**Time**: ~60 minutes  
 **Personas**: David (Architect), Jordan (Platform Engineer), Marcus (DevOps)
 
 ---
@@ -51,7 +51,7 @@ DevOps reviewer, infrastructure agents
 
 **[EXERCISES.md →](EXERCISES.md)**  
 All exercises in story order  
-*~90 minutes*
+*~60 minutes*
 
 Best for: First-time learners, instructor-led sessions
 
@@ -63,9 +63,9 @@ Best for: First-time learners, instructor-led sessions
 
 | Exercise | Focus | Time |
 |----------|-------|------|
-| [4.1](EXERCISES.md#exercise-41-your-first-agent-workflow--marcus-goes-autonomous) | Agent Mode | 20m |
-| [4.2](EXERCISES.md#exercise-42-create-a-custom-agent--davids-architecture-reviewer) | Custom Agents | 30m |
-| [4.3](EXERCISES.md#exercise-43-background-agents--the-refactor-task-enterprise) | Background Agents | 15m |
+| [4.1](EXERCISES.md#exercise-41-character-detail-v2--the-golden-thread-agent-implementation) | Golden Thread + Agent Mode | 25m |
+| [4.2](EXERCISES.md#exercise-42-create-a-custom-agent--davids-architecture-reviewer) | Custom Agents | 20m |
+| [4.3](EXERCISES.md#exercise-43-background-agents--the-refactor-task) | Background Agents | 15m |
 
 </td>
 </tr>

@@ -15,14 +15,14 @@
 
 The team has built an impressive foundation:
 - **Module 1**: Architecture docs and team standards (`copilot-instructions.md`)
-- **Module 2**: Structured planning with agent plan mode for systematic AI collaboration
+- **Module 2**: Structured planning with agent plan mode—and that Character Detail page is finally working
 - **Module 3**: A prompt library for tests, specs, and feature planning
 
-But there's a pattern emerging: Even with great prompts and planning, someone has to manually orchestrate each step. Ask for an implementation plan. Copy the result. Ask for the code. Apply the code. Ask for tests. Apply the tests.
+But there's a pattern emerging: Even with great prompts and planning, someone has to manually orchestrate each step. The Character Detail page from Module 02? It works, but it's basic. Users want more—episode appearances, quotes, related characters. That means touching frontend, backend, and tests. Again.
 
 *"What if Copilot could do all of that automatically?"* Jordan asks. As a platform engineer, he's built pipelines that automate everything. Manual steps are a code smell to him.
 
-**This module's mission**: Graduate from interactive chat to autonomous agents that work on your behalf, using your plan mode skills to design them effectively.
+**This module's mission**: Graduate from interactive chat to autonomous agents. You'll take that same Character Detail page and let an agent implement the rich version—demonstrating how all your context investment pays off.
 
 ---
 
@@ -32,43 +32,44 @@ But there's a pattern emerging: Even with great prompts and planning, someone ha
 
 ## 🔨 Exercises
 
-### Exercise 4.1: Your First Agent Workflow — "Marcus Goes Autonomous"
+### Exercise 4.1: Character Detail v2 — "The Golden Thread: Agent Implementation"
+
+> 🧵 **The Golden Thread Continues**: In Modules 00-02, you planned and manually implemented a basic Character Detail page. Now see what happens when you give that same requirement to an **agent** with all your context in place.
 
 #### 📖 The Story
 
-**Marcus** (DevOps Developer, 5 years) gets a ticket: "Add health check endpoints to all API services."
+**Marcus** (DevOps Developer, 5 years) looks at the Character Detail page the team built in Module 02. It works, but it's basic—just name, photo, and bio.
 
-In the old world, this meant:
-1. Ask Copilot how to add a health check
-2. Manually create the endpoint
-3. Ask Copilot for tests
-4. Manually create the test file
-5. Run tests, fix issues, repeat
+*"Users are asking for more,"* Rafael reports. *"They want to see which episodes a character appears in, their best quotes, and related characters from the same show."*
 
-*"This is exactly the kind of tedious work that should be automated,"* Marcus thinks.
+In the old world, this would mean:
+1. Plan the feature (Module 02 ✓)
+2. Manually implement frontend component
+3. Manually add backend endpoint for related data
+4. Manually write tests
+5. Debug integration issues
 
-Jordan shows him Agent Mode.
+*"We have all the context now,"* Marcus realizes. *"ARCHITECTURE.md, copilot-instructions.md, our planning templates. What if we just... let the agent do it?"*
 
-#### ❌ The "Before" — What Frustration Looks Like
+#### ❌ The "Before" — Manual Multi-File Implementation
 
-Traditional Chat workflow for adding a health check:
+Even with great planning, implementing a cross-layer feature meant:
 
 ```
-[Human]: How do I add a health check endpoint to Express?
-[Copilot]: Here's an example... (shows code snippet)
-[Human]: (copies code, pastes into file)
-[Human]: Now write tests for this
-[Copilot]: Here are the tests... (shows code snippet)
-[Human]: (copies code, creates test file)
-[Human]: (runs tests, finds issues)
-[Human]: The test failed because...
+[Plan]: Character detail needs episode appearances, quotes, related characters
+[Human]: (implements CharacterDetail.jsx changes)
+[Human]: (creates new API endpoint in characters.js)
+[Human]: (writes frontend tests)
+[Human]: (writes backend tests)
+[Human]: (fixes integration issues)
+[Human]: (updates types/interfaces)
 ```
 
-**5 back-and-forth exchanges** for one feature. Multiply by every feature.
+**Hours of manual work** across multiple files, even with AI suggestions.
 
 #### 🎯 Objective
 
-Use Agent Mode to implement a complete feature with minimal manual intervention.
+Use Agent Mode to implement a rich Character Detail page that touches frontend, backend, and tests—demonstrating how context compounds with autonomous agents.
 
 #### 📋 Steps
 
@@ -78,68 +79,91 @@ Use Agent Mode to implement a complete feature with minimal manual intervention.
    
    Click the mode dropdown (top of chat panel) and select **"Agent"**
 
-2. **Describe the full task**
+2. **Give the agent the full requirement**
 
    ```
-   @workspace Add a comprehensive health check endpoint to the FanHub backend:
+   @workspace Enhance the Character Detail page with rich, connected data:
    
    Requirements:
-   - GET /api/health that returns service status
-   - Check database connectivity
-   - Include uptime, memory usage, and version info
-   - Return appropriate status codes (200 OK, 503 Service Unavailable)
-   - Add tests for both healthy and unhealthy scenarios
-   - Follow our patterns in copilot-instructions.md
+   1. Show which episodes this character appears in (with links)
+   2. Display the character's notable quotes
+   3. Show "Related Characters" from the same show
+   4. Add a "Favorite" toggle button (store in localStorage for now)
    
-   Create all necessary files and run tests to verify.
+   Implementation needs:
+   - Backend: Add endpoint GET /api/characters/:id/full that returns character 
+     with episodes, quotes, and related characters in one response
+   - Frontend: Update CharacterDetail component to display all this data
+   - Tests: Add tests for the new endpoint and component behavior
+   
+   Follow patterns in docs/ARCHITECTURE.md and .github/copilot-instructions.md.
    ```
 
-3. **Watch Agent Mode work**
+3. **Watch the agent work**
    
    Observe as the agent:
-   - Reads your codebase to understand the structure
-   - Creates the health check route
-   - Registers it in the main app
-   - Creates test files
-   - Runs the tests
-   - Iterates if tests fail
+   - Reads your architecture and instruction files
+   - Creates/modifies the backend route
+   - Updates the frontend component
+   - Generates tests
+   - Runs tests and iterates if needed
 
-4. **Review the proposed changes**
+4. **Review the results**
    
-   Before accepting, review:
-   - Does the code follow your patterns?
-   - Are the tests comprehensive?
-   - Is error handling consistent?
+   Before accepting, verify:
+   - [ ] New endpoint follows REST conventions from your instructions
+   - [ ] Frontend patterns match existing components
+   - [ ] Error handling is consistent
+   - [ ] Tests cover happy path and edge cases
 
-5. **Accept or refine**
+5. **Update your tracking document**
    
-   If something needs adjustment, tell the agent:
-   ```
-   The health check looks good, but please also include:
-   - A deep health check at /api/health/deep that tests each database table
-   - Response time metrics
+   Open `docs/character-detail-challenge.md` and add a new section:
+   
+   ```markdown
+   ## Attempt 5: Module 04 — Agent Implementation
+   
+   **Approach**: Full agent mode with rich requirements
+   **Time to working code**: ___ minutes
+   **Files created/modified**: ___
+   **Manual interventions needed**: ___
+   **Quality of first result (1-10)**: ___
+   
+   **Observations**:
+   - Did the agent use our architecture patterns?
+   - Did it follow copilot-instructions.md?
+   - What did it get right? What needed adjustment?
    ```
 
 #### ✅ Success Criteria
 
-- [ ] Switched to Agent Mode successfully
-- [ ] Agent created at least 2 files (route + test)
-- [ ] Agent ran terminal commands (npm test)
-- [ ] Reviewed changes before accepting
-- [ ] Health check follows copilot-instructions.md patterns
-- [ ] Tests pass
+- [ ] Used Agent Mode for multi-file implementation
+- [ ] Agent created/modified at least 3 files (backend, frontend, tests)
+- [ ] New endpoint returns character with related data
+- [ ] Frontend displays episodes, quotes, and related characters
+- [ ] Agent followed your project patterns (verify against copilot-instructions.md)
+- [ ] Updated `docs/character-detail-challenge.md` with Module 04 metrics
 
-#### ✨ The "After" — The Improved Experience
+#### ✨ The "After" — Context Makes Agents Powerful
 
-What used to take 30+ minutes of back-and-forth:
-- **Agent Mode**: One prompt, complete implementation, 5 minutes
-- **Human role**: Review and approve
+**The Golden Thread payoff:**
 
-**Marcus's new workflow**:
-1. Describe the complete requirement
-2. Let agent work
-3. Review results
-4. Ship
+| Module | Context | Approach | Result |
+|--------|---------|----------|--------|
+| **00** | None | Manual + Chat | Chaos, wrong patterns |
+| **01** | ARCHITECTURE.md | Manual + Chat | Better structure |
+| **01b** | + Instructions | Manual + Chat | Consistent patterns |
+| **02** | + Plan Mode | Plan → Manual | First-try basic page |
+| **04** | All context | **Agent Mode** | **Rich feature, multiple files, minimal intervention** |
+
+**The lesson**: Every module's investment compounds. The agent isn't magic—it's effective because you gave it:
+- Architecture knowledge (where things go)
+- Coding standards (how things should look)  
+- Planning discipline (clear requirements)
+
+**Time comparison**:
+- Manual implementation of rich feature: 2-3 hours
+- Agent with good context: 15-20 minutes + review
 
 #### 📚 Official Docs
 
@@ -148,18 +172,15 @@ What used to take 30+ minutes of back-and-forth:
 
 #### 💭 Marcus's Revelation
 
-*"I spent the morning doing manual steps between AI suggestions. This is what I thought AI would be: tell it what you want, let it figure out the how, review the results. I'm not a prompt typist anymore—I'm a reviewer."*
+*"I spent Modules 01 and 02 thinking 'why am I writing all this documentation?' Now I get it. That documentation isn't for humans—it's for agents. The better I document, the more I can delegate."*
 
-#### 🚀 Challenge Extension
+#### 🎭 Team Celebration
 
-**Complex multi-file task**: Ask the agent to:
-```
-Add rate limiting middleware to all API routes:
-- Use express-rate-limit package
-- Configure different limits per route type (auth: 5/min, reads: 100/min, writes: 20/min)
-- Add tests for rate limit behavior
-- Update ARCHITECTURE.md to document the rate limiting strategy
-```
+**Sarah**: *"Remember Module 00? I was ready to dismiss Copilot entirely. Now look at this—cross-layer feature, proper patterns, tests included."*
+
+**David**: *"The agent followed our architecture. It didn't just generate code—it generated code that fits our system. That's the difference."*
+
+**Priya**: *"I learned so much watching the agent work. It showed me how senior developers think about feature implementation."*
 
 ---
 
@@ -373,7 +394,7 @@ David's code review workflow transforms:
 
 ---
 
-### Exercise 4.3: Background Agents — "The Refactor Task" (Enterprise)
+### Exercise 4.3: Background Agents — "The Refactor Task"
 
 #### 📖 The Story
 
@@ -479,14 +500,14 @@ Large refactors with agents:
 ## 🔗 Compounding Value
 
 **What we created in this module:**
-- Experience with Agent Mode workflows
+- Rich Character Detail page (Golden Thread culmination)
 - `architecture-reviewer.agent.md` — Custom review agent
 - `devops-reviewer.agent.md` — Infrastructure review agent
-- CLI integration for terminal workflows
 
 **Artifacts from previous modules we used:**
 - `docs/ARCHITECTURE.md` — Referenced by agents
 - `.github/copilot-instructions.md` — Agent behavior patterns
+- `docs/character-detail-challenge.md` — Tracking progress across modules
 - Prompt library — Foundation for agent instructions
 
 **How this helps in future modules:**
@@ -495,6 +516,22 @@ Large refactors with agents:
 |--------|----------------------|
 | Module 5 | Instructions work with agent-reviewed code |
 | Module 6 | Agent skills build on agent concepts |
+
+---
+
+## 🧵 The Golden Thread: Complete
+
+You've now completed the **Character Detail Challenge** across the full arc:
+
+| Module | Context | Approach | Result |
+|--------|---------|----------|--------|
+| **00** | Nothing | Direct ask | Chaos, 3+ attempts |
+| **01a** | ARCHITECTURE.md | Direct ask | Better structure |
+| **01b** | + Instructions | Direct ask | Consistent patterns |
+| **02** | + Plan Mode | Plan → Manual | First-try basic page |
+| **04** | All context | **Agent Mode** | **Rich feature, multi-file, minimal intervention** |
+
+**The lesson**: Context compounds. Documentation + Instructions + Planning = Agents that actually work.
 
 ---
 
@@ -572,6 +609,6 @@ fanhub/.github/agents/
 
 | Exercise | Time | Ongoing Value |
 |----------|------|---------------|
-| 4.1 Agent Mode | 20 min | 30+ min saved per multi-file feature |
-| 4.2 Custom Agents | 30 min | 15-30 min saved per PR review |
+| 4.1 Character Detail v2 | 25 min | See how context compounds with agents |
+| 4.2 Custom Agents | 20 min | 15-30 min saved per PR review |
 | 4.3 Background Agents | 15 min | Days saved on large refactors |
