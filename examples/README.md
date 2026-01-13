@@ -12,49 +12,46 @@ This folder contains reference implementations for everything you'll build in th
 
 ```
 examples/
-├── completed-config/          # Full "finished" state
-│   ├── .github/
-│   │   ├── copilot-instructions.md    # Repository instructions
-│   │   ├── prompts/                    # Custom prompt files
-│   │   │   ├── commit.prompt.md
-│   │   │   ├── create-api-tests.prompt.md
-│   │   │   ├── create-component-tests.prompt.md
-│   │   │   ├── create-detail-page.prompt.md
-│   │   │   ├── feature-request-template.prompt.md
-│   │   │   └── spec-to-implementation.prompt.md
-│   │   ├── agents/                     # Custom agents
-│   │   │   ├── architecture-reviewer.agent.md
-│   │   │   ├── devops-reviewer.agent.md
-│   │   │   └── fanhub-validator.agent.md
-│   │   └── instructions/               # Custom instructions
-│   │       ├── api-routes.instructions.md
-│   │       ├── infrastructure.instructions.md
-│   │       ├── react-components.instructions.md
-│   │       └── testing.instructions.md
-│   ├── .vscode/
-│   │   └── mcp.json                    # MCP server configuration
-│   ├── docs/
-│   │   ├── ARCHITECTURE.md
-│   │   └── character-detail-challenge.md
-│   └── skills/                         # Agent Skills examples
-│       ├── agent-skills.md
-│       ├── api-endpoint-design/
-│       │   └── SKILL.md
-│       ├── bug-reproduction-test-generator/
-│       │   └── SKILL.md
-│       ├── effort-estimator/
-│       │   └── SKILL.md
-│       ├── feature-requirements/
-│       │   └── SKILL.md
-│       └── tv-show-data-validator/
-│           └── SKILL.md
-│
-└── module-11/                 # Enterprise patterns templates
-    ├── org-instructions-template.md
-    ├── COPILOT-REVIEW-GUIDE.md
-    ├── TEAM-ONBOARDING.md
-    ├── quarterly-report-template.md
-    └── README.md
+└── completed-config/          # Full "finished" state
+    ├── .github/
+    │   ├── copilot-instructions.md    # Repository instructions
+    │   ├── prompts/                    # Custom prompt files
+    │   │   ├── commit.prompt.md
+    │   │   ├── create-api-tests.prompt.md
+    │   │   ├── create-component-tests.prompt.md
+    │   │   ├── create-detail-page.prompt.md
+    │   │   ├── feature-request-template.prompt.md
+    │   │   └── spec-to-implementation.prompt.md
+    │   ├── agents/                     # Custom agents
+    │   │   ├── architecture-reviewer.agent.md
+    │   │   ├── devops-reviewer.agent.md
+    │   │   └── fanhub-validator.agent.md
+    │   └── instructions/               # Custom instructions
+    │       ├── api-routes.instructions.md
+    │       ├── infrastructure.instructions.md
+    │       ├── react-components.instructions.md
+    │       └── testing.instructions.md
+    ├── .vscode/
+    │   └── mcp.json                    # MCP server configuration
+    ├── docs/
+    │   ├── ARCHITECTURE.md
+    │   ├── character-detail-challenge.md
+    │   ├── org-instructions-template.md      # Module 11: Org-level instructions
+    │   ├── COPILOT-REVIEW-GUIDE.md          # Module 11: Code review checklist
+    │   ├── TEAM-ONBOARDING.md               # Module 11: Team onboarding guide
+    │   └── quarterly-report-template.md      # Module 11: Metrics report template
+    └── skills/                         # Agent Skills examples
+        ├── agent-skills.md
+        ├── api-endpoint-design/
+        │   └── SKILL.md
+        ├── bug-reproduction-test-generator/
+        │   └── SKILL.md
+        ├── effort-estimator/
+        │   └── SKILL.md
+        ├── feature-requirements/
+        │   └── SKILL.md
+        └── tv-show-data-validator/
+            └── SKILL.md
 ```
 
 ---
@@ -70,7 +67,7 @@ examples/
 | **Module 5** | Agent Skills | Domain-specific skills | [completed-config/skills/](completed-config/skills/) |
 | **Module 6** | MCP Servers | External system connections | [completed-config/.vscode/mcp.json](completed-config/.vscode/mcp.json) |
 | **Module 7** | Custom Agents | Agent configuration files | [completed-config/.github/agents/](completed-config/.github/agents/) |
-| **Module 11** | Enterprise Patterns | Org templates | [module-11/](module-11/) |
+| **Module 11** | Enterprise Patterns | Organization templates | [completed-config/docs/](completed-config/docs/) (org-instructions-template.md, COPILOT-REVIEW-GUIDE.md, TEAM-ONBOARDING.md, quarterly-report-template.md) |
 
 ---
 

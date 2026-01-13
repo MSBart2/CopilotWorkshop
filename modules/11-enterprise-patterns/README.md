@@ -170,7 +170,7 @@ Rafael: *"Governance should feel like guardrails on a highway, not roadblocks."*
 
 ## 🔨 Exercises
 
-### Exercise 10.1: Organization Instructions — "Rafael and Sarah Set the Standard"
+### Exercise 11.1: Organization Instructions — "Rafael and Sarah Set the Standard"
 
 #### 📖 The Story
 
@@ -184,7 +184,7 @@ Sarah's interested: *"Show me."*
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-**Scenario**: A new developer joins Team Phoenix and starts working on the checkout service.
+**Scenario**: A new developer joins another team in your organization and starts working on a checkout service.
 
 They ask Copilot to generate an API endpoint. Copilot suggests:
 - Express.js (Team uses Fastify)
@@ -365,6 +365,10 @@ When you override, document WHY in your repository instructions.
 - [ ] Override guidelines are documented
 - [ ] New team members can see immediate value
 
+#### 📄 Reference Template
+
+See [examples/completed-config/docs/org-instructions-template.md](../../examples/completed-config/docs/org-instructions-template.md) for a complete organization instructions template you can customize.
+
 #### 💭 Rafael's Realization
 
 *"We just encoded two decades of organizational knowledge into a file. When Priya asks Copilot for help tomorrow, she gets Sarah's standards, David's patterns, and Jordan's DevOps expertise automatically. That's not replacing expertise—that's multiplying it."*
@@ -400,7 +404,7 @@ Use @workspace to detect project type and apply appropriate standards.
 
 ---
 
-### Exercise 10.2: Code Review Standards — "Elena and David Build the Safety Net"
+### Exercise 11.2: Code Review Standards — "Elena and David Build the Safety Net"
 
 #### 📖 The Story
 
@@ -764,6 +768,10 @@ Run a 30-minute workshop:
 - [ ] At least one PR has been reviewed using the systematic approach
 - [ ] Guide is iterated based on real-world usage
 
+#### 📄 Reference Template
+
+See [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md) for a complete code review checklist you can use or customize.
+
 #### 💭 Elena's Realization
 
 *"This isn't about trusting or distrusting AI. It's about systematic quality assurance. The same way I test code—don't just check if it works, check how it breaks. AI makes us faster, but this checklist makes us safer."*
@@ -805,7 +813,7 @@ The agent doesn't replace human review—it frontloads the systematic checks so 
 
 ---
 
-### Exercise 10.3: Copilot Spaces Setup — "Jordan and David Build the Knowledge Base"
+### Exercise 11.3: Copilot Spaces Setup — "Jordan and David Build the Knowledge Base"
 
 🏢 **Enterprise Feature**
 
@@ -1038,7 +1046,7 @@ Team members can switch between Spaces based on the type of work they're doing.
 
 ---
 
-### Exercise 10.4: Metrics Dashboard — "Jordan and Sarah Measure Success"
+### Exercise 11.4: Metrics Dashboard — "Jordan and Sarah Measure Success"
 
 💼 **Business Feature**
 
@@ -1323,6 +1331,10 @@ gh api \
 - [ ] Established review cadence
 - [ ] Can tell the Copilot ROI story with data
 
+#### 📄 Reference Template
+
+See [examples/completed-config/docs/quarterly-report-template.md](../../examples/completed-config/docs/quarterly-report-template.md) for a complete metrics and ROI report template.
+
 #### 💭 Jordan's Realization
 
 *"This is monitoring for our AI tools. We treat production observability as critical—we should treat developer tool effectiveness the same way. When acceptance rate drops, I investigate root cause just like I would for increased latency. Operational excellence applies everywhere."*
@@ -1357,7 +1369,7 @@ Answer questions like:
 
 ---
 
-### Exercise 10.5: Onboarding Kit — "Marcus and Priya Enable the Next Team"
+### Exercise 11.5: Onboarding Kit — "Marcus and Priya Enable the Next Team"
 
 🆓 **Free Feature**
 
@@ -1367,7 +1379,7 @@ Answer questions like:
 
 **Priya** (Recent Graduate, 1 year) has grown remarkably: *"I started intimidated, afraid to ask 'basic' questions. But the repository instructions answered them before I had to ask. The custom prompts showed me patterns. I want other junior developers to have that same experience."*
 
-**The New Request**: Team Phoenix, working on the inventory management system, heard about FanHub's success. Their lead reached out:
+**The New Request**: Another team in your organization, working on an inventory management system, heard about FanHub's success. Their lead reached out:
 
 *"We're starting a new project next week. We heard you went from zero to shipped in one day. Can you share what you learned?"*
 
@@ -1380,7 +1392,7 @@ Priya finishes his thought: *"Or we could package it so they can set themselves 
 **Scenario**: Knowledge transfer through verbal tradition.
 
 ```
-Week 1: Team Phoenix asks FanHub team for help
+Week 1: New team asks FanHub team for help
 Marcus: [45-minute explanation of custom instructions]
 
 Week 2: Team Aurora asks the same questions
@@ -1403,7 +1415,7 @@ Result:
 **Scenario**: Self-service onboarding kit.
 
 ```
-Week 1: Team Phoenix gets the onboarding kit
+Week 1: New team gets the onboarding kit
 - Complete setup in 30 minutes
 - No FanHub team time required
 - Everything documented for reference
@@ -1986,6 +1998,10 @@ Your input improves the experience for the next team!
 - [ ] Champions program documented
 - [ ] Feedback mechanism established
 - [ ] At least one pilot team has completed onboarding
+
+#### 📄 Reference Template
+
+See [examples/completed-config/docs/TEAM-ONBOARDING.md](../../examples/completed-config/docs/TEAM-ONBOARDING.md) for a complete self-service onboarding guide you can customize for your organization.
 - [ ] Pilot team reports successful setup (<45 min)
 
 #### 💭 Marcus's Transformation
