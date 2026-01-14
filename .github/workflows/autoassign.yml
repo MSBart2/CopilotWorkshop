@@ -13,8 +13,9 @@ jobs:
     steps:
       - name: Assign issue to Copilot coding agent
         uses: actions/github-script@v7
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue_number = context.payload.issue.number;
             const owner = context.repo.owner;
@@ -46,6 +47,21 @@ jobs:
             actors.forEach(actor => {
               console.log(`  - ${actor.login} (${actor.__typename}) ${actor.id || '(no id)'}`);
             });
+            
+            // Also check assignable users separately
+            try {
+              const assignableUsers = await github.rest.issues.listAssignees({
+                owner,
+                repo,
+                per_page: 100
+              });
+              console.log(`\nAssignable users from REST API (${assignableUsers.data.length}):`);
+              assignableUsers.data.forEach(user => {
+                console.log(`  - ${user.login} (${user.type})`);
+              });
+            } catch (e) {
+              console.log('Could not fetch assignable users via REST API');
+            }
             
             // Try multiple possible Copilot login names
             const copilotBot = actors.find(
