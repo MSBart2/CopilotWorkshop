@@ -90,7 +90,7 @@ Copilot (using your skill): *"react-router-dom@6 requires React 18+. Update thes
 
 ---
 
-### Exercise 5.4A: Build Pipeline Analyzer Skill 🤝 *Team collaboration with Jordan*
+### Exercise 5.4A: Build Pipeline Analyzer Skill 🤝 *Team collaboration with Sarah*
 
 **Your role**: Diagnose CI/CD failures systematically  
 **Time**: ~30 minutes  
@@ -113,7 +113,7 @@ Copilot sees the CI failure and analyzes:
 **Time saved**: 17 minutes per CI failure
 
 **Your transformation moment:**
-> *"Jordan and I have debugged thousands of CI failures—test timeouts, Docker context issues, flaky tests. The skill captures our combined 17 years of experience. Now anyone can diagnose pipeline failures without waiting for us."*
+> *"Sarah and I have debugged thousands of CI failures—test timeouts, Docker context issues, flaky tests. The skill captures our combined 17 years of experience. Now anyone can diagnose pipeline failures without waiting for us."*
 
 ---
 
@@ -160,7 +160,7 @@ As a DevOps developer expanding into full-stack:
 **Skills** (in `.github/skills/`):
 - `docker-build-debugger/` — Your Docker troubleshooting expertise
 - `dependency-conflict-resolver/` — Your npm conflict resolution patterns
-- `build-pipeline-analyzer/` — CI/CD diagnostic workflows (with Jordan)
+- `build-pipeline-analyzer/` — CI/CD diagnostic workflows (with Sarah)
 
 **Scripts** (skill automation):
 - `analyze-dockerfile.js` — Pre-build Dockerfile validation
@@ -179,7 +179,7 @@ As a DevOps developer expanding into full-stack:
 **After this module (your achievements):**
 - ✅ Created Docker Build Debugger skill—diagnose Dockerfile issues in 2 minutes
 - ✅ Created Dependency Conflict Resolver—resolve npm hell 8x faster
-- ✅ Created Build Pipeline Analyzer with Jordan—democratize CI/CD debugging
+- ✅ Created Build Pipeline Analyzer with Sarah—democratize CI/CD debugging
 - ✅ Your DevOps expertise is now encoded and accessible to the whole team
 
 **Key insight:**
@@ -283,7 +283,7 @@ Your Module 5 skills compound into future modules:
 
 **Module 6 (MCP Servers)**: 
 - Your build-pipeline-analyzer skill connects to GitHub MCP server
-- Jordan shows you how to query GitHub Actions via MCP
+- Sarah shows you how to query GitHub Actions via MCP
 
 **Module 8 (Copilot Web)**:
 - Use GitHub Copilot in the browser to create more GitHub Actions workflows
@@ -305,7 +305,7 @@ Your Module 5 skills compound into future modules:
 - [View all exercises](../EXERCISES.md) to see Elena and Rafael's full paths
 - [Elena's path](elena.md) to see testing expertise encoded
 - [Rafael's path](rafael.md) to see product knowledge systematized
-- [Jordan's path](jordan.md) to see your CI/CD collaboration partner
+- [Marcus's path](jordan.md) to see your CI/CD collaboration partner
 
 ### Next Module
 Your next appearance: **[Module 7: Custom Agents](../../07-custom-agents/README.md)**

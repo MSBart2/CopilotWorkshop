@@ -147,9 +147,9 @@ Always read these files first:
 - The files being changed in this review
 ````
 
-2. **Collaborate with Jordan on DevOps reviewer**
+2. **Collaborate with Sarah on DevOps reviewer**
    
-   Jordan contributes his infrastructure expertise as a companion agent.
+   Marcus contributes his infrastructure expertise as a companion agent.
    
    Create: `fanhub/.github/agents/devops-reviewer.agent.md`
 
@@ -409,7 +409,7 @@ Large refactors with agents:
 ```
 fanhub/.github/agents/
 ├── architecture-reviewer.agent.md    # Your comprehensive reviewer
-└── devops-reviewer.agent.md          # Jordan's infrastructure reviewer
+└── devops-reviewer.agent.md          # Marcus's infrastructure reviewer
 ```
 
 ### The Deeper Win

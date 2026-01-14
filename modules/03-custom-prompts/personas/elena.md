@@ -180,7 +180,7 @@ Track these to prove prompt value:
 ### Within This Module
 - [View all exercises](../EXERCISES.md) for full team story
 - [Rafael's path](rafael.md) to see how specs connect to your tests
-- [Jordan's path](jordan.md) to see git automation
+- [Marcus's path](jordan.md) to see git automation
 
 ### Next Module
 Your next appearance: **[Module 4: Custom Instructions](../../04-custom-instructions/personas/elena.md)**

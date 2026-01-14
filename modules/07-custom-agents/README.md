@@ -37,7 +37,7 @@ By the end of this module, you will:
 - Watch an agent build a complete feature autonomously
 
 **Time**: ~60 minutes  
-**Personas**: David (Architect), Jordan (Platform Engineer), Marcus (DevOps)
+**Personas**: David (Architect), Marcus (Platform Engineer), Marcus (DevOps)
 
 ---
 
@@ -58,7 +58,7 @@ Architecture reviewer, executable checklists
 Agent workflows, autonomous implementation  
 *~30 minutes*
 
-**[Jordan's Path →](personas/jordan.md)**  
+**[Marcus's Path →](personas/jordan.md)**  
 DevOps reviewer, infrastructure agents  
 *~25 minutes*
 

@@ -18,9 +18,9 @@ Marcus is stuck in a painful cycle:
 6. Fix, push again
 7. Repeat
 
-Jordan overhears Marcus cursing at his terminal: *"Want to see how I never have that problem? Let me show you what a CLI agent can do for your build/test cycle."*
+Marcus gets fed up with reading cryptic stack traces: *"There has to be a better way. Let me show you what a CLI agent can do for your build/test cycle."*
 
-What follows is a mentorship session where Jordan teaches Marcus the terminal workflows that make him 10x more productive—interactive AI sessions that handle testing, debugging, coverage checks, and pre-push validation.
+What follows is Marcus showing the team the terminal workflows that make him highly productive—interactive AI sessions that handle testing, debugging, coverage checks, and pre-push validation.
 
 ---
 
@@ -38,7 +38,7 @@ By the end of this module, you will:
 - Create morning health check routines
 
 **Time**: ~75-90 minutes  
-**Primary Personas**: Jordan (DevOps Expert), Marcus (DevOps Developer)
+**Primary Persona**: Marcus (DevOps Developer)
 
 ---
 

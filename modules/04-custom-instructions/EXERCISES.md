@@ -23,9 +23,9 @@ The team is preparing for the big feature: Character Detail v2—a rich page wit
 
 *"Custom prompts are great when you remember to use them,"* Elena observes. *"But what about patterns that should apply every time you touch a specific file type? I don't want to remember to invoke a prompt every time I edit a test."*
 
-Jordan agrees: *"Same with the Dockerfile. The one the contractor left has security issues. When we finally build Character Detail v2, I want the agent to know our Docker security requirements automatically."*
+Marcus agrees: *"Same with the Dockerfile. The one the contractor left has security issues. When we finally build Character Detail v2, I want the agent to know our Docker security requirements automatically."*
 
-David realizes the pattern: *"Our repository instructions give Copilot general context. But different file types need specialized expertise. Tests need Elena's QA patterns. Dockerfiles need Jordan's security checklist. What if we could create instructions that activate automatically based on what file you're working in?"*
+David realizes the pattern: *"Our repository instructions give Copilot general context. But different file types need specialized expertise. Tests need Elena's QA patterns. Dockerfiles need Marcus's security checklist. What if we could create instructions that activate automatically based on what file you're working in?"*
 
 **This module's mission**: Create specialized instruction files that provide contextual expertise based on file patterns—ensuring that every file type in FanHub gets the right expertise automatically. When we build Character Detail v2 in Module 07, all these instructions will activate together.
 
@@ -530,19 +530,19 @@ Look at the existing routes in `routes/`. Do they follow the REST conventions in
 
 ### Exercise 4.3: Infrastructure Instructions — "Preparing to Ship Character Detail v2"
 
-> 🧵 **The Golden Thread Continues**: When Character Detail v2 is ready, Jordan will need to deploy it. The existing Dockerfile hasn't been updated since the contractor left, and it has security issues. Let's fix that now.
+> 🧵 **The Golden Thread Continues**: When Character Detail v2 is ready, Marcus will need to deploy it. The existing Dockerfile hasn't been updated since the contractor left, and it has security issues. Let's fix that now.
 
 #### 📖 The Story
 
-**Jordan** (Platform Engineer, 12 years) is thinking ahead to deploying Character Detail v2. He opens the project's Dockerfile and groans.
+**Marcus** (DevOps Developer, 5 years) is thinking ahead to deploying Character Detail v2. He opens the project's Dockerfile and groans.
 
-*"This Dockerfile is from the contractor days,"* Jordan explains. *"It runs as root, uses the `latest` tag, no health check, no multi-stage build. It'll work, but it's a security incident waiting to happen."*
+*"This Dockerfile is from the contractor days,"* Marcus explains. *"It runs as root, uses the `latest` tag, no health check, no multi-stage build. It'll work, but it's a security incident waiting to happen."*
 
-The team realizes they need to fix the Dockerfile before they even build Character Detail v2. But Jordan has a broader concern:
+The team realizes they need to fix the Dockerfile before they even build Character Detail v2. But Marcus has a broader concern:
 
 *"I can fix this manually, but what about when the agent generates infrastructure changes in Module 07? I want Copilot to enforce our infra patterns automatically."*
 
-**Supporting Cast**: Marcus learns Docker security patterns by watching Jordan's instructions in action.
+**Supporting Cast**: Priya learns Docker security patterns by watching Marcus's instructions in action.
 
 #### ❌ The "Before" — Insecure Infrastructure
 
@@ -765,7 +765,7 @@ Create specialized instructions for infrastructure and deployment files, then us
 #### ✨ The "After" — The Improved Experience
 
 **Before**: Contractor's Dockerfile with security issues  
-**After**: Production-ready infrastructure that follows Jordan's 12 years of best practices
+**After**: Production-ready infrastructure that follows Marcus's 5 years of DevOps best practices
 
 **Security improvement**: Infrastructure files are secure by default  
 **Review time saved**: Infrastructure passes security review on first try
@@ -778,7 +778,7 @@ Create specialized instructions for infrastructure and deployment files, then us
 - [Docker Security Best Practices](https://docs.docker.com/develop/security-best-practices/)
 - [GitHub Actions Security Hardening](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
 
-#### 💭 Jordan's Relief
+#### 💭 Marcus's Relief
 
 *"The contractor's Dockerfile was a ticking time bomb. Now it's secure, optimized, and the agent will follow these patterns when building Character Detail v2 in Module 07. I'm not the bottleneck for every security review anymore."*
 
@@ -1071,7 +1071,7 @@ Look at the existing components in the codebase. Do they follow your new React i
 .github/instructions/
 ├── testing.instructions.md          # Elena's QA expertise
 ├── api-routes.instructions.md       # David's REST patterns  
-├── infrastructure.instructions.md   # Jordan's DevOps knowledge
+├── infrastructure.instructions.md   # Marcus's DevOps knowledge
 └── react-components.instructions.md # Priya's React standards
 ```
 
@@ -1103,7 +1103,7 @@ Custom instructions capture **institutional knowledge**:
 
 - Elena's years of QA experience → `testing.instructions.md`
 - David's architectural patterns → `api-routes.instructions.md`
-- Jordan's security practices → `infrastructure.instructions.md`
+- Marcus's security practices → `infrastructure.instructions.md`
 - Priya's React learning → `react-components.instructions.md`
 
 This knowledge doesn't leave when people do. It's **codified and shared**.
@@ -1162,7 +1162,7 @@ If instructions don't seem to activate:
 |---------|--------|-------|
 | **Elena** | Worried about inconsistent tests | Testing standards auto-enforced |
 | **David** | REST expertise locked in his head | API routes get REST context automatically |
-| **Jordan** | Security gaps in contractor's Dockerfile | Infrastructure secure by default |
+| **Marcus** | Security gaps in contractor's Dockerfile | Infrastructure secure by default |
 | **Priya** | Inconsistent component patterns | React best practices built-in |
 
 ### Artifacts Created
@@ -1171,7 +1171,7 @@ If instructions don't seem to activate:
 .github/instructions/
 ├── testing.instructions.md          # Elena's QA expertise
 ├── api-routes.instructions.md       # David's REST patterns
-├── infrastructure.instructions.md   # Jordan's DevOps knowledge
+├── infrastructure.instructions.md   # Marcus's DevOps knowledge
 └── react-components.instructions.md # Priya's React standards
 
 backend/

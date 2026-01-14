@@ -58,7 +58,7 @@ By the end of this module, you will:
 - Understand security considerations for MCP server trust
 
 **Time**: ~45 minutes  
-**Personas**: Elena (data validation), Jordan (infrastructure)
+**Personas**: Elena (data validation), Marcus (infrastructure)
 
 ---
 
@@ -121,7 +121,7 @@ Different roles can focus on different aspects of MCP:
 | Your Role | Recommended Focus | Start Here |
 |-----------|------------------|------------|
 | **QA/Testing** | Data validation with DB access | [Elena's Path](./personas/elena.md) |
-| **Platform Engineer** | Infrastructure state awareness | [Jordan's Path](./personas/jordan.md) |
+| **Platform Engineer** | Infrastructure state awareness | [Marcus's Path](./personas/jordan.md) |
 
 ---
 

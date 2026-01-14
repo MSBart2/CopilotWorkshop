@@ -51,7 +51,7 @@ Without strategic orchestration:
 **4:00 PM**: Team works on whatever seems important
 - David refactors architecture (complex, no visible demo impact)
 - Elena writes tests (important, but not demo material)
-- Jordan optimizes deployment (won't be visible in demo)
+- Marcus optimizes deployment (won't be visible in demo)
 - Marcus starts search (too big for 90 minutes)
 
 **5:30 PM**: Nothing shippable. Everyone worked hard, no coherent outcome.
@@ -120,7 +120,7 @@ Use product judgment + AI orchestration to prioritize work, decompose it into pa
    - **Interface**: VS Code Agent Mode
    - **Why**: Needs design decisions, interactive
    
-   ### Stream 3: Bug Fix + Infrastructure (Jordan)
+   ### Stream 3: Bug Fix + Infrastructure (Marcus)
    - **Interface**: Copilot CLI
    - **Why**: Database investigation, scripted fix
    ```

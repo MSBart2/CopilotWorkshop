@@ -63,12 +63,11 @@ By the end of this module, you will:
 You're part of the development team at **TechCorp**, a mid-sized software company. Your team includes:
 
 - **Sarah** — Senior developer (15 years), skeptical of new tools, demands proof of value
-- **Marcus** — DevOps developer (5 years), comfortable with infrastructure, wants to improve application code skills
+- **Marcus** — DevOps developer (5 years), comfortable with infrastructure, wants to improve application code skills and automation
 - **Priya** — Recent graduate (1 year), eager to learn, afraid of asking "dumb" questions
 - **David** — Staff engineer (20 years), concerned about relevance, deep expertise
 - **Elena** — QA engineer (8 years), passionate about quality and comprehensive testing
 - **Rafael** — Product manager (10 years), bridges business and technical, prioritizes ruthlessly
-- **Jordan** — Platform engineer (12 years), automation-first, security-conscious
 
 *(For full persona details, see [PERSONAS.md](PERSONAS.md))*
 

@@ -184,7 +184,7 @@ See [examples/completed-config/docs/org-instructions-template.md](../../examples
 
 ### 💭 Rafael's Realization
 
-*"We just encoded two decades of organizational knowledge into a file. When Priya asks Copilot for help tomorrow, she gets Sarah's standards, David's patterns, and Jordan's DevOps expertise automatically. That's not replacing expertise—that's multiplying it."*
+*"We just encoded two decades of organizational knowledge into a file. When Priya asks Copilot for help tomorrow, she gets Sarah's standards, David's patterns, and Marcus's DevOps expertise automatically. That's not replacing expertise—that's multiplying it."*
 
 ### 💭 Sarah's Reaction
 
@@ -365,7 +365,7 @@ See [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../../examples/comp
 
 ---
 
-## Exercise 11.3: Copilot Knowledge Bases — "Jordan and David Build the Shared Context"
+## Exercise 11.3: Copilot Knowledge Bases — "Marcus and David Build the Shared Context"
 
 **Who should do this**: Platform teams, architects, DevOps leads  
 **Time**: 30-45 minutes  
@@ -373,13 +373,13 @@ See [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../../examples/comp
 
 ### 📖 The Story
 
-**Jordan** (DevOps Expert, 12 years) manages infrastructure for eight microservices across three repositories. Each service has its own README, runbooks, and tribal knowledge.
+**Marcus** (DevOps Expert, 12 years) manages infrastructure for eight microservices across three repositories. Each service has its own README, runbooks, and tribal knowledge.
 
-*"When something breaks at 2 AM,"* Jordan says, *"I need to remember which service uses which database, which Redis instance, which secrets manager. It's all documented... somewhere. Across three wikis, two Notion spaces, and countless Slack threads."*
+*"When something breaks at 2 AM,"* Marcus says, *"I need to remember which service uses which database, which Redis instance, which secrets manager. It's all documented... somewhere. Across three wikis, two Notion spaces, and countless Slack threads."*
 
 **David** (Seasoned Architect, 20 years) has the same problem with architectural decisions: *"I documented why we chose Kafka over RabbitMQ. But where? Was it in the ADR in the events-service repo? Or the architecture doc in the wiki? When new developers ask '@workspace why do we use Kafka?' they get generic answers, not our specific reasons."*
 
-Jordan: *"What if we could create shared context for Copilot—index all our repos so Copilot can reference them together?"*
+Marcus: *"What if we could create shared context for Copilot—index all our repos so Copilot can reference them together?"*
 
 David: *"Like a shared brain for the organization. Copilot knowledge bases."*
 
@@ -510,7 +510,7 @@ Expected: Answer identifies common dependencies from all repos.
 - [ ] Knowledge base answers cross-repo questions accurately
 - [ ] Team knows how to attach and use the knowledge base in Copilot Chat
 
-### 💭 Jordan's Realization
+### 💭 Marcus's Realization
 
 *"This is infrastructure for knowledge. Instead of remembering which repo has the deployment docs, Copilot can reference all our infrastructure repos together. When I need to understand how services interact, one knowledge base gives me the full picture."*
 
@@ -539,7 +539,7 @@ Team members attach different knowledge bases depending on their current work.
 
 ---
 
-## Exercise 11.4: Metrics Dashboard — "Jordan and Sarah Measure Success"
+## Exercise 11.4: Metrics Dashboard — "Marcus and Sarah Measure Success"
 
 **Who should do this**: Engineering managers, platform teams, anyone justifying Copilot investment  
 **Time**: 45-60 minutes  
@@ -547,13 +547,13 @@ Team members attach different knowledge bases depending on their current work.
 
 ### 📖 The Story
 
-**Jordan** (DevOps Expert, 12 years) monitors everything: CPU usage, memory, latency, error rates. If it affects production, there's a dashboard for it.
+**Marcus** (DevOps Expert, 12 years) monitors everything: CPU usage, memory, latency, error rates. If it affects production, there's a dashboard for it.
 
-*"We deployed all these customizations—instructions, prompts, skills, knowledge bases,"* Jordan says. *"But how do we know they're working? Are teams actually using Copilot more effectively? Where should we focus improvement efforts?"*
+*"We deployed all these customizations—instructions, prompts, skills, knowledge bases,"* Marcus says. *"But how do we know they're working? Are teams actually using Copilot more effectively? Where should we focus improvement efforts?"*
 
 **Sarah** (Skeptical Senior, 15 years) has a meeting with leadership next week: *"I'm convinced Copilot works for our team. But when I present this to the CFO, they'll ask: 'What's the business impact? How many hours saved? What's the adoption rate?' I need data, not anecdotes."*
 
-Jordan grins: *"Then let's build a metrics framework. If we can monitor Kubernetes, we can monitor Copilot."*
+Marcus grins: *"Then let's build a metrics framework. If we can monitor Kubernetes, we can monitor Copilot."*
 
 ### ❌ The "Before" — What Frustration Looks Like
 
@@ -838,7 +838,7 @@ gh api \
 
 See [examples/completed-config/docs/quarterly-report-template.md](../../examples/completed-config/docs/quarterly-report-template.md) for a complete metrics and ROI report template.
 
-### 💭 Jordan's Realization
+### 💭 Marcus's Realization
 
 *"This is monitoring for our AI tools. We treat production observability as critical—we should treat developer tool effectiveness the same way. When acceptance rate drops, I investigate root cause just like I would for increased latency. Operational excellence applies everywhere."*
 

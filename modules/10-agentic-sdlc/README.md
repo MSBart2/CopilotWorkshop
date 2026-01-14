@@ -3,7 +3,7 @@
 ## ⏰ Monday 7:00 PM — Parallel Development Power
 
 > *"We've learned to use agents one at a time. Now let's see what happens when we run them everywhere at once."*  
-> — Jordan, ready to unleash the full potential of multi-interface agents
+> — Marcus, ready to unleash the full potential of multi-interface agents
 
 ---
 
@@ -14,7 +14,7 @@ You've learned to customize Copilot with instructions, prompts, agents, skills, 
 **Agentic SDLC** changes that. With agents running across VS Code, GitHub.com, and the CLI simultaneously, you can build features in parallel.
 
 **Time**: ~90 minutes  
-**Personas**: Jordan (parallel orchestration), David (background tasks), Rafael (sprint planning)
+**Personas**: Marcus (parallel orchestration), David (background tasks), Rafael (sprint planning)
 
 ---
 
@@ -76,7 +76,7 @@ Sprint End ◄── All streams converge
 |----------|---------|-------|------|
 | 5.1 | Marcus | VS Code Agent Mode | 20 min |
 | 5.2 | David | GitHub Web Coding Agent | 20 min |
-| 5.3 | Jordan | GitHub Copilot CLI | 20 min |
+| 5.3 | Marcus | GitHub Copilot CLI | 20 min |
 | 5.4 | Team | The Convergence | 15 min |
 | 5.5 | Rafael | Sprint Orchestration | 25 min |
 | 5.6 | Sarah | Checkpoints (Safety) | 10 min |
@@ -84,7 +84,7 @@ Sprint End ◄── All streams converge
 ### Quick Links
 
 - [Exercise 5.1: VS Code Agent Mode](./EXERCISES.md#exercise-51-vs-code-agent-mode--the-feature-build) — Marcus builds search feature
-- [Exercise 5.3: Copilot CLI](./EXERCISES.md#exercise-53-github-copilot-cli--the-infrastructure-sprint) — Jordan's infrastructure sprint
+- [Exercise 5.3: Copilot CLI](./EXERCISES.md#exercise-53-github-copilot-cli--the-infrastructure-sprint) — Marcus's infrastructure sprint
 - [Exercise 5.5: Sprint Orchestration](./EXERCISES.md#exercise-55-sprint-orchestration--rafael-directs-the-symphony) — Rafael prioritizes and orchestrates
 
 ---
@@ -95,7 +95,7 @@ Sprint End ◄── All streams converge
 |-----------|------------------|------------|
 | **Developer** | Interactive development | [Marcus's Path](./personas/marcus.md) |
 | **Product/Lead** | Sprint orchestration | [Rafael's Path](./personas/rafael.md) |
-| **DevOps** | Parallel infrastructure | [Jordan's Path](./personas/jordan.md) |
+| **DevOps** | Parallel infrastructure | [Marcus's Path](./personas/jordan.md) |
 
 ---
 

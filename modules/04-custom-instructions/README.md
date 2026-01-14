@@ -11,7 +11,7 @@
 
 > 🧵 **The Golden Thread Continues**: In Module 03, the team created custom prompts—reusable patterns for common tasks. But prompts are *opt-in*—developers have to remember to use them. What about expertise that should *always* apply?
 
-The tests should follow Elena's QA patterns. The API endpoints should follow David's REST conventions. The Dockerfile (untouched since the contractor left) needs Jordan's security checklist. The React components should handle loading states consistently.
+The tests should follow Elena's QA patterns. The API endpoints should follow David's REST conventions. The Dockerfile (untouched since the contractor left) needs Marcus's security checklist. The React components should handle loading states consistently.
 
 *"Custom prompts are great when you remember to use them,"* David observes. *"But what about patterns that should apply every time you touch a specific file type? I don't want to remember to invoke a prompt every time I edit an API route."*
 
@@ -31,7 +31,7 @@ By the end of this module, you will:
 - **Complete the Character Detail v2 prerequisites** with proper tests, deployment, and component patterns
 
 **Time**: ~90 minutes  
-**Personas**: Elena (QA), David (Architect), Jordan (DevOps), Priya (Junior)
+**Personas**: Elena (QA), David (Architect), Marcus (DevOps), Priya (Junior)
 
 ---
 
@@ -48,7 +48,7 @@ By the end of this module, you will:
 Testing standards, QA automation  
 *~25 minutes*
 
-**[Jordan's Path →](personas/jordan.md)**  
+**[Marcus's Path →](personas/marcus.md)**  
 Infrastructure, DevOps security  
 *~25 minutes*
 
@@ -173,7 +173,7 @@ Just like a senior developer changes their approach based on what they're workin
 .github/instructions/
 ├── testing.instructions.md          # Elena's QA expertise
 ├── api-routes.instructions.md       # David's REST patterns  
-├── infrastructure.instructions.md   # Jordan's DevOps knowledge
+├── infrastructure.instructions.md   # Marcus's DevOps knowledge
 └── react-components.instructions.md # Priya's React standards
 ```
 
@@ -203,7 +203,7 @@ Custom instructions capture **institutional knowledge**:
 
 - Elena's years of QA experience → `testing.instructions.md`
 - David's architectural patterns → `api-routes.instructions.md`
-- Jordan's security practices → `infrastructure.instructions.md`
+- Marcus's security practices → `infrastructure.instructions.md`
 - Priya's React learning → `react-components.instructions.md`
 
 This knowledge doesn't leave when people do. It's **codified and shared**.

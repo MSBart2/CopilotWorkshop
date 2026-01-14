@@ -305,7 +305,7 @@ Always read these files first:
 - The files being changed in this review
 ````
 
-2. **Create a DevOps reviewer agent** (Jordan's contribution)
+2. **Create a DevOps reviewer agent** (Marcus's contribution)
    
    Create: `fanhub/.github/agents/devops-reviewer.agent.md`
 
@@ -631,14 +631,14 @@ This is the balance: autonomous enough to be useful, controlled enough to be saf
 | **Marcus** | Manual orchestration between AI suggestions | Delegates complete tasks, reviews results |
 | **David** | 20 years of expertise felt threatened | Sees AI amplifies his architectural knowledge |
 | **Sarah** | Skeptical of AI hype | Convinced after seeing real results |
-| **Jordan** | Infrastructure expertise siloed | DevOps reviewer agent shares his knowledge |
+| **Marcus** | Infrastructure expertise siloed | DevOps reviewer agent shares his knowledge |
 
 ### Artifacts Created
 
 ```
 fanhub/.github/agents/
 ├── architecture-reviewer.agent.md    # David's comprehensive reviewer
-└── devops-reviewer.agent.md          # Jordan's infrastructure reviewer
+└── devops-reviewer.agent.md          # Marcus's infrastructure reviewer
 
 fanhub/frontend/src/
 └── components/CharacterDetail.jsx    # Character Detail v2 - THE PAYOFF!

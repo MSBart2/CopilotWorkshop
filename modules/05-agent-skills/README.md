@@ -9,7 +9,7 @@
 
 ## 🧵 The Golden Thread: From Code Patterns to Domain Knowledge
 
-In **Module 04**, the team created custom instructions that activate based on file patterns. Tests get Elena's QA expertise. Dockerfiles get Jordan's security patterns. React components get Priya's standards.
+In **Module 04**, the team created custom instructions that activate based on file patterns. Tests get Elena's QA expertise. Dockerfiles get Marcus's security patterns. React components get Priya's standards.
 
 But some knowledge isn't file-specific:
 - *"Related characters should never have duplicates from the same show"*

@@ -34,7 +34,7 @@ By the end of this module, you will:
 - Experience multi-modal workflows (VS Code + GitHub.com)
 
 **Time**: ~90 minutes (or follow your persona's focused path for less)  
-**Featured Personas**: Elena (QA), Rafael (Product), Marcus (DevOps), Jordan (Platform)
+**Featured Personas**: Elena (QA), Rafael (Product), Marcus (DevOps)
 
 ---
 
@@ -95,8 +95,7 @@ Pick the path that matches your role and interests:
 
 - **[Elena's Path](personas/elena.md)** — Test generation and quality assurance (60 min)
 - **[Rafael's Path](personas/rafael.md)** — Requirements translation and specifications (60 min)
-- **[Marcus's Path](personas/marcus.md)** — Backend API patterns (30 min)
-- **[Jordan's Path](personas/jordan.md)** — Git workflow automation (30 min)
+- **[Marcus's Path](personas/marcus.md)** — Backend API patterns and git workflow automation (60 min)
 
 Each persona path includes:
 - Your focused exercises
@@ -123,7 +122,7 @@ Jump directly to specific exercises:
 | [3.1](EXERCISES.md#exercise-31-create-a-test-prompt-library--elenas-quality-toolkit) | Elena | 30 min | Test generation prompts |
 | [3.2](EXERCISES.md#exercise-32-spec-to-code-prompts--rafael-bridges-the-gap) | Rafael | 30 min | Requirements translation |
 | [3.3](EXERCISES.md#exercise-33-build-the-episode-guide--the-team-collaborates) | Team | 45 min | Episode Guide + **Golden Thread pattern** 🧵 |
-| [3.4](EXERCISES.md#exercise-34-one-word-git-workflow--jordans-ship-it-button) | Jordan | 30 min | Git automation |
+| [3.4](EXERCISES.md#exercise-34-one-word-git-workflow--marcuss-ship-it-button) | Marcus | 30 min | Git automation |
 
 ---
 
@@ -140,7 +139,7 @@ Jump directly to specific exercises:
 
 **[Module 4: Custom Instructions](../04-custom-instructions/README.md)** (Monday 2:00 PM)
 
-The team has patterns, documentation, and prompts. Now it's time to let Copilot work autonomously. David will create an Architecture Reviewer agent, Jordan will build DevOps automation, and we'll explore how agents can run in the background while you work on other things.
+The team has patterns, documentation, and prompts. Now it's time to let Copilot work autonomously. David will create an Architecture Reviewer agent, Marcus will build DevOps automation, and we'll explore how agents can run in the background while you work on other things.
 
 ---
 
