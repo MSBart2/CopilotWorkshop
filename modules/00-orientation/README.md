@@ -2,6 +2,8 @@
 
 > **Monday, 9:00 AM** — A skeptical senior developer throws down a challenge: prove that AI-assisted development is worth the hype by building something real. Fast.
 
+---
+
 ## Why This Module Matters
 
 This training isn't about features and keyboard shortcuts. It's about **a fundamental shift in how you build software**.
@@ -11,8 +13,6 @@ Over the next 8 hours (your time, your pace), you'll transform from someone typi
 But first, you need to see the problem. You need to _feel_ the frustration of working with AI that doesn't understand your codebase, your standards, or your domain. Only then will the transformation be meaningful.
 
 **This module sets up everything.** Read it carefully. Experience the struggle. Then watch as the next 9 hours transform how you work.
-
----
 
 ## Prerequisites
 
@@ -31,8 +31,6 @@ But first, you need to see the problem. You need to _feel_ the frustration of wo
 ## Estimated Time
 
 60 minutes
-
----
 
 ## 🎯 Learning Objectives
 
@@ -320,7 +318,7 @@ Do you want this applied AUTOMATICALLY?
 
 ## 🔨 Exercise 0: The Character Detail Challenge — "The Struggle"
 
-### 📖 The Setup
+### 📖 The Story
 
 It's Monday, 9:30 AM. You've just looked at the FanHub starter code. It's time to experience what happens when you try to build with AI that doesn't understand your codebase.
 
@@ -540,6 +538,10 @@ His expertise isn't obsolete—it needs to be expressed differently.
 
 Define how YOU will measure success with AI-assisted development.
 
+### 📋 Steps
+
+**1. Identify your persona** (see [PERSONAS.md](PERSONAS.md))
+
 **2. Reflect on what matters**
 
 Some example metrics to consider:
@@ -568,6 +570,12 @@ Review Copilot's suggestions. Which make sense? Which don't?
 
 - [ ] Identified which persona you resonate with most
 - [ ] (Optional) Got Copilot's suggestions and evaluated them critically
+
+### 📚 Official Docs
+
+- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+- [About AI-powered developer tools](https://docs.github.com/en/copilot/about-github-copilot)
+- [Getting started with GitHub Copilot](https://docs.github.com/en/copilot/getting-started-with-github-copilot)
 
 ### 🧠 Mindful Moment: Setting Intention
 
@@ -608,9 +616,10 @@ Review Copilot's suggestions. Which make sense? Which don't?
 
 **What's Coming:**
 - Module 1: Repository Instructions (watch everything change)
-- Module 2: Build a reusable prompt library
-- Module 3: Create custom agents that understand your domain
-- Modules 4-6: Complete FanHub using every AI assistance technique
+- Module 2: Agent Plan Mode (watch everything change further with structured thinking)
+- Module 3: Custom Prompts (build a reusable prompt library)
+- Module 4: Custom Agents (create AI specialists that understand your domain)
+- Modules 5-9: Complete FanHub using every AI assistance technique
 
 ---
 
@@ -620,7 +629,7 @@ You've experienced the struggle. You've set your success metrics. You're ready f
 
 **On to Module 1:** [Repository Instructions](../01-repository-instructions/README.md)
 
-Monday, 10:00 AM. Marcus is about to show the team how configuration changes everything...
+Monday, 10:00 AM. The team is about to discover how documentation and configuration change everything...
 
 ---
 

@@ -78,6 +78,7 @@ Each character represents a real archetype that learners recognize—either in t
 | **Rafael** | 10 years | Product Manager | Requirements writer | Execution enabler |
 | **Jordan** | 12 years | Platform Engineer | Manual ops | Automated excellence |
 
+---
 
 ## 📅 The Timeline
 
@@ -204,7 +205,6 @@ Priya represents anyone feeling overwhelmed:
 4. **Build confidence gradually** — Small wins compound
 
 ---
-
 
 
 ## 📚 Additional Resources
