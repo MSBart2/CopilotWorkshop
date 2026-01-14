@@ -11,43 +11,25 @@ jobs:
   assign-to-copilot:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign to Copilot via GraphQL
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const issue_number = context.issue.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-
-            try {
-              // First, get the issue's node ID (required for GraphQL)
-              const { data: issue } = await github.rest.issues.get({
-                owner,
-                repo,
-                issue_number
-              });
-
-              // Use GraphQL mutation to assign to Copilot
-              // This is the correct way to assign to GitHub Copilot coding agent
-              const mutation = `
-                mutation($issueId: ID!) {
-                  assignCopilotToIssue(input: {issueId: $issueId}) {
-                    issue {
-                      id
-                      number
-                    }
-                  }
-                }
-              `;
-
-              await github.graphql(mutation, {
-                issueId: issue.node_id
-              });
-
-              console.log(`Successfully assigned issue #${issue_number} to GitHub Copilot`);
-            } catch (error) {
-              console.error(`Failed to assign issue #${issue_number}:`, error.message);
-              console.log('You may need to manually click "Assign to Copilot" button');
-              // Don't fail the workflow if assignment fails
-            }
+      - name: Try to assign via GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Attempting to assign issue #${ISSUE_NUMBER} to Copilot..."
+          
+          # Try using gh CLI to assign to copilot
+          # The CLI might have access to features not in the REST API
+          if gh issue edit ${ISSUE_NUMBER} --repo ${REPO} --add-assignee "github-copilot[bot]" 2>/dev/null; then
+            echo "✅ Successfully assigned issue to Copilot via CLI"
+          else
+            echo "❌ CLI assignment failed. Trying API workaround..."
+            
+            # Add a comment that might trigger Copilot assignment
+            gh issue comment ${ISSUE_NUMBER} --repo ${REPO} --body "@github-copilot Please handle this issue"
+            
+            echo "⚠️  Automatic assignment not available via API yet."
+            echo "Please manually click the 'Assign to Copilot' button for issue #${ISSUE_NUMBER}"
+            echo "Comment added to notify you to assign manually."
+          fi
