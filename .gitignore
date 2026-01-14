@@ -52,3 +52,6 @@ dev-data/
 *.db
 *.sqlite
 *.sqlite3
+
+# Workflow files to ignore
+.github/workflows/demo.yml
