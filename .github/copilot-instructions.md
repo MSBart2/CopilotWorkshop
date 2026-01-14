@@ -455,6 +455,79 @@ Always include at least one of:
 
 ---
 
+## Golden Thread Checkpoint Evaluation
+
+The "Golden Thread" is a recurring feature challenge (Character Detail page) that spans multiple modules, demonstrating compounding value. Each checkpoint measures improvement from different persona perspectives:
+
+### Checkpoint Evaluation Templates
+
+When documenting Golden Thread checkpoints, include role-specific metrics:
+
+#### David's Lens (Architecture & Correctness)
+- **Architectural coherence**: Does it fit the documented system design?
+- **Pattern adherence**: Uses established patterns (async/await, error handling)?
+- **Technical depth**: Handles edge cases, performance, security?
+- **Code quality**: Maintainable, follows SOLID principles?
+
+Example metrics:
+- **Architectural violations**: 0 (all components in correct layers)
+- **Pattern consistency**: 95% (async/await throughout)
+- **Technical debt introduced**: Minimal (one TODO for optimization)
+
+#### Sarah's Lens (Consistency & Standards)
+- **Convention compliance**: Follows team naming, formatting, structure?
+- **Pattern consistency**: Same approach as existing features?
+- **Code review efficiency**: How much feedback needed?
+- **Maintainability**: Can any team member understand and modify it?
+
+Example metrics:
+- **Style violations**: 0 (matches copilot-instructions.md)
+- **Code review rounds**: 1 (down from 3-4 in Module 00)
+- **Pattern divergence**: None (consistent with existing routes/components)
+
+#### Priya's Lens (Learning & Confidence)
+- **Comprehension**: Can she explain what the code does?
+- **Independence**: Generated without needing senior help?
+- **Learning acceleration**: Understanding gained through AI collaboration?
+- **Confidence boost**: Feels capable of similar tasks?
+
+Example metrics:
+- **Time to understanding**: 5 minutes (vs 30 minutes in Module 00)
+- **Questions needed**: 0 (AI explained as it generated)
+- **Confidence level**: 8/10 (up from 3/10)
+- **Ability to modify**: High (understands all parts)
+
+### Usage in Checkpoints
+
+In EXERCISES.md, include generic checkpoint language:
+```markdown
+### 🧵 Checkpoint 1.1b: Character Detail Challenge
+
+**Track your results** in `docs/character-detail-challenge.md`
+
+**Generic success indicators**:
+- Correct project structure and file placement
+- Follows documented patterns from ARCHITECTURE.md
+- Generates working code faster than previous attempts
+```
+
+In persona files, include role-specific perspectives:
+```markdown
+### 🧵 Your Checkpoint 1.1b Results
+
+From your **architectural perspective**, evaluate:
+- [ ] Components placed in correct architectural layers
+- [ ] Data flow matches ARCHITECTURE.md diagrams
+- [ ] No circular dependencies introduced
+
+**Your metrics**:
+- Architectural violations: ___
+- Pattern consistency: ___% 
+- Technical debt notes: ___
+```
+
+---
+
 ## Cross-Reference Patterns
 
 ### Exercises ↔ Personas
