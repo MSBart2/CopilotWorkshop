@@ -224,15 +224,15 @@ Pragmatic, automation-first, always thinking about scale and repeatability. Appr
 
 In this workshop, these seven personas work together to build FanHub—a TV show fan site—in a 9-10 hour sprint. Each persona has a specific role and transformation arc:
 
-| Persona | Primary Role | Modules Featured | Key Transformation |
+| Persona | Primary Role | Key Transformation |
 |---------|-------------|------------------|-------------------|
-| **Sarah** | Sprint lead, skeptic | 0, 2, 9 | From "prove it" to "I'm convinced" |
-| **David** | Architecture, code review | 1, 2, 4, 7, 9 | From "will AI replace me?" to "AI amplifies me" |
-| **Marcus** | DevOps → application code | 1, 2, 3, 4, 8 | From infrastructure-only to full-stack confident |
-| **Priya** | Learning, UI implementation | 1, 5, 9 | From intimidated to empowered learner |
-| **Elena** | Testing, quality assurance | 3, 5, 6, 9 | From AI-skeptical QA to AI-assisted QA |
-| **Rafael** | Product, specifications | 3, 6, 7, 9 | From requirements writer to execution enabler |
-| **Jordan** | Platform, deployment | 5, 8, 9 | From manual ops to documented automation |
+| **Sarah** | Sprint lead, skeptic | From "prove it" to "I'm convinced" |
+| **David** | Architecture, code review | From "will AI replace me?" to "AI amplifies me" |
+| **Marcus** | DevOps → application code | From infrastructure-only to full-stack confident |
+| **Priya** | Learning, UI implementation | From intimidated to empowered learner |
+| **Elena** | Testing, quality assurance | From AI-skeptical QA to AI-assisted QA |
+| **Rafael** | Product, specifications | From requirements writer to execution enabler |
+| **Jordan** | Platform, deployment | From manual ops to documented automation |
 
 ### The Story Arc
 
