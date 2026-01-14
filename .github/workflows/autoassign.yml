@@ -1,5 +1,5 @@
 
-name: Assign Issue to Copilot
+name: Prepare Issue for Copilot Assignment
 on:
   issues:
     types: [opened]
@@ -8,28 +8,42 @@ permissions:
   issues: write
 
 jobs:
-  assign-to-copilot:
+  prepare-for-copilot:
     runs-on: ubuntu-latest
     steps:
-      - name: Try to assign via GitHub CLI
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          REPO: ${{ github.repository }}
-        run: |
-          echo "Attempting to assign issue #${ISSUE_NUMBER} to Copilot..."
-          
-          # Try using gh CLI to assign to copilot
-          # The CLI might have access to features not in the REST API
-          if gh issue edit ${ISSUE_NUMBER} --repo ${REPO} --add-assignee "github-copilot[bot]" 2>/dev/null; then
-            echo "✅ Successfully assigned issue to Copilot via CLI"
-          else
-            echo "❌ CLI assignment failed. Trying API workaround..."
+      - name: Add label and reminder comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue_number = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Add "copilot-ready" label
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number,
+              labels: ['copilot-ready']
+            });
+
+            // Add a comment with clear instructions
+            const comment = `🤖 **Ready for Copilot Assignment**
             
-            # Add a comment that might trigger Copilot assignment
-            gh issue comment ${ISSUE_NUMBER} --repo ${REPO} --body "@github-copilot Please handle this issue"
+            This issue has been automatically prepared for the GitHub Copilot coding agent.
             
-            echo "⚠️  Automatic assignment not available via API yet."
-            echo "Please manually click the 'Assign to Copilot' button for issue #${ISSUE_NUMBER}"
-            echo "Comment added to notify you to assign manually."
-          fi
+            **To assign to Copilot:** Click the "Assign to Copilot" button in the sidebar →
+            
+            ---
+            
+            *Note: GitHub Copilot assignment is currently a UI-only feature and cannot be automated via API.*`;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body: comment
+            });
+
+            console.log(`✅ Added label and reminder comment to issue #${issue_number}`)
