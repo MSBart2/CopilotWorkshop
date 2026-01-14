@@ -6,7 +6,7 @@
 > — Elena, hitting the limits of knowledge without action
 
 > *"And when I'm working on infrastructure, Copilot suggests changes without knowing our current deployment state. What if it suggests scaling up during a deployment?"*  
-> — Jordan, worried about context-blind suggestions
+> — Marcus, worried about context-blind suggestions
 
 ---
 
@@ -105,7 +105,7 @@ The FanHub team has built impressive AI collaboration:
 
 > *"The skill teaches Copilot HOW to write tests. But when a user reports 'duplicate character data,' I still have to manually check the database to see what duplicates exist before I can write an accurate test. The skill can't SEE the actual data."*
 
-**Jordan** sees an even bigger pattern:
+**Marcus** sees an even bigger pattern:
 
 > *"This is true for everything we do. When I'm working on deployment configs, Copilot doesn't know our current cluster state. When David reviews architecture, Copilot can't see our actual database schema. We're giving Copilot knowledge, but not eyes or hands."*
 
@@ -130,7 +130,7 @@ By the end of this module, you will:
 - Design an MCP strategy that balances capability with security
 
 **Time**: ~75 minutes  
-**Personas**: Jordan (Platform Engineer), Elena (Quality Champion), David (Security Review)
+**Personas**: Marcus (Platform Engineer), Elena (Quality Champion), David (Security Review)
 
 ---
 
@@ -585,7 +585,7 @@ The FanHub team now has:
 
 **Elena**: *"My bug reproduction workflows are finally complete. Copilot knows our testing patterns AND can see actual data issues."*
 
-**Jordan**: *"Infrastructure changes are safer because Copilot sees actual system state."*
+**Marcus**: *"Infrastructure changes are safer because Copilot sees actual system state."*
 
 **David**: *"The governance is in place. Power with responsibility."*
 

@@ -75,7 +75,7 @@ GitHub Copilot can use prompt files stored in `.github/prompts/`. These files:
 > - `spec-to-implementation.prompt.md` — Rafael's spec translator
 > - `feature-request-template.prompt.md` — Feature request formatter
 > - `create-detail-page.prompt.md` — The Golden Thread pattern 🧵
-> - `commit.prompt.md` — Jordan's one-word ship button
+> - `commit.prompt.md` — Marcus's one-word ship button
 
 ### Chat Participants
 
@@ -610,19 +610,19 @@ Track how long each takes. The pattern should hold.
 
 ---
 
-### Exercise 3.4: One-Word Git Workflow — "Jordan's Ship-It Button"
+### Exercise 3.4: One-Word Git Workflow — "Marcus's Ship-It Button"
 
 #### 📖 The Story
 
-**Jordan** (Platform Engineer, 12 years) watches the team work. They're writing great code now, but he notices a pattern: every time someone finishes a feature, they fumble through the same git commands.
+**Marcus** (DevOps Developer, 5 years) watches the team work. They're writing great code now, but he notices a pattern: every time someone finishes a feature, they fumble through the same git commands.
 
 *"Wait, am I on main? I need to create a branch first..."*  
 *"What was the command to push and set upstream again?"*  
 *"How do I create a PR from the terminal?"*
 
-Jordan's automation instincts kick in. *"What if we had a one-word command that just... ships it? Handles branches, commits, pushes, creates the PR—all in one?"*
+Marcus's automation instincts kick in. *"What if we had a one-word command that just... ships it? Handles branches, commits, pushes, creates the PR—all in one?"*
 
-**Supporting Cast**: Marcus (DevOps) helps Jordan think through the edge cases.
+**Supporting Cast**: Priya (learning git workflows) benefits from Marcus's automation patterns.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
@@ -764,7 +764,7 @@ Now shipping code is one word: `/commit`
 | 🔄 **Iterate and Refine** | You refined the prompt to handle edge cases |
 | 📚 **Documentation as Leverage** | The prompt encodes your team's git workflow |
 
-#### 💭 Jordan's Satisfaction
+#### 💭 Marcus's Satisfaction
 
 *"I've written shell scripts for this before. But this is better—it's intelligent. It reads the changes and generates appropriate names and messages. And anyone can customize it by editing the prompt."*
 
@@ -896,7 +896,7 @@ Before moving to Module 4, verify:
 
 **[Module 3: Custom Agents](../03-custom-agents/README.md)** (Monday 1:00 PM)
 
-The team has patterns, documentation, and prompts. Now it's time to let Copilot work autonomously. David will create an Architecture Reviewer agent, Jordan will build DevOps automation, and we'll explore how agents can run in the background while you work on other things.
+The team has patterns, documentation, and prompts. Now it's time to let Copilot work autonomously. David will create an Architecture Reviewer agent, Marcus will build DevOps automation, and we'll explore how agents can run in the background while you work on other things.
 
 *"We've been asking Copilot questions. Now let's tell it to solve problems."* — Sarah, already thinking about what she'll automate
 

@@ -72,11 +72,10 @@ Each character represents a real archetype that learners recognize—either in t
 |-----------|-----------|------|----------------|--------------|
 | **Sarah** | 15 years | Sprint Lead | Skeptical challenger | Convinced advocate |
 | **David** | 20 years | Architect | Worried about relevance | Empowered expert |
-| **Marcus** | 5 years | DevOps | Infrastructure-only | Full-stack confident |
+| **Marcus** | 5 years | DevOps Developer | Infrastructure-only | Full-stack + automation confident |
 | **Priya** | 1 year | Junior Dev | Intimidated learner | Empowered contributor |
 | **Elena** | 8 years | QA Lead | Quality skeptic | AI-assisted QA champion |
 | **Rafael** | 10 years | Product Manager | Requirements writer | Execution enabler |
-| **Jordan** | 12 years | Platform Engineer | Manual ops | Automated excellence |
 
 
 ## 📅 The Timeline

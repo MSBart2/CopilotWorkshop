@@ -189,50 +189,18 @@ Strategic, outcome-focused, always connecting work to user value. Appreciates wh
 
 ---
 
-## Jordan — The DevOps Expert
-
-**Experience:** 12 years
-
-### Background
-
-- Platform Engineer responsible for CI/CD pipelines and deployment infrastructure
-- Deep expertise in GitHub Actions, Azure DevOps, Terraform, and Kubernetes
-- Automates everything—if it can be scripted, it should be
-- Champions "you build it, you run it" culture across the organization
-
-### Goals
-
-- Accelerate pipeline development and reduce YAML debugging time
-- Generate Infrastructure as Code faster while maintaining best practices
-- Create self-service templates that development teams can adopt
-- Use AI to document and explain complex deployment configurations
-
-### Fears
-
-- AI-generated configs that look right but have security vulnerabilities
-- Losing the deep understanding of what pipelines actually do
-- Creating technical debt through copy-paste infrastructure
-- Junior engineers deploying AI-generated infrastructure without understanding it
-
-### Voice in Exercises
-
-Pragmatic, automation-first, always thinking about scale and repeatability. Appreciates tools that reduce toil but insists on understanding the "why" behind every configuration.
-
----
-
 ## The FanHub Team
 
-In this workshop, these seven personas work together to build FanHub—a TV show fan site—in a 9-10 hour sprint. Each persona has a specific role and transformation arc:
+In this workshop, these six personas work together to build FanHub—a TV show fan site—in a 9-10 hour sprint. Each persona has a specific role and transformation arc:
 
-| Persona | Primary Role | Modules Featured | Key Transformation |
+| Persona | Primary Role | Key Transformation |
 |---------|-------------|------------------|-------------------|
-| **Sarah** | Sprint lead, skeptic | 0, 2, 9 | From "prove it" to "I'm convinced" |
-| **David** | Architecture, code review | 1, 2, 4, 7, 9 | From "will AI replace me?" to "AI amplifies me" |
-| **Marcus** | DevOps → application code | 1, 2, 3, 4, 8 | From infrastructure-only to full-stack confident |
-| **Priya** | Learning, UI implementation | 1, 5, 9 | From intimidated to empowered learner |
-| **Elena** | Testing, quality assurance | 3, 5, 6, 9 | From AI-skeptical QA to AI-assisted QA |
-| **Rafael** | Product, specifications | 3, 6, 7, 9 | From requirements writer to execution enabler |
-| **Jordan** | Platform, deployment | 5, 8, 9 | From manual ops to documented automation |
+| **Sarah** | Sprint lead, skeptic | From "prove it" to "I'm convinced" |
+| **David** | Architecture, code review | From "will AI replace me?" to "AI amplifies me" |
+| **Marcus** | DevOps & infrastructure | From infrastructure-only to full-stack confident |
+| **Priya** | Learning, UI implementation | From intimidated to empowered learner |
+| **Elena** | Testing, quality assurance | From AI-skeptical QA to AI-assisted QA |
+| **Rafael** | Product, specifications | From requirements writer to execution enabler |
 
 ### The Story Arc
 
@@ -243,11 +211,10 @@ In this workshop, these seven personas work together to build FanHub—a TV show
 **The Transformation**: By the end, each persona has grown:
 - Sarah realizes structured AI collaboration delivers real value
 - David discovers AI amplifies his 20 years of architectural experience  
-- Marcus gains full-stack confidence through systematic AI workflows
+- Marcus gains full-stack confidence and masters deployment automation through systematic AI workflows
 - Priya learns faster because AI explains as it generates
 - Elena integrates AI into quality assurance without sacrificing rigor
 - Rafael bridges requirements and implementation more effectively through domain skills
-- Jordan creates documented, systematic automation workflows
 - The whole team works more effectively together
 
 ---
@@ -266,6 +233,5 @@ As you work through this training, consider which persona resonates most with yo
 | Are newer to professional development | Priya |
 | Focus on testing and quality | Elena |
 | Bridge business and technical teams | Rafael |
-| Own deployment and operations | Jordan |
 
 > **Remember:** This training exists to help developers at all levels embrace AI-assisted development while honoring the expertise they bring. AI is a tool; wisdom is human.

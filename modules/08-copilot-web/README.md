@@ -106,7 +106,7 @@ Product managers often feel disconnected from technical delivery. Requirements g
 
 **[Module 9: GitHub Copilot CLI](../09-copilot-cli/README.md)** — Command-line AI assistance
 
-> *"I've mastered the web interface. Now Jordan's showing me how Copilot works in the terminal for those quick automation tasks."*  
+> *"I've mastered the web interface. Now Marcus's showing me how Copilot works in the terminal for those quick automation tasks."*  
 > — Rafael, expanding his toolkit
 
 ---

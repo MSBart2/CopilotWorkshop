@@ -114,7 +114,7 @@ Build a full-stack search feature using VS Code Agent Mode while other agents ha
 
 **While you build search:**
 - David's analytics PR runs in the background (Web Agent)
-- Jordan handles infrastructure (CLI Agent)
+- Marcus handles infrastructure (CLI Agent)
 - **3 streams of work happening simultaneously**
 
 ### 📚 Official Docs

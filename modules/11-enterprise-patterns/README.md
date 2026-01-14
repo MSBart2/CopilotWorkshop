@@ -19,7 +19,7 @@ The challenge: Individual success doesn't automatically become organizational ca
 - **Rafael** (Product): *"How do we ensure consistent standards across all teams?"*
 - **Elena** (QA): *"How do we catch AI-generated code issues systematically?"*
 - **David** (Architect): *"How do we share architectural knowledge across repositories?"*
-- **Jordan** (DevOps): *"How do we measure and justify our Copilot investment?"*
+- **Marcus** (DevOps): *"How do we measure and justify our Copilot investment?"*
 - **Marcus & Priya**: *"How do we enable new teams without becoming teachers?"*
 
 This module provides patterns for scaling Copilot adoption across your organization.
@@ -37,7 +37,7 @@ By the end of this module, you will:
 - **Build onboarding materials** that package your learnings for new teams
 
 **Time**: Choose exercises relevant to your role (~30-90 minutes total)  
-**Personas**: Sarah, Jordan, David, Rafael, Elena, Marcus, Priya  
+**Personas**: Sarah, Marcus, David, Rafael, Elena, Marcus, Priya  
 **Difficulty**: 🌳 Advanced  
 **Tiers**: Mixed (🆓 Free, 💼 Business, 🏢 Enterprise)
 
@@ -171,7 +171,7 @@ From this module, you create:
 2. **Elena's code review checklist** captures systematic quality thinking  
    → Teams catch issues David would catch, even without David reviewing
 
-3. **Jordan's knowledge base** connects infrastructure + applications + documentation  
+3. **Marcus's knowledge base** connects infrastructure + applications + documentation  
    → Copilot can answer questions spanning the entire system
 
 4. **Sarah's metrics framework** quantifies what feels like productivity gains  
@@ -218,7 +218,7 @@ From this module, you create:
 | **Priya** | "Afraid to ask questions" | "I write the answers" | Junior to knowledge contributor |
 | **Elena** | "AI quality concerns" | "Systematic quality at scale" | Quality engineering for AI age |
 | **Rafael** | "Bridge business and tech" | "Enable execution everywhere" | Product thinking meets enablement |
-| **Jordan** | "Automate everything" | "Automate knowledge transfer" | Systems thinking for people |
+| **Marcus** | "Automate everything" | "Automate knowledge transfer" | Systems thinking for people |
 
 ---
 
@@ -302,7 +302,7 @@ You've completed the full journey—from first principles to enterprise scale. W
 
 **His transformation**: From requirements writer to execution multiplier.
 
-### Jordan (DevOps Expert, 12 years)
+### Marcus (DevOps Expert, 12 years)
 *"I automate infrastructure. Now I automate knowledge transfer. The metrics dashboard is monitoring for our AI tools—operational excellence applies everywhere."*
 
 **His transformation**: From operational to organizational systems thinking.

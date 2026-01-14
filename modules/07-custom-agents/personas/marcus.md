@@ -40,7 +40,7 @@ In the old world, this meant:
 
 *"This is exactly the kind of tedious work that should be automated,"* Marcus thinks.
 
-Jordan shows him Agent Mode.
+Sarah shows him Agent Mode.
 
 ### ❌ The "Before" — What Frustration Looks Like
 

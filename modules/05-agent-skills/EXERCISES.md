@@ -1670,9 +1670,9 @@ Enhance the effort estimator to:
 
 ---
 
-### Exercise 5.4A: Build Pipeline Analyzer Skill — "Jordan and Marcus Debug CI/CD Failures"
+### Exercise 5.4A: Build Pipeline Analyzer Skill — "Marcus and Sarah Debug CI/CD Failures"
 
-> 🧵 **The Golden Thread**: FanHub's GitHub Actions pipeline fails. Marcus and Jordan spend 20 minutes digging through logs. They'll create a skill that diagnoses build failures systematically. *This connects to Module 8 (Copilot Web) and Module 9 (CLI), where pipeline automation continues.*
+> 🧵 **The Golden Thread**: FanHub's GitHub Actions pipeline fails. Marcus and Sarah spend 20 minutes digging through logs. They'll create a skill that diagnoses build failures systematically. *This connects to Module 8 (Copilot Web) and Module 9 (CLI), where pipeline automation continues.*
 
 #### 📖 The Story
 
@@ -1685,11 +1685,11 @@ npm ERR! fanhub-frontend@1.0.0 test: `react-scripts test --coverage`
 npm ERR! Exit status 1
 ```
 
-**Jordan** (DevOps Expert, 12 years) joins: *"What failed this time?"*
+**Sarah** (Senior Developer, 15 years) joins: *"What failed this time?"*
 
 Marcus: *"Tests... I think? The log is huge."*
 
-Jordan: *"Let me look... yeah, tests are timing out. But why? This worked yesterday."*
+Sarah: *"Let me look... yeah, tests are timing out. But why? This worked yesterday."*
 
 They spend 20 minutes analyzing:
 - Was it an environment issue? (check Node version)
@@ -1701,7 +1701,7 @@ They spend 20 minutes analyzing:
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-**Scenario**: The FanHub backend build fails on pull request #47. Here's Marcus and Jordan's painful process:
+**Scenario**: The FanHub backend build fails on pull request #47. Here's Marcus and Sarah's painful process:
 
 1. **Get notified** — Slack: "CI failed" (instant)
 2. **Open GitHub Actions** — Navigate to workflow run (30 seconds)
@@ -1717,7 +1717,7 @@ They spend 20 minutes analyzing:
 
 **Total time**: ~25 minutes per CI failure
 **Frustration**: High — *"We spend more time debugging CI than writing features"*
-**Bus factor**: Only Marcus and Jordan know how to read these logs effectively
+**Bus factor**: Only Marcus and Sarah know how to read these logs effectively
 
 #### 🎯 Objective
 
@@ -1911,19 +1911,19 @@ Now when CI fails:
 **Before the skill:**
 - Time per CI failure: ~20-25 minutes (log forensics + diagnosis)
 - False starts: 2-3 (wrong diagnosis, try again)
-- Team dependency: Only Marcus/Jordan can diagnose efficiently
+- Team dependency: Only Marcus/Sarah can diagnose efficiently
 - Documentation: Ad-hoc Slack threads
 
 **After the skill:**
 - Time per CI failure: ~3-5 minutes (describe failure, get diagnosis)
 - False starts: 0-1 (correct diagnosis first time)
 - Team dependency: Anyone can ask Copilot for help
-- Documentation: Skill encodes Marcus/Jordan's expertise
+- Documentation: Skill encodes Marcus/Sarah's expertise
 
 **Value unlocked**: 
 - 5x faster CI debugging
 - Entire team can diagnose pipeline failures
-- Marcus and Jordan's knowledge is democratized
+- Marcus and Sarah's knowledge is democratized
 - Connects to Module 8 (GitHub Actions automation) and Module 9 (CLI workflows)
 
 #### 📚 Official Docs
@@ -1932,11 +1932,11 @@ Now when CI fails:
 - [GitHub Docs: Debugging workflows](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/using-workflow-run-logs)
 - [Jest: Timeout configuration](https://jestjs.io/docs/jest-object#jestsettimeouttimeout)
 
-#### 💭 Marcus and Jordan's Transformation
+#### 💭 Marcus and Sarah's Transformation
 
 **Marcus**: *"I've debugged hundreds of CI failures—test timeouts, Docker context issues, flaky tests. Now that knowledge is in a skill. When someone's PR fails, they don't wait for me—they ask Copilot and get my diagnosis instantly."*
 
-**Jordan**: *"This is automation at the next level. We automated the builds; now we're automating the debugging. The skill captures our 17 combined years of CI/CD experience. And it connects perfectly to our GitHub Actions work in Module 8."*
+**Sarah**: *"This is automation at the next level. We automated the builds; now we're automating the debugging. The skill captures our 20 combined years of CI/CD experience. And it connects perfectly to our GitHub Actions work in Module 8."*
 
 #### 🚀 Challenge Extension
 
@@ -2158,7 +2158,7 @@ The FanHub team now has:
 
 ### What's Next
 
-In **Module 7: MCP Servers**, you'll learn how to connect Copilot to external systems—databases, APIs, and deployment infrastructure. Elena's bug reproduction skill knows the TESTING PATTERNS, but MCP gives it access to query the ACTUAL DATABASE to understand what data is causing bugs. Jordan shows the team how MCP (Model Context Protocol) supercharges skills with real-time data access.
+In **Module 7: MCP Servers**, you'll learn how to connect Copilot to external systems—databases, APIs, and deployment infrastructure. Elena's bug reproduction skill knows the TESTING PATTERNS, but MCP gives it access to query the ACTUAL DATABASE to understand what data is causing bugs. Marcus shows the team how MCP (Model Context Protocol) supercharges skills with real-time data access.
 
 **💡 Plan Mode Tip for Next Module**: Before adding MCP servers, use plan mode to identify which external systems Copilot should connect to and what security constraints apply.
 

@@ -18,7 +18,7 @@ In **Module 6**, they integrated MCP servers for external data sources.
 In **Module 7**, they created dedicated custom agents for different workflows.  
 In **Module 8**, Rafael mastered GitHub.com Copilot for product management tasks.
 
-Now, **in Module 9**, Jordan shows Marcus the terminal workflows that make him unstoppable—interactive AI sessions that handle testing, debugging, and pre-push validation conversationally.
+Now, **in Module 9**, Marcus shows the team the terminal workflows that make him unstoppable—interactive AI sessions that handle testing, debugging, and pre-push validation conversationally.
 
 ---
 
@@ -115,7 +115,7 @@ You can approve per-action or for the session.
 
 **Meet Marcus.** He just modified `fanhub/backend/src/routes/characters.js` to add a new endpoint. He runs `npm test` and sees 47 lines of stack trace. It takes him 10 minutes to figure out the issue: a missing import.
 
-Jordan walks over: *"You're still reading stack traces manually? Let me show you something."*
+Sarah walks over: *"You're still reading stack traces manually? Let me show you the terminal workflow that saves me hours every week."*
 
 #### ❌ The "Before" — What Frustration Looks Like
 
@@ -246,7 +246,7 @@ Ask the agent: *"Add three more edge case tests for the characters endpoint."* S
 
 #### 📖 The Story
 
-**Marcus is learning.** He just changed one function in `database/queries.js`. Out of habit, he runs the full test suite: `npm test`. It takes 2 minutes. Jordan looks over: *"Why are you running tests for files you didn't touch?"*
+**Marcus is learning.** He just changed one function in `database/queries.js`. Out of habit, he runs the full test suite: `npm test`. It takes 2 minutes. Sarah looks over: *"Why are you running tests for files you didn't touch?"*
 
 #### ❌ The "Before" — What Frustration Looks Like
 
@@ -365,7 +365,7 @@ Ask the agent: *"Create a git hook that runs this check before every commit."*
 - Forgot to run the full test suite
 - Forgot to check for TypeScript errors
 
-Jordan shows him the workflow that makes this impossible.
+Sarah shows him the workflow that makes this impossible.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
@@ -462,7 +462,7 @@ If anything fails, he asks: *"Fix that."* Done in 30 seconds.
 
 #### 💭 Marcus's Reaction
 
-_"I literally can't break CI anymore. The agent catches everything before I push. Jordan, you're a wizard."_
+_"I literally can't break CI anymore. The agent catches everything before I push. Sarah, you're a wizard."_
 
 ---
 
@@ -470,7 +470,7 @@ _"I literally can't break CI anymore. The agent catches everything before I push
 
 #### 📖 The Story
 
-**Marcus just wrote a new feature:** A function to calculate character compatibility scores. He knows he needs tests, but writing comprehensive test cases takes forever. Jordan shows him how to generate tests conversationally.
+**Marcus just wrote a new feature:** A function to calculate character compatibility scores. He knows he needs tests, but writing comprehensive test cases takes forever. Sarah shows him how to generate tests conversationally.
 
 #### ❌ The "Before" — What Frustration Looks Like
 
@@ -609,13 +609,13 @@ Ask the agent: *"Generate property-based tests for this function using a fuzzing
 
 #### 📖 The Story
 
-**Jordan's turn.** He just updated dependencies in `fanhub/backend/package.json` and now the build is broken. Cryptic error messages about peer dependencies. He could spend 20 minutes Googling, or...
+**Priya's turn.** She just updated dependencies in `fanhub/backend/package.json` and now the build is broken. Cryptic error messages about peer dependencies. She could spend 20 minutes Googling, or...
 
 *"Let's see if the CLI agent can figure this out."*
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Jordan's dependency debugging process:
+Priya's dependency debugging process:
 1. `npm install` fails
 2. Read cryptic error about peer dependencies
 3. Google the error
@@ -705,7 +705,7 @@ Run npm run build if we have a build script
 
 #### ✨ The "After" — The Improved Experience
 
-Jordan describes the error. The agent:
+Priya describes the error. The agent:
 1. Analyzes package.json
 2. Identifies the problem (React doesn't belong)
 3. Explains WHY it's causing issues
@@ -720,7 +720,7 @@ Jordan describes the error. The agent:
 
 - [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
 
-#### 💭 Jordan's Reaction
+#### 💭 Priya's Reaction
 
 _"I usually just trial-and-error this stuff. Having it explain WHY the dependency is wrong is way better than just fixing it."_
 
@@ -734,7 +734,7 @@ Ask the agent: *"Audit all our dependencies for security vulnerabilities and sug
 
 #### 📖 The Story
 
-**Marcus and Jordan are reviewing code coverage reports.** The `episodes` module is only 45% covered. Jordan: *"Let's use the CLI agent to drive coverage up systematically."*
+**Marcus and Elena are reviewing code coverage reports.** The `episodes` module is only 45% covered. Elena: *"Let's use the CLI agent to drive coverage up systematically."*
 
 #### ❌ The "Before" — What Frustration Looks Like
 
@@ -842,11 +842,11 @@ _"I've been manually hunting for uncovered lines like a caveman. This is systema
 
 #### 📖 The Story
 
-**Jordan's secret weapon:** Every morning, before writing any code, he runs a health check routine. It catches issues before they become problems. Marcus: *"Show me your morning routine."*
+**Marcus's secret weapon:** Every morning, before writing any code, he runs a health check routine. It catches issues before they become problems. Priya: *"Show me your morning routine."*
 
 #### ❌ The "Before" — What Frustration Looks Like
 
-Marcus's morning start:
+Priya's morning start:
 1. Pull latest code
 2. Hope nothing is broken
 3. Start working
@@ -927,7 +927,7 @@ Document this morning check routine for the team
 
 #### ✨ The "After" — The Improved Experience
 
-Every morning, Jordan runs: *"Morning health check."* The agent:
+Every morning, Marcus runs: *"Morning health check."* The agent:
 1. Pulls latest
 2. Checks dependencies
 3. Runs tests
@@ -944,9 +944,9 @@ Issues caught BEFORE coding begins. Mornings start productive, not reactive.
 
 - [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
 
-#### 💭 Jordan's Reaction
+#### 💭 Marcus's Reaction
 
-_"This is the routine that's saved me hundreds of hours. Now Marcus has it too."_
+_"This is the routine that's saved me hundreds of hours. Now the whole team has it too."_
 
 #### 🚀 Challenge Extension
 
@@ -978,7 +978,7 @@ The CLI agent doesn't just execute commands faster—it explains what's happenin
 
 **The Best Automators Understand Their Systems**
 
-Jordan is effective because:
+Marcus is effective because:
 1. He knows what SHOULD happen
 2. He uses CLI agents to execute it faster
 3. He reviews agent explanations to deepen understanding

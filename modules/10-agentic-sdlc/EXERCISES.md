@@ -3,7 +3,7 @@
 ## ⏰ Monday 7:00 PM — Parallel Development Power
 
 > *"We've learned to use agents one at a time. Now let's see what happens when we run them everywhere at once."*  
-> — Jordan, ready to unleash the full potential of multi-interface agents
+> — Marcus, ready to unleash the full potential of multi-interface agents
 
 ---
 
@@ -24,7 +24,7 @@ But so far, they've been working sequentially—one task at a time, one interfac
 
 **David** looks at the sprint backlog and does the math: *"We have 90 minutes. We have three major features to build. One person, one task at a time... we won't make it."*
 
-**Jordan** grins: *"Who said anything about one at a time? We have agents in VS Code, agents on the web, and agents in the CLI. Let's run them in parallel."*
+**Marcus** grins: *"Who said anything about one at a time? We have agents in VS Code, agents on the web, and agents in the CLI. Let's run them in parallel."*
 
 ---
 
@@ -40,7 +40,7 @@ By the end of this module, you will:
 - Understand which interface to use for which task type
 
 **Time**: ~90-120 minutes  
-**Personas**: Jordan (DevOps), David (Architect), Marcus (Developer), Elena (QA)
+**Personas**: Marcus (DevOps), David (Architect), Marcus (Developer), Elena (QA)
 
 ---
 
@@ -365,7 +365,7 @@ By now you should have running:
 
 #### 📖 The Story
 
-**Jordan** (DevOps) has been watching Marcus and David work. Now it's infrastructure time.
+**Marcus** (DevOps) has been watching Marcus and David work. Now it's infrastructure time.
 
 *"While you two handle features, I need to set up test fixtures, run migrations, generate monitoring configs, and prepare the deployment. These are all terminal tasks. Perfect for the CLI agent."*
 
@@ -496,7 +496,7 @@ Your parallel agent status:
 - [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli)
 - [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
 
-#### 💭 Jordan's DevOps Perspective
+#### 💭 Marcus's DevOps Perspective
 
 *"The Copilot CLI is like having a junior DevOps engineer in my terminal. I can ask it to create files, run commands, even open PRs—all without leaving the command line. And the conversation keeps context, so I can iterate quickly."*
 
@@ -611,7 +611,7 @@ It's Monday, 4:00 PM. **Sarah** gathers the team for sprint planning:
 **Rafael** opens the backlog. There are 8 feature requests, 3 bug fixes, and 2 tech debt items. Everyone starts talking at once:
 
 - **Elena**: "We need to fix that character duplication bug—it's a data integrity issue!"
-- **Jordan**: "The deployment pipeline is fragile. We should add health checks."
+- **Marcus**: "The deployment pipeline is fragile. We should add health checks."
 - **David**: "The architecture needs refactoring. We have circular dependencies."
 - **Marcus**: "Users want search! It's the most requested feature!"
 
@@ -633,7 +633,7 @@ Without strategic orchestration:
 **4:00 PM**: Team starts working on whatever they think is important
 - David refactors architecture (complex, no visible impact)
 - Elena writes tests for edge cases (important, but not demo material)
-- Jordan optimizes deployment (won't be visible in demo)
+- Marcus optimizes deployment (won't be visible in demo)
 - Marcus starts search feature (too big for 90 minutes)
 
 **5:30 PM**: Sarah checks progress
@@ -724,7 +724,7 @@ Rafael uses product judgment + AI orchestration to prioritize work, decompose it
      - Share to Twitter, Facebook, Instagram
    - **Success**: Working buttons on quote pages
    
-   ### Stream 3: Bug Fix + Infrastructure (Jordan)
+   ### Stream 3: Bug Fix + Infrastructure (Marcus)
    - **Interface**: GitHub Copilot CLI (Terminal)
    - **Why**: Database investigation + scripted fix
    - **Deliverables**:
@@ -1037,7 +1037,7 @@ Use a background agent to process a multi-file task while you continue other wor
 
 #### 📖 The Story
 
-**Jordan** is responsible for infrastructure across 200+ microservices. When a security vulnerability is discovered, patches need to be applied everywhere. Cloud agents leverage enterprise infrastructure to process at scale.
+**Marcus** is responsible for infrastructure across 200+ microservices. When a security vulnerability is discovered, patches need to be applied everywhere. Cloud agents leverage enterprise infrastructure to process at scale.
 
 #### 🎯 Objective
 
@@ -1082,7 +1082,7 @@ Understand how cloud agents enable enterprise-scale AI processing with governanc
 - [GitHub Copilot Enterprise](https://docs.github.com/en/enterprise-cloud@latest/copilot/github-copilot-enterprise)
 - [Copilot for Business](https://docs.github.com/en/copilot/copilot-business)
 
-#### 💭 Jordan's Insight
+#### 💭 Marcus's Insight
 
 *"Security patches across 200 services used to be a week-long fire drill. Cloud agents process in an hour. I still review and approve, but the grunt work is handled."*
 
@@ -1278,7 +1278,7 @@ Each persona learned something different:
 
 **Elena** (8 years): *"Test generation was good, but I still had to think about what to test. That's fine—that's my job. The AI wrote the tests, I designed the strategy."*
 
-**Jordan** (12 years): *"The deployment docs almost wrote themselves. Running agents in parallel changed everything—I'm orchestrating, not just coding."*
+**Marcus** (12 years): *"The deployment docs almost wrote themselves. Running agents in parallel changed everything—I'm orchestrating, not just coding."*
 
 **Rafael** (10 years): *"The real win was the prompt library—now we have repeatable ways to translate specs into code. We ship faster AND better."*
 
