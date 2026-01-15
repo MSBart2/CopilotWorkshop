@@ -37,7 +37,7 @@ By the end of this module, you will:
 - Watch an agent build a complete feature autonomously
 
 **Time**: ~60 minutes  
-**Personas**: David (Architect), Marcus (Platform Engineer), Marcus (DevOps)
+**Personas**: David (Architect), Marcus (Platform Engineer), Sarah (Senior Developer), Elena (QA)
 
 ---
 
@@ -62,9 +62,9 @@ Agent workflows, autonomous implementation
 Validating the payoff, skeptic to advocate  
 *~20 minutes*
 
-**[Marcus's Path →](personas/marcus.md)**  
-DevOps reviewer, infrastructure agents  
-*~25 minutes*
+**[Elena's Path →](personas/elena.md)**  
+QA validation of agent-generated tests  
+*~35 minutes*
 
 </td>
 <td width="33%" valign="top">

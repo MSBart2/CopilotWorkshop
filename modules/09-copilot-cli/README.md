@@ -38,7 +38,7 @@ By the end of this module, you will:
 - Create morning health check routines
 
 **Time**: ~75-90 minutes  
-**Primary Personas**: Marcus (DevOps Developer), David (Architect)
+**Primary Personas**: Marcus (DevOps Developer), David (Architect), Elena (QA)
 
 ---
 

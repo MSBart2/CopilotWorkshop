@@ -110,6 +110,10 @@ The exercises in this module are **independent**—complete the ones most releva
 🆓 **Tier**: All tiers  
 🌟 **Value**: Catch AI-specific issues (over-engineering, edge cases, security) before production
 
+**[Elena's Path →](personas/elena.md)** — Testing standards at scale  
+⏱️ **Time**: 40 min  
+🎯 **Goal**: Scale testing patterns to organization-wide standards
+
 ### For Architects & Platform Engineers (Enterprise)
 
 **[Exercise 11.3: Copilot Knowledge Bases](EXERCISES.md#exercise-113-copilot-knowledge-bases--marcus-and-david-build-the-shared-context)**  

@@ -34,7 +34,7 @@ By the end of this module, you will:
 - Use Copilot to analyze backlog patterns for data-informed prioritization
 
 **Time**: ~50-60 minutes  
-**Primary Personas**: Rafael (Product Manager), David (Architect)  
+**Primary Personas**: Rafael (Product Manager), David (Architect), Elena (QA)  
 **GitHub Copilot Tier**: Enterprise (required for PR summaries and full chat)
 
 ---

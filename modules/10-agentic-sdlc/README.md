@@ -14,7 +14,7 @@ You've learned to customize Copilot with instructions, prompts, agents, skills, 
 **Agentic SDLC** changes that. With agents running across VS Code, GitHub.com, and the CLI simultaneously, you can build features in parallel.
 
 **Time**: ~90 minutes  
-**Personas**: Marcus (parallel orchestration), David (architecture review), Rafael (sprint planning)
+**Personas**: Marcus (parallel orchestration), David (architecture review), Rafael (sprint planning), Elena (parallel QA)
 
 ---
 
@@ -100,6 +100,7 @@ Sprint End ◄── All streams converge
 | **Architect** | Parallel architecture review | [David's Path](./personas/david.md) |
 | **Product/Lead** | Sprint orchestration | [Rafael's Path](./personas/rafael.md) |
 | **Senior/Safety** | Checkpoints & safety nets | [Sarah's Path](./personas/sarah.md) |
+| **QA** | Parallel testing workflows | [Elena's Path](./personas/elena.md) |
 | **DevOps** | Parallel infrastructure | [Marcus's Path](./personas/marcus.md) |
 
 ---

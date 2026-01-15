@@ -35,7 +35,7 @@ By the end of this module, you will:
 - Understand why "clarity is the new syntax" isn't just a slogan
 
 **Time**: ~90 minutes (or follow your persona's focused path for less)  
-**Featured Personas**: David (Architect), Sarah (Senior Developer), Marcus (DevOps)
+**Featured Personas**: David (Architect), Sarah (Senior Developer), Marcus (DevOps), Elena (QA)
 
 ---
 
@@ -101,6 +101,7 @@ This is why David's architecture documentation is step one—not step last.
 - **[David's Path](personas/david.md)** (40 min) — Lead Exercise 1.1 (architecture), checkpoint 1.1b, collaborate on Exercise 1.4 (debug view)
 - **[Sarah's Path](personas/sarah.md)** (55 min) — Lead Exercise 1.2 (team standards), Exercise 1.3 (validate standards), both checkpoints
 - **[Marcus's Path](personas/marcus.md)** (25 min) — Lead Exercise 1.2c (developer workflow), enable self-service setup
+- **[Elena's Path](personas/elena.md)** (35 min) — Add testing standards to repo instructions, ensure test patterns are documented
 
 ### Option 2: Experience the Full Story
 

@@ -36,7 +36,7 @@ By the end of this module, you will:
 - Experience how structured thinking improves AI output quality
 
 **Time**: ~90 minutes (or follow your persona's focused path for less)  
-**Featured Personas**: Sarah (Skeptical Senior), David (Seasoned Architect), Marcus (DevOps Developer)
+**Featured Personas**: Sarah (Skeptical Senior), David (Seasoned Architect), Marcus (DevOps Developer), Elena (Quality Champion)
 
 ---
 
@@ -110,6 +110,11 @@ This isn't about creating project management overhead. It's about leveraging AI 
 - Lead: Exercise 2.3 (Systematic test failure investigation)
 - **Transformation**: From "I'll just rerun the tests" to "I understand what I'm testing"
 - **Creates**: `TEST-FAILURE-INVESTIGATION.md` for Module 03
+
+**Elena (Quality Champion)** — [30 minutes focused path](personas/elena.md)
+- Contribute: Testing requirements in feature plans
+- **Transformation**: From "reactive test discovery" to "proactive test planning"
+- **Creates**: Testing requirements section in feature plans
 
 ### Option 2: Experience the Full Story
 
