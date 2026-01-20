@@ -37,20 +37,6 @@ This isn't just about convenience. MCP servers transform Copilot from a code gen
 
 ---
 
-## 💭 Why This Matters
-
-**Sarah (Skeptical Senior):** Connects Copilot to the GitHub API for automated code review insights—validates that PRs meet merge criteria in 30 seconds instead of 5 minutes of manual checking. Scales her review expertise across the entire team's workflow.
-
-**David (Seasoned Architect):** Queries production database schema directly in chat to validate architecture decisions—no more context-switching to database tools. His 20 years of schema design experience now operates on live data, not outdated documentation.
-
-**Marcus (DevOps Developer):** Connects build systems, databases, and deployment APIs to Copilot—debugs failed deployments by querying logs and database state without leaving VS Code. Removes 15 minutes of tool-switching per incident.
-
-**Elena (Quality Champion):** Validates that test fixtures match production schema by querying the actual database—catches schema drift before tests fail. Reduces schema-related test failures from 12% to 0% in QA environment.
-
-**Rafael (Product Visionary):** Queries analytics database to validate feature usage during planning—backs up product decisions with real usage data in seconds instead of waiting for reports. Turns "I think users want X" into "83% of users already use related feature Y."
-
----
-
 ## 💡 Understanding MCP (Model Context Protocol)
 
 **MCP is an open standard** that allows AI assistants to communicate with external tools and services through a unified interface. Think of it as a universal adapter that lets Copilot talk to databases, APIs, file systems, and other resources without needing custom integration code for each one.
