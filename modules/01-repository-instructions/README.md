@@ -38,20 +38,6 @@ This isn't about bureaucracy. It's about leverage. Every hour David spends docum
 
 ---
 
-## 💭 Why This Matters
-
-**Sarah (Skeptical Senior, 15 years):** *"I tested it. Before ARCHITECTURE.md: Copilot analyzed 847 files to answer 'where do database queries go?' Response time: 8 seconds. After: Referenced architecture doc, 2 seconds. That's 75% faster responses, every query. When I added copilot-instructions.md with our React standards, pattern violations in PR reviews dropped from 8 per PR to 0. That's 40 minutes saved per review, 3 reviews per week = 2 hours back every week."*
-
-**David (Seasoned Architect, 20 years):** *"For 20 years, I've documented architecture after the fact. Now architecture documentation is input, not output. ARCHITECTURE.md means Copilot understands my system design from the start—it doesn't suggest patterns that violate the architecture. It amplifies my decisions instead of working around them. Documentation once = architectural alignment automatically."*
-
-**Marcus (DevOps Developer, 5 years):** *"Build failures used to take 30 minutes to debug because Copilot would suggest patterns that broke our build pipeline. Now copilot-instructions.md includes 'always use npm workspaces syntax, avoid file: protocol' and build-breaking suggestions dropped from 5 per sprint to 0. That's 150 minutes saved per sprint = 5 hours back every two weeks."*
-
-**Elena (Quality Champion, 8 years):** *"I documented our testing standards once in copilot-instructions.md: 'use Jest, mock external APIs, test error cases.' Now generated test suites follow our patterns from the start. Test revision rounds went from 3→1, saving 30 minutes per test suite. That's actual time back, not theoretical improvement."*
-
-**Rafael (Product Visionary, 10 years):** *"When I analyze codebases for feature feasibility, ARCHITECTURE.md cuts my exploration time from 45 minutes to 5. I can walk into stakeholder meetings with 'here's what's possible' answers instead of 'I need to investigate.' Faster technical understanding = faster business decisions = features shipped earlier."*
-
----
-
 💡 **Understanding `@workspace`**
 
 Throughout this module, you'll use `@workspace` in your Copilot prompts. This powerful context operator:
