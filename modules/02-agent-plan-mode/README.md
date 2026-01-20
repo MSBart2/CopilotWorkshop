@@ -36,20 +36,6 @@ This isn't about letting AI make decisions for you. It's about using AI to do th
 
 ---
 
-## 💭 Why This Matters
-
-**Sarah (Skeptical Senior):** *"I tested plan mode on our character detail feature. Before: spent 35 minutes mapping dependencies, identifying files to modify, checking for conflicts. After: plan mode analyzed the codebase in 90 seconds, proposed 7 implementation steps with file paths and rationale. I validated the approach in 5 minutes, then executed. That's 35→7 minutes for planning = 28 minutes saved per feature, every feature. Multiply that by 15 features per sprint: 7 hours back."*
-
-**David (Seasoned Architect):** *"The plan agent doesn't replace my 20 years of architectural knowledge—it amplifies it. It proposed a solid implementation that followed ARCHITECTURE.md, but I caught what AI couldn't: the plan didn't account for our caching layer invalidation strategy. AI gave me the 80% fast; my expertise ensures the production-ready 20%. Planning in 7 minutes instead of 35 means I review 5x more feature designs per week."*
-
-**Marcus (DevOps Developer):** *"Feature planning used to be guesswork: 'I think we need to modify these files.' Plan mode gave me certainty: exact file paths, specific changes, dependency order. Build failures from missed dependencies dropped from 5 per sprint to 1. That's 4 × 28 minutes = 112 minutes saved per sprint. Plus I gained confidence implementing full-stack features I used to avoid."*
-
-**Elena (Quality Champion):** *"The plan includes test file modifications I would've missed. Before: wrote feature code, then realized I needed 3 new test files. After: plan mode identified all test impacts upfront—unit tests, integration tests, API endpoint tests. Test coverage gaps found during planning instead of PR review = 1 review cycle saved per feature (45 minutes each)."*
-
-**Rafael (Product Visionary):** *"When stakeholders ask 'how hard is adding character search?', I used to say 'let me get back to you.' Now I run plan mode and walk into the meeting with: '7 steps, touches frontend search UI, backend API, database queries, and caching—3 days for a senior, 5 for a mid-level.' Data-driven estimation in 5 minutes instead of 2 hours of developer time."*
-
----
-
 💡 **Understanding the Plan Agent**
 
 The **plan agent** is a specialized mode in VS Code Copilot Chat that helps you research and plan complex tasks before implementing them. Unlike the default agent that immediately starts making changes, the plan agent:
