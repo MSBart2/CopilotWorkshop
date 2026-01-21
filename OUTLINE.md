@@ -25,8 +25,9 @@ This workshop teaches ways to customize GitHub Copilot. Each module progressivel
 | 🔄 **Agentic SDLC**            | Background agents for autonomous work          | Module 10     |
 | 🏢 **Enterprise Patterns**     | Organization-wide standards and governance     | Module 11     |
 | 🔒 **Copilot Hooks**           | Governance, validation, and control points     | Module 12     |
+| 🎓 **Customizations Overview** | Complete ecosystem tour of all customization types | Module 13 |
 
-By Module 12, all features work together and you'll scale your success across the organization.
+By Module 13, you'll have a complete understanding of the entire customization landscape and how all features work together.
 
 ---
 
@@ -63,8 +64,9 @@ Six personas guide you through the workshop, each representing real developer ar
 | **10** | [Agentic SDLC](modules/10-agentic-sdlc/README.md)                       | 90 min    | 3         | 🆓     | Background agents with Git worktrees; autonomous parallel work                                           |
 | **11** | [Enterprise Patterns](modules/11-enterprise-patterns/README.md)         | 30-90 min | Variable  | 🆓💼🏢 | Scale success org-wide; choose exercises by role                                                         |
 | **12** | [Copilot Hooks](modules/12-copilot-hooks/README.md)                     | 60-90 min | 3         | 🆓     | Add governance, validation, and control points; automation with accountability                           |
+| **13** | [Customizations Overview](modules/13-customizations-overview/README.md) | 60 min    | 5         | 🆓     | Comprehensive tour of the customization ecosystem; learn when to use each tool                           |
 
-**Total**: 13 modules, 38 exercises, ~11-13 hours
+**Total**: 14 modules, 43 exercises, ~12-14 hours
 
 ---
 

@@ -23,7 +23,7 @@ But first, you need to see the problem. You need to _feel_ the frustration of wo
 Your environment includes:
 - ✅ VS Code in the browser (or connect from desktop VS Code)
 - ✅ GitHub Copilot & Chat pre-installed and activated
-- ✅ Mermaid diagram rendering for architecture visuals  
+- ✅ Mermaid diagram rendering for architecture visuals
 - ✅ All FanHub development tools (Node.js, Docker, ESLint, Prettier)
 - ✅ Ports automatically forwarded for the app
 - ✅ Works from any device—even tablets!
@@ -236,7 +236,7 @@ The best code is code anyone can understand. If you can't explain it clearly to 
 
 ---
 
-### 2. 🎯 Intent Over Implementation  
+### 2. 🎯 Intent Over Implementation
 
 **Describe WHAT you want, not HOW to build it**
 
@@ -285,7 +285,7 @@ The quality of suggestions is directly proportional to the quality of context yo
 
 **Your investment:** Learn what context to provide when:
 - **Instructions** for persistent patterns
-- **`@workspace`** for project awareness  
+- **`@workspace`** for project awareness
 - **`#file`** for targeted focus
 - **Images** for visual design
 
@@ -399,7 +399,7 @@ Look at:
 
 Pick your favorite show. Some ideas:
 - 📺 The Office (US)
-- 🔦 Stranger Things  
+- 🔦 Stranger Things
 - 🧪 Breaking Bad
 - 🛡️ The Mandalorian
 - 🐉 Game of Thrones
