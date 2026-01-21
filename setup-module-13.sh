@@ -10,8 +10,12 @@
 echo "Creating Module 13 directory structure..."
 mkdir -p modules/13-customizations-overview
 
-echo "Copying README file..."
-cp /tmp/module-13-readme.md modules/13-customizations-overview/README.md
+echo "Moving README file to module directory..."
+mv MODULE-13-README.md modules/13-customizations-overview/README.md
 
 echo "Module 13 directory structure created successfully!"
-echo "Next step: Run exercise-author skill to create exercise files"
+echo ""
+echo "Next steps:"
+echo "1. Run: bash setup-module-13.sh (if not already done)"
+echo "2. Use exercise-author skill to create exercise files (13.1-13.5)"
+echo "3. Verify all artifacts are consistent with the exercise planning table"
