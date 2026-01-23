@@ -14,6 +14,8 @@ David reviews failed builds to ensure architectural standards aren't violated, b
 
 This exercise transforms the interactive CLI workflows from Exercise 9.1 into programmatic automation—enabling AI-powered build analysis that runs automatically on every pipeline failure, identifies patterns, and surfaces actionable fixes without human intervention.
 
+> 💡 **Mode Selection:** Exercise 9.1 used **Plan Mode** (interactive sessions with collaborative planning) for complex debugging where clarifying questions help. This exercise uses **Programmatic Mode** (`copilot -p`) for CI/CD automation where tasks are well-defined and must run headlessly without human interaction. Both modes can leverage real-time steering and cloud delegation.
+
 #### 🔄 The Transformation
 
 | Before ❌ | After ✨ |

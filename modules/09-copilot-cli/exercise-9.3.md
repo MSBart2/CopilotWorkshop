@@ -14,6 +14,8 @@ Creating architecture diagrams manually requires understanding the entire system
 
 This exercise uses Copilot CLI to generate infrastructure documentation automatically from the actual running system—creating diagrams, deployment procedures, and architecture overviews that stay synchronized with reality.
 
+> 💡 **Plan Mode for Documentation:** This exercise uses **interactive mode** with Plan Mode capabilities. When generating documentation, Copilot can ask clarifying questions like "Should I include development setup or focus on production deployment?" or "Do you want security considerations documented?" This collaborative approach ensures the documentation serves its intended audience—Rafael's stakeholder presentations, Sarah's onboarding guides, or Marcus's operational runbooks.
+
 #### 🔄 The Transformation
 
 | Before ❌ | After ✨ |
