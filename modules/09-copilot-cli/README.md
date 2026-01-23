@@ -61,6 +61,50 @@ This isn't just about running AI commands in a terminal—it's about creating sc
 
 ---
 
+## 🚀 **New: Plan Mode — "Plan Before You Build, Steer as You Go"**
+
+**January 2026 Update:** GitHub Copilot CLI now includes **Plan Mode**, a collaborative workflow that emphasizes discussion and clarification before code generation.
+
+**What Plan Mode Changes:**
+
+**Traditional workflow:** Request → Copilot generates code → You review and fix → Repeat
+**Plan Mode workflow:** Request → Copilot asks clarifying questions → You collaborate on plan → Review plan together → Generate implementation
+
+**Key Features:**
+
+1. **Collaborative Planning**
+   - Copilot actively asks clarifying questions before building
+   - Confirm requirements and scope before any code is written
+   - Prevents misunderstandings and reduces iteration cycles
+
+2. **Advanced Reasoning**
+   - Access to advanced models optimized for code reasoning
+   - Select reasoning "depth" (speed vs. thoroughness) for your needs
+   - Toggle reasoning visibility to see how Copilot reaches solutions
+
+3. **Real-Time Steering**
+   - Queue follow-up prompts while Copilot is generating responses
+   - Provide inline feedback to adapt mid-generation
+   - Reject actions with instant feedback instead of stopping the flow
+
+4. **Cloud Delegation**
+   - Delegate long-running or complex requests to background agents
+   - Frees your terminal for other tasks while agents work
+   - Get notifications when background work completes
+
+5. **Automatic Context Management**
+   - Conversation histories auto-compact as they near token limits
+   - Prevents workflow interruptions and keeps context relevant
+   - Seamless continuation without manual context cleanup
+
+**Why This Matters:**
+
+Plan Mode transforms Copilot from an autocomplete engine into a proactive pair-programmer during planning. For complex, multi-step engineering work—or when codebase understanding and architectural reasoning are needed—these enhancements mark a significant leap for terminal-based AI agents.
+
+> 💡 **Pro Tip:** Use Plan Mode for architectural decisions and complex refactoring where understanding requirements is crucial. Switch to direct mode for well-defined, straightforward tasks.
+
+---
+
 ## 📚 Key Concepts
 
 ### Command Line AI Integration
@@ -133,6 +177,7 @@ The exercises below use Copilot CLI capabilities to solve real DevOps workflow p
 - 📖 [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli) — Core concepts and capabilities overview
 - 📖 [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli) — Interactive and programmatic usage patterns
 - 📖 [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli) — Installation and authentication setup
+- 🆕 [GitHub Copilot CLI: Plan before you build, steer as you go](https://github.blog/changelog/2026-01-21-github-copilot-cli-plan-before-you-build-steer-as-you-go/) — January 2026 announcement: Plan Mode, advanced reasoning, and real-time steering
 
 > 💡 **Important for this module:** The `--allow-tool` and `--deny-tool` flags are essential because they control what operations Copilot can perform automatically. This enables CI/CD integration while maintaining security boundaries for production systems.
 

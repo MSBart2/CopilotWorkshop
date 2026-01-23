@@ -65,7 +65,7 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    
    **Expected output:** Interactive welcome message showing available slash commands (`/help`, `/model`, `/context`) and built-in agents (Explore, Task, Plan, Code-review).
 
-2. **Debug a Docker Container Issue**
+2. **Debug a Docker Container Issue (Using Plan Mode)**
    
    Navigate to the FanHub project and introduce a deliberate configuration issue to practice debugging:
    
@@ -92,7 +92,7 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    docker-compose logs backend
    ```
    
-   You'll see connection errors. Now start an interactive Copilot CLI session:
+   You'll see connection errors. Now start an interactive Copilot CLI session with **Plan Mode**:
    
    ```bash
    copilot
@@ -100,14 +100,30 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    
    In the Copilot prompt, ask:
    ```
-   Why isn't the backend container starting? The logs show database connection errors.
+   I need to debug why the backend container isn't starting. The logs show database connection errors. Can you help me plan the investigation?
    ```
    
-   **What to observe:**
-   - Copilot automatically reads the docker-compose.yml configuration
-   - Analyzes the backend service logs
-   - Identifies the missing `DATABASE_URL` environment variable
-   - Suggests the exact fix with proper syntax
+   **What to observe with Plan Mode:**
+   - **Copilot asks clarifying questions first**: "Do you want me to check the docker-compose configuration, examine the logs, or both?"
+   - **Collaborative planning**: Copilot suggests an investigation plan before making changes
+   - **You can steer**: Provide additional context or constraints before Copilot proceeds
+   - **Transparent reasoning**: Copilot explains why it's checking specific files
+   
+   Copilot will likely suggest:
+   1. Analyzing the docker-compose.yml configuration
+   2. Examining the backend service logs
+   3. Checking for missing environment variables
+   
+   Approve the plan, then Copilot will:
+   - Automatically read the docker-compose.yml configuration
+   - Analyze the backend service logs
+   - Identify the missing `DATABASE_URL` environment variable
+   - Suggest the exact fix with proper syntax
+   
+   **Try real-time steering:** While Copilot is working, you can queue a follow-up message:
+   ```
+   Also check if there are any other missing environment variables
+   ```
    
    Follow Copilot's suggestion to restore the environment variable, then verify:
    
@@ -119,9 +135,38 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    
    All services should now be healthy.
    
-   **Marcus's insight:** "Interactive sessions cut Docker debugging from 45 minutes to 8 minutes. Instead of trial-and-error with logs, I ask what's wrong and get the exact fix. That's 37 minutes saved per issue—4-5 issues per week = 3 hours back."
+   **Marcus's insight:** "Plan Mode transformed debugging. Instead of jumping straight to solutions, Copilot asks what I actually need. For complex issues, this planning conversation catches edge cases I would've missed. Interactive sessions with Plan Mode cut Docker debugging from 45 minutes to 8 minutes. That's 37 minutes saved per issue—4-5 issues per week = 3 hours back."
 
-3. **Automate Container Health Analysis Workflow**
+3. **Explore Advanced Reasoning Mode**
+   
+   In the same Copilot CLI session, try using advanced reasoning for a more complex architectural question:
+   
+   ```
+   /model
+   ```
+   
+   **What to observe:** Copilot shows available models and reasoning levels. Select an advanced model for deeper analysis.
+   
+   Now ask a complex question that benefits from deeper reasoning:
+   
+   ```
+   Analyze our Docker setup and suggest optimizations for production deployment. Consider: multi-stage builds, layer caching, security best practices, and resource limits.
+   ```
+   
+   **What advanced reasoning provides:**
+   - **Deeper analysis**: Considers multiple aspects (security, performance, maintainability)
+   - **Reasoning transparency**: You can toggle visibility to see the thinking process
+   - **Comprehensive recommendations**: Not just quick fixes, but strategic improvements
+   
+   Copilot might suggest:
+   - Multi-stage Dockerfile improvements to reduce image size
+   - Security enhancements (non-root users, vulnerability scanning)
+   - Resource limits in docker-compose.yml
+   - Health check configurations
+   
+   **Key insight:** Use standard mode for quick debugging, advanced reasoning for architectural decisions and complex optimizations.
+
+4. **Automate Container Health Analysis Workflow**
    
    Create a reusable workflow for checking container health. In the Copilot CLI session:
    
@@ -150,7 +195,9 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
 #### ✅ Success Criteria
 
 - [ ] GitHub Copilot CLI installed and authenticated successfully
-- [ ] Resolved Docker container issue using interactive CLI session in under 10 minutes
+- [ ] Resolved Docker container issue using Plan Mode in under 10 minutes
+- [ ] Experienced Plan Mode's collaborative planning workflow with clarifying questions
+- [ ] Explored advanced reasoning mode for complex architectural analysis
 - [ ] Created executable health check script at `fanhub/scripts/check-docker-health.sh`
 - [ ] Verified script identifies container health issues and logs automatically
 

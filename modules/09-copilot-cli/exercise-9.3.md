@@ -67,6 +67,12 @@ Create automated infrastructure documentation workflows using Copilot CLI that g
    - Creates visual diagram showing complete system architecture
    - Includes port mappings and data flow
    
+   **Automatic Context Management:** As you continue working in the CLI session, notice that Copilot maintains relevant context about your infrastructure. If the conversation gets long (approaching token limits), Copilot will automatically compress earlier parts of the conversation while preserving key information. This means:
+   - No manual context cleanup needed
+   - Sessions don't break when reaching token limits
+   - Important context is retained automatically
+   - You can work continuously without interruptions
+   
    The Mermaid diagram can be rendered in GitHub, VS Code, or converted to PNG/SVG for presentations.
 
 2. **Create Automated Deployment Procedure Documentation**

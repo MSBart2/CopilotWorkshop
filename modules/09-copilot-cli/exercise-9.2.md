@@ -80,7 +80,7 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    
    **What you've created:** A programmatic script that can run in CI/CD pipelines without human interaction, automatically analyzing failures and generating actionable reports.
 
-2. **Test the Script with a Real Build Failure**
+2. **Test the Script with Real-Time Steering**
    
    Introduce a deliberate build failure to test the automation:
    
@@ -107,6 +107,14 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    - Suggests the exact fix (remove the incomplete line)
    - Provides structured output suitable for CI/CD consumption
    
+   **Try real-time steering:** While the analysis is running, if you want to add more context or change direction, you can queue follow-up instructions. For example, in a more complex scenario:
+   
+   ```
+   Also check if there are any related TypeScript configuration issues
+   ```
+   
+   This message will be queued and processed, allowing you to steer the analysis mid-generation without stopping the flow.
+   
    Fix the issue:
    
    ```bash
@@ -118,9 +126,9 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    npm run build
    ```
 
-3. **Create CI/CD Integration Pattern with Build Pipeline Analyzer**
+3. **Create CI/CD Integration Pattern with Cloud Delegation**
    
-   Create an enhanced script that integrates with the custom `build-pipeline-analyzer` skill from Module 5:
+   Create an enhanced script that integrates with the custom `build-pipeline-analyzer` skill from Module 5 and demonstrates cloud delegation for long-running analysis:
    
    ```bash
    cd /workspaces/CopilotTraining/fanhub/scripts
@@ -131,7 +139,7 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    ```bash
    #!/bin/bash
    
-   # CI/CD Build Failure Handler with Custom Agent
+   # CI/CD Build Failure Handler with Custom Agent and Cloud Delegation
    # Integrates custom build-pipeline-analyzer skill for specialized analysis
    
    BUILD_LOG=${1:-"/tmp/build.log"}
@@ -141,7 +149,8 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    echo "📊 Running automated analysis..."
    echo ""
    
-   # Use programmatic mode with custom skill
+   # For complex analysis, use cloud delegation to free terminal
+   # The --delegate flag (when available) sends long-running tasks to background agents
    copilot -p "Using the build-pipeline-analyzer skill, analyze the build failure in $BUILD_LOG.
    
    Context: FanHub application (Node.js backend + React frontend)
@@ -171,8 +180,15 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    **What you've built:** A CI/CD-ready script that:
    - Runs automatically when builds fail
    - Uses custom agent skills for specialized analysis
+   - Supports cloud delegation for complex analysis without blocking terminal
    - Generates structured output for notifications (Slack, email, GitHub comments)
    - Provides prevention strategies, not just immediate fixes
+   
+   **Cloud Delegation Benefits:**
+   - Long-running analysis doesn't block your terminal
+   - Continue working on other tasks while agents work in the background
+   - Get notifications when analysis completes
+   - Ideal for comprehensive codebase analysis or multi-file refactoring tasks
 
 #### ✅ Success Criteria
 
