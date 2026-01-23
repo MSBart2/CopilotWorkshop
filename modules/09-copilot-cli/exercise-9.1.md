@@ -18,8 +18,8 @@ This exercise brings Copilot directly into Marcus's terminal—enabling interact
 
 | Before ❌ | After ✨ |
 |-----------|----------|
-| Container won't start. Marcus manually inspects logs, checks Dockerfile syntax, validates volume paths, examines network config. Tries rebuilding with different options. Tests port mappings. Eventually finds the issue was a missing environment variable that wasn't obvious from error messages. | Container fails. Marcus starts interactive CLI session: "Why isn't the backend container starting?" CLI analyzes logs, identifies missing `DATABASE_URL` env var, suggests fix with exact syntax for docker-compose. Issue resolved in one attempt. |
-| **Time:** 45 min per Docker issue<br>**Attempts:** 8 trial-and-error cycles<br>**Log analysis:** Manual grep/search<br>**Context switching:** 6+ terminal tabs | **Time:** 8 min per Docker issue<br>**Attempts:** 2 (identify + fix)<br>**Log analysis:** AI-automated<br>**Context switching:** Single session |
+| Container won't start. Marcus manually inspects logs, checks Dockerfile syntax, validates volume paths, examines network config. Tries rebuilding with different options. Tests port mappings. Eventually finds the issue was a missing environment variable that wasn't obvious from error messages. | Container fails. Marcus starts interactive CLI session with **Plan Mode**: "I need to debug the backend container." Copilot asks: "Should I check the docker-compose config, examine logs, or both?" Marcus: "Both." Copilot creates investigation plan, asks for approval, then analyzes logs and identifies missing `DATABASE_URL` env var. Suggests fix with exact syntax. Issue resolved in one attempt with collaborative planning. |
+| **Time:** 45 min per Docker issue<br>**Attempts:** 8 trial-and-error cycles<br>**Log analysis:** Manual grep/search<br>**Context switching:** 6+ terminal tabs | **Time:** 8 min per Docker issue<br>**Attempts:** 2 (plan + fix)<br>**Log analysis:** AI-automated with Plan Mode collaboration<br>**Context switching:** Single session with transparent reasoning |
 
 #### 🎯 Your Goal
 

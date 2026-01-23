@@ -144,7 +144,7 @@ The CLI seamlessly delegates to appropriate agents based on your request, often 
 
 ## What You'll Learn
 
-**GitHub Copilot CLI** brings conversational AI directly into terminal workflows, enabling intelligent automation of Docker operations, build debugging, and deployment pipelines. You'll configure terminal-native AI workflows that integrate with existing DevOps tools, and measure concrete improvements in debugging speed and deployment reliability.
+**GitHub Copilot CLI** brings conversational AI directly into terminal workflows, enabling intelligent automation of Docker operations, build debugging, and deployment pipelines. With the new **Plan Mode** (January 2026), you'll experience collaborative planning conversations before code generation, real-time steering of AI responses, and advanced reasoning for complex architectural decisions. You'll configure terminal-native AI workflows that integrate with existing DevOps tools, and measure concrete improvements in debugging speed and deployment reliability.
 
 **Time:** ~45 minutes | **Exercises:** 3
 
