@@ -53,8 +53,8 @@ With context engineering:
 | 0:00-0:15 | [Introduction](00-introduction.md) | Why context matters | Understand the value proposition |
 | 0:15-0:30 | [Exercise 0](exercise-0-context-primitives.md) | Context primitives | Master `@`-mentions and `#`-mentions |
 | 0:30-1:00 | [Exercise 1](exercise-1-project-context.md) | Persistent context layers | ARCHITECTURE.md + instructions + `applyTo` patterns |
-| 1:00-1:25 | [Exercise 2](exercise-2-planning-workflow.md) | Implementation planning | Build a planning workflow with templates |
-| 1:25-1:50 | [Exercise 3](exercise-3-execution-validation.md) | Execution & validation | Implement from plan + measure improvement |
+| 1:00-1:25 | [Exercise 2](exercise-2-prompts-and-enforcement.md) | Prompts & enforcement | Reusable prompts + Standards Review Agent |
+| 1:25-1:50 | [Exercise 3](exercise-3-execution-validation.md) | Execution & validation | Implement + review + measure improvement |
 | 1:50-2:00 | [Wrap-Up](04-wrapup.md) | Measuring success | Document your context engineering baseline |
 
 ---
@@ -67,8 +67,8 @@ By the end of this workshop, you'll have created:
 2. **`docs/ARCHITECTURE.md`** — Project structure documentation that gives Copilot immediate understanding
 3. **`.github/copilot-instructions.md`** — Persistent context automatically included in all interactions
 4. **`.github/instructions/*.instructions.md`** — File-pattern-specific instructions using `applyTo`
-5. **`docs/templates/plan-template.md`** — Reusable implementation plan structure
-6. **`.github/agents/plan.agent.md`** — Custom planning agent (optional)
+5. **`.github/prompts/*.prompt.md`** — Reusable prompts for common tasks
+6. **`.github/agents/standards-review.agent.md`** — Agent that enforces your documented standards
 7. **Baseline metrics** — Before/after measurements proving impact
 
 ---
@@ -170,21 +170,20 @@ Before the workshop:
 ## 📂 Workshop Files
 
 ```
-workshops/context-engineering-foundations/
-├── README.md                            # This file - workshop overview
-├── 00-introduction.md                   # Why context engineering matters
-├── exercise-0-context-primitives.md     # @-mentions and #-mentions (15 min)
-├── exercise-1-project-context.md        # Persistent context layers (30 min)
-├── exercise-2-planning-workflow.md      # Planning workflow (25 min)
-├── exercise-3-execution-validation.md   # Execution & validation (25 min)
-├── 04-wrapup.md                         # Measuring success, next steps
-└── templates/                           # Reference templates
+context-engineering-foundations/
+├── README.md                              # This file - workshop overview
+├── 00-introduction.md                     # Why context engineering matters
+├── exercise-0-context-primitives.md       # @-mentions and #-mentions (15 min)
+├── exercise-1-project-context.md          # Persistent context layers (30 min)
+├── exercise-2-prompts-and-enforcement.md  # Prompts + Standards Review Agent (25 min)
+├── exercise-3-execution-validation.md     # Execution & validation (25 min)
+├── 04-wrapup.md                           # Measuring success, next steps
+└── templates/                             # Reference templates
     ├── architecture-template.md
     ├── copilot-instructions-template.md
-    ├── plan-template.md
-    ├── testing.instructions-template.md        # applyTo: **/*.test.*
+    ├── testing.instructions-template.md          # applyTo: **/*.test.*
     ├── react-components.instructions-template.md # applyTo: src/components/**
-    └── api-routes.instructions-template.md     # applyTo: src/routes/**
+    └── api-routes.instructions-template.md       # applyTo: src/routes/**
 ```
 
 ---

@@ -119,7 +119,8 @@ By the end of this 2-hour workshop, you'll have:
 |----------|---------|--------|
 | `docs/ARCHITECTURE.md` | Project structure documentation | Copilot understands your codebase instantly |
 | `.github/copilot-instructions.md` | Persistent context and standards | Every suggestion follows your patterns |
-| `docs/templates/plan-template.md` | Implementation plan structure | Consistent feature planning |
+| `.github/prompts/*.prompt.md` | Reusable prompts for common tasks | One command for tests, docs, explanations |
+| `@standards-review` agent | Automated standards enforcement | Violations caught before human review |
 | Baseline metrics | Before/after measurements | Proof that context engineering works |
 
 ---

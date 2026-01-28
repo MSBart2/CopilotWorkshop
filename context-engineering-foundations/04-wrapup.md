@@ -33,13 +33,13 @@ You've completed the Context Engineering Foundations workshop. In 2 hours, you'v
 
 **Impact:** Copilot now understands your project's structure, conventions, and patterns on every interaction—with specialized rules for different file types.
 
-### Layer 2: Planning Workflow
+### Layer 2: Prompts & Enforcement
 | Artifact | Purpose | Location |
 |----------|---------|----------|
-| `plan-template.md` | Consistent implementation plan structure | `docs/templates/plan-template.md` |
-| Planning prompt/agent | Systematic plan generation | `.github/prompts/plan.prompt.md` or `.github/agents/plan.agent.md` |
+| Reusable prompts | On-demand tasks (`/generate-tests`, `/explain`, `/add-docs`) | `.github/prompts/*.prompt.md` |
+| Standards Review Agent | Automated enforcement of documented standards | `.github/agents/standards-review.agent.md` |
 
-**Impact:** New features start with comprehensive plans, reducing surprises and rework.
+**Impact:** Common tasks are one command away, and standards are enforced automatically before human review.
 
 ### Layer 3: Validation
 | Artifact | Purpose | Location |
@@ -218,8 +218,8 @@ Before you leave, confirm:
 - [ ] `docs/ARCHITECTURE.md` created and accurate
 - [ ] `.github/copilot-instructions.md` configured with team standards
 - [ ] At least one `.github/instructions/*.instructions.md` with `applyTo` pattern
-- [ ] `docs/templates/plan-template.md` created
-- [ ] Planning workflow (prompt or agent) working
+- [ ] At least 2 prompts created in `.github/prompts/`
+- [ ] Standards Review Agent created and working
 - [ ] Baseline metrics documented
 - [ ] Verified instructions appear in chat "References"
 
