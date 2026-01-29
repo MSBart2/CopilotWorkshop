@@ -216,8 +216,8 @@ File-pattern instructions apply to **specific file types** in your workspace. Wh
 Use Copilot Chat to analyze your codebase and create instructions for your primary file pattern:
 
 ```
-@workspace Analyze all React components in this codebase and create 
-.github/instructions/react-components.instructions.md with this exact file header:
+@workspace:fanhub Analyze all React components in this codebase and create 
+react-components.instructions.md with this exact file header:
 
 ---
 description: React component standards and conventions
