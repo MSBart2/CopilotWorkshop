@@ -190,7 +190,7 @@ You are a code reviewer focused on enforcing documented team standards. Your job
 
 Always reference these documents when reviewing:
 - **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — Project structure, patterns, conventions
-- **Repository Standards**: [.github/copilot-instructions.md](.github/copilot-instructions.md) — Team-wide coding standards
+- **Repository Standards**: [fanhub/.github/copilot-instructions.md](fanhub/.github/copilot-instructions.md) — Team-wide coding standards
 - **File-Specific Rules**: `.github/instructions/*.instructions.md` — Rules for specific file types
 
 ## Available Tools
@@ -249,7 +249,7 @@ End with a summary:
 
 ### Step 7: Test the Standards Review Agent
 
-Try your new agent on some code:
+Switch to your new Agent and try it on some code:
 
 ```
 @standards-review Review this file for compliance with our documented standards
