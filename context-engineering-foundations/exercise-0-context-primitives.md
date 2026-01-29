@@ -9,7 +9,7 @@
 
 ## 📖 The Foundation
 
-Before you create documentation or build workflows, you need to master the **primitives**—the basic building blocks for providing context to Copilot in every interaction.
+Before you create documentation or build workflows, you should master the **primitives**—the basic runtime building blocks for providing context to Copilot in every interaction.
 
 There are two types of context primitives:
 - **`@`-mentions (Chat Participants)** — Specialized assistants for different domains
@@ -25,27 +25,10 @@ Chat participants are **domain experts** you can invoke for specific tasks. Thin
 
 | Participant | Purpose | Example |
 |-------------|---------|---------|
-| `@workspace` | Understands your entire codebase | `@workspace Where is authentication handled?` |
+| `@workspace` | Analyzes project structure and files open in your current workspace | `@workspace How is the frontend organized—where do new components go?` |
 | `@vscode` | Expert on VS Code features | `@vscode How do I enable word wrap?` |
 | `@terminal` | Analyzes terminal output and commands | `@terminal What caused this build failure?` |
 | `@github` | GitHub features and workflows | `@github Show my open PRs` |
-
-### When to Use Each
-
-**`@workspace`** — Your most-used participant for code questions:
-- "Where should I add a new API endpoint?"
-- "How does the authentication flow work?"
-- "Find all usages of the UserService class"
-
-**`@vscode`** — For editor configuration and features:
-- "How do I set up debugging for Node.js?"
-- "What keyboard shortcut opens the terminal?"
-- "How do I configure ESLint?"
-
-**`@terminal`** — For command-line help:
-- "What does this error message mean?"
-- "What's the command to list all Docker containers?"
-- "Explain the output of this git command"
 
 ---
 
@@ -59,7 +42,7 @@ Context variables let you **attach specific context** to your prompts. Type `#` 
 |----------|--------------|---------|
 | `#file` | A specific file | `Explain #file:src/auth.js` |
 | `#selection` | Currently selected code | `Refactor #selection to use async/await` |
-| `#codebase` | Searches your entire codebase | `How does routing work? #codebase` |
+| `#codebase` | Searches your entire codebase (indexed) | `How is authentication implemented? #codebase` |
 | `#terminalLastCommand` | Last terminal command + output | `Why did this fail? #terminalLastCommand` |
 | `#terminalSelection` | Selected terminal text | `Explain #terminalSelection` |
 | `#problems` | Current errors/warnings from Problems panel | `Fix #problems in this file` |
@@ -96,11 +79,11 @@ Open Copilot Chat and try these prompts:
 ```
 
 ```
-@workspace Where are API routes defined?
+@workspace How is the frontend organized—where do new components go?
 ```
 
 ```
-@workspace How is error handling implemented?
+@workspace Show me the folder structure for API endpoints
 ```
 
 **Observe:** How does Copilot gather information? Does it reference specific files?
@@ -172,13 +155,14 @@ Update my code to follow the latest patterns #fetch https://react.dev/reference/
 The real power comes from **combining** context primitives:
 
 ```
-@workspace Based on how authentication works in #codebase, 
-add login functionality to #file:src/pages/login.js 
-following the patterns shown in #fetch https://our-api-docs.com/auth
+@workspace Analyze how the login flow is organized. 
+Add login functionality to #file:src/pages/login.js 
+following the authentication patterns in #codebase
+and the API specs from #fetch https://our-api-docs.com/auth
 ```
 
 This single prompt uses:
-- `@workspace` — Full codebase understanding
+- `@workspace` — Workspace structure understanding
 - `#codebase` — Search for authentication patterns
 - `#file` — Target specific file
 - `#fetch` — Reference external documentation
@@ -191,7 +175,7 @@ This single prompt uses:
 
 | Need | Use | Example |
 |------|-----|---------|
-| Full project understanding | `@workspace` | `@workspace How does X work?` |
+| Full project understanding | `@workspace` | `@workspace How is X structured?` |
 | Specific file | `#file:path` | `Explain #file:src/config.js` |
 | Selected code | `#selection` | `Refactor #selection` |
 | Search codebase | `#codebase` | `Where is X defined? #codebase` |
@@ -207,7 +191,7 @@ This single prompt uses:
 
 1. **Be specific** — `#file:exact/path.js` beats vague references
 2. **Combine context** — Layer multiple `#`-mentions for precision
-3. **Use @workspace for discovery** — When you don't know where something is
+3. **Use @workspace for structure** — When you need to understand project organization
 4. **Use #codebase for patterns** — When you want to follow existing conventions
 5. **Use #fetch for freshness** — When you need current documentation
 

@@ -5,7 +5,7 @@
 **Time:** 30 minutes  
 **Outcome:** Documentation + repository instructions + file-pattern instructions that ground Copilot in your project
 
-> 💡 **Builds on Exercise 0:** You learned to use `@workspace` and `#codebase` to provide context in individual prompts. Now we'll make that context **persistent**—so Copilot always has it without you typing it every time.
+> 💡 **Builds on Exercise 0:** You learned to use `@workspace` and `#codebase` to provide context in individual prompts. Now we'll make some of that context **persistent**—so Copilot always has it without you typing it every time.
 
 ---
 
@@ -21,16 +21,16 @@ Every codebase has tribal knowledge—patterns, conventions, and architectural d
 
 ## 📚 Understanding Persistent Context Layers
 
-VS Code supports **multiple layers** of persistent context, each serving a different purpose:
+GitHub Copilot in VS Code supports **multiple layers** of persistent context, each serving a different purpose:
 
-| Layer | File | Scope | Use For |
-|-------|------|-------|---------|
-| **Documentation** | `docs/ARCHITECTURE.md` | Referenced when analyzing code | Project structure, tech stack, decisions |
-| **Repository Instructions** | `.github/copilot-instructions.md` | All chat requests in workspace | Team standards, shared conventions |
-| **File-Pattern Instructions** | `.github/instructions/*.instructions.md` | Specific file types (via `applyTo`) | Language-specific rules, component conventions |
-| **User Instructions** | User profile `.instructions.md` | All your workspaces | Personal preferences |
+| Layer | File | Loaded When | Use For |
+|-------|------|-------------|---------|
+| **Repository Instructions** | `.github/copilot-instructions.md` | Every chat request (automatic) | Team standards, shared conventions |
+| **File-Pattern Instructions** | `.github/instructions/*.instructions.md` | When `applyTo` matches the active file (automatic) | Language-specific rules, component conventions |
+| **User Instructions** | User profile `.instructions.md` | All your workspaces (automatic) | Personal preferences |
+| **Documentation** | `docs/ARCHITECTURE.md` | When referenced via `@workspace` or `#file` | Project structure, tech stack, decisions |
 
-**Key insight:** These layers **combine automatically**. Copilot merges all applicable instructions for each request.
+**Key insight:** Instructions load **automatically**. Documentation loads **on-demand** when you reference it.
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -39,7 +39,7 @@ VS Code supports **multiple layers** of persistent context, each serving a diffe
 │  + Repository Instructions (.github/copilot-...)    │
 │  + File-Pattern Instructions (if applyTo matches)   │
 │  + User Instructions (from profile)                 │
-│  + Documentation (via @workspace or links)          │
+│  + Documentation (when referenced)                 │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -97,10 +97,11 @@ Open the generated `docs/ARCHITECTURE.md` and verify:
 - [ ] **Folder Structure** matches your actual project layout
 - [ ] **Key Patterns** reflects how your team actually works
 
-**Common corrections needed:**
-- Remove dependencies that don't exist
-- Fix folder paths that are wrong
-- Add important conventions Copilot missed
+**Review with your expertise:**
+Copilot generates a solid starting point. Use your domain knowledge to validate:
+- Accurate dependencies and versions
+- Correct folder structure and naming
+- All key patterns documented
 
 ### Step 3: Test the Improvement
 
@@ -118,52 +119,79 @@ Ask a structural question:
 
 Repository instructions apply to **all chat requests** in your workspace. This is where you put team standards that everyone should follow.
 
-### Step 4: Create the Instructions File
+### Step 4: Generate Repository Instructions
 
-Create `.github/copilot-instructions.md`:
-
-```markdown
-# [Your Project Name] Copilot Guidelines
-
-## Project Context
-Refer to [System Architecture](../docs/ARCHITECTURE.md) for project structure and patterns.
-
-## Code Standards
-- Language: [e.g., TypeScript 5.x with strict mode]
-- Testing: [e.g., Jest with React Testing Library]
-- Linting: [e.g., ESLint + Prettier]
-
-## Key Patterns
-- **API Routes**: Place in `src/routes/`, follow REST conventions
-- **Database Access**: Use repository pattern in `src/repositories/`
-- **Error Handling**: Use custom `AppError` class, never throw raw errors
-- **Components**: Functional components with hooks, no class components
-
-## What NOT to Do
-- ❌ Don't use `any` type - use `unknown` if type is truly unknown
-- ❌ Don't commit `console.log` statements
-- ❌ Don't use inline styles - use CSS modules
-- ❌ Don't skip error handling on async operations
-
-## Documentation
-Suggest updates to ARCHITECTURE.md or these instructions when you notice:
-- Patterns that aren't documented
-- Conflicts between documentation and code
-- Missing conventions that would help consistency
-```
-
-### Step 5: Generate Suggestions (Optional)
-
-If you're not sure what to include, ask Copilot:
+Use Copilot Chat to analyze your codebase and create the instructions file:
 
 ```
-@workspace Based on the codebase, suggest what should go in our 
-.github/copilot-instructions.md file. Focus on:
-- Patterns we consistently use
-- Common mistakes to avoid
-- Testing conventions
-- Naming conventions
+@workspace Analyze this codebase and create .github/copilot-instructions.md 
+that includes:
+
+1. **Project Context** - How to reference our architecture docs
+2. **Code Standards** - Languages, testing frameworks, linting tools we actually use
+3. **Key Patterns** - How we structure API routes, database access, error handling, components
+4. **What NOT to Do** - Common mistakes specific to our tech stack (be concrete, not generic)
+
+Base this on patterns you see consistently in the codebase. Keep it under 100 lines.
+Focus on standards that would help maintain consistency across the team.
+
+Save to .github/copilot-instructions.md
 ```
+
+**Why this approach:** Let Copilot analyze your actual codebase patterns rather than starting from a generic template. You'll get project-specific content immediately.
+
+### 💡 Alternative: Built-in "Generate Chat Instructions"
+
+**Quick baseline approach:**
+1. Click the settings cog (⚙️) in Copilot Chat
+2. Select "Generate Chat Instructions"
+3. Review and customize the output
+
+**When to use each:**
+- **Built-in command:** Quick baseline, unfamiliar with prompting
+- **Custom prompt:** Targeted analysis, learning prompt engineering, specific needs
+
+**Try both** and compare the results. The built-in command is great for getting started; custom prompts give you more control over what's analyzed and included.
+
+### Step 5: Review and Customize
+
+Open the generated `.github/copilot-instructions.md` and verify:
+
+- [ ] **Code Standards are accurate** — Check framework versions, testing tools, linting setup
+- [ ] **Key Patterns match reality** — Verify API routes, database access, error handling patterns
+- [ ] **"What NOT to Do" is specific** — Generic anti-patterns won't help; ensure they're concrete
+- [ ] **Project Context references are correct** — Verify links to ARCHITECTURE.md or other docs
+
+**Apply your expertise:** Copilot generates based on code patterns it sees. You know:
+- Team conventions that aren't obvious from code
+- Decisions made in architecture reviews
+- Pain points from past mistakes
+- Standards you're moving toward (not just what exists)
+
+Add or refine anything that will help maintain consistency.
+
+### Step 5a: Reflection — Prompt Specificity (Optional)
+
+**Compare generic vs. specific prompts** to see the difference:
+
+**Generic prompt:**
+```
+Create copilot instructions for my project
+```
+
+**Specific prompt (what you just used):**
+```
+@workspace Analyze this codebase and create .github/copilot-instructions.md...
+```
+
+**Try both in separate chats.** Notice how the specific prompt produces:
+- Actual framework versions (not placeholders like "[e.g., TypeScript 5.x]")
+- Real patterns from your codebase (not generic examples)
+- Concrete anti-patterns based on your tech stack
+
+**This demonstrates the "Markdown Whisperer" principle:** Clear, specific intent → Better output.
+
+---
 
 ### Step 6: Test Repository Instructions
 
@@ -177,201 +205,104 @@ What testing framework should I use for a new feature?
 
 ---
 
-## 📋 Part 3: Create File-Pattern Instructions (10 min)
+## 📋 Part 3: Create File-Pattern Instructions (8 min)
 
-File-pattern instructions use the `applyTo` property to apply **only when working with specific file types**. This is powerful for language-specific or component-specific rules.
+File-pattern instructions apply to **specific file types** in your workspace. When you edit a React component, Copilot automatically loads your React-specific standards—no need to mention them manually.
 
-### Step 7: Create the Instructions Folder
+### Step 6: Generate Component-Specific Instructions
 
-Create the folder: `.github/instructions/`
-
-### Step 8: Create Test File Instructions
-
-Create `.github/instructions/testing.instructions.md`:
-
-```markdown
----
-applyTo: "**/*.test.{ts,tsx,js,jsx}"
----
-# Testing Standards
-
-## Framework
-- Use Jest as test runner
-- Use React Testing Library for component tests
-- Use `@testing-library/user-event` for user interactions
-
-## Test Structure
-- Use `describe` blocks to group related tests
-- Use clear test names: `it('should [expected behavior] when [condition]')`
-- Follow Arrange-Act-Assert pattern
-
-## Patterns
-- Test behavior, not implementation
-- Prefer `getByRole` over `getByTestId`
-- Mock external dependencies, not internal modules
-- Each test should be independent
-
-## Coverage
-- Aim for 80% coverage on new code
-- Always test error states and edge cases
-- Include at least one integration test per feature
-```
-
-### Step 9: Create Component Instructions (Example for React)
-
-Create `.github/instructions/react-components.instructions.md`:
-
-```markdown
----
-applyTo: "src/components/**/*.{tsx,jsx}"
----
-# React Component Standards
-
-## Component Structure
-- Use functional components with hooks
-- Export component as default export
-- Co-locate styles, tests, and types with component
-
-## Naming
-- Component files: PascalCase (`UserProfile.tsx`)
-- Hook files: camelCase with `use` prefix (`useUserData.ts`)
-- Test files: `ComponentName.test.tsx`
-
-## Props
-- Define props interface above component
-- Use destructuring in function signature
-- Provide default values for optional props
-
-## Hooks
-- Place hooks at top of component
-- Custom hooks go in `src/hooks/`
-- Don't call hooks conditionally
-
-## State Management
-- Use local state for component-specific state
-- Use context for shared state across component tree
-- Avoid prop drilling more than 2 levels
-```
-
-### Step 10: Create Additional Pattern Instructions (Optional)
-
-**For API routes** — `.github/instructions/api-routes.instructions.md`:
-
-```markdown
----
-applyTo: "src/routes/**/*.ts"
----
-# API Route Standards
-
-## Error Handling
-- Wrap async handlers with `asyncHandler` utility
-- Use `AppError` for operational errors
-- Return consistent error response format
-
-## Validation
-- Validate request body with Zod schemas
-- Return 400 for validation errors with details
-
-## Response Format
-- Success: `{ data: T, meta?: { pagination } }`
-- Error: `{ error: { code: string, message: string } }`
-```
-
-### Step 11: Test File-Pattern Instructions
-
-Open a test file (or create one) and start a new chat:
+Use Copilot Chat to analyze your codebase and create instructions for your primary file pattern:
 
 ```
-Help me write tests for a UserProfile component
+@workspace Analyze all React components in this codebase and create 
+.github/instructions/react-components.instructions.md with this exact file header:
+
+---
+description: React component standards and conventions
+applyTo: '**/*.jsx'
+---
+
+Then include:
+
+1. **Component Structure** - How we organize React components (functional, hooks, composition)
+2. **Naming Conventions** - File naming, prop naming, event handler patterns
+3. **State Management** - How we handle state (Context, Redux, local state preferences)
+4. **Testing Patterns** - How we test React components (which testing library, common patterns)
+5. **What NOT to Do** - Specific mistakes we've seen in PRs, concrete anti-patterns
+
+Keep it under 80 lines. Base this on actual patterns in our codebase.
+
+Save to .github/instructions/react-components.instructions.md
 ```
 
-**Expected result:** Copilot should follow your testing.instructions.md patterns.
+**Note:** The `applyTo: '**/*.jsx'` glob pattern applies these instructions to all `.jsx` files. Adjust if your components use a different extension (`.js`, `.tsx`, etc.).
 
-**Verify:** Check the "References" section in the chat response to see which instruction files were applied.
+### Step 7: Validate and Refine
 
----
+Open the generated `.github/instructions/react-components.instructions.md` and verify:
 
-## 📊 Understanding How Layers Combine
+- [ ] **Patterns are accurate** — Do these match your actual component structure?
+- [ ] **Conventions are correct** — File naming, prop patterns, hooks usage?
+- [ ] **State management approach is clear** — Matches how your team actually manages state?
+- [ ] **Testing examples are realistic** — Based on real tests in your codebase?
+- [ ] **"What NOT to Do" is concrete** — Specific mistakes, not generic anti-patterns?
 
-When you work on a test file for a React component, Copilot combines all applicable layers:
+**Apply your expertise:** Copilot analyzes code; you validate against team standards. Add missing context your team has but the code doesn't fully reveal.
+
+### Step 8: Test File-Pattern Instructions
+
+Create a new component file:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  Working on: src/components/UserCard/UserCard.test.tsx      │
-├─────────────────────────────────────────────────────────────┤
-│  ✓ Repository instructions (.github/copilot-instructions)   │
-│  ✓ Testing instructions (applyTo: **/*.test.*)              │
-│  ✓ React instructions (applyTo: src/components/**)          │
-│  ✓ Documentation (ARCHITECTURE.md via links)                │
-└─────────────────────────────────────────────────────────────┘
+@workspace I'm creating a new component for [feature]. What structure and patterns should I follow?
 ```
 
-**All applicable instructions are merged** for that specific request.
+**Expected result:** Copilot should reference your file-pattern instructions and provide guidance **specific to your project's patterns**—not generic React suggestions.
 
 ---
 
-## ✅ Success Criteria
+### 🔄 (Optional) Generate Additional File-Pattern Instructions
 
-Before moving on, verify:
+If your project has other key patterns (API routes, database queries, test files), repeat Steps 6-8 for each:
 
-- [ ] `docs/ARCHITECTURE.md` exists and is under 150 lines
-- [ ] `.github/copilot-instructions.md` exists with project-wide standards
-- [ ] At least one `.github/instructions/*.instructions.md` file exists with `applyTo`
-- [ ] Structural questions reference your documentation
-- [ ] File-specific questions follow the appropriate instructions
-- [ ] Check "References" in chat to confirm instructions are being applied
+**For API routes:**
+```
+@workspace Analyze all API routes in this codebase and create 
+.github/instructions/api-routes.instructions.md that includes:
 
----
+1. **Route Structure** - Endpoint patterns, middleware usage
+2. **Error Handling** - How we handle and return errors
+3. **Validation** - Request validation patterns
+4. **What NOT to Do** - Common route mistakes
 
-## 📊 Measure Your Baseline
+Keep it under 80 lines.
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Time to answer "where does X go?" | ___ seconds | ___ seconds |
-| Conflicting patterns suggested | ___ | ___ |
-| Instructions referenced in chat | No | Yes |
-| Test suggestions match conventions | No | Yes |
+Save to .github/instructions/api-routes.instructions.md
+```
 
----
+**For test files:**
+```
+@workspace Analyze all test files in this codebase and create 
+.github/instructions/testing.instructions.md that includes:
 
-## 💡 Pro Tips
+1. **Test Organization** - How we structure test suites
+2. **Naming Conventions** - Test naming patterns
+3. **Mock Patterns** - How we mock dependencies
+4. **Coverage Standards** - What we consider adequate coverage
 
-### Start Small, Add as Needed
-Don't try to document everything. Start with:
-- 1 architecture doc
-- 1 repository instructions file
-- 1-2 file-pattern instructions for your most common work
+Keep it under 80 lines.
 
-Add more as you notice gaps in Copilot's suggestions.
+Save to .github/instructions/testing.instructions.md
+```
 
-### Use `applyTo` Strategically
-Good patterns for `applyTo`:
-- `**/*.test.{ts,tsx}` — All test files
-- `src/components/**/*.tsx` — All React components
-- `src/routes/**/*.ts` — All API routes
-- `**/*.sql` — All SQL files
-- `docs/**/*.md` — All documentation
-
-### Check References
-After each chat response, check the "References" section to see which instructions were applied. If expected instructions aren't showing:
-- Verify the `applyTo` pattern matches your file path
-- Ensure the file is in `.github/instructions/`
-- Confirm the file has the `.instructions.md` extension
-
-### Keep Instructions Focused
-Each instructions file should focus on one topic. Better to have:
-- `testing.instructions.md`
-- `react-components.instructions.md`
-- `api-routes.instructions.md`
-
-Than one massive file with everything.
+**Then validate and test each one** following Steps 7-8.
 
 ---
 
-## 📚 Official Docs
+## 📖 Official Docs
 
-- [VS Code: Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) — Complete reference for all instruction types
-- [VS Code: Instructions File Format](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_instructions-file-format) — YAML frontmatter and `applyTo` patterns
+- [GitHub: Copilot Instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot)
+- [VS Code: File-Pattern Instructions](https://code.visualstudio.com/docs/copilot/customize-copilot)
 - [GitHub: Awesome Copilot](https://github.com/github/awesome-copilot) — Community-contributed instruction examples
 
 ---
@@ -395,8 +326,8 @@ Than one massive file with everything.
 
 ## ➡️ Next: Exercise 2
 
-**[Exercise 2: Planning Workflow →](exercise-2-planning-workflow.md)**
+**[Exercise 2: Prompts & Standards Enforcement →](exercise-2-prompts-and-enforcement.md)**
 
-Now that Copilot understands your project structure and patterns, we'll create a systematic workflow for planning new features.
+Now that Copilot understands your project structure and patterns, we'll create reusable prompts and a Standards Review Agent to enforce those patterns.
 
-> *"Documentation is the foundation. Instructions are the guardrails. Together they create consistency."*
+> *"Documentation is the foundation. Instructions are the guardrails. Enforcement makes it automatic."*

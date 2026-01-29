@@ -62,9 +62,15 @@ the existing pattern in userQueries.js.
 
 ---
 
-## 🔑 The Three Layers of Context
+## 🔑 The Four Layers of Context
 
-Context engineering works at three layers:
+Context engineering works at four layers:
+
+### Layer 0: Context Primitives (Runtime Context)
+**What:** The building blocks for providing context in every chat interaction  
+**How:** `@workspace`, `#file`, `#selection`, `#codebase`, `#fetch`  
+**Impact:** You control what information Copilot sees in each conversation  
+**Learn more:** [Exercise 0: Context Primitives](exercise-0-context-primitives.md)
 
 ### Layer 1: Project-Wide Context
 **What:** Documentation that describes your project's architecture, patterns, and conventions  
@@ -72,7 +78,7 @@ Context engineering works at three layers:
 **Impact:** Copilot understands your project structure on every interaction
 
 ### Layer 2: Persistent Instructions
-**What:** Guidelines automatically included in every Copilot interaction  
+**What:** Guidelines automatically included in every Copilot interaction or when applied explicitly  
 **How:** `.github/copilot-instructions.md`, `.instructions.md` with `applyTo`  
 **Impact:** Your standards enforced without repeating them every time
 

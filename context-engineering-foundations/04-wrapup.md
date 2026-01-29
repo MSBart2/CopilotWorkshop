@@ -89,7 +89,7 @@ Everything else builds on context. Custom agents, advanced prompts, complex work
 You don't need perfect documentation. Start with:
 - 50 lines of architecture docs
 - 20 lines of instructions
-- 1 planning template
+- 2-3 reusable prompts
 
 Add more as you notice gaps.
 
@@ -114,8 +114,8 @@ This workshop focused on **Instructions** and **Prompts**. Here's when to use ea
 | Type | What It Is | When to Use | Example |
 |------|------------|-------------|---------|
 | **Instructions** | Passive guidelines that apply automatically | Coding standards, conventions, patterns | `.github/copilot-instructions.md` |
-| **Prompts** | On-demand tasks you invoke with `/command` | Specific workflows (generate tests, create plan) | `.github/prompts/plan.prompt.md` |
-| **Agents** | Custom chat participants with specific tools | Complex workflows needing tool access | `.github/agents/reviewer.agent.md` |
+| **Prompts** | On-demand tasks you invoke with `/command` | Specific workflows (generate tests, explain code) | `.github/prompts/generate-tests.prompt.md` |
+| **Agents** | Custom chat participants with specific tools | Complex workflows needing tool access | `.github/agents/standards-review.agent.md` |
 | **Skills** | Portable instruction+script bundles | Capabilities that work across VS Code, CLI, and Copilot coding agent | `.github/skills/webapp-testing/` |
 
 ### Decision Flow

@@ -149,6 +149,25 @@ Now create an agent that enforces your documented standards. This is more powerf
 - Can analyze code against multiple documents
 - Provides structured, actionable feedback
 
+### Understanding Agent Tools
+
+Before creating the agent, understand the tools it will have access to:
+
+| Tool | Purpose | Example Usage |
+|------|---------|----------------|
+| **codebase** | Search your entire codebase for patterns and examples | "Find how error handling is done elsewhere" |
+| **search** | Find specific files or code snippets | "Find all files matching pattern X" |
+| **problems** | Access current linting/type errors from VS Code | "Include any TypeScript errors in this file" |
+| **usages** | Find where code is used (references, implementations) | "See how UserService is used in the codebase" |
+
+These tools allow the agent to:
+1. **Understand your patterns** — Search the codebase for how you actually do things
+2. **Cite evidence** — Reference real code examples when suggesting changes
+3. **See the full context** — Understand where and how code is used
+4. **Catch real issues** — Include actual TypeScript/linting errors in review
+
+**Key point:** The agent uses these tools automatically as needed. You don't need to invoke them manually—just describe what you want reviewed.
+
 ### Step 5: Create the Agents Folder
 
 Create the folder: `.github/agents/`
@@ -174,10 +193,18 @@ Always reference these documents when reviewing:
 - **Repository Standards**: [.github/copilot-instructions.md](.github/copilot-instructions.md) — Team-wide coding standards
 - **File-Specific Rules**: `.github/instructions/*.instructions.md` — Rules for specific file types
 
+## Available Tools
+
+This agent has access to the following tools and uses them automatically:
+- **codebase** — Search the entire project for patterns and examples
+- **search** — Find specific files and code
+- **problems** — Access current TypeScript/linting errors
+- **usages** — Find code references and implementations
+
 ## Review Process
 
 ### 1. Identify Applicable Standards
-- Use #tool:search to find relevant standards for the code being reviewed
+- Use the `codebase` tool to search for relevant standards for the code being reviewed
 - Check if file-specific instructions apply (based on file path/type)
 - Load the relevant sections from ARCHITECTURE.md
 
@@ -185,19 +212,17 @@ Always reference these documents when reviewing:
 - Check structural patterns (file location, naming, organization)
 - Check coding patterns (error handling, typing, conventions)
 - Check testing patterns (if test files are included)
-- Use #tool:usages to understand how similar code is written elsewhere
+- Use the `usages` tool to understand how similar code is written elsewhere in the project
 
 ### 3. Report Findings
 
 For each violation found, provide:
 
-```
 **Violation**: [Brief description]
 **Standard**: [Quote the specific rule from documentation]
 **Location**: [File and line reference]
 **Current Code**: [The problematic code]
 **Suggested Fix**: [How to correct it]
-```
 
 ### 4. Summary
 
@@ -213,7 +238,7 @@ End with a summary:
 - If a pattern isn't documented but seems wrong, suggest adding it to documentation
 - Be specific — quote the exact standard being violated
 - Be helpful — always provide a fix, not just criticism
-- Check #tool:problems for any existing linting/type errors to include
+- Check the `problems` tool for any existing linting/type errors to include
 
 ## What NOT to Review
 
@@ -229,7 +254,7 @@ Try your new agent on some code:
 ```
 @standards-review Review this file for compliance with our documented standards
 
-#file:src/components/SomeComponent.tsx
+#file:src/components/CharacterCard.jsx
 ```
 
 Or review recent changes:
@@ -256,6 +281,11 @@ Try each prompt you created:
 3. Verify the output follows your testing conventions
 
 Repeat for `/explain` and `/add-docs`.
+
+**How to know prompts are working:**
+- Look for the prompt name in the chat (e.g., "Generate Tests")
+- Check the "References" section to see which prompt file was used
+- Verify the output follows your conventions from Exercise 1
 
 ### Step 9: Test the Standards Review Agent
 
