@@ -238,6 +238,16 @@ Sarah calls an early meeting: "We built something that works. Now we need to mak
 **The transformation**: Individual success → Organizational capability  
 **Featured**: All personas (scaling focus: Sarah, Rafael, Marcus)
 
+### Standalone: Copilot SDK (45 min)
+**Beyond the workshop**
+
+Sarah, Rafael, and Elena explore embedding Copilot's agentic engine into custom Python tools. Rafael builds a release notes generator (2 hours → 10 min). Elena creates a test failure analyzer with flaky test detection (45 min → 5 min). Sarah builds a code review bot that pre-reviews PRs against team standards, doubling team throughput.
+
+**You'll learn**: GitHub Copilot SDK, embedding AI in custom applications, building domain-specific tools  
+**The transformation**: Using AI → Building with AI  
+**Featured**: Rafael, Elena, Sarah  
+**Note**: Standalone module, can be taken after Module 9 (CLI)
+
 ---
 
 ## 🚀 Getting Started

@@ -66,7 +66,13 @@ Six personas guide you through the workshop, each representing real developer ar
 | **12** | [Copilot Hooks](modules/12-copilot-hooks/README.md)                     | 60-90 min | 3         | 🆓     | Add governance, validation, and control points; automation with accountability                           |
 | **13** | [Customizations Overview](modules/13-customizations-overview/README.md) | 60 min    | 5         | 🆓     | Comprehensive tour of the customization ecosystem; learn when to use each tool                           |
 
-**Total**: 14 modules, 43 exercises, ~12-14 hours
+**Standalone/Bonus Modules:**
+
+| Module | Title                                                           | Time   | Exercises | Tier | Key Focus                                                                  |
+| ------ | --------------------------------------------------------------- | ------ | --------- | ---- | -------------------------------------------------------------------------- |
+| **SDK** | [Copilot SDK](modules/copilot-sdk/README.md) | 45 min | 3         | 💼   | Embed Copilot's engine in custom Python tools; build domain-specific automation |
+
+**Total**: 14 modules, 46 exercises, ~12-14 hours
 
 ---
 
