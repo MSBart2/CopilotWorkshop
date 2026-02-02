@@ -252,19 +252,19 @@ layout: two-cols
 
 **What you build in this module:**
 
-1. **Rafael's organization instructions** encode David's 20 years of patterns  
+1. **Rafael's organization instructions** encode David's 20 years of patterns
    → Every new developer automatically gets expert-level guidance
 
-2. **Elena's code review checklist** captures systematic quality thinking  
+2. **Elena's code review checklist** captures systematic quality thinking
    → Teams catch issues David would catch, even without David reviewing
 
-3. **Marcus's knowledge base** connects infrastructure + apps + docs  
+3. **Marcus's knowledge base** connects infrastructure + apps + docs
    → Copilot answers questions spanning the entire system
 
-4. **Sarah's metrics framework** quantifies productivity gains  
+4. **Sarah's metrics framework** quantifies productivity gains
    → Leadership sees ROI, funds continued improvement
 
-5. **Onboarding kit** packages 11 modules of learnings  
+5. **Onboarding kit** packages 11 modules of learnings
    → New teams reach your level in 30 minutes instead of 11 hours
 
 </div>

@@ -9,7 +9,7 @@ const slideNumber = computed(() => `${currentPage.value} / ${total.value}`)
 <template>
   <div class="slidev-layout center text-center flex flex-col items-center justify-center">
     <slot />
-    <div 
+    <div
       class="absolute bottom-4 right-4 text-sm opacity-50 z-50"
       style="background: rgba(255,255,255,0.8); padding: 0.25rem 0.75rem; border-radius: 0.375rem;"
     >

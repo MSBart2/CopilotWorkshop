@@ -9,7 +9,7 @@ export default defineAppSetup(({ app, router }) => {
         if (existingNumber) {
           existingNumber.remove()
         }
-        
+
         const slideNumber = document.createElement('div')
         slideNumber.id = 'slide-number-overlay'
         slideNumber.style.cssText = `
@@ -25,10 +25,10 @@ export default defineAppSetup(({ app, router }) => {
           pointer-events: none;
           box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         `
-        
+
         const currentSlide = to.path.split('/')[1] || '1'
         const totalSlides = router.getRoutes().filter(r => r.path.match(/^\/\d+$/)).length
-        
+
         slideNumber.textContent = `${currentSlide} / ${totalSlides}`
         document.body.appendChild(slideNumber)
       }, 100)
