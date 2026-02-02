@@ -245,6 +245,7 @@ Create automated infrastructure documentation workflows using Copilot CLI that g
 - [ ] Generated Mermaid architecture diagram at `docs/generated/architecture.mmd` showing all services and relationships
 - [ ] Created `scripts/generate-deployment-docs.sh` that produces comprehensive deployment guide automatically
 - [ ] Created `scripts/generate-infra-report.sh` that generates stakeholder-ready status reports
+- [ ] Used `/review` command to sanity-check generated scripts before committing
 - [ ] Verified all scripts run without manual intervention and produce accurate documentation
 
 > 📂 **Compare Your Work**: See example documentation automation in [`examples/completed-config/`](../../examples/completed-config/)

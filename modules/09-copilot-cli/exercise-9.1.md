@@ -31,6 +31,13 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    
    Install Copilot CLI using one of the supported methods. Choose based on your platform:
    
+   **GitHub CLI (easiest for existing `gh` users):**
+   ```bash
+   gh copilot
+   ```
+   
+   On first run, this will prompt you to install Copilot CLI automatically. From then on, use `gh copilot` as a convenient entry point.
+   
    **macOS/Linux (Homebrew):**
    ```bash
    brew install copilot-cli
@@ -145,7 +152,13 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    /model
    ```
    
-   **What to observe:** Copilot shows available models and reasoning levels. Select an advanced model for deeper analysis.
+   **What to observe:** Copilot shows available models and reasoning levels. Select **GPT-5.2-Codex** or another advanced model that supports configurable reasoning effort.
+   
+   Configure reasoning effort based on your needs:
+   - **Low/Medium**: Faster responses for straightforward questions
+   - **High/Extra High**: Deeper analysis for architectural decisions
+   
+   **Toggle reasoning visibility** by pressing **Ctrl + T** — this lets you see (or hide) how Copilot thinks through the problem step-by-step. The visibility setting persists across sessions.
    
    Now ask a complex question that benefits from deeper reasoning:
    
@@ -155,8 +168,9 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    
    **What advanced reasoning provides:**
    - **Deeper analysis**: Considers multiple aspects (security, performance, maintainability)
-   - **Reasoning transparency**: You can toggle visibility to see the thinking process
+   - **Reasoning transparency**: Press **Ctrl + T** to see the thinking process unfold in real-time
    - **Comprehensive recommendations**: Not just quick fixes, but strategic improvements
+   - **Configurable depth**: Adjust reasoning effort (Low/Medium/High/Extra High) to balance speed vs. thoroughness
    
    Copilot might suggest:
    - Multi-stage Dockerfile improvements to reduce image size
@@ -164,7 +178,7 @@ Install GitHub Copilot CLI and use interactive sessions to debug FanHub's Docker
    - Resource limits in docker-compose.yml
    - Health check configurations
    
-   **Key insight:** Use standard mode for quick debugging, advanced reasoning for architectural decisions and complex optimizations.
+   **Key insight:** Use standard mode for quick debugging, advanced reasoning with visible thinking (Ctrl + T) for architectural decisions and complex optimizations where understanding the reasoning path matters.
 
 4. **Automate Container Health Analysis Workflow**
    

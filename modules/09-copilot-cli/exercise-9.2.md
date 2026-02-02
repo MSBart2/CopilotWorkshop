@@ -182,15 +182,22 @@ Create programmatic CLI automation scripts that analyze build failures automatic
    **What you've built:** A CI/CD-ready script that:
    - Runs automatically when builds fail
    - Uses custom agent skills for specialized analysis
-   - Supports cloud delegation for complex analysis without blocking terminal
+   - Demonstrates **cloud delegation with `&` prefix** — sends long-running analysis to background agents without blocking terminal
+   - Uses **`--allow-all` flag** (or `--yolo`) to enable all permissions at once in trusted CI/CD environments
    - Generates structured output for notifications (Slack, email, GitHub comments)
    - Provides prevention strategies, not just immediate fixes
    
    **Cloud Delegation Benefits:**
+   - Prefix any prompt with `&` to delegate to GitHub Copilot coding agent in the cloud
    - Long-running analysis doesn't block your terminal
    - Continue working on other tasks while agents work in the background
    - Get notifications when analysis completes
    - Ideal for comprehensive codebase analysis or multi-file refactoring tasks
+   
+   **Permission Flags for CI/CD:**
+   - **`--allow-all`**: Enables all permissions at once — use when you trust Copilot to run freely in CI/CD pipelines
+   - **`--yolo`**: Alias for `--allow-all` — convenient shorthand for headless automation
+   - **Best practice**: Use in trusted environments only; for production, prefer explicit `--allow-tool` permissions
 
 #### ✅ Success Criteria
 

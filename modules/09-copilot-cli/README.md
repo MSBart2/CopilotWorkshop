@@ -96,28 +96,56 @@ Request → Copilot asks clarifying questions → You collaborate on plan → Re
 - Example: "Should I check the docker-compose config, examine logs, or both?"
 
 **2. Advanced Reasoning Models**
-- Access to advanced models optimized for complex code reasoning
-- Select reasoning "depth" (speed vs. thoroughness) for your specific needs
-- Toggle reasoning visibility to see how Copilot reaches solutions
+- **GPT-5.2-Codex**: Latest model optimized for code generation and understanding — select with `/model` or `--model gpt-5.2-codex`
+- **Configurable reasoning effort**: For GPT models that support extended thinking, configure how much reasoning effort the model applies (Low, Medium, High, Extra High) — balances response speed with reasoning depth
+- **Toggle reasoning visibility**: Press **Ctrl + T** to show or hide the model's reasoning steps during generation — setting persists across sessions so you can always see how Copilot approaches complex problems
 - Essential for architectural decisions and multi-step refactoring
 
 **3. Real-Time Steering**
-- Queue follow-up prompts while Copilot is generating responses
-- Provide inline feedback to adapt mid-generation without stopping
-- Reject proposed actions with instant feedback
-- Maintain conversation flow while correcting course
+- **Enqueue additional messages**: Interact with Copilot while it's thinking — send follow-up messages to steer the conversation in a different direction, or queue additional instructions for Copilot to process after it finishes its current response
+- **Inline feedback on rejection**: When you reject a tool permission request, give Copilot inline feedback about the rejection so it can adapt its approach without stopping entirely — makes conversation flow more naturally when guiding Copilot away from certain actions
+- Maintain conversation flow while correcting course in real-time
 
 **4. Cloud Delegation**
-- Delegate long-running or complex requests to background agents
-- Frees your terminal for other tasks while agents work asynchronously
+- **Prefix prompts with `&`**: Shorthand syntax to delegate any prompt to the GitHub Copilot coding agent in the cloud (equivalent to `/delegate` command)
+- Frees your terminal for other tasks while agents work asynchronously in the background
 - Get notifications when background work completes
 - Ideal for comprehensive codebase analysis or large-scale refactoring
 
 **5. Automatic Context Management**
-- Conversation histories auto-compact as they approach token limits
-- Prevents workflow interruptions and keeps context relevant
-- Seamless continuation without manual context cleanup
+- **Auto-compaction**: When your conversation approaches 95% of the token limit, Copilot automatically compresses your history in the background without interrupting your workflow — enables virtually infinite sessions
+- **Manual control**: Use `/compact` to manually compress context anytime — press **Escape** to cancel if you change your mind
+- **Visualize usage**: The `/context` command shows detailed token usage breakdown so you can understand how your context window is being used
 - Maintains important context while pruning redundant information
+
+**6. Repository Memory**
+- Copilot remembers important facts about your codebase across sessions
+- Stores conventions, patterns, and preferences it learns as you work — making future sessions more productive
+- Memory storage tool captures coding standards, project structure insights, and your preferred approaches
+- Cross-session learning ensures Copilot gets smarter about your specific repository over time
+
+**7. Enhanced Permissions Experience**
+- **Approve for session**: Selecting "approve for session" now auto-approves any pending parallel permission requests of the same type — reduces interruptions during complex multistep operations
+- **Convenience flags**: New `--allow-all` and `--yolo` flags enable all permissions at once for when you trust Copilot to run freely (use carefully in production!)
+- Maintains security boundaries while reducing friction in trusted workflows
+
+**8. Code Review in CLI**
+- **`/review` command**: Analyzes code changes directly in the CLI without leaving the terminal
+- Get feedback on staged or unstaged changes — perfect for a quick sanity check before committing
+- High signal-to-noise ratio — only surfaces issues that genuinely matter (bugs, security, logic errors)
+- Complements interactive debugging with quality-focused analysis
+
+**9. Shell Mode Improvements**
+- **History filtering**: Shell mode history navigation (`!` prefix) now filters by prefix — typing `!git` and pressing up arrow cycles only through previous git commands, making it faster to find and rerun specific commands
+- **Cleaner environment**: Copilot excludes shell commands from your Bash and PowerShell history files, keeping your shell history clean
+- Native terminal integration without polluting your command history
+
+**10. Quality-of-Life Enhancements**
+- **`/resume` command**: Switch between local and remote GitHub Copilot coding agent sessions easily
+- **`/cd` alias**: Shorthand for `/cwd` to change the working directory
+- **Tab title display**: Current intent now displays in your terminal tab title — see what Copilot is working on at a glance
+- **Custom instructions combining**: All custom instruction files now combine instead of using priority-based fallbacks — gives you more flexibility in instruction composition
+- **Redesigned header**: Fresh CLI header with branded mascot and streamlined welcome message
 
 ### Why This Matters
 
@@ -208,6 +236,17 @@ copilot
 ### How They Work Together
 
 The CLI seamlessly delegates to appropriate agents based on your request, often running multiple agents in parallel. Combined with custom instructions and skills, this creates a powerful infrastructure automation platform that speaks your team's specific workflows.
+
+### GitHub CLI Integration
+
+**New Access Point:** GitHub CLI users can now access Copilot CLI more easily by running `gh copilot`:
+
+- **First-time installation**: Running `gh copilot` for the first time prompts you to install Copilot CLI automatically
+- **Seamless entry point**: Use `gh copilot` as a convenient alternative to the standalone `copilot` command
+- **GitHub Actions integration**: Installation happens automatically in GitHub Actions without confirmation prompts
+- **Update methods**: Keep current with `brew upgrade copilot-cli`, `winget upgrade GitHub.Copilot`, `npm install -g @github/copilot@latest`, or let auto-update handle it
+
+This integration makes it easier for teams already using GitHub CLI to adopt Copilot CLI workflows without additional setup complexity.
 
 > 📂 **Reference Examples**: The [`examples/completed-config/`](../../examples/completed-config/) folder contains sample configurations:
 > - [Docker build debugger skill](../../examples/completed-config/skills/docker-build-debugger/)
