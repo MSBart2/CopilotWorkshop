@@ -265,7 +265,7 @@ When creating Slidev presentations for workshop modules, follow these structural
 
 ### Structural Requirements
 
-- **Maximum 15 slides per module** — Force focused, essential content only
+- **Maximum 15-20 slides per module** — Force focused, essential content only
 - **Required slide types**: Title, Learning Objectives, Persona Context, Before/After Comparisons, Key Exercises, Next Steps
 - **Visual hierarchy**: Use existing emoji vocabulary consistently (🎯 for objectives, ⏰ for time markers, 📊 for metrics, etc.)
 - **Slide progression**: Match module flow — setup → problem → solution → validation → outcomes
@@ -279,20 +279,159 @@ Extract content directly from module README.md files while preserving:
 - **Exercise objectives** — Extract 🎯 sections but focus on outcomes, not learning goals
 - **Official documentation links** — Include GitHub/VS Code/Microsoft Learn references from exercises
 
+### Visual Design Guidelines (CRITICAL)
+
+**Default to beautiful, polished slides.** Every slide should look presentation-ready for executives.
+
+#### Never Use Mermaid Diagrams
+
+Mermaid diagrams render inconsistently and look unprofessional. **Always replace with styled HTML divs:**
+
+````html
+<!-- ❌ DON'T: Mermaid diagram -->
+```mermaid flowchart TB A --> B --> C
+````
+
+<!-- ✅ DO: Styled divs with Tailwind -->
+<div class="grid grid-cols-3 gap-4">
+  <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400 text-center">
+    <div class="text-2xl">🎯</div>
+    <div class="font-bold text-white">Step A</div>
+  </div>
+  <!-- ... more cards -->
+</div>
+```
+
+#### Card-Based Layouts
+
+Use dark cockpit-style cards for technical content:
+
+```html
+<div class="p-3 bg-gray-800 rounded-lg border-l-4 border-blue-500">
+  <div class="font-bold text-blue-400">Title</div>
+  <div class="text-gray-300">Description</div>
+</div>
+```
+
+#### Color Coding Conventions
+
+| Purpose           | Background                                   | Border/Accent       | Text              |
+| ----------------- | -------------------------------------------- | ------------------- | ----------------- |
+| Human authority   | `bg-blue-900/60`                             | `border-blue-400`   | `text-blue-300`   |
+| AI/Automation     | `bg-green-900/60`                            | `border-green-400`  | `text-green-300`  |
+| Warning/Danger    | `bg-red-900/40`                              | `border-red-500`    | `text-red-400`    |
+| Caution           | `bg-yellow-900/40`                           | `border-yellow-500` | `text-yellow-400` |
+| Neutral/Info      | `bg-gray-800`                                | `border-gray-600`   | `text-gray-300`   |
+| Success/Highlight | `bg-gradient-to-r from-blue-600 to-blue-800` | —                   | `text-white`      |
+
+#### Grid Layouts by Content Type
+
+**Comparisons (Before/After, Old/New):**
+
+```html
+<div class="grid grid-cols-2 gap-8">
+  <div class="p-6 bg-red-50 dark:bg-red-900/30 rounded-lg">❌ Before</div>
+  <div class="p-6 bg-green-50 dark:bg-green-900/30 rounded-lg">✅ After</div>
+</div>
+```
+
+**Process Steps (3-4 phases):**
+
+```html
+<div class="grid grid-cols-4 gap-3">
+  <div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
+    Phase 1
+  </div>
+  <!-- ... -->
+</div>
+```
+
+**Checklists/Features (2x4 or 3x3):**
+
+```html
+<div class="grid grid-cols-2 gap-2 text-xs">
+  <div class="p-2 bg-gray-800 rounded-lg flex items-center gap-2">
+    <span class="text-2xl">🎯</span>
+    <div>
+      <div class="text-white font-bold">Feature</div>
+      <div class="text-gray-400">Description</div>
+    </div>
+  </div>
+</div>
+```
+
+**Hierarchies (org charts, systems):**
+
+```html
+<div class="flex flex-col items-center gap-3">
+  <div class="p-3 bg-purple-100 rounded-lg w-80">Top Level</div>
+  <div class="flex gap-4">
+    <div class="p-3 bg-blue-100 rounded-lg w-56">Mid Left</div>
+    <div class="p-3 bg-orange-100 rounded-lg w-56">Mid Right</div>
+  </div>
+  <div class="p-3 bg-green-100 rounded-lg w-64">Bottom</div>
+</div>
+```
+
+#### Callout Boxes
+
+**Punchlines/Key Messages:**
+
+```html
+<div
+  class="p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center"
+>
+  <div class="text-2xl font-bold text-white">Key insight goes here.</div>
+</div>
+```
+
+**Warnings:**
+
+```html
+<div
+  class="p-3 bg-gradient-to-r from-red-900/40 to-gray-800 rounded-lg text-center"
+>
+  <span class="text-white font-bold">⚠️ Warning message</span>
+</div>
+```
+
+**Bottom taglines:**
+
+```html
+<div class="mt-4 text-center text-sm text-gray-400 italic">
+  Closing thought or attribution
+</div>
+```
+
+#### Visual Flow Indicators
+
+Use arrows and visual connections between related elements:
+
+```html
+<div class="text-3xl text-gray-400 text-center">↓</div>
+<!-- or -->
+<div class="text-2xl text-gray-400">↓ ↓ ↓</div>
+<!-- or for horizontal flow -->
+<span class="text-gray-400">→</span>
+```
+
 ### Aesthetic Guidelines
 
-- **GitHub color scheme** — Use GitHub's brand colors for consistency with training materials
-- **Clean layouts** — Minimize text per slide, maximize visual impact with emojis and metrics
-- **Readable fonts** — Ensure code examples and metrics are clearly visible for presentations
-- **Consistent spacing** — Use Slidev's layout components for professional appearance
+- **Dark mode first** — Use `dark:` variants for all colors; dark backgrounds look more polished
+- **Consistent spacing** — Use `gap-2` for tight grids, `gap-4` for standard, `gap-8` for breathing room
+- **Readable text** — `text-xs` for dense info, `text-sm` for body, `text-xl`+ for headlines
+- **Icon + text pairings** — Always pair emojis with labels for scannability
+- **Border accents** — Use colored left borders (`border-l-4`) for list items, full borders for cards
 
 ### Copilot Collaboration Workflow
 
 1. **Read module README thoroughly** to understand persona transformations and key metrics
 2. **Extract persona quotes** using their established voice patterns from PERSONAS.md
-3. **Verify metrics accuracy** — Ensure all Before/After comparisons include concrete numbers
-4. **Iterate slide content** with Copilot to refine persona authenticity and visual clarity
-5. **Test presentation flow** to ensure smooth transitions between concepts
+3. **Convert any diagrams to styled divs** — Never output Mermaid
+4. **Apply consistent color coding** — Blue for human, green for AI, red for warnings
+5. **Verify metrics accuracy** — Ensure all Before/After comparisons include concrete numbers
+6. **Test visual hierarchy** — Key messages should be immediately visible
+7. **Test presentation flow** to ensure smooth transitions between concepts
 
 **Reference existing personas** from [modules/00-orientation/PERSONAS.md](../modules/00-orientation/PERSONAS.md) rather than creating slide-specific versions.
 
