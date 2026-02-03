@@ -1,379 +1,685 @@
 ---
 theme: default
-background: https://source.unsplash.com/collection/94734566/1920x1080
+background: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1920
 class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Module 0: The Challenge — Building FanHub in 8 Hours
-
+  ## Module 0: Orientation - The Challenge
+  Building FanHub in 8 Hours
   CopilotWorkshop Training
 drawings:
   persist: false
 transition: slide-left
-title: "Module 0: The Challenge — Building FanHub in 8 Hours"
+title: Module 0 - The Challenge
 mdc: true
-controls: true
 ---
 
-<style>
-.slide-number {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  font-size: 0.875rem;
-  opacity: 0.5;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  pointer-events: none;
-}
-</style>
-
-# Module 0: The Challenge — Building FanHub in 8 Hours
+# Module 0: The Challenge
+## Building FanHub in 8 Hours
 
 <div class="pt-12">
-  <span class="text-6xl">
-    📚
-  </span>
+  <span class="text-6xl">🚀</span>
 </div>
-
-<div class="pt-6">
-  <h2 class="text-xl opacity-80">Monday, 9:00 AM — A skeptical senior developer throws down a challenge</h2>
-</div>
-
-
----
-
-# 🎯 Learning Objectives
-
-By the end of this module, you will have:
-
-- **Experienced "the struggle"** — Building with AI that doesn't understand your codebase
-- **Mastered context variables** — `#file`, `@workspace`, `#codebase`, `#fetch`, images
-- **Understood the shift** — From Syntax Wizards to Markdown Whisperers
-- **Mapped customization options** — When to use Repo Instructions vs. Agents vs. Skills
-- **Set up your development environment** — FanHub running locally with your chosen show
-
-<div class="pt-8">
-  <h3 class="text-lg opacity-70">This isn't about features—it's about a fundamental shift in how you build software</h3>
-</div>
-
-
----
-
-# 📖 The Personas You'll Meet
-
-<div class="grid grid-cols-2 gap-8 text-sm">
-
-<div>
-  <h3>💭 Sarah — The Skeptical Senior (15 years)</h3>
-  <p><em>"I've seen too many 'revolutionary' tools that waste time. Prove it with metrics."</em></p>
-
-  <h3>🔧 Marcus — The DevOps Developer (5 years)</h3>
-  <p><em>"This is going to take days to understand this codebase."</em></p>
-
-  <h3>🏗️ David — The Seasoned Architect (20 years)</h3>
-  <p><em>"Another codebase with no architecture decisions recorded."</em></p>
-</div>
-
-<div>
-  <h3>🧪 Elena — The Quality Champion (8 years)</h3>
-  <p><em>"I don't even know where to start with testing this."</em></p>
-
-  <h3>📋 Rafael — The Product Visionary (10 years)</h3>
-  <p><em>"How do we scope features when we don't understand the system?"</em></p>
-</div>
-
-</div>
-
-<div class="pt-6 text-center">
-  <p class="text-lg font-bold">Sarah smiles: "You've got Copilot. Let's see if it helps or just suggests more confusion."</p>
-</div>
-
-
----
-
-# 🔄 The Evolution: Syntax Wizards → Markdown Whisperers
-
-<div class="grid grid-cols-3 gap-6 text-sm">
-
-<div class="text-center">
-  <h3 class="text-lg font-bold">🧙‍♂️ Syntax Wizards</h3>
-  <p class="opacity-80">(1990-2015)</p>
-  <ul class="text-left mt-4">
-    <li>✗ Syntax mastery</li>
-    <li>✗ Clever solutions</li>
-    <li>✗ Knowledge hoarding</li>
-    <li>✗ Fast typing</li>
-  </ul>
-</div>
-
-<div class="text-center">
-  <h3 class="text-lg font-bold">🤠 YAML Cowboys</h3>
-  <p class="opacity-80">(2015-2020)</p>
-  <ul class="text-left mt-4">
-    <li>⚠️ Configuration complexity</li>
-    <li>⚠️ Tool multiplication</li>
-    <li>⚠️ Copy-paste engineering</li>
-    <li>⚠️ Infrastructure as Code</li>
-  </ul>
-</div>
-
-<div class="text-center">
-  <h3 class="text-lg font-bold">✍️ Markdown Whisperers</h3>
-  <p class="opacity-80">(2020-Now)</p>
-  <ul class="text-left mt-4">
-    <li>✅ Clarity over cleverness</li>
-    <li>✅ Intent over implementation</li>
-    <li>✅ Documentation as leverage</li>
-    <li>✅ AI amplifies clarity</li>
-  </ul>
-</div>
-
-</div>
-
-
----
-
-# 🗺️ The Copilot Customization Map
-
-<div class="text-sm">
-
-| I want Copilot to... | Use | File Location | When Loaded |
-|---------------------|-----|---------------|-------------|
-| **Know our project basics** | Repo Instructions | `.github/copilot-instructions.md` | Always, every request |
-| **Apply rules to specific files** | Custom Instructions | `.github/instructions/*.instructions.md` | By file pattern |
-| **Run a specific task I trigger** | Prompts | `.github/prompts/*.prompt.md` | When you invoke `/prompt-name` |
-| **Act as a specialist persona** | Agents | `.github/agents/*.agent.md` | When you @ mention it |
-| **Know our domain automatically** | Skills | `.github/skills/*/SKILL.md` | Automatically when relevant |
-
-</div>
-
-<div class="pt-6 text-center">
-  <h3 class="text-lg font-bold">The Question: "What am I trying to teach Copilot?"</h3>
-</div>
-
-
----
-
-# ❌ The "Before" State — Experience the Struggle
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-  <h3 class="text-lg font-bold text-red-400">What You'll Experience</h3>
-  <ul class="text-sm">
-    <li>✗ Generic suggestions that don't match architecture</li>
-    <li>✗ Inconsistent code styles</li>
-    <li>✗ Show-generic content ("John Doe" characters)</li>
-    <li>✗ Uncertainty about patterns to follow</li>
-    <li>✗ Multiple attempts to get what you want</li>
-  </ul>
-</div>
-
-<div>
-  <h3 class="text-lg font-bold text-red-400">The Codebase Reality</h3>
-  <ul class="text-sm">
-    <li>Database schema is generic</li>
-    <li>API endpoints are inconsistent</li>
-    <li>Frontend components mix styles</li>
-    <li>Zero documentation</li>
-    <li>No tests or standards</li>
-    <li>Generic placeholder content</li>
-  </ul>
-</div>
-
-</div>
-
-<div class="pt-8 text-center">
-  <p class="text-lg font-bold text-yellow-400">This frustration is intentional. You need to feel the "before" to appreciate the transformation.</p>
-</div>
-
-
----
-
-# 📊 Context Variables — The Foundation
-
-<div class="text-sm">
-
-**The Problem:** Marcus asks: *"How do I add a character to the database?"*
-**Copilot's Response:** Generic SQL syntax (useless!)
-
-**The Solution:** Provide the right context
-
-| Context Type | Usage | What It Does |
-|-------------|--------|-------------|
-| `#file:schema.sql` | Reference specific files | Copilot reads that file's content |
-| `@workspace` | Include workspace context | Searches across all project files |
-| `#codebase` | Reference entire codebase | Broad project understanding |
-| `#fetch:url` | Include web content | Fetch documentation or examples |
-| Images | Upload screenshots/diagrams | Visual context for layouts |
-
-</div>
-
-<div class="pt-6 text-center">
-  <h3 class="text-lg font-bold">Quality of AI responses = Quality of context you provide</h3>
-</div>
-
-
----
-
-# 🔨 Key Exercises
-
-<div class="grid grid-cols-2 gap-8 text-sm">
-
-<div>
-  <h3 class="text-lg font-bold">📋 Exercise 0.1: Master Context Variables</h3>
-  <ul>
-    <li><strong>Time:</strong> 20 minutes</li>
-    <li><strong>Lead:</strong> Everyone ⭐</li>
-    <li><strong>Goal:</strong> Learn #file, @workspace, #codebase, #fetch, images</li>
-    <li><strong>Outcome:</strong> Effective AI collaboration foundation</li>
-  </ul>
-</div>
-
-<div>
-  <h3 class="text-lg font-bold">😤 Exercise 0.2: Experience "The Struggle"</h3>
-  <ul>
-    <li><strong>Time:</strong> 15 minutes</li>
-    <li><strong>Lead:</strong> Everyone ⭐</li>
-    <li><strong>Goal:</strong> Build without configuration or documentation</li>
-    <li><strong>Outcome:</strong> Feel the frustration (important!)</li>
-  </ul>
-</div>
-
-</div>
-
-<div class="pt-8 text-center">
-  <p class="text-lg">Total Module Time: <strong>35 minutes</strong></p>
-</div>
-
-
----
-
-# 🎭 Your FanHub Journey Begins
-
-<div class="text-center">
-  <h3 class="text-2xl font-bold mb-6">Choose Your Show Theme</h3>
-
-  <div class="grid grid-cols-3 gap-4 text-sm">
-    <div>📺 The Office (US)</div>
-    <div>🔦 Stranger Things</div>
-    <div>🧪 Breaking Bad</div>
-    <div>🛡️ The Mandalorian</div>
-    <div>🐉 Game of Thrones</div>
-    <div>🚀 The Expanse</div>
-  </div>
-</div>
-
-<div class="pt-8">
-  <h3 class="text-lg font-bold">Tech Stack You'll Master</h3>
-  <div class="grid grid-cols-2 gap-6 text-sm mt-4">
-    <div>
-      <strong>Backend:</strong> Node.js + Express, PostgreSQL, GraphQL API, JWT auth
-    </div>
-    <div>
-      <strong>Frontend:</strong> React 18, React Router, Mixed styling approaches
-    </div>
-  </div>
-</div>
-
-
----
-
-# ✅ Success Criteria
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-  <h3 class="text-lg font-bold text-green-400">Environment Setup</h3>
-  <ul class="text-sm">
-    <li>☐ FanHub app running locally</li>
-    <li>☐ Show theme chosen</li>
-    <li>☐ Context variables mastered</li>
-    <li>☐ Development environment ready</li>
-  </ul>
-</div>
-
-<div>
-  <h3 class="text-lg font-bold text-green-400">Experience Gained</h3>
-  <ul class="text-sm">
-    <li>☐ Attempted Character Detail Challenge</li>
-    <li>☐ Felt the frustration (essential!)</li>
-    <li>☐ Understand customization map</li>
-    <li>☐ Ready for Module 01 transformation</li>
-  </ul>
-</div>
-
-</div>
-
-<div class="pt-8 text-center">
-  <p class="text-lg opacity-80">The next 8 hours will transform how you work. The struggle ends here.</p>
-</div>
-
-
----
-
-# 💭 Mindful Moment: Before the Transformation
-
-<div class="grid grid-cols-2 gap-8 text-sm">
-
-<div>
-  <h3 class="text-lg font-bold">What The Team Thinks</h3>
-  <ul>
-    <li><strong>Marcus:</strong> "Is Copilot even helping? This feels like fighting with autocomplete."</li>
-    <li><strong>Priya:</strong> "If I can't get good results, maybe I'm not using it right?"</li>
-    <li><strong>David:</strong> "Will AI make my 20 years of expertise obsolete?"</li>
-    <li><strong>Elena:</strong> "How do I trust AI-generated tests to catch real bugs?"</li>
-  </ul>
-</div>
-
-<div>
-  <h3 class="text-lg font-bold">Sarah's Challenge</h3>
-  <blockquote class="border-l-4 border-yellow-400 pl-4 italic">
-    "I was skeptical because I've seen too many 'revolutionary' tools that waste more time than they save. You've got 8 hours to prove that AI-assisted development delivers real, measurable value."
-  </blockquote>
-</div>
-
-</div>
-
-
----
-
-# ➡️ Next Up: Module 01 — Repository Instructions
-
-<div class="text-center">
-  <h3 class="text-2xl font-bold mb-6">The Transformation Begins</h3>
-
-  <p class="text-lg mb-8">In Module 01, you'll add the first layer of context: Repository Instructions</p>
-
-  <div class="grid grid-cols-2 gap-8 text-sm">
-    <div>
-      <h4 class="font-bold">You'll Learn</h4>
-      <ul>
-        <li>How to create copilot-instructions.md</li>
-        <li>Project context that's always loaded</li>
-        <li>Coding standards and architecture patterns</li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-bold">You'll Experience</h4>
-      <ul>
-        <li>Sarah's first "I'm convinced" moment</li>
-        <li>Consistent code suggestions</li>
-        <li>Show-specific content automatically</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="pt-8 text-center opacity-70">
-  <p>Ready to turn frustration into force multiplication?</p>
-</div>
-
 
 <div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotWorkshop Training</span>
+  <span class="text-sm opacity-50">Monday, 9:00 AM · CopilotWorkshop Training</span>
+</div>
+
+---
+layout: center
+---
+
+# 📖 The Story
+
+<div class="text-left max-w-3xl mx-auto mt-8 space-y-4">
+
+<div class="p-6 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
+  <div class="font-bold text-blue-300 text-xl mb-3">Sarah's Challenge</div>
+  <div class="text-gray-200 italic">
+    "A contractor bailed on a generic fan site. Turn it into a production-ready fan hub.
+    Authentication, search, admin tools, deployment pipeline. You have until <strong>end of day</strong>.
+    Oh, and you're all using GitHub Copilot. Prove me wrong."
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-3 mt-6">
+  <div class="p-3 bg-gray-800 rounded-lg text-center">
+    <div class="text-yellow-400 text-2xl">😰</div>
+    <div class="text-xs text-gray-400 mt-2">Marcus: "This will take days"</div>
+  </div>
+  <div class="p-3 bg-gray-800 rounded-lg text-center">
+    <div class="text-yellow-400 text-2xl">🤔</div>
+    <div class="text-xs text-gray-400 mt-2">Priya: "Where do I start?"</div>
+  </div>
+  <div class="p-3 bg-gray-800 rounded-lg text-center">
+    <div class="text-yellow-400 text-2xl">😮‍💨</div>
+    <div class="text-xs text-gray-400 mt-2">David: "No architecture docs..."</div>
+  </div>
+</div>
+
+</div>
+
+---
+layout: center
+---
+
+# ❌ The Problem
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div class="p-6 bg-red-900/30 rounded-lg border-2 border-red-500">
+  <div class="text-3xl mb-3">🗑️</div>
+  <div class="font-bold text-red-400 text-lg mb-3">The Codebase</div>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>❌ Generic database schema</li>
+    <li>❌ Inconsistent API patterns</li>
+    <li>❌ Mixed component styles</li>
+    <li>❌ Zero documentation</li>
+    <li>❌ No tests</li>
+    <li>❌ No standards</li>
+  </ul>
+</div>
+
+<div class="p-6 bg-yellow-900/30 rounded-lg border-2 border-yellow-500">
+  <div class="text-3xl mb-3">🤖</div>
+  <div class="font-bold text-yellow-400 text-lg mb-3">Copilot Without Config</div>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>❌ Generic suggestions</li>
+    <li>❌ Wrong patterns</li>
+    <li>❌ Inconsistent with codebase</li>
+    <li>❌ Doesn't know your domain</li>
+    <li>❌ Multiple failed attempts</li>
+  </ul>
+</div>
+
+</div>
+
+<div class="mt-8 text-center text-gray-400 italic text-sm">
+  This frustration is intentional. You need to feel the problem to appreciate the solution.
+</div>
+
+---
+layout: center
+---
+
+# 🎯 The Mission
+
+<div class="max-w-4xl mx-auto mt-8">
+
+<div class="p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center mb-8">
+  <div class="text-3xl font-bold text-white mb-2">
+    Transform a generic mess into a production-ready fan hub
+  </div>
+  <div class="text-blue-200 text-lg">
+    In 8 hours, using GitHub Copilot
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-4 text-sm">
+  <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-green-500">
+    <div class="font-bold text-green-400 mb-2">✅ By End of Day</div>
+    <ul class="text-gray-300 space-y-1">
+      <li>✓ Authentication & authorization</li>
+      <li>✓ Advanced search</li>
+      <li>✓ Admin dashboard</li>
+      <li>✓ Comprehensive tests</li>
+      <li>✓ Deployment pipeline</li>
+      <li>✓ Show-specific branding</li>
+    </ul>
+  </div>
+  <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-blue-500">
+    <div class="font-bold text-blue-400 mb-2">🎨 Your Choice</div>
+    <div class="text-gray-300 space-y-1">
+      <div>Pick your favorite show:</div>
+      <div class="text-xs mt-2">
+        📺 The Office • 🔦 Stranger Things<br/>
+        🧪 Breaking Bad • 🛡️ The Mandalorian<br/>
+        🐉 Game of Thrones • 🚀 The Expanse
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+---
+layout: two-cols
+---
+
+# The Evolution
+
+<div class="space-y-6 mt-6">
+
+<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
+  <div class="text-3xl mb-2">🧙‍♂️</div>
+  <div class="font-bold text-purple-300 text-sm">1990-2015: Syntax Wizards</div>
+  <ul class="text-xs text-gray-400 mt-2 space-y-1">
+    <li>• Memorize language quirks</li>
+    <li>• Clever solutions</li>
+    <li>• Knowledge hoarding</li>
+  </ul>
+</div>
+
+<div class="p-4 bg-yellow-900/40 rounded-lg border-l-4 border-yellow-400">
+  <div class="text-3xl mb-2">🤠</div>
+  <div class="font-bold text-yellow-300 text-sm">2015-2020: YAML Cowboys</div>
+  <ul class="text-xs text-gray-400 mt-2 space-y-1">
+    <li>• Configuration as code</li>
+    <li>• Infrastructure everywhere</li>
+    <li>• Copy-paste engineering</li>
+  </ul>
+</div>
+
+</div>
+
+::right::
+
+<div class="ml-4 mt-6">
+
+<div class="p-6 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg border-2 border-blue-400 shadow-xl">
+  <div class="text-4xl mb-3">🧘</div>
+  <div class="font-bold text-white text-xl mb-3">2020-Present:</div>
+  <div class="font-bold text-blue-200 text-2xl mb-4">Markdown Whisperers</div>
+  <ul class="text-sm text-blue-100 space-y-2">
+    <li>✓ <strong>Clear intent</strong> over syntax</li>
+    <li>✓ <strong>Understandable code</strong> over clever</li>
+    <li>✓ <strong>Scaled knowledge</strong> via docs</li>
+    <li>✓ <strong>Fast thinking</strong> over fast typing</li>
+  </ul>
+</div>
+
+<div class="mt-6 p-4 bg-gray-800/60 rounded-lg text-center">
+  <div class="text-xs text-gray-400 italic">
+    "AI handles syntax.<br/>Humans handle judgment."
+  </div>
+</div>
+
+</div>
+
+---
+layout: center
+---
+
+# 🧠 The Mindset Shift
+
+<div class="max-w-5xl mx-auto mt-6">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="p-5 bg-red-900/30 rounded-lg border-2 border-red-500">
+  <div class="text-center text-3xl mb-3">❌</div>
+  <div class="font-bold text-red-400 text-center mb-4">The Old Way</div>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>• Syntax mastery</li>
+    <li>• Clever solutions</li>
+    <li>• Knowledge hoarding</li>
+    <li>• Fast typing</li>
+  </ul>
+  <div class="mt-4 p-3 bg-red-950/50 rounded text-xs text-red-300">
+    Result: Onboarding takes months, fragile teams, hidden debt
+  </div>
+</div>
+
+<div class="p-5 bg-green-900/30 rounded-lg border-2 border-green-500">
+  <div class="text-center text-3xl mb-3">✅</div>
+  <div class="font-bold text-green-400 text-center mb-4">The New Way</div>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>• Clear intent</li>
+    <li>• Understandable code</li>
+    <li>• Scaled knowledge</li>
+    <li>• Fast thinking</li>
+  </ul>
+  <div class="mt-4 p-3 bg-green-950/50 rounded text-xs text-green-300">
+    Result: AI handles boilerplate, expertise matters more
+  </div>
+</div>
+
+</div>
+
+<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-center">
+  <div class="text-xl font-bold text-white">
+    Experience doesn't become obsolete—it becomes the quality filter
+  </div>
+</div>
+
+</div>
+
+---
+
+# The 5 Principles
+
+<div class="grid grid-cols-1 gap-3 mt-6 text-sm">
+
+<div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400 flex items-start gap-3">
+  <div class="text-3xl">🔍</div>
+  <div>
+    <div class="font-bold text-blue-300 text-base">1. Clarity Over Cleverness</div>
+    <div class="text-gray-400 mt-1">Clear thinking enables effective AI collaboration. If you can't explain it to a human, you can't explain it to AI.</div>
+  </div>
+</div>
+
+<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400 flex items-start gap-3">
+  <div class="text-3xl">🎯</div>
+  <div>
+    <div class="font-bold text-green-300 text-base">2. Intent Over Implementation</div>
+    <div class="text-gray-400 mt-1">Describe WHAT you want (outcomes, constraints), not HOW to build it. Your expertise is knowing what to build.</div>
+  </div>
+</div>
+
+<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400 flex items-start gap-3">
+  <div class="text-3xl">📚</div>
+  <div>
+    <div class="font-bold text-purple-300 text-base">3. Documentation as Leverage</div>
+    <div class="text-gray-400 mt-1">Write once, benefit infinitely. Documentation helps humans AND AI. Every piece pays dividends forever.</div>
+  </div>
+</div>
+
+<div class="p-4 bg-orange-900/40 rounded-lg border-l-4 border-orange-400 flex items-start gap-3">
+  <div class="text-3xl">🧩</div>
+  <div>
+    <div class="font-bold text-orange-300 text-base">4. Context is Everything</div>
+    <div class="text-gray-400 mt-1">Quality of suggestions matches quality of context provided. AI reads context, not minds.</div>
+  </div>
+</div>
+
+<div class="p-4 bg-red-900/40 rounded-lg border-l-4 border-red-400 flex items-start gap-3">
+  <div class="text-3xl">⚖️</div>
+  <div>
+    <div class="font-bold text-red-300 text-base">5. Validate, Don't Automate</div>
+    <div class="text-gray-400 mt-1">AI proposes; you decide. Your expertise catches what AI misses. Always review critically.</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+# 🗺️ The Customization Map
+
+<div class="mt-6">
+
+<div class="text-center mb-6 text-gray-400 text-sm italic">
+  Five ways to customize GitHub Copilot—learn when to use what
+</div>
+
+<div class="grid grid-cols-5 gap-2 text-xs">
+
+<div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400 text-center">
+  <div class="text-2xl mb-2">📚</div>
+  <div class="font-bold text-blue-300">Repo Instructions</div>
+  <div class="text-gray-400 mt-2">Project README for AI</div>
+  <div class="text-blue-200 mt-2 font-mono text-[10px]">copilot-instructions.md</div>
+  <div class="mt-2 text-gray-500">Always on</div>
+</div>
+
+<div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400 text-center">
+  <div class="text-2xl mb-2">📋</div>
+  <div class="font-bold text-green-300">Custom Instructions</div>
+  <div class="text-gray-400 mt-2">File-specific rules</div>
+  <div class="text-green-200 mt-2 font-mono text-[10px]">*.instructions.md</div>
+  <div class="mt-2 text-gray-500">By file pattern</div>
+</div>
+
+<div class="p-3 bg-purple-900/60 rounded-lg border-2 border-purple-400 text-center">
+  <div class="text-2xl mb-2">⚡</div>
+  <div class="font-bold text-purple-300">Prompts</div>
+  <div class="text-gray-400 mt-2">Task template</div>
+  <div class="text-purple-200 mt-2 font-mono text-[10px]">*.prompt.md</div>
+  <div class="mt-2 text-gray-500">When invoked</div>
+</div>
+
+<div class="p-3 bg-orange-900/60 rounded-lg border-2 border-orange-400 text-center">
+  <div class="text-2xl mb-2">🤖</div>
+  <div class="font-bold text-orange-300">Agents</div>
+  <div class="text-gray-400 mt-2">Specialist persona</div>
+  <div class="text-orange-200 mt-2 font-mono text-[10px]">*.agent.md</div>
+  <div class="mt-2 text-gray-500">@ mentioned</div>
+</div>
+
+<div class="p-3 bg-pink-900/60 rounded-lg border-2 border-pink-400 text-center">
+  <div class="text-2xl mb-2">🎓</div>
+  <div class="font-bold text-pink-300">Skills</div>
+  <div class="text-gray-400 mt-2">Domain expert</div>
+  <div class="text-pink-200 mt-2 font-mono text-[10px]">SKILL.md</div>
+  <div class="mt-2 text-gray-500">Auto-loaded</div>
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-gray-800 rounded-lg">
+  <div class="font-bold text-white mb-2 text-sm">Quick Decision</div>
+  <div class="text-gray-400 text-xs space-y-1">
+    <div>• <strong class="text-blue-300">Project-wide context?</strong> → Repo Instructions</div>
+    <div>• <strong class="text-green-300">Specific file types?</strong> → Custom Instructions</div>
+    <div>• <strong class="text-purple-300">Reusable task?</strong> → Prompts</div>
+    <div>• <strong class="text-orange-300">Specialist role?</strong> → Agents</div>
+    <div>• <strong class="text-pink-300">Domain knowledge?</strong> → Skills</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+# 👥 Meet The Team
+
+<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
+
+<div class="p-4 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-lg border-2 border-blue-400">
+  <div class="text-3xl mb-2 text-center">👨‍💼</div>
+  <div class="font-bold text-blue-300 text-center text-base">Sarah</div>
+  <div class="text-gray-400 text-center mb-3">Senior Dev · 15 years</div>
+  <div class="text-gray-300 italic text-center">
+    "I've seen hype cycles. Prove this is different."
+  </div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-green-900/60 to-green-800/40 rounded-lg border-2 border-green-400">
+  <div class="text-3xl mb-2 text-center">🔧</div>
+  <div class="font-bold text-green-300 text-center text-base">Marcus</div>
+  <div class="text-gray-400 text-center mb-3">DevOps Dev · 5 years</div>
+  <div class="text-gray-300 italic text-center">
+    "Can this help me build apps, not just infrastructure?"
+  </div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-purple-900/60 to-purple-800/40 rounded-lg border-2 border-purple-400">
+  <div class="text-3xl mb-2 text-center">👨‍💻</div>
+  <div class="font-bold text-purple-300 text-center text-base">David</div>
+  <div class="text-gray-400 text-center mb-3">Staff Engineer · 20 years</div>
+  <div class="text-gray-300 italic text-center">
+    "Will AI make my 20 years of expertise obsolete?"
+  </div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-orange-900/60 to-orange-800/40 rounded-lg border-2 border-orange-400">
+  <div class="text-3xl mb-2 text-center">🧪</div>
+  <div class="font-bold text-orange-300 text-center text-base">Elena</div>
+  <div class="text-gray-400 text-center mb-3">QA Engineer · 8 years</div>
+  <div class="text-gray-300 italic text-center">
+    "Will AI tests miss critical edge cases?"
+  </div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-pink-900/60 to-pink-800/40 rounded-lg border-2 border-pink-400">
+  <div class="text-3xl mb-2 text-center">📱</div>
+  <div class="font-bold text-pink-300 text-center text-base">Rafael</div>
+  <div class="text-gray-400 text-center mb-3">Product Manager · 10 years</div>
+  <div class="text-gray-300 italic text-center">
+    "Can this bridge business and technical faster?"
+  </div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-yellow-900/60 to-yellow-800/40 rounded-lg border-2 border-yellow-400">
+  <div class="text-3xl mb-2 text-center">👩‍💻</div>
+  <div class="font-bold text-yellow-300 text-center text-base">Priya</div>
+  <div class="text-gray-400 text-center mb-3">Junior Dev · 1 year</div>
+  <div class="text-gray-300 italic text-center">
+    "How do I avoid asking 'dumb' questions?"
+  </div>
+</div>
+
+</div>
+
+<div class="mt-6 text-center text-sm text-gray-400">
+  Each persona has a transformation arc throughout this 8-hour journey
+</div>
+
+---
+
+# 🔨 Exercises
+
+<div class="mt-6">
+
+<table class="text-xs w-full">
+  <thead>
+    <tr class="bg-gray-800">
+      <th class="p-2 text-left">#</th>
+      <th class="p-2 text-left">Exercise</th>
+      <th class="p-2 text-left">Lead</th>
+      <th class="p-2 text-center">Time</th>
+      <th class="p-2 text-left">What You'll Do</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="bg-gray-900/50">
+      <td class="p-2 font-bold text-blue-400">0.1</td>
+      <td class="p-2">Master Context Variables</td>
+      <td class="p-2">All ⭐</td>
+      <td class="p-2 text-center">10 min</td>
+      <td class="p-2 text-gray-400">Learn #file, @workspace, #codebase, #fetch, images</td>
+    </tr>
+    <tr class="bg-gray-900/30">
+      <td class="p-2 font-bold text-blue-400">0.2</td>
+      <td class="p-2">Experience "The Struggle"</td>
+      <td class="p-2">All ⭐</td>
+      <td class="p-2 text-center">10 min</td>
+      <td class="p-2 text-gray-400">Build with unconfigured Copilot—feel the pain</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mt-6 p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
+  <div class="font-bold text-yellow-400 mb-2">💡 Exercise 0.2 is Critical</div>
+  <div class="text-gray-300 text-sm">
+    You <strong>must</strong> experience frustration with generic Copilot suggestions before Module 1.
+    This "before" state makes the transformation meaningful.
+  </div>
+</div>
+
+</div>
+
+---
+layout: two-cols
+---
+
+# ❌ The "Before"
+
+<div class="mt-6 space-y-3">
+
+<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
+  <div class="font-bold text-red-400 mb-2">What You'll Experience</div>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>❌ Generic suggestions</li>
+    <li>❌ Wrong architectural patterns</li>
+    <li>❌ Show-generic content</li>
+    <li>❌ Inconsistent styles</li>
+    <li>❌ Multiple failed attempts</li>
+  </ul>
+</div>
+
+<div class="p-4 bg-gray-800 rounded-lg">
+  <div class="font-bold text-gray-400 mb-2 text-sm">💭 Team Reactions</div>
+  <div class="text-xs text-gray-400 space-y-2">
+    <div><strong>Marcus:</strong> "Fighting with autocomplete..."</div>
+    <div><strong>Priya:</strong> "Am I using it wrong?"</div>
+    <div><strong>Sarah:</strong> "Generic garbage."</div>
+    <div><strong>David:</strong> "AI doesn't know our patterns."</div>
+  </div>
+</div>
+
+</div>
+
+::right::
+
+# ✨ The Promise
+
+<div class="ml-4 mt-6 space-y-3">
+
+<div class="p-4 bg-green-900/30 rounded-lg border-l-4 border-green-500">
+  <div class="font-bold text-green-400 mb-2">After Configuration</div>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>✅ Context-aware suggestions</li>
+    <li>✅ Follows your architecture</li>
+    <li>✅ Show-specific content</li>
+    <li>✅ Consistent patterns</li>
+    <li>✅ First-try success</li>
+  </ul>
+</div>
+
+<div class="p-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg">
+  <div class="font-bold text-white text-base mb-2">The Transformation</div>
+  <div class="text-blue-100 text-sm">
+    From frustration to flow.<br/>
+    From generic to domain-specific.<br/>
+    From guessing to understanding.
+  </div>
+</div>
+
+</div>
+
+---
+layout: center
+---
+
+# 📊 Success Metrics
+
+<div class="max-w-4xl mx-auto mt-6">
+
+<div class="text-center mb-6 text-gray-400">
+  By the end of Module 0, you'll have...
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-3">
+  <div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">🎯</div>
+      <div>
+        <div class="font-bold text-blue-300">Environment Ready</div>
+        <div class="text-xs text-gray-400 mt-1">FanHub running locally</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">📺</div>
+      <div>
+        <div class="font-bold text-green-300">Show Selected</div>
+        <div class="text-xs text-gray-400 mt-1">Your fan site theme chosen</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="space-y-3">
+  <div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">😤</div>
+      <div>
+        <div class="font-bold text-purple-300">Frustration Felt</div>
+        <div class="text-xs text-gray-400 mt-1">Experienced generic AI struggles</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4 bg-orange-900/40 rounded-lg border-l-4 border-orange-400">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">🧠</div>
+      <div>
+        <div class="font-bold text-orange-300">Mindset Shifted</div>
+        <div class="text-xs text-gray-400 mt-1">5 principles internalized</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="mt-8 p-4 bg-gray-800 rounded-lg text-center">
+  <div class="text-sm text-gray-300">
+    Ready to see everything change in <strong class="text-blue-400">Module 1</strong>
+  </div>
+</div>
+
+</div>
+
+---
+layout: center
+---
+
+# 🔗 The Compounding Effect
+
+<div class="max-w-3xl mx-auto mt-8">
+
+<div class="p-6 bg-gradient-to-r from-purple-900/60 to-blue-900/60 rounded-lg border-2 border-purple-400">
+  <div class="text-center mb-4 text-xl font-bold text-white">
+    Each module builds on the previous
+  </div>
+  <div class="text-sm text-gray-300 space-y-2">
+    <div>📚 <strong>Module 1:</strong> Repository Instructions → Project-wide context</div>
+    <div>📋 <strong>Module 2:</strong> Custom Instructions → File-specific rules</div>
+    <div>⚡ <strong>Module 3:</strong> Prompts → Reusable task templates</div>
+    <div>🤖 <strong>Module 4:</strong> Agents → Specialist personas</div>
+    <div>🎓 <strong>Module 5:</strong> Skills → Domain expertise</div>
+  </div>
+</div>
+
+<div class="mt-8 text-center text-gray-400 text-sm italic">
+  By Module 9, all five customizations work together—that's when the magic happens
+</div>
+
+</div>
+
+---
+layout: center
+---
+
+# ➡️ Next Steps
+
+<div class="max-w-3xl mx-auto mt-8 space-y-6">
+
+<div class="p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
+  <div class="text-2xl font-bold text-white mb-2">
+    Module 1: Repository Instructions
+  </div>
+  <div class="text-blue-200">
+    Watch Marcus show how configuration changes everything
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-4 text-sm">
+  <div class="p-4 bg-gray-800 rounded-lg text-center">
+    <div class="text-2xl mb-2">⏰</div>
+    <div class="font-bold text-gray-300">10:00 AM</div>
+    <div class="text-xs text-gray-500 mt-1">Monday continues</div>
+  </div>
+  <div class="p-4 bg-gray-800 rounded-lg text-center">
+    <div class="text-2xl mb-2">📚</div>
+    <div class="font-bold text-gray-300">First Configuration</div>
+    <div class="text-xs text-gray-500 mt-1">copilot-instructions.md</div>
+  </div>
+  <div class="p-4 bg-gray-800 rounded-lg text-center">
+    <div class="text-2xl mb-2">✨</div>
+    <div class="font-bold text-gray-300">Everything Changes</div>
+    <div class="text-xs text-gray-500 mt-1">Same code, better AI</div>
+  </div>
+</div>
+
+<div class="mt-6 p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500 text-center">
+  <div class="text-yellow-400 font-bold mb-2">⚠️ Don't Skip Exercise 0.2</div>
+  <div class="text-gray-300 text-sm">
+    The transformation only matters if you experience the problem first
+  </div>
+</div>
+
+</div>
+
+---
+layout: end
+---
+
+# Ready to Begin?
+
+<div class="text-center mt-12">
+  <div class="text-6xl mb-6">🚀</div>
+  <div class="text-2xl text-gray-300 mb-4">
+    The 8-hour transformation starts now
+  </div>
+  <div class="text-gray-500">
+    Module 0: Orientation — Complete
+  </div>
 </div>
