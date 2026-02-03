@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "./scripts/security-check.sh",
+        "powershell": "./scripts/security-check.ps1",
+        "cwd": ".github/hooks",
+        "timeoutSec": 15,
+        "comment": "Security validation - blocks dangerous commands"
+      },
+      {
+        "type": "command",
+        "bash": "./scripts/directory-restrictions.sh",
+        "powershell": "./scripts/directory-restrictions.ps1",
+        "cwd": ".github/hooks",
+        "timeoutSec": 10,
+        "comment": "Directory access control - enforces file path policies"
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "./scripts/log-security-event.sh",
+        "powershell": "./scripts/log-security-event.ps1",
+        "cwd": ".github/hooks",
+        "comment": "Security audit trail"
+      }
+    ]
+  }
+}

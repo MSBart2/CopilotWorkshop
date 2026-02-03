@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "sqlite": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sqlite",
+        "/workspaces/CopilotTraining/dev-data/fanhub-dev.db"
+      ]
+    }
+  }
+}
