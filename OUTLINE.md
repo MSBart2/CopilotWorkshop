@@ -41,7 +41,7 @@ Six personas guide you through the workshop, each representing real developer ar
 | **Elena**  | 8 years    | Testing, quality assurance            | AI-skeptical QA → AI-assisted QA → Quality at scale           |
 | **Rafael** | 10 years   | Product, specifications               | Requirements → Execution bridge → Enabling all teams          |
 
-**Full personas**: [modules/00-orientation/PERSONAS.md](modules/00-orientation/PERSONAS.md)
+**Full personas**: [modules/00-orientation/PERSONAS.md](workshop/00-orientation/PERSONAS.md)
 
 ---
 
@@ -49,18 +49,18 @@ Six personas guide you through the workshop, each representing real developer ar
 
 | Module | Title                                                                   | Time      | Exercises | Tier   | Key Focus                                                                                                |
 | ------ | ----------------------------------------------------------------------- | --------- | --------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| **0**  | [The Challenge — Building FanHub](modules/00-orientation/README.md)     | 60 min    | 3         | 🆓     | Experience Copilot without customization; feel the frustration that drives transformation                |
-| **1**  | [Repository Instructions](modules/01-repository-instructions/README.md) | 90 min    | 2         | 🆓     | Create `.github/copilot-instructions.md` and `ARCHITECTURE.md`; transform from confused to context-aware |
-| **2**  | [Agent Plan Mode](modules/02-agent-plan-mode/README.md)                 | 90 min    | 3         | 🆓     | Master structured thinking; use AI to help you think, not just type                                      |
-| **3**  | [Custom Prompts](modules/03-custom-prompts/README.md)                   | 90 min    | 3         | 🆓     | Build reusable `.prompt.md` library; solved problems stay solved                                         |
-| **4**  | [Custom Instructions](modules/04-custom-instructions/README.md)         | 90 min    | 3         | 🆓     | Create file-scoped `.instructions.md` with `applyTo` patterns; context activates automatically           |
-| **5**  | [Agent Skills](modules/05-agent-skills/README.md)                       | 90 min    | 3         | 🆓     | Teach specialized capabilities via `.github/skills/`; domain knowledge as AI-accessible resources        |
-| **6**  | [MCP Servers](modules/06-mcp-servers/README.md)                         | 45 min    | 3         | 🆓     | Connect to databases and APIs; transform from "knows things" to "can do things"                          |
-| **7**  | [Custom Agents](modules/07-custom-agents/README.md)                     | 60 min    | 5         | 🆓     | Bundle instructions, skills, and tools into role-based `.agent.md` presets                               |
-| **8**  | [Copilot on the Web](modules/08-copilot-web/README.md)                  | 50-60 min | 4         | 🏢     | Use customizations beyond VS Code; work where you already are                                            |
-| **9**  | [GitHub Copilot CLI](modules/09-copilot-cli/README.md)                  | 60 min    | 3         | 💼     | Terminal-native AI workflows; automate Git, shell, and GitHub operations                                 |
-| **10** | [Agentic SDLC](modules/10-agentic-sdlc/README.md)                       | 90 min    | 3         | 🆓     | Background agents with Git worktrees; autonomous parallel work                                           |
-| **11** | [Enterprise Patterns](modules/11-enterprise-patterns/README.md)         | 30-90 min | Variable  | 🆓💼🏢 | Scale success org-wide; choose exercises by role                                                         |
+| **0**  | [The Challenge — Building FanHub](workshop/00-orientation/README.md)     | 60 min    | 3         | 🆓     | Experience Copilot without customization; feel the frustration that drives transformation                |
+| **1**  | [Repository Instructions](workshop/01-repository-instructions/README.md) | 90 min    | 2         | 🆓     | Create `.github/copilot-instructions.md` and `ARCHITECTURE.md`; transform from confused to context-aware |
+| **2**  | [Agent Plan Mode](workshop/02-agent-plan-mode/README.md)                 | 90 min    | 3         | 🆓     | Master structured thinking; use AI to help you think, not just type                                      |
+| **3**  | [Custom Prompts](workshop/03-custom-prompts/README.md)                   | 90 min    | 3         | 🆓     | Build reusable `.prompt.md` library; solved problems stay solved                                         |
+| **4**  | [Custom Instructions](workshop/04-custom-instructions/README.md)         | 90 min    | 3         | 🆓     | Create file-scoped `.instructions.md` with `applyTo` patterns; context activates automatically           |
+| **5**  | [Agent Skills](workshop/05-agent-skills/README.md)                       | 90 min    | 3         | 🆓     | Teach specialized capabilities via `.github/skills/`; domain knowledge as AI-accessible resources        |
+| **6**  | [MCP Servers](workshop/06-mcp-servers/README.md)                         | 45 min    | 3         | 🆓     | Connect to databases and APIs; transform from "knows things" to "can do things"                          |
+| **7**  | [Custom Agents](workshop/07-custom-agents/README.md)                     | 60 min    | 5         | 🆓     | Bundle instructions, skills, and tools into role-based `.agent.md` presets                               |
+| **8**  | [Copilot on the Web](workshop/08-copilot-web/README.md)                  | 50-60 min | 4         | 🏢     | Use customizations beyond VS Code; work where you already are                                            |
+| **9**  | [GitHub Copilot CLI](workshop/09-copilot-cli/README.md)                  | 60 min    | 3         | 💼     | Terminal-native AI workflows; automate Git, shell, and GitHub operations                                 |
+| **10** | [Agentic SDLC](workshop/10-agentic-sdlc/README.md)                       | 90 min    | 3         | 🆓     | Background agents with Git worktrees; autonomous parallel work                                           |
+| **11** | [Enterprise Patterns](workshop/11-enterprise-patterns/README.md)         | 30-90 min | Variable  | 🆓💼🏢 | Scale success org-wide; choose exercises by role                                                         |
                          |
                         |
 
@@ -68,7 +68,7 @@ Six personas guide you through the workshop, each representing real developer ar
 
 | Module | Title                                                           | Time   | Exercises | Tier | Key Focus                                                                  |
 | ------ | --------------------------------------------------------------- | ------ | --------- | ---- | -------------------------------------------------------------------------- |
-| **SDK** | [Copilot SDK](modules/copilot-sdk/README.md) | 45 min | 3         | 💼   | Embed Copilot's engine in custom Python tools; build domain-specific automation |
+| **SDK** | [Copilot SDK](tech-talks/copilot-sdk/README.md) | 45 min | 3         | 💼   | Embed Copilot's engine in custom Python tools; build domain-specific automation |
 
 **Total**: 14 modules, 46 exercises, ~12-14 hours
 

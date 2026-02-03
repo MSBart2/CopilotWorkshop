@@ -183,8 +183,8 @@ Create layer-specific instruction files that automatically apply React patterns 
 - [ ] Backend suggestions no longer include React hooks or JSX syntax
 
 > 📂 **Compare Your Work**:
-> - [`frontend.instructions.md`](../../examples/completed-config/.github/instructions/frontend.instructions.md)
-> - [`backend.instructions.md`](../../examples/completed-config/.github/instructions/backend.instructions.md)
+> - [`frontend.instructions.md`](../examples/completed-config/.github/instructions/frontend.instructions.md)
+> - [`backend.instructions.md`](../examples/completed-config/.github/instructions/backend.instructions.md)
 
 #### 📚 Official Docs
 

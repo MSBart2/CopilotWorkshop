@@ -112,7 +112,7 @@ When you invoke the plan agent, it automatically reads:
 **Result:** Plans that respect your architecture, follow your conventions, and integrate seamlessly with existing code.
 
 > 📂 **Reference Examples**: The [`examples/completed-config/`](../../examples/completed-config/) folder contains sample files showing completed plans:
-> - [`docs/character-detail-challenge.md`](../../examples/completed-config/docs/character-detail-challenge.md) — Example feature plan output
+> - [`docs/character-detail-challenge.md`](../examples/completed-config/docs/character-detail-challenge.md) — Example feature plan output
 
 ---
 

@@ -198,7 +198,7 @@ Ensure tests cover:
 
 ### 4. FanHub Testing Standards
 
-Follow team conventions from [.github/copilot-instructions.md](../.github/copilot-instructions.md):
+Follow team conventions from [.github/copilot-instructions.md](../../../../../.github/copilot-instructions.md):
 
 - **Framework**: Jest
 - **Assertions**: Specific matchers (`toBe`, `toEqual`, `toThrow`)

@@ -306,7 +306,7 @@ Create a `build-pipeline-analyzer` agent skill that teaches Copilot how to analy
    
    ### Step 2: Run Log Analyzer
    
-   Use [analyze-logs.sh](./analyze-logs.sh) to identify patterns:
+   Use [analyze-logs.sh](../examples/completed-config/skills/build-pipeline-analyzer/analyze-logs.sh) to identify patterns:
    
    ```bash
    .github/skills/build-pipeline-analyzer/analyze-logs.sh build-failure.log
@@ -338,9 +338,9 @@ Create a `build-pipeline-analyzer` agent skill that teaches Copilot how to analy
    
    Detailed examples in log-patterns/:
    
-   - [Missing dependency](./log-patterns/missing-dependency.txt) — Package not in package.json or not installed
-   - [TypeScript errors](./log-patterns/typescript-error.txt) — Type mismatches, missing @types packages
-   - [Memory exhaustion](./log-patterns/memory-exhaustion.txt) — Insufficient heap size for build
+   - [Missing dependency](../examples/completed-config/skills/build-pipeline-analyzer/log-patterns/missing-dependency.txt) — Package not in package.json or not installed
+   - [TypeScript errors](../examples/completed-config/skills/build-pipeline-analyzer/log-patterns/typescript-error.txt) — Type mismatches, missing @types packages
+   - [Memory exhaustion](../examples/completed-config/skills/build-pipeline-analyzer/log-patterns/memory-exhaustion.txt) — Insufficient heap size for build
    
    ## Pattern Recognition Guide
    

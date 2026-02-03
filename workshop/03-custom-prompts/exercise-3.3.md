@@ -61,10 +61,10 @@ Create variable-driven prompts that automatically capture file paths, selected t
 
    Diagnose the problem by:
 
-   1. Checking [Docker configuration](${workspaceFolder}/docker-compose.yml)
-   2. Validating [package.json dependencies](${workspaceFolder}/package.json)
+   1. Checking [Docker configuration](../../fanhub/docker-compose.yml)
+   2. Validating [package.json dependencies](../../slides/package.json)
    3. Reviewing recent changes to ${file}
-   4. Comparing against [ARCHITECTURE.md](${workspaceFolder}/docs/ARCHITECTURE.md) build patterns
+   4. Comparing against [ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md) build patterns
 
    Provide:
 
@@ -137,7 +137,7 @@ Create variable-driven prompts that automatically capture file paths, selected t
 
    Reference:
 
-   - Architecture patterns: [ARCHITECTURE.md](${workspaceFolder}/docs/ARCHITECTURE.md)
+   - Architecture patterns: [ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md)
    - Existing features: Search for similar implementations
 
    Provide effort estimate in:
@@ -215,9 +215,9 @@ Create variable-driven prompts that automatically capture file paths, selected t
 
 > 📂 **Compare Your Work**:
 >
-> - [`debug-build.prompt.md`](../../examples/completed-config/.github/prompts/debug-build.prompt.md)
-> - [`feature-estimate.prompt.md`](../../examples/completed-config/.github/prompts/feature-estimate.prompt.md)
-> - [`test-file.prompt.md`](../../examples/completed-config/.github/prompts/test-file.prompt.md)
+> - [`debug-build.prompt.md`](../examples/completed-config/.github/prompts/debug-build.prompt.md)
+> - [`feature-estimate.prompt.md`](../examples/completed-config/.github/prompts/feature-estimate.prompt.md)
+> - [`test-file.prompt.md`](../examples/completed-config/.github/prompts/test-file.prompt.md)
 
 #### 📚 Official Docs
 

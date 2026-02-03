@@ -103,7 +103,7 @@ Create `.github/copilot-instructions.md` that automatically enforces FanHub's co
 - [ ] Team generates code and sees 0 pattern violations (or very few requiring instructions updates)
 - [ ] PR reviews now focus on logic, not style corrections
 
-> 📂 **Compare Your Work**: [`examples/completed-config/.github/copilot-instructions.md`](../../examples/completed-config/.github/copilot-instructions.md)
+> 📂 **Compare Your Work**: [`examples/completed-config/.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
 
 #### 📚 Official Docs
 

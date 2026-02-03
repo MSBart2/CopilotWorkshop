@@ -143,4 +143,4 @@ Before deploying, customize:
 
 - [GitHub Docs: Managing policies for Copilot](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization)
 - [GitHub Docs: Adding custom instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot)
-- [Module 11: Enterprise Patterns](../../modules/11-enterprise-patterns/README.md)
+- [Module 11: Enterprise Patterns](../../../11-enterprise-patterns/README.md)

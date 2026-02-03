@@ -167,7 +167,7 @@ Create a `preToolUse` hook that validates agent tool executions against security
 - [ ] Safe operations (like creating a hello world script) succeed normally
 - [ ] `.github/hooks/logs/security.log` contains timestamped audit entries for both denied and allowed operations
 
-> 📂 **Compare Your Work**: [`examples/completed-config/hooks/security-hooks.json`](../../examples/completed-config/hooks/security-hooks.json) and [`examples/completed-config/hooks/scripts/security-check.sh`](../../examples/completed-config/hooks/scripts/security-check.sh)
+> 📂 **Compare Your Work**: [`examples/completed-config/hooks/security-hooks.json`](../examples/completed-config/hooks/security-hooks.json) and [`examples/completed-config/hooks/scripts/security-check.sh`](../examples/completed-config/hooks/scripts/security-check.sh)
 
 #### 📚 Official Docs
 

@@ -271,7 +271,7 @@ CharacterDetail (page component)
 
 ## Related Documentation
 
-- [Architecture Overview](ARCHITECTURE.md) — System design and component patterns
+- [Architecture Overview](../../workshop/examples/completed-config/docs/ARCHITECTURE.md) — System design and component patterns
 - [API Documentation](API.md) — Backend API specifications  
 - Component Library — Reusable UI components
 - Styling Guide — CSS conventions and theming

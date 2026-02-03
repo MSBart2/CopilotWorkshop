@@ -81,7 +81,7 @@ Create a structured list of standards that should apply everywhere.
 
 **2. Draft Organization Instructions**
 
-Reference the complete template at [examples/completed-config/docs/org-instructions-template.md](../../examples/completed-config/docs/org-instructions-template.md).
+Reference the complete template at [examples/completed-config/docs/org-instructions-template.md](../examples/completed-config/docs/org-instructions-template.md).
 
 Key sections to include:
 - **Framework and Library Standards** — Common tools across all projects
@@ -180,7 +180,7 @@ When you override, document WHY in your repository instructions.
 
 ### 📄 Reference Template
 
-See [examples/completed-config/docs/org-instructions-template.md](../../examples/completed-config/docs/org-instructions-template.md) for a complete organization instructions template you can customize.
+See [examples/completed-config/docs/org-instructions-template.md](../examples/completed-config/docs/org-instructions-template.md) for a complete organization instructions template you can customize.
 
 ### 💭 Rafael's Realization
 
@@ -290,7 +290,7 @@ Generate a structured review checklist framework.
 
 **2. Create the Review Guide Document**
 
-Reference the complete template at [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md).
+Reference the complete template at [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md).
 
 The guide includes six critical review categories specifically for AI-generated code:
 
@@ -347,7 +347,7 @@ Run a 30-minute workshop:
 
 ### 📄 Reference Template
 
-See [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md) for a complete code review checklist you can use or customize.
+See [examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md](../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md) for a complete code review checklist you can use or customize.
 
 ### 💭 Elena's Realization
 
@@ -836,7 +836,7 @@ gh api \
 
 ### 📄 Reference Template
 
-See [examples/completed-config/docs/quarterly-report-template.md](../../examples/completed-config/docs/quarterly-report-template.md) for a complete metrics and ROI report template.
+See [examples/completed-config/docs/quarterly-report-template.md](../examples/completed-config/docs/quarterly-report-template.md) for a complete metrics and ROI report template.
 
 ### 💭 Marcus's Realization
 
@@ -962,7 +962,7 @@ Create a structured onboarding plan that enables self-service setup.
 
 **2. Create the TEAM-ONBOARDING.md Guide**
 
-Reference the complete onboarding template at [examples/completed-config/docs/TEAM-ONBOARDING.md](../../examples/completed-config/docs/TEAM-ONBOARDING.md).
+Reference the complete onboarding template at [examples/completed-config/docs/TEAM-ONBOARDING.md](../examples/completed-config/docs/TEAM-ONBOARDING.md).
 
 The onboarding guide includes:
 - **Self-service setup** — 30-minute guided walkthrough
@@ -1022,7 +1022,7 @@ After pilot testing:
 
 ### 📄 Reference Template
 
-See [examples/completed-config/docs/TEAM-ONBOARDING.md](../../examples/completed-config/docs/TEAM-ONBOARDING.md) for a complete self-service onboarding guide you can customize for your organization.
+See [examples/completed-config/docs/TEAM-ONBOARDING.md](../examples/completed-config/docs/TEAM-ONBOARDING.md) for a complete self-service onboarding guide you can customize for your organization.
 
 ### 💭 Marcus's Transformation
 

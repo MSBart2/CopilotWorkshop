@@ -82,7 +82,7 @@ Search for: [relevant keywords from feature description]
 
 ### 3. Pattern Matching
 
-Reference [ARCHITECTURE.md](${workspaceFolder}/docs/ARCHITECTURE.md) to ensure estimate includes:
+Reference [ARCHITECTURE.md](../../docs/ARCHITECTURE.md) to ensure estimate includes:
 
 - All three layers (frontend, backend, database)
 - Standard error handling

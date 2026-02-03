@@ -19,7 +19,7 @@ This training embraces the evolution from **"Syntax Wizards"** to **"Markdown Wh
 
 When creating content, use the training personas to make it relatable. Each persona represents a real archetype of professionals who will take this training.
 
-**📖 For full persona details, read:** [modules/00-orientation/PERSONAS.md](../modules/00-orientation/PERSONAS.md)
+**📖 For full persona details, read:** [modules/00-orientation/PERSONAS.md](../workshop/00-orientation/PERSONAS.md)
 
 **Persona summary:**
 
@@ -433,7 +433,7 @@ Use arrows and visual connections between related elements:
 6. **Test visual hierarchy** — Key messages should be immediately visible
 7. **Test presentation flow** to ensure smooth transitions between concepts
 
-**Reference existing personas** from [modules/00-orientation/PERSONAS.md](../modules/00-orientation/PERSONAS.md) rather than creating slide-specific versions.
+**Reference existing personas** from [modules/00-orientation/PERSONAS.md](../workshop/00-orientation/PERSONAS.md) rather than creating slide-specific versions.
 
 ---
 

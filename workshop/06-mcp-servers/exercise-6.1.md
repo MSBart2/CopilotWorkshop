@@ -53,7 +53,7 @@ Configure the SQLite MCP server to give Copilot direct access to the FanHub data
    - Points to the development database at `dev-data/fanhub-dev.db`
    - `npx -y` automatically installs the server if not present
    
-   > 📂 **Reference**: See [`examples/completed-config/.vscode/mcp.json`](../../examples/completed-config/.vscode/mcp.json) for a working example
+   > 📂 **Reference**: See [`examples/completed-config/.vscode/mcp.json`](../examples/completed-config/.vscode/mcp.json) for a working example
 
 2. **Verify Development Database Exists**
    
@@ -107,7 +107,7 @@ Configure the SQLite MCP server to give Copilot direct access to the FanHub data
 - [ ] Database queries return live schema information without leaving VS Code
 - [ ] Marcus: "I can write queries without opening TablePlus—saves me 5 minutes per query"
 
-> 📂 **Compare Your Work**: [`examples/completed-config/.vscode/mcp.json`](../../examples/completed-config/.vscode/mcp.json)
+> 📂 **Compare Your Work**: [`examples/completed-config/.vscode/mcp.json`](../examples/completed-config/.vscode/mcp.json)
 
 #### 📚 Official Docs
 

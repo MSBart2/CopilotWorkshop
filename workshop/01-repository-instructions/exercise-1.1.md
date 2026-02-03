@@ -79,7 +79,7 @@ Create `fanhub/docs/ARCHITECTURE.md` that gives Copilot (and humans) structural 
 - [ ] Copilot now references ARCHITECTURE.md when answering structural questions (visible in chat responses)
 - [ ] Team agrees document is accurate (no major corrections needed)
 
-> 📂 **Compare Your Work**: [`examples/completed-config/docs/ARCHITECTURE.md`](../../examples/completed-config/docs/ARCHITECTURE.md)
+> 📂 **Compare Your Work**: [`examples/completed-config/docs/ARCHITECTURE.md`](../examples/completed-config/docs/ARCHITECTURE.md)
 
 #### 📚 Official Docs
 

@@ -82,7 +82,7 @@ npm install
 **Relative paths** for internal docs:
 
 ```markdown
-[Architecture](./ARCHITECTURE.md)
+[Architecture](../../docs/ARCHITECTURE.md)
 [API Routes](../backend/API.md)
 ```
 

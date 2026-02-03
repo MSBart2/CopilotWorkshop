@@ -233,7 +233,7 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
    
    ## OpenAPI Schema Reference
    
-   All endpoints must follow the schema defined in [openapi-schema.yaml](./openapi-schema.yaml):
+   All endpoints must follow the schema defined in [openapi-schema.yaml](../examples/completed-config/skills/api-endpoint-design/openapi-schema.yaml):
    
    - **Character schema**: `id`, `name`, `show` (required); `actor`, `bio` (optional)
    - **Episode schema**: `id`, `title`, `season`, `episode_number` (required); `air_date`, `rating` (optional)
@@ -272,8 +272,8 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
    
    Reference these patterns when creating new endpoints:
    
-   - [GET character by ID](./example-endpoints/get-character.js) — Shows path parameter validation and 404 handling
-   - [GET episode by season/episode](./example-endpoints/get-episode.js) — Shows query parameter validation and schema compliance
+   - [GET character by ID](../examples/completed-config/skills/api-endpoint-design/example-endpoints/get-character.js) — Shows path parameter validation and 404 handling
+   - [GET episode by season/episode](../examples/completed-config/skills/api-endpoint-design/example-endpoints/get-episode.js) — Shows query parameter validation and schema compliance
    
    ## Validation Checklist
    

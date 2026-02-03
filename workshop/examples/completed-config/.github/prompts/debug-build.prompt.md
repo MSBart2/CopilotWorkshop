@@ -44,15 +44,15 @@ Check relevant configuration files based on error type:
 
 **Docker issues** → Review:
 
-- [docker-compose.yml](${workspaceFolder}/docker-compose.yml)
-- [backend/Dockerfile](${workspaceFolder}/backend/Dockerfile)
-- [frontend/Dockerfile](${workspaceFolder}/frontend/Dockerfile)
+- [docker-compose.yml](../../../../../fanhub/docker-compose.yml)
+- [backend/Dockerfile](../../../../../fanhub/backend/Dockerfile)
+- [frontend/Dockerfile](../../../../../fanhub/frontend/Dockerfile)
 
 **Dependency issues** → Review:
 
-- [package.json](${workspaceFolder}/package.json) (root)
-- [backend/package.json](${workspaceFolder}/backend/package.json)
-- [frontend/package.json](${workspaceFolder}/frontend/package.json)
+- [package.json](../../../../../slides/package.json) (root)
+- [backend/package.json](../../../../../fanhub/backend/package.json)
+- [frontend/package.json](../../../../../fanhub/frontend/package.json)
 - Look for version conflicts between dependencies
 
 **Build script issues** → Review:
@@ -69,7 +69,7 @@ Check relevant configuration files based on error type:
 
 ### 3. Architecture Compliance
 
-Verify ${file} follows [ARCHITECTURE.md](${workspaceFolder}/docs/ARCHITECTURE.md) patterns:
+Verify ${file} follows [ARCHITECTURE.md](../../docs/ARCHITECTURE.md) patterns:
 
 - Correct file location and imports
 - Following documented build process

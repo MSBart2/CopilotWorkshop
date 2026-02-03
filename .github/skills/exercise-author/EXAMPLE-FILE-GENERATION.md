@@ -117,7 +117,7 @@ Automatically added to Success Criteria:
 - [ ] Content follows standards
 - [ ] Copilot suggestions improve
 
-> 📂 **Compare Your Work**: [`examples/completed-config/.github/instructions/frontend.instructions.md`](../../examples/completed-config/.github/instructions/frontend.instructions.md)
+> 📂 **Compare Your Work**: [`examples/completed-config/.github/instructions/frontend.instructions.md`](../../../workshop/examples/completed-config/.github/instructions/frontend.instructions.md)
 ```
 
 ---
@@ -270,5 +270,5 @@ Potential improvements to consider:
 
 - [SKILL.md](SKILL.md) — Main exercise-author skill documentation
 - [TEMPLATE.md](TEMPLATE.md) — Exercise file template structure
-- [examples/README.md](../../../examples/README.md) — Examples folder overview
+- [examples/README.md](../../../workshop/examples/README.md) — Examples folder overview
 ```

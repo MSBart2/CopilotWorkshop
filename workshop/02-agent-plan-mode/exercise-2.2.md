@@ -127,7 +127,7 @@ Apply architectural expertise to validate the AI-generated plan, identify gaps, 
 - [ ] Edge cases and error scenarios documented with handling strategies
 - [ ] Plan marked as reviewed and approved for implementation
 
-> 📂 **Compare Your Work**: See the refined plan with review notes in [`examples/completed-config/docs/character-detail-challenge.md`](../../examples/completed-config/docs/character-detail-challenge.md)
+> 📂 **Compare Your Work**: See the refined plan with review notes in [`examples/completed-config/docs/character-detail-challenge.md`](../examples/completed-config/docs/character-detail-challenge.md)
 
 #### 📚 Official Docs
 

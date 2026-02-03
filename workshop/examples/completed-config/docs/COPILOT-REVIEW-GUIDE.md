@@ -284,4 +284,4 @@ Is the code correct?
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [GitHub Docs: Best practices for Copilot](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
-- [Module 11: Enterprise Patterns](../../modules/11-enterprise-patterns/README.md)
+- [Module 11: Enterprise Patterns](../../../11-enterprise-patterns/README.md)

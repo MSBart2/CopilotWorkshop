@@ -201,6 +201,6 @@ Verify skills work correctly:
 
 ## Related Resources
 
-- [Module 6: Agent Skills](../../../modules/05-agent-skills/README.md)
+- [Module 6: Agent Skills](../../../05-agent-skills/README.md)
 - [GitHub Docs: About Agent Skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)
 - [Agent Skills Open Standard](https://github.com/agentskills/agentskills)

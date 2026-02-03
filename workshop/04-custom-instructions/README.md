@@ -2,7 +2,7 @@
 
 ## ⏰ — The Context Problem
 
-> *"My Python code needs different guidance than my JavaScript. My test files need different standards than my production code. But Copilot treats everything the same."*  
+> *"My Python code needs different guidance than my JavaScript. My test files need different standards than my production code. But Copilot treats everything the same."*
 > — Elena, wishing Copilot understood context-specific rules
 
 ---
@@ -21,7 +21,7 @@ Now, in **Module 4**, they face a new challenge: **context-specific guidance tha
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
 - Complete [Module 01: Repository Instructions](../01-repository-instructions/README.md)
 - `.github/copilot-instructions.md` file created
@@ -177,7 +177,7 @@ applyTo: 'frontend/src/**/*.{jsx,tsx}'
 - **applyTo**: Glob pattern for automatic application (required for auto-activation)
 - **Body**: Markdown-formatted instructions
 
-> 📂 **Reference Examples**: The [`examples/completed-config/`](../../examples/completed-config/) folder shows layered instruction files in action.
+> 📂 **Reference Examples**: The [`examples/completed-config/`](../examples/completed-config/) folder shows layered instruction files in action.
 
 ---
 
@@ -209,7 +209,7 @@ The exercises below demonstrate how path-based instructions eliminate context mi
 
 **When to use it:** When different parts of your codebase need different guidance—frontend vs. backend, Python vs. JavaScript, production code vs. tests, application code vs. infrastructure, or code vs. documentation.
 
-**What you'll build:** 
+**What you'll build:**
 - **Layer-specific instructions** — Frontend UI patterns and backend API standards that apply to the right architectural layer
 - **Language-specific instructions** — Python PEP 8, JavaScript Airbnb, TypeScript strict mode that activate for the right file extensions
 - **File-type instructions** — Testing conventions, Docker best practices, documentation style that target specific file types or directories
@@ -229,7 +229,7 @@ The exercises below demonstrate how path-based instructions eliminate context mi
 
 **[Module 5: Agent Skills](../05-agent-skills/README.md)** — While instructions and prompts provide guidance, agent skills give Copilot new capabilities—custom tools and functions that extend what agents can do beyond built-in features.
 
-> *"Instructions tell Copilot how to behave, but what if I need it to do something it doesn't know how to do? Like validate against our custom API schema or check our specific deployment requirements?"*  
+> *"Instructions tell Copilot how to behave, but what if I need it to do something it doesn't know how to do? Like validate against our custom API schema or check our specific deployment requirements?"*
 > — David, about to discover agent skills
 
 ---

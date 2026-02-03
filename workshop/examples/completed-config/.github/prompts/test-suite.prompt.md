@@ -10,7 +10,7 @@ tools: ['codebase']
 
 ---
 
-Generate a comprehensive test suite for ${file} following our testing standards in [.github/copilot-instructions.md](../.github/copilot-instructions.md).
+Generate a comprehensive test suite for ${file} following our testing standards in [.github/copilot-instructions.md](../../../../../.github/copilot-instructions.md).
 
 ## Requirements
 

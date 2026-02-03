@@ -193,10 +193,10 @@ The exercises in this module are **independent**—complete the ones most releva
 
 All exercises reference complete, customizable templates:
 
-- **[Organization Instructions Template](../../examples/completed-config/docs/org-instructions-template.md)** — Baseline standards for all repos
-- **[Code Review Guide](../../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md)** — AI-specific review checklist
-- **[Quarterly Report Template](../../examples/completed-config/docs/quarterly-report-template.md)** — Metrics and ROI reporting
-- **[Team Onboarding Guide](../../examples/completed-config/docs/TEAM-ONBOARDING.md)** — Self-service setup kit
+- **[Organization Instructions Template](../examples/completed-config/docs/org-instructions-template.md)** — Baseline standards for all repos
+- **[Code Review Guide](../examples/completed-config/docs/COPILOT-REVIEW-GUIDE.md)** — AI-specific review checklist
+- **[Quarterly Report Template](../examples/completed-config/docs/quarterly-report-template.md)** — Metrics and ROI reporting
+- **[Team Onboarding Guide](../examples/completed-config/docs/TEAM-ONBOARDING.md)** — Self-service setup kit
 
 ---
 

@@ -151,11 +151,11 @@ fi
 
 ## See Also
 
-- **[Module 12: Copilot Hooks](../../../modules/12-copilot-hooks/README.md)** — Complete training module with exercises
+- **[Module 12: Copilot Hooks](../../../12-copilot-hooks/README.md)** — Complete training module with exercises
 - **[GitHub Docs: Hooks Configuration](https://docs.github.com/en/copilot/reference/hooks-configuration)** — Official reference
-- **[Exercise 12.1](../../../modules/12-copilot-hooks/exercise-12.1.md)** — Security policy enforcement walkthrough
-- **[Exercise 12.2](../../../modules/12-copilot-hooks/exercise-12.2.md)** — Compliance audit trail setup
-- **[Exercise 12.3](../../../modules/12-copilot-hooks/exercise-12.3.md)** — Quality gate integration
+- **[Exercise 12.1](../../../12-copilot-hooks/exercise-12.1.md)** — Security policy enforcement walkthrough
+- **[Exercise 12.2](../../../12-copilot-hooks/exercise-12.2.md)** — Compliance audit trail setup
+- **[Exercise 12.3](../../../12-copilot-hooks/exercise-12.3.md)** — Quality gate integration
 
 ---
 

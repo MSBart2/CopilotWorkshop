@@ -20,7 +20,7 @@ The SDK exposes the same production-tested agent runtime that powers GitHub Copi
 ---
 
 ⚠️ **Prerequisites**: 
-- Complete [Module 9: GitHub Copilot CLI](../09-copilot-cli/README.md) for context on Copilot's agentic capabilities
+- Complete [Module 9: GitHub Copilot CLI](../../workshop/09-copilot-cli/README.md) for context on Copilot's agentic capabilities
 - Python 3.8+ installed
 - GitHub Copilot subscription (SDK uses same billing model as CLI)
 - Basic understanding of Python development

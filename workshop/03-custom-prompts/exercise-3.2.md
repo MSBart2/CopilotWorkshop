@@ -40,7 +40,7 @@ Create a code review prompt that links to your existing documentation, ensuring 
    agent: "ask"
    ---
 
-   Review the React component in ${file} against our standards documented in [.github/copilot-instructions.md](../.github/copilot-instructions.md).
+   Review the React component in ${file} against our standards documented in [.github/copilot-instructions.md](../../.github/copilot-instructions.md).
 
    Check for compliance with:
 
@@ -54,7 +54,7 @@ Create a code review prompt that links to your existing documentation, ensuring 
 
    **Architecture Patterns** (from ARCHITECTURE.md):
 
-   - Component location matches [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md) folder structure
+   - Component location matches [docs/ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md) folder structure
    - API calls use centralized services layer
    - State management follows established patterns
 
@@ -67,7 +67,7 @@ Create a code review prompt that links to your existing documentation, ensuring 
    ```
 
    **Key elements:**
-   - **Relative Markdown links**: `[.github/copilot-instructions.md](../.github/copilot-instructions.md)` references the actual file
+   - **Relative Markdown links**: `[.github/copilot-instructions.md](../../.github/copilot-instructions.md)` references the actual file
    - **Multiple document references**: Links both copilot-instructions.md and ARCHITECTURE.md
    - **Structured output**: Specifies exactly what format you want returned
    - **agent: 'ask'**: Uses analysis agent (no code changes, just review)
@@ -129,7 +129,7 @@ Create a code review prompt that links to your existing documentation, ensuring 
    agent: "ask"
    ---
 
-   Review ${file} against our architecture documented in [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md).
+   Review ${file} against our architecture documented in [docs/ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md).
 
    Validate:
 
@@ -152,8 +152,8 @@ Create a code review prompt that links to your existing documentation, ensuring 
 
 > 📂 **Compare Your Work**:
 >
-> - [`react-review.prompt.md`](../../examples/completed-config/.github/prompts/react-review.prompt.md)
-> - [`arch-review.prompt.md`](../../examples/completed-config/.github/prompts/arch-review.prompt.md)
+> - [`react-review.prompt.md`](../examples/completed-config/.github/prompts/react-review.prompt.md)
+> - [`arch-review.prompt.md`](../examples/completed-config/.github/prompts/arch-review.prompt.md)
 
 #### 📚 Official Docs
 

@@ -218,7 +218,7 @@ If issues are found, use the "Fix Issues" handoff to return to implementation mo
 
 2. Save the file
 
-**Validation:** The agent file exists at [.github/agents/security-review.agent.md](../../.github/agents/security-review.agent.md) and contains YAML frontmatter with analysis-only tools plus comprehensive review instructions.
+**Validation:** The agent file exists at [.github/agents/security-review.agent.md](../examples/completed-config/.github/agents/security-review.agent.md) and contains YAML frontmatter with analysis-only tools plus comprehensive review instructions.
 
 ---
 
@@ -228,7 +228,7 @@ If issues are found, use the "Fix Issues" handoff to return to implementation mo
 
 **Task:**
 
-1. Open [.github/agents/implement.agent.md](../../.github/agents/implement.agent.md)
+1. Open [.github/agents/implement.agent.md](../examples/completed-config/.github/agents/implement.agent.md)
 2. Verify the `handoffs` section includes:
 
 ```yaml

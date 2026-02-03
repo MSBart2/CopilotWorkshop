@@ -104,7 +104,7 @@ Create your first workspace prompt file that standardizes test generation and ma
 - [ ] Running `/test-suite` on a source file generates comprehensive tests following your standards
 - [ ] Generated tests include unit tests, integration tests, and edge cases without manual reminders
 
-> 📂 **Compare Your Work**: [`examples/completed-config/.github/prompts/test-suite.prompt.md`](../../examples/completed-config/.github/prompts/test-suite.prompt.md)
+> 📂 **Compare Your Work**: [`examples/completed-config/.github/prompts/test-suite.prompt.md`](../examples/completed-config/.github/prompts/test-suite.prompt.md)
 
 #### 📚 Official Docs
 

@@ -118,8 +118,8 @@ A typical governance workflow combines multiple hook types:
 
 > 📂 **Reference Examples**: The [`examples/completed-config/hooks/`](../../examples/completed-config/hooks/) folder contains sample hook configurations:
 >
-> - [`audit-hooks.json`](../../examples/completed-config/hooks/audit-hooks.json) — Complete audit trail setup
-> - [`security-hooks.json`](../../examples/completed-config/hooks/security-hooks.json) — Security policy enforcement
+> - [`audit-hooks.json`](../examples/completed-config/hooks/audit-hooks.json) — Complete audit trail setup
+> - [`security-hooks.json`](../examples/completed-config/hooks/security-hooks.json) — Security policy enforcement
 > - [`scripts/`](../../examples/completed-config/hooks/scripts/) — Reusable hook scripts
 
 ---
@@ -168,7 +168,7 @@ The exercises below use hooks to implement governance that was previously manual
 
 ## ➡️ Next Module
 
-**[Module 13: Advanced Integration Patterns](../13-advanced-integration/README.md)** — Combining hooks, agents, skills, and instructions into cohesive workflows that adapt to your team's unique process
+**[Module 13: Advanced Integration Patterns](../../exec-talks/agentic-flight/README.md)** — Combining hooks, agents, skills, and instructions into cohesive workflows that adapt to your team's unique process
 
 > _"We've built the pieces—instructions, agents, skills, hooks. Now how do we orchestrate them into a system that makes the whole team faster?"_  
 > — David, seeing the path from individual features to integrated platform

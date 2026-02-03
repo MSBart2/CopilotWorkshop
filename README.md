@@ -68,7 +68,7 @@ Throughout this training, you'll work alongside six personas representing real d
 - **Elena** (8 years) — Quality champion ensuring comprehensive testing
 - **Rafael** (10 years) — Product visionary bridging business and tech
 
-**Full personas**: [PERSONAS.md](modules/00-orientation/PERSONAS.md)
+**Full personas**: [PERSONAS.md](workshop/00-orientation/PERSONAS.md)
 
 You'll see their fears, their breakthroughs, and their evolving perspectives as they discover that AI doesn't replace expertise—it amplifies it.
 
@@ -276,7 +276,7 @@ open modules/00-orientation/README.md
 
 ### Quick Start
 
-1. **Read [Module 0: The Challenge](modules/00-orientation/README.md)** — Understand the philosophy and meet the team
+1. **Read [Module 0: The Challenge](workshop/00-orientation/README.md)** — Understand the philosophy and meet the team
 2. **Clone FanHub** — Get the starter app running locally
 3. **Choose your show** — The Office? Stranger Things? Breaking Bad?
 4. **Experience the struggle** — Try using Copilot without configuration
@@ -335,7 +335,7 @@ By completing this workshop, you will:
 
 ### Training Materials
 
-- [PERSONAS.md](modules/00-orientation/PERSONAS.md) — Meet the seven team members
+- [PERSONAS.md](workshop/00-orientation/PERSONAS.md) — Meet the seven team members
 - [OUTLINE.md](OUTLINE.md) — Detailed module breakdown with time estimates
 - [RESOURCES.md](RESOURCES.md) — Curated links to blogs, videos, and learning paths
 
@@ -384,7 +384,7 @@ This training is open source under the MIT License. Feel free to use, adapt, and
 
 ## 🎬 Ready to Start?
 
-**Your challenge awaits**: [Module 0: The Challenge](modules/00-orientation/README.md)
+**Your challenge awaits**: [Module 0: The Challenge](workshop/00-orientation/README.md)
 
 
 Monday, 9:00 AM. Sarah is waiting. Let's prove AI-assisted development is the real deal.

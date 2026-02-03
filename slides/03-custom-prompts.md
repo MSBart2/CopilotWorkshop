@@ -137,8 +137,8 @@ tools: ['codebase']
   <pre class="text-xs">Generate test suite for ${file}
 
 Following:
-- [Standards](../copilot-instructions.md)
-- [Examples](__tests__/README.md)
+- [Standards](../.github/copilot-instructions.md)
+- [Examples](../fanhub/frontend/__tests__/README.md)
 
 Include edge cases</pre>
 </div>

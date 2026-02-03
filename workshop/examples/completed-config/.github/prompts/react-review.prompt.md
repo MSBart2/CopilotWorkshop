@@ -9,7 +9,7 @@ agent: 'ask'
 
 ---
 
-Review the React component in ${file} against our coding standards documented in [.github/copilot-instructions.md](../.github/copilot-instructions.md).
+Review the React component in ${file} against our coding standards documented in [.github/copilot-instructions.md](../../../../../.github/copilot-instructions.md).
 
 ## Standards Validation
 

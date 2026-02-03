@@ -78,8 +78,8 @@ These two files form the foundation of all Copilot customization:
 Both are read by Copilot automatically when you use `@workspace` context.
 
 > 📂 **Reference Examples**: The [`examples/completed-config/`](../../examples/completed-config/) folder contains sample files showing completed work:
-> - [`docs/ARCHITECTURE.md`](../../examples/completed-config/docs/ARCHITECTURE.md)
-> - [`.github/copilot-instructions.md`](../../examples/completed-config/.github/copilot-instructions.md)
+> - [`docs/ARCHITECTURE.md`](../examples/completed-config/docs/ARCHITECTURE.md)
+> - [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
 
 ---
 

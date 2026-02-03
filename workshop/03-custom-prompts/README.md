@@ -74,7 +74,7 @@ tools: ['githubRepo']       # Available tools for this prompt
 
 **Body (The Actual Prompt):**
 ```markdown
-Review this React component against our standards in [.github/copilot-instructions.md](../.github/copilot-instructions.md).
+Review this React component against our standards in [.github/copilot-instructions.md](../../.github/copilot-instructions.md).
 
 Check for:
 * Proper TypeScript types
@@ -126,9 +126,9 @@ tools: ['codebase']
 ---
 
 Generate test suite for ${file} following:
-* Testing standards: [copilot-instructions.md](../.github/copilot-instructions.md)
-* Architecture patterns: [ARCHITECTURE.md](../../docs/ARCHITECTURE.md)
-* Example tests: [__tests__/README.md](../../backend/__tests__/README.md)
+* Testing standards: [copilot-instructions.md](../../.github/copilot-instructions.md)
+* Architecture patterns: [ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md)
+* Example tests: [__tests__/README.md](../../fanhub/frontend/__tests__/README.md)
 
 Include:
 - Unit tests for all public functions

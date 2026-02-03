@@ -279,7 +279,7 @@ You:
    - Add metadata comments linking back to Module 99, Exercise 2
 7. **Add Compare Your Work section** to exercise-02.md Success Criteria:
    ```markdown
-   > 📂 **Compare Your Work**: [`examples/completed-config/.github/skills/bug-analyzer/SKILL.md`](../../examples/completed-config/.github/skills/bug-analyzer/SKILL.md)
+   > 📂 **Compare Your Work**: [`examples/completed-config/.github/skills/bug-analyzer/SKILL.md`](../module-author/SKILL.md)
    ```
 8. Create `modules/99-agent-skills-vscode/exercise-03.md` (repeat steps 5-7)
 9. Report: "Created 2 missing exercises and 3 example files: exercise-02.md, exercise-03.md, and reference implementations in examples/completed-config/"

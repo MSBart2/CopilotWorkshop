@@ -86,7 +86,7 @@ Use the plan agent to research and generate a comprehensive implementation plan 
 - [ ] Planning completed in ~7 minutes (compared to 35 minutes manual analysis)
 - [ ] Plan saved for review and team discussion
 
-> 📂 **Compare Your Work**: [`examples/completed-config/docs/character-detail-challenge.md`](../../examples/completed-config/docs/character-detail-challenge.md)
+> 📂 **Compare Your Work**: [`examples/completed-config/docs/character-detail-challenge.md`](../examples/completed-config/docs/character-detail-challenge.md)
 
 #### 📚 Official Docs
 

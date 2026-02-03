@@ -198,7 +198,7 @@ Notice how this agent configuration incorporates patterns you learned from analy
   - `'changes'` — To see recent modifications for context
 - **FanHub-specific context** — Customized for your project (not generic)
 
-**Validation:** The agent file exists at [.github/agents/feature-plan.agent.md](../../.github/agents/feature-plan.agent.md) and contains YAML frontmatter plus planning instructions with stopping rules and style guide.
+**Validation:** The agent file exists at [.github/agents/feature-plan.agent.md](../examples/completed-config/.github/agents/feature-plan.agent.md) and contains YAML frontmatter plus planning instructions with stopping rules and style guide.
 
 ---
 

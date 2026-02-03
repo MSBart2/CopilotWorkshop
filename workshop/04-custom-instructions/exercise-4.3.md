@@ -305,9 +305,9 @@ Create file-type-specific instruction files for tests, Docker configs, and docum
 - [ ] Production code does NOT receive testing-specific or Docker-specific guidance
 
 > 📂 **Compare Your Work**:
-> - [`tests.instructions.md`](../../examples/completed-config/.github/instructions/tests.instructions.md)
-> - [`docker.instructions.md`](../../examples/completed-config/.github/instructions/docker.instructions.md)
-> - [`docs.instructions.md`](../../examples/completed-config/.github/instructions/docs.instructions.md)
+> - [`tests.instructions.md`](../examples/completed-config/.github/instructions/tests.instructions.md)
+> - [`docker.instructions.md`](../examples/completed-config/.github/instructions/docker.instructions.md)
+> - [`docs.instructions.md`](../examples/completed-config/.github/instructions/docs.instructions.md)
 
 #### 📚 Official Docs
 

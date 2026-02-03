@@ -258,7 +258,7 @@ Implement comprehensive audit logging using multiple hook types (`sessionStart`,
 - [ ] You can query the log to find specific tool uses, prompts, or sessions using standard command-line tools
 - [ ] Compliance questions like "What files did Copilot modify today?" are answerable in under 2 minutes
 
-> 📂 **Compare Your Work**: [`examples/completed-config/hooks/audit-hooks.json`](../../examples/completed-config/hooks/audit-hooks.json) and [`examples/completed-config/hooks/scripts/`](../../examples/completed-config/hooks/scripts/)
+> 📂 **Compare Your Work**: [`examples/completed-config/hooks/audit-hooks.json`](../examples/completed-config/hooks/audit-hooks.json) and [`examples/completed-config/hooks/scripts/`](../../examples/completed-config/hooks/scripts/)
 
 #### 📚 Official Docs
 

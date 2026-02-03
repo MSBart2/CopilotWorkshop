@@ -31,7 +31,7 @@ This repository includes a development container configuration that automaticall
 
 1. Click "Code" → "Create codespace on main"
 2. Wait ~2-3 minutes for the environment to build
-3. Everything is ready! Start with [Module 00](../modules/00-orientation/README.md)
+3. Everything is ready! Start with [Module 00](../workshop/00-orientation/README.md)
 
 ### Option 2: VS Code Desktop with Dev Containers
 

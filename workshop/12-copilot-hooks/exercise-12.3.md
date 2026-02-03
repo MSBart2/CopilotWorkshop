@@ -265,7 +265,7 @@ Implement a `preToolUse` hook that runs linters and formatters on proposed code 
 
 ## ➡️ Next Module
 
-**[Module 13: Advanced Integration Patterns](../13-advanced-integration/README.md)** — Orchestrating hooks, agents, skills, and instructions into cohesive workflows that adapt to your team's unique process
+**[Module 13: Advanced Integration Patterns](../../exec-talks/agentic-flight/README.md)** — Orchestrating hooks, agents, skills, and instructions into cohesive workflows that adapt to your team's unique process
 
 > _"We have all the pieces—instructions, agents, skills, and hooks. Now: how do we compose them into a system that's greater than the sum of its parts?"_  
 > — David, ready to architect the integrated experience

@@ -180,7 +180,7 @@ Agent Skills use a three-level loading system to keep context efficient:
 1. You ask: "Generate API endpoint for fetching character details"
 2. Copilot scans skill descriptions, finds match: `api-endpoint-design` skill
 3. Copilot loads `api-endpoint-design/SKILL.md` instructions
-4. Instructions reference `[example endpoint](./example-endpoints/get-character.js)`
+4. Instructions reference `[example endpoint](../examples/completed-config/skills/api-endpoint-design/example-endpoints/get-character.js)`
 5. Copilot loads `get-character.js` only when needed
 6. Other skill resources remain unloaded
 

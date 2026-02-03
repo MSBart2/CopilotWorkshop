@@ -268,9 +268,9 @@ Create language-specific instruction files that automatically apply Python, Java
 - [ ] Frontend TypeScript files combine both frontend patterns AND TypeScript patterns
 
 > 📂 **Compare Your Work**:
-> - [`python.instructions.md`](../../examples/completed-config/.github/instructions/python.instructions.md)
-> - [`javascript.instructions.md`](../../examples/completed-config/.github/instructions/javascript.instructions.md)
-> - [`typescript.instructions.md`](../../examples/completed-config/.github/instructions/typescript.instructions.md)
+> - [`python.instructions.md`](../examples/completed-config/.github/instructions/python.instructions.md)
+> - [`javascript.instructions.md`](../examples/completed-config/.github/instructions/javascript.instructions.md)
+> - [`typescript.instructions.md`](../examples/completed-config/.github/instructions/typescript.instructions.md)
 
 #### 📚 Official Docs
 

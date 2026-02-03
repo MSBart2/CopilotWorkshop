@@ -22,7 +22,7 @@ Now, in **Module N**, they [new challenge that this module's capability solves].
 ---
 
 ⚠️ **Prerequisites**: 
-- Complete [Module 00: Orientation](../00-orientation/README.md)
+- Complete [Module 00: Orientation](../../../workshop/00-orientation/README.md)
 - [Any specific files or setup needed from previous modules]
 - [Optional: Links to reference materials or specifications]
 
@@ -136,7 +136,7 @@ The exercises below use this module's capabilities to solve real problems. Each 
 
 ## ➡️ Next Module
 
-**[Module N+1: Title](../XX-next-module/README.md)** — [1 sentence describing next capability and its value]
+**[Module N+1: Title](../../../exec-talks/agentic-flight/README.md)** — [1 sentence describing next capability and its value]
 
 > *"[Quote that teases the next challenge or opportunity—often a question or realization]"*  
 > — [Persona], [context about what they're about to discover]
