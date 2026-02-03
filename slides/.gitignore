@@ -6,10 +6,6 @@ package-lock.json
 dist/
 .slidev/
 
-# Generated files
-*.pdf
-*.pptx
-
 # OS files
 .DS_Store
 Thumbs.db
