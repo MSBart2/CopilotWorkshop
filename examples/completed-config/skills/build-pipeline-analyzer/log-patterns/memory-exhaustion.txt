@@ -1,4 +1,0 @@
-FATAL ERROR: Ineffective mark-compacts near heap limit
-JavaScript heap out of memory
-ENOMEM
-allocation failure
