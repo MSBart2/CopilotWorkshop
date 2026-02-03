@@ -1,8 +1,8 @@
 # FanHub Workshop: Complete Outline
 
-> **Total Time**: 11-13 hours (self-paced)  
-> **Modules**: 13 modules (0-12)  
-> **Exercises**: 38 hands-on exercises  
+> **Total Time**: 11-13 hours (self-paced)
+> **Modules**: 13 modules (0-12)
+> **Exercises**: 38 hands-on exercises
 > **Target Audience**: Developers at all experience levels
 
 ---
@@ -24,10 +24,8 @@ This workshop teaches ways to customize GitHub Copilot. Each module progressivel
 | 🖥️ **CLI Integration**         | Terminal-native AI workflows                   | Module 9      |
 | 🔄 **Agentic SDLC**            | Background agents for autonomous work          | Module 10     |
 | 🏢 **Enterprise Patterns**     | Organization-wide standards and governance     | Module 11     |
-| 🔒 **Copilot Hooks**           | Governance, validation, and control points     | Module 12     |
-| 🎓 **Customizations Overview** | Complete ecosystem tour of all customization types | Module 13 |
 
-By Module 13, you'll have a complete understanding of the entire customization landscape and how all features work together.
+By Module 11, you'll have a complete understanding of the entire customization landscape and how all features work together.
 
 ---
 
@@ -63,8 +61,8 @@ Six personas guide you through the workshop, each representing real developer ar
 | **9**  | [GitHub Copilot CLI](modules/09-copilot-cli/README.md)                  | 60 min    | 3         | 💼     | Terminal-native AI workflows; automate Git, shell, and GitHub operations                                 |
 | **10** | [Agentic SDLC](modules/10-agentic-sdlc/README.md)                       | 90 min    | 3         | 🆓     | Background agents with Git worktrees; autonomous parallel work                                           |
 | **11** | [Enterprise Patterns](modules/11-enterprise-patterns/README.md)         | 30-90 min | Variable  | 🆓💼🏢 | Scale success org-wide; choose exercises by role                                                         |
-| **12** | [Copilot Hooks](modules/12-copilot-hooks/README.md)                     | 60-90 min | 3         | 🆓     | Add governance, validation, and control points; automation with accountability                           |
-| **13** | [Customizations Overview](modules/13-customizations-overview/README.md) | 60 min    | 5         | 🆓     | Comprehensive tour of the customization ecosystem; learn when to use each tool                           |
+                         |
+                        |
 
 **Standalone/Bonus Modules:**
 
@@ -90,7 +88,6 @@ Six personas guide you through the workshop, each representing real developer ar
 | `.github/skills/*/SKILL.md`              | Agent Skills with domain knowledge      | Module 5   |
 | `.vscode/mcp.json`                       | MCP server configurations               | Module 6   |
 | `.github/agents/*.agent.md`              | Custom agent definitions                | Module 7   |
-| `.github/hooks/*.json`                   | Governance and validation hooks         | Module 12  |
 
 ### The Transformation Journey
 
@@ -108,7 +105,6 @@ Six personas guide you through the workshop, each representing real developer ar
 | **Automated**    | Module 9  | Terminal-native AI workflows                    |
 | **Orchestrated** | Module 10 | Background agents, parallel work                |
 | **Scaled**       | Module 11 | Organization-wide patterns                      |
-| **Governed**     | Module 12 | Validation, audit, control points               |
 
 ---
 
