@@ -48,15 +48,15 @@ jobs:
           CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- . || echo "")
 
           # Check if shared files or workflow changed (require full rebuild)
-          SHARED_PATTERNS="package.json|package-lock.json|style.css|global-top.vue|global-bottom.vue|layouts/|components/|setup/|\.github/workflows/deploy-slides\.yml"
+          SHARED_PATTERNS="slides/package.json|slides/package-lock.json|slides/style.css|slides/global-top.vue|slides/global-bottom.vue|slides/layouts/|slides/components/|slides/setup/|\.github/workflows/deploy-slides\.yml"
           if echo "$CHANGED_FILES" | grep -qE "$SHARED_PATTERNS"; then
             echo "🔄 Shared files or workflow changed - full rebuild required"
             echo "full_rebuild=true" >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          # Extract changed slide .md files
-          CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^(workshop|tech-talks|exec-talks)/.*\.md$" || echo "")
+          # Extract changed slide .md files (paths include slides/ prefix from git)
+          CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^slides/(workshop|tech-talks|exec-talks)/.*\.md$" | sed 's#^slides/##' || echo "")
 
           if [ -z "$CHANGED_SLIDES" ]; then
             echo "📭 No slide files changed"
@@ -73,6 +73,7 @@ jobs:
           fi
 
       - name: Download previous build from gh-pages
+        id: download
         if: steps.changes.outputs.full_rebuild != 'true'
         continue-on-error: true
         run: |
@@ -85,9 +86,10 @@ jobs:
             cp -r ./previous-build/* ./slides/dist/ 2>/dev/null || true
             rm -rf ./previous-build
             echo "✅ Previous build restored"
+            echo "needs_rebuild=false" >> $GITHUB_OUTPUT
           else
             echo "⚠️ No gh-pages branch found - will build all slides"
-            echo "full_rebuild=true" >> $GITHUB_ENV
+            echo "needs_rebuild=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Setup Node.js
@@ -137,7 +139,7 @@ jobs:
           echo "✨ Incremental build complete!"
 
       - name: Build all presentations (full rebuild)
-        if: steps.changes.outputs.full_rebuild == 'true'
+        if: steps.changes.outputs.full_rebuild == 'true' || steps.download.outputs.needs_rebuild == 'true'
         working-directory: ./slides
         run: |
           echo "🚀 Building all Slidev presentations..."
@@ -198,16 +200,17 @@ jobs:
 
           echo "✨ All presentations built successfully!"
 
-      - name: Skip build (no changes)
-        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides == ''
+      - name: Verify build output
+        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides == '' && steps.download.outputs.needs_rebuild != 'true'
         working-directory: ./slides
         run: |
           echo "⏭️ No slide changes detected - using previous build"
-          # Ensure we have a valid dist directory
+          # Verify we have a valid dist directory
           if [ ! -d dist ] || [ ! -f dist/index.html ]; then
-            echo "⚠️ No previous build available - triggering full rebuild"
-            echo "full_rebuild=true" >> $GITHUB_ENV
+            echo "❌ Error: No valid dist directory found and no slides to build"
+            exit 1
           fi
+          echo "✅ Previous build is valid"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
