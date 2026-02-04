@@ -17,16 +17,32 @@
 import { chromium } from 'playwright';
 import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
+import { existsSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Find workspace root (look for slides/ directory)
+function findWorkspaceRoot() {
+  let dir = __dirname;
+  while (dir !== path.parse(dir).root) {
+    if (existsSync(path.join(dir, 'slides'))) {
+      return dir;
+    }
+    dir = path.dirname(dir);
+  }
+  throw new Error('Could not find workspace root (no slides/ directory found)');
+}
+
+const WORKSPACE_ROOT = findWorkspaceRoot();
+const SLIDES_DIR = path.join(WORKSPACE_ROOT, 'slides');
+
 // Configuration
 const BASE_PORT = 3030;
-const SCREENSHOT_DIR = path.join(__dirname, 'screenshots');
-const REPORT_DIR = path.join(__dirname, 'verification-reports');
+const SCREENSHOT_DIR = path.join(SLIDES_DIR, 'screenshots');
+const REPORT_DIR = path.join(SLIDES_DIR, 'verification-reports');
 
 /**
  * Start Slidev dev server for a slide file
@@ -34,7 +50,7 @@ const REPORT_DIR = path.join(__dirname, 'verification-reports');
 async function startSlidevServer(slideFile, port) {
   return new Promise((resolve, reject) => {
     const server = spawn('npx', ['slidev', slideFile, '--port', port.toString()], {
-      cwd: __dirname,
+      cwd: SLIDES_DIR,
       stdio: 'pipe'
     });
 
@@ -297,7 +313,7 @@ async function findAllSlides() {
   const categories = ['workshop', 'tech-talks', 'exec-talks'];
   
   for (const category of categories) {
-    const categoryPath = path.join(__dirname, category);
+    const categoryPath = path.join(SLIDES_DIR, category);
     try {
       const files = await fs.readdir(categoryPath);
       for (const file of files) {

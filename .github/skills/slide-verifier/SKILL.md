@@ -40,7 +40,7 @@ Determine which slides to check:
 
 ### Step 2: Run the Verification Script
 
-The repository includes a standalone verification script at `slides/verify-slides.mjs` that handles:
+The skill includes a standalone verification script at `scripts/verify-slides.mjs` that handles:
 - Starting Slidev dev server
 - Playwright automation
 - Issue detection and reporting
@@ -49,25 +49,28 @@ The repository includes a standalone verification script at `slides/verify-slide
 **Usage:**
 
 ```bash
-cd slides
-
-# Verify a single deck
-node verify-slides.mjs workshop/03-custom-prompts.md
+# From the workspace root
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
 
 # Verify all decks
-node verify-slides.mjs --all
+.github/skills/slide-verifier/scripts/verify-slides.mjs --all
 
 # Verify with exit code (for CI/CD)
-node verify-slides.mjs tech-talks/copilot-cli.md --fail-on-errors
+.github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --fail-on-errors
 ```
 
 **The script automatically:**
-1. Starts a Slidev dev server on port 3030
-2. Uses Playwright to visit each slide
-3. Performs all checks (overflow, images, errors, readability)
-4. Captures screenshots of problems
-5. Generates a detailed report
-6. Cleans up the server process
+1. Finds the workspace slides directory
+2. Starts a Slidev dev server
+3. Uses Playwright to visit each slide
+4. Performs all checks (overflow, images, errors, readability)
+5. Captures screenshots of problems
+6. Generates a detailed report
+7. Cleans up the server process
+
+**Output directories:**
+- Reports: `slides/verification-reports/`
+- Screenshots: `slides/screenshots/`
 
 ### Step 3: Review the Output
 
@@ -185,7 +188,7 @@ slides/
 
 ## Technical Requirements
 
-The verification script (`slides/verify-slides.mjs`) requires:
+The verification script requires:
 
 **Dependencies (in `slides/package.json`):**
 ```json
@@ -204,9 +207,9 @@ npm install --save-dev playwright @playwright/test
 npx playwright install chromium
 ```
 
-**Script location:** `slides/verify-slides.mjs`
+**Script location:** `scripts/verify-slides.mjs` (within this skill directory)
 
-The script is a standalone tool - it can be called directly from command line, CI/CD pipelines, or by agents through the skill interface.
+The script is self-contained and automatically finds the workspace slides directory. It can be called from anywhere in the workspace.
 
 ## Best Practices
 
@@ -246,22 +249,17 @@ A slide deck passes verification when:
 
 **Verify single deck:**
 ```bash
-node verify-slides.mjs workshop/03-custom-prompts
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
 ```
 
-**Verify all workshop slides:**
+**Verify all slides:**
 ```bash
-for file in workshop/*.md; do
-  node verify-slides.mjs "$file"
-done
+.github/skills/slide-verifier/scripts/verify-slides.mjs --all
 ```
 
 **CI/CD integration:**
 ```yaml
 - name: Verify slides
   run: |
-    cd slides
-    npm install
-    npx playwright install chromium
-    node verify-slides.mjs --all --fail-on-errors
+    .github/skills/slide-verifier/scripts/verify-slides.mjs --all --fail-on-errors
 ```
