@@ -168,7 +168,7 @@ The exercises below use hooks to implement governance that was previously manual
 
 ## ➡️ Next Module
 
-**[Module 13: Advanced Integration Patterns](../../exec-talks/agentic-flight/README.md)** — Combining hooks, agents, skills, and instructions into cohesive workflows that adapt to your team's unique process
+**[Module 13: Advanced Integration Patterns](../../exec-talks/agentic-delivery/README.md)** — Combining hooks, agents, skills, and instructions into cohesive workflows that adapt to your team's unique process
 
 > _"We've built the pieces—instructions, agents, skills, hooks. Now how do we orchestrate them into a system that makes the whole team faster?"_  
 > — David, seeing the path from individual features to integrated platform

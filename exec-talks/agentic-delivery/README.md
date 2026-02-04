@@ -1,4 +1,4 @@
-# No Instruments, No Flight: The Enterprise Agentic Imperative
+# No Instruments, No Delivery: The Enterprise Agentic Imperative
 
 *A thought leadership guide for technical leaders navigating agentic AI adoption*
 

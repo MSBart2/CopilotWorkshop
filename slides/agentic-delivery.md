@@ -5,16 +5,16 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## No Instruments, No Flight
+  ## No Instruments, No Delivery
   The Enterprise Agentic Imperative - Executive Briefing
 drawings:
   persist: false
 transition: slide-left
-title: No Instruments, No Flight - Executive Briefing
+title: No Instruments, No Delivery - Executive Briefing
 mdc: true
 ---
 
-# No Instruments, No Flight
+# No Instruments, No Delivery
 ## The Enterprise Agentic Imperative
 
 <div class="pt-12">

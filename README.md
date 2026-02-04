@@ -48,7 +48,7 @@ This repository contains three distinct types of content for different audiences
 
 **Topics include**:
 - **[Agentic Labor](exec-talks/agentic-labor/)** — What missions can agents actually fly beyond code generation
-- **[Agentic Flight](exec-talks/agentic-flight/)** — How to think about agents with instruments and guardrails
+- **[Agentic Delivery](exec-talks/agentic-delivery/)** — How to think about agents with instruments and guardrails
 - **[Agentic Economics](exec-talks/agentic-economics/)** — Economic models for AI-assisted development ROI
 
 ---
@@ -167,7 +167,7 @@ The [Workshop Training](workshop/) includes facilitator guidance and customizabl
 3. [Enterprise Patterns](workshop/11-enterprise-patterns/) — Scale across organization
 
 **Path 3: Executive Understanding**
-1. [Agentic Flight](exec-talks/agentic-flight/) — Mental model for agents
+1. [Agentic Delivery](exec-talks/agentic-delivery/) — Mental model for agents
 2. [Agentic Labor](exec-talks/agentic-labor/) — Understand the labor multiplier
 3. [Agentic Economics](exec-talks/agentic-economics/) — ROI and investment framework
 4. [Enterprise Patterns](workshop/11-enterprise-patterns/) — Organizational implementation

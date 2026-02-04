@@ -136,7 +136,7 @@ The exercises below use this module's capabilities to solve real problems. Each 
 
 ## ➡️ Next Module
 
-**[Module N+1: Title](../../../exec-talks/agentic-flight/README.md)** — [1 sentence describing next capability and its value]
+**[Module N+1: Title](../../../exec-talks/agentic-delivery/README.md)** — [1 sentence describing next capability and its value]
 
 > *"[Quote that teases the next challenge or opportunity—often a question or realization]"*  
 > — [Persona], [context about what they're about to discover]
