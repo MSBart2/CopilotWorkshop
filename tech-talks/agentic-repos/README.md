@@ -194,6 +194,168 @@ Encode in automated checks:
 - ⚖️ **Licensing:** No GPL in proprietary code
 - 🎯 **Quality:** 80% test coverage, complexity < 15, no TODO comments in shipped code
 
+---
+
+## The Compliance Pain (And Why Agents Are the Answer)
+
+### The Traditional Compliance Tax
+
+Compliance reviews slow everything down. Manual processes are:
+- **Slow:** 3-day wait for security review, 2-day wait for compliance sign-off
+- **Inconsistent:** Different reviewers apply different standards, same code gets different outcomes
+- **Brittle:** Checklists can't handle context or nuance
+- **Non-scalable:** 50 PRs/week overwhelms compliance teams
+
+**The Pattern:** Compliance becomes a bottleneck. Developers route around it. Incidents happen. Regulations tighten. Bottleneck gets worse.
+
+### Why Traditional Automation Fails
+
+**Deterministic tools miss context:**
+
+```python
+# Compliance scanner: ❌ FAIL - PII detected
+customer_email = request.body['email']
+log.info(f"Processing request for {customer_email}")
+```
+
+**Is this a violation?**
+- ✅ **If it's a support ticket system:** Logging customer email for audit trail = required
+- ❌ **If it's a marketing site:** Logging PII without consent = GDPR violation
+
+**Traditional static analysis can't tell the difference.**
+
+The same code in different contexts has different compliance implications. Checklist-based tools don't understand:
+- Business context (what is this feature for?)
+- Regulatory scope (which regulations apply here?)
+- Risk nuance (is this PII being stored, logged, or just validated?)
+- Compensating controls (is encryption enabled? Are logs anonymized downstream?)
+
+### Agents Understand Context and Nuance
+
+**Agents are non-deterministic.** They can:
+- **Read the feature description** — "Support ticket ingestion system" vs "Newsletter signup form"
+- **Understand regulatory scope** — "EU users" triggers GDPR checks, "Healthcare data" triggers HIPAA
+- **Reason about risk** — Logging email for audit trail (acceptable) vs logging SSN to analytics (violation)
+- **Recommend compensating controls** — "If you must log this, use hashed identifiers instead"
+
+**Same code, different analysis:**
+
+```python
+# Context: Support ticket system with audit requirements
+customer_email = request.body['email']
+log.info(f"Processing request for {customer_email}")
+```
+
+**Agent Analysis:**
+> ✅ **Compliance: Acceptable with conditions**
+> - Logging customer email is required for SOC 2 audit trail
+> - Ensure logs are encrypted at rest (checked: ✅)
+> - Ensure log retention matches data retention policy (checked: ✅)
+> - Recommendation: Consider using `hash(customer_email)` for correlation if full email isn't required
+
+**vs.**
+
+```python
+# Context: Marketing newsletter signup form
+customer_email = request.body['email']
+log.info(f"Processing request for {customer_email}")
+```
+
+**Agent Analysis:**
+> ⚠️ **Compliance: Needs review**
+> - Logging PII without clear audit purpose may violate GDPR Article 5 (purpose limitation)
+> - Recommendation: Log `hash(customer_email)` or omit logging entirely
+> - If logging is required, document the legitimate interest in privacy policy
+
+**Same line of code. Different context. Different compliance ruling.**
+
+### Compliance Becomes Automatable
+
+Yes, compliance is **hard**. But agents offer tools to make it:
+
+**1. Easier** — Agents explain *why* something is a violation and *how* to fix it
+```
+❌ Don't just say: "PII violation detected"
+✅ Instead explain: "Logging SSN violates HIPAA §164.502(b) minimum necessary rule.
+   Consider: Use patient_id instead, or hash SSN if correlation is required."
+```
+
+**2. Faster** — Agents check every PR in seconds, not days
+- Traditional: 3-day security review backlog
+- Agent-assisted: Instant feedback, human reviews only flagged issues
+- **Result:** 95% of PRs get immediate green/red signal
+
+**3. Automatable** — Agents learn your compliance patterns and codify them
+```yaml
+# Compliance rules agents help you build:
+- rule: no-pii-in-logs
+  applies-to: [healthcare, finance]
+  check: |
+    if logging.contains(ssn, patient_id, account_number):
+      require: hashing or encryption
+      require: documented-audit-purpose
+      require: retention-policy-match
+```
+
+### The CI Trust Factory for Compliance
+
+**If CI is green, compliance is validated. If CI is red, nobody ships.**
+
+Agents transform compliance from a gate at the end to continuous validation:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  TRADITIONAL COMPLIANCE WORKFLOW (Days)                      │
+├─────────────────────────────────────────────────────────────┤
+│  Code → PR → Wait → Security Review → Wait → Compliance     │
+│         ↓            ↓(3 days)        ↓(2 days)             │
+│       Questions   "Needs changes"   "Approved with          │
+│                                      conditions"             │
+│                                                              │
+│  Timeline: 5-7 days, 3 back-and-forths, 2 Slack threads     │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│  AGENT-ASSISTED COMPLIANCE (Minutes)                         │
+├─────────────────────────────────────────────────────────────┤
+│  Code → Agent Analysis (30s) → CI Validation (2 min)        │
+│         ↓                       ↓                            │
+│       ✅ Compliant            ✅ All checks pass             │
+│       ⚠️ Needs attention      → Human review (flagged)       │
+│       ❌ Violation            → Blocked, fix required        │
+│                                                              │
+│  Timeline: 3 minutes for 95% of PRs, human review only      │
+│            for the 5% that need judgment calls              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### What Gets Better
+
+| Metric | Before Agents | With Agents | Impact |
+|--------|---------------|-------------|---------|
+| **Compliance review time** | 3 days average | 3 minutes (95% auto) | 1,440x faster |
+| **False positives** | 40% (checklist rigidity) | 8% (context-aware) | Developer velocity |
+| **Coverage** | 100% manual | 100% automated | No PRs slip through |
+| **Consistency** | Varies by reviewer | Same standards | Predictable outcomes |
+| **Audit trail** | PDF + email chain | Structured evidence | Audit-ready |
+
+### The Hard Truth
+
+**Compliance doesn't get easier.** Regulations multiply. Requirements tighten. Enforcement increases.
+
+**But agents make compliance *manageable* at scale:**
+- They understand nuance (not just pattern matching)
+- They explain violations (not just flag them)
+- They suggest fixes (not just block PRs)
+- They learn your standards (and apply them consistently)
+- They scale linearly (10 PRs or 1,000 PRs, same speed)
+
+**The alternative?** Hire 5 more compliance reviewers, slow down delivery, and still miss edge cases.
+
+> 🎯 **Compliance used to be "catch violations before prod." Now it's "make violations impossible to merge."**
+
+---
+
 ### Agents Produce Evidence, Humans Validate Outcomes
 **Agent generates:**
 - ✅ Unit tests (327 assertions, 89% coverage)
