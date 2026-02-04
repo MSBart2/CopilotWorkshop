@@ -56,7 +56,7 @@ jobs:
           fi
 
           # Extract changed slide .md files
-          CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^slides/(workshop|tech-talks|exec-talks)/.*\.md$" | sed 's|^slides/||' || echo "")
+          CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^(workshop|tech-talks|exec-talks)/.*\.md$" || echo "")
 
           if [ -z "$CHANGED_SLIDES" ]; then
             echo "📭 No slide files changed"
