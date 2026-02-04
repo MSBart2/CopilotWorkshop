@@ -1,13 +1,12 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1920
+background: https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072
 class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Module 0: Orientation - The Challenge
+  ## Module 0: The Challenge
   Building FanHub in 8 Hours
-  CopilotWorkshop Training
 drawings:
   persist: false
 transition: slide-left
@@ -16,87 +15,71 @@ mdc: true
 ---
 
 # Module 0: The Challenge
-## Building FanHub in 8 Hours
+
+## ⏰ Building FanHub in 8 Hours
 
 <div class="pt-12">
   <span class="text-6xl">🚀</span>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">Monday, 9:00 AM · CopilotWorkshop Training</span>
+<div class="mt-8 text-xl opacity-75">
+  "Prove that AI-assisted development is worth the hype by building something real. Fast."
 </div>
 
----
-layout: center
+<div class="abs-br m-6 flex gap-2">
+  <span class="text-sm opacity-50">CopilotWorkshop Training</span>
+</div>
+
 ---
 
 # 📖 The Story
 
-<div class="text-left max-w-3xl mx-auto mt-8 space-y-4">
+<div class="text-left">
 
-<div class="p-6 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="font-bold text-blue-300 text-xl mb-3">Sarah's Challenge</div>
-  <div class="text-gray-200 italic">
-    "A contractor bailed on a generic fan site. Turn it into a production-ready fan hub.
-    Authentication, search, admin tools, deployment pipeline. You have until <strong>end of day</strong>.
-    Oh, and you're all using GitHub Copilot. Prove me wrong."
-  </div>
-</div>
+### Monday Morning, 9:00 AM
 
-<div class="grid grid-cols-3 gap-3 mt-6">
-  <div class="p-3 bg-gray-800 rounded-lg text-center">
-    <div class="text-yellow-400 text-2xl">😰</div>
-    <div class="text-xs text-gray-400 mt-2">Marcus: "This will take days"</div>
-  </div>
-  <div class="p-3 bg-gray-800 rounded-lg text-center">
-    <div class="text-yellow-400 text-2xl">🤔</div>
-    <div class="text-xs text-gray-400 mt-2">Priya: "Where do I start?"</div>
-  </div>
-  <div class="p-3 bg-gray-800 rounded-lg text-center">
-    <div class="text-yellow-400 text-2xl">😮‍💨</div>
-    <div class="text-xs text-gray-400 mt-2">David: "No architecture docs..."</div>
-  </div>
-</div>
+Sarah walks into standup and drops a challenge:
+
+> "A contractor bailed halfway through building a generic fan site. The code works, barely, but it's a mess—no documentation, inconsistent patterns, completely generic. Pick your favorite show and turn this into a production-ready fan hub. Authentication, search, admin tools, deployment pipeline, the works."
+
+**You have until end of day. Oh, and you're all using GitHub Copilot.**
 
 </div>
 
 ---
-layout: center
----
 
-# ❌ The Problem
+# 👥 Meet the Team
 
-<div class="grid grid-cols-2 gap-8 mt-8">
+<div class="grid grid-cols-2 gap-4 mt-8">
 
-<div class="p-6 bg-red-900/30 rounded-lg border-2 border-red-500">
-  <div class="text-3xl mb-3">🗑️</div>
-  <div class="font-bold text-red-400 text-lg mb-3">The Codebase</div>
-  <ul class="text-sm text-gray-300 space-y-2">
-    <li>❌ Generic database schema</li>
-    <li>❌ Inconsistent API patterns</li>
-    <li>❌ Mixed component styles</li>
-    <li>❌ Zero documentation</li>
-    <li>❌ No tests</li>
-    <li>❌ No standards</li>
-  </ul>
+<div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 rounded-lg">
+  <div class="text-3xl mb-2">👨‍💼</div>
+  <h3 class="text-lg font-bold">Sarah</h3>
+  <p class="text-sm opacity-75">Senior Dev · 15 years</p>
+  <p class="text-xs mt-2 italic">"Prove me wrong about this AI hype"</p>
 </div>
 
-<div class="p-6 bg-yellow-900/30 rounded-lg border-2 border-yellow-500">
-  <div class="text-3xl mb-3">🤖</div>
-  <div class="font-bold text-yellow-400 text-lg mb-3">Copilot Without Config</div>
-  <ul class="text-sm text-gray-300 space-y-2">
-    <li>❌ Generic suggestions</li>
-    <li>❌ Wrong patterns</li>
-    <li>❌ Inconsistent with codebase</li>
-    <li>❌ Doesn't know your domain</li>
-    <li>❌ Multiple failed attempts</li>
-  </ul>
+<div class="p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 rounded-lg">
+  <div class="text-3xl mb-2">👨‍💻</div>
+  <h3 class="text-lg font-bold">Marcus</h3>
+  <p class="text-sm opacity-75">DevOps · 5 years</p>
+  <p class="text-xs mt-2 italic">"This will take days to understand"</p>
 </div>
 
+<div class="p-4 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/20 rounded-lg">
+  <div class="text-3xl mb-2">👩‍💻</div>
+  <h3 class="text-lg font-bold">Priya</h3>
+  <p class="text-sm opacity-75">Junior Dev · 1 year</p>
+  <p class="text-xs mt-2 italic">"I don't know where to start"</p>
 </div>
 
-<div class="mt-8 text-center text-gray-400 italic text-sm">
-  This frustration is intentional. You need to feel the problem to appreciate the solution.
+<div class="p-4 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/20 rounded-lg">
+  <div class="text-3xl mb-2">👴</div>
+  <h3 class="text-lg font-bold">David</h3>
+  <p class="text-sm opacity-75">Staff Engineer · 20 years</p>
+  <p class="text-xs mt-2 italic">"No architecture decisions recorded"</p>
+</div>
+
 </div>
 
 ---
