@@ -471,7 +471,7 @@ TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
 FILE_PATH=$(echo "$INPUT" | jq -r '.args.path')
 
 # Only lint code file edits
-if [[ "$TOOL_NAME" != "edit" ]] || 
+if [[ "$TOOL_NAME" != "edit" ]] ||
    [[ ! "$FILE_PATH" =~ \.(js|ts)$ ]]; then
   exit 0
 fi
@@ -483,7 +483,7 @@ echo "$INPUT" | jq -r '.args.new_str' > "$TEMP_FILE"
 # Run linter
 if ! npx eslint "$TEMP_FILE" > /dev/null 2>&1; then
   echo '{"permissionDecision": "deny",
-         "permissionDecisionReason": 
+         "permissionDecisionReason":
          "Code fails linting"}'
   rm "$TEMP_FILE"
   exit 0
@@ -520,12 +520,12 @@ fi
     <div class="font-bold text-green-300">&lt; 2 seconds</div>
     <div class="text-gray-300 text-sm">Security checks, logging</div>
   </div>
-  
+
   <div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-500">
     <div class="font-bold text-blue-300">&lt; 5 seconds</div>
     <div class="text-gray-300 text-sm">Linting, validation</div>
   </div>
-  
+
   <div class="p-4 bg-yellow-900/40 rounded-lg border-l-4 border-yellow-500">
     <div class="font-bold text-yellow-300">&lt; 120 seconds</div>
     <div class="text-gray-300 text-sm">External API calls (use <code>timeoutSec</code>)</div>
@@ -608,12 +608,12 @@ fi
     <div class="font-bold text-red-400">❌ Never</div>
     <div class="text-gray-300">Log credentials, tokens, sensitive data</div>
   </div>
-  
+
   <div class="p-3 bg-green-900/40 rounded-lg border-l-4 border-green-500">
     <div class="font-bold text-green-400">✓ Always</div>
     <div class="text-gray-300">Use environment variables for secrets</div>
   </div>
-  
+
   <div class="p-3 bg-green-900/40 rounded-lg border-l-4 border-green-500">
     <div class="font-bold text-green-400">✓ Always</div>
     <div class="text-gray-300">Scrub sensitive fields before logging</div>
@@ -745,7 +745,7 @@ time ./hook.sh < test-input.json
 
 ```bash
 # Security blocks (last 7 days)
-jq -r 'select(.permissionDecision == "deny") 
+jq -r 'select(.permissionDecision == "deny")
   | .permissionDecisionReason' audit.jsonl \
   | sort | uniq -c
 
@@ -754,10 +754,10 @@ jq -r '.toolName' audit.jsonl \
   | sort | uniq -c | sort -rn
 
 # Session metrics
-jq -s 'group_by(.sessionId) 
-  | map({tools: length, 
+jq -s 'group_by(.sessionId)
+  | map({tools: length,
          violations: map(select(
-           .permissionDecision == "deny")) 
+           .permissionDecision == "deny"))
          | length})' audit.jsonl
 ```
 
@@ -874,7 +874,7 @@ jq -s 'group_by(.sessionId)
 if [[ "$WORKING_DIR" =~ /production/ ]]; then
   if [[ "$TOOL_NAME" == "edit" ]]; then
     echo '{"permissionDecision": "deny",
-           "permissionDecisionReason": 
+           "permissionDecisionReason":
            "Production requires approval"}'
     exit 0
   fi
@@ -887,7 +887,7 @@ fi
 
 ```bash
 # Junior developers restricted
-if [[ "$USER_ROLE" == "junior" ]] && 
+if [[ "$USER_ROLE" == "junior" ]] &&
    echo "$COMMAND" | grep -q "deploy"; then
   echo '{"permissionDecision": "deny"}'
   exit 0
@@ -1293,5 +1293,5 @@ layout: end
 # Thank You
 
 <div class="absolute bottom-10 right-10 text-sm opacity-50">
-  CopilotWorkshop Tech Talk
+  CopilotTraining Tech Talk
 </div>

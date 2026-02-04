@@ -6,7 +6,7 @@ highlighter: shiki
 lineNumbers: false
 info: |
   ## Module 6: Custom Agents
-  CopilotWorkshop Training
+  CopilotTraining Training
 drawings:
   persist: false
 transition: slide-left
@@ -541,7 +541,7 @@ Location: <code class="bg-gray-800 px-2 py-1 rounded">.github/agents/planner.age
 </div>
 
 <div class="text-3xl font-bold text-white mt-6">Congratulations!</div>
-<div class="text-xl text-gray-300">You've completed the entire CopilotWorkshop training</div>
+<div class="text-xl text-gray-300">You've completed the entire CopilotTraining training</div>
 
 <div class="grid grid-cols-4 gap-4 mt-8">
 <div class="p-4 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-xl">
@@ -634,7 +634,7 @@ class: text-center
 Thank You!
 </div>
 
-<div class="text-xl text-gray-300">CopilotWorkshop Training Complete</div>
+<div class="text-xl text-gray-300">CopilotTraining Training Complete</div>
 
 <div class="grid grid-cols-3 gap-8 mt-8 max-w-2xl mx-auto">
 <div class="text-center">

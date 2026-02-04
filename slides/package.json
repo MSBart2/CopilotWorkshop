@@ -1,7 +1,7 @@
 {
-  "name": "copilotworkshop-slides",
+  "name": "CopilotTraining-slides",
   "version": "1.0.0",
-  "description": "Slidev presentation decks for CopilotWorkshop training modules",
+  "description": "Slidev presentation decks for CopilotTraining training modules",
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",

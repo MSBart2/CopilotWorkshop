@@ -6,7 +6,7 @@ highlighter: shiki
 lineNumbers: false
 info: |
   ## Module 2: Agent Plan Mode
-  CopilotWorkshop Training - From Complexity to Clarity
+  CopilotTraining Training - From Complexity to Clarity
 drawings:
   persist: false
 transition: slide-left
@@ -28,7 +28,7 @@ mdc: true
 <div class="mt-4 text-sm opacity-60">— Marcus, DevOps Developer</div>
 
 <div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotWorkshop Training</span>
+  <span class="text-sm opacity-50">CopilotTraining Training</span>
 </div>
 
 ---

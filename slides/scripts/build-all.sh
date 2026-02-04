@@ -37,14 +37,14 @@ build_slide() {
         echo "   🔨 ${CATEGORY}/${BASENAME}..."
         cd "${SLIDES_DIR}"
         npx slidev build "${CATEGORY}/${BASENAME}.md" \
-            --base "/CopilotWorkshop/${CATEGORY}/${BASENAME}/" \
+            --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
             --out "${OUTPUT_DIR}/${CATEGORY}/${BASENAME}" 2>&1 | sed 's/^/      /'
         echo "   ✅ ${CATEGORY}/${BASENAME} built"
     else
         printf "   🔨 %s/%s... " "${CATEGORY}" "${BASENAME}"
         cd "${SLIDES_DIR}"
         if npx slidev build "${CATEGORY}/${BASENAME}.md" \
-            --base "/CopilotWorkshop/${CATEGORY}/${BASENAME}/" \
+            --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
             --out "${OUTPUT_DIR}/${CATEGORY}/${BASENAME}" > /dev/null 2>&1; then
             echo "✅"
         else

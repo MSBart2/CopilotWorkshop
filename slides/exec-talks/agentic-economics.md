@@ -7,7 +7,7 @@ lineNumbers: false
 info: |
   ## Agentic Economics
   Making the Business Case for AI Agent Adoption
-  CopilotWorkshop Executive Talk
+  CopilotTraining Executive Talk
 drawings:
   persist: false
 transition: slide-left
@@ -24,7 +24,7 @@ mdc: true
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotWorkshop Executive Talk</span>
+  <span class="text-sm opacity-50">CopilotTraining Executive Talk</span>
 </div>
 
 ---
@@ -43,21 +43,21 @@ mdc: true
     <div class="text-gray-400">$75-100/hour</div>
     <div class="text-red-400 mt-2">37-50x more expensive</div>
   </div>
-  
+
   <div class="p-4 bg-gray-800 rounded-lg">
     <div class="text-2xl mb-2">🎯</div>
     <div class="text-white font-bold">Senior Developer (US)</div>
     <div class="text-gray-400">$125-175/hour</div>
     <div class="text-red-400 mt-2">62-87x more expensive</div>
   </div>
-  
+
   <div class="p-4 bg-gray-800 rounded-lg">
     <div class="text-2xl mb-2">⭐</div>
     <div class="text-white font-bold">Staff Engineer (US)</div>
     <div class="text-gray-400">$175-250/hour</div>
     <div class="text-red-400 mt-2">87-125x more expensive</div>
   </div>
-  
+
   <div class="p-4 bg-gray-800 rounded-lg">
     <div class="text-2xl mb-2">🌍</div>
     <div class="text-white font-bold">Offshore Developer</div>
@@ -470,13 +470,13 @@ mdc: true
     <div class="text-white text-2xl font-bold">$251K</div>
     <div class="text-gray-400 text-xs mt-1">0-3 months</div>
   </div>
-  
+
   <div class="p-5 bg-blue-900/40 rounded-lg border-2 border-blue-500 text-center">
     <div class="text-blue-400 text-sm mb-2">Tier 2: Medium Effort</div>
     <div class="text-white text-2xl font-bold">$638K</div>
     <div class="text-gray-400 text-xs mt-1">3-6 months</div>
   </div>
-  
+
   <div class="p-5 bg-purple-900/40 rounded-lg border-2 border-purple-500 text-center">
     <div class="text-purple-400 text-sm mb-2">Tier 3: High Investment</div>
     <div class="text-white text-2xl font-bold">$1,346K</div>
@@ -792,7 +792,7 @@ mdc: true
         <span class="text-blue-300 font-bold">6 months</span>
       </div>
     </div>
-    
+
     <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
       <div class="text-blue-300 mb-2">500-person team (10x scale)</div>
       <div class="flex justify-between">
@@ -822,9 +822,9 @@ mdc: true
         <div>Strategic: 800 hrs @ VALUE</div>
       </div>
     </div>
-    
+
     <div class="text-3xl text-gray-400 text-center">↓</div>
-    
+
     <div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
       <div class="text-green-400 font-bold mb-2">✨ After Agents</div>
       <div class="text-gray-300 text-xs mb-1">Per developer, annually:</div>
@@ -968,7 +968,7 @@ mdc: true
       <div>• Potential savings: <span class="text-green-400 font-bold">$2-3M per 50 engineers</span></div>
     </div>
   </div>
-  
+
   <div class="p-5 bg-green-900/60 rounded-lg border-l-4 border-green-400">
     <div class="text-green-300 font-bold text-lg mb-3">💰 The Investment</div>
     <div class="text-sm text-gray-300 space-y-1">
@@ -990,7 +990,7 @@ mdc: true
       <div>• Savings via <span class="text-yellow-400">capacity multiplication</span>, not headcount cuts</div>
     </div>
   </div>
-  
+
   <div class="p-5 bg-purple-900/40 rounded-lg border-l-4 border-purple-500">
     <div class="text-purple-300 font-bold text-lg mb-3">🎯 The Recommendation</div>
     <div class="text-sm text-gray-300 space-y-1">
@@ -1078,7 +1078,7 @@ mdc: true
       <div>• People can be retrained</div>
     </div>
   </div>
-  
+
   <div class="p-5 bg-blue-900/60 rounded-lg">
     <div class="text-blue-400 font-bold text-lg mb-3">🚀 Different Cost Structure</div>
     <div class="text-sm text-gray-300">
@@ -1107,20 +1107,20 @@ layout: end
 <div class="text-center">
   <div class="text-6xl mb-4">💰</div>
   <div class="text-2xl text-gray-400 mb-8">Making the Business Case for Agentic AI</div>
-  
+
   <div class="grid grid-cols-3 gap-4 text-sm max-w-4xl mx-auto">
     <div class="p-4 bg-gray-800 rounded-lg">
       <div class="text-blue-400 font-bold mb-2">The Opportunity</div>
       <div class="text-white text-2xl font-bold">$2/hour</div>
       <div class="text-gray-400">vs. $150/hour</div>
     </div>
-    
+
     <div class="p-4 bg-gray-800 rounded-lg">
       <div class="text-green-400 font-bold mb-2">The Target</div>
       <div class="text-white text-2xl font-bold">20%</div>
       <div class="text-gray-400">labor arbitrage</div>
     </div>
-    
+
     <div class="p-4 bg-gray-800 rounded-lg">
       <div class="text-purple-400 font-bold mb-2">The Timeline</div>
       <div class="text-white text-2xl font-bold">18 months</div>

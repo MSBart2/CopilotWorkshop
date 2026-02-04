@@ -6,7 +6,7 @@ highlighter: shiki
 lineNumbers: false
 info: |
   ## Module 6: MCP Servers
-  CopilotWorkshop Training
+  CopilotTraining Training
 drawings:
   persist: false
 transition: slide-left

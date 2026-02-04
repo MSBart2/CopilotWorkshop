@@ -243,7 +243,7 @@ layout: center
     <div class="mb-2 text-gray-400">New issues per month: <span class="text-white font-bold">88</span></div>
     <div class="mb-2 text-gray-400">Triaged this month: <span class="text-yellow-400 font-bold">32 (36%)</span></div>
     <div class="mb-4 text-gray-400">Awaiting triage: <span class="text-red-400 font-bold">56 (64%)</span></div>
-    
+
     <div class="border-t border-gray-700 pt-3 mt-3">
       <div class="font-bold text-red-400 mb-2">⚠️ HIDDEN COSTS</div>
       <div class="text-gray-400">
@@ -550,23 +550,23 @@ layout: center
 
 <div class="mb-4">
   <div class="font-bold text-blue-300 mb-2">📄 API Reference: docs/api/users.md</div>
-  
+
   | Documented | Actual Code | Status | Fix |
   |------------|-------------|--------|-----|
   | `POST /users` returns `201` | Returns `200` | 🔴 Mismatch | ✅ Auto |
   | `email` field required | Now optional | 🔴 Mismatch | ✅ Auto |
   | Rate limit: 100/min | Now 50/min | 🔴 Mismatch | ✅ Auto |
-  
+
 </div>
 
 <div class="mb-4">
   <div class="font-bold text-green-300 mb-2">🏗️ Architecture Doc: ARCHITECTURE.md</div>
-  
+
   | Documented | Actual Code | Status |
   |------------|-------------|--------|
   | "Auth service uses JWT" | Now uses session tokens | 🔴 Major drift |
   | "Cache: Redis" | Now Memcached | 🔴 Major drift |
-  
+
 </div>
 
 <div class="p-3 bg-blue-900/40 rounded-lg">
@@ -977,16 +977,16 @@ layout: end
       The organizations that win aren't those with<br/>
       <span class="text-white font-bold text-4xl">the most developers</span>
     </div>
-    
+
     <div class="text-6xl">↓</div>
-    
+
     <div class="text-3xl text-gray-300">
       They're those whose developers spend their time on<br/>
       <span class="text-green-400 font-bold text-4xl">judgment, not toil</span>
     </div>
-    
+
     <div class="mt-12 text-sm text-gray-500">
-      The Labor Multiplier · CopilotWorkshop
+      The Labor Multiplier · CopilotTraining
     </div>
   </div>
 </div>

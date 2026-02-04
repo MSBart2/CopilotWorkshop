@@ -1,6 +1,6 @@
 # GitHub Pages Deployment Setup
 
-This document explains how to enable and use the GitHub Pages deployment for CopilotWorkshop slide presentations.
+This document explains how to enable and use the GitHub Pages deployment for CopilotTraining slide presentations.
 
 ## 🚀 Quick Setup
 
@@ -29,7 +29,7 @@ https://<username>.github.io/<repository-name>/
 
 For this repository:
 ```
-https://MSBart2.github.io/CopilotWorkshop/
+https://MSBart2.github.io/CopilotTraining/
 ```
 
 ---

@@ -1,4 +1,4 @@
-# Copilot Instructions for CopilotWorkshop Content Development
+# Copilot Instructions for CopilotTraining Content Development
 
 ## Repository Structure
 
@@ -133,7 +133,9 @@ When calling subagents (via `runSubagent`), keep prompts minimal:
 - **Let agents work** — They're configured to follow workspace conventions automatically
 
 **Bad example:**
+
 > "Generate slides following the slide generation guidelines, using emoji vocabulary, dark cockpit-style, max 15-20 slides..."
 
 **Good example:**
+
 > "Generate slides for workshop/03-custom-prompts"

@@ -6,7 +6,7 @@ highlighter: shiki
 lineNumbers: false
 info: |
   ## Module 5: Agent Skills
-  CopilotWorkshop Training
+  CopilotTraining Training
 drawings:
   persist: false
 transition: slide-left

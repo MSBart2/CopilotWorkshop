@@ -27,7 +27,7 @@ mdc: true
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotWorkshop Training</span>
+  <span class="text-sm opacity-50">CopilotTraining Training</span>
 </div>
 
 ---

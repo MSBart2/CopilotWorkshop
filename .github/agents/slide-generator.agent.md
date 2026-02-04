@@ -1,6 +1,6 @@
 ---
 name: Slide Generator
-description: Generate Slidev presentation slides from CopilotWorkshop module README files. Extracts objectives, personas, metrics, and exercises to create beautiful, maintainable slide decks.
+description: Generate Slidev presentation slides from CopilotTraining module README files. Extracts objectives, personas, metrics, and exercises to create beautiful, maintainable slide decks.
 tools: ["read", "edit/createFile", "edit/editFiles"]
 model: Claude Sonnet 4.5
 argument-hint: Provide content path (e.g., workshop/03-custom-prompts, tech-talks/copilot-cli, exec-talks/agentic-delivery)
@@ -8,7 +8,7 @@ argument-hint: Provide content path (e.g., workshop/03-custom-prompts, tech-talk
 
 # Slide Generator Agent
 
-You are a specialized agent for generating Slidev presentation slides from CopilotWorkshop module README files.
+You are a specialized agent for generating Slidev presentation slides from CopilotTraining module README files.
 
 ## Your Role
 
@@ -218,7 +218,7 @@ The index has three sections identified by CSS classes:
 **Card Template:**
 
 ```html
-<a href="/CopilotWorkshop/{section}/{slug}/" class="card">
+<a href="/CopilotTraining/{section}/{slug}/" class="card">
   <h2>{Title}</h2>
   <p>{Short description}</p>
 </a>
@@ -228,16 +228,16 @@ The index has three sections identified by CSS classes:
 
 | Source Path         | Index Section        | URL Pattern                          |
 | ------------------- | -------------------- | ------------------------------------ |
-| `workshop/NN-name/` | `section.workshop`   | `/CopilotWorkshop/workshop/NN-name/` |
-| `tech-talks/name/`  | `section.tech-talks` | `/CopilotWorkshop/tech-talks/name/`  |
-| `exec-talks/name/`  | `section.exec-talks` | `/CopilotWorkshop/exec-talks/name/`  |
+| `workshop/NN-name/` | `section.workshop`   | `/CopilotTraining/workshop/NN-name/` |
+| `tech-talks/name/`  | `section.tech-talks` | `/CopilotTraining/tech-talks/name/`  |
+| `exec-talks/name/`  | `section.exec-talks` | `/CopilotTraining/exec-talks/name/`  |
 
 **Examples:**
 
 Adding a tech-talk:
 
 ```html
-<a href="/CopilotWorkshop/tech-talks/subagents/" class="card">
+<a href="/CopilotTraining/tech-talks/subagents/" class="card">
   <h2>Subagents</h2>
   <p>Context isolation for complex workflows</p>
 </a>
@@ -246,7 +246,7 @@ Adding a tech-talk:
 Adding a workshop module:
 
 ```html
-<a href="/CopilotWorkshop/workshop/07-copilot-web/" class="card">
+<a href="/CopilotTraining/workshop/07-copilot-web/" class="card">
   <h2>07 - Copilot Web</h2>
   <p>Web-based Copilot features</p>
 </a>
@@ -291,7 +291,7 @@ highlighter: shiki
 lineNumbers: false
 info: |
   ## Module 1: Repository Instructions
-  CopilotWorkshop Training
+  CopilotTraining Training
 drawings:
   persist: false
 transition: slide-left
@@ -314,7 +314,7 @@ mdc: true
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotWorkshop Training</span>
+  <span class="text-sm opacity-50">CopilotTraining Training</span>
 </div>
 
 ---

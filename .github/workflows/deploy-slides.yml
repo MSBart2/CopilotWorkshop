@@ -60,7 +60,7 @@ jobs:
               echo "🔨 Building workshop/${BASENAME}..."
 
               npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotWorkshop/workshop/${BASENAME}/" \
+                --base "/CopilotTraining/workshop/${BASENAME}/" \
                 --out "$(pwd)/dist/workshop/${BASENAME}"
 
               echo "✅ workshop/${BASENAME} built successfully"
@@ -75,7 +75,7 @@ jobs:
               echo "🔨 Building tech-talks/${BASENAME}..."
 
               npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotWorkshop/tech-talks/${BASENAME}/" \
+                --base "/CopilotTraining/tech-talks/${BASENAME}/" \
                 --out "$(pwd)/dist/tech-talks/${BASENAME}"
 
               echo "✅ tech-talks/${BASENAME} built successfully"
@@ -90,7 +90,7 @@ jobs:
               echo "🔨 Building exec-talks/${BASENAME}..."
 
               npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotWorkshop/exec-talks/${BASENAME}/" \
+                --base "/CopilotTraining/exec-talks/${BASENAME}/" \
                 --out "$(pwd)/dist/exec-talks/${BASENAME}"
 
               echo "✅ exec-talks/${BASENAME} built successfully"

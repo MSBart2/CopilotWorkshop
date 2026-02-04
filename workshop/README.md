@@ -114,10 +114,10 @@ Every module connects back to these core ideas:
 2. **Start the training**:
    - Read [Module 0: The Challenge](00-orientation/README.md) in this repository
    - Make all code changes and customizations in your FanHub repository
-   - Use this repository (CopilotWorkshop) as your instruction guide
+   - Use this repository (CopilotTraining) as your instruction guide
 
 **Two repositories, two purposes:**
-- **CopilotWorkshop** (this repo) — Instructions, exercises, and learning materials
+- **CopilotTraining** (this repo) — Instructions, exercises, and learning materials
 - **FanHub** (your template repo) — Working codebase where you make changes
 
 ---

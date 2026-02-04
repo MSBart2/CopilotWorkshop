@@ -1,6 +1,6 @@
-# CopilotWorkshop Slide Decks
+# CopilotTraining Slide Decks
 
-Slidev-based presentation materials for the CopilotWorkshop training modules and tech talks.
+Slidev-based presentation materials for the CopilotTraining training modules and tech talks.
 
 > **🌐 View Online**: These slides are automatically deployed to GitHub Pages! See [DEPLOYMENT.md](./DEPLOYMENT.md) for setup instructions.
 
@@ -513,7 +513,7 @@ When adding or updating slides:
 
 ## License
 
-Same as the main CopilotWorkshop repository.
+Same as the main CopilotTraining repository.
 
 ---
 
