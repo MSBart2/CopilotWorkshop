@@ -1,7 +1,7 @@
 # Organization-Level Copilot Instructions Template
 
-> **Purpose**: Template for organization-wide GitHub Copilot custom instructions.  
-> **Tier**: 💼 Business / 🏢 Enterprise  
+> **Purpose**: Template for organization-wide GitHub Copilot custom instructions.
+> **Tier**: 💼 Business / 🏢 Enterprise
 > **Location**: GitHub Organization Settings → Copilot → Custom Instructions
 
 ---
@@ -143,4 +143,4 @@ Before deploying, customize:
 
 - [GitHub Docs: Managing policies for Copilot](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization)
 - [GitHub Docs: Adding custom instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot)
-- [Module 11: Enterprise Patterns](../../../11-enterprise-patterns/README.md)
+- [Module 10: Enterprise Patterns](../../../10-enterprise-patterns/README.md)

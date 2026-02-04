@@ -1,8 +1,8 @@
-# Exercise 5.1: API Endpoint Design Skill
+# Exercise 4.1: API Endpoint Design Skill
 
 ## 🔨 Exercise
 
-### Exercise 5.1: API Endpoint Design Skill — "From Repeated Explanations to Specialized Capability"
+### Exercise 4.1: API Endpoint Design Skill — "From Repeated Explanations to Specialized Capability"
 
 **Lead:** Sarah ⭐ | **Support:** David 🤝 | **Time:** 12 min
 
@@ -32,25 +32,25 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
 #### 📋 Steps
 
 1. **Create the skill directory structure**
-   
+
    Agent skills live in `.github/skills/[skill-name]/` with each skill in its own folder:
-   
+
    ```bash
    mkdir -p .github/skills/api-endpoint-design/example-endpoints
    ```
-   
+
    This structure separates the skill definition (`SKILL.md`) from resources (schema, examples).
 
 2. **Create the OpenAPI schema reference**
-   
+
    Create `.github/skills/api-endpoint-design/openapi-schema.yaml` with FanHub's TV show API schema:
-   
+
    ```yaml
    openapi: 3.0.0
    info:
      title: FanHub TV Show API
      version: 1.0.0
-   
+
    components:
      schemas:
        Character:
@@ -67,7 +67,7 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
              type: string
            bio:
              type: string
-       
+
        Episode:
          type: object
          required: [id, title, season, episode_number]
@@ -87,7 +87,7 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
              type: number
              minimum: 0
              maximum: 10
-       
+
        ErrorResponse:
          type: object
          required: [error, message]
@@ -100,21 +100,21 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
            details:
              type: object
    ```
-   
+
    This schema defines FanHub's data models and error formats that all endpoints must follow.
 
 3. **Create example endpoint files**
-   
+
    Create `.github/skills/api-endpoint-design/example-endpoints/get-character.js`:
-   
+
    ```javascript
    // GET /api/characters/:id
    // Example: Fetch character details by ID
-   
+
    router.get('/characters/:id', async (req, res) => {
      try {
        const characterId = parseInt(req.params.id);
-       
+
        // Validate ID format
        if (isNaN(characterId) || characterId <= 0) {
          return res.status(400).json({
@@ -122,16 +122,16 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
            message: 'Character ID must be a positive integer'
          });
        }
-       
+
        const character = await db.getCharacter(characterId);
-       
+
        if (!character) {
          return res.status(404).json({
            error: 'NOT_FOUND',
            message: `Character with ID ${characterId} not found`
          });
        }
-       
+
        // Return response matching Character schema
        res.json({
          id: character.id,
@@ -140,7 +140,7 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
          actor: character.actor || null,
          bio: character.bio || null
        });
-       
+
      } catch (error) {
        console.error('Error fetching character:', error);
        res.status(500).json({
@@ -150,17 +150,17 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
      }
    });
    ```
-   
+
    And `.github/skills/api-endpoint-design/example-endpoints/get-episode.js`:
-   
+
    ```javascript
    // GET /api/episodes?season=X&episode=Y
    // Example: Fetch episode by season and episode number
-   
+
    router.get('/episodes', async (req, res) => {
      try {
        const { season, episode } = req.query;
-       
+
        // Validate required query parameters
        if (!season || !episode) {
          return res.status(400).json({
@@ -168,26 +168,26 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
            message: 'Both season and episode query parameters are required'
          });
        }
-       
+
        const seasonNum = parseInt(season);
        const episodeNum = parseInt(episode);
-       
+
        if (isNaN(seasonNum) || isNaN(episodeNum) || seasonNum <= 0 || episodeNum <= 0) {
          return res.status(400).json({
            error: 'BAD_REQUEST',
            message: 'Season and episode must be positive integers'
          });
        }
-       
+
        const episodeData = await db.getEpisode(seasonNum, episodeNum);
-       
+
        if (!episodeData) {
          return res.status(404).json({
            error: 'NOT_FOUND',
            message: `Episode not found: Season ${seasonNum}, Episode ${episodeNum}`
          });
        }
-       
+
        // Return response matching Episode schema
        res.json({
          id: episodeData.id,
@@ -197,7 +197,7 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
          air_date: episodeData.air_date,
          rating: episodeData.rating || null
        });
-       
+
      } catch (error) {
        console.error('Error fetching episode:', error);
        res.status(500).json({
@@ -207,78 +207,78 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
      }
    });
    ```
-   
+
    These examples demonstrate FanHub's patterns: input validation, standardized error responses, schema-compliant return values.
 
 4. **Create the SKILL.md file**
-   
+
    Create `.github/skills/api-endpoint-design/SKILL.md`:
-   
+
    ````markdown
    ---
    name: api-endpoint-design
    description: Design REST API endpoints for FanHub TV show platform following OpenAPI schema, with proper validation, error handling, and response formatting. Use when creating new API routes or modifying existing endpoints.
    ---
-   
+
    # FanHub API Endpoint Design
-   
+
    This skill teaches how to create REST API endpoints for the FanHub TV show platform that comply with our OpenAPI schema and follow established patterns.
-   
+
    ## When to Use This Skill
-   
+
    - Creating new API endpoints for characters, episodes, or shows
    - Modifying existing endpoints to add fields or change behavior
    - Debugging endpoints that don't match schema expectations
    - Reviewing API code for compliance with FanHub standards
-   
+
    ## OpenAPI Schema Reference
-   
+
    All endpoints must follow the schema defined in [openapi-schema.yaml](../examples/completed-config/skills/api-endpoint-design/openapi-schema.yaml):
-   
+
    - **Character schema**: `id`, `name`, `show` (required); `actor`, `bio` (optional)
    - **Episode schema**: `id`, `title`, `season`, `episode_number` (required); `air_date`, `rating` (optional)
    - **ErrorResponse schema**: `error` (enum), `message` (required); `details` (optional)
-   
+
    ## Step-by-Step Process
-   
+
    ### 1. Input Validation
-   
+
    - Validate all path parameters and query parameters
    - Check data types (integers, strings, dates)
    - Validate ranges (positive numbers, valid enums)
    - Return `400 BAD_REQUEST` with descriptive message for invalid input
-   
+
    ### 2. Database Query
-   
+
    - Use appropriate database method based on endpoint purpose
    - Handle database errors with try-catch blocks
    - Check for null/undefined results
-   
+
    ### 3. Response Formatting
-   
+
    - **Success (200/201)**: Return data matching OpenAPI schema
    - **Not Found (404)**: Return `ErrorResponse` with `NOT_FOUND` error code
    - **Bad Request (400)**: Return `ErrorResponse` with `BAD_REQUEST` error code
    - **Server Error (500)**: Return `ErrorResponse` with `INTERNAL_ERROR` error code
-   
+
    ### 4. Error Handling
-   
+
    Always include:
    - Descriptive error messages for users
    - Error enum from schema (`NOT_FOUND`, `BAD_REQUEST`, `INTERNAL_ERROR`)
    - Console logging for debugging (not exposed to client)
-   
+
    ## Example Endpoints
-   
+
    Reference these patterns when creating new endpoints:
-   
+
    - [GET character by ID](../examples/completed-config/skills/api-endpoint-design/example-endpoints/get-character.js) — Shows path parameter validation and 404 handling
    - [GET episode by season/episode](../examples/completed-config/skills/api-endpoint-design/example-endpoints/get-episode.js) — Shows query parameter validation and schema compliance
-   
+
    ## Validation Checklist
-   
+
    Before considering an endpoint complete, verify:
-   
+
    - [ ] All path/query parameters validated for type and range
    - [ ] Invalid input returns 400 with BAD_REQUEST error
    - [ ] Missing resources return 404 with NOT_FOUND error
@@ -287,16 +287,16 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
    - [ ] Error responses use ErrorResponse schema format
    - [ ] Console logging for debugging (no sensitive data)
    - [ ] Try-catch blocks around all database operations
-   
+
    ## FanHub-Specific Patterns
-   
+
    - **ID validation**: Parse to integer, check > 0, return 400 if invalid
    - **Database methods**: Use `db.getCharacter()`, `db.getEpisode()`, etc. from database module
    - **Null handling**: Return null for optional fields if missing, don't omit fields
    - **Error messages**: Include context (e.g., "Character with ID 123 not found")
-   
+
    ## Testing New Endpoints
-   
+
    After generating an endpoint:
    1. Test happy path with valid input
    2. Test 400 errors: invalid IDs, missing parameters, wrong types
@@ -304,18 +304,18 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
    4. Test 500 errors: simulate database failures
    5. Verify response schema matches OpenAPI spec
    ````
-   
+
    This skill combines instructions (how to design endpoints) + schema (what format to follow) + examples (concrete patterns to reference).
 
 5. **Test the skill**
-   
+
    In VS Code Copilot Chat, ask:
-   
+
    ```
-   Create a new API endpoint: GET /api/episodes/:id/characters that returns all characters 
+   Create a new API endpoint: GET /api/episodes/:id/characters that returns all characters
    appearing in a specific episode. Should validate episode ID and return 404 if episode doesn't exist.
    ```
-   
+
    Copilot should:
    - Load the `api-endpoint-design` skill (matches description: "creating new API routes")
    - Reference `openapi-schema.yaml` for Character response format
@@ -350,7 +350,7 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
 
 | Previous Modules | This Module | Combined Power |
 |------------------|-------------|----------------|
-| Custom instructions (Module 4) define *how to write code* | Agent skills teach *how to perform workflows* | Instructions guide style; skills teach capabilities = comprehensive guidance |
+| Custom instructions (Module 1) define *how to write code* | Agent skills teach *how to perform workflows* | Instructions guide style; skills teach capabilities = comprehensive guidance |
 | Prompt files (Module 3) invoke specific tasks | Skills activate automatically when relevant | Prompts for explicit invocation; skills for automatic capability teaching |
 
 **Sarah's ROI calculation:**
@@ -364,9 +364,9 @@ Create an `api-endpoint-design` agent skill that teaches Copilot how to generate
 
 ## ➡️ Next Up
 
-**[Exercise 5.2: Bug Reproduction Test Generator](exercise-5.2.md)** — API endpoints now follow schema automatically. Next: teach Copilot how to generate comprehensive bug reproduction tests using templates and edge case patterns.
+**[Exercise 4.2: Bug Reproduction Test Generator](exercise-4.2.md)** — API endpoints now follow schema automatically. Next: teach Copilot how to generate comprehensive bug reproduction tests using templates and edge case patterns.
 
-> *"The skill taught Copilot our API patterns. But when bugs appear, I spend 25 minutes writing reproduction tests—setting up mocks, covering edge cases, writing assertions. Can a skill teach that workflow too?"*  
+> *"The skill taught Copilot our API patterns. But when bugs appear, I spend 25 minutes writing reproduction tests—setting up mocks, covering edge cases, writing assertions. Can a skill teach that workflow too?"*
 > — Elena, about to create the bug-reproduction-test-generator skill
 
 ---

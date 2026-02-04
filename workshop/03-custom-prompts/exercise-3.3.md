@@ -250,9 +250,9 @@ Create variable-driven prompts that automatically capture file paths, selected t
 
 ## ➡️ Next Module
 
-**[Module 4: Custom Instructions](../04-custom-instructions/README.md)** — Prompt files are perfect for specific tasks, but what if you want _every_ Copilot interaction to understand your role, preferences, and context automatically?
+**[Module 4: Agent Skills](../04-agent-skills/README.md)** — Prompt files are perfect for specific tasks, but what if you want to give Copilot specialized domain knowledge and capabilities?
 
-> _"These prompt functions are powerful, but I'm still explaining 'I'm a senior QA engineer focused on edge cases' in every new chat session. Can I make that automatic?"_  
+> _"These prompt functions are powerful, but I'm still explaining 'I'm a senior QA engineer focused on edge cases' in every new chat session. Can I make that automatic?"_
 > — Elena, about to discover custom instructions
 
 ---

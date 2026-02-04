@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'slides/**'
-      - '.github/workflows/deploy-slides.yml'
+      - "slides/**"
+      - ".github/workflows/deploy-slides.yml"
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -24,58 +24,58 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      
+          node-version: "20"
+
       - name: Install dependencies
         working-directory: ./slides
         run: npm ci
-      
+
       - name: Install Playwright browsers
         working-directory: ./slides
         run: npx playwright install chromium --with-deps
-      
+
       - name: Build all presentations
         working-directory: ./slides
         run: |
           echo "🚀 Building all Slidev presentations..."
-          
+
           # Create dist directory
           mkdir -p dist
-          
+
           # Find all .md files except README.md, GLOBAL-LAYERS.md, DEPLOYMENT.md, and temporarily skip failing files
-          SLIDE_FILES=$(find . -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" ! -name "DEPLOYMENT.md" ! -name "03-custom-prompts.md" ! -name "05-agent-skills.md" ! -name "07-custom-agents.md" | sort)
-          
+          SLIDE_FILES=$(find . -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" ! -name "DEPLOYMENT.md" | sort)
+
           # Build each presentation
           for SLIDE_FILE in $SLIDE_FILES; do
             BASENAME=$(basename "$SLIDE_FILE" .md)
             echo "🔨 Building ${BASENAME}..."
-            
+
             npx slidev build "${BASENAME}.md" \
               --base "/CopilotWorkshop/${BASENAME}/" \
               --out "dist/${BASENAME}"
-            
+
             echo "✅ ${BASENAME} built successfully"
           done
-          
+
           # Copy custom index.html to dist root
           echo "📄 Copying index.html to dist root..."
           cp index-custom.html dist/index.html
-          
+
           echo "✨ All presentations built successfully!"
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./slides/dist
-  
+
   deploy:
     environment:
       name: github-pages

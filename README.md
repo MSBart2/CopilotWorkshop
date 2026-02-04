@@ -157,14 +157,14 @@ The [Workshop Training](workshop/) includes facilitator guidance and customizabl
 
 **Path 1: Individual Skill Building**
 1. [Workshop Module 0](workshop/00-orientation/) — Understand the challenge
-2. [Workshop Modules 1-6](workshop/) — Build foundational skills
-3. [Workshop Module 7](workshop/07-custom-agents/) — Experience the payoff
-4. [Workshop Modules 8-11](workshop/) — Scale and orchestrate
+2. [Workshop Modules 1-5](workshop/) — Build foundational skills
+3. [Workshop Module 6](workshop/06-custom-agents/) — Experience the payoff
+4. [Workshop Modules 7-10](workshop/) — Scale and orchestrate
 
 **Path 2: Team Enablement**
 1. [Agentic Repos](tech-talks/agentic-repos/) — Understand customization options
-2. [Workshop Modules 1-4](workshop/) — Establish team standards
-3. [Enterprise Patterns](workshop/11-enterprise-patterns/) — Scale across organization
+2. [Workshop Modules 1-3](workshop/) — Establish team standards
+3. [Enterprise Patterns](workshop/10-enterprise-patterns/) — Scale across organization
 
 **Path 3: Executive Understanding**
 1. [Agentic Delivery](exec-talks/agentic-delivery/) — Mental model for agents

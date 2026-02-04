@@ -1,8 +1,8 @@
-# Module 1: Repository Instructions
+# Module 1: Instructions
 
 ## ⏰ — Establishing Foundations
 
-> *"We've all felt it—Copilot giving wildly different suggestions to each of us. Let's fix that."*  
+> *"We've all felt it—Copilot giving wildly different suggestions to each of us. Let's fix that."*
 > — Sarah, looking at the team's chaotic FanHub codebase
 
 ---
@@ -13,28 +13,42 @@ The TechCorp team has cloned the FanHub starter project and experienced **The St
 
 **David** (Staff Engineer) knows the problem: *"Before anyone writes another line of code, we need to document what we have. Otherwise Copilot is just guessing—and so are we."* Every prompt Copilot sees includes unnecessary context because there's no architecture guide. It's wasting tokens analyzing the entire codebase just to understand basic structure.
 
-**Sarah** (Senior Developer) has seen this movie before: *"See how the backend routes use three different async patterns? That's because the contractor had no standards. Let's fix that—and teach Copilot at the same time."* 
+**Sarah** (Senior Developer) has seen this movie before: *"See how the backend routes use three different async patterns? That's because the contractor had no standards. Let's fix that—and teach Copilot at the same time."*
 
-**This module's mission**: Create two foundational files that transform how Copilot understands your project:
-1. **ARCHITECTURE.md** — Reduces context waste, provides structural understanding
-2. **.github/copilot-instructions.md** — Standardizes patterns, ensures consistency
+**Elena** (Quality Champion) quickly discovers a limitation: *"My Python code needs different guidance than my JavaScript. My test files need different standards than my production code. But a single file treats everything the same."* She needs context-specific instructions that change based on what she's editing.
 
-By the end, everyone will get better suggestions with less context, following your chosen patterns.
+**This module's mission**: Build a complete instruction system that transforms how Copilot understands your project:
+
+### Part 1: The "Magic File" Foundation
+1. **ARCHITECTURE.md** — Project context that reduces token waste
+2. **`.github/copilot-instructions.md`** — 🪄 The "magic file" that applies to ALL interactions
+
+### Part 2: Path-Based Context
+3. **`.instructions.md` files** — Context-specific rules that only apply to matching files
+
+> 🪄 **The Magic File**: `.github/copilot-instructions.md` is special—VS Code automatically loads it into **every** Copilot interaction. No manual invocation, no applyTo patterns. It just works, always. This is your repository-wide baseline.
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
 
 ---
 
-## 🧠 Mindful Moment: The Documentation Paradox
+## 🧠 Mindful Moment: Two Levels of Instructions
 
-Traditional thinking: *"Documentation is something you write AFTER the code works."*
+**Traditional thinking:** *"I'll keep all instructions in one file and hope Copilot figures out the context."*
 
-AI-native thinking: *"Documentation is the FIRST thing you create—it's the context that makes everything else better."*
+**AI-native thinking:** *"Different files need different guidance. I'll use the magic file for universal rules, and path-based instructions for context-specific patterns."*
 
-This isn't about bureaucracy. It's about leverage. Every hour David spends documenting architecture saves the team (and Copilot) hundreds of hours of confusion.
+### The Two Instruction Types
+
+| Type | File | When Applied | Purpose |
+|------|------|--------------|---------|
+| 🪄 **Magic File** | `.github/copilot-instructions.md` | **Always** — every interaction, every file | Repository-wide baseline standards |
+| 📂 **Path-Based** | `.github/instructions/*.instructions.md` | **Conditionally** — only when editing matching files | Context-specific rules (frontend, backend, tests, Python, etc.) |
+
+> 🪄 **Key Distinction**: The magic file is your foundation—it applies universally. Path-based instructions layer on top for specialized contexts. Together, they give Copilot the right guidance at the right time.
 
 ---
 
@@ -52,9 +66,11 @@ Think of `@workspace` as giving Copilot the same bird's-eye view you have as a d
 
 ## 📚 Key Concepts
 
-### The Two-File Foundation
+### Part 1: The Magic File Foundation
 
-These two files form the foundation of all Copilot customization:
+#### The Three-File Foundation
+
+These files form the foundation of all Copilot customization:
 
 **1. ARCHITECTURE.md (docs/ or repo root)**
 - **Purpose**: Structural understanding + context efficiency
@@ -63,43 +79,134 @@ These two files form the foundation of all Copilot customization:
 - **What to include**: Tech stack, folder structure, data flow, key patterns
 - **What NOT to include**: Implementation details, code examples, exhaustive file lists
 
-**2. .github/copilot-instructions.md**
-- **Purpose**: Automatic pattern standardization
-- **Value**: Every Copilot interaction follows your team's conventions
+**2. .github/copilot-instructions.md** 🪄 **THE MAGIC FILE**
+- **Purpose**: Automatic pattern standardization for ALL interactions
+- **Value**: Every Copilot interaction follows your team's conventions, automatically
 - **Result**: Consistent code style, reduced review cycles, fewer violations
 - **What to include**: Coding conventions, library preferences, error patterns, testing requirements
-- **What NOT to include**: Project structure, architecture decisions, task-specific rules
+- **What NOT to include**: Project structure, architecture decisions, context-specific rules
+- **🪄 Magic**: This file is automatically included in every Copilot prompt—no manual invocation needed
 
-### How They Work Together
+**3. .instructions.md Files** 📂 **PATH-BASED**
+- **Purpose**: Context-specific guidance that changes based on what you're editing
+- **Value**: Frontend code gets frontend patterns, backend gets backend patterns, tests get test patterns
+- **Result**: Zero context pollution—right guidance, right place, right time
+- **What to include**: Layer-specific conventions, language-specific style, file-type-specific rules
+- **Location**: `.github/instructions/` directory
+- **📂 Conditional**: These files use `applyTo` glob patterns to match specific files
 
-1. **ARCHITECTURE.md** gives Copilot the "what" and "where" → *"This is a React frontend with Express backend, here's the folder structure"*
-2. **copilot-instructions.md** gives Copilot the "how" → *"Always use async/await, prefer functional components, handle errors with our error middleware"*
+#### How They Work Together
 
-Both are read by Copilot automatically when you use `@workspace` context.
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Every Copilot Interaction                                   │
+├─────────────────────────────────────────────────────────────┤
+│ 1. ARCHITECTURE.md         → "What" and "Where"             │
+│    (project context)          Project structure & data flow │
+│                                                             │
+│ 2. copilot-instructions.md → "How" (universal)              │  🪄 ALWAYS
+│    (magic file)               Patterns for ALL code         │  LOADED
+│                                                             │
+│ 3. matching .instructions.md → "How" (specific)             │  📂 LOADED
+│    (path-based)               Patterns for THIS file type   │  IF MATCHING
+└─────────────────────────────────────────────────────────────┘
+```
 
-> 📂 **Reference Examples**: The [`examples/completed-config/`](../../examples/completed-config/) folder contains sample files showing completed work:
-> - [`docs/ARCHITECTURE.md`](../examples/completed-config/docs/ARCHITECTURE.md)
-> - [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
+### Part 2: Path-Based Instructions
+
+#### The applyTo Pattern System
+
+Path-based `.instructions.md` files use glob patterns to specify when they activate:
+
+```yaml
+---
+applyTo: "glob pattern here"
+---
+```
+
+**Common patterns:**
+
+| Pattern | Matches | Use Case |
+|---------|---------|----------|
+| `**/*.py` | All Python files | PEP 8 standards, type hints |
+| `**/__tests__/**` | All test directories | Testing conventions, mocking |
+| `frontend/src/**` | Frontend source files | React patterns, accessibility |
+| `backend/src/routes/**` | API route files | REST conventions, auth patterns |
+| `**/{Dockerfile,*.dockerfile}` | Docker files | Container best practices |
+| `**/docs/**/*.md` | Documentation files | Stakeholder language, examples |
+
+#### Layering Instructions
+
+VS Code combines multiple instruction sources automatically:
+
+**Order of application (all combined into context):**
+1. 🪄 **Magic file:** `.github/copilot-instructions.md` (always, for all files)
+2. 📂 **Path-specific:** Matching `.instructions.md` files (when patterns match)
+3. 👤 **User profile:** Personal `.instructions.md` files (your preferences)
+
+**Example scenario — editing `frontend/src/components/CharacterCard.tsx`:**
+- ✅ `.github/copilot-instructions.md` — General standards (always)
+- ✅ `.github/instructions/frontend.instructions.md` (applyTo: `frontend/**`) — UI patterns
+- ✅ `.github/instructions/typescript.instructions.md` (applyTo: `**/*.{ts,tsx}`) — Type rules
+- ❌ `.github/instructions/backend.instructions.md` (applyTo: `backend/**`) — Not applied
+
+**Result:** Copilot gets comprehensive guidance layered from general to specific.
+
+#### Recommended File Structure
+
+```
+.github/
+├── copilot-instructions.md          # 🪄 MAGIC FILE: Repository-wide baseline
+├── prompts/                          # Invokable functions (Module 3)
+│   ├── test-suite.prompt.md
+│   └── react-review.prompt.md
+└── instructions/                     # 📂 PATH-BASED: Context-specific rules
+    ├── frontend.instructions.md      # UI layer guidance
+    ├── backend.instructions.md       # API layer guidance
+    ├── tests.instructions.md         # Testing conventions
+    ├── python.instructions.md        # Language-specific
+    └── docker.instructions.md        # Infrastructure patterns
+```
+
+> 📂 **Reference Examples**: The [`examples/completed-config/`](../examples/completed-config/) folder shows these files in action.
 
 ---
 
 ## 🔨 Exercises
 
+### Part 1: The Magic File Foundation
+
 | # | Exercise | Lead | Support | Time | Topic |
 |---|----------|------|---------|------|-------|
-| [1.1](exercise-1.1.md) | Create ARCHITECTURE.md | David | All | 15 min | Documentation as Leverage |
-| [1.2](exercise-1.2.md) | Create copilot-instructions.md | Sarah | All | 20 min | Intent Over Implementation |
+| [1.1](exercise-1.1.md) | Create ARCHITECTURE.md | David | All | 10 min | Documentation as Leverage |
+| [1.2](exercise-1.2.md) | Create copilot-instructions.md | Sarah | All | 10 min | 🪄 The Magic File |
 
-**Total Time**: ~15 minutes
+### Part 2: Path-Based Instructions
+
+| # | Exercise | Lead | Support | Time | Topic |
+|---|----------|------|---------|------|-------|
+| [1.3](exercise-1.3.md) | Layer-Specific Instructions | Sarah | David | 10 min | Frontend vs Backend patterns |
+| [1.4](exercise-1.4.md) | Language-Specific Standards | Elena | Marcus | 8 min | PEP 8, Airbnb, TypeScript |
+| [1.5](exercise-1.5.md) | File-Type Specialized Guidance | Marcus | Elena, David | 12 min | Tests, Docker, Docs |
+
+**Total Time**: ~50 minutes
 
 ---
 
 ## 📚 Official Documentation
 
-- [VS Code: Custom Instructions](https://code.visualstudio.com/docs/copilot/copilot-customization)
-- [VS Code: Copilot Chat Context](https://code.visualstudio.com/docs/copilot/copilot-chat#_chat-context)
-- [GitHub Docs: Repository Instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot)
-- [GitHub Docs: Prompt Engineering](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
+### Magic File (copilot-instructions.md)
+- **[VS Code: Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)** — Complete guide to `.github/copilot-instructions.md`
+- **[GitHub Docs: Repository Instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)** — Official repository custom instructions documentation
+
+### Path-Based Instructions (.instructions.md)
+- **[VS Code: Instruction Files](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_instruction-files)** — Path-based instructions with `applyTo` patterns
+- **[VS Code: Glob Patterns](https://code.visualstudio.com/docs/editor/glob-patterns)** — Understanding glob patterns for targeting files
+- **[GitHub Tutorial: Your First Custom Instructions](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/your-first-custom-instructions)** — Step-by-step guide
+
+### Related Resources
+- [VS Code: Copilot Chat Context](https://code.visualstudio.com/docs/copilot/copilot-chat#_chat-context) — Understanding `@workspace` and context operators
+- [GitHub Docs: Prompt Engineering](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot) — Best practices for working with Copilot
 
 ---
 
@@ -107,9 +214,9 @@ Both are read by Copilot automatically when you use `@workspace` context.
 
 **[Module 2: Agent Plan Mode](../02-agent-plan-mode/README.md)** — Monday 11:30 AM
 
-Now that Copilot knows our structure (ARCHITECTURE.md) and our patterns (copilot-instructions.md), let's teach it to think through problems before coding. David will discover AI planning for architectural decisions, Marcus will debug complex deployment issues, and the whole team will see how "plan first, code second" transforms their workflow.
+Now that Copilot knows our structure (ARCHITECTURE.md), our universal patterns (🪄 magic file), and our context-specific rules (📂 path-based instructions), let's teach it to think through problems before coding. David will discover AI planning for architectural decisions, Marcus will debug complex deployment issues, and the whole team will see how "plan first, code second" transforms their workflow.
 
-> *"Copilot knows our patterns now. But can it think through complex problems like we do?"*  
+> *"Copilot knows our patterns now—both universal and context-specific. But can it think through complex problems like we do?"*
 > — David, ready to test Copilot's reasoning capabilities
 
 ---
@@ -118,12 +225,18 @@ Now that Copilot knows our structure (ARCHITECTURE.md) and our patterns (copilot
 
 Before moving to Module 2, verify:
 
+### Part 1: Magic File Foundation
 - [ ] `fanhub/docs/ARCHITECTURE.md` exists and includes: tech stack, folder structure, data flow
 - [ ] `.github/copilot-instructions.md` exists with: coding conventions, library preferences, error patterns
-- [ ] Tested queries run faster with ARCHITECTURE.md (compare before/after response times)
-- [ ] Copilot suggestions now follow your documented patterns
+- [ ] Copilot suggestions follow your documented patterns (test with a simple prompt)
 - [ ] Team agrees on both documents (no "but I prefer..." objections)
-- [ ] Both checkpoints completed showing measurable improvements
+
+### Part 2: Path-Based Instructions
+- [ ] `.github/instructions/` directory created
+- [ ] At least 2 layer-specific instructions (frontend, backend)
+- [ ] At least 2 language-specific instructions (Python, JavaScript/TypeScript)
+- [ ] At least 1 file-type instruction (tests, docker, or docs)
+- [ ] Verified instructions apply correctly (edit a matching file, check Copilot's context)
 
 ---
 
@@ -132,12 +245,14 @@ Before moving to Module 2, verify:
 | Practice | How It Applied |
 |----------|----------------|
 | 📚 **Documentation as Leverage** | Your ARCHITECTURE.md now benefits humans AND AI |
-| 🎯 **Context is Everything** | The `@workspace` context enabled accurate analysis |
+| 🪄 **Magic File for Universal Rules** | `copilot-instructions.md` applies to every interaction automatically |
+| 📂 **Path-Based for Context-Specific** | `.instructions.md` files activate only when editing matching files |
+| 🎯 **Right Guidance, Right Context** | Layer, language, and file-type instructions eliminate cross-context pollution |
 | 🔄 **Iterate and Refine** | You reviewed and improved AI output before accepting |
 
-#### 💭 David's Realization
+#### 💭 Elena's Realization
 
-*"I've been documenting architecture for years because it helps junior devs. I never realized it also helps the AI. Same investment, double the payoff."*
+*"I kept trying to put everything in one file. Now I understand—universal rules go in the magic file, specific rules go in path-based instructions. My Python files get PEP 8, my tests get testing conventions, and nothing gets confused."*
 
 ---
 
@@ -145,63 +260,62 @@ Before moving to Module 2, verify:
 
 **What we created in this module:**
 - `docs/ARCHITECTURE.md` — Project context
-- `.github/copilot-instructions.md` — Team patterns
+- `.github/copilot-instructions.md` — 🪄 Universal team patterns
+- `.github/instructions/*.instructions.md` — 📂 Context-specific rules
 
 **How this helps in future modules:**
 
 | Module | How Today's Work Helps |
 |--------|----------------------|
-| Module 2 | Custom prompts can reference ARCHITECTURE.md |
-| Module 3 | Custom agents know your patterns |
-| Module 4 | Custom instructions build on repository instructions |
-| Module 5 | All customizations compound, ship, and reflect |
+| Module 2 | Agent plan mode uses your architecture context |
+| Module 3 | Custom prompts can reference documented patterns |
+| Module 4 | Agent skills build on your established conventions |
+| Module 5 | MCP servers extend your infrastructure patterns |
+| Module 6 | Custom agents leverage all your instruction layers |
 
 Every minute invested here saves hours later.
 
 ---
 
-## 🧠 Mindful Moment: The Transformation
+## 🧠 Mindful Moment: The Two-Level Transformation
 
 **Before this module:**
 - Copilot gave everyone different suggestions
-- Code reviews caught inconsistencies
-- Junior developers felt lost
+- Frontend code got backend patterns (context pollution)
+- Python files got JavaScript conventions (language confusion)
+- Code reviews caught inconsistencies at every level
 - The codebase was heading toward entropy
 
 **After this module:**
-- Copilot gives everyone the SAME suggestions
-- Code reviews focus on logic, not style
-- Junior developers produce senior-quality code
-- The codebase has gravity—it pulls code toward consistency
+- 🪄 The magic file ensures UNIVERSAL consistency
+- 📂 Path-based instructions ensure CONTEXTUAL accuracy
+- Frontend code gets frontend patterns, Python gets PEP 8
+- Code reviews focus on logic, not style or context mismatches
+- The codebase has gravity—it pulls code toward the right patterns
 
-**The shift**: Documentation isn't a tax. It's a multiplier.
-
----
-
-
-## 📚 Official Documentation
-
-### Core Documentation
-- **[VS Code: Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)** — Complete guide to .github/copilot-instructions.md
-- **[GitHub Docs: Repository Instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)** — Official repository custom instructions documentation
-
-### Related Resources
-- [VS Code: Copilot Chat Context](https://code.visualstudio.com/docs/copilot/copilot-chat#_chat-context) — Understanding `@workspace` and context operators
-- [GitHub Docs: Prompt Engineering](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot) — Best practices for working with Copilot
+**The shift**: Instructions aren't just documentation. They're a layered system—universal baseline plus contextual precision.
 
 ---
-
-
 
 ## 🎭 Behind the Scenes: What Just Happened
 
 For those who want to understand the deeper mechanics:
 
-### Why `.github/copilot-instructions.md` Works
+### Why `.github/copilot-instructions.md` is "Magic" 🪄
 
-1. **Automatic inclusion**: Copilot reads this file and includes it in every prompt context
-2. **Priority**: These instructions influence suggestions across the entire repository
-3. **Consistency**: Every team member gets the same context, so everyone gets consistent suggestions
+1. **Automatic inclusion**: VS Code automatically loads this file into every Copilot prompt
+2. **No configuration needed**: Unlike `.instructions.md` files, no `applyTo` pattern required
+3. **Universal application**: Applies whether you're editing Python, JavaScript, tests, or docs
+4. **Team consistency**: Every team member gets the same baseline context automatically
+
+### How Path-Based Instructions Layer 📂
+
+When you edit a file, VS Code:
+1. **Always loads**: `.github/copilot-instructions.md` (the magic file)
+2. **Scans**: `.github/instructions/` directory for `*.instructions.md` files
+3. **Evaluates**: Each file's `applyTo` pattern against the current file path
+4. **Combines**: All matching instructions into Copilot's context
+5. **Sends**: The layered context with every chat request
 
 ### Why Architecture Documentation Matters to AI
 
@@ -215,8 +329,8 @@ Your `ARCHITECTURE.md` turns implicit knowledge ("everyone knows the frontend ca
 ### The Virtuous Cycle
 
 ```
-Documentation → Better AI suggestions → 
-Consistent code → Easier documentation → 
+Documentation → Better AI suggestions →
+Consistent code → Easier documentation →
 Better AI suggestions → ...
 ```
 

@@ -87,7 +87,7 @@ Web Copilot enables workflows impossible in IDE-only environments. Product manag
 - Domain-specific capabilities execute identically
 - Skills invoked through natural language
 
-**Custom Agents (Module 7):**
+**Custom Agents (Module 6):**
 - `@review-enforcer` appears in agent dropdown
 - Handoffs and tool restrictions work the same
 - Role-based presets available instantly

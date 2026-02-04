@@ -1,4 +1,4 @@
-# Exercise 7.3: Create Implementation Agent for ADR Execution
+# Exercise 6.3: Create Implementation Agent for ADR Execution
 
 ## 🎯 Objective
 
@@ -377,7 +377,7 @@ Document these comparisons:
 
 ## ➡️ What's Next?
 
-In [Exercise 7.4](exercise-7.4.md), you'll create the `@security-review` agent with read-only analysis tools and React standards, completing the workflow chain: Implement → Review → Deploy.
+In [Exercise 6.4](exercise-6.4.md), you'll create the `@security-review` agent with read-only analysis tools and React standards, completing the workflow chain: Implement → Review → Deploy.
 
-> *"We can implement features systematically from ADRs. Now we need a review agent that catches issues without accidentally modifying code during review—receiving handoffs from @implement and catching what automated execution might miss."*  
+> *"We can implement features systematically from ADRs. Now we need a review agent that catches issues without accidentally modifying code during review—receiving handoffs from @implement and catching what automated execution might miss."*
 > — Elena, ready to build quality validation into the workflow

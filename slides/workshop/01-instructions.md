@@ -5,16 +5,16 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Module 1: Repository Instructions
-  Establishing foundations for AI-assisted development through documentation
+  ## Module 1: Instructions
+  The Magic File and Path-Based Context for AI-Assisted Development
 drawings:
   persist: false
 transition: slide-left
-title: Module 1 - Repository Instructions
+title: Module 1 - Instructions
 mdc: true
 ---
 
-# Module 1: Repository Instructions
+# Module 1: Instructions
 
 ## ⏰ Establishing Foundations
 

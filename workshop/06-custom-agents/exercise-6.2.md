@@ -1,10 +1,10 @@
-# Exercise 7.2: Create Feature Planning Agent
+# Exercise 6.2: Create Feature Planning Agent
 
 ## 🎯 Objective
 
 Create a `@feature-plan` custom agent with read-only tools and feature-requirements skill that prevents accidental edits during research and auto-loads planning context.
 
-> **Note:** This exercise builds on concepts from [Exercise 7.1](exercise-7.1.md) where you analyzed the default plan agent.
+> **Note:** This exercise builds on concepts from [Exercise 6.1](exercise-6.1.md) where you analyzed the default plan agent.
 
 **Lead:** David ⭐ | **Support:** Sarah 🤝
 
@@ -62,7 +62,7 @@ David creates `.github/agents/feature-plan.agent.md` with:
 
 > *"This is the separation of concerns I preach in architecture, applied to AI assistance. Planning mode can't accidentally modify code because it doesn't have the tools. My 20 years of 'think first, code later' is now enforced by the agent configuration."*
 >
-> *"But what really impressed me is how we applied the patterns from Exercise 7.1—the stopping rules, the style guide, the iterative workflow. We didn't just copy Microsoft's plan agent; we adapted it for FanHub. That's production-quality engineering: learn from the best, customize for your context."*
+> *"But what really impressed me is how we applied the patterns from Exercise 6.1—the stopping rules, the style guide, the iterative workflow. We didn't just copy Microsoft's plan agent; we adapted it for FanHub. That's production-quality engineering: learn from the best, customize for your context."*
 
 ---
 
@@ -152,7 +152,7 @@ Structure your implementation plan consistently:
 1. [Open question or recommendation — 10-30 words]
 2. [Alternative approaches if applicable]
 
-IMPORTANT: 
+IMPORTANT:
 - DO NOT include code blocks—describe changes and link to files
 - Keep each step concise and actionable
 - Reference specific files with markdown links: [CharacterList.jsx](../../fanhub/frontend/src/components/CharacterList.jsx)
@@ -185,12 +185,12 @@ Reference `.github/copilot-instructions.md` for coding standards that implementa
 
 2. Save the file
 
-**Key enhancements from Exercise 7.1:**
+**Key enhancements from Exercise 6.1:**
 
 Notice how this agent configuration incorporates patterns you learned from analyzing the default plan agent:
 
 - **`<stopping_rules>` section** — Explicit constraints preventing implementation (just like the default agent)
-- **Three-phase workflow** — Research → Present → Iterate pattern from Exercise 7.1
+- **Three-phase workflow** — Research → Present → Iterate pattern from Exercise 6.1
 - **`<plan_style_guide>` template** — Consistent output format with word counts and structure
 - **Tool additions:**
   - `'runSubagent'` — For autonomous deep research (if available)
@@ -230,7 +230,7 @@ Analyze the Character Detail Page feature from fanhub/docs/FEATURE-CHARACTER-DET
 6. Try to ask the agent to modify a file: "Now update CharacterList.jsx"
 7. Confirm the agent refuses with reference to `<stopping_rules>` or indicates it can't make edits
 
-**Validation:** 
+**Validation:**
 - ✅ Agent generates structured plan matching the style guide template (TL;DR, steps, testing, considerations)
 - ✅ Plan uses concise steps (5-20 words each) with file path links
 - ✅ Agent uses search and research tools effectively
@@ -283,7 +283,7 @@ Document these comparisons:
 - [ ] Agent successfully analyzes Character Detail Page feature
 - [ ] Agent generates plan following style guide (TL;DR, concise steps, testing strategy)
 - [ ] Agent refuses to make code edits citing stopping rules
-- [ ] You can explain how this agent adapts patterns from Exercise 7.1
+- [ ] You can explain how this agent adapts patterns from Exercise 6.1
 - [ ] You can document 5→0 minute setup time improvement
 
 ---
@@ -304,7 +304,7 @@ Document these comparisons:
 
 ## 📚 Key Concepts
 
-**Production patterns from Exercise 7.1:**
+**Production patterns from Exercise 6.1:**
 - **Stopping rules** — Explicit constraints preventing scope creep (agent can't drift into implementation)
 - **Style guides** — Structured output format ensures consistent, scannable plans
 - **Iterative workflow** — Research → Present → Iterate beats one-shot planning
@@ -341,7 +341,7 @@ Document these comparisons:
 
 ## ➡️ What's Next?
 
-In [Exercise 7.3](exercise-7.3.md), you'll create the `@implement` agent with full editing capabilities and configure the handoff workflow from `@plan` → `@implement` with pre-filled prompts.
+In [Exercise 6.3](exercise-6.3.md), you'll create the `@implement` agent with full editing capabilities and configure the handoff workflow from `@plan` → `@implement` with pre-filled prompts.
 
-> *"Now that we have a planning agent with production-quality patterns, we need an implementation agent that can actually make changes—with a one-click handoff from plan to code."*  
+> *"Now that we have a planning agent with production-quality patterns, we need an implementation agent that can actually make changes—with a one-click handoff from plan to code."*
 > — Sarah, ready to build the implementation workflow

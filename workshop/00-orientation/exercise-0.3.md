@@ -29,7 +29,7 @@ Define how YOU will measure success with AI-assisted development.
 Review the [Training Personas](PERSONAS.md) and identify which one reflects your situation:
 
 - **Sarah** — Skeptical about AI hype, need concrete ROI proof
-- **Marcus** — Infrastructure background, want to improve application code confidence  
+- **Marcus** — Infrastructure background, want to improve application code confidence
 - **David** — Concerned about expertise relevance, deep experience
 - **Elena** — Quality-focused, worried AI will compromise rigor
 - **Rafael** — Bridge technical and business, need clearer communication
@@ -51,8 +51,8 @@ Some example metrics to consider:
 Ask Copilot Chat:
 
 ```
-@workspace Based on these goals [....], 
-suggest specific ways I can measure progress as I work through 
+@workspace Based on these goals [....],
+suggest specific ways I can measure progress as I work through
 the FanHub project in this training.
 ```
 
@@ -134,10 +134,10 @@ This document is YOUR north star for the training. Refer back to it after each m
 
 You've completed Module 0! You now understand:
 
-✅ The Five Principles of AI-Assisted Development  
-✅ How to provide context to Copilot (`#file`, `@workspace`, `#codebase`, etc.)  
-✅ What AI-assisted development feels like WITHOUT configuration (the struggle)  
-✅ What success means to YOU personally  
+✅ The Five Principles of AI-Assisted Development
+✅ How to provide context to Copilot (`#file`, `@workspace`, `#codebase`, etc.)
+✅ What AI-assisted development feels like WITHOUT configuration (the struggle)
+✅ What success means to YOU personally
 
 **You're ready for the transformation.**
 
@@ -145,6 +145,6 @@ You've completed Module 0! You now understand:
 
 ## ➡️ Next Module
 
-**[Module 1: Repository Instructions](../01-repository-instructions/README.md)**
+**[Module 1: Instructions](../01-instructions/README.md)**
 
 Monday, 10:00 AM. Marcus is about to show the team how configuration changes everything...

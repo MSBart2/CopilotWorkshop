@@ -1,8 +1,8 @@
-# Exercise 6.1: Connect to FanHub Database
+# Exercise 5.1: Connect to FanHub Database
 
 ## 🔨 Exercise
 
-### Exercise 6.1: Connect to FanHub Database — "Eliminate Schema Context Switching"
+### Exercise 5.1: Connect to FanHub Database — "Eliminate Schema Context Switching"
 
 **Lead:** Marcus ⭐ | **Support:** Elena 🤝, David 🤝 | **Time:** 15 min
 
@@ -28,9 +28,9 @@ Configure the SQLite MCP server to give Copilot direct access to the FanHub data
 #### 📋 Steps
 
 1. **Create MCP Configuration File**
-   
+
    In the workspace root, create `.vscode/mcp.json`:
-   
+
    ```json
    {
      "servers": {
@@ -46,53 +46,53 @@ Configure the SQLite MCP server to give Copilot direct access to the FanHub data
      }
    }
    ```
-   
+
    **What this does:**
    - Defines an MCP server named "sqlite" using stdio transport
    - Uses the official SQLite MCP server from npm
    - Points to the development database at `dev-data/fanhub-dev.db`
    - `npx -y` automatically installs the server if not present
-   
+
    > 📂 **Reference**: See [`examples/completed-config/.vscode/mcp.json`](../examples/completed-config/.vscode/mcp.json) for a working example
 
 2. **Verify Development Database Exists**
-   
+
    The development database is already set up at:
    ```
    /workspaces/CopilotTraining/dev-data/fanhub-dev.db
    ```
-   
+
    This contains sample TV show data for testing. You can verify it exists:
    ```bash
    ls -lh /workspaces/CopilotTraining/dev-data/fanhub-dev.db
    ```
-   
+
    **Expected output:** File exists, typically a few KB to MB in size.
 
 3. **Start the MCP Server**
-   
+
    Open Copilot Chat (Ctrl+Alt+I), toggle to **Agent mode**, and look for the MCP servers list. You should see "sqlite" listed but not started.
-   
+
    Click the start/refresh button to initialize the MCP server.
-   
+
    VS Code will start the MCP server process and discover its tools. Look for confirmation that the server started successfully.
 
 4. **Query the Database Schema**
-   
+
    In Copilot Chat, try these queries:
-   
+
    ```
    @workspace #mcp-sqlite Show me the schema for the characters table
    ```
-   
+
    ```
    @workspace #mcp-sqlite What are all the tables in the database?
    ```
-   
+
    ```
    @workspace #mcp-sqlite Show me the foreign key relationships between shows, episodes, and characters
    ```
-   
+
    **What to observe:**
    - Copilot invokes the SQLite MCP server tools
    - Database schema returns directly in chat
@@ -127,8 +127,8 @@ Configure the SQLite MCP server to give Copilot direct access to the FanHub data
 
 | Previous Modules | This Module | Combined Power |
 |------------------|-------------|----------------|
-| Module 5: Agent Skills (data validator) | MCP database access | Skills validate code structure; MCP validates against live schema |
-| Module 4: Custom instructions (standards) | MCP database queries | Instructions guide code style; MCP ensures schema compliance |
+| Module 4: Agent Skills (data validator) | MCP database access | Skills validate code structure; MCP validates against live schema |
+| Module 1: Custom instructions (standards) | MCP database queries | Instructions guide code style; MCP ensures schema compliance |
 
 **Marcus's insight:** "Before, I had to remember or look up schema details. Now Copilot knows the database better than I do—and it's always current."
 
@@ -136,9 +136,9 @@ Configure the SQLite MCP server to give Copilot direct access to the FanHub data
 
 ## ➡️ Next Up
 
-**[Exercise 6.2: Automate PR Review Validation](exercise-6.2.md)** — Connect to GitHub API to automatically validate PRs against Module 4's code review standards.
+**[Exercise 5.2: Automate PR Review Validation](exercise-5.2.md)** — Connect to GitHub API to automatically validate PRs against Module 1's code review standards.
 
-> *"Database access is great, but what about connecting to GitHub? I still manually check PR status, CI results, and approvals before merging."*  
+> *"Database access is great, but what about connecting to GitHub? I still manually check PR status, CI results, and approvals before merging."*
 > — Sarah, realizing MCP can automate her entire review checklist
 
 ---

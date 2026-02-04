@@ -1,4 +1,4 @@
-# Module 7: Custom Agents
+# Module 6: Custom Agents
 
 ## ⏰ — The Context-Switching Problem
 
@@ -15,11 +15,11 @@ In **Module 2**, they used **plan mode** with `@workspace` to research and analy
 
 In **Module 3**, they built **prompt files** (`.prompt.md`)—invokable functions like `/test-suite` for specific tasks.
 
-In **Module 4**, they added **custom instructions** (`.instructions.md`)—path-based guidance that auto-applies based on file context.
+In **Module 1**, they added **custom instructions** (`.instructions.md`)—path-based guidance that auto-applies based on file context.
 
-In **Module 5**, they created **Agent Skills** (`.github/skills/`)—specialized capabilities teaching Copilot domain-specific workflows.
+In **Module 4**, they created **Agent Skills** (`.github/skills/`)—specialized capabilities teaching Copilot domain-specific workflows.
 
-In **Module 6**, they connected **MCP servers**—direct access to databases, APIs, and external systems.
+In **Module 5**, they connected **MCP servers**—direct access to databases, APIs, and external systems.
 
 **Now they're ready to automate and simplify.** Sarah switches between "planning mode" (read-only tools, analysis focus) and "implementation mode" (full editing, code generation) multiple times per day. David wants to streamline his security reviews by bundling linting and analysis tools into one preset. Marcus sees an opportunity to create a "DevOps agent" with deployment scripts and infrastructure access already configured. Elena wants her test generation workflow automated with skills and templates pre-loaded.
 
@@ -33,8 +33,8 @@ In **Module 6**, they connected **MCP servers**—direct access to databases, AP
 
 ⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
-- Complete [Module 05: Agent Skills](../05-agent-skills/README.md) — Understanding skills helps you decide which to include in agents
-- Complete [Module 06: MCP Servers](../06-mcp-servers/README.md) — Agents can bundle MCP server access
+- Complete [Module 04: Agent Skills](../04-agent-skills/README.md) — Understanding skills helps you decide which to include in agents
+- Complete [Module 05: MCP Servers](../05-mcp-servers/README.md) — Agents can bundle MCP server access
 - VS Code 1.106+ (for custom agents support)
 
 ---
@@ -120,11 +120,11 @@ The exercises below create custom agents that orchestrate capabilities from Modu
 
 | # | Exercise | Lead | Support | Problem | Solution | Key Metrics | Artifacts |
 |---|----------|------|---------|---------|----------|-------------|-----------|
-| [7.1](exercise-7.1.md) | Understand the Default Plan Agent | All | All | Need to understand agent structure before building custom ones: frontmatter, tools, handoffs, stopping rules, workflows | Reverse-engineer Microsoft's `@plan` agent to learn production-quality patterns for role enforcement, tool selection, and workflow design | 100% questions answered, understand all agent components, ready to build own agents | Knowledge of agent architecture and best practices |
-| [7.2](exercise-7.2.md) | Create Feature Planning Agent | David | Sarah | Manual planning setup: 5 min loading context, 3 accidental edits during research, inconsistent analysis approach | `@feature-plan` agent with read-only tools, feature-requirements skill, GitHub MCP—prevents edits, auto-loads planning context | 5→0 min setup, 3→0 accidental edits, 100% consistent planning approach | `.github/agents/feature-plan.agent.md` |
-| [7.3](exercise-7.3.md) | Create Implementation Agent for ADR Execution | Sarah | Marcus, David | Manual ADR implementation: 8 min reading/searching, 60% first-time completeness (missing components), ad-hoc order causing rework | `@implement` agent with full editing tools, API design skill, ADR-reading workflow, handoff to @security-review | 8→0 min setup, 60%→100% completeness, systematic execution order, integrated security review | `.github/agents/implement.agent.md`, verified ADR-driven implementation |
-| [7.4](exercise-7.4.md) | Design Security Review Agent | Elena | Sarah, David | Review setup: 6 min loading standards, running analysis tools, 2 accidental modifications during review | `@security-review` agent with read-only + analysis tools, React standards from Module 4, handoff to @implement for fixes | 6→0 min setup, 2→0 accidental mods, catches 5 security issues per review vs. previous 2 | `.github/agents/security-review.agent.md` |
-| [7.5](exercise-7.5.md) | Access Custom Agents from the Web | Rafael | Sarah, Marcus | Agent access during meetings: Need VS Code open (30 sec load time), context-switching away from calls (5-6 min per feature), no mobile access | Discover existing agents (@feature-plan, @implement, @security-review) work automatically on github.copilot.com—no additional config needed | 5-6→1.5 min per feature analysis (no VS Code loading), zero context-switching during meetings, mobile access enabled | Understanding of web agent access, documented use cases for web vs. VS Code |
+| [6.1](exercise-6.1.md) | Understand the Default Plan Agent | All | All | Need to understand agent structure before building custom ones: frontmatter, tools, handoffs, stopping rules, workflows | Reverse-engineer Microsoft's `@plan` agent to learn production-quality patterns for role enforcement, tool selection, and workflow design | 100% questions answered, understand all agent components, ready to build own agents | Knowledge of agent architecture and best practices |
+| [6.2](exercise-6.2.md) | Create Feature Planning Agent | David | Sarah | Manual planning setup: 5 min loading context, 3 accidental edits during research, inconsistent analysis approach | `@feature-plan` agent with read-only tools, feature-requirements skill, GitHub MCP—prevents edits, auto-loads planning context | 5→0 min setup, 3→0 accidental edits, 100% consistent planning approach | `.github/agents/feature-plan.agent.md` |
+| [6.3](exercise-6.3.md) | Create Implementation Agent for ADR Execution | Sarah | Marcus, David | Manual ADR implementation: 8 min reading/searching, 60% first-time completeness (missing components), ad-hoc order causing rework | `@implement` agent with full editing tools, API design skill, ADR-reading workflow, handoff to @security-review | 8→0 min setup, 60%→100% completeness, systematic execution order, integrated security review | `.github/agents/implement.agent.md`, verified ADR-driven implementation |
+| [6.4](exercise-6.4.md) | Design Security Review Agent | Elena | Sarah, David | Review setup: 6 min loading standards, running analysis tools, 2 accidental modifications during review | `@security-review` agent with read-only + analysis tools, React standards from Module 1, handoff to @implement for fixes | 6→0 min setup, 2→0 accidental mods, catches 5 security issues per review vs. previous 2 | `.github/agents/security-review.agent.md` |
+| [6.5](exercise-6.5.md) | Access Custom Agents from the Web | Rafael | Sarah, Marcus | Agent access during meetings: Need VS Code open (30 sec load time), context-switching away from calls (5-6 min per feature), no mobile access | Discover existing agents (@feature-plan, @implement, @security-review) work automatically on github.copilot.com—no additional config needed | 5-6→1.5 min per feature analysis (no VS Code loading), zero context-switching during meetings, mobile access enabled | Understanding of web agent access, documented use cases for web vs. VS Code |
 
 ---
 
@@ -205,7 +205,7 @@ sequenceDiagram
 3. **@workspace provides dynamic context** — While other layers provide static guidance, workspace analysis adapts to your actual codebase
 4. **MCP servers extend capabilities** — Agents can access external systems (databases, APIs, web) that static instructions can't reach
 
-This diagram shows why Module 7 is the culmination of everything you've learned—custom agents bring all customization capabilities together into coherent, executable workflows.
+This diagram shows why Module 6 is the culmination of everything you've learned—custom agents bring all customization capabilities together into coherent, executable workflows.
 
 ---
 

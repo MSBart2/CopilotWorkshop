@@ -1,7 +1,7 @@
 {
   "name": "GitHub Copilot Training Workshop",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
-  
+
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
@@ -13,20 +13,20 @@
         // GitHub Copilot extensions (required for training)
         "GitHub.copilot",
         "GitHub.copilot-chat",
-        
+
         // Markdown support with Mermaid diagrams
         "bierner.markdown-mermaid",
         "yzhang.markdown-all-in-one",
-        
+
         // Development tools for FanHub
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
-        
+
         // Optional but helpful
         "eamodio.gitlens"
       ],
-      
+
       "settings": {
         // Ensure Copilot is enabled
         "github.copilot.enable": {
@@ -34,22 +34,22 @@
           "markdown": true,
           "plaintext": false
         },
-        
-        // Enable Agent Skills support (Module 5)
+
+        // Enable Agent Skills support (Module 4)
         "chat.useAgentSkills": true,
-        
-        // Enable experimental custom agents in subagents (Module 7)
+
+        // Enable experimental custom agents in subagents (Module 6)
         "chat.customAgentInSubagent.enabled": true,
-        
+
         // Markdown settings
         "markdown.extension.toc.levels": "2..6",
         "markdown.preview.breaks": true,
-        
+
         // Editor settings for training content
         "editor.wordWrap": "on",
         "editor.formatOnSave": true,
         "files.trimTrailingWhitespace": true,
-        
+
         // Prettier for consistent formatting
         "[markdown]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode",

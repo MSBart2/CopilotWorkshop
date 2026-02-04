@@ -177,7 +177,7 @@ Later modules build on earlier ones:
 - **Module 1:** Basic documentation (ARCHITECTURE.md)
 - **Module 3:** Reusable prompts reference Module 1 patterns
 - **Module 5:** Skills use terminology from Module 1 docs
-- **Module 7:** Agents orchestrate earlier skills
+- **Module 6:** Agents orchestrate earlier skills
 
 ---
 
@@ -221,9 +221,9 @@ Before generating example files:
   - `examples/completed-config/.github/skills/api-endpoint-design/example-endpoints/get-character.js`
 - **Demonstrates:** Multi-file skills, schema references, concrete examples
 
-### Module 7: Custom Agents
+### Module 6: Custom Agents
 
-**Exercise 7.2** creates `.github/agents/feature-plan.agent.md`
+**Exercise 6.2** creates `.github/agents/feature-plan.agent.md`
 - **Example:** `examples/completed-config/.github/agents/feature-plan.agent.md`
 - **Content:** Complete agent definition with instructions and context
 - **Demonstrates:** Agent structure, skill integration, output format

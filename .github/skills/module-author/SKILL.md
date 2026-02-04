@@ -16,9 +16,9 @@ Generate module README.md with exercise planning for CopilotTraining workshop mo
 - Researching and planning exercises for a specific feature
 
 **Invocation examples:**
-- "Create module 7 on MCP servers using https://github.blog/mcp-announcement"
+- "Create module 5 on MCP servers using https://github.blog/mcp-announcement"
 - "Update module 4 about custom instructions with https://docs.github.com/copilot/customizing"
-- "Research https://code.visualstudio.com/docs/copilot/agents and create module 8"
+- "Research https://code.visualstudio.com/docs/copilot/agents and create module 6"
 
 ---
 
@@ -223,7 +223,7 @@ Choose support personas based on realistic collaboration:
 
 ```bash
 # User provides URL for research
-"@module-author Create module 7 on MCP servers using https://github.blog/mcp-announcement"
+"@module-author Create module 5 on MCP servers using https://github.blog/mcp-announcement"
 ```
 
 **Research workflow:**
