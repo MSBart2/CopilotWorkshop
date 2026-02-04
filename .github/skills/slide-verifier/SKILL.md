@@ -38,190 +38,108 @@ Determine which slides to check:
    - `slides/exec-talks/*.md`
 3. **Recently changed**: Use git to find modified slides (if context allows)
 
-### Step 2: Start Slidev Development Server
+### Step 2: Run the Verification Script
 
-For each deck to verify:
+The repository includes a standalone verification script at `slides/verify-slides.mjs` that handles:
+- Starting Slidev dev server
+- Playwright automation
+- Issue detection and reporting
+- Cleanup
+
+**Usage:**
 
 ```bash
 cd slides
-npx slidev <slide-file>.md --port 3030 &
-SLIDEV_PID=$!
+
+# Verify a single deck
+node verify-slides.mjs workshop/03-custom-prompts.md
+
+# Verify all decks
+node verify-slides.mjs --all
+
+# Verify with exit code (for CI/CD)
+node verify-slides.mjs tech-talks/copilot-cli.md --fail-on-errors
 ```
 
-Wait 5-10 seconds for server startup, then proceed to verification.
+**The script automatically:**
+1. Starts a Slidev dev server on port 3030
+2. Uses Playwright to visit each slide
+3. Performs all checks (overflow, images, errors, readability)
+4. Captures screenshots of problems
+5. Generates a detailed report
+6. Cleans up the server process
 
-### Step 3: Run Playwright Verification
+### Step 3: Review the Output
 
-Create a Node.js script that uses Playwright to check slides:
+The script provides:
 
-```javascript
-const { chromium } = require('playwright');
-
-async function verifySlides(baseUrl, deckName) {
-  const browser = await chromium.launch();
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  
-  const issues = [];
-  
-  // Navigate to the presentation
-  await page.goto(baseUrl);
-  
-  // Get total slide count
-  const totalSlides = await page.evaluate(() => {
-    return window.__slidev?.total || 0;
-  });
-  
-  console.log(`🔍 Verifying ${totalSlides} slides in ${deckName}...`);
-  
-  // Check each slide
-  for (let i = 1; i <= totalSlides; i++) {
-    await page.goto(`${baseUrl}/${i}`);
-    await page.waitForTimeout(500); // Let animations settle
-    
-    // Check 1: Console errors
-    const errors = [];
-    page.on('console', msg => {
-      if (msg.type() === 'error') errors.push(msg.text());
-    });
-    
-    // Check 2: Vertical overflow detection
-    const hasOverflow = await page.evaluate(() => {
-      const slideContent = document.querySelector('.slidev-layout');
-      if (!slideContent) return false;
-      
-      const contentHeight = slideContent.scrollHeight;
-      const viewportHeight = slideContent.clientHeight;
-      
-      return contentHeight > viewportHeight + 10; // 10px tolerance
-    });
-    
-    if (hasOverflow) {
-      const screenshot = `overflow-${deckName.replace(/\//g, '-')}-slide-${i}.png`;
-      await page.screenshot({ path: `screenshots/${screenshot}` });
-      issues.push({
-        slide: i,
-        type: 'overflow',
-        message: 'Content exceeds slide viewport height',
-        screenshot
-      });
-    }
-    
-    // Check 3: Missing images/assets
-    const brokenImages = await page.evaluate(() => {
-      const imgs = Array.from(document.querySelectorAll('img'));
-      return imgs
-        .filter(img => !img.complete || img.naturalHeight === 0)
-        .map(img => img.src);
-    });
-    
-    if (brokenImages.length > 0) {
-      issues.push({
-        slide: i,
-        type: 'broken-images',
-        message: `Missing images: ${brokenImages.join(', ')}`
-      });
-    }
-    
-    // Check 4: Console errors during render
-    if (errors.length > 0) {
-      issues.push({
-        slide: i,
-        type: 'console-errors',
-        message: `Console errors: ${errors.join('; ')}`
-      });
-    }
-    
-    // Check 5: Very long text blocks (readability)
-    const longTextBlocks = await page.evaluate(() => {
-      const blocks = Array.from(document.querySelectorAll('p, li'));
-      return blocks
-        .filter(el => el.textContent.length > 200)
-        .length;
-    });
-    
-    if (longTextBlocks > 0) {
-      issues.push({
-        slide: i,
-        type: 'readability',
-        severity: 'warning',
-        message: `${longTextBlocks} text block(s) exceed 200 characters`
-      });
-    }
-  }
-  
-  await browser.close();
-  return issues;
-}
+**1. Console output during execution:**
+```
+🔍 Verifying 12 slides in workshop/03-custom-prompts.md...
+  ✅ Slide 1: OK
+  ✅ Slide 2: OK
+  ❌ Slide 3: Content overflow
+  ✅ Slide 4: OK
+  ⚠️ Slide 5: Console errors
+  ...
 ```
 
-### Step 4: Generate Verification Report
+**2. Markdown report** saved to `slides/verification-reports/<deck-name>-<timestamp>.md`
 
-Produce a structured report:
+**3. Screenshots** of problematic slides in `slides/screenshots/`
+
+**4. Exit code:**
+- `0` = All slides passed (or warnings only)
+- `1` = Critical issues found (when using `--fail-on-errors`)
+
+### Step 4: Report Issues to User
+
+Parse the generated report and present findings in a clear, actionable format:
 
 ```markdown
-# Slide Verification Report
+## Verification Results for workshop/03-custom-prompts
 
-**Deck**: workshop/03-custom-prompts
-**Date**: 2026-02-04 23:45:00
-**Total Slides**: 12
-**Issues Found**: 3
+**Status**: ❌ Issues Found
 
-## Critical Issues ❌
+### Critical Issues
 
-### Slide 5: Content Overflow
-- **Type**: overflow
-- **Message**: Content exceeds slide viewport height
-- **Screenshot**: [overflow-workshop-03-custom-prompts-slide-5.png](screenshots/overflow-workshop-03-custom-prompts-slide-5.png)
-- **Fix**: Split content into multiple slides or use two-column layout
+- **Slide 5**: Content overflow (content exceeds viewport by 150px)
+  - Fix: Split into slides 5a and 5b, or use two-column layout
+  - Screenshot: [View](slides/screenshots/overflow-workshop-03-custom-prompts-slide-5.png)
 
-### Slide 8: Broken Images
-- **Type**: broken-images
-- **Message**: Missing images: /assets/diagram.png
-- **Fix**: Verify image path and ensure file exists
+- **Slide 8**: Broken image
+  - Missing: `/assets/diagram.png`
+  - Fix: Verify file exists and path is correct
 
-## Warnings ⚠️
+### Warnings
 
-### Slide 3: Readability
-- **Type**: readability  
-- **Message**: 2 text blocks exceed 200 characters
-- **Fix**: Consider breaking into bullet points or multiple slides
+- **Slide 3**: Long text block (245 characters)
+  - Consider breaking into bullet points
 
-## Summary
+### Next Steps
 
-✅ **9 slides passed** all checks
-❌ **2 slides have critical issues** requiring fixes
-⚠️ **1 slide has warnings** (optional improvements)
-```
-
-### Step 5: Cleanup
-
-Kill the Slidev server:
-
-```bash
-kill $SLIDEV_PID
+1. Fix critical issues in slides 5 and 8
+2. Re-run verification to confirm fixes
+3. Consider addressing warnings for improved readability
 ```
 
 ## Output Format
 
-Return verification results as:
+The `verify-slides.mjs` script automatically generates:
 
-1. **Console summary** during execution:
-   ```
-   🔍 Verifying workshop/03-custom-prompts...
-   ✅ Slide 1: OK
-   ✅ Slide 2: OK
-   ❌ Slide 3: Content overflow detected
-   ...
-   ```
+1. **Real-time console output** showing progress and immediate results
+2. **Markdown report** in `slides/verification-reports/` directory
+3. **Screenshots** of problematic slides in `slides/screenshots/` directory
+4. **Exit code** for automation (0 = success, 1 = critical issues when using `--fail-on-errors`)
 
-2. **Markdown report** saved to `slides/verification-reports/<deck-name>-<timestamp>.md`
-
-3. **Screenshots** of problematic slides in `slides/screenshots/`
-
-4. **Exit code**:
-   - `0` = All slides passed
-   - `1` = Issues found (with report)
+**Report structure:**
+```
+slides/
+├── verification-reports/
+│   └── workshop-03-custom-prompts-2026-02-04T234500.md
+└── screenshots/
+    └── overflow-workshop-03-custom-prompts-slide-5.png
+```
 
 ## Common Issues and Fixes
 
@@ -267,8 +185,9 @@ Return verification results as:
 
 ## Technical Requirements
 
-Ensure these are installed in the slides directory:
+The verification script (`slides/verify-slides.mjs`) requires:
 
+**Dependencies (in `slides/package.json`):**
 ```json
 {
   "devDependencies": {
@@ -278,12 +197,16 @@ Ensure these are installed in the slides directory:
 }
 ```
 
-If missing, install with:
+**Installation (if missing):**
 ```bash
 cd slides
 npm install --save-dev playwright @playwright/test
 npx playwright install chromium
 ```
+
+**Script location:** `slides/verify-slides.mjs`
+
+The script is a standalone tool - it can be called directly from command line, CI/CD pipelines, or by agents through the skill interface.
 
 ## Best Practices
 
@@ -306,19 +229,6 @@ After generating slides:
 4. Report any issues found
 5. Fix critical issues if found
 6. Re-verify after fixes
-```
-
-## Directory Structure
-
-```
-slides/
-├── verification-reports/
-│   ├── workshop-03-custom-prompts-2026-02-04-234500.md
-│   └── tech-talks-copilot-cli-2026-02-04-235000.md
-├── screenshots/
-│   ├── overflow-workshop-03-custom-prompts-slide-5.png
-│   └── broken-img-tech-talks-copilot-cli-slide-3.png
-└── verify-slides.mjs  # The Playwright verification script
 ```
 
 ## Success Criteria
