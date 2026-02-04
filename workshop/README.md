@@ -149,24 +149,6 @@ Every module connects back to these core ideas:
 
 ---
 
-## 🚀 Getting Started
-
-1. **Create your FanHub repository** from the template:
-   - Visit [github.com/MSBart2/FanHub](https://github.com/MSBart2/FanHub)
-   - Click **"Use this template"** → **"Create a new repository"**
-   - Follow the setup instructions in the FanHub README
-
-2. **Start the training**:
-   - Read [Module 0: The Challenge](00-orientation/README.md) in this repository
-   - Make all code changes and customizations in your FanHub repository
-   - Use this repository (CopilotWorkshop) as your instruction guide
-
-**Two repositories, two purposes:**
-- **CopilotWorkshop** (this repo) — Instructions, exercises, and learning materials
-- **FanHub** (your template repo) — Working codebase where you make changes
-
----
-
 ## 📊 What Makes This Training Different
 
 ### ✅ Story-Driven
