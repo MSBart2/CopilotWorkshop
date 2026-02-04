@@ -2,7 +2,13 @@
 set -e
 
 # Build script for all Slidev presentations
-# This script builds each .md file in the slides directory as a separate presentation
+# This script builds each .md file in the slides subdirectories
+# Usage: build-all.sh [-v|--verbose]
+
+VERBOSE=false
+if [[ "$1" == "-v" || "$1" == "--verbose" ]]; then
+    VERBOSE=true
+fi
 
 SLIDES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${SLIDES_DIR}/dist"
@@ -10,50 +16,82 @@ OUTPUT_DIR="${SLIDES_DIR}/dist"
 echo "🚀 Building all Slidev presentations..."
 echo "📁 Slides directory: ${SLIDES_DIR}"
 echo "📦 Output directory: ${OUTPUT_DIR}"
-echo ""
-
-# Create output directory
-mkdir -p "${OUTPUT_DIR}"
-
-# Find all .md files except README.md, GLOBAL-LAYERS.md, and DEPLOYMENT.md
-SLIDE_FILES=$(find "${SLIDES_DIR}" -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" ! -name "DEPLOYMENT.md" | sort)
-
-if [ -z "${SLIDE_FILES}" ]; then
-    echo "❌ No slide files found!"
-    exit 1
+if $VERBOSE; then
+    echo "📢 Verbose mode enabled"
 fi
-
-# Count total files
-TOTAL_FILES=$(echo "${SLIDE_FILES}" | wc -l)
-CURRENT=0
-
-echo "📊 Found ${TOTAL_FILES} slide decks to build"
 echo ""
 
-# Build each presentation
-for SLIDE_FILE in ${SLIDE_FILES}; do
-    CURRENT=$((CURRENT + 1))
-    BASENAME=$(basename "${SLIDE_FILE}" .md)
-    
-    echo "[${CURRENT}/${TOTAL_FILES}] 🔨 Building ${BASENAME}..."
-    
-    # Build the presentation
-    cd "${SLIDES_DIR}"
-    npx slidev build "${BASENAME}.md" \
-        --base "/CopilotWorkshop/${BASENAME}/" \
-        --out "dist/${BASENAME}" \
-        2>&1 | grep -v "[@vue/compiler-sfc]" || true
-    
-    echo "   ✅ ${BASENAME} built successfully"
-    echo ""
+# Create output directory structure
+mkdir -p "${OUTPUT_DIR}/workshop"
+mkdir -p "${OUTPUT_DIR}/tech-talks"
+mkdir -p "${OUTPUT_DIR}/exec-talks"
+
+TOTAL_BUILT=0
+
+# Helper function to build a slide
+build_slide() {
+    local CATEGORY=$1
+    local BASENAME=$2
+
+    if $VERBOSE; then
+        echo "   🔨 ${CATEGORY}/${BASENAME}..."
+        cd "${SLIDES_DIR}"
+        npx slidev build "${CATEGORY}/${BASENAME}.md" \
+            --base "/CopilotWorkshop/${CATEGORY}/${BASENAME}/" \
+            --out "${OUTPUT_DIR}/${CATEGORY}/${BASENAME}" 2>&1 | sed 's/^/      /'
+        echo "   ✅ ${CATEGORY}/${BASENAME} built"
+    else
+        printf "   🔨 %s/%s... " "${CATEGORY}" "${BASENAME}"
+        cd "${SLIDES_DIR}"
+        if npx slidev build "${CATEGORY}/${BASENAME}.md" \
+            --base "/CopilotWorkshop/${CATEGORY}/${BASENAME}/" \
+            --out "${OUTPUT_DIR}/${CATEGORY}/${BASENAME}" > /dev/null 2>&1; then
+            echo "✅"
+        else
+            echo "❌ (run with -v for details)"
+        fi
+    fi
+}
+
+# Build workshop slides
+echo "📚 Building workshop slides..."
+for SLIDE_FILE in "${SLIDES_DIR}"/workshop/*.md; do
+    if [ -f "$SLIDE_FILE" ]; then
+        BASENAME=$(basename "$SLIDE_FILE" .md)
+        build_slide "workshop" "${BASENAME}"
+        TOTAL_BUILT=$((TOTAL_BUILT + 1))
+    fi
 done
+echo ""
+
+# Build tech-talks slides
+echo "🔬 Building tech-talks slides..."
+for SLIDE_FILE in "${SLIDES_DIR}"/tech-talks/*.md; do
+    if [ -f "$SLIDE_FILE" ]; then
+        BASENAME=$(basename "$SLIDE_FILE" .md)
+        build_slide "tech-talks" "${BASENAME}"
+        TOTAL_BUILT=$((TOTAL_BUILT + 1))
+    fi
+done
+echo ""
+
+# Build exec-talks slides
+echo "💼 Building exec-talks slides..."
+for SLIDE_FILE in "${SLIDES_DIR}"/exec-talks/*.md; do
+    if [ -f "$SLIDE_FILE" ]; then
+        BASENAME=$(basename "$SLIDE_FILE" .md)
+        build_slide "exec-talks" "${BASENAME}"
+        TOTAL_BUILT=$((TOTAL_BUILT + 1))
+    fi
+done
+echo ""
 
 # Copy index.html to dist root
 echo "📄 Copying index-custom.html to dist root..."
 cp "${SLIDES_DIR}/index-custom.html" "${OUTPUT_DIR}/index.html"
 
 echo ""
-echo "✨ All presentations built successfully!"
+echo "✨ All ${TOTAL_BUILT} presentations built successfully!"
 echo "📦 Output location: ${OUTPUT_DIR}"
 echo ""
 echo "To preview locally, run: cd dist && python3 -m http.server 8080"

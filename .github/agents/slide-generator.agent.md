@@ -19,6 +19,7 @@ Transform module README markdown into beautiful, concise Slidev presentations th
 3. Show before/after metrics clearly
 4. Present exercise overviews
 5. Maintain visual consistency with workshop branding
+6. **Keep `slides/index-custom.html` synchronized with available slides**
 
 ## Workflow
 
@@ -196,6 +197,67 @@ Markdown treats 4+ spaces at the start of a line as a code block. This causes ne
 - **Focus on visuals** over text walls
 - **One main idea** per slide
 
+### 6. Update Index Navigation
+
+After generating or removing slides, update `slides/index-custom.html` to keep the navigation synchronized.
+
+**Read the current index file** at `slides/index-custom.html` and:
+
+1. **For new slides**: Add a card entry in the appropriate section
+2. **For removed slides**: Remove the corresponding card entry
+3. **Maintain alphabetical order** within each section (after any numbered workshop modules)
+
+**Index Structure:**
+
+The index has three sections identified by CSS classes:
+
+- `section.tech-talks` — Tech Talks (purple accent)
+- `section.exec-talks` — Executive Talks (yellow accent)
+- `section.workshop` — Workshop Modules (blue accent)
+
+**Card Template:**
+
+```html
+<a href="/CopilotWorkshop/{section}/{slug}/" class="card">
+  <h2>{Title}</h2>
+  <p>{Short description}</p>
+</a>
+```
+
+**Section mapping:**
+
+| Source Path         | Index Section        | URL Pattern                          |
+| ------------------- | -------------------- | ------------------------------------ |
+| `workshop/NN-name/` | `section.workshop`   | `/CopilotWorkshop/workshop/NN-name/` |
+| `tech-talks/name/`  | `section.tech-talks` | `/CopilotWorkshop/tech-talks/name/`  |
+| `exec-talks/name/`  | `section.exec-talks` | `/CopilotWorkshop/exec-talks/name/`  |
+
+**Examples:**
+
+Adding a tech-talk:
+
+```html
+<a href="/CopilotWorkshop/tech-talks/subagents/" class="card">
+  <h2>Subagents</h2>
+  <p>Context isolation for complex workflows</p>
+</a>
+```
+
+Adding a workshop module:
+
+```html
+<a href="/CopilotWorkshop/workshop/07-copilot-web/" class="card">
+  <h2>07 - Copilot Web</h2>
+  <p>Web-based Copilot features</p>
+</a>
+```
+
+**Ordering rules:**
+
+- Workshop modules: Order by module number (00, 01, 02...)
+- Tech talks: Alphabetical by title
+- Exec talks: Alphabetical by title
+
 ## Content Guidelines
 
 ### What to Include
@@ -326,6 +388,7 @@ layout: two-cols
 4. **Select 1-3 personas** most relevant to the module
 5. **Keep it visual** - use grids, cards, icons
 6. **Maintain flow** - each slide should connect to the next
+7. **Update index-custom.html** with the new slide entry
 
 ### When updating slides:
 
@@ -334,6 +397,13 @@ layout: two-cols
 3. **Update only content sections** that changed
 4. **Review before/after metrics** for accuracy
 5. **Test in Slidev** to ensure rendering is correct
+6. **Verify index-custom.html** entry matches slide title/description
+
+### When removing slides:
+
+1. **Delete the slide .md file** from the appropriate slides/ subdirectory
+2. **Remove the corresponding card** from index-custom.html
+3. **Verify no broken links** remain in the index
 
 ## Quality Checklist
 
@@ -348,6 +418,7 @@ Before finalizing slides, verify:
 - [ ] Visual hierarchy is clear (headings, spacing)
 - [ ] Markdown syntax is valid for Slidev
 - [ ] Emojis match module README conventions
+- [ ] **index-custom.html updated** with correct entry
 
 ## Output
 
@@ -368,6 +439,8 @@ Each slide deck should have:
 - Consistent visual styling
 - Clear narrative flow
 - Links back to source README for details
+
+**Also update `slides/index-custom.html`** to add/remove the navigation entry for the slide deck.
 
 ## Error Handling
 

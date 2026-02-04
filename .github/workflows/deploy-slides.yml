@@ -47,22 +47,54 @@ jobs:
         run: |
           echo "🚀 Building all Slidev presentations..."
 
-          # Create dist directory
-          mkdir -p dist
+          # Create dist directory structure
+          mkdir -p dist/workshop
+          mkdir -p dist/tech-talks
+          mkdir -p dist/exec-talks
 
-          # Find all .md files except README.md, GLOBAL-LAYERS.md, DEPLOYMENT.md, and temporarily skip failing files
-          SLIDE_FILES=$(find . -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" ! -name "DEPLOYMENT.md" | sort)
+          # Build workshop slides
+          echo "📚 Building workshop slides..."
+          for SLIDE_FILE in workshop/*.md; do
+            if [ -f "$SLIDE_FILE" ]; then
+              BASENAME=$(basename "$SLIDE_FILE" .md)
+              echo "🔨 Building workshop/${BASENAME}..."
 
-          # Build each presentation
-          for SLIDE_FILE in $SLIDE_FILES; do
-            BASENAME=$(basename "$SLIDE_FILE" .md)
-            echo "🔨 Building ${BASENAME}..."
+              npx slidev build "$SLIDE_FILE" \
+                --base "/CopilotWorkshop/workshop/${BASENAME}/" \
+                --out "$(pwd)/dist/workshop/${BASENAME}"
 
-            npx slidev build "${BASENAME}.md" \
-              --base "/CopilotWorkshop/${BASENAME}/" \
-              --out "dist/${BASENAME}"
+              echo "✅ workshop/${BASENAME} built successfully"
+            fi
+          done
 
-            echo "✅ ${BASENAME} built successfully"
+          # Build tech-talks slides
+          echo "🔬 Building tech-talks slides..."
+          for SLIDE_FILE in tech-talks/*.md; do
+            if [ -f "$SLIDE_FILE" ]; then
+              BASENAME=$(basename "$SLIDE_FILE" .md)
+              echo "🔨 Building tech-talks/${BASENAME}..."
+
+              npx slidev build "$SLIDE_FILE" \
+                --base "/CopilotWorkshop/tech-talks/${BASENAME}/" \
+                --out "$(pwd)/dist/tech-talks/${BASENAME}"
+
+              echo "✅ tech-talks/${BASENAME} built successfully"
+            fi
+          done
+
+          # Build exec-talks slides
+          echo "💼 Building exec-talks slides..."
+          for SLIDE_FILE in exec-talks/*.md; do
+            if [ -f "$SLIDE_FILE" ]; then
+              BASENAME=$(basename "$SLIDE_FILE" .md)
+              echo "🔨 Building exec-talks/${BASENAME}..."
+
+              npx slidev build "$SLIDE_FILE" \
+                --base "/CopilotWorkshop/exec-talks/${BASENAME}/" \
+                --out "$(pwd)/dist/exec-talks/${BASENAME}"
+
+              echo "✅ exec-talks/${BASENAME} built successfully"
+            fi
           done
 
           # Copy custom index.html to dist root
