@@ -59,7 +59,7 @@ jobs:
             echo "🔨 Building ${BASENAME}..."
             
             npx slidev build "${BASENAME}.md" \
-              --base "/${BASENAME}/" \
+              --base "/CopilotWorkshop/${BASENAME}/" \
               --out "dist/${BASENAME}"
             
             echo "✅ ${BASENAME} built successfully"

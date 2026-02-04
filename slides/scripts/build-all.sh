@@ -40,7 +40,7 @@ for SLIDE_FILE in ${SLIDE_FILES}; do
     # Build the presentation
     cd "${SLIDES_DIR}"
     npx slidev build "${BASENAME}.md" \
-        --base "/${BASENAME}/" \
+        --base "/CopilotWorkshop/${BASENAME}/" \
         --out "dist/${BASENAME}" \
         2>&1 | grep -v "[@vue/compiler-sfc]" || true
     
@@ -49,8 +49,8 @@ for SLIDE_FILE in ${SLIDE_FILES}; do
 done
 
 # Copy index.html to dist root
-echo "📄 Copying index.html to dist root..."
-cp "${SLIDES_DIR}/index.html" "${OUTPUT_DIR}/index.html"
+echo "📄 Copying index-custom.html to dist root..."
+cp "${SLIDES_DIR}/index-custom.html" "${OUTPUT_DIR}/index.html"
 
 echo ""
 echo "✨ All presentations built successfully!"
