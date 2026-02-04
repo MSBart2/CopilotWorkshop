@@ -47,7 +47,7 @@ The deployment includes:
 Each `.md` file in the `slides/` directory (except `README.md` and `GLOBAL-LAYERS.md`) is built as a standalone Slidev presentation:
 
 - `00-orientation.md` → `/00-orientation/`
-- `01-repository-instructions.md` → `/01-repository-instructions/`
+- `01-instructions.md` → `/01-instructions/`
 - `agentic-delivery.md` → `/agentic-delivery/`
 - etc.
 
@@ -94,7 +94,7 @@ The workflow (`.github/workflows/deploy-slides.yml`) does the following:
 2. **Setup Node.js**: Installs Node 20 with npm caching
 3. **Install Dependencies**: Runs `npm ci` in slides directory
 4. **Install Playwright**: For PDF/PPTX export capabilities
-5. **Build All Presentations**: 
+5. **Build All Presentations**:
    - Finds all `.md` files (excluding README and GLOBAL-LAYERS)
    - Builds each as a Slidev static site
    - Sets proper base paths for each presentation
@@ -121,7 +121,7 @@ After deployment, the GitHub Pages site has this structure:
 ├── 00-orientation/            ← Workshop Module 0
 │   ├── index.html
 │   └── assets/
-├── 01-repository-instructions/ ← Workshop Module 1
+├── 01-instructions/            ← Workshop Module 1
 │   ├── index.html
 │   └── assets/
 ├── ...

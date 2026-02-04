@@ -504,11 +504,11 @@ layout: center
     </div>
     <div class="flex items-start gap-2">
       <span class="text-purple-400">→</span>
-      <div><strong>Module 7:</strong> Custom agents can invoke your prompt files</div>
+      <div><strong>Module 6:</strong> Custom agents can invoke your prompt files</div>
     </div>
     <div class="flex items-start gap-2">
       <span class="text-purple-400">→</span>
-      <div><strong>Module 8:</strong> Agent skills build on prompt patterns</div>
+      <div><strong>Module 4:</strong> Agent skills build on prompt patterns</div>
     </div>
     <div class="flex items-start gap-2">
       <span class="text-purple-400">→</span>

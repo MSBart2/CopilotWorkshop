@@ -36,10 +36,10 @@ examples/
     ├── docs/
     │   ├── ARCHITECTURE.md
     │   ├── character-detail-challenge.md
-    │   ├── org-instructions-template.md      # Module 11: Org-level instructions
-    │   ├── COPILOT-REVIEW-GUIDE.md          # Module 11: Code review checklist
-    │   ├── TEAM-ONBOARDING.md               # Module 11: Team onboarding guide
-    │   └── quarterly-report-template.md      # Module 11: Metrics report template
+    │   ├── org-instructions-template.md      # Module 10: Org-level instructions
+    │   ├── COPILOT-REVIEW-GUIDE.md          # Module 10: Code review checklist
+    │   ├── TEAM-ONBOARDING.md               # Module 10: Team onboarding guide
+    │   └── quarterly-report-template.md      # Module 10: Metrics report template
     └── skills/                         # Agent Skills examples
         ├── agent-skills.md
         ├── api-endpoint-design/
@@ -62,12 +62,12 @@ examples/
 |--------|---------|-----------------|----------------|
 | **Module 1** | Repository Instructions | `copilot-instructions.md` | [completed-config/.github/copilot-instructions.md](completed-config/.github/copilot-instructions.md) |
 | **Module 1** | Documentation | `ARCHITECTURE.md` | [completed-config/docs/ARCHITECTURE.md](completed-config/docs/ARCHITECTURE.md) |
+| **Module 1** | Custom Instructions | File-scoped instructions | [completed-config/.github/instructions/](completed-config/.github/instructions/) |
 | **Module 3** | Custom Prompts | Prompt files | [completed-config/.github/prompts/](completed-config/.github/prompts/) |
-| **Module 4** | Custom Instructions | File-scoped instructions | [completed-config/.github/instructions/](completed-config/.github/instructions/) |
-| **Module 5** | Agent Skills | Domain-specific skills | [completed-config/skills/](completed-config/skills/) |
-| **Module 6** | MCP Servers | External system connections | [completed-config/.vscode/mcp.json](completed-config/.vscode/mcp.json) |
-| **Module 7** | Custom Agents | Agent configuration files | [completed-config/.github/agents/](completed-config/.github/agents/) |
-| **Module 11** | Enterprise Patterns | Organization templates | [completed-config/docs/](completed-config/docs/) (org-instructions-template.md, COPILOT-REVIEW-GUIDE.md, TEAM-ONBOARDING.md, quarterly-report-template.md) |
+| **Module 4** | Agent Skills | Domain-specific skills | [completed-config/skills/](completed-config/skills/) |
+| **Module 5** | MCP Servers | External system connections | [completed-config/.vscode/mcp.json](completed-config/.vscode/mcp.json) |
+| **Module 6** | Custom Agents | Agent configuration files | [completed-config/.github/agents/](completed-config/.github/agents/) |
+| **Module 10** | Enterprise Patterns | Organization templates | [completed-config/docs/](completed-config/docs/) (org-instructions-template.md, COPILOT-REVIEW-GUIDE.md, TEAM-ONBOARDING.md, quarterly-report-template.md) |
 
 ---
 

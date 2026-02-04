@@ -438,7 +438,7 @@ You've experienced:
 
 You've experienced the struggle. You've set your success metrics. You're ready for the transformation.
 
-**On to Module 1:** [Repository Instructions](../01-repository-instructions/README.md)
+**On to Module 1:** [Instructions](../01-instructions/README.md)
 
 Monday, 10:00 AM. Marcus is about to show the team how configuration changes everything...
 

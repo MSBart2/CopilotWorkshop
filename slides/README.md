@@ -35,8 +35,8 @@ Start a specific slide deck with live reload:
 # Run the orientation module
 npm run dev 00-orientation.md
 
-# Run the repository instructions module
-npm run dev 01-repository-instructions.md
+# Run the instructions module
+npm run dev 01-instructions.md
 
 # Run a tech talk
 npm run dev tech-talks-repo-config.md
@@ -65,7 +65,7 @@ Generate a PDF version of any slide deck:
 npm run export 00-orientation.md
 
 # Export with custom output name
-npm run export 01-repository-instructions.md -- --output ./exports/repo-instructions.pdf
+npm run export 01-instructions.md -- --output ./exports/instructions.pdf
 
 # Export with dark theme
 npm run export 02-agent-plan-mode.md -- --dark
@@ -118,7 +118,7 @@ npm run build 00-orientation.md
 slides/
 ├── package.json              # Slidev dependencies and scripts
 ├── 00-orientation.md         # Module 0: Training overview
-├── 01-repository-instructions.md
+├── 01-instructions.md
 ├── 02-agent-plan-mode.md
 ├── 03-custom-prompts.md
 ├── ...                       # Additional module slides
@@ -146,19 +146,16 @@ slides/
 | Slide File | Workshop Module | Description |
 |------------|----------------|-------------|
 | `00-orientation.md` | Module 0 | Training overview, personas, principles |
-| `01-repository-instructions.md` | Module 1 | Repository-level instructions |
+| `01-instructions.md` | Module 1 | Instructions (magic file + path-based) |
 | `02-agent-plan-mode.md` | Module 2 | Agent plan mode thinking |
 | `03-custom-prompts.md` | Module 3 | Custom prompt engineering |
-| `04-custom-instructions.md` | Module 4 | Custom instructions |
-| `05-agent-skills.md` | Module 5 | Domain-specific Agent Skills |
-| `06-mcp-servers.md` | Module 6 | Model Context Protocol servers |
-| `07-custom-agents.md` | Module 7 | Building custom agents |
-| `08-copilot-web.md` | Module 8 | Copilot for web workflows |
-| `09-copilot-cli.md` | Module 9 | Copilot CLI automation |
-| `10-agentic-sdlc.md` | Module 10 | Agentic software delivery |
-| `11-enterprise-patterns.md` | Module 11 | Enterprise customization patterns |
-| `12-copilot-hooks.md` | Module 12 | Copilot Hooks integration |
-| `13-context-engineering.md` | Module 13 | Context engineering foundations |
+| `04-agent-skills.md` | Module 4 | Domain-specific Agent Skills |
+| `05-mcp-servers.md` | Module 5 | Model Context Protocol servers |
+| `06-custom-agents.md` | Module 6 | Building custom agents |
+| `07-copilot-web.md` | Module 7 | Copilot for web workflows |
+| `08-copilot-cli.md` | Module 8 | Copilot CLI automation |
+| `09-agentic-sdlc.md` | Module 9 | Agentic software delivery |
+| `10-enterprise-patterns.md` | Module 10 | Enterprise customization patterns |
 
 ### Tech Talks
 
@@ -178,7 +175,7 @@ Generate slides from a module README:
 
 ```bash
 # Generate slides for a specific module
-npm run generate -- ../workshop/01-repository-instructions
+npm run generate -- ../workshop/01-instructions
 
 # Regenerate all module slides
 npm run generate -- --all

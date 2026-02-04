@@ -1,4 +1,4 @@
-# Exercise 7.5: Access Custom Agents from the Web
+# Exercise 6.5: Access Custom Agents from the Web
 
 ## 🎯 Objective
 
@@ -92,9 +92,9 @@ Rafael realizes that custom agents in `.github/agents/` are automatically availa
    - Look for an agent selector or @ mention menu
    - Type `@` in the chat to see available agents
    - Verify you see:
-     - `@feature-plan` (from Exercise 7.2)
-     - `@implement` (from Exercise 7.3)
-     - `@security-review` (from Exercise 7.4)
+     - `@feature-plan` (from Exercise 6.2)
+     - `@implement` (from Exercise 6.3)
+     - `@security-review` (from Exercise 6.4)
 
 **Validation:**
 - ✅ github.com/copilot/agents loads successfully
@@ -336,11 +336,11 @@ Document these comparisons:
 
 ---
 
-## 🔗 Module 7 Complete
+## 🔗 Module 6 Complete
 
 **What you've discovered:**
 
-You built three custom agents in Exercises 7.2-7.4, and now you've learned they automatically work on the web too:
+You built three custom agents in Exercises 6.2-6.4, and now you've learned they automatically work on the web too:
 
 1. **@feature-plan** — Read-only planning agent (great for web-based analysis)
 2. **@implement** — Full editing implementation agent (VS Code preferred)
@@ -352,15 +352,15 @@ You built three custom agents in Exercises 7.2-7.4, and now you've learned they 
 - Planning and analysis? Use the web (faster, no setup)
 - Implementation and editing? Use VS Code (full tools)
 
-**Compound value from Modules 1-7:**
+**Compound value from Modules 1-6:**
 
 - **Module 1**: Repository instructions (work in both VS Code and web)
 - **Module 2**: Plan mode (technique, not tool-specific)
 - **Module 3**: Prompt files (accessible from both environments)
-- **Module 4**: Custom instructions (repository-based, available everywhere)
-- **Module 5**: Agent Skills (work with web and VS Code agents)
-- **Module 6**: MCP servers (web needs inline config, VS Code uses workspace config)
-- **Module 7**: Custom agents (automatically available in both VS Code and web)
+- **Module 1**: Custom instructions (repository-based, available everywhere)
+- **Module 4**: Agent Skills (work with web and VS Code agents)
+- **Module 5**: MCP servers (web needs inline config, VS Code uses workspace config)
+- **Module 6**: Custom agents (automatically available in both VS Code and web)
 
 The customization you've built isn't locked to one tool—it follows the repository across all interfaces.
 
@@ -627,7 +627,7 @@ Document these comparisons:
 
 ---
 
-## 🔗 Module 7 Complete
+## 🔗 Module 6 Complete
 
 **What you've built:**
 
@@ -644,15 +644,15 @@ These agents demonstrate:
 - **Local vs. web execution** (VS Code vs. github.com/copilot/agents)
 - **External data integration** (GitHub MCP for live issue queries)
 
-**Compound value from Modules 1-7:**
+**Compound value from Modules 1-6:**
 
 - **Module 1**: Repository instructions (baseline standards)
 - **Module 2**: Plan mode with @workspace (research technique)
 - **Module 3**: Prompt files (invokable functions)
-- **Module 4**: Custom instructions (path-based guidance)
-- **Module 5**: Agent Skills (specialized capabilities)
-- **Module 6**: MCP servers (external data access)
-- **Module 7**: Custom agents (orchestrate everything into workflows)
+- **Module 1**: Custom instructions (path-based guidance)
+- **Module 4**: Agent Skills (specialized capabilities)
+- **Module 5**: MCP servers (external data access)
+- **Module 6**: Custom agents (orchestrate everything into workflows)
 
 Each agent can leverage all previous customizations—instructions, prompts, skills, and MCP servers—creating a fully integrated AI-assisted development environment.
 

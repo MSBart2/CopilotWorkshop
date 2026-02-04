@@ -2,7 +2,7 @@
 
 ## ⏰ — The Repetition Problem
 
-> *"I've typed this same prompt five times today: 'Generate tests following our standards.' There has to be a better way."*  
+> *"I've typed this same prompt five times today: 'Generate tests following our standards.' There has to be a better way."*
 > — Elena, copying and pasting her carefully-crafted test generation prompt for the fifth time
 
 ---
@@ -19,9 +19,9 @@ Now, in **Module 3**, they face a new challenge: **repetitive, specialized promp
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
-- Complete [Module 01: Repository Instructions](../01-repository-instructions/README.md)
+- Complete [Module 01: Instructions](../01-instructions/README.md)
 - ARCHITECTURE.md and .github/copilot-instructions.md files created
 
 ---
@@ -109,7 +109,7 @@ Prompt files become powerful when they reference **dynamic context**:
 
 **Example:**
 ```markdown
-Generate a React component named ${input:componentName} 
+Generate a React component named ${input:componentName}
 following patterns in [components/](${workspaceFolder}/src/components/)
 ```
 
@@ -186,12 +186,12 @@ The exercises below demonstrate how prompt files transform repetitive tasks into
 
 **When to use it:** When you find yourself typing the same detailed prompt repeatedly—code reviews, test generation, architecture analysis, scaffolding components, debugging tasks, or any specialized work requiring specific context and standards.
 
-**What you'll build:** 
+**What you'll build:**
 - **Test generation prompt** — Standardized test suite creation following team patterns, invoked via `/test-suite`
 - **Code review prompt** — Automated React standards validation referencing copilot-instructions.md, invoked via `/react-review`
 - **Build debugging prompt** — Structured build failure analysis using context variables, invoked via `/debug-build`
 
-> 💡 **Think of prompts as functions:** They're invoked by name, accept parameters (variables), execute once, and return results. Custom agents (Module 7) are more like workflows—multi-step processes that maintain state and iterate over time.
+> 💡 **Think of prompts as functions:** They're invoked by name, accept parameters (variables), execute once, and return results. Custom agents (Module 6) are more like workflows—multi-step processes that maintain state and iterate over time.
 
 **Official Documentation:
 - 📖 [Prompt Files in VS Code](https://code.visualstudio.com/docs/copilot/customization/prompt-files) — Complete guide to creating and using prompt files
@@ -204,9 +204,9 @@ The exercises below demonstrate how prompt files transform repetitive tasks into
 
 ## ➡️ Next Module
 
-**[Module 4: Custom Instructions](../04-custom-instructions/README.md)** — While prompt files handle specific tasks, custom instructions apply context to every Copilot interaction, shaping how AI understands your role, codebase, and preferences.
+**[Module 4: Agent Skills](../04-agent-skills/README.md)** — While prompt files handle specific tasks, agent skills provide Copilot with specialized domain knowledge and capabilities.
 
-> *"I love the prompt files, but I'm still explaining the same context in every chat session. Can I make Copilot remember who I am and what I care about?"*  
+> *"I love the prompt files, but I'm still explaining the same context in every chat session. Can I make Copilot remember who I am and what I care about?"*
 > — David, about to discover how custom instructions work
 
 ---
@@ -251,7 +251,7 @@ VS Code resolves variables in this sequence:
 
 **Input variables enable interactive prompts:**
 ```markdown
-Generate API endpoint for ${input:resourceName:user} 
+Generate API endpoint for ${input:resourceName:user}
 with operations: ${input:operations:CRUD}
 ```
 

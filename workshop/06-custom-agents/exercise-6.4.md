@@ -1,10 +1,10 @@
-# Exercise 7.4: Design Security Review Agent
+# Exercise 6.4: Design Security Review Agent
 
 ## 🎯 Objective
 
 Create a `@security-review` custom agent with read-only analysis tools and React standards that catches security issues and standards violations without accidentally modifying code during review.
 
-> **Note:** This exercise applies the read-only tool pattern from [Exercise 7.1](exercise-7.1.md) and [Exercise 7.2](exercise-7.2.md) to code review workflows.
+> **Note:** This exercise applies the read-only tool pattern from [Exercise 6.1](exercise-6.1.md) and [Exercise 6.2](exercise-6.2.md) to code review workflows.
 
 **Lead:** Elena ⭐ | **Support:** Sarah 🤝, David 🤝
 
@@ -18,7 +18,7 @@ Create a `@security-review` custom agent with read-only analysis tools and React
 
 **Current workflow:**
 1. Opens each modified file manually
-2. Loads React standards from Module 4's `.instructions.md`
+2. Loads React standards from Module 1's `.instructions.md`
 3. Reads through code looking for common issues
 4. Types detailed security checklist in chat
 5. While reviewing `CharacterDetail.jsx`, suggests a fix
@@ -47,7 +47,7 @@ Sarah watches Elena undo another accidental edit: "This is the same problem Davi
 
 Elena creates `.github/agents/security-review.agent.md` with:
 - **Read-only analysis tools** — `['search', 'fetch', 'analysis']` — no edit capabilities
-- **React standards auto-loaded** — References Module 4's `.github/standards/react-components.instructions.md`
+- **React standards auto-loaded** — References Module 1's `.github/standards/react-components.instructions.md`
 - **Security-focused instructions** — XSS prevention, authentication checks, prop validation, error handling
 - **Handoff to implementation** — If issues found, hand back to `@implement` agent with fix suggestions
 
@@ -261,19 +261,19 @@ import React, { useState } from 'react';
 // Component with intentional security and standards issues for testing
 function TestComponent(props) {
   const [userInput, setUserInput] = useState('');
-  
+
   // Issue 1: Missing prop validation
   // Issue 2: Dangerous HTML injection risk
   return (
     <div>
       <h2>Test Component</h2>
-      <input 
-        value={userInput} 
-        onChange={(e) => setUserInput(e.target.value)} 
+      <input
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
       />
       {/* Issue 3: dangerouslySetInnerHTML without sanitization */}
       <div dangerouslySetInnerHTML={{ __html: userInput }} />
-      
+
       {/* Issue 4: Inline style instead of CSS classes */}
       <button style={{ color: 'red' }} onClick={() => {
         // Issue 5: Hardcoded API key
@@ -438,7 +438,7 @@ Document these comparisons:
 
 ## ➡️ What's Next?
 
-In [Exercise 7.5](exercise-7.5.md), you'll create the `@product-analyzer` agent with web accessibility (`target: github-copilot`) so Rafael can analyze features and query GitHub data during stakeholder meetings without opening VS Code.
+In [Exercise 6.5](exercise-6.5.md), you'll create the `@product-analyzer` agent with web accessibility (`target: github-copilot`) so Rafael can analyze features and query GitHub data during stakeholder meetings without opening VS Code.
 
-> *"Can I use these agents during stakeholder calls when I don't have VS Code open? I need to analyze requirements and query repos in real-time."*  
+> *"Can I use these agents during stakeholder calls when I don't have VS Code open? I need to analyze requirements and query repos in real-time."*
 > — Rafael, discovering web-accessible agents

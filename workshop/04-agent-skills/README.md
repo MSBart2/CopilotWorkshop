@@ -1,4 +1,4 @@
-# Module 5: Agent Skills
+# Module 4: Agent Skills
 
 ## ⏰ — The Capability Gap
 
@@ -15,18 +15,15 @@ In **Module 2**, they used **plan mode** to research complex features before imp
 
 In **Module 3**, they created **prompt files** (`.prompt.md`)—invokable functions for specific tasks like `/test-suite` and `/react-review`, eliminating the need to retype complex prompts.
 
-In **Module 4**, they added **custom instructions** (`.instructions.md`)—path-based guidance that automatically applies based on what you're editing. Frontend files get UI patterns, backend files get API standards, test files get testing conventions—all automatic.
+Now, in **Module 4**, they face a new challenge: **teaching Copilot specialized capabilities it doesn't have built-in**. David needs to validate code against FanHub's TV show API schema. Elena wants to generate tests using the team's custom test template. Marcus needs deployment scripts that check FanHub's specific infrastructure requirements. Instructions can tell Copilot *how* to work, but they can't teach it *new tasks* that require specialized knowledge, scripts, or workflows.
 
-Now, in **Module 5**, they face a new challenge: **teaching Copilot specialized capabilities it doesn't have built-in**. David needs to validate code against FanHub's TV show API schema. Elena wants to generate tests using the team's custom test template. Marcus needs deployment scripts that check FanHub's specific infrastructure requirements. Instructions can tell Copilot *how* to work, but they can't teach it *new tasks* that require specialized knowledge, scripts, or workflows.
-
-💡 **Integration Note:** This module builds on Module 4's `.instructions.md` files by adding **agent skills** (`.github/skills/`)—folders containing instructions, scripts, examples, and resources that teach Copilot specialized capabilities. Instructions = behavior guidelines. Skills = new capabilities.
+💡 **Integration Note:** This module builds on Module 1's `.instructions.md` files by adding **agent skills** (`.github/skills/`)—folders containing instructions, scripts, examples, and resources that teach Copilot specialized capabilities. Instructions = behavior guidelines. Skills = new capabilities.
 
 ---
 
 ⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
-- Complete [Module 01: Repository Instructions](../01-repository-instructions/README.md)
-- Complete [Module 04: Custom Instructions](../04-custom-instructions/README.md)
+- Complete [Module 01: Instructions](../01-instructions/README.md)
 - Setting enabled: `chat.useAgentSkills` (required for Agent Skills support in VS Code)
 
 ---
@@ -63,7 +60,7 @@ This isn't about replacing instructions—it's about **teaching new capabilities
 
 **How they differ from what you've learned:**
 
-| Feature | copilot-instructions.md (Module 1) | .instructions.md (Module 4) | Agent Skills (Module 5) |
+| Feature | copilot-instructions.md (Module 1) | .instructions.md (Module 1) | Agent Skills (Module 4) |
 |---------|-----------------------------------|----------------------------|-------------------------|
 | **Scope** | Repository-wide coding standards | Path-based context rules | Specialized task capabilities |
 | **Activation** | Always active for all files | Auto-applied when editing matching files | Auto-loaded when task matches description |
@@ -310,9 +307,9 @@ The exercises below demonstrate how agent skills teach Copilot specialized capab
 
 | # | Exercise | Lead | Support | Problem | Solution | Key Metrics | Artifacts |
 |---|----------|------|---------|---------|----------|-------------|-----------|
-| [5.1](exercise-5.1.md) | API Endpoint Design Skill | Sarah | David | New API endpoints: 12 min/endpoint explaining standards, schema mismatches require 8 min rework | Create `api-endpoint-design` skill with OpenAPI schema, example endpoints, validation checklist | 12→2 min/endpoint, 0 schema mismatches, 80 min/sprint saved | `.github/skills/api-endpoint-design/SKILL.md`, `openapi-schema.yaml`, `example-endpoints/` |
-| [5.2](exercise-5.2.md) | Bug Reproduction Test Generator | Elena | Marcus | Writing bug reproduction tests: 25 min/bug, inconsistent mocking patterns, forget edge cases 40% of time | Create `bug-reproduction-test-generator` skill with test template, mocking examples, edge case checklist | 25→4 min/bug, 100% edge case coverage, 126 min/sprint saved | `.github/skills/bug-reproduction-test-generator/SKILL.md`, `test-template.js`, `examples/` |
-| [5.3](exercise-5.3.md) | Build Pipeline Analyzer | Marcus | Elena, Sarah | Debugging build failures: 30 min/failure (15 min reproduce, 15 min trace), 5 failures/sprint | Create `build-pipeline-analyzer` skill with diagnostic script, log pattern examples, troubleshooting workflow | 30→2 min/failure, 140 min/sprint saved, instant root cause identification | `.github/skills/build-pipeline-analyzer/SKILL.md`, `analyze-logs.sh`, `log-patterns/` |
+| [4.1](exercise-4.1.md) | API Endpoint Design Skill | Sarah | David | New API endpoints: 12 min/endpoint explaining standards, schema mismatches require 8 min rework | Create `api-endpoint-design` skill with OpenAPI schema, example endpoints, validation checklist | 12→2 min/endpoint, 0 schema mismatches, 80 min/sprint saved | `.github/skills/api-endpoint-design/SKILL.md`, `openapi-schema.yaml`, `example-endpoints/` |
+| [4.2](exercise-4.2.md) | Bug Reproduction Test Generator | Elena | Marcus | Writing bug reproduction tests: 25 min/bug, inconsistent mocking patterns, forget edge cases 40% of time | Create `bug-reproduction-test-generator` skill with test template, mocking examples, edge case checklist | 25→4 min/bug, 100% edge case coverage, 126 min/sprint saved | `.github/skills/bug-reproduction-test-generator/SKILL.md`, `test-template.js`, `examples/` |
+| [4.3](exercise-4.3.md) | Build Pipeline Analyzer | Marcus | Elena, Sarah | Debugging build failures: 30 min/failure (15 min reproduce, 15 min trace), 5 failures/sprint | Create `build-pipeline-analyzer` skill with diagnostic script, log pattern examples, troubleshooting workflow | 30→2 min/failure, 140 min/sprint saved, instant root cause identification | `.github/skills/build-pipeline-analyzer/SKILL.md`, `analyze-logs.sh`, `log-patterns/` |
 
 ---
 
@@ -340,7 +337,7 @@ The exercises below demonstrate how agent skills teach Copilot specialized capab
 
 ## ➡️ Next Module
 
-**[Module 6: MCP Servers](../06-mcp-servers/README.md)** — Agent skills teach Copilot specialized workflows, but what if you need to connect Copilot to external services—databases, APIs, cloud platforms? MCP servers provide runtime integration with live data sources.
+**[Module 5: MCP Servers](../05-mcp-servers/README.md)** — Agent skills teach Copilot specialized workflows, but what if you need to connect Copilot to external services—databases, APIs, cloud platforms? MCP servers provide runtime integration with live data sources.
 
 > *"Skills taught Copilot how to validate against our API schema. But the schema is static. What if I need Copilot to query our actual PostgreSQL database or call our live TV show API to validate real data?"*
 > — Marcus, about to discover MCP servers

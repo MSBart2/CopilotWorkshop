@@ -5,16 +5,16 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Module 7: Custom Agents
+  ## Module 6: Custom Agents
   CopilotWorkshop Training
 drawings:
   persist: false
 transition: slide-left
-title: Module 7 - Custom Agents
+title: Module 6 - Custom Agents
 mdc: true
 ---
 
-# Module 7: Custom Agents
+# Module 6: Custom Agents
 
 <div class="mt-4 text-2xl text-gray-400 font-light">The Context-Switching Problem</div>
 
@@ -509,25 +509,19 @@ Location: <code class="bg-gray-800 px-2 py-1 rounded">.github/agents/planner.age
 </div>
 
 <div class="flex items-center gap-4">
-<div class="flex-shrink-0 w-28 p-3 bg-orange-900/60 rounded text-center text-sm font-bold text-orange-200">Module 4</div>
-<div class="text-gray-400">→</div>
-<div class="flex-1 p-3 bg-gray-800 rounded text-sm text-gray-300"><span class="text-orange-300">Custom instructions</span> — path-based context</div>
-</div>
-
-<div class="flex items-center gap-4">
-<div class="flex-shrink-0 w-28 p-3 bg-purple-900/60 rounded text-center text-sm font-bold text-purple-200">Module 5</div>
+<div class="flex-shrink-0 w-28 p-3 bg-purple-900/60 rounded text-center text-sm font-bold text-purple-200">Module 4</div>
 <div class="text-gray-400">→</div>
 <div class="flex-1 p-3 bg-gray-800 rounded text-sm text-gray-300"><span class="text-purple-300">Agent skills</span> — specialized capabilities with scripts</div>
 </div>
 
 <div class="flex items-center gap-4">
-<div class="flex-shrink-0 w-28 p-3 bg-cyan-900/60 rounded text-center text-sm font-bold text-cyan-200">Module 6</div>
+<div class="flex-shrink-0 w-28 p-3 bg-cyan-900/60 rounded text-center text-sm font-bold text-cyan-200">Module 5</div>
 <div class="text-gray-400">→</div>
 <div class="flex-1 p-3 bg-gray-800 rounded text-sm text-gray-300"><span class="text-cyan-300">MCP servers</span> — live data connections</div>
 </div>
 
 <div class="flex items-center gap-4">
-<div class="flex-shrink-0 w-28 p-3 bg-red-900/60 rounded text-center text-sm font-bold text-red-200">Module 7</div>
+<div class="flex-shrink-0 w-28 p-3 bg-red-900/60 rounded text-center text-sm font-bold text-red-200">Module 6</div>
 <div class="text-gray-400">→</div>
 <div class="flex-1 p-3 bg-gray-800 rounded text-sm text-gray-300"><span class="text-red-300">Custom agents</span> — role-based orchestration</div>
 </div>

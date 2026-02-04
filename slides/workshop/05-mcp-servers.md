@@ -470,7 +470,7 @@ Config: <code class="bg-gray-800 px-2 py-1 rounded">.vscode/mcp.json</code> (wor
 <div class="text-3xl text-center text-gray-400 my-2">↓</div>
 
 <div class="flex items-center gap-4">
-<div class="flex-shrink-0 w-28 p-3 bg-orange-900/60 rounded text-center text-sm font-bold text-orange-200">Module 7</div>
+<div class="flex-shrink-0 w-28 p-3 bg-orange-900/60 rounded text-center text-sm font-bold text-orange-200">Module 6</div>
 <div class="text-gray-400">→</div>
 <div class="flex-1 p-3 bg-gray-800 rounded text-sm text-gray-300">Custom agents <span class="text-orange-300">bundle MCP servers</span> for specialized access</div>
 </div>
@@ -497,7 +497,7 @@ You have skills, MCP servers, prompts, instructions...
 
 <div class="p-6 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl text-center">
 <div class="text-2xl font-bold text-white mb-3">
-Module 7: Custom Agents
+Module 6: Custom Agents
 </div>
 <div class="text-base text-orange-100">
 Bundle everything into role-based agents you can switch between instantly
@@ -542,7 +542,7 @@ class: text-center
 
 <div class="mt-8 p-4 bg-gradient-to-r from-orange-600/30 to-cyan-600/30 rounded-xl border border-orange-500/30 max-w-xl mx-auto">
 <div class="text-lg">
-<span class="text-orange-300">Next:</span> Module 7 - Custom Agents
+<span class="text-orange-300">Next:</span> Module 6 - Custom Agents
 </div>
 <div class="text-sm text-gray-400 mt-1">Bundle skills, MCP servers & prompts into role-based presets</div>
 </div>

@@ -1,4 +1,4 @@
-# Exercise 7.1: Understand the Default Plan Agent
+# Exercise 6.1: Understand the Default Plan Agent
 
 ## 🎯 Objective
 
@@ -12,7 +12,7 @@ Analyze the built-in `@plan` agent to understand how custom agents work, includi
 
 ### 💭 Sarah's Question
 
-**Monday 3:45 PM** — The team has just finished Module 6 (MCP Servers) and is ready to learn about custom agents.
+**Monday 3:45 PM** — The team has just finished Module 5 (MCP Servers) and is ready to learn about custom agents.
 
 Sarah asks: *"Before we start building our own agents, I want to understand how the `@plan` agent that comes with Copilot actually works. What makes it different from regular chat? Why does it only research and never implement? How do those handoff buttons work?"*
 
@@ -305,13 +305,13 @@ Study the two handoffs:
 
 Now that you understand how agents work, you're ready to build your own:
 
-**[Exercise 7.2](exercise-7.2.md)** — Create a planning agent for FanHub (customized for your project)
+**[Exercise 6.2](exercise-6.2.md)** — Create a planning agent for FanHub (customized for your project)
 
-**[Exercise 7.3](exercise-7.3.md)** — Build an implementation agent with full editing tools and handoff
+**[Exercise 6.3](exercise-6.3.md)** — Build an implementation agent with full editing tools and handoff
 
-**[Exercise 7.4](exercise-7.4.md)** — Design a security review agent with read-only tools
+**[Exercise 6.4](exercise-6.4.md)** — Design a security review agent with read-only tools
 
-**[Exercise 7.5](exercise-7.5.md)** — Create a web-accessible product analysis agent
+**[Exercise 6.5](exercise-6.5.md)** — Create a web-accessible product analysis agent
 
 ---
 

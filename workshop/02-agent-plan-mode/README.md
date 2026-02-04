@@ -2,7 +2,7 @@
 
 ## ⏰ — The Complexity Problem
 
-> *"We have the foundation, but now I need to implement the character detail page. Where do I even start?"*  
+> *"We have the foundation, but now I need to implement the character detail page. Where do I even start?"*
 > — Marcus, staring at a feature request spanning frontend, backend, and database
 
 ---
@@ -19,9 +19,9 @@ Now, in **Module 2**, they face a new challenge: **complex, multi-file features*
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
-- Complete [Module 01: Repository Instructions](../01-repository-instructions/README.md)
+- Complete [Module 01: Instructions](../01-instructions/README.md)
 - ARCHITECTURE.md and .github/copilot-instructions.md files created
 
 ---
@@ -142,7 +142,7 @@ The exercises below use plan mode to tackle increasingly complex implementation 
 
 **When to use it:** When implementing features that span multiple files or layers, refactoring code with unclear dependencies, or breaking down ambiguous requirements into actionable steps.
 
-**What you'll build:** 
+**What you'll build:**
 - **Character detail page feature** — Full-stack implementation plan spanning frontend, backend, and database
 - **Validated implementation roadmap** — Plan reviewed and refined by experienced developers
 - **Executed feature code** — Frontend components, API endpoints, database queries, and tests
@@ -160,7 +160,7 @@ The exercises below use plan mode to tackle increasingly complex implementation 
 
 **[Module 3: Custom Prompts](../03-custom-prompts/README.md)** — Turn repeated requests into reusable prompt templates that capture domain expertise and accelerate common workflows.
 
-> *"I just ran the same planning workflow three times. There has to be a way to template this..."*  
+> *"I just ran the same planning workflow three times. There has to be a way to template this..."*
 > — Sarah, noticing patterns in her Copilot usage
 
 ---

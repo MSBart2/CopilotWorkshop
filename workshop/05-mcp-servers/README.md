@@ -1,27 +1,27 @@
-# Module 6: MCP Servers
+# Module 5: MCP Servers
 
 ## ⏰ — The Context Problem
 
-> *"Copilot is great at code generation, but it has no idea what's actually in our database. I keep having to explain our schema over and over."*  
+> *"Copilot is great at code generation, but it has no idea what's actually in our database. I keep having to explain our schema over and over."*
 > — Marcus, debugging database queries for the third time today
 
 ---
 
 ## 📖 Story So Far
 
-In **Module 5**, the team built custom Agent Skills that enabled domain-specific capabilities—TV show data validation, effort estimation, and API endpoint design.
+In **Module 4**, the team built custom Agent Skills that enabled domain-specific capabilities—TV show data validation, effort estimation, and API endpoint design.
 
 Those skills were powerful for code generation and analysis, but they were limited to the files in the workspace. When Marcus needed to query the FanHub database, Copilot couldn't see the actual data. Elena wanted to validate that test data matched production schema, but had to manually copy schema definitions into chat.
 
-Now, in **Module 6**, they discover **MCP servers**—a way to give Copilot direct access to external systems like databases, APIs, and other tools through a standardized protocol.
+Now, in **Module 5**, they discover **MCP servers**—a way to give Copilot direct access to external systems like databases, APIs, and other tools through a standardized protocol.
 
 💡 **Integration Note:** This module extends Agent Skills by connecting Copilot to external resources. While skills operate on workspace code, MCP servers bring live data, databases, and external APIs into the conversation.
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
-- Complete [Module 05: Agent Skills](../05-agent-skills/README.md) — Understanding custom tools helps contextualize MCP capabilities
+- Complete [Module 04: Agent Skills](../04-agent-skills/README.md) — Understanding custom tools helps contextualize MCP capabilities
 - Docker installed and running (for database connection exercise)
 - VS Code 1.101+ (for MCP support)
 
@@ -68,9 +68,9 @@ The exercises below use MCP servers to solve real problems by connecting Copilot
 
 | # | Exercise | Lead | Support | Problem | Solution | Key Metrics | Artifacts |
 |---|----------|------|---------|---------|----------|-------------|-----------|
-| [6.1](exercise-6.1.md) | Connect to FanHub Database | Marcus | Elena, David | Manual schema lookups: 2-5 min per query, context switching, outdated schema docs | Configure SQLite MCP server using stdio to query FanHub DB directly in chat | 5→0 min (eliminated), 0 context switches, live schema access | `.vscode/mcp.json`, verified database queries |
-| [6.2](exercise-6.2.md) | Automate PR Review Validation | Sarah | David, Marcus | Manual PR checklist validation: 5 min per PR, checking 8 criteria, human error on blocking issues | GitHub MCP server (HTTP) to auto-validate PR status, CI checks, approvals against Module 4 standards | 5 min→30 sec, 100% criteria coverage, 0 missed blocking issues | GitHub MCP config, automated PR validation queries |
-| [6.3](exercise-6.3.md) | Validate Backend API Against Data Rules | Elena | Marcus | Manual API contract validation: 10 min per cycle, manual curl testing, API contract breaks caught in staging | Custom MCP server queries FanHub backend API, validates responses against Module 5's tv-show-data-validator skill rules | 10 min→30 sec, 95%+ contract compliance, catches violations in development | FanHub API MCP server, API contract validation prompt |
+| [5.1](exercise-5.1.md) | Connect to FanHub Database | Marcus | Elena, David | Manual schema lookups: 2-5 min per query, context switching, outdated schema docs | Configure SQLite MCP server using stdio to query FanHub DB directly in chat | 5→0 min (eliminated), 0 context switches, live schema access | `.vscode/mcp.json`, verified database queries |
+| [5.2](exercise-5.2.md) | Automate PR Review Validation | Sarah | David, Marcus | Manual PR checklist validation: 5 min per PR, checking 8 criteria, human error on blocking issues | GitHub MCP server (HTTP) to auto-validate PR status, CI checks, approvals against Module 1 standards | 5 min→30 sec, 100% criteria coverage, 0 missed blocking issues | GitHub MCP config, automated PR validation queries |
+| [5.3](exercise-5.3.md) | Validate Backend API Against Data Rules | Elena | Marcus | Manual API contract validation: 10 min per cycle, manual curl testing, API contract breaks caught in staging | Custom MCP server queries FanHub backend API, validates responses against Module 4's tv-show-data-validator skill rules | 10 min→30 sec, 95%+ contract compliance, catches violations in development | FanHub API MCP server, API contract validation prompt |
 
 ---
 
@@ -80,7 +80,7 @@ The exercises below use MCP servers to solve real problems by connecting Copilot
 
 **When to use it:** When you need Copilot to understand live data (database queries, API responses, CI/CD status) or when your work spans systems beyond the workspace (GitHub repositories, production databases, external services).
 
-**What you'll build:** 
+**What you'll build:**
 - **MCP configuration file** — Defines server connections and authentication for your workspace
 - **Database connection** — stdio-based MCP server connecting Copilot to the FanHub PostgreSQL database
 - **Verified queries** — Natural language database queries that prove live schema access
@@ -132,9 +132,9 @@ MCP consists of three main components that work together to extend Copilot's cap
 
 ## ➡️ Next Module
 
-**[Module 7: Custom Agents](../07-custom-agents/README.md)** — Build specialized agents that combine multiple capabilities (skills + MCP servers) into domain-specific assistants.
+**[Module 6: Custom Agents](../06-custom-agents/README.md)** — Build specialized agents that combine multiple capabilities (skills + MCP servers) into domain-specific assistants.
 
-> *"We have skills, we have MCP servers, we have prompts... what if we combined them into a single 'FanHub Expert' agent that understands our entire stack?"*  
+> *"We have skills, we have MCP servers, we have prompts... what if we combined them into a single 'FanHub Expert' agent that understands our entire stack?"*
 > — Sarah, realizing the full potential of customization
 
 ---
