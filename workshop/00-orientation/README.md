@@ -357,8 +357,10 @@ This will be YOUR FanHub throughout the training.
 
 | # | Exercise | Lead | Support | Time | Topic |
 |---|----------|------|---------|------|-------|
-| [0.1](exercise-0.1.md) | Master Context Variables | All ⭐ | All 🤝 | 10 min | Learn to provide the right context to Copilot using `#file`, `@workspace`, `#codebase`, `#fetch`, and images. |
+| [0.1](exercise-0.1.md) | Context Fundamentals | All ⭐ | All 🤝 | 10 min | Quick practice with `#file`, `@workspace`, `#codebase`, `#fetch`, and images. |
 | [0.2](exercise-0.2.md) | Experience "The Struggle" | All ⭐ | All 🤝 | 10 min | Experience what happens when you build with AI that doesn't understand your codebase.  |
+
+> 📚 **Want to go deeper?** See the [Copilot Chat Tech Talk](../../tech-talks/copilot-chat/README.md) for comprehensive coverage of context mechanisms, VS Code 1.109 Chat UX enhancements, and best practices.
 
 **Total Time**: ~20 minutes
 
@@ -402,6 +404,10 @@ You've experienced:
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
 - [Getting Started with Copilot Chat](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)
 - [Copilot Chat in VS Code](https://code.visualstudio.com/docs/copilot/copilot-chat)
+
+### 🎤 Related Tech Talk
+
+- [Copilot Chat: Context Mastery](../../tech-talks/copilot-chat/README.md) — Deep dive into context mechanisms, VS Code 1.109 features, and best practices
 
 ---
 
