@@ -47,10 +47,10 @@ jobs:
 
           CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- . || echo "")
 
-          # Check if shared files changed (require full rebuild)
-          SHARED_PATTERNS="package.json|package-lock.json|style.css|global-top.vue|global-bottom.vue|layouts/|components/|setup/"
+          # Check if shared files or workflow changed (require full rebuild)
+          SHARED_PATTERNS="package.json|package-lock.json|style.css|global-top.vue|global-bottom.vue|layouts/|components/|setup/|\.github/workflows/deploy-slides\.yml"
           if echo "$CHANGED_FILES" | grep -qE "$SHARED_PATTERNS"; then
-            echo "🔄 Shared files changed - full rebuild required"
+            echo "🔄 Shared files or workflow changed - full rebuild required"
             echo "full_rebuild=true" >> $GITHUB_OUTPUT
             exit 0
           fi
