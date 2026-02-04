@@ -6,7 +6,7 @@
 
 ## The $2/Hour Engineer
 
-Let's start with a number that should get every leader's attention.
+Let's start with a number that will get every leader's attention.
 
 **A fully-engaged AI agent costs approximately $2/hour** using the best available models.
 
@@ -53,7 +53,7 @@ Every engineering organization has work that falls into one of three buckets:
 │                                                                                  │
 │   🔁 PURE TOIL                                                                   │
 │   ────────────                                                                   │
-│   • Issue triage                      Should be $2/hr                            │
+│   • Issue triage                      Best at $2/hr                              │
 │   • Compliance checking               Rule-following                             │
 │   • Status reports                    Data aggregation                           │
 │   • Audit preparation                 Pattern matching                           │
@@ -682,7 +682,7 @@ Leaders face three options:
 
 ### The Hybrid Path
 
-Most organizations should pursue a hybrid:
+Most organizations benefit from pursuing a hybrid:
 
 1. **Quick wins now:** Deploy agents for triage, PR descriptions, dependency updates with minimal infrastructure
 2. **Platform investment:** Build (or buy) the infrastructure for automated verification over 6 months
