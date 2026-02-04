@@ -108,6 +108,54 @@ When you send a chat message, here's what happens:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+---
+
+## Thinking Tokens: See the Model Reason (VS Code 1.109)
+
+### What Are Thinking Tokens?
+
+Some models (Claude, o-series) produce "thinking" content—internal reasoning steps before generating a response. VS Code 1.109 can now display these tokens, giving visibility into *how* the model approaches your request.
+
+### Enabling Thinking Display
+
+Setting: `chat.renderThinking`
+
+Values:
+- **"collapsed"** (default) — Thinking shown collapsed, expand on demand
+- **"expanded"** — Thinking shown expanded automatically
+- **"hidden"** — Thinking not displayed
+
+### What Thinking Reveals
+
+| Insight | Value |
+|---------|-------|
+| **Problem decomposition** | How the model breaks down your request |
+| **Tool selection reasoning** | Why specific tools were chosen |
+| **Context evaluation** | How files and instructions influenced decisions |
+| **Uncertainty signals** | When the model considers multiple approaches |
+
+### Debugging with Thinking
+
+When results don't match expectations, thinking tokens reveal:
+- Did the model misunderstand the request?
+- Was relevant context overlooked?
+- Did it consider the right approach but reject it?
+
+**Example thinking output:**
+```
+Looking at the user's request to add error handling...
+I see the function uses async/await pattern.
+The project has a custom ErrorHandler class in utils/.
+I should use that pattern for consistency.
+Let me check if there are similar functions to match style...
+```
+
+### Narrative
+
+Thinking tokens transform debugging from "why did it do that?" to "I see why it did that." For complex prompts or unexpected results, expanding the thinking section shows the model's decision process. This is particularly valuable when training teams on effective prompting—you can demonstrate how different prompts lead to different reasoning chains.
+
+---
+
 ### What to Look For in Debug View
 
 **Context section:**
@@ -143,6 +191,28 @@ Custom agents, instructions, prompts, and skills can fail to load silently. The 
 2. Select **Diagnostics**
 
 A markdown document opens showing the current state of all customization files.
+
+### Enhanced Diagnostics (VS Code 1.109)
+
+**Terminal Sandboxing Status:**
+- Shows whether terminal sandboxing is enabled
+- Indicates network and filesystem restrictions in effect
+- Reveals tool availability (`awaitTerminal`, `killTerminal`)
+
+**Attachment Optimization:**
+- Reports which attachments were sent to the model
+- Shows any optimization applied (large files, binary detection)
+- Indicates when attachments were skipped
+
+**Ask Questions Tool:**
+- Indicates if `chat.askQuestions.enabled` is active
+- Shows when model chose to ask clarifying questions
+- Reveals question types available (single-select, multi-select, free text)
+
+**Quick Feedback Submission:**
+- Direct link to report issues from diagnostics
+- Includes context for faster debugging
+- Helps improve Copilot when things go wrong
 
 ### Common Issues Revealed
 
@@ -308,6 +378,40 @@ Every model has a context window limit. When exceeded:
 
 ---
 
+## Mermaid Diagram Support (VS Code 1.109)
+
+### Visual Responses
+
+Copilot can now render Mermaid diagrams directly in chat responses:
+
+- **Flowcharts** — Process flows, decision trees
+- **Sequence diagrams** — API interactions, request flows
+- **Class diagrams** — Code architecture visualization
+- **State diagrams** — State machine representations
+
+### Prompting for Diagrams
+
+**Effective prompts:**
+- "Show me a sequence diagram of the authentication flow"
+- "Create a flowchart of the order processing logic"
+- "Visualize the class hierarchy for the payment module"
+
+### Debugging with Diagrams
+
+When investigating complex interactions:
+1. Ask Copilot to diagram the current flow
+2. Identify where expectations diverge from reality
+3. Use the visual as shared understanding
+
+### In Debug View
+
+The raw Mermaid code appears in the response section of Debug View, allowing you to:
+- Copy and modify diagrams
+- Understand exactly what was generated
+- Reuse in documentation
+
+---
+
 ## Network Diagnostics
 
 ### When Copilot Can't Connect
@@ -372,9 +476,11 @@ When you find effective prompts:
 
 1. **Visibility enables improvement** — You can't fix what you can't see
 2. **Debug View is essential** — System prompts, context, tool invocations all visible
-3. **Diagnostics catches config issues** — Load failures, syntax errors, wrong paths
-4. **Context window matters** — Monitor usage, optimize what's sent
-5. **Logs for deep issues** — Network, auth, and extension problems
+3. **Thinking tokens reveal reasoning** — See *why* the model made decisions (1.109)
+4. **Diagnostics catches config issues** — Load failures, syntax errors, wrong paths
+5. **Context window matters** — Monitor usage, optimize what's sent
+6. **Mermaid diagrams visualize flows** — Request visual explanations (1.109)
+7. **Logs for deep issues** — Network, auth, and extension problems
 
 ### Narrative
 
@@ -387,14 +493,16 @@ The difference between frustrating trial-and-error and systematic debugging is v
 ### Immediate Actions
 
 1. **Open Chat Debug View now** — Make a request and examine every section
-2. **Check Diagnostics** — Right-click in Chat to verify your customizations
-3. **Monitor context window** — Watch the indicator as you add context
+2. **Enable thinking display** — Set `chat.renderThinking` to "expanded" to see reasoning
+3. **Check Diagnostics** — Right-click in Chat to verify your customizations
+4. **Monitor context window** — Watch the indicator as you add context
 
 ### Next Steps
 
 1. **Enable trace logs** when debugging complex issues
 2. **Review MCP server status** if using external tools
 3. **Develop with Debug View visible** to iterate faster
+4. **Request Mermaid diagrams** for complex flow visualization
 
 ---
 

@@ -35,7 +35,7 @@ In **Module 5**, they connected **MCP servers**—direct access to databases, AP
 - Complete [Module 00: Orientation](../00-orientation/README.md)
 - Complete [Module 04: Agent Skills](../04-agent-skills/README.md) — Understanding skills helps you decide which to include in agents
 - Complete [Module 05: MCP Servers](../05-mcp-servers/README.md) — Agents can bundle MCP server access
-- VS Code 1.106+ (for custom agents support)
+- VS Code 1.109+ (for invocation controls, model fallback, and agent orchestration controls)
 
 ---
 
@@ -246,12 +246,15 @@ When generating plans, include:
 | `description` | Brief agent description shown as placeholder text | `"Security-focused code review"` |
 | `name` | Agent display name (defaults to filename) | `"Security Reviewer"` |
 | `tools` | List of available tools | `['search', 'analysis']` |
-| `model` | Preferred AI model | `"Claude Sonnet 4"` |
+| `model` | Preferred AI model (with optional fallback) | `"Claude Sonnet 4"` or `["Claude Opus 4.5", "Claude Sonnet 4"]` |
 | `handoffs` | Workflow transitions to other agents | See handoff structure below |
 | `target` | Where agent runs | `"vscode"` or `"github-copilot"` |
 | `mcp-servers` | MCP config for web agents | See web agent structure below |
 | `infer` | Enable as subagent (default true) | `false` to disable |
 | `argument-hint` | Input guidance text | `"Describe the security concern"` |
+| `user-invokable` | Can users directly invoke this agent? (1.109) | `false` for subagent-only |
+| `disable-model-invocation` | Prevent model from invoking this agent (1.109) | `true` for user-only agents |
+| `agents` | Allow/deny specific agents as subagents (1.109) | `{allow: ['plan', 'search']}` |
 
 ### Handoff Structure
 
@@ -270,6 +273,90 @@ handoffs:
 - **Implement → Review** — Complete code, switch to review agent
 - **Review → Implement** — Find issues, hand back to fix them
 - **Plan → Test** — Design feature, hand off to generate failing tests
+
+### Invocation Controls (VS Code 1.109)
+
+New frontmatter fields provide fine-grained control over how agents can be invoked:
+
+**`user-invokable`** — Control direct user access:
+```yaml
+---
+name: Implementation Helper
+user-invokable: false  # Hidden from dropdown, only callable as subagent
+---
+```
+
+**`disable-model-invocation`** — Prevent automatic model invocation:
+```yaml
+---
+name: Dangerous Operations
+disable-model-invocation: true  # Only users can invoke, never the model
+---
+```
+
+**`agents`** — Restrict which agents can be used as subagents:
+```yaml
+---
+name: Conductor
+agents:
+  allow: ['plan', 'search', 'research']  # Only these agents available
+  # OR
+  deny: ['dangerous-ops', 'deploy']       # These agents blocked
+---
+```
+
+**Orchestration pattern example:**
+```yaml
+---
+name: Conductor
+description: Orchestrates development workflow
+user-invokable: true
+agents:
+  allow: ['planner', 'implementer', 'reviewer']
+model: Claude Opus 4.5
+---
+
+---
+name: Planner
+user-invokable: false  # Subagent only
+tools: ['search', 'fetch', 'githubRepo']
+model: GPT-5
+---
+
+---
+name: Implementer
+user-invokable: false  # Subagent only
+tools: ['edit', 'create', 'search']
+model: Claude Sonnet 4
+---
+```
+
+**When to use each control:**
+| Control | Use Case |
+|---------|----------|
+| `user-invokable: false` | Specialized subagents that shouldn't clutter dropdown |
+| `disable-model-invocation: true` | Sensitive operations requiring explicit user approval |
+| `agents.allow` | Limit orchestration scope to specific trusted agents |
+| `agents.deny` | Block specific dangerous or incompatible agents |
+
+### Model Configuration with Fallback
+
+The `model` field now supports fallback chains (VS Code 1.109):
+
+```yaml
+---
+name: Complex Analysis
+model:
+  - "Claude Opus 4.5"     # Try first (best for complex reasoning)
+  - "Claude Sonnet 4"     # Fallback if Opus unavailable
+  - "GPT-5"               # Final fallback
+---
+```
+
+**Why fallback matters:**
+- Handle model availability variations
+- Balance cost vs. capability automatically
+- Ensure agent works across different subscriptions
 
 ### Tool Selection
 
@@ -346,6 +433,8 @@ tools: ['effort-estimator/*', 'github/*']
 | 🎯 **Workflow Presets** | Each agent bundles tools, skills, and instructions for specific tasks, eliminating manual configuration |
 | 🔄 **Guided Workflows** | Handoffs create sequential workflows (Plan → Implement → Review) with pre-filled prompts |
 | 🔗 **Capability Orchestration** | Agents combine repository instructions, skills, MCP servers, and tool selections from Modules 1-6 |
+| 🔒 **Invocation Controls** | `user-invokable`, `disable-model-invocation`, and `agents` restrict who/what can invoke each agent (1.109) |
+| 🎚️ **Model Fallback** | Multi-model arrays ensure agents work across availability and subscription variations (1.109) |
 
 ---
 

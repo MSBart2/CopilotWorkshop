@@ -19,12 +19,18 @@ The TechCorp team has cloned the FanHub starter project and experienced **The St
 
 **This module's mission**: Build a complete instruction system that transforms how Copilot understands your project:
 
+### Part 0: Quick Start
+0. **`/init` command** — Let AI analyze your codebase and generate initial instructions automatically
+
 ### Part 1: The "Magic File" Foundation
 1. **ARCHITECTURE.md** — Project context that reduces token waste
 2. **`.github/copilot-instructions.md`** — 🪄 The "magic file" that applies to ALL interactions
 
 ### Part 2: Path-Based Context
 3. **`.instructions.md` files** — Context-specific rules that only apply to matching files
+
+### Enterprise: Organization-Wide Instructions
+4. **Organization instructions** — Standards that apply to ALL repositories in your GitHub organization
 
 > 🪄 **The Magic File**: `.github/copilot-instructions.md` is special—VS Code automatically loads it into **every** Copilot interaction. No manual invocation, no applyTo patterns. It just works, always. This is your repository-wide baseline.
 
@@ -95,12 +101,48 @@ These files form the foundation of all Copilot customization:
 - **Location**: `.github/instructions/` directory
 - **📂 Conditional**: These files use `applyTo` glob patterns to match specific files
 
+#### The /init Command: AI-Assisted Bootstrap
+
+Before writing instructions manually, let the AI analyze your codebase first:
+
+**`/init` slash command:**
+- **Purpose**: Generate initial instructions by analyzing your codebase
+- **How it works**: Scans project structure, package files, and code patterns
+- **Output**: Creates `.github/copilot-instructions.md` or `AGENTS.md` with discovered conventions
+- **Best for**: Starting a new project, onboarding existing codebases, updating after major changes
+
+**The workflow:**
+1. Run `/init` to get an AI-generated baseline
+2. Review and refine the output
+3. Add team-specific knowledge the AI couldn't discover
+4. Layer with path-based instructions for context specificity
+
+#### Organization-Wide Instructions (Enterprise)
+
+For teams using GitHub Enterprise, organization-level instructions cascade to all repositories:
+
+**`github.copilot.chat.organizationInstructions.enabled`:**
+- **Purpose**: Apply consistent standards across ALL repositories in a GitHub organization
+- **Value**: Security policies, compliance requirements, and company conventions enforced automatically
+- **Result**: Every repository inherits baseline standards without per-repo configuration
+- **Enabled by default**: Set to `false` to opt out
+
+**Instruction hierarchy (all combined):**
+1. 🏢 **Organization instructions** — Enterprise-wide baseline
+2. 🪄 **Magic file** — Repository-specific standards
+3. 📂 **Path-based** — Context-specific rules
+
+> 💡 **Enterprise Tip:** Organization instructions are configured in GitHub Organization Settings → Copilot → Custom Instructions. Individual repositories can extend but not override organization rules.
+
 #### How They Work Together
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ Every Copilot Interaction                                   │
 ├─────────────────────────────────────────────────────────────┤
+│ 0. Organization instructions → Enterprise baseline          │  🏢 IF
+│    (GitHub org settings)       Security, compliance         │  CONFIGURED
+│                                                             │
 │ 1. ARCHITECTURE.md         → "What" and "Where"             │
 │    (project context)          Project structure & data flow │
 │                                                             │
@@ -174,6 +216,12 @@ VS Code combines multiple instruction sources automatically:
 
 ## 🔨 Exercises
 
+### Part 0: Quick Start
+
+| # | Exercise | Lead | Support | Time | Topic |
+|---|----------|------|---------|------|-------|
+| [1.0](exercise-1.0.md) | Bootstrap with /init | David | Sarah, Elena | 8 min | 🚀 AI-Generated Baseline |
+
 ### Part 1: The Magic File Foundation
 
 | # | Exercise | Lead | Support | Time | Topic |
@@ -189,11 +237,14 @@ VS Code combines multiple instruction sources automatically:
 | [1.4](exercise-1.4.md) | Language-Specific Standards | Elena | Marcus | 8 min | PEP 8, Airbnb, TypeScript |
 | [1.5](exercise-1.5.md) | File-Type Specialized Guidance | Marcus | Elena, David | 12 min | Tests, Docker, Docs |
 
-**Total Time**: ~50 minutes
+**Total Time**: ~58 minutes
 
 ---
 
 ## 📚 Official Documentation
+
+### Quick Start (/init Command)
+- **[VS Code: Set up workspace with /init](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_set-up-your-workspace-for-ai-with-init)** — Generate instructions from codebase analysis
 
 ### Magic File (copilot-instructions.md)
 - **[VS Code: Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)** — Complete guide to `.github/copilot-instructions.md`
@@ -203,6 +254,9 @@ VS Code combines multiple instruction sources automatically:
 - **[VS Code: Instruction Files](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_instruction-files)** — Path-based instructions with `applyTo` patterns
 - **[VS Code: Glob Patterns](https://code.visualstudio.com/docs/editor/glob-patterns)** — Understanding glob patterns for targeting files
 - **[GitHub Tutorial: Your First Custom Instructions](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/your-first-custom-instructions)** — Step-by-step guide
+
+### Organization-Wide Instructions (Enterprise)
+- **[GitHub Docs: Organization Instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/organization-instructions)** — Apply standards across all repositories
 
 ### Related Resources
 - [VS Code: Copilot Chat Context](https://code.visualstudio.com/docs/copilot/copilot-chat#_chat-context) — Understanding `@workspace` and context operators
@@ -224,6 +278,11 @@ Now that Copilot knows our structure (ARCHITECTURE.md), our universal patterns (
 ## ✅ Module Checklist
 
 Before moving to Module 2, verify:
+
+### Part 0: Quick Start
+- [ ] Ran `/init` command to generate baseline instructions
+- [ ] Reviewed AI-generated output for accuracy
+- [ ] Identified items needing refinement
 
 ### Part 1: Magic File Foundation
 - [ ] `fanhub/docs/ARCHITECTURE.md` exists and includes: tech stack, folder structure, data flow
@@ -249,16 +308,22 @@ Before moving to Module 2, verify:
 | 📂 **Path-Based for Context-Specific** | `.instructions.md` files activate only when editing matching files |
 | 🎯 **Right Guidance, Right Context** | Layer, language, and file-type instructions eliminate cross-context pollution |
 | 🔄 **Iterate and Refine** | You reviewed and improved AI output before accepting |
+| 🚀 **AI-First Bootstrap** | `/init` analyzed codebase before manual refinement |
 
 #### 💭 Elena's Realization
 
 *"I kept trying to put everything in one file. Now I understand—universal rules go in the magic file, specific rules go in path-based instructions. My Python files get PEP 8, my tests get testing conventions, and nothing gets confused."*
+
+#### 💭 David's Insight
+
+*"Running `/init` first was a game-changer. It found patterns in the codebase I'd forgotten existed. Then we just refined what it discovered instead of starting from scratch."*
 
 ---
 
 ## 🔗 Compounding Value
 
 **What we created in this module:**
+- AI-generated baseline via `/init` — Starting point from codebase analysis
 - `docs/ARCHITECTURE.md` — Project context
 - `.github/copilot-instructions.md` — 🪄 Universal team patterns
 - `.github/instructions/*.instructions.md` — 📂 Context-specific rules

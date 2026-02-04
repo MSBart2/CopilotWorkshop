@@ -230,6 +230,36 @@ Background agents enable sophisticated multi-agent workflows. For independent ta
 
 ## Session Management Interface (VS Code 1.109)
 
+### Ask Questions Tool (Experimental)
+
+Setting: `chat.askQuestions.enabled`
+
+Instead of making assumptions, agents can now ask clarifying questions:
+
+- **Single/multi-select options:** Choose from predefined answers
+- **Free text input:** Provide custom responses
+- **Recommended answers highlighted:** Quick decisions for common cases
+- **Keyboard navigation:** Up/Down to navigate, number keys to select
+
+**Example interaction:**
+```
+Agent: "I need clarification before proceeding:
+
+        What authentication pattern should I use?
+        [1] JWT tokens (recommended)
+        [2] Session cookies
+        [3] OAuth2
+        [4] Custom - describe your requirements"
+```
+
+The Plan agent uses this extensively in its 4-phase workflow:
+1. **Discovery** — Explores codebase autonomously
+2. **Alignment** — Asks clarifying questions before committing
+3. **Design** — Drafts implementation plan
+4. **Refinement** — Adds verification criteria
+
+> 💡 **Quick access:** Use `/plan` slash command to invoke the Plan agent directly.
+
 ### Session Type Picker
 
 The new session type picker in the chat input area serves two purposes:
@@ -298,19 +328,40 @@ Agents can spawn **subagents** to break complex tasks into smaller parts:
 
 - Each subagent operates in its own **dedicated context window**
 - Subagents don't consume the main agent's context budget
-- **Parallel execution:** Independent subagents run simultaneously
+- **Parallel execution (1.109):** Independent subagents now run simultaneously, not sequentially
 - Full visibility into subagent tasks, tools used, and results
+
+### Custom Agents in Subagents (1.109)
+
+Setting: `chat.customAgentInSubagent.enabled`
+
+Subagents can now use your custom agents:
+- Main agent delegates to specialized `@code-reviewer` subagent
+- Each subagent gets the full custom agent configuration
+- Chain specialized agents for complex workflows
+
+**New frontmatter controls for orchestration:**
+```yaml
+---
+name: implementation-agent
+user-invokable: false           # Hidden from UI, only callable as subagent
+agents: ['Modify', 'Search']    # Can only invoke these subagents
+---
+```
 
 ### Search Subagent (Experimental)
 
-The search subagent (`github.copilot.chat.searchSubagent.enabled`) handles iterative codebase searches:
+Setting: `github.copilot.chat.searchSubagent.enabled`
+
+The search subagent handles iterative codebase searches:
 
 - Runs in isolated agent loop
 - Refines queries, tries multiple approaches
 - Explores different parts of workspace
 - Returns focused results without polluting main context
+- Preserves main agent's context window for orchestration
 
-### Subagent Visibility
+### Subagent Visibility (Enhanced in 1.109)
 
 Chat shows expanded subagent information:
 - Task being performed
@@ -318,10 +369,11 @@ Chat shows expanded subagent information:
 - Current tool in use
 - Full initial prompt (expandable)
 - Returned result
+- **Active spinner** showing parallel execution
 
 ### Narrative
 
-Subagents solve the context overflow problem in complex tasks. When an agent needs to search, analyze, or implement across many files, spawning subagents keeps each operation contained. The main agent's context stays clean for high-level orchestration. Parallel subagent execution significantly speeds up tasks that decompose into independent parts. The search subagent is particularly valuable: instead of consuming main context with iterative queries, it refines searches independently and returns only the relevant results.
+Subagents solve the context overflow problem in complex tasks. When an agent needs to search, analyze, or implement across many files, spawning subagents keeps each operation contained. The main agent's context stays clean for high-level orchestration. The 1.109 release transforms subagents with **parallel execution**—independent subagents run simultaneously, dramatically speeding up tasks that decompose into parts. Custom agent support means your specialized agents work as subagents too, enabling sophisticated orchestration patterns. The search subagent is particularly valuable: instead of consuming main context with iterative queries, it refines searches independently and returns only the relevant results.
 
 ---
 
@@ -388,6 +440,55 @@ VS Code 1.109 introduces Claude Agent support:
 ### Narrative
 
 Claude Agent integration brings Anthropic's agent SDK directly into VS Code. This isn't just model access—it's the full Claude Agent harness with specialized prompts, tools, and architecture. For tasks requiring extended reasoning, Claude Agent provides interleaved thinking between tool calls, giving visibility into model decision-making. The integration leverages your existing Copilot subscription, requiring no additional setup. Select Claude Agent from the session type picker and experience a different approach to agentic workflows.
+
+---
+
+## Agent Orchestration Patterns
+
+### Community Orchestration Systems
+
+The VS Code agent ecosystem has produced sophisticated orchestration frameworks:
+
+**[Copilot Orchestra](https://github.com/ShepAlderson/copilot-orchestra):**
+- **Conductor agent** orchestrates the workflow
+- **Planning subagent** creates implementation plans
+- **Implementation subagent** executes code changes
+- **Code review subagent** validates results
+- Complete development cycle in one coordinated flow
+
+**[GitHub Copilot Atlas](https://github.com/bigguy345/Github-Copilot-Atlas):**
+- **Prometheus** — Strategic planning and requirements analysis
+- **Oracle** — Research and knowledge gathering
+- **Sisyphus** — Persistent implementation work
+- **Explorer** — Rapid codebase discovery
+
+### Building Your Own Orchestration
+
+VS Code provides the building blocks:
+
+1. **Custom agents** (`.github/agents/`) — Specialized personas with tool restrictions
+2. **Subagents** — Context-isolated task delegation
+3. **Agent invocation controls** — `user-invokable`, `disable-model-invocation`, `agents`
+4. **Model selection** — Different models for different agent roles
+
+**Example orchestration pattern:**
+```
+┌─────────────────┐
+│   Conductor     │  ← User-invokable, orchestrates workflow
+│   (Claude 4.5)  │
+└────────┬────────┘
+         │
+    ┌────┴────┬────────────┐
+    ▼         ▼            ▼
+┌───────┐ ┌───────┐  ┌───────────┐
+│Planner│ │Coder  │  │ Reviewer  │  ← Not user-invokable,
+│(GPT-5)│ │(Sonnet)│ │(Claude 4.5)│    subagent-only
+└───────┘ └───────┘  └───────────┘
+```
+
+### Narrative
+
+Agent orchestration represents the frontier of AI-assisted development. Instead of one agent handling everything, specialized agents collaborate—each optimized for its role. The conductor manages workflow, the planner creates structure, the implementer writes code, the reviewer validates quality. This mirrors human team organization, but with agents that scale infinitely. The community systems demonstrate what's possible; VS Code provides the primitives to build your own.
 
 ---
 

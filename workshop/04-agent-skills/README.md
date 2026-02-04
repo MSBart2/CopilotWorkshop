@@ -24,7 +24,7 @@ Now, in **Module 4**, they face a new challenge: **teaching Copilot specialized 
 ⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
 - Complete [Module 01: Instructions](../01-instructions/README.md)
-- Setting enabled: `chat.useAgentSkills` (required for Agent Skills support in VS Code)
+- VS Code 1.109+ (Agent Skills are now generally available and enabled by default)
 
 ---
 
@@ -40,6 +40,8 @@ This isn't about replacing instructions—it's about **teaching new capabilities
 
 💡 **Understanding Agent Skills**
 
+> 🎉 **Now Generally Available (VS Code 1.109+):** Agent Skills are GA and enabled by default. No configuration required—just create skills and start using them.
+
 **Agent Skills** are folders of instructions, scripts, examples, and resources that teach Copilot specialized capabilities. Each skill is stored in its own directory with a `SKILL.md` file that defines the skill's behavior.
 
 **Key characteristics:**
@@ -48,6 +50,7 @@ This isn't about replacing instructions—it's about **teaching new capabilities
 - **Portable standard** — Works across VS Code, Copilot CLI, and Copilot coding agent (open standard at agentskills.io)
 - **Automatic activation** — Copilot decides when to use skills based on your prompt matching the skill's description
 - **Composable** — Multiple skills can work together to handle complex multi-step workflows
+- **Extension distribution** — Extensions can package and distribute skills using the `chatSkills` contribution point
 
 **Three-level loading system:**
 1. **Discovery** — Copilot always knows which skills are available (reads `name` and `description` from YAML frontmatter)
@@ -57,6 +60,11 @@ This isn't about replacing instructions—it's about **teaching new capabilities
 **Two skill scopes:**
 - **Project skills:** `.github/skills/` (recommended) or `.claude/skills/` (legacy) — team-shared, version-controlled
 - **Personal skills:** `~/.copilot/skills/` (recommended) or `~/.claude/skills/` (legacy) — individual preferences
+
+**Additional skill locations (VS Code 1.109+):**
+- **Custom paths:** Configure additional directories with `chat.agentSkillsLocations` setting
+- **Extension-bundled:** Extensions can contribute skills via `chatSkills` contribution point in `package.json`
+- **Organization-wide:** Enterprise organizations can distribute skills across all repositories
 
 **How they differ from what you've learned:**
 
@@ -192,6 +200,35 @@ Agent Skills use a three-level loading system to keep context efficient:
 6. Other skill resources remain unloaded
 
 **Why this matters:** You can have 20+ skills installed. Only 1-2 load per task. Context stays efficient.
+
+### Extension-Distributed Skills (VS Code 1.109+)
+
+Extensions can package and distribute skills to users. This enables:
+- **Shared expertise:** Framework authors bundle framework-specific skills
+- **Automatic installation:** Skills install with the extension
+- **Version management:** Skills update with extension updates
+
+**Extension authors register skills in `package.json`:**
+
+```json
+{
+  "contributes": {
+    "chatSkills": [
+      {
+        "path": "./skills/my-framework-skill"
+      },
+      {
+        "path": "./skills/testing-patterns"
+      }
+    ]
+  }
+}
+```
+
+**Example use cases:**
+- React extension includes component testing skill
+- Azure extension includes deployment troubleshooting skill
+- Testing framework includes test generation patterns
 
 ### Script Execution (The Power Feature)
 
@@ -331,7 +368,15 @@ The exercises below demonstrate how agent skills teach Copilot specialized capab
 - 📖 [About Agent Skills (GitHub Docs)](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) — Understanding skills across Copilot products
 - 📖 [Agent Skills Standard](https://agentskills.io/) — Open standard specification and portability details
 
-> 💡 **Important for this module:** Enable the `chat.useAgentSkills` setting in VS Code to use Agent Skills. Skills use progressive disclosure—Copilot always knows which skills are available (level 1: discovery), loads full instructions only when relevant (level 2), and accesses scripts/examples on-demand (level 3). This means you can install many skills without consuming context until they're actually needed.
+**Management Commands (VS Code 1.109+):**
+- `Chat: Configure Skills` — View all available skills and their load status
+- `Chat: New Skill File` — Create a new skill in your workspace or user home
+
+**Settings:**
+- `chat.useAgentSkills` — Enable/disable agent skills (default: `true` in 1.109+)
+- `chat.agentSkillsLocations` — Additional directories to search for skills
+
+> 💡 **Skill Diagnostics:** Right-click in Chat view → Diagnostics to see all loaded skills, their source, and any errors.
 
 ---
 

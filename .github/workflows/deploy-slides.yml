@@ -28,6 +28,67 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Need previous commit to detect changes
+
+      - name: Detect changed slides
+        id: changes
+        working-directory: ./slides
+        run: |
+          echo "🔍 Detecting changed files..."
+
+          # Get changed files between HEAD^ and HEAD
+          # For workflow_dispatch or first commit, build all
+          if ! git rev-parse HEAD^ >/dev/null 2>&1; then
+            echo "📦 First commit or shallow clone - building all slides"
+            echo "full_rebuild=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- . || echo "")
+
+          # Check if shared files changed (require full rebuild)
+          SHARED_PATTERNS="package.json|package-lock.json|style.css|global-top.vue|global-bottom.vue|layouts/|components/|setup/"
+          if echo "$CHANGED_FILES" | grep -qE "$SHARED_PATTERNS"; then
+            echo "🔄 Shared files changed - full rebuild required"
+            echo "full_rebuild=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Extract changed slide .md files
+          CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^slides/(workshop|tech-talks|exec-talks)/.*\.md$" | sed 's|^slides/||' || echo "")
+
+          if [ -z "$CHANGED_SLIDES" ]; then
+            echo "📭 No slide files changed"
+            echo "full_rebuild=false" >> $GITHUB_OUTPUT
+            echo "changed_slides=" >> $GITHUB_OUTPUT
+          else
+            echo "📝 Changed slides:"
+            echo "$CHANGED_SLIDES"
+            echo "full_rebuild=false" >> $GITHUB_OUTPUT
+            # Convert to space-separated for easier iteration
+            echo "changed_slides<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGED_SLIDES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Download previous build from gh-pages
+        if: steps.changes.outputs.full_rebuild != 'true'
+        continue-on-error: true
+        run: |
+          echo "📥 Downloading previous build from gh-pages branch..."
+          mkdir -p ./slides/dist
+
+          # Clone only the gh-pages branch (shallow)
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }}.git ./previous-build
+            cp -r ./previous-build/* ./slides/dist/ 2>/dev/null || true
+            rm -rf ./previous-build
+            echo "✅ Previous build restored"
+          else
+            echo "⚠️ No gh-pages branch found - will build all slides"
+            echo "full_rebuild=true" >> $GITHUB_ENV
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,7 +103,41 @@ jobs:
         working-directory: ./slides
         run: npx playwright install chromium --with-deps
 
-      - name: Build all presentations
+      - name: Build presentations (incremental)
+        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != ''
+        working-directory: ./slides
+        run: |
+          echo "🚀 Building changed slides only..."
+
+          # Ensure dist directories exist
+          mkdir -p dist/workshop dist/tech-talks dist/exec-talks
+
+          # Build only changed slides
+          while IFS= read -r SLIDE_FILE; do
+            if [ -n "$SLIDE_FILE" ] && [ -f "$SLIDE_FILE" ]; then
+              # Extract category and basename
+              CATEGORY=$(dirname "$SLIDE_FILE")
+              BASENAME=$(basename "$SLIDE_FILE" .md)
+
+              echo "🔨 Building ${CATEGORY}/${BASENAME}..."
+
+              npx slidev build "$SLIDE_FILE" \
+                --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
+                --out "$(pwd)/dist/${CATEGORY}/${BASENAME}"
+
+              echo "✅ ${CATEGORY}/${BASENAME} built successfully"
+            fi
+          done <<< "${{ steps.changes.outputs.changed_slides }}"
+
+          # Ensure index.html exists
+          if [ ! -f dist/index.html ]; then
+            cp index-custom.html dist/index.html
+          fi
+
+          echo "✨ Incremental build complete!"
+
+      - name: Build all presentations (full rebuild)
+        if: steps.changes.outputs.full_rebuild == 'true'
         working-directory: ./slides
         run: |
           echo "🚀 Building all Slidev presentations..."
@@ -102,6 +197,17 @@ jobs:
           cp index-custom.html dist/index.html
 
           echo "✨ All presentations built successfully!"
+
+      - name: Skip build (no changes)
+        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides == ''
+        working-directory: ./slides
+        run: |
+          echo "⏭️ No slide changes detected - using previous build"
+          # Ensure we have a valid dist directory
+          if [ ! -d dist ] || [ ! -f dist/index.html ]; then
+            echo "⚠️ No previous build available - triggering full rebuild"
+            echo "full_rebuild=true" >> $GITHUB_ENV
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
