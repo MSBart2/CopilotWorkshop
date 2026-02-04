@@ -446,7 +446,7 @@ Now that you've mastered these customization techniques in the workshop context,
 
 - **GitHub Copilot on the Web** — Multi-interface AI across browser and mobile (see `tech-talks/copilot-web/`)
 - **GitHub Copilot CLI** — Terminal-native automation with Plan Mode (see `tech-talks/copilot-cli/`)
-- **Agentic SDLC** — Background agents and autonomous workflows (see `tech-talks/agentic-sdlc/`)
+- **Agentic Sessions** — Multi-environment agent orchestration (see `tech-talks/agentic-sessions/`)
 - **Enterprise Patterns** — Organization-wide scaling and governance (see `tech-talks/enterprise-patterns/`)
 - **Copilot Hooks** — Lifecycle validation and compliance automation (see `tech-talks/copilot-hooks/`)
 

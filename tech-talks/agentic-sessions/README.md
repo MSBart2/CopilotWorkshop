@@ -1,6 +1,28 @@
-# Agentic SDLC: Background Agents and Autonomous Workflows
+# Agentic Sessions: Multi-Environment Agent Orchestration
 
-Autonomous development through isolated execution and multi-agent orchestration
+Delegate, monitor, and switch between local, background, and cloud agents from a unified interface
+
+---
+
+## The Agent Environment Landscape
+
+### Key Points
+
+- **Multiple execution environments**
+  Local agents for interactive work, background agents for autonomous tasks, cloud agents for large-scale operations
+
+- **Session type picker (VS Code 1.109)**
+  Unified interface to start sessions across environments and hand off between them
+
+- **Agent status indicator**
+  Command center badge showing in-progress, unread, and attention-needed sessions
+
+- **Parallel subagents**
+  Break complex tasks into smaller parts running in dedicated context windows
+
+### Narrative
+
+VS Code has evolved into a unified agent UX supporting multiple execution environments. Local agents work interactively in your IDE. Background agents operate autonomously in Git worktrees. Cloud agents handle large-scale operations on GitHub infrastructure. The January 2026 release (v1.109) introduced the session type picker—a single interface to start, switch, and delegate between these environments. Plan a task locally, then hand off to cloud implementation with one click. Monitor multiple parallel sessions from the Agent Sessions view. The agent status indicator in the command center shows which sessions need attention. This transforms agent interaction from single-session focus to multi-session orchestration.
 
 ---
 
@@ -206,22 +228,45 @@ Background agents enable sophisticated multi-agent workflows. For independent ta
 
 ---
 
-## Session Management Interface
+## Session Management Interface (VS Code 1.109)
 
-### VS Code Background Agents Panel
+### Session Type Picker
 
-**Key features:**
-- **Active agents list:** See all running background agents with status
+The new session type picker in the chat input area serves two purposes:
+
+- **Choose session type:** Start local, background, cloud, or Claude agent sessions
+- **Hand off sessions:** Transfer an ongoing session to a different environment
+
+**Example workflow:**
+1. Plan interactively in local session
+2. Use picker to "Continue in Cloud" for implementation
+3. Cloud agent works while you start next local session
+
+> 💡 **Tip:** Bind `workbench.action.chat.newLocalChat` to a keyboard shortcut for quick local session creation.
+
+### Agent Sessions View
+
+**Key features (enhanced in 1.109):**
+- **Resize sessions list:** Adjust when showing side-by-side
+- **Multi-select sessions:** Bulk operations across sessions
+- **Stacked view:** Better navigation with filter support
+- **Active agents list:** See all running agents with status
 - **Progress monitoring:** Real-time updates without interrupting agents
 - **Log streaming:** Review agent decisions and reasoning
-- **Control actions:** Pause, resume, or terminate agents as needed
 
-**Information displayed:**
-- Agent name and task description
-- Current phase (planning, implementing, testing, documenting)
-- Files modified count
-- Branch name and worktree location
-- Estimated time remaining
+### Agent Status Indicator
+
+The command center now shows an **agent status indicator** (`chat.agentsControl.enabled`):
+
+| Status | Meaning |
+|--------|---------|
+| 🔵 In-progress | Agent actively working |
+| 🟡 Unread | Session has new updates |
+| 🔴 Attention needed | Agent requires input or approval |
+
+Click the indicator to quickly open and filter the sessions list.
+
+**Chat button behavior:** Configure `chat.agentsControl.clickBehavior` to cycle through sidebar, maximized, or hidden states.
 
 ### CLI Management
 
@@ -241,7 +286,167 @@ gh copilot agents stop <agent-id>
 
 ### Narrative
 
-VS Code provides unified session management for background agents. The Background Agents panel shows all active agents with real-time status: current task phase, files modified, branch name. You monitor progress without interrupting agents—they continue autonomous execution. Logs stream agent reasoning: "Analyzing dependencies... Generating test cases... Running validation..." This visibility enables informed decisions about when to review results. CLI commands provide programmatic access for scripting and CI/CD integration. The combination ensures you maintain control while agents work independently.
+VS Code 1.109 transforms session management from single-focus to multi-session orchestration. The session type picker enables seamless hand-offs: plan locally, implement in cloud, review results—all from one interface. The Agent Sessions view now supports bulk operations across multiple parallel sessions. The status indicator in the command center provides at-a-glance visibility: which sessions are working, which have updates, which need attention. This unified approach enables developers to run 5-10 parallel agent sessions without losing track of progress.
+
+---
+
+## Subagents: Parallel Task Decomposition
+
+### How Subagents Work
+
+Agents can spawn **subagents** to break complex tasks into smaller parts:
+
+- Each subagent operates in its own **dedicated context window**
+- Subagents don't consume the main agent's context budget
+- **Parallel execution:** Independent subagents run simultaneously
+- Full visibility into subagent tasks, tools used, and results
+
+### Search Subagent (Experimental)
+
+The search subagent (`github.copilot.chat.searchSubagent.enabled`) handles iterative codebase searches:
+
+- Runs in isolated agent loop
+- Refines queries, tries multiple approaches
+- Explores different parts of workspace
+- Returns focused results without polluting main context
+
+### Subagent Visibility
+
+Chat shows expanded subagent information:
+- Task being performed
+- Custom agent used (if any)
+- Current tool in use
+- Full initial prompt (expandable)
+- Returned result
+
+### Narrative
+
+Subagents solve the context overflow problem in complex tasks. When an agent needs to search, analyze, or implement across many files, spawning subagents keeps each operation contained. The main agent's context stays clean for high-level orchestration. Parallel subagent execution significantly speeds up tasks that decompose into independent parts. The search subagent is particularly valuable: instead of consuming main context with iterative queries, it refines searches independently and returns only the relevant results.
+
+---
+
+## Cloud Agents: Large-Scale Operations
+
+### Cloud Agent Capabilities (1.109)
+
+When starting a cloud agent session:
+
+- **Model selection:** Choose from available models for cloud execution
+- **Custom agents:** Use repository-defined agents from default branch
+- **Partner agents:** Access third-party agents where available
+- **Multi-root support:** Select which folder to use in multi-root workspaces
+
+### Cloud Agent Use Cases
+
+**Large-scale refactoring:**
+- Modify 100+ files without local resource constraints
+- GitHub infrastructure handles compute
+
+**Cross-repository operations:**
+- Access multiple repos in a single session
+- Coordinate changes across microservices
+
+**Long-running tasks:**
+- Operations that would timeout locally
+- Continuous execution without IDE dependency
+
+### Checkout Workflow
+
+The **Checkout** option now works without GitHub Pull Requests extension pre-installed:
+1. Select Checkout action
+2. Extension installs automatically if needed
+3. Hands off to extension for checkout
+
+### Narrative
+
+Cloud agents extend agent capabilities beyond local machine limitations. Large refactoring operations that would strain local resources run on GitHub infrastructure. The 1.109 release added model selection for cloud agents—choose the best model for your specific task. Custom agents defined in your repository work identically in cloud as locally. The seamless checkout workflow means you can start reviewing cloud agent work immediately without manual extension setup.
+
+---
+
+## Claude Agent Integration (Preview)
+
+### Native Claude Agent SDK
+
+VS Code 1.109 introduces Claude Agent support:
+
+- **Official Anthropic harness:** Same prompts, tools, and architecture as other Claude Agent implementations
+- **Copilot subscription models:** Use Claude models included in your GitHub Copilot subscription
+- **Session type picker:** Claude Agent appears alongside Local, Background, and Cloud options
+
+### When to Use Claude Agent
+
+**Ideal for:**
+- Tasks benefiting from Claude's reasoning strengths
+- Extended thinking for complex architectural decisions
+- Interleaved thinking with tool calls
+
+**Configuration:**
+- `github.copilot.chat.anthropic.thinking.budgetTokens`: Configure thinking token budget
+- `github.copilot.chat.anthropic.toolSearchTool.enabled`: Enable tool discovery
+- `github.copilot.chat.anthropic.contextEditing.enabled`: Efficient context management
+
+### Narrative
+
+Claude Agent integration brings Anthropic's agent SDK directly into VS Code. This isn't just model access—it's the full Claude Agent harness with specialized prompts, tools, and architecture. For tasks requiring extended reasoning, Claude Agent provides interleaved thinking between tool calls, giving visibility into model decision-making. The integration leverages your existing Copilot subscription, requiring no additional setup. Select Claude Agent from the session type picker and experience a different approach to agentic workflows.
+
+---
+
+## Background Agent Enhancements (1.109)
+
+### New Capabilities
+
+**Custom agents for background:**
+- Use repository-defined agents (`.github/agents/`) in background mode
+- Same agent configuration works across all execution environments
+
+**Image context support:**
+- Attach images as context in background agent sessions
+- Useful for UI implementation from mockups
+
+**Multi-root workspace support:**
+- Select which folder to use in multi-root workspaces
+- Clear scope for agent operations
+
+**Auto-commit per turn:**
+- Changes committed to Git worktree at end of each turn
+- Simplified working set display
+- Keep/Undo actions removed (Git history provides rollback)
+
+### Worktree File Inclusion
+
+New setting `git.worktreeIncludeFiles`:
+- Specify additional files copied to worktree after creation
+- Useful for git-ignored files (local config, build artifacts)
+- Ensures agents have complete working environment
+
+### Narrative
+
+Background agents in 1.109 gain feature parity with local and cloud environments. Custom agents now work identically across all session types—define once, use everywhere. Image context support enables background agents to implement UI from design mockups autonomously. The auto-commit behavior per turn creates granular Git history, enabling precise rollback if needed. For projects with git-ignored dependencies, the worktree include files setting ensures agents have everything they need without manual intervention.
+
+---
+
+## Agent Sessions Welcome Page (Experimental)
+
+### Session-Centric Startup
+
+Enable with `workbench.startupEditor: agentSessionsWelcomePage`:
+
+- **Recent sessions:** Front-and-center display of agent sessions
+- **Quick actions:** Common operations accessible immediately
+- **Embedded chat widget:** Start new sessions without navigation
+
+### When to Use
+
+**Ideal for:**
+- Developers running multiple parallel agents daily
+- Teams with agent-first workflows
+- Environments where session tracking matters most
+
+### Narrative
+
+The Agent Sessions Welcome Page represents VS Code's evolution toward session-centric development. Instead of starting with files or folders, you start with your agent sessions—what's running, what completed, what needs attention. This experimental feature signals the direction: agents as first-class development primitives, not add-ons to traditional workflows.
+
+---
 
 ---
 
@@ -543,24 +748,27 @@ Background agents represent the transition from AI-assisted development to auton
 
 ### Core Insights
 
-- **Supervision is the bottleneck**
-  Interactive agents scale linearly with human attention; background agents enable parallelism
+- **Session type picker unifies environments**
+  Local, background, cloud, and Claude agents from one interface with seamless hand-offs
+
+- **Status indicator enables parallel work**
+  Track multiple sessions at a glance without context switching
+
+- **Subagents preserve context**
+  Complex tasks decompose into parallel subtasks in dedicated context windows
 
 - **Git worktrees enable safe autonomy**
   Isolated execution prevents conflicts and enables risk-free experimentation
 
-- **Planning quality determines success**
-  Clear intent and constraints drive autonomous execution; vague hand-offs lead to rework
-
-- **Custom agents multiply value**
-  Repository-defined agents apply specialized expertise autonomously at scale
+- **Custom agents work everywhere**
+  Define once in `.github/agents/`, use across local, background, and cloud
 
 - **Hand-off pattern is transformative**
-  Interactive planning → autonomous execution → final review maximizes productivity
+  Plan locally → implement in background/cloud → review finished work
 
 ### Narrative
 
-Background agents fundamentally change AI-assisted development economics. The bottleneck shifts from agent capability to human supervision. Git worktree isolation enables truly autonomous execution—agents work independently without risking active development. The hand-off pattern transforms productivity: 15 minutes planning, 2 minutes hand-off, 60 minutes parallel execution, 10 minutes review. Custom agents developed for interactive use become exponentially more valuable when running autonomously. Organizations that master background agent workflows achieve 2-3x developer throughput while maintaining or improving code quality.
+VS Code 1.109 transforms agent interaction from single-session focus to multi-environment orchestration. The session type picker enables seamless transitions between local planning, background execution, and cloud-scale operations. The status indicator in the command center tracks parallel sessions without consuming attention. Subagents preserve main context while handling complex subtasks. Git worktree isolation provides safety for autonomous execution. Custom agents work identically across all environments. The result: developers orchestrate 5-10 parallel agent sessions, achieving throughput impossible with interactive-only workflows.
 
 ---
 
@@ -568,45 +776,48 @@ Background agents fundamentally change AI-assisted development economics. The bo
 
 ### Immediate Actions
 
-1. **Enable background agents in VS Code**
-   Settings → GitHub Copilot → Enable Background Agents
+1. **Try the session type picker**
+   Start a local chat, then use the picker to continue in background or cloud
 
-2. **Test worktree isolation**
+2. **Enable the agent status indicator**
+   `chat.agentsControl.enabled: true` — monitor sessions from command center
+
+3. **Test worktree isolation**
    Hand off simple refactoring task, observe isolated execution
 
-3. **Configure custom agent for background**
-   Add `background: true` to `.github/agents/` configuration
+4. **Explore subagents**
+   Enable `github.copilot.chat.searchSubagent.enabled` for iterative searches
 
-4. **Practice hand-off workflow**
-   Plan interactively 15 min → hand off → start next task
-
-5. **Monitor and measure**
-   Track active time before/after adopting background execution
+5. **Try Claude Agent (Preview)**
+   Select Claude Agent from session picker for extended reasoning tasks
 
 ### Next Steps
 
 - Implement multi-agent parallel execution for independent tasks
 - Integrate background agents into CI/CD for automated reviews
-- Develop sequential hand-off workflows for dependent tasks
-- Scale to 5-10 parallel background agents for maximum throughput
+- Enable Agent Sessions Welcome Page for session-centric workflow
+- Scale to 5-10 parallel sessions across local, background, and cloud
 
 ### Narrative
 
-Adopting background agents requires minimal configuration—enable in VS Code settings and test with a simple refactoring task. The learning curve is practicing the hand-off pattern: spend adequate time on interactive planning, clearly define intent and constraints, then trust autonomous execution. Start with low-risk tasks (test generation, documentation) to build confidence. Measure active time savings to quantify ROI. As proficiency grows, scale to sophisticated multi-agent orchestration handling 5-10 tasks in parallel. The productivity transformation compounds with practice.
+Start with the session type picker—the gateway to multi-environment orchestration. Plan locally, hand off to background, review results. Enable the status indicator to track parallel sessions at a glance. As proficiency grows, leverage subagents for complex tasks and Claude Agent for extended reasoning. The Agent Sessions Welcome Page signals where VS Code is heading: sessions as first-class development primitives.
 
 ---
 
 ## Resources
 
 **Official Documentation:**
+- [VS Code 1.109 Release Notes: Agent Session Management](https://code.visualstudio.com/updates/v1_109#_agent-session-management) — Session type picker, status indicator, subagents
 - [VS Code: Background Agents](https://code.visualstudio.com/docs/copilot/agents/background-agents) — Autonomous agent execution and worktree isolation
+- [VS Code: Cloud Agents](https://code.visualstudio.com/docs/copilot/agents/cloud-agents) — Large-scale operations on GitHub infrastructure
+- [VS Code: Subagents](https://code.visualstudio.com/docs/copilot/agents/subagents) — Parallel task decomposition
 - [VS Code: Custom Agents](https://code.visualstudio.com/docs/copilot/customization/custom-agents) — Creating specialized agent personas
 - [Git Worktrees](https://git-scm.com/docs/git-worktree) — Technical reference for worktree management
 
 **Related Talks:**
 - [Agentic PRs](../agentic-prs/README.md) — Gen-4 SDLC and AI-driven delivery
-- [GitHub Copilot Web](../copilot-web/README.md) — Multi-interface AI workflows
+- [Copilot Chat Internals](../copilot-chat-internals/README.md) — Understanding what agents see
 
 ---
 
-**Autonomous development through isolated execution and multi-agent orchestration**
+**Multi-environment agent orchestration for autonomous development**

@@ -50,7 +50,7 @@ Organization Settings
     ├── Framework preferences
     ├── Coding standards
     └── Compliance rules
-  
+
 Individual Repos (optional overrides)
   ├── repo-1/.github/copilot-instructions.md  ← Repo-specific additions
   └── repo-2/.github/copilot-instructions.md  ← Repo-specific additions
@@ -763,7 +763,7 @@ Starting enterprise Copilot adoption requires baseline assessment, initial stand
 - [Code Review Best Practices](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
 
 **Related Talks:**
-- [Agentic SDLC](../agentic-sdlc/README.md) — Background agents and autonomous workflows
+- [Agentic Sessions](../agentic-sessions/README.md) — Multi-environment agent orchestration
 - [GitHub Copilot Web](../copilot-web/README.md) — Multi-interface AI assistance
 
 ---
