@@ -36,7 +36,7 @@ jobs:
       
       - name: Install dependencies
         working-directory: ./slides
-        run: npm ci
+        run: npm install
       
       - name: Install Playwright browsers
         working-directory: ./slides
