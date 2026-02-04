@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",
+    "build-all": "bash scripts/build-all.sh",
     "export": "slidev export",
     "export-pdf": "slidev export --format pdf",
     "export-pptx": "slidev export --format pptx",
