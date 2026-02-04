@@ -38,9 +38,9 @@ This isn't just about saving typing time. It's about **standardizing practices**
 
 💡 **Understanding Prompt Files**
 
-**Prompt files** are Markdown files with a `.prompt.md` extension that define reusable prompts for common development tasks. Unlike custom instructions that apply to all requests, prompt files are **triggered on-demand** for specific tasks.
+**Prompt files** are Markdown files with a `.prompt.md` extension that define reusable functions for common development tasks. Unlike custom instructions that apply to all requests, prompt files are **triggered on-demand** for specific tasks.
 
-Think of them as **functions you can invoke**: code review checklists, test generation templates, architecture analysis procedures—any specialized prompt you use repeatedly. Like functions, they accept inputs (variables), execute once, and return results.
+**Think of prompts as functions you can invoke:** code review checklists, test generation templates, architecture analysis procedures—any specialized prompt you use repeatedly. Like functions, they accept inputs (variables), execute once, and return results.
 
 **Key characteristics:**
 - **On-demand execution** — Type `/` in chat followed by the prompt name to invoke

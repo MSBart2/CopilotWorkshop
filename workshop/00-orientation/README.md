@@ -14,62 +14,6 @@ But first, you need to see the problem. You need to _feel_ the frustration of wo
 
 ---
 
-## Prerequisites
-
-### Option 1: GitHub Codespaces (Recommended)
-
-**Zero setup required!** Click "Code" → "Create codespace on main" in this repository.
-
-Your environment includes:
-- ✅ VS Code in the browser (or connect from desktop VS Code)
-- ✅ GitHub Copilot & Chat pre-installed and activated
-- ✅ Mermaid diagram rendering for architecture visuals
-- ✅ All FanHub development tools (Node.js, Docker, ESLint, Prettier)
-- ✅ Ports automatically forwarded for the app
-- ✅ Works from any device—even tablets!
-
-**Build time:** 2-3 minutes first launch, instant thereafter
-
-📖 [Learn more about the dev container setup](../../.devcontainer/README.md)
-
----
-
-### Option 2: Local Dev Container
-
-**Near-zero setup** using VS Code with Docker:
-
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-2. Install [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-3. Clone this repo and open in VS Code
-4. Click "Reopen in Container" when prompted
-
-Same consistent environment as Codespaces, but running locally.
-
----
-
-### Option 3: Manual Installation
-
-If you prefer to set up everything yourself:
-
-| Requirement | Details |
-|-------------|---------|
-| **VS Code 1.107+** | [Download](https://code.visualstudio.com/download) · Check version: Help → About |
-| **GitHub Copilot** | [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) + [Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions |
-| **Docker Desktop** | [Download](https://www.docker.com/products/docker-desktop/) (for FanHub app) |
-| **Node.js 18+** | [Download](https://nodejs.org/) |
-| **GitHub Account** | With [Copilot access](https://github.com/features/copilot) (Individual, Business, or Enterprise) |
-| **Read First** | [Training Personas](PERSONAS.md) — Meet the team you'll be working with |
-
----
-
-
-
-## Estimated Time
-
-60 minutes
-
----
-
 ## 📖 The Story: Monday Morning, 9:00 AM
 
 ### The Team
@@ -322,7 +266,7 @@ Throughout this training, you'll learn five ways to customize GitHub Copilot. He
 | **Know our project basics** | Repo Instructions | "This is a React/Node app, use these patterns" |
 | **Apply rules to specific files** | Custom Instructions | "For test files, use Jest with these conventions" |
 | **Run a specific task I trigger** | Prompts | "Generate a React component with tests" |
-| **Act as a specialist persona** | Agents | "Be a security reviewer with read-only access" |
+| **Act as a workflow** | Agents | "Be a security reviewer executing a multi-step process" |
 | **Know our domain automatically** | Skills | "Validate TV show data against our schema" |
 
 ### The Five Customization Types
@@ -334,8 +278,8 @@ Throughout this training, you'll learn five ways to customize GitHub Copilot. He
 | **Think of it as** | Project README for AI | File-specific rules | Task template | Specialist persona | Domain expert |
 | **When loaded** | Always, every request | By file pattern (`applyTo`) | When you invoke it | When you @ mention it | Automatically when relevant |
 | **You trigger it by** | Nothing—always on | Opening matching files | Running `/prompt-name` | Typing `@agent-name` | Just asking—Copilot decides |
-| **Scope** | Whole repository | Specific file types | Specific task | Role-based workflow | Specialized knowledge |
-| **Best for** | Project context | File-type consistency | Repeatability | Autonomy | Expertise |
+| **Scope** | Whole repository | Specific file types | Specific task | Multi-step workflow | Specialized knowledge |
+| **Best for** | Project context | File-type consistency | Invokable functions | Automated workflows | Expertise |
 | **Module** | 1 | 5 | 3 | 4 | 6 |
 
 ### Real-World Analogy
@@ -344,8 +288,8 @@ Imagine onboarding a new developer:
 
 - **Repo Instructions** = The project overview they read first ("Here's what this app does and our tech stack")
 - **Custom Instructions** = Context-specific guidelines ("When working on tests, follow these patterns")
-- **Prompts** = Checklists they follow for common tasks ("Use this template when creating a new API endpoint")
-- **Agents** = Roles they can take on ("When doing security review, only read code—don't change it")
+- **Prompts** = Functions they call for common tasks ("Use this function when creating a new API endpoint")
+- **Agents** = Workflows they execute ("When doing security review, follow this multi-step process")
 - **Skills** = Domain knowledge they acquire over time ("Our TV show data has specific validation rules")
 
 ### Quick Decision Flowchart

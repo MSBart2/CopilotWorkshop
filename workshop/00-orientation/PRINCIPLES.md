@@ -140,5 +140,5 @@ Throughout this training, you'll learn five ways to customize GitHub Copilot. He
 | **Know our project basics** | Repo Instructions | "This is a React/Node app, use these patterns" |
 | **Apply rules to specific files** | Custom Instructions | "For test files, use Jest with these conventions" |
 | **Run a specific task I trigger** | Prompts | "Generate a React component with tests" |
-| **Act as a specialist persona** | Agents | "Be a security reviewer with read-only access" |
+| **Act as a workflow** | Agents | "Be a security reviewer executing a multi-step process" |
 | **Know our domain automatically** | Skills | "Validate TV show data against our schema" |

@@ -96,11 +96,11 @@ This isn't about memorizing every feature—it's about **pattern recognition**. 
 |---|----------------------|------------------------|-------------|------------|-----------|
 | **File** | `copilot-instructions.md` | `*.instructions.md` | `*.prompt.md` | `*.agent.md` | `SKILL.md` |
 | **Location** | `.github/` | `.github/instructions/` | `.github/prompts/` | `.github/agents/` | `.github/skills/*/` |
-| **Think of it as** | Project README for AI | File-specific rules | Task template | Specialist persona | Domain expert |
+| **Think of it as** | Project README for AI | File-specific rules | Invokable function | Multi-step workflow | Domain expert |
 | **When loaded** | Always, every request | By file pattern (`applyTo`) | When you invoke it | When you @ mention it | Automatically when relevant |
 | **You trigger it by** | Nothing—always on | Opening matching files | Running `/prompt-name` | Typing `@agent-name` | Just asking—Copilot decides |
 | **Scope** | Whole repository | Specific file types | Specific task | Role-based workflow | Specialized knowledge |
-| **Best for** | Project context | File-type consistency | Repeatability | Autonomy | Expertise |
+| **Best for** | Project context | File-type consistency | Repeatable functions | Multi-step workflows | Expertise |
 | **Module** | 1 | 5 | 3 | 4 | 6 |
 
 ---

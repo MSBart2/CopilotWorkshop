@@ -37,7 +37,7 @@ Create your first workspace prompt file that standardizes test generation and ma
    mkdir -p .github/prompts
    ```
 
-   This folder will store all your team's reusable prompt functions, version-controlled alongside your code.
+   This folder will store all your team's reusable prompt functions (invokable task templates), version-controlled alongside your code.
 
 2. **Create your first prompt file**
 
@@ -134,7 +134,7 @@ Create your first workspace prompt file that standardizes test generation and ma
 
 **[Exercise 3.2: Referencing Standards and Docs](exercise-3.2.md)** — Take your prompt functions to the next level by linking them to your ARCHITECTURE.md and copilot-instructions.md files, ensuring they always reference the latest standards.
 
-> _"The test generation prompt is great, but I'm still manually typing React review standards. Can I link the prompt to copilot-instructions.md so it always uses current conventions?"_  
+> _"The test generation prompt is great, but I'm still manually typing React review standards. Can I link the prompt to copilot-instructions.md so it always uses current conventions?"_
 > — Sarah, about to discover prompt file Markdown links
 
 ---

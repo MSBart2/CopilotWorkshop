@@ -370,7 +370,7 @@ The customization you've built isn't locked to one tool—it follows the reposit
 
 **[Module 8: Copilot Web](../08-copilot-web/README.md)** — Explore additional web-based workflows beyond custom agents, including workspace search, multi-file refactoring, and collaboration features.
 
-> *"The agents we built aren't VS Code agents—they're repository agents that happen to work everywhere. That's the difference."*  
+> *"The agents we built aren't VS Code agents—they're repository agents that happen to work everywhere. That's the difference."*
 > — Sarah, understanding the portability of custom agents
 
 ### Implementation Approaches
@@ -398,8 +398,8 @@ Structure your analysis as:
 Brief description of what's being analyzed.
 
 ### Effort Estimate
-**MVP**: X days/sprints  
-**Full Implementation**: Y days/sprints  
+**MVP**: X days/sprints
+**Full Implementation**: Y days/sprints
 **Confidence**: High/Medium/Low (explain why)
 
 ### Breakdown
@@ -462,7 +462,7 @@ Clear recommendation with rationale:
    - Type this prompt:
 
 ```
-Analyze the effort required to implement a "Watch Party" feature for FanHub that lets users watch TV show episodes together in synchronized viewing sessions with chat. 
+Analyze the effort required to implement a "Watch Party" feature for FanHub that lets users watch TV show episodes together in synchronized viewing sessions with chat.
 
 Include:
 - Component breakdown (frontend, backend, real-time sync)
@@ -639,7 +639,7 @@ You now have four custom agents orchestrating your workflow:
 4. **@product-analyzer** — Web-accessible feature analysis with GitHub data
 
 These agents demonstrate:
-- **Role-based tool access** (read-only vs. editing)
+- **Workflow-based tool access** (read-only vs. editing)
 - **Sequential workflows** (handoffs between agents)
 - **Local vs. web execution** (VS Code vs. github.com/copilot/agents)
 - **External data integration** (GitHub MCP for live issue queries)
@@ -648,7 +648,7 @@ These agents demonstrate:
 
 - **Module 1**: Repository instructions (baseline standards)
 - **Module 2**: Plan mode with @workspace (research technique)
-- **Module 3**: Prompt files (task templates)
+- **Module 3**: Prompt files (invokable functions)
 - **Module 4**: Custom instructions (path-based guidance)
 - **Module 5**: Agent Skills (specialized capabilities)
 - **Module 6**: MCP servers (external data access)
@@ -662,5 +662,5 @@ Each agent can leverage all previous customizations—instructions, prompts, ski
 
 **[Module 8: Copilot Web](../08-copilot-web/README.md)** — Explore additional web-based workflows beyond custom agents, including workspace search, multi-file refactoring, and collaboration features.
 
-> *"We've built custom agents that work on the web. What else can we do from github.com/copilot/agents without opening VS Code?"*  
+> *"We've built custom agents that work on the web. What else can we do from github.com/copilot/agents without opening VS Code?"*
 > — The team, discovering the full potential of web-based AI assistance

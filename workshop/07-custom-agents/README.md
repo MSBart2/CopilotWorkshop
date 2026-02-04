@@ -2,7 +2,7 @@
 
 ## ⏰ — The Context-Switching Problem
 
-> *"I have all these great tools—instructions, prompts, skills, MCP servers—but I'm constantly switching contexts. One minute I'm planning, next I'm implementing, then reviewing. Each time I have to remember which tools to use and reset Copilot's behavior. I need role-based presets that bundle the right capabilities for each task."*  
+> *"I have all these great tools—instructions, prompts, skills, MCP servers—but I'm constantly switching contexts. One minute I'm planning, next I'm implementing, then reviewing. Each time I have to remember which tools to use and reset Copilot's behavior. I need workflow presets that bundle the right capabilities for each task."*
 > — Sarah, switching between planning agent and implementation mode for the fifth time today
 
 ---
@@ -23,15 +23,15 @@ In **Module 6**, they connected **MCP servers**—direct access to databases, AP
 
 **Now they're ready to automate and simplify.** Sarah switches between "planning mode" (read-only tools, analysis focus) and "implementation mode" (full editing, code generation) multiple times per day. David wants to streamline his security reviews by bundling linting and analysis tools into one preset. Marcus sees an opportunity to create a "DevOps agent" with deployment scripts and infrastructure access already configured. Elena wants her test generation workflow automated with skills and templates pre-loaded.
 
-**The pattern:** Each role uses different tools, instructions, and behaviors—but manually configuring these for every context switch wastes time and mental energy.
+**The pattern:** Each workflow uses different tools, instructions, and behaviors—but manually configuring these for every context switch wastes time and mental energy.
 
-**The automation:** Custom agents bundle instructions, tools, skills, and MCP servers into role-based presets you can instantly switch between, eliminating repetitive setup.
+**The automation:** Custom agents bundle instructions, tools, skills, and MCP servers into workflow presets you can instantly switch between, eliminating repetitive setup.
 
-💡 **Integration Note:** This module orchestrates everything from Modules 1-6 by creating **custom agents** (`.agent.md`)—persona-like configurations that bundle repository instructions, skills, MCP servers, and tool selections into switchable presets. Unlike skills (which teach capabilities) or instructions (which define behavior), agents define complete working modes with specific tool access and behavioral constraints.
+💡 **Integration Note:** This module orchestrates everything from Modules 1-6 by creating **custom agents** (`.agent.md`)—workflow configurations that bundle repository instructions, skills, MCP servers, and tool selections into switchable presets. **Think of agents as workflows** that define complete working modes with specific tool access and behavioral constraints. Unlike skills (which teach capabilities) or instructions (which define behavior), agents orchestrate multi-step processes.
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
 - Complete [Module 05: Agent Skills](../05-agent-skills/README.md) — Understanding skills helps you decide which to include in agents
 - Complete [Module 06: MCP Servers](../06-mcp-servers/README.md) — Agents can bundle MCP server access
@@ -39,19 +39,19 @@ In **Module 6**, they connected **MCP servers**—direct access to databases, AP
 
 ---
 
-> 💡 **Experimental Feature: Custom Agents in Subagents**  
-> 
+> 💡 **Experimental Feature: Custom Agents in Subagents**
+>
 > If you want to use custom agents with subagents (for example, using a specialized research agent within a development task), you'll need to enable this experimental feature:
-> 
+>
 > 1. Open Settings (Ctrl+,)
 > 2. Search for `chat.customAgentInSubagent.enabled`
 > 3. Enable the setting
 > 4. Ensure your custom agent doesn't have `infer: false` in its frontmatter (which prevents subagent use)
-> 
+>
 > Once enabled, you can prompt Copilot to use specific custom or built-in agents as subagents. For example:
 > - "Run the research agent as a subagent to research the best auth methods for this project."
 > - "Use the plan agent in a subagent to create an implementation plan for myfeature. Then save the plan in plans/myfeature.plan.md"
-> 
+>
 > **Learn more:** [Using custom agents with subagents](https://code.visualstudio.com/docs/copilot/chat/chat-sessions#_use-a-custom-agent-with-subagents-experimental)
 
 ---
@@ -60,7 +60,7 @@ In **Module 6**, they connected **MCP servers**—direct access to databases, AP
 
 **Traditional thinking:** *"I'll memorize which tools to use for each task and manually configure Copilot each time."*
 
-**AI-native thinking:** *"I'll create role-based agents that automatically configure tools, instructions, and capabilities for specific workflows—switching contexts becomes instant."*
+**AI-native thinking:** *"I'll create workflow-based agents that automatically configure tools, instructions, and capabilities for specific tasks—switching contexts becomes instant."*
 
 This isn't just about convenience. Custom agents transform Copilot from a general-purpose assistant into a specialized teammate for each role. A "Plan" agent only has read-only tools, preventing accidental edits during research. A "Security Review" agent automatically loads security-focused skills and runs analysis tools. A "DevOps" agent bundles infrastructure skills and deployment MCP servers. The result: context-appropriate AI assistance with zero configuration overhead.
 
@@ -68,7 +68,7 @@ This isn't just about convenience. Custom agents transform Copilot from a genera
 
 ## 💡 Understanding Custom Agents
 
-**Custom agents** are role-based Copilot configurations that bundle instructions, available tools, skills, MCP servers, and behavioral constraints into switchable personas. Each agent defines a complete working mode for specific tasks.
+**Custom agents** are workflow-based Copilot configurations that bundle instructions, available tools, skills, MCP servers, and behavioral constraints into switchable presets. Each agent defines a complete working mode for specific tasks.
 
 **How they work:**
 - **YAML frontmatter** — Defines agent name, description, tools list, model, handoffs, and optional MCP servers
@@ -108,7 +108,7 @@ This isn't just about convenience. Custom agents transform Copilot from a genera
 
 ## What You'll Learn
 
-**Custom agents** bundle instructions, tools, skills, and MCP servers into role-based configurations you can instantly switch between. You'll create specialized agents for planning, implementation, review, and product analysis (including web-accessible agent), and measure how role-based presets eliminate context-switching overhead.
+**Custom agents** bundle instructions, tools, skills, and MCP servers into workflow configurations you can instantly switch between. You'll create specialized agents for planning, implementation, review, and product analysis (including web-accessible agent), and measure how workflow-based presets eliminate context-switching overhead.
 
 **Time:** ~75 minutes | **Exercises:** 5
 
@@ -116,7 +116,7 @@ This isn't just about convenience. Custom agents transform Copilot from a genera
 
 ## 📋 Exercise Planning
 
-The exercises below create custom agents that orchestrate capabilities from Modules 1-6 into role-based presets. Each exercise solves context-switching problems and demonstrates different agent patterns.
+The exercises below create custom agents that orchestrate capabilities from Modules 1-6 into workflow presets. Each exercise solves context-switching problems and demonstrates different agent patterns.
 
 | # | Exercise | Lead | Support | Problem | Solution | Key Metrics | Artifacts |
 |---|----------|------|---------|---------|----------|-------------|-----------|
@@ -130,11 +130,11 @@ The exercises below create custom agents that orchestrate capabilities from Modu
 
 ## 📚 What This Feature Does
 
-**Custom Agents:** Role-based Copilot configurations stored in `.agent.md` files that define available tools, loaded skills, MCP servers, behavioral instructions, and workflow handoffs for specific tasks.
+**Custom Agents:** Workflow-based Copilot configurations stored in `.agent.md` files that define available tools, loaded skills, MCP servers, behavioral instructions, and workflow handoffs for specific tasks.
 
 **When to use it:** When different tasks require different capabilities—planning needs read-only research tools, implementation needs full editing, code review needs analysis focus, product analysis needs web access. When you want to eliminate context-switching overhead and enforce role-appropriate tool usage.
 
-**What you'll build:** 
+**What you'll build:**
 - **Feature planning agent** — Read-only tools, feature requirements skill, prevents accidental edits during research
 - **Implementation agent** — Full editing capabilities, API design skills, systematic ADR execution workflow
 - **Security review agent** — Analysis tools only, React standards instructions, catches issues without modifying code
@@ -167,33 +167,33 @@ sequenceDiagram
     participant P as Prompts
     participant M as MCP Servers
     participant W as @workspace
-    
+
     U->>A: "Add character search endpoint"
-    
+
     Note over A: Agent defines workflow:<br/>Research → Plan → Implement
-    
+
     A->>R: Load project-wide context
     R-->>A: REST API standards<br/>Error handling patterns<br/>Testing requirements
-    
+
     A->>C: Load path-specific guidance
     C-->>A: React component patterns<br/>Express route structure<br/>PostgreSQL query conventions
-    
+
     A->>S: Load domain expertise
     S-->>A: API endpoint design<br/>Database schema knowledge<br/>React component best practices
-    
+
     A->>P: Load formatting template
     P-->>A: Feature plan structure<br/>Test suite format<br/>Documentation templates
-    
+
     A->>M: Query external systems
     M-->>A: PostgreSQL schema (characters table)<br/>Existing API routes<br/>Component examples
-    
+
     A->>W: Analyze workspace
     W-->>A: Express route patterns<br/>React component structure<br/>Database connection setup
-    
+
     Note over A: Priority hierarchy:<br/>Agent > Skills > Prompts ><br/>Custom Instructions ><br/>Repository Instructions
-    
+
     A->>U: Generated plan with FanHub-specific<br/>endpoints, components, and tests
-    
+
     U->>A: Accept and implement
     A->>U: Creates Express routes, React components,<br/>PostgreSQL queries following hierarchy
 ```
@@ -205,7 +205,7 @@ sequenceDiagram
 3. **@workspace provides dynamic context** — While other layers provide static guidance, workspace analysis adapts to your actual codebase
 4. **MCP servers extend capabilities** — Agents can access external systems (databases, APIs, web) that static instructions can't reach
 
-This diagram shows why Module 7 is the culmination of everything you've learned—custom agents bring all customization capabilities together into coherent, role-based workflows.
+This diagram shows why Module 7 is the culmination of everything you've learned—custom agents bring all customization capabilities together into coherent, executable workflows.
 
 ---
 
@@ -342,7 +342,7 @@ tools: ['effort-estimator/*', 'github/*']
 
 **[Module 8: Copilot Web](../08-copilot-web/README.md)** — Leverage Copilot on github.copilot.com for web-based workflows including workspace search and multi-file refactoring without local environment setup.
 
-> *"Wait, I can use all these capabilities—agents, skills, MCP servers—without even opening VS Code?"*  
+> *"Wait, I can use all these capabilities—agents, skills, MCP servers—without even opening VS Code?"*
 > — Rafael, discovering web-based development workflows
 
 ---
@@ -352,7 +352,7 @@ tools: ['effort-estimator/*', 'github/*']
 | Practice | How It Applied in This Module |
 |----------|-------------------------------|
 | 📚 **Separation of Concerns** | Planning agents have read-only tools; implementation agents have editing tools—enforced by agent configuration |
-| 🎯 **Role-Based Presets** | Each agent bundles tools, skills, and instructions for specific tasks, eliminating manual configuration |
+| 🎯 **Workflow Presets** | Each agent bundles tools, skills, and instructions for specific tasks, eliminating manual configuration |
 | 🔄 **Guided Workflows** | Handoffs create sequential workflows (Plan → Implement → Review) with pre-filled prompts |
 | 🔗 **Capability Orchestration** | Agents combine repository instructions, skills, MCP servers, and tool selections from Modules 1-6 |
 

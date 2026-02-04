@@ -105,10 +105,10 @@ handoffs:
 
 ```markdown
 <stopping_rules>
-STOP IMMEDIATELY if you consider starting implementation, switching to 
+STOP IMMEDIATELY if you consider starting implementation, switching to
 implementation mode or running a file editing tool.
 
-If you catch yourself planning implementation steps for YOU to execute, 
+If you catch yourself planning implementation steps for YOU to execute,
 STOP. Plans describe steps for the USER or another agent to execute later.
 </stopping_rules>
 ```
@@ -121,7 +121,7 @@ STOP. Plans describe steps for the USER or another agent to execute later.
 | What specific actions does it prohibit? | *List them* |
 | Who executes the plan steps—the plan agent or someone else? | *Find the answer in the rules* |
 
-**💡 Key Insight:** Stopping rules make the agent's role **explicit and enforceable**. Without them, the AI might drift into implementation. This is how you create focused, role-based agents.
+**💡 Key Insight:** Stopping rules make the agent's workflow **explicit and enforceable**. Without them, the AI might drift into implementation. This is how you create focused, workflow-based agents.
 
 ### Step 3: Understand the Workflow
 
@@ -137,7 +137,7 @@ STOP. Plans describe steps for the USER or another agent to execute later.
 ```markdown
 ## 1. Context gathering and research:
 
-MANDATORY: Run #tool:runSubagent tool, instructing the agent to work 
+MANDATORY: Run #tool:runSubagent tool, instructing the agent to work
 autonomously without pausing for user feedback...
 ```
 
@@ -153,7 +153,7 @@ autonomously without pausing for user feedback...
 ```markdown
 ## 3. Handle user feedback:
 
-Once the user replies, restart <workflow> to gather additional context 
+Once the user replies, restart <workflow> to gather additional context
 for refining the plan.
 ```
 
