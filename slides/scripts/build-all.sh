@@ -15,8 +15,8 @@ echo ""
 # Create output directory
 mkdir -p "${OUTPUT_DIR}"
 
-# Find all .md files except README.md and GLOBAL-LAYERS.md
-SLIDE_FILES=$(find "${SLIDES_DIR}" -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" | sort)
+# Find all .md files except README.md, GLOBAL-LAYERS.md, and DEPLOYMENT.md
+SLIDE_FILES=$(find "${SLIDES_DIR}" -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" ! -name "DEPLOYMENT.md" | sort)
 
 if [ -z "${SLIDE_FILES}" ]; then
     echo "❌ No slide files found!"

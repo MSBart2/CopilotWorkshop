@@ -52,8 +52,8 @@ jobs:
           # Create dist directory
           mkdir -p dist
           
-          # Find all .md files except README.md and GLOBAL-LAYERS.md
-          SLIDE_FILES=$(find . -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" | sort)
+          # Find all .md files except README.md, GLOBAL-LAYERS.md, and DEPLOYMENT.md
+          SLIDE_FILES=$(find . -maxdepth 1 -name "*.md" ! -name "README.md" ! -name "GLOBAL-LAYERS.md" ! -name "DEPLOYMENT.md" | sort)
           
           # Build each presentation
           for SLIDE_FILE in $SLIDE_FILES; do

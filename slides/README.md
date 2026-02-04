@@ -2,6 +2,8 @@
 
 Slidev-based presentation materials for the CopilotWorkshop training modules and tech talks.
 
+> **🌐 View Online**: These slides are automatically deployed to GitHub Pages! See [DEPLOYMENT.md](./DEPLOYMENT.md) for setup instructions.
+
 ---
 
 ## What is Slidev?
