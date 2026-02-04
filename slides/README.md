@@ -164,6 +164,7 @@ slides/
 
 | Slide File | Topic |
 |------------|-------|
+| `copilot-hooks.md` | GitHub Copilot Hooks: Programmable AI Governance |
 | `tech-talks-repo-config.md` | Agentic Delivery Repo Topology |
 | `agentic-delivery.md` | Executive briefing on agentic workflows |
 
