@@ -453,6 +453,7 @@ After generating/updating slides, invoke the `@slide-verifier` skill to check fo
 ```
 
 The skill will:
+
 1. Start a Slidev dev server for the deck
 2. Use Playwright to check each slide for:
    - **Content overflow** (content exceeding viewport)

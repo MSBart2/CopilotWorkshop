@@ -41,6 +41,7 @@ Determine which slides to check:
 ### Step 2: Run the Verification Script
 
 The skill includes a standalone verification script at `scripts/verify-slides.mjs` that handles:
+
 - Starting Slidev dev server
 - Playwright automation
 - Issue detection and reporting
@@ -60,6 +61,7 @@ The skill includes a standalone verification script at `scripts/verify-slides.mj
 ```
 
 **The script automatically:**
+
 1. Finds the workspace slides directory
 2. Starts a Slidev dev server
 3. Uses Playwright to visit each slide
@@ -69,6 +71,7 @@ The skill includes a standalone verification script at `scripts/verify-slides.mj
 7. Cleans up the server process
 
 **Output directories:**
+
 - Reports: `slides/verification-reports/`
 - Screenshots: `slides/screenshots/`
 
@@ -77,6 +80,7 @@ The skill includes a standalone verification script at `scripts/verify-slides.mj
 The script provides:
 
 **1. Console output during execution:**
+
 ```
 🔍 Verifying 12 slides in workshop/03-custom-prompts.md...
   ✅ Slide 1: OK
@@ -92,6 +96,7 @@ The script provides:
 **3. Screenshots** of problematic slides in `slides/screenshots/`
 
 **4. Exit code:**
+
 - `0` = All slides passed (or warnings only)
 - `1` = Critical issues found (when using `--fail-on-errors`)
 
@@ -136,6 +141,7 @@ The `verify-slides.mjs` script automatically generates:
 4. **Exit code** for automation (0 = success, 1 = critical issues when using `--fail-on-errors`)
 
 **Report structure:**
+
 ```
 slides/
 ├── verification-reports/
@@ -151,6 +157,7 @@ slides/
 **Symptom**: Content spills off bottom of slide
 **Detection**: `scrollHeight > clientHeight`
 **Fix suggestions**:
+
 - Split into multiple slides ("Topic 1/2", "Topic 2/2")
 - Use `layout: two-cols` for side-by-side content
 - Reduce bullet points (max 5 per column)
@@ -161,6 +168,7 @@ slides/
 **Symptom**: Image fails to load
 **Detection**: `img.complete === false` or `naturalHeight === 0`
 **Fix suggestions**:
+
 - Verify file exists at specified path
 - Check relative vs absolute path
 - Ensure image is committed to repo
@@ -171,6 +179,7 @@ slides/
 **Symptom**: JavaScript errors in browser console
 **Detection**: `console.error()` messages
 **Fix suggestions**:
+
 - Check for malformed frontmatter
 - Verify component syntax
 - Ensure all imports resolve
@@ -181,6 +190,7 @@ slides/
 **Symptom**: Paragraph or list item > 200 characters
 **Detection**: `textContent.length > 200`
 **Fix suggestions**:
+
 - Break into multiple bullet points
 - Use shorter sentences
 - Move details to separate slide
@@ -191,6 +201,7 @@ slides/
 The verification script requires:
 
 **Dependencies (in `slides/package.json`):**
+
 ```json
 {
   "devDependencies": {
@@ -201,6 +212,7 @@ The verification script requires:
 ```
 
 **Installation (if missing):**
+
 ```bash
 cd slides
 npm install --save-dev playwright @playwright/test
@@ -226,6 +238,7 @@ The slide-generator agent can invoke this skill at the end of its workflow:
 
 ```markdown
 After generating slides:
+
 1. Write slide file
 2. Update index-custom.html
 3. @slide-verifier verify the deck
@@ -248,16 +261,19 @@ A slide deck passes verification when:
 ## Example Usage
 
 **Verify single deck:**
+
 ```bash
 .github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
 ```
 
 **Verify all slides:**
+
 ```bash
 .github/skills/slide-verifier/scripts/verify-slides.mjs --all
 ```
 
 **CI/CD integration:**
+
 ```yaml
 - name: Verify slides
   run: |

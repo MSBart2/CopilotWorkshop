@@ -69,7 +69,12 @@ async function startSlidevServer(slideFile, port) {
     server.stdout.on("data", (data) => {
       const output = data.toString();
       // Slidev outputs "public slide show   > http://localhost:3030/" when ready
-      if (output.includes("ready in") || output.includes("Local:") || output.includes("public slide show") || output.includes("http://localhost")) {
+      if (
+        output.includes("ready in") ||
+        output.includes("Local:") ||
+        output.includes("public slide show") ||
+        output.includes("http://localhost")
+      ) {
         if (!started) {
           started = true;
           clearTimeout(timeout);
@@ -117,7 +122,7 @@ async function verifySlides(slideFile, port) {
   try {
     // Navigate to the presentation
     await page.goto(baseUrl, { waitUntil: "networkidle", timeout: 15000 });
-    
+
     // Wait for Slidev to initialize
     await page.waitForTimeout(2000);
 
@@ -126,15 +131,16 @@ async function verifySlides(slideFile, port) {
       // Try various Slidev API endpoints
       if (window.__slidev?.nav?.total) return window.__slidev.nav.total;
       if (window.__slidev?.total) return window.__slidev.total;
-      
+
       // Fallback: count slide elements
-      const slideElements = document.querySelectorAll('.slidev-page');
+      const slideElements = document.querySelectorAll(".slidev-page");
       if (slideElements.length > 0) return slideElements.length;
-      
+
       // Another fallback: check navigation
-      const navTotal = document.querySelector('[data-slidev-nav-total]');
-      if (navTotal) return parseInt(navTotal.getAttribute('data-slidev-nav-total'), 10);
-      
+      const navTotal = document.querySelector("[data-slidev-nav-total]");
+      if (navTotal)
+        return parseInt(navTotal.getAttribute("data-slidev-nav-total"), 10);
+
       return 0;
     });
 
