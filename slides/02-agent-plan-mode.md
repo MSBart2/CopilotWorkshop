@@ -216,24 +216,6 @@ layout: two-cols
 
 </div>
 
-</div>
-
-::right::
-
-# ✨ The "After"
-
-<div class="bg-green-50 dark:bg-green-900 p-6 rounded-lg">
-
-**Plan agent research:**
-- 7 minutes AI analysis
-- Automatic file discovery
-- 1 missed dependency per sprint
-- Conflicts caught during planning
-
-**Result:** Implementation confidence, 1 review cycle
-
-</div>
-
 ---
 
 # 💡 Understanding the Plan Agent
