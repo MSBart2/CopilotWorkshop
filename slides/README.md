@@ -121,7 +121,7 @@ slides/
 ├── 03-custom-prompts.md
 ├── ...                       # Additional module slides
 ├── tech-talks-repo-config.md # Tech talk: Agentic delivery topology
-├── executive-agentic-flight.md # Executive briefing
+├── agentic-delivery.md       # Executive briefing
 ├── components/               # Reusable Vue components
 │   ├── PersonaCard.vue
 │   ├── MetricsTable.vue
@@ -163,7 +163,7 @@ slides/
 | Slide File | Topic |
 |------------|-------|
 | `tech-talks-repo-config.md` | Agentic Delivery Repo Topology |
-| `executive-agentic-flight.md` | Executive briefing on agentic workflows |
+| `agentic-delivery.md` | Executive briefing on agentic workflows |
 
 ---
 
