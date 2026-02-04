@@ -1,6 +1,5 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920
 class: text-center
 highlighter: shiki
 lineNumbers: false
@@ -15,12 +14,35 @@ title: Enterprise Patterns for GitHub Copilot
 mdc: true
 ---
 
-# Scaling GitHub Copilot Across Organizations
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"></div>
 
-## Enterprise patterns for organization-wide AI adoption and governance
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
 
-<div class="pt-12">
-  <span class="text-6xl">🏢</span>
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-64" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Gradient text title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10">
+    Scaling GitHub Copilot
+  </h1>
+
+  <!-- Pill subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-lg font-medium shadow-lg shadow-cyan-500/25">
+      Enterprise Patterns for AI Adoption
+    </span>
+  </div>
+
+  <!-- Decorative line -->
+  <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
 <div class="abs-br m-6 flex gap-2">
@@ -299,7 +321,7 @@ layout: center
 
 <div class="space-y-4">
   <h3 class="text-xl font-bold text-blue-400">Policy Framework</h3>
-  
+
   <div class="p-4 bg-gray-800 rounded-lg">
     <div class="text-sm font-bold text-gray-300 mb-2">Organization Settings</div>
     <div class="space-y-2 text-xs">
@@ -313,7 +335,7 @@ layout: center
 
 <div class="space-y-4">
   <h3 class="text-xl font-bold text-green-400">Cost Optimization</h3>
-  
+
   <div class="space-y-2 text-sm">
     <div class="p-3 bg-green-900/30 rounded-lg flex items-center gap-3">
       <span class="text-2xl">⚡</span>
@@ -322,7 +344,7 @@ layout: center
         <div class="text-xs text-gray-400">Fast, cost-effective models</div>
       </div>
     </div>
-    
+
     <div class="p-3 bg-blue-900/30 rounded-lg flex items-center gap-3">
       <span class="text-2xl">📝</span>
       <div>
@@ -330,7 +352,7 @@ layout: center
         <div class="text-xs text-gray-400">Balanced models (Sonnet)</div>
       </div>
     </div>
-    
+
     <div class="p-3 bg-purple-900/30 rounded-lg flex items-center gap-3">
       <span class="text-2xl">🏗️</span>
       <div>
@@ -677,7 +699,7 @@ layout: center
 
 <div class="mt-8">
   <h3 class="text-lg font-bold text-green-400 mb-4 text-center">Compliance Automation Examples</h3>
-  
+
   <div class="grid grid-cols-2 gap-4">
     <div class="p-4 bg-gray-800 rounded-lg">
       <div class="text-sm font-bold text-green-300 mb-2">@security-validator agent</div>
@@ -910,13 +932,13 @@ layout: center
     <div class="text-xs text-gray-300">Mandate identical configs for all teams</div>
     <div class="text-xs text-green-400 mt-2">✅ Baseline + flexibility</div>
   </div>
-  
+
   <div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
     <div class="text-red-400 font-bold mb-2">❌ Under-governance</div>
     <div class="text-xs text-gray-300">No org policies, teams reinvent everything</div>
     <div class="text-xs text-green-400 mt-2">✅ Federated model</div>
   </div>
-  
+
   <div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
     <div class="text-red-400 font-bold mb-2">❌ Metrics theater</div>
     <div class="text-xs text-gray-300">Track 50 metrics, take no action</div>
@@ -929,12 +951,12 @@ layout: center
     <div class="text-yellow-400 font-bold mb-2">⚠️ Low acceptance (<45%)</div>
     <div class="text-xs text-gray-300">Fix: Interactive training, prompt examples</div>
   </div>
-  
+
   <div class="p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
     <div class="text-yellow-400 font-bold mb-2">⚠️ High support (>5 tickets)</div>
     <div class="text-xs text-gray-300">Fix: Improve onboarding, add FAQs</div>
   </div>
-  
+
   <div class="p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
     <div class="text-yellow-400 font-bold mb-2">⚠️ Stalled adoption (<60%)</div>
     <div class="text-xs text-gray-300">Fix: ROI case studies, exec sponsorship</div>
@@ -1008,7 +1030,7 @@ layout: center
         <div class="text-xs text-gray-400">Survey teams for existing configs & pain points</div>
       </div>
     </div>
-    
+
     <div class="p-3 bg-blue-900/30 rounded-lg flex items-start gap-3">
       <span class="text-xl">2️⃣</span>
       <div>
@@ -1016,7 +1038,7 @@ layout: center
         <div class="text-xs text-gray-400">Security, frameworks, coding standards</div>
       </div>
     </div>
-    
+
     <div class="p-3 bg-blue-900/30 rounded-lg flex items-start gap-3">
       <span class="text-xl">3️⃣</span>
       <div>
@@ -1037,7 +1059,7 @@ layout: center
         <div class="text-xs text-gray-400">30-min quick start with working examples</div>
       </div>
     </div>
-    
+
     <div class="p-3 bg-green-900/30 rounded-lg flex items-start gap-3">
       <span class="text-xl">5️⃣</span>
       <div>
@@ -1045,7 +1067,7 @@ layout: center
         <div class="text-xs text-gray-400">Model policies, content filtering, audit</div>
       </div>
     </div>
-    
+
     <div class="p-3 bg-green-900/30 rounded-lg flex items-start gap-3">
       <span class="text-xl">6️⃣</span>
       <div>
@@ -1113,7 +1135,7 @@ layout: center
       </a>
     </div>
   </div>
-  
+
   <h3 class="text-lg font-bold text-purple-400 mb-4 mt-6">Related Tech Talks</h3>
   <div class="space-y-2 text-sm text-gray-300">
     <div class="p-2 bg-gray-800 rounded">

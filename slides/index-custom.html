@@ -24,7 +24,7 @@
     h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #6366f1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -63,26 +63,38 @@
       font-size: 0.95rem;
       margin-top: 0.25rem;
     }
+    /* Workshop: orange → red → purple */
     .section.workshop {
-      border-color: rgba(96, 165, 250, 0.3);
-      background: linear-gradient(135deg, rgba(96, 165, 250, 0.05) 0%, rgba(59, 130, 246, 0.03) 100%);
+      border-color: rgba(251, 146, 60, 0.3);
+      background: linear-gradient(135deg, rgba(251, 146, 60, 0.05) 0%, rgba(248, 113, 113, 0.03) 50%, rgba(192, 132, 252, 0.03) 100%);
     }
     .section.workshop .section-title {
-      color: #60a5fa;
+      background: linear-gradient(135deg, #fb923c 0%, #f87171 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
+    /* Tech-talks: cyan → blue → indigo */
     .section.tech-talks {
-      border-color: rgba(167, 139, 250, 0.3);
-      background: linear-gradient(135deg, rgba(167, 139, 250, 0.05) 0%, rgba(139, 92, 246, 0.03) 100%);
+      border-color: rgba(34, 211, 238, 0.3);
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.05) 0%, rgba(59, 130, 246, 0.03) 50%, rgba(99, 102, 241, 0.03) 100%);
     }
     .section.tech-talks .section-title {
-      color: #a78bfa;
+      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
+    /* Exec-talks: blue → cyan → green */
     .section.exec-talks {
-      border-color: rgba(251, 191, 36, 0.3);
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(245, 158, 11, 0.03) 100%);
+      border-color: rgba(59, 130, 246, 0.3);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(34, 211, 238, 0.03) 50%, rgba(74, 222, 128, 0.03) 100%);
     }
     .section.exec-talks .section-title {
-      color: #fbbf24;
+      background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 50%, #4ade80 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .grid {
       display: grid;
@@ -101,25 +113,40 @@
     }
     .card:hover {
       background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(96, 165, 250, 0.5);
       transform: translateY(-4px);
-      box-shadow: 0 4px 20px rgba(96, 165, 250, 0.2);
     }
+    /* Workshop card styles: orange → red → purple */
     .section.workshop .card:hover {
-      border-color: rgba(96, 165, 250, 0.6);
+      border-color: rgba(251, 146, 60, 0.6);
+      box-shadow: 0 4px 20px rgba(251, 146, 60, 0.2);
     }
+    .section.workshop .card h2 {
+      background: linear-gradient(135deg, #fb923c 0%, #f87171 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Tech-talks card styles: cyan → blue → indigo */
     .section.tech-talks .card:hover {
-      border-color: rgba(167, 139, 250, 0.6);
-      box-shadow: 0 4px 20px rgba(167, 139, 250, 0.2);
+      border-color: rgba(34, 211, 238, 0.6);
+      box-shadow: 0 4px 20px rgba(34, 211, 238, 0.2);
     }
+    .section.tech-talks .card h2 {
+      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Exec-talks card styles: blue → cyan → green */
     .section.exec-talks .card:hover {
-      border-color: rgba(251, 191, 36, 0.6);
-      box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+      border-color: rgba(59, 130, 246, 0.6);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
     }
-    .card h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: #60a5fa;
+    .section.exec-talks .card h2 {
+      background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .card p {
       font-size: 0.9rem;
@@ -152,6 +179,16 @@
         </div>
       </div>
       <div class="grid">
+        <a href="/CopilotTraining/tech-talks/agent-orchestration/" class="card">
+          <h2>Agent Orchestration</h2>
+          <p>Multi-agent workflows in VS Code. Design coordinated agent systems where specialized agents collaborate on complex development tasks.</p>
+        </a>
+
+        <a href="/CopilotTraining/tech-talks/agentic-ci/" class="card">
+          <h2>Agentic CI</h2>
+          <p>The Trust Factory. How AI agents transform CI from quality gate to trust manufacturing at scale.</p>
+        </a>
+
         <a href="/CopilotTraining/tech-talks/agentic-prs/" class="card">
           <h2>Agentic PRs</h2>
           <p>When AI generates feature-scale code, how do you review it? Intent-based governance for large AI-generated diffs.</p>
@@ -182,6 +219,26 @@
           <p>AI assistance at the terminal. Natural language to shell commands, git operations, and scripting workflows.</p>
         </a>
 
+        <a href="/CopilotTraining/tech-talks/copilot-memory/" class="card">
+          <h2>Copilot Memory</h2>
+          <p>Cross-session context persistence. Store preferences, project context, and workflow patterns that persist across all conversations.</p>
+        </a>
+
+        <a href="/CopilotTraining/tech-talks/copilot-sdk/" class="card">
+          <h2>Copilot SDK</h2>
+          <p>Embedding AI agents in your applications. Build custom tools, bots, and automation with programmatic Copilot access.</p>
+        </a>
+
+        <a href="/CopilotTraining/tech-talks/mcp-apps/" class="card">
+          <h2>MCP Apps</h2>
+          <p>Rich UI in chat responses. Transform chat from text-only to interactive visual experiences with component-based MCP tools.</p>
+        </a>
+
+        <a href="/CopilotTraining/tech-talks/context-engineering-foundations/" class="card">
+          <h2>Context Engineering Foundations</h2>
+          <p>The foundation that unlocks everything. Master context primitives, persistent layers, and enforcement patterns for expert-level AI assistance.</p>
+        </a>
+
         <a href="/CopilotTraining/tech-talks/copilot-hooks/" class="card">
           <h2>Copilot Hooks</h2>
           <p>Programmable governance for AI agents. Real-time prevention, audit trails, and compliance enforcement at execution time.</p>
@@ -200,6 +257,11 @@
         <a href="/CopilotTraining/tech-talks/subagents/" class="card">
           <h2>Subagents</h2>
           <p>Autonomous agents with isolated context windows. Solve context bloat, parallelize research, and filter exploratory noise.</p>
+        </a>
+
+        <a href="/CopilotTraining/tech-talks/terminal-sandboxing/" class="card">
+          <h2>Terminal Sandboxing</h2>
+          <p>Safe agentic execution. Network restrictions, filesystem limits, and execution controls for secure AI-assisted development.</p>
         </a>
       </div>
     </div>

@@ -1,6 +1,5 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920
 class: text-center
 highlighter: shiki
 lineNumbers: false
@@ -15,12 +14,35 @@ title: Agentic Economics - Making the Business Case
 mdc: true
 ---
 
-# The Agentic Economics
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-cyan-900/10 to-green-900/20"></div>
 
-## Making the Business Case
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-green-500/20 rounded-full blur-3xl"></div>
 
-<div class="pt-12">
-  <span class="text-6xl">💰</span>
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-64" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Gradient text title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 bg-clip-text text-transparent relative z-10">
+    The Agentic Economics
+  </h1>
+
+  <!-- Pill subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-blue-600/80 to-cyan-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-blue-500/25">
+      Making the Business Case
+    </span>
+  </div>
+
+  <!-- Decorative line -->
+  <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
 <div class="abs-br m-6 flex gap-2">

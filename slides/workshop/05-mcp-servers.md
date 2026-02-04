@@ -1,46 +1,56 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop
 class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Module 6: MCP Servers
+  ## Module 5: MCP Servers
   CopilotTraining Training
 drawings:
   persist: false
 transition: slide-left
-title: Module 6 - MCP Servers
+title: Module 5 - MCP Servers
 mdc: true
 ---
 
-# Module 6: MCP Servers
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-red-900/10 to-purple-900/20"></div>
 
-<div class="mt-4 text-2xl text-gray-400 font-light">The Context Problem</div>
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 rounded-full blur-3xl"></div>
 
-<div class="mt-12 flex justify-center">
-<div class="relative">
-<div class="absolute -inset-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
-<div class="relative text-8xl">🔌</div>
-</div>
-</div>
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-72" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-72 relative" alt="SDP Logo" />
+  </div>
 
-<div class="mt-12 grid grid-cols-3 gap-6 max-w-2xl mx-auto text-sm">
-<div class="text-center">
-<div class="text-3xl mb-2">💾</div>
-<div class="text-gray-400">Static <span class="text-red-400">files only</span></div>
-</div>
-<div class="text-center">
-<div class="text-3xl mb-2">→</div>
-</div>
-<div class="text-center">
-<div class="text-3xl mb-2">🌐</div>
-<div class="text-gray-400">Live <span class="text-green-400">systems</span></div>
-</div>
+  <!-- Gradient text title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-orange-400 via-red-400 to-purple-400 bg-clip-text text-transparent relative z-10">
+    Module 5: MCP Servers
+  </h1>
+
+  <!-- Pill subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-orange-600/80 to-red-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-orange-500/25">
+      The Context Problem
+    </span>
+  </div>
+
+  <!-- Concept line -->
+  <div class="mt-8 text-lg opacity-70 relative z-10">
+    Static <span class="text-red-400 font-semibold">files only</span> → Live <span class="text-purple-400 font-semibold">systems</span>
+  </div>
+
+  <!-- Decorative line -->
+  <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-<span class="text-sm opacity-50">⏰ 45 minutes</span>
+  <span class="text-sm opacity-50">⏰ 45 minutes</span>
 </div>
 
 ---

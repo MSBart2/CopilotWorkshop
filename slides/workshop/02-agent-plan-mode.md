@@ -1,6 +1,5 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop
 class: text-center
 highlighter: shiki
 lineNumbers: false
@@ -14,21 +13,45 @@ title: Module 2 - Agent Plan Mode
 mdc: true
 ---
 
-# Module 2: Agent Plan Mode
-## ⏰ The Complexity Problem
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-red-900/10 to-purple-900/20"></div>
 
-<div class="pt-12">
-  <span class="text-6xl">🎯</span>
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 rounded-full blur-3xl"></div>
+
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-72" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-72 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-orange-400 via-red-400 to-purple-400 bg-clip-text text-transparent relative z-10">
+    Module 2: Agent Plan Mode
+  </h1>
+
+  <!-- Subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-orange-600/80 to-red-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-orange-500/25">
+      ⏰ The Complexity Problem
+    </span>
+  </div>
+
+  <!-- Quote -->
+  <div class="mt-8 text-lg opacity-60 max-w-xl italic relative z-10">
+    "We have the foundation, but now I need to implement the character detail page. Where do I even start?"
+  </div>
+  <div class="mt-2 text-sm opacity-40 relative z-10">— Marcus, DevOps Developer</div>
+
+  <!-- Decorative line -->
+  <div class="mt-4 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"></div>
 </div>
-
-<div class="mt-8 text-xl opacity-75 italic">
-"We have the foundation, but now I need to implement the character detail page.<br>Where do I even start?"
-</div>
-
-<div class="mt-4 text-sm opacity-60">— Marcus, DevOps Developer</div>
 
 <div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining Training</span>
+  <span class="text-sm opacity-50">CopilotTraining</span>
 </div>
 
 ---

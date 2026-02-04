@@ -1,46 +1,56 @@
 ---
 theme: default
-background: https://source.unsplash.com/collection/94734566/1920x1080
 class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Module 5: Agent Skills
+  ## Module 4: Agent Skills
   CopilotTraining Training
 drawings:
   persist: false
 transition: slide-left
-title: Module 5 - Agent Skills
+title: Module 4 - Agent Skills
 mdc: true
 ---
 
-# Module 5: Agent Skills
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-red-900/10 to-purple-900/20"></div>
 
-<div class="mt-4 text-2xl text-gray-400 font-light">The Capability Gap</div>
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 rounded-full blur-3xl"></div>
 
-<div class="mt-12 flex justify-center">
-<div class="relative">
-<div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
-<div class="relative text-8xl">🎓</div>
-</div>
-</div>
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-72" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-72 relative" alt="SDP Logo" />
+  </div>
 
-<div class="mt-12 grid grid-cols-3 gap-6 max-w-2xl mx-auto text-sm">
-<div class="text-center">
-<div class="text-3xl mb-2">📝</div>
-<div class="text-gray-400">Instructions tell <span class="text-blue-400">how</span></div>
-</div>
-<div class="text-center">
-<div class="text-3xl mb-2">→</div>
-</div>
-<div class="text-center">
-<div class="text-3xl mb-2">🎯</div>
-<div class="text-gray-400">Skills teach <span class="text-green-400">capabilities</span></div>
-</div>
+  <!-- Gradient text title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-orange-400 via-red-400 to-purple-400 bg-clip-text text-transparent relative z-10">
+    Module 4: Agent Skills
+  </h1>
+
+  <!-- Pill subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-orange-600/80 to-red-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-orange-500/25">
+      The Capability Gap
+    </span>
+  </div>
+
+  <!-- Concept line -->
+  <div class="mt-8 text-lg opacity-70 relative z-10">
+    Instructions tell <span class="text-orange-400 font-semibold">how</span> → Skills teach <span class="text-purple-400 font-semibold">capabilities</span>
+  </div>
+
+  <!-- Decorative line -->
+  <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-<span class="text-sm opacity-50">⏰ 30 minutes</span>
+  <span class="text-sm opacity-50">⏰ 30 minutes</span>
 </div>
 
 ---

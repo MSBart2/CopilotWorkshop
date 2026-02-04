@@ -65,7 +65,168 @@ Apply appropriate layouts:
 - `layout: end` for conclusion
 - Default for content slides
 
-### 4. Apply Consistent Styling
+### 4. Prevent Content Overflow (CRITICAL)
+
+**Slidev slides have limited vertical space (~450px usable). Content that exceeds this spills off the bottom and is invisible.**
+
+**PREFER SPLITTING over condensing.** When content exceeds limits, create multiple slides rather than reducing information.
+
+#### Content Limits Per Slide
+
+| Element                  | Maximum       | If Exceeded → Split Into                    |
+| ------------------------ | ------------- | ------------------------------------------- |
+| Bullet points per column | 5 items       | "Topic (1/2)" and "Topic (2/2)"             |
+| Use cases                | 2 per slide   | "Use Cases: Part 1" and "Use Cases: Part 2" |
+| Code examples            | 1 per slide   | Separate "Code Example" slide               |
+| Comparison pairs         | 3 pairs       | Split into multiple comparison slides       |
+| Grid items               | 6 items (2x3) | "Features (1/2)" continuation               |
+
+#### Multi-Slide Splitting Patterns
+
+**Pattern 1: Numbered Continuation**
+
+```
+Slide 1: "Use Cases (1 of 3)"
+Slide 2: "Use Cases (2 of 3)"
+Slide 3: "Use Cases (3 of 3)"
+```
+
+**Pattern 2: Category Split**
+
+```
+Slide 1: "Use Cases: Development"
+Slide 2: "Use Cases: Operations"
+Slide 3: "Use Cases: Quality"
+```
+
+**Pattern 3: Detail Expansion**
+
+```
+Slide 1: "Key Features" (overview with 6 items)
+Slide 2: "Feature Deep Dive: Authentication" (detail on one)
+Slide 3: "Feature Deep Dive: Caching" (detail on another)
+```
+
+**Pattern 4: Code Separation**
+
+```
+Slide 1: "The Problem + Solution" (concepts only)
+Slide 2: "Implementation Example" (full code block)
+```
+
+#### When to Split vs Condense
+
+| Situation                          | Action                                      |
+| ---------------------------------- | ------------------------------------------- |
+| 7+ bullet points                   | **SPLIT** into two slides                   |
+| 4+ use cases                       | **SPLIT** into "Part 1" and "Part 2"        |
+| Code block > 5 lines               | **SPLIT** code into its own slide           |
+| Problem + Solution + Code + Impact | **SPLIT** code/impact to next slide         |
+| Dense comparison table             | **SPLIT** into multiple focused comparisons |
+| Long feature list                  | **SPLIT** by category or importance         |
+
+**Only condense when:**
+
+- Content is genuinely redundant
+- Bullets can merge without losing meaning
+- Text is unnecessarily verbose
+
+#### Overflow-Prone Patterns to AVOID
+
+❌ **Stacked vertical sections** with `space-y-4` or `space-y-6`
+❌ **Multi-line code blocks** (more than 4 lines) on same slide as other content
+❌ **Two grid boxes + code block + impact bar** (4 vertical elements)
+❌ **Large padding** (`p-5`, `p-6`) on multiple nested elements
+❌ **7+ bullet points** per column without splitting
+
+#### Overflow-Safe Patterns to USE
+
+✅ **Split into continuation slides** when content is valuable
+✅ **2-column or 3-column grids** instead of stacked sections
+✅ **Dedicated code slides** for examples > 4 lines
+✅ **Compact padding** (`p-3`, `p-4`) on content boxes
+✅ **Border-left accents** (`border-l-4`) instead of full borders
+✅ **5 or fewer bullets** per column, split if more needed
+
+#### Use Case Slide Pattern (Split-Friendly)
+
+For use cases with code examples, use TWO slides:
+
+**Slide 1: Problem & Solution Concept**
+
+```html
+<div class="grid grid-cols-2 gap-4">
+  <div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
+    <div class="text-lg font-bold text-red-300 mb-2">❌ The Problem</div>
+    <div class="text-sm text-gray-300 space-y-2">
+      <div>• First issue with full context</div>
+      <div>• Second issue with explanation</div>
+      <div>• Third issue and its impact</div>
+    </div>
+  </div>
+  <div class="p-4 bg-green-900/30 rounded-lg border-l-4 border-green-500">
+    <div class="text-lg font-bold text-green-300 mb-2">✅ The Solution</div>
+    <div class="text-sm text-gray-300 space-y-2">
+      <div>• First benefit with context</div>
+      <div>• Second benefit explained</div>
+      <div>• Third benefit and outcome</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="mt-6 p-4 bg-gradient-to-r from-green-600/80 to-blue-600/80 rounded-lg text-center"
+>
+  <span class="text-white font-bold">Impact: 2+ hours → 10 minutes</span>
+</div>
+```
+
+**Slide 2: Implementation Example**
+
+```html
+# Implementation: [Use Case Name]
+
+<div class="p-4 bg-gray-800 rounded-lg">
+  \`\`\`python from github_copilot_sdk import CopilotClient client =
+  CopilotClient() response = client.chat(""" Analyze commits from v1.2.0..v1.3.0
+  and generate release notes. Categorize as Features, Fixes, Breaking Changes,
+  Security. """) for note in response.notes: print(f"- {note.category}:
+  {note.description}") \`\`\`
+</div>
+
+<div class="mt-4 text-sm text-gray-400">
+  Full example available in <code>examples/release-notes.py</code>
+</div>
+```
+
+<div class="mt-3 p-3 bg-gray-800 rounded-lg text-xs font-mono text-gray-300">
+  response = client.chat("prompt")<br />result = process(response)
+</div>
+
+<div
+  class="mt-3 p-2 bg-gradient-to-r from-green-600/80 to-blue-600/80 rounded-lg text-center"
+>
+  <span class="text-white font-bold text-sm">Impact: X → Y improvement</span>
+</div>
+```
+
+#### Feature Comparison Pattern (Compact 3-Column)
+
+```html
+<div class="grid grid-cols-3 gap-3">
+  <div class="p-3 bg-orange-900/40 rounded-lg">
+    <div class="text-sm font-bold text-orange-300 mb-2">📚 Feature A</div>
+    <div class="text-xs text-gray-300 space-y-1">
+      <div><span class="text-orange-400">Part 1:</span> Brief</div>
+      <div><span class="text-cyan-400">Part 2:</span> Brief</div>
+    </div>
+    <div class="mt-2 text-xs text-white font-bold">= Result</div>
+  </div>
+  <!-- Repeat for B and C -->
+</div>
+```
+
+### 5. Apply Consistent Styling
 
 **CRITICAL: Never Use Mermaid Diagrams**
 
@@ -187,17 +348,41 @@ Markdown treats 4+ spaces at the start of a line as a code block. This causes ne
 - **Icon + text pairings** — Always pair emojis with labels for scannability
 - **Border accents** — Use `border-l-4` for list items, full borders for cards
 
-### 5. Keep Slides Concise
+### 6. Keep Slides Focused (Split > Condense)
+
+**Philosophy: More slides with clear content beats fewer slides with cramped content.**
 
 **Guidelines:**
 
-- **10-15 slides max** per module
-- **3-5 bullet points** per slide
-- **30-50 words** per slide (excluding code/tables)
-- **Focus on visuals** over text walls
+- **15-25 slides** per module is fine if content is valuable
+- **3-5 bullet points** per column — split into continuation if more
 - **One main idea** per slide
+- **Split code into dedicated slides** — don't cram code with concepts
+- **Use continuation titles** — "Features (1/2)", "Use Cases: Part 2"
 
-### 6. Update Index Navigation
+**When you have too much content:**
+
+1. ✅ **FIRST**: Split into multiple slides with clear titles
+2. ✅ **SECOND**: Use 2-3 column grids to go horizontal
+3. ❌ **LAST RESORT**: Condense only if truly redundant
+
+**Example: Use Case with Code**
+
+Instead of cramming everything onto one slide:
+
+```
+❌ BAD: Problem + Solution + 10-line code + Impact (overflows)
+```
+
+Split into two slides:
+
+```
+✅ GOOD:
+  Slide 1: "Use Case: Release Notes" (Problem + Solution + Impact)
+  Slide 2: "Implementation: Release Notes" (Full code example)
+```
+
+### 7. Update Index Navigation
 
 After generating or removing slides, update `slides/index-custom.html` to keep the navigation synchronized.
 
@@ -298,6 +483,200 @@ transition: slide-left
 title: Module 1 - Repository Instructions
 mdc: true
 ---
+```
+
+## Title Slide Template (REQUIRED)
+
+**Every slide deck MUST use the beautified title slide template with the correct color scheme for its category.**
+
+### Color Schemes by Category
+
+| Category       | Primary Gradient                            | Background                                           | Accent                             |
+| -------------- | ------------------------------------------- | ---------------------------------------------------- | ---------------------------------- |
+| **Workshop**   | `from-orange-400 via-red-400 to-purple-400` | `from-orange-900/20 via-red-900/10 to-purple-900/20` | `from-orange-600/80 to-red-600/80` |
+| **Tech-talks** | `from-cyan-400 via-blue-400 to-indigo-400`  | `from-cyan-900/20 via-blue-900/10 to-indigo-900/20`  | `from-cyan-600/80 to-blue-600/80`  |
+| **Exec-talks** | `from-blue-400 via-cyan-400 to-green-400`   | `from-blue-900/20 via-cyan-900/10 to-green-900/20`   | `from-blue-600/80 to-cyan-600/80`  |
+
+### Logo Path
+
+The SDP logo is located in each category folder. **Always use relative path:**
+
+- Workshop: `./sdp-logo.png`
+- Tech-talks: `./sdp-logo.png`
+- Exec-talks: `./sdp-logo.png`
+
+### Title Slide Template
+
+Replace `{TITLE}`, `{SUBTITLE}`, `{TAGLINE}`, and color values based on category:
+
+```html
+<div
+  class="h-full flex flex-col items-center justify-center relative overflow-hidden"
+>
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br {BACKGROUND_GRADIENT}"></div>
+
+  <!-- Glowing orb -->
+  <div
+    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r {ORB_GRADIENT} rounded-full blur-3xl"
+  ></div>
+
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-64" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Gradient text title -->
+  <h1
+    class="!text-5xl !font-bold !mt-8 bg-gradient-to-r {TEXT_GRADIENT} bg-clip-text text-transparent relative z-10"
+  >
+    {TITLE}
+  </h1>
+
+  <!-- Pill subtitle -->
+  <div class="mt-4 relative z-10">
+    <span
+      class="px-6 py-2 bg-gradient-to-r {PILL_GRADIENT} rounded-full text-white text-xl font-medium shadow-lg {SHADOW_COLOR}"
+    >
+      {SUBTITLE}
+    </span>
+  </div>
+
+  <!-- Tagline (optional) -->
+  <div class="mt-8 text-lg opacity-70 relative z-10">{TAGLINE}</div>
+
+  <!-- Decorative line -->
+  <div
+    class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-{ACCENT_COLOR}-400 to-transparent rounded-full relative z-10"
+  ></div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <span class="text-sm opacity-50">{FOOTER_TEXT}</span>
+</div>
+```
+
+### Workshop Example (orange → red → purple)
+
+```html
+<div
+  class="h-full flex flex-col items-center justify-center relative overflow-hidden"
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-red-900/10 to-purple-900/20"
+  ></div>
+  <div
+    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 rounded-full blur-3xl"
+  ></div>
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-72" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-72 relative" alt="SDP Logo" />
+  </div>
+  <h1
+    class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-orange-400 via-red-400 to-purple-400 bg-clip-text text-transparent relative z-10"
+  >
+    Module 1: Instructions
+  </h1>
+  <div class="mt-4 relative z-10">
+    <span
+      class="px-6 py-2 bg-gradient-to-r from-orange-600/80 to-red-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-orange-500/25"
+    >
+      The Consistency Problem
+    </span>
+  </div>
+  <div
+    class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"
+  ></div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <span class="text-sm opacity-50">⏰ 45 minutes</span>
+</div>
+```
+
+### Tech-talk Example (cyan → blue → indigo)
+
+```html
+<div
+  class="h-full flex flex-col items-center justify-center relative overflow-hidden"
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"
+  ></div>
+  <div
+    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"
+  ></div>
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-64" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+  </div>
+  <h1
+    class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10"
+  >
+    Copilot CLI
+  </h1>
+  <div class="mt-4 relative z-10">
+    <span
+      class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-cyan-500/25"
+    >
+      AI Assistance at the Terminal
+    </span>
+  </div>
+  <div
+    class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"
+  ></div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <span class="text-sm opacity-50">Tech Talk · 45 minutes</span>
+</div>
+```
+
+### Exec-talk Example (blue → cyan → green)
+
+```html
+<div
+  class="h-full flex flex-col items-center justify-center relative overflow-hidden"
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-cyan-900/10 to-green-900/20"
+  ></div>
+  <div
+    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-green-500/20 rounded-full blur-3xl"
+  ></div>
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-64" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+  </div>
+  <h1
+    class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 bg-clip-text text-transparent relative z-10"
+  >
+    Agentic Economics
+  </h1>
+  <div class="mt-4 relative z-10">
+    <span
+      class="px-6 py-2 bg-gradient-to-r from-blue-600/80 to-cyan-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-blue-500/25"
+    >
+      Making the Business Case
+    </span>
+  </div>
+  <div
+    class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"
+  ></div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <span class="text-sm opacity-50">CopilotTraining Executive Talk</span>
+</div>
 ```
 
 ## Example Slides
@@ -409,9 +788,12 @@ layout: two-cols
 
 Before finalizing slides, verify:
 
+- [ ] **Title slide uses beautified template** with correct color scheme for category
+- [ ] **SDP logo included** with glow effect (`./sdp-logo.png`)
+- [ ] **No content overflow** — max 3 vertical sections, 5 bullets/column, 3-line code snippets
 - [ ] 10-15 slides per module (not too many)
 - [ ] All sections follow consistent layout patterns
-- [ ] Colors match workshop branding (GitHub blue/purple)
+- [ ] Colors match category scheme (workshop=orange/red/purple, tech=cyan/blue/indigo, exec=blue/cyan/green)
 - [ ] Metrics are concrete and quantified
 - [ ] Persona quotes are accurate from README
 - [ ] No text walls (max 50 words per slide)

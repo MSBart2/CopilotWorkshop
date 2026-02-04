@@ -1,6 +1,5 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920
 class: text-center
 highlighter: shiki
 lineNumbers: false
@@ -14,13 +13,35 @@ title: No Instruments, No Delivery - Executive Briefing
 mdc: true
 ---
 
-# No Instruments, No Delivery
-## The Enterprise Agentic Imperative
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Animated gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/10 to-cyan-900/20"></div>
 
-<div class="pt-12">
-  <span class="text-6xl">
-    ✈️
-  </span>
+  <!-- Glowing orb behind logo -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-green-500/20 rounded-full blur-3xl"></div>
+
+  <!-- Logo with glow effect -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-72" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-72 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Title with gradient text -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 bg-clip-text text-transparent relative z-10">
+    No Instruments, No Delivery
+  </h1>
+
+  <!-- Subtitle with accent -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-blue-600/80 to-cyan-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-blue-500/25">
+      The Enterprise Agentic Imperative
+    </span>
+  </div>
+
+  <!-- Decorative line -->
+  <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
 <div class="abs-br m-6 flex gap-2">
