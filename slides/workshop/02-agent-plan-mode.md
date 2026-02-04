@@ -46,13 +46,13 @@ mdc: true
 </div>
 
 <div class="p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg border-l-4 border-purple-500">
-  <div class="text-lg font-bold text-purple-300 mb-2">The Traditional Approach</div>
-  <div class="text-gray-400 text-sm space-y-1">
-    <div>1. Read feature requirements</div>
-    <div>2. Start coding</div>
-    <div>3. Realize you missed dependencies</div>
-    <div>4. Refactor or start over</div>
-  </div>
+<div class="text-lg font-bold text-purple-300 mb-2">The Traditional Approach</div>
+<div class="text-gray-400 text-sm space-y-1">
+<div>1. Read feature requirements</div>
+<div>2. Start coding</div>
+<div>3. Realize you missed dependencies</div>
+<div>4. Refactor or start over</div>
+</div>
 </div>
 
 </div>
@@ -73,16 +73,16 @@ Result: Wasted time, missed requirements, conflicts in PR review
   </div>
 
   <div class="grid grid-cols-2 gap-8 text-sm">
-    <div class="space-y-3">
-      <div class="font-bold text-red-300">Traditional Thinking:</div>
-      <div class="text-white italic">"I need to figure out all the steps before I start coding."</div>
-    </div>
+<div class="space-y-3">
+<div class="font-bold text-red-300">Traditional Thinking:</div>
+<div class="text-white italic">"I need to figure out all the steps before I start coding."</div>
+</div>
 
-    <div class="space-y-3">
-      <div class="font-bold text-green-300">AI-Native Thinking:</div>
-      <div class="text-white italic">"AI can research my codebase and propose a plan—I validate the architecture, then execute."</div>
-    </div>
-  </div>
+<div class="space-y-3">
+<div class="font-bold text-green-300">AI-Native Thinking:</div>
+<div class="text-white italic">"AI can research my codebase and propose a plan—I validate the architecture, then execute."</div>
+</div>
+</div>
 </div>
 
 <div class="mt-6 text-center text-sm text-gray-400 italic max-w-3xl">
@@ -223,43 +223,43 @@ layout: two-cols
 <div class="mt-6 space-y-4">
 
 <div class="p-5 bg-gradient-to-r from-blue-900/60 to-gray-800 rounded-lg border-l-4 border-blue-400">
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 text-4xl text-center">🔍</div>
-    <div class="col-span-10">
-      <div class="font-bold text-blue-300 mb-1">Analyzes Comprehensively</div>
-      <div class="text-gray-300 text-sm">Uses read-only tools—no code changes until you approve</div>
-    </div>
-  </div>
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-2 text-4xl text-center">🔍</div>
+<div class="col-span-10">
+<div class="font-bold text-blue-300 mb-1">Analyzes Comprehensively</div>
+<div class="text-gray-300 text-sm">Uses read-only tools—no code changes until you approve</div>
+</div>
+</div>
 </div>
 
 <div class="p-5 bg-gradient-to-r from-blue-900/60 to-gray-800 rounded-lg border-l-4 border-blue-400">
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 text-4xl text-center">🧩</div>
-    <div class="col-span-10">
-      <div class="font-bold text-blue-300 mb-1">Breaks Down Complexity</div>
-      <div class="text-gray-300 text-sm">Sequences steps with clear dependencies and rationale</div>
-    </div>
-  </div>
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-2 text-4xl text-center">🧩</div>
+<div class="col-span-10">
+<div class="font-bold text-blue-300 mb-1">Breaks Down Complexity</div>
+<div class="text-gray-300 text-sm">Sequences steps with clear dependencies and rationale</div>
+</div>
+</div>
 </div>
 
 <div class="p-5 bg-gradient-to-r from-blue-900/60 to-gray-800 rounded-lg border-l-4 border-blue-400">
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 text-4xl text-center">❓</div>
-    <div class="col-span-10">
-      <div class="font-bold text-blue-300 mb-1">Identifies Open Questions</div>
-      <div class="text-gray-300 text-sm">Surfaces ambiguities that need clarification before coding</div>
-    </div>
-  </div>
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-2 text-4xl text-center">❓</div>
+<div class="col-span-10">
+<div class="font-bold text-blue-300 mb-1">Identifies Open Questions</div>
+<div class="text-gray-300 text-sm">Surfaces ambiguities that need clarification before coding</div>
+</div>
+</div>
 </div>
 
 <div class="p-5 bg-gradient-to-r from-blue-900/60 to-gray-800 rounded-lg border-l-4 border-blue-400">
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 text-4xl text-center">🏗️</div>
-    <div class="col-span-10">
-      <div class="font-bold text-blue-300 mb-1">Respects Your Architecture</div>
-      <div class="text-gray-300 text-sm">References ARCHITECTURE.md and copilot-instructions.md automatically</div>
-    </div>
-  </div>
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-2 text-4xl text-center">🏗️</div>
+<div class="col-span-10">
+<div class="font-bold text-blue-300 mb-1">Respects Your Architecture</div>
+<div class="text-gray-300 text-sm">References ARCHITECTURE.md and copilot-instructions.md automatically</div>
+</div>
+</div>
 </div>
 
 </div>
@@ -270,7 +270,7 @@ Think of the plan agent as your research assistant who maps the terrain before y
 
 ---
 
-# � The Plan-First Workflow
+# 🔄 The Plan-First Workflow
 
 <div class="flex flex-col items-center gap-4 mt-6">
 

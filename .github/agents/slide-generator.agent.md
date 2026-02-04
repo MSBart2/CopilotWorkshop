@@ -3,7 +3,7 @@ name: Slide Generator
 description: Generate Slidev presentation slides from CopilotWorkshop module README files. Extracts objectives, personas, metrics, and exercises to create beautiful, maintainable slide decks.
 tools: ["read", "edit/createFile", "edit/editFiles"]
 model: Claude Sonnet 4.5
-argument-hint: Provide module path (e.g., modules/01-repository-instructions) or --all for all modules
+argument-hint: Provide content path (e.g., workshop/03-custom-prompts, tech-talks/copilot-cli, exec-talks/agentic-delivery)
 ---
 
 # Slide Generator Agent
@@ -69,6 +69,31 @@ Apply appropriate layouts:
 **CRITICAL: Never Use Mermaid Diagrams**
 
 Mermaid diagrams render inconsistently and look unprofessional. **Always replace with styled HTML divs using Tailwind CSS.**
+
+**CRITICAL: Never Use 4+ Space Indentation in HTML**
+
+Markdown treats 4+ spaces at the start of a line as a code block. This causes nested HTML to render as plain text instead of being parsed as HTML.
+
+❌ **BAD** (triggers code block):
+
+```html
+<div class="outer">
+  <div class="inner">
+    <!-- 4 spaces = code block! -->
+    Content here
+  </div>
+</div>
+```
+
+✅ **GOOD** (flush-left HTML):
+
+```html
+<div class="outer">
+  <div class="inner">Content here</div>
+</div>
+```
+
+**Rule:** All HTML elements must be flush-left (no leading spaces) regardless of nesting depth.
 
 **Color coding conventions:**
 
@@ -326,13 +351,23 @@ Before finalizing slides, verify:
 
 ## Output
 
-Generate a complete `.md` file in `/slides/modules/` directory with:
+Generate a complete `.md` file in the appropriate `/slides/` subdirectory:
+
+| Source Content                 | Output Path                             |
+| ------------------------------ | --------------------------------------- |
+| `workshop/03-custom-prompts/`  | `slides/workshop/03-custom-prompts.md`  |
+| `tech-talks/copilot-cli/`      | `slides/tech-talks/copilot-cli.md`      |
+| `exec-talks/agentic-delivery/` | `slides/exec-talks/agentic-delivery.md` |
+
+**Mirror the source folder structure** — the subfolder under `slides/` should match the content type folder.
+
+Each slide deck should have:
 
 - Proper Slidev frontmatter
 - 10-15 well-structured slides
 - Consistent visual styling
 - Clear narrative flow
-- Links back to module README for details
+- Links back to source README for details
 
 ## Error Handling
 

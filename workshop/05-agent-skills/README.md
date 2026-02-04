@@ -2,7 +2,7 @@
 
 ## ⏰ — The Capability Gap
 
-> *"Instructions tell Copilot how to behave, but they don't teach it how to do things it doesn't know how to do. I need custom capabilities—like validating against our TV show API schema or checking our specific deployment requirements."*  
+> *"Instructions tell Copilot how to behave, but they don't teach it how to do things it doesn't know how to do. I need custom capabilities—like validating against our TV show API schema or checking our specific deployment requirements."*
 > — David, discovering agent skills
 
 ---
@@ -23,7 +23,7 @@ Now, in **Module 5**, they face a new challenge: **teaching Copilot specialized 
 
 ---
 
-⚠️ **Prerequisites**: 
+⚠️ **Prerequisites**:
 - Complete [Module 00: Orientation](../00-orientation/README.md)
 - Complete [Module 01: Repository Instructions](../01-repository-instructions/README.md)
 - Complete [Module 04: Custom Instructions](../04-custom-instructions/README.md)
@@ -147,8 +147,18 @@ You can reference files in this skill directory:
 |-------|----------|-------------|------------|
 | `name` | Yes | Unique identifier, lowercase with hyphens (e.g., `webapp-testing`) | 64 chars |
 | `description` | Yes | What the skill does AND when to use it (both capabilities and use cases help Copilot decide when to load) | 1024 chars |
-| `license` | No | License that applies to this skill | N/A |
+| `license` | No | License that applies to this skill | N/A || `compatibility` | No | Environment requirements—intended product, required system packages, network access needs | 500 chars |
+| `allowed-tools` | No | **Experimental** — Space-delimited list of pre-approved tools the skill may use (e.g., `Bash(git:*) Bash(jq:*) Read`) | N/A |
 
+**Example with allowed-tools:**
+```yaml
+---
+name: build-pipeline-analyzer
+description: Diagnose CI/CD build failures by analyzing logs, identifying common patterns, and running diagnostic scripts
+compatibility: Requires bash, jq, and access to GitHub Actions logs
+allowed-tools: Bash(jq:*) Bash(grep:*) Bash(./scripts/*) Read
+---
+```
 **Body sections (recommended structure):**
 - **What the skill accomplishes** — Clear capability statement
 - **When to use the skill** — Specific scenarios and triggers
@@ -186,6 +196,58 @@ Agent Skills use a three-level loading system to keep context efficient:
 
 **Why this matters:** You can have 20+ skills installed. Only 1-2 load per task. Context stays efficient.
 
+### Script Execution (The Power Feature)
+
+**Skills can include executable scripts that Copilot runs on your behalf.** This is what transforms skills from "read-only instructions" into "active capabilities."
+
+**Recommended directory structure:**
+```
+.github/skills/build-pipeline-analyzer/
+  SKILL.md                    # Instructions referencing the script
+  scripts/
+    analyze-logs.sh           # Executable diagnostic script
+    parse-error-patterns.py   # Python parser for common failures
+  log-patterns/
+    node-errors.md            # Common Node.js build errors
+    docker-errors.md          # Container build failures
+```
+
+**In SKILL.md, reference scripts for Copilot to run:**
+```markdown
+## Diagnostic Workflow
+
+When a build fails, run the log analyzer:
+
+\`\`\`bash
+./scripts/analyze-logs.sh <workflow-run-id>
+\`\`\`
+
+This script will:
+1. Fetch the GitHub Actions logs via `gh` CLI
+2. Parse for known error patterns using `jq`
+3. Output a structured diagnosis with root cause and fix suggestions
+```
+
+**Pre-approving tools with `allowed-tools`:**
+
+The experimental `allowed-tools` frontmatter field lets you pre-approve specific commands so Copilot can run them without prompting:
+
+```yaml
+---
+name: build-pipeline-analyzer
+description: Diagnose CI/CD failures by analyzing logs and running diagnostic scripts
+allowed-tools: Bash(./scripts/*) Bash(gh:*) Bash(jq:*) Read
+---
+```
+
+**Tool patterns:**
+- `Bash(git:*)` — Allow all git commands
+- `Bash(./scripts/*)` — Allow scripts in the skill's scripts/ directory
+- `Bash(npm:test)` — Allow only `npm test`
+- `Read` — Allow file reading
+
+> ⚠️ **Security note:** VS Code's terminal tool provides controls for script execution including auto-approve options with configurable allow-lists. Review shared skills before using them to ensure they meet your security standards.
+
 ### Referencing Resources Within Skills
 
 Use relative paths to reference files within your skill directory:
@@ -202,11 +264,12 @@ See [example outputs](./examples/) for reference
 - Include their content in context
 - Follow patterns shown in examples
 - Use templates as starting points
+- **Execute scripts when instructed** (with user approval or pre-approved tools)
 
 **Example from bug-reproduction-test-generator skill:**
 ```markdown
 Generate a reproduction test following [this template](./test-template.js).
-Reference [concurrent bug example](./examples/concurrent-bug-test.js) for 
+Reference [concurrent bug example](./examples/concurrent-bug-test.js) for
 race condition patterns.
 ```
 
@@ -259,7 +322,7 @@ The exercises below demonstrate how agent skills teach Copilot specialized capab
 
 **When to use it:** When you need to teach Copilot a complete workflow that requires more than just coding guidelines—API validation against custom schemas, test generation using specific templates, debugging with specialized scripts, or any task that combines instructions with executable resources.
 
-**What you'll build:** 
+**What you'll build:**
 - **API Endpoint Design Skill** — Complete workflow for creating REST endpoints that validate against FanHub's TV show API schema, with OpenAPI spec and example endpoints
 - **Bug Reproduction Test Generator** — Test creation workflow using Jest templates, mocking patterns, and edge case examples from past bugs
 - **Build Pipeline Analyzer** — Debugging workflow with log analysis script, common failure patterns, and troubleshooting decision tree
@@ -279,7 +342,7 @@ The exercises below demonstrate how agent skills teach Copilot specialized capab
 
 **[Module 6: MCP Servers](../06-mcp-servers/README.md)** — Agent skills teach Copilot specialized workflows, but what if you need to connect Copilot to external services—databases, APIs, cloud platforms? MCP servers provide runtime integration with live data sources.
 
-> *"Skills taught Copilot how to validate against our API schema. But the schema is static. What if I need Copilot to query our actual PostgreSQL database or call our live TV show API to validate real data?"*  
+> *"Skills taught Copilot how to validate against our API schema. But the schema is static. What if I need Copilot to query our actual PostgreSQL database or call our live TV show API to validate real data?"*
 > — Marcus, about to discover MCP servers
 
 ---

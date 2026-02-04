@@ -9,7 +9,9 @@
     "export": "slidev export",
     "export-pdf": "slidev export --format pdf",
     "export-pptx": "slidev export --format pptx",
-    "generate": "node scripts/generate-slides.js"
+    "generate": "node scripts/generate-slides.js",
+    "test:slide": "node scripts/test-slides.mjs",
+    "test:all": "node scripts/test-slides.mjs --all"
   },
   "dependencies": {
     "@slidev/cli": "^0.49.0",

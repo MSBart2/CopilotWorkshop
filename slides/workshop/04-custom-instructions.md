@@ -1,6 +1,6 @@
 ---
 theme: default
-background: https://source.unsplash.com/collection/94734566/1920x1080
+background: https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop
 class: text-center
 highlighter: shiki
 lineNumbers: false

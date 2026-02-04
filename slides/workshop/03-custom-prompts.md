@@ -1,12 +1,12 @@
 ---
 theme: default
-background: https://source.unsplash.com/collection/94734566/1920x1080
+background: https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=2128
 class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
   ## Module 3: Custom Prompts
-  CopilotWorkshop Training - Transforming repetitive prompts into reusable functions
+  Transform repetitive prompts into reusable, standardized functions
 drawings:
   persist: false
 transition: slide-left
@@ -22,6 +22,10 @@ mdc: true
   <span class="text-6xl">🔄</span>
 </div>
 
+<div class="mt-8 text-xl opacity-75">
+  "I've typed this same prompt five times today. There has to be a better way."
+</div>
+
 <div class="abs-br m-6 flex gap-2">
   <span class="text-sm opacity-50">CopilotWorkshop Training</span>
 </div>
@@ -30,230 +34,105 @@ mdc: true
 
 # 📖 The Problem
 
-<div class="text-left space-y-4 mt-8">
+<div class="grid grid-cols-2 gap-8 mt-8">
 
-<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
-  <div class="font-bold text-red-400 mb-2">😰 Elena's Frustration</div>
-  <blockquote class="italic text-gray-300">
-    "I've typed this same prompt five times today: 'Generate tests following our standards.' There has to be a better way."
+<div class="p-6 bg-red-900/30 rounded-lg border-l-4 border-red-500">
+  <div class="text-3xl mb-4">😰</div>
+  <h3 class="text-xl font-bold text-red-400 mb-3">The Pain of Repetition</h3>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>✗ Same prompt typed 5× per day</li>
+    <li>✗ 3 minutes each time to get it right</li>
+    <li>✗ Inconsistent standards across team</li>
+    <li>✗ Manual copying from standards docs</li>
+    <li>✗ Junior devs missing key checks</li>
+  </ul>
+</div>
+
+<div class="p-6 bg-gray-800 rounded-lg border-l-4 border-gray-600">
+  <div class="text-3xl mb-4">💭</div>
+  <h3 class="text-xl font-bold text-gray-300 mb-3">The Root Cause</h3>
+  <blockquote class="text-sm text-gray-400 italic space-y-3">
+    <p>"I've typed this same prompt five times today: 'Generate tests following our standards.' There has to be a better way."</p>
+    <p class="text-xs text-gray-500">— Elena, Quality Champion (8 years)</p>
   </blockquote>
 </div>
 
-<div class="mt-6 text-gray-400 text-sm space-y-2">
-  <div>✅ <strong>Module 1:</strong> ARCHITECTURE.md and copilot-instructions.md established foundations</div>
-  <div>✅ <strong>Module 2:</strong> Plan mode reduced planning time from 35 to 7 minutes</div>
-  <div>❓ <strong>Module 3 Challenge:</strong> Repetitive, specialized prompts requiring specific context</div>
 </div>
 
-</div>
-
----
-
-# 🧠 Mindful Moment
-
-<div class="mt-12 space-y-8">
-
-<div class="grid grid-cols-2 gap-8">
-  <div class="p-6 bg-red-900/30 rounded-lg border-2 border-red-500">
-    <div class="font-bold text-red-400 mb-3">❌ Traditional Thinking</div>
-    <div class="text-gray-300">"I'll just type the prompt again—it's only a minute."</div>
-  </div>
-  <div class="p-6 bg-green-900/30 rounded-lg border-2 border-green-500">
-    <div class="font-bold text-green-400 mb-3">✅ AI-Native Thinking</div>
-    <div class="text-gray-300">"Document this prompt once, invoke it in 2 keystrokes, ensure the team uses the same standards."</div>
-  </div>
-</div>
-
-<div class="p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center mt-8">
-  <div class="text-xl font-bold text-white">Knowledge scales across the entire team.</div>
-</div>
-
+<div class="mt-8 text-center text-lg text-yellow-400">
+  ⚠️ Your best prompts shouldn't require copy-paste
 </div>
 
 ---
 
-# 🎯 What You'll Learn
+# 🎯 Learning Objectives
 
-<div class="text-left space-y-3 mt-8 text-sm">
+<div class="grid grid-cols-2 gap-6 mt-8">
 
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="font-bold text-blue-300 mb-2">Turn Best Prompts into Reusable Functions</div>
-  <div class="text-gray-300">Create workspace prompts for code review and test generation</div>
+<div class="p-5 bg-blue-900/60 rounded-lg border-2 border-blue-400">
+  <div class="text-3xl mb-3">🔨</div>
+  <h3 class="font-bold text-blue-300 mb-2">What You'll Create</h3>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li><code>.github/prompts/test-suite.prompt.md</code></li>
+    <li><code>.github/prompts/react-review.prompt.md</code></li>
+    <li><code>.github/prompts/debug-build.prompt.md</code></li>
+  </ul>
 </div>
 
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="font-bold text-blue-300 mb-2">Configure YAML Frontmatter</div>
-  <div class="text-gray-300">Control agent behavior, model selection, and tool availability</div>
-</div>
-
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="font-bold text-blue-300 mb-2">Measure Time Savings</div>
-  <div class="text-gray-300">Track prompt reuse and consistency improvements</div>
-</div>
-
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="font-bold text-blue-300 mb-2">Document Specialized Functions</div>
-  <div class="text-gray-300">Invoke complex workflows in seconds with standardized context</div>
+<div class="p-5 bg-green-900/60 rounded-lg border-2 border-green-400">
+  <div class="text-3xl mb-3">✨</div>
+  <h3 class="font-bold text-green-300 mb-2">What You'll Achieve</h3>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>3 min → 0.1 min per invocation</li>
+    <li>14.5 minutes saved per day</li>
+    <li>Standardized team practices</li>
+    <li>Zero missed checks in reviews</li>
+  </ul>
 </div>
 
 </div>
 
-<div class="mt-6 text-center text-gray-400">
-  <strong>Time:</strong> ~20 minutes | <strong>Exercises:</strong> 3
-</div>
-
----
-
-# 💡 Understanding Prompt Files
-
-<div class="text-left space-y-4 mt-6 text-sm">
-
-<div class="p-4 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-2">What are Prompt Files?</div>
-  <div class="text-gray-300">Markdown files with <code>.prompt.md</code> extension that define reusable functions for common development tasks.</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4">
-  <div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400">
-    <div class="text-green-300 font-bold mb-2">✨ Key Characteristics</div>
-    <ul class="text-gray-300 space-y-1 text-xs">
-      <li>• On-demand execution via <code>/command</code></li>
-      <li>• Structured with YAML frontmatter</li>
-      <li>• Reference your docs automatically</li>
-      <li>• Scoped to workspace or user</li>
-      <li>• Composable with variables</li>
-    </ul>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-    <div class="text-blue-300 font-bold mb-2">📦 Two Scopes</div>
-    <ul class="text-gray-300 space-y-1 text-xs">
-      <li><strong>Workspace:</strong> <code>.github/prompts/</code></li>
-      <li>→ Team-wide, project-specific</li>
-      <li><strong>User:</strong> VS Code profile</li>
-      <li>→ Personal, synced across machines</li>
-    </ul>
-  </div>
-</div>
-
-<div class="p-4 bg-gradient-to-r from-purple-900/40 to-gray-800 rounded-lg text-center">
-  <span class="text-white font-bold">💡 Think of prompts as functions you can invoke</span>
-</div>
-
+<div class="mt-8 p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-500 text-center">
+  <span class="text-purple-300 font-semibold">Document prompts once. Invoke in 2 keystrokes. Scale across the team.</span>
 </div>
 
 ---
 
-# 📚 Prompt File Structure
+# 👥 Key Personas
 
-<div class="mt-6 space-y-4">
+<div class="grid grid-cols-3 gap-4 mt-6">
 
-<div class="grid grid-cols-2 gap-6 text-xs">
-  <div>
-    <div class="font-bold text-blue-300 mb-2">Header (YAML Frontmatter)</div>
-    <pre class="bg-gray-900 p-3 rounded-lg text-gray-300"><code>---
-name: react-review
-description: 'Review React component'
-agent: 'ask'
-model: 'GPT-4o'
-tools: ['githubRepo']
----</code></pre>
-  </div>
-  <div>
-    <div class="font-bold text-green-300 mb-2">Body (Prompt Instructions)</div>
-    <pre class="bg-gray-900 p-3 rounded-lg text-gray-300"><code>Review this React component against
-our standards in copilot-instructions.md.
-
-Check for:
-* TypeScript types
-* Error boundaries
-* Accessibility
-* Performance
-
-Reference file: $&#123;file&#125;</code></pre>
-  </div>
+<div class="p-4 bg-gradient-to-br from-green-900/60 to-green-800/40 rounded-lg border-2 border-green-500">
+  <div class="text-4xl mb-2">👩‍🔬</div>
+  <h3 class="text-lg font-bold text-white">Elena</h3>
+  <p class="text-xs text-green-300 opacity-75 mb-2">Quality Champion · 8 years</p>
+  <blockquote class="text-xs text-gray-300 italic">
+    "I need test generation that follows our patterns every single time."
+  </blockquote>
 </div>
 
-<div class="grid grid-cols-3 gap-3 mt-6">
-  <div class="p-3 bg-gray-800 rounded-lg">
-    <div class="text-white font-bold text-xs mb-1">name</div>
-    <div class="text-gray-400 text-xs">Command after <code>/</code></div>
-  </div>
-  <div class="p-3 bg-gray-800 rounded-lg">
-    <div class="text-white font-bold text-xs mb-1">agent</div>
-    <div class="text-gray-400 text-xs">ask, edit, or agent</div>
-  </div>
-  <div class="p-3 bg-gray-800 rounded-lg">
-    <div class="text-white font-bold text-xs mb-1">tools</div>
-    <div class="text-gray-400 text-xs">Available tools</div>
-  </div>
+<div class="p-4 bg-gradient-to-br from-red-900/60 to-red-800/40 rounded-lg border-2 border-red-500">
+  <div class="text-4xl mb-2">👩‍💻</div>
+  <h3 class="text-lg font-bold text-white">Sarah</h3>
+  <p class="text-xs text-red-300 opacity-75 mb-2">Senior Developer · 15 years</p>
+  <blockquote class="text-xs text-gray-300 italic">
+    "Code reviews should reference our standards automatically."
+  </blockquote>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-lg border-2 border-blue-500">
+  <div class="text-4xl mb-2">👨‍💼</div>
+  <h3 class="text-lg font-bold text-white">Marcus</h3>
+  <p class="text-xs text-blue-300 opacity-75 mb-2">DevOps Developer · 5 years</p>
+  <blockquote class="text-xs text-gray-300 italic">
+    "Debugging needs structured context gathering."
+  </blockquote>
 </div>
 
 </div>
 
----
-
-# 🔧 Variables and Context
-
-<div class="mt-8 space-y-4 text-sm">
-
-<div class="grid grid-cols-2 gap-6">
-  <div class="p-4 bg-blue-900/60 rounded-lg">
-    <div class="font-bold text-blue-300 mb-3">Built-in Variables</div>
-    <ul class="text-gray-300 space-y-2 text-xs">
-      <li><code>$&#123;workspaceFolder&#125;</code> — Root path</li>
-      <li><code>$&#123;file&#125;</code> — Current file path</li>
-      <li><code>$&#123;selection&#125;</code> — Selected text</li>
-    </ul>
-  </div>
-  <div class="p-4 bg-green-900/60 rounded-lg">
-    <div class="font-bold text-green-300 mb-3">Input Variables</div>
-    <ul class="text-gray-300 space-y-2 text-xs">
-      <li><code>$&#123;input:componentName&#125;</code></li>
-      <li>→ Prompts user for value</li>
-      <li><code>$&#123;input:featureName:default&#125;</code></li>
-      <li>→ With placeholder text</li>
-    </ul>
-  </div>
-</div>
-
-<div class="p-4 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-2">Example: Dynamic Component Generator</div>
-  <pre class="text-gray-300 text-xs"><code>Generate a React component named $&#123;input:componentName&#125; 
-following patterns in [components/]($&#123;workspaceFolder&#125;/src/components/)</code></pre>
-</div>
-
-</div>
-
----
-
-# 📖 Referencing Documentation
-
-<div class="mt-8 space-y-4">
-
-<div class="p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">The real power: linking to your standards</div>
-</div>
-
-<div class="p-4 bg-gray-800 rounded-lg text-xs">
-<pre class="text-gray-300"><code>---
-name: test-suite
-description: 'Generate comprehensive test suite'
-agent: 'agent'
-tools: ['codebase']
----
-
-Generate test suite for $&#123;file&#125; following:
-* Testing standards: [copilot-instructions.md](../../.github/copilot-instructions.md)
-* Architecture patterns: [ARCHITECTURE.md](../docs/ARCHITECTURE.md)
-* Example tests: [__tests__/README.md](../../fanhub/frontend/__tests__/README.md)
-
-Include unit tests, integration tests, edge cases from QA checklist</code></pre>
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  When copilot-instructions.md changes, all prompts automatically reference the latest version.
-</div>
-
+<div class="mt-6 text-center text-sm text-gray-400">
+  <span class="text-xl">⭐</span> Elena leads Exercise 3.1, Sarah leads 3.2, Marcus leads 3.3
 </div>
 
 ---
@@ -262,34 +141,30 @@ layout: two-cols
 
 # ❌ The "Before"
 
-<div class="space-y-4 mt-8 text-sm">
+<div class="mt-6 space-y-4">
 
 <div class="p-4 bg-red-900/30 rounded-lg">
-  <div class="font-bold text-red-400 mb-2">Elena's Test Generation</div>
-  <ul class="text-gray-300 space-y-2 text-xs">
-    <li>⏱️ 3 minutes per invocation</li>
-    <li>🔁 5 invocations per day</li>
-    <li>❌ Inconsistent standards</li>
-    <li>📋 Manual typing of patterns</li>
-  </ul>
+  <div class="font-bold text-red-400 mb-2">⏱️ Time Per Prompt</div>
+  <div class="text-sm text-gray-300">
+    <span class="text-2xl font-bold text-red-300">3 minutes</span>
+    <div>typing same prompt carefully</div>
+  </div>
 </div>
 
 <div class="p-4 bg-red-900/30 rounded-lg">
-  <div class="font-bold text-red-400 mb-2">Sarah's React Review</div>
-  <ul class="text-gray-300 space-y-2 text-xs">
-    <li>📝 8 lines manually typed</li>
-    <li>⏱️ 3 minutes setup time</li>
-    <li>⚠️ Missed checks</li>
-  </ul>
+  <div class="font-bold text-red-400 mb-2">🔄 Daily Invocations</div>
+  <div class="text-sm text-gray-300">
+    <span class="text-2xl font-bold text-red-300">5 times</span>
+    <div>copy-pasting from notes</div>
+  </div>
 </div>
 
 <div class="p-4 bg-red-900/30 rounded-lg">
-  <div class="font-bold text-red-400 mb-2">Marcus' Build Debugging</div>
-  <ul class="text-gray-300 space-y-2 text-xs">
-    <li>⏱️ 5 minutes gathering context</li>
-    <li>📂 Manual log collection</li>
-    <li>🔍 Env var copy/paste</li>
-  </ul>
+  <div class="font-bold text-red-400 mb-2">⚠️ Missed Checks</div>
+  <div class="text-sm text-gray-300">
+    <span class="text-2xl font-bold text-red-300">3 per review</span>
+    <div>inconsistent standards</div>
+  </div>
 </div>
 
 </div>
@@ -298,145 +173,308 @@ layout: two-cols
 
 # ✨ The "After"
 
-<div class="space-y-4 mt-8 text-sm">
+<div class="mt-6 space-y-4">
 
 <div class="p-4 bg-green-900/30 rounded-lg">
-  <div class="font-bold text-green-400 mb-2">/test-suite Prompt</div>
-  <ul class="text-gray-300 space-y-2 text-xs">
-    <li>⚡ 0.1 minutes per invocation</li>
-    <li>🎯 Same 5 invocations/day</li>
-    <li>✅ Consistent standards</li>
-    <li>💾 <strong>14.5 min/day saved</strong></li>
-  </ul>
+  <div class="font-bold text-green-400 mb-2">⚡ Instant Invocation</div>
+  <div class="text-sm text-gray-300">
+    <span class="text-2xl font-bold text-green-300">0.1 minutes</span>
+    <div>type <code>/test-suite</code></div>
+  </div>
 </div>
 
 <div class="p-4 bg-green-900/30 rounded-lg">
-  <div class="font-bold text-green-400 mb-2">/react-review Prompt</div>
-  <ul class="text-gray-300 space-y-2 text-xs">
-    <li>📝 1 line: <code>/react-review</code></li>
-    <li>⚡ 0.1 minutes setup</li>
-    <li>✅ 0 missed checks</li>
-  </ul>
+  <div class="font-bold text-green-400 mb-2">📈 Time Saved</div>
+  <div class="text-sm text-gray-300">
+    <span class="text-2xl font-bold text-green-300">14.5 min/day</span>
+    <div>per developer</div>
+  </div>
 </div>
 
 <div class="p-4 bg-green-900/30 rounded-lg">
-  <div class="font-bold text-green-400 mb-2">/debug-build Prompt</div>
-  <ul class="text-gray-300 space-y-2 text-xs">
-    <li>⚡ 0.5 minutes context</li>
-    <li>🚀 10× faster debugging</li>
-    <li>📊 Auto-gathered vars</li>
-  </ul>
+  <div class="font-bold text-green-400 mb-2">🎯 Consistency</div>
+  <div class="text-sm text-gray-300">
+    <span class="text-2xl font-bold text-green-300">0 missed</span>
+    <div>automatic standards reference</div>
+  </div>
 </div>
 
+</div>
+
+---
+
+# 📚 Key Concepts: Prompt Files
+
+<div class="grid grid-cols-2 gap-6 mt-8">
+
+<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-blue-500">
+  <h3 class="text-xl font-bold text-blue-400 mb-3">What Are Prompt Files?</h3>
+  <div class="text-sm text-gray-300 space-y-2 mb-4">
+    <div><strong class="text-blue-300">Definition:</strong> Reusable functions for common tasks</div>
+    <div><strong class="text-blue-300">Extension:</strong> <code>.prompt.md</code> files</div>
+    <div><strong class="text-blue-300">Invocation:</strong> Type <code>/prompt-name</code> in chat</div>
+  </div>
+  <div class="text-xs text-gray-400 space-y-1">
+    <div class="text-green-400">✓ On-demand execution</div>
+    <div class="text-green-400">✓ Structured with YAML frontmatter</div>
+    <div class="text-green-400">✓ Reference your documentation</div>
+    <div class="text-green-400">✓ Accept input variables</div>
+  </div>
+</div>
+
+<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-purple-500">
+  <h3 class="text-xl font-bold text-purple-400 mb-3">Structure</h3>
+  <div class="text-xs text-gray-300 space-y-3">
+    <div>
+      <div class="font-bold text-purple-300 mb-1">Header (YAML):</div>
+      <div class="text-gray-400">name, description, agent, model, tools</div>
+    </div>
+    <div>
+      <div class="font-bold text-purple-300 mb-1">Body (Prompt):</div>
+      <div class="text-gray-400">Instructions + links to standards</div>
+    </div>
+    <div>
+      <div class="font-bold text-purple-300 mb-1">Variables:</div>
+      <div class="text-gray-400"><code>${file}</code>, <code>${selection}</code>, <code>${input:name}</code></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="mt-6 text-center text-sm text-gray-400">
+  💡 Think of prompts as functions: invoke by name, accept parameters, return results
+</div>
+
+---
+
+# 🔗 Workspace vs. User Prompts
+
+<div class="flex flex-col items-center gap-4 mt-8">
+
+<div class="p-5 bg-blue-900/60 rounded-lg border-2 border-blue-400 w-full max-w-2xl">
+  <div class="text-2xl mb-2">🏢 Workspace Prompts</div>
+  <div class="text-sm text-blue-300 font-semibold mb-2">Location: <code>.github/prompts/</code></div>
+  <div class="text-xs text-gray-300 space-y-1">
+    <div>✓ Team-wide standardized functions</div>
+    <div>✓ Project-specific patterns</div>
+    <div>✓ Reference local files (ARCHITECTURE.md)</div>
+    <div>✓ Version controlled via Git</div>
+  </div>
+</div>
+
+<div class="text-2xl text-gray-400">vs</div>
+
+<div class="p-5 bg-purple-900/60 rounded-lg border-2 border-purple-400 w-full max-w-2xl">
+  <div class="text-2xl mb-2">👤 User Prompts</div>
+  <div class="text-sm text-purple-300 font-semibold mb-2">Location: VS Code profile folder</div>
+  <div class="text-xs text-gray-300 space-y-1">
+    <div>✓ Personal functions across all projects</div>
+    <div>✓ Language-agnostic patterns</div>
+    <div>✓ Synced automatically via Settings Sync</div>
+    <div>✓ Not tied to specific project structure</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+# 💡 Variables and Context
+
+<div class="grid grid-cols-2 gap-6 mt-8">
+
+<div class="p-5 bg-gray-800 rounded-lg">
+  <h3 class="font-bold text-blue-300 mb-3">Built-in Variables</h3>
+  <div class="text-sm text-gray-300 space-y-2">
+    <div class="flex items-start gap-2">
+      <code class="text-blue-400">${workspaceFolder}</code>
+      <span class="text-xs text-gray-400">Root path</span>
+    </div>
+    <div class="flex items-start gap-2">
+      <code class="text-blue-400">${file}</code>
+      <span class="text-xs text-gray-400">Current file path</span>
+    </div>
+    <div class="flex items-start gap-2">
+      <code class="text-blue-400">${selection}</code>
+      <span class="text-xs text-gray-400">Selected text</span>
+    </div>
+  </div>
+</div>
+
+<div class="p-5 bg-gray-800 rounded-lg">
+  <h3 class="font-bold text-green-300 mb-3">Input Variables</h3>
+  <div class="text-sm text-gray-300 space-y-2">
+    <div class="flex items-start gap-2">
+      <code class="text-green-400">${input:name}</code>
+      <span class="text-xs text-gray-400">Prompts user for value</span>
+    </div>
+    <div class="flex items-start gap-2">
+      <code class="text-green-400">${input:name:default}</code>
+      <span class="text-xs text-gray-400">With placeholder</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="mt-8 p-5 bg-gradient-to-r from-blue-900/40 to-purple-900/40 rounded-lg text-center">
+  <div class="text-lg text-white font-semibold mb-2">
+    Variables make prompts both consistent and flexible
+  </div>
+  <div class="text-sm text-gray-400">
+    Built-ins for context, inputs for parameters
+  </div>
 </div>
 
 ---
 
 # 🔨 Exercises
 
-<div class="mt-8">
+<div class="mt-6">
 
-| # | Exercise | Lead | Support | Key Metrics |
-|---|----------|------|---------|-------------|
-| **3.1** | Creating Your First Prompt File | Elena ⭐ | Marcus | 3→0.1 min per invocation<br/>14.5 min/day saved |
-| **3.2** | Referencing Standards and Docs | Sarah ⭐ | David | 8→1 lines<br/>3→0.1 min setup<br/>0 missed checks |
-| **3.3** | Variable-Driven Prompts | Marcus ⭐ | Rafael, Elena | 5→0.5 min context<br/>10× faster debugging |
+| # | Exercise | Lead | Time | Key Metric |
+|---|----------|------|------|------------|
+| **3.1** | Creating Your First Prompt File | Elena ⭐ | 10 min | 3→0.1 min per invocation |
+| **3.2** | Referencing Standards and Docs | Sarah ⭐ | 8 min | 8→1 lines, 0 missed checks |
+| **3.3** | Variable-Driven Prompts | Marcus ⭐ | 7 min | 5→0.5 min context gathering |
 
-<div class="mt-6 p-4 bg-blue-900/60 rounded-lg">
-  <div class="font-bold text-blue-300 mb-2">What You'll Build</div>
-  <div class="text-gray-300 text-sm space-y-1">
-    <div>✅ <code>.github/prompts/test-suite.prompt.md</code> — Standardized test generation</div>
-    <div>✅ <code>.github/prompts/react-review.prompt.md</code> — Automated standards validation</div>
-    <div>✅ <code>.github/prompts/debug-build.prompt.md</code> — Structured build analysis</div>
+</div>
+
+<div class="mt-8 grid grid-cols-3 gap-4">
+
+<div class="p-3 bg-green-900/30 rounded-lg border-2 border-green-400">
+  <h3 class="font-bold text-green-300 mb-2 text-sm">3.1: Test Suite</h3>
+  <div class="text-xs text-gray-300 space-y-1">
+    <div>• Create <code>test-suite.prompt.md</code></div>
+    <div>• Reference testing standards</div>
+    <div>• Invoke with <code>/test-suite</code></div>
   </div>
 </div>
 
+<div class="p-3 bg-red-900/30 rounded-lg border-2 border-red-400">
+  <h3 class="font-bold text-red-300 mb-2 text-sm">3.2: React Review</h3>
+  <div class="text-xs text-gray-300 space-y-1">
+    <div>• Link to copilot-instructions.md</div>
+    <div>• Automated standards checking</div>
+    <div>• Zero manual setup</div>
+  </div>
+</div>
+
+<div class="p-3 bg-blue-900/30 rounded-lg border-2 border-blue-400">
+  <h3 class="font-bold text-blue-300 mb-2 text-sm">3.3: Debug Build</h3>
+  <div class="text-xs text-gray-300 space-y-1">
+    <div>• Use <code>${file}</code> and <code>${selection}</code></div>
+    <div>• Structured debugging</div>
+    <div>• 10× faster analysis</div>
+  </div>
+</div>
+
+</div>
+
+<div class="mt-6 text-center text-sm text-gray-400">
+  📖 Detailed instructions in module folder
 </div>
 
 ---
+layout: center
+---
 
-# � Persona Journeys
+# 💭 Elena's Realization
 
-<div class="grid grid-cols-3 gap-4 mt-8">
-
-<div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/40 dark:to-blue-800/40 rounded-lg">
-  <div class="text-3xl mb-2">👩‍💻</div>
-  <h3 class="text-lg font-bold text-blue-800 dark:text-blue-300">Elena</h3>
-  <p class="text-xs opacity-75 mb-3">Quality Champion · 8 years</p>
-  <blockquote class="text-xs italic text-gray-700 dark:text-gray-300">
-    "I've typed this same prompt five times today. There has to be a better way."
+<div class="p-8 bg-gradient-to-br from-green-900/60 to-green-800/40 rounded-xl shadow-lg max-w-3xl">
+  <div class="text-6xl mb-4 text-center">👩‍🔬</div>
+  <blockquote class="text-2xl text-center text-white italic leading-relaxed">
+    "I was spending 15 minutes per day just typing the same test generation prompt. Now I type <code>/test-suite</code> and it's done. That's 60+ hours per year saved."
   </blockquote>
-  <div class="mt-3 text-xs text-green-700 dark:text-green-400 font-bold">
-    → Saves 14.5 min/day with /test-suite
+  <div class="mt-4 text-center text-green-300">
+    — Elena, Quality Champion (8 years)
   </div>
 </div>
 
-<div class="p-4 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/40 dark:to-purple-800/40 rounded-lg">
-  <div class="text-3xl mb-2">👩‍💼</div>
-  <h3 class="text-lg font-bold text-purple-800 dark:text-purple-300">Sarah</h3>
-  <p class="text-xs opacity-75 mb-3">Skeptical Senior · 15 years</p>
-  <blockquote class="text-xs italic text-gray-700 dark:text-gray-300">
-    "React reviews now reference our standards automatically—no more manual typing."
-  </blockquote>
-  <div class="mt-3 text-xs text-green-700 dark:text-green-400 font-bold">
-    → 0 missed checks, standards enforced
-  </div>
-</div>
-
-<div class="p-4 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/40 dark:to-orange-800/40 rounded-lg">
-  <div class="text-3xl mb-2">👨‍💻</div>
-  <h3 class="text-lg font-bold text-orange-800 dark:text-orange-300">Marcus</h3>
-  <p class="text-xs opacity-75 mb-3">DevOps Developer · 5 years</p>
-  <blockquote class="text-xs italic text-gray-700 dark:text-gray-300">
-    "Build debugging went from 5 minutes of context gathering to 30 seconds."
-  </blockquote>
-  <div class="mt-3 text-xs text-green-700 dark:text-green-400 font-bold">
-    → 10× faster with /debug-build
-  </div>
-</div>
-
+<div class="mt-8 text-center text-lg text-gray-400">
+  Document once. Invoke forever. Scale across the team.
 </div>
 
 ---
 
 # 📊 Success Metrics
 
-<div class="mt-8 space-y-4">
+<div class="grid grid-cols-3 gap-4 mt-8">
 
-<div class="grid grid-cols-3 gap-4 text-center">
-  <div class="p-4 bg-gradient-to-br from-green-900/60 to-green-800/60 rounded-lg border-2 border-green-400">
-    <div class="text-3xl font-bold text-green-300">14.5 min</div>
-    <div class="text-sm text-gray-300 mt-2">Daily time saved</div>
-    <div class="text-xs text-gray-400 mt-1">(Elena's test generation)</div>
+<div class="p-5 bg-gradient-to-br from-red-900/40 to-gray-800 rounded-lg text-center">
+  <div class="text-sm text-red-400 font-bold mb-2">Before</div>
+  <div class="text-4xl font-bold text-white mb-1">3 min</div>
+  <div class="text-xs text-gray-400">per prompt invocation</div>
+  <div class="text-3xl text-gray-400 my-3">↓</div>
+  <div class="text-sm text-green-400 font-bold mb-2">After</div>
+  <div class="text-4xl font-bold text-white mb-1">0.1 min</div>
+  <div class="text-xs text-gray-400">with <code>/prompt-name</code></div>
+</div>
+
+<div class="p-5 bg-gradient-to-br from-red-900/40 to-gray-800 rounded-lg text-center">
+  <div class="text-sm text-red-400 font-bold mb-2">Before</div>
+  <div class="text-4xl font-bold text-white mb-1">8 lines</div>
+  <div class="text-xs text-gray-400">manual standards typing</div>
+  <div class="text-3xl text-gray-400 my-3">↓</div>
+  <div class="text-sm text-green-400 font-bold mb-2">After</div>
+  <div class="text-4xl font-bold text-white mb-1">1 line</div>
+  <div class="text-xs text-gray-400">automatic doc reference</div>
+</div>
+
+<div class="p-5 bg-gradient-to-br from-red-900/40 to-gray-800 rounded-lg text-center">
+  <div class="text-sm text-red-400 font-bold mb-2">Before</div>
+  <div class="text-4xl font-bold text-white mb-1">5 min</div>
+  <div class="text-xs text-gray-400">context gathering for debug</div>
+  <div class="text-3xl text-gray-400 my-3">↓</div>
+  <div class="text-sm text-green-400 font-bold mb-2">After</div>
+  <div class="text-4xl font-bold text-white mb-1">0.5 min</div>
+  <div class="text-xs text-gray-400">with variables</div>
+</div>
+
+</div>
+
+<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-2xl font-bold text-white">
+    14.5 minutes saved per developer per day
   </div>
-  <div class="p-4 bg-gradient-to-br from-blue-900/60 to-blue-800/60 rounded-lg border-2 border-blue-400">
-    <div class="text-3xl font-bold text-blue-300">0</div>
-    <div class="text-sm text-gray-300 mt-2">Missed checks</div>
-    <div class="text-xs text-gray-400 mt-1">(Sarah's React review)</div>
-  </div>
-  <div class="p-4 bg-gradient-to-br from-purple-900/60 to-purple-800/60 rounded-lg border-2 border-purple-400">
-    <div class="text-3xl font-bold text-purple-300">10×</div>
-    <div class="text-sm text-gray-300 mt-2">Faster debugging</div>
-    <div class="text-xs text-gray-400 mt-1">(Marcus' build analysis)</div>
+  <div class="mt-2 text-sm text-blue-200">
+    That's 60+ hours per year per person
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
-  <div class="p-4 bg-gray-800 rounded-lg">
-    <div class="font-bold text-white mb-2">Prompt Invocations</div>
-    <div class="text-gray-300 text-xs space-y-1">
-      <div>• Before: 3 min × 5/day = 15 min</div>
-      <div>• After: 0.1 min × 5/day = 0.5 min</div>
-      <div class="text-green-400 font-bold mt-2">→ 97% time reduction</div>
-    </div>
+---
+
+# 🔗 How Prompt Files Reference Standards
+
+<div class="flex flex-col items-center gap-4 mt-6">
+
+<div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400 w-full max-w-2xl">
+  <div class="text-lg mb-2">📚 Module 1: Created Documentation</div>
+  <div class="text-xs text-gray-300 space-y-1">
+    <div>✓ <code>ARCHITECTURE.md</code> — Structural understanding</div>
+    <div>✓ <code>copilot-instructions.md</code> — Team patterns</div>
   </div>
-  <div class="p-4 bg-gray-800 rounded-lg">
-    <div class="font-bold text-white mb-2">Consistency Impact</div>
-    <div class="text-gray-300 text-xs space-y-1">
-      <div>• Standards referenced automatically</div>
-      <div>• Junior devs get senior-level results</div>
-      <div class="text-blue-400 font-bold mt-2">→ Knowledge scales team-wide</div>
-    </div>
+</div>
+
+<div class="text-3xl text-gray-400">↓</div>
+
+<div class="p-4 bg-purple-900/60 rounded-lg border-2 border-purple-400 w-full max-w-2xl">
+  <div class="text-lg mb-2">🔗 Module 3: Prompt Files Link to Docs</div>
+  <div class="text-xs text-gray-300">
+    <code class="text-purple-300">[copilot-instructions.md](../../.github/copilot-instructions.md)</code>
+  </div>
+</div>
+
+<div class="text-3xl text-gray-400">↓</div>
+
+<div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400 w-full max-w-2xl text-center">
+  <div class="text-lg mb-2">✨ Result</div>
+  <div class="text-sm text-green-300 font-bold">
+    Standards documented once, enforced automatically through prompts
+  </div>
+  <div class="text-xs text-gray-400 mt-2">
+    When your standards evolve, prompts automatically reference the latest version
   </div>
 </div>
 
@@ -444,118 +482,180 @@ layout: two-cols
 
 ---
 
-# 🔗 Integration & Compounding
+# 🔗 Compounding Value
 
-<div class="mt-8 space-y-4">
+<div class="mt-8">
 
-<div class="flex flex-col items-center gap-3">
-  <div class="p-4 bg-purple-900/60 rounded-lg border-2 border-purple-400 w-96 text-center">
-    <div class="font-bold text-purple-300">Module 1: Repository Instructions</div>
-    <div class="text-xs text-gray-300 mt-1">ARCHITECTURE.md + copilot-instructions.md</div>
-  </div>
-  <div class="text-2xl text-gray-400">↓</div>
-  <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400 w-96 text-center">
-    <div class="font-bold text-blue-300">Module 2: Plan Mode</div>
-    <div class="text-xs text-gray-300 mt-1">35 → 7 min planning time</div>
-  </div>
-  <div class="text-2xl text-gray-400">↓</div>
-  <div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400 w-96 text-center">
-    <div class="font-bold text-green-300">Module 3: Custom Prompts</div>
-    <div class="text-xs text-gray-300 mt-1">Reusable functions reference standards automatically</div>
+<div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-500 mb-4">
+  <h3 class="text-lg font-bold text-blue-300 mb-2">What We Created</h3>
+  <div class="grid grid-cols-3 gap-3 text-xs text-gray-300">
+    <div>✓ <code>test-suite.prompt.md</code></div>
+    <div>✓ <code>react-review.prompt.md</code></div>
+    <div>✓ <code>debug-build.prompt.md</code></div>
   </div>
 </div>
 
-<div class="p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center mt-6">
-  <div class="text-lg font-bold text-white">Prompts build on your foundation—they reference your architecture and standards to deliver consistent results.</div>
+<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-500">
+  <h3 class="text-lg font-bold text-purple-300 mb-3">How This Helps Future Modules</h3>
+  <div class="text-xs text-gray-300 space-y-2">
+    <div class="flex items-start gap-2">
+      <span class="text-purple-400">→</span>
+      <div><strong>Module 4:</strong> Custom instructions work alongside prompt files</div>
+    </div>
+    <div class="flex items-start gap-2">
+      <span class="text-purple-400">→</span>
+      <div><strong>Module 7:</strong> Custom agents can invoke your prompt files</div>
+    </div>
+    <div class="flex items-start gap-2">
+      <span class="text-purple-400">→</span>
+      <div><strong>Module 8:</strong> Agent skills build on prompt patterns</div>
+    </div>
+    <div class="flex items-start gap-2">
+      <span class="text-purple-400">→</span>
+      <div><strong>All Modules:</strong> Standardized functions compound over time</div>
+    </div>
+  </div>
 </div>
 
+</div>
+
+<div class="mt-6 text-center text-lg text-yellow-300">
+  ⏰ Every prompt saved is time multiplied
 </div>
 
 ---
 
-# 🎭 How It Works Behind the Scenes
+# 🧠 The Transformation
 
-<div class="mt-8 space-y-4 text-xs">
+<div class="grid grid-cols-2 gap-8 mt-8">
 
-<div class="p-4 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-3">When you invoke <code>/prompt-name</code>:</div>
-  <div class="grid grid-cols-4 gap-2">
-    <div class="p-2 bg-blue-900/60 rounded border-2 border-blue-400 text-center">
-      <div class="font-bold text-blue-300">1. Discover</div>
-      <div class="text-gray-300 mt-1">Find .prompt.md files</div>
-    </div>
-    <div class="p-2 bg-blue-900/60 rounded border-2 border-blue-400 text-center">
-      <div class="font-bold text-blue-300">2. Parse</div>
-      <div class="text-gray-300 mt-1">Read YAML config</div>
-    </div>
-    <div class="p-2 bg-blue-900/60 rounded border-2 border-blue-400 text-center">
-      <div class="font-bold text-blue-300">3. Substitute</div>
-      <div class="text-gray-300 mt-1">Replace variables</div>
-    </div>
-    <div class="p-2 bg-blue-900/60 rounded border-2 border-blue-400 text-center">
-      <div class="font-bold text-blue-300">4. Resolve</div>
-      <div class="text-gray-300 mt-1">Include linked docs</div>
-    </div>
+<div class="p-6 bg-red-900/30 rounded-lg">
+  <h3 class="text-xl font-bold text-red-400 mb-4">❌ Before This Module</h3>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>Typing same prompts repeatedly</li>
+    <li>Copy-pasting from personal notes</li>
+    <li>Inconsistent standards application</li>
+    <li>Junior devs missing key checks</li>
+    <li>15 minutes wasted per day</li>
+  </ul>
+</div>
+
+<div class="p-6 bg-green-900/30 rounded-lg">
+  <h3 class="text-xl font-bold text-green-400 mb-4">✨ After This Module</h3>
+  <ul class="text-sm text-gray-300 space-y-2">
+    <li>Invoke best prompts in 2 keystrokes</li>
+    <li>Automatic standards enforcement</li>
+    <li>Everyone uses the same functions</li>
+    <li>Junior devs get senior-quality results</li>
+    <li>14.5 minutes saved per day</li>
+  </ul>
+</div>
+
+</div>
+
+<div class="mt-8 p-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg text-center">
+  <div class="text-3xl font-bold text-white mb-2">
+    Your best prompts are now team functions
   </div>
-  <div class="grid grid-cols-3 gap-2 mt-2">
-    <div class="p-2 bg-green-900/60 rounded border-2 border-green-400 text-center">
-      <div class="font-bold text-green-300">5. Assemble</div>
-      <div class="text-gray-300 mt-1">Combine context</div>
-    </div>
-    <div class="p-2 bg-green-900/60 rounded border-2 border-green-400 text-center">
-      <div class="font-bold text-green-300">6. Invoke</div>
-      <div class="text-gray-300 mt-1">Route to agent</div>
-    </div>
-    <div class="p-2 bg-green-900/60 rounded border-2 border-green-400 text-center">
-      <div class="font-bold text-green-300">7. Execute</div>
-      <div class="text-gray-300 mt-1">Run with tools</div>
-    </div>
+  <div class="text-lg text-blue-100 italic">
+    Document once. Invoke forever. Scale knowledge.
   </div>
 </div>
 
-<div class="p-4 bg-gradient-to-r from-purple-900/40 to-gray-800 rounded-lg text-center">
-  <span class="text-white font-bold">💡 Key Takeaway: Prompt files are context orchestrators</span>
-  <div class="text-gray-400 text-xs mt-2">They ensure the right context (standards, architecture, patterns) is always included, consistently.</div>
+---
+
+# ✅ Module Checklist
+
+<div class="grid grid-cols-2 gap-6 mt-8">
+
+<div class="p-5 bg-gray-800 rounded-lg">
+  <h3 class="font-bold text-blue-300 mb-3">Files Created</h3>
+  <div class="text-sm text-gray-300 space-y-2">
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="w-4 h-4" />
+      <span><code>test-suite.prompt.md</code> exists</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="w-4 h-4" />
+      <span><code>react-review.prompt.md</code> exists</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="w-4 h-4" />
+      <span><code>debug-build.prompt.md</code> exists</span>
+    </div>
+  </div>
+</div>
+
+<div class="p-5 bg-gray-800 rounded-lg">
+  <h3 class="font-bold text-green-300 mb-3">Validated Improvements</h3>
+  <div class="text-sm text-gray-300 space-y-2">
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="w-4 h-4" />
+      <span>Prompts invoke in <0.1 min</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="w-4 h-4" />
+      <span>Standards automatically referenced</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="w-4 h-4" />
+      <span>Team uses consistent functions</span>
+    </div>
+  </div>
 </div>
 
 </div>
 
+<div class="mt-8 text-center">
+  <div class="text-sm text-gray-400 mb-2">Practices Applied</div>
+  <div class="flex justify-center gap-4 text-xs">
+    <span class="px-3 py-1 bg-blue-900/40 rounded-full">📚 Documentation as Leverage</span>
+    <span class="px-3 py-1 bg-purple-900/40 rounded-full">🎯 Outcome-Focused Prompts</span>
+    <span class="px-3 py-1 bg-green-900/40 rounded-full">🔄 Iterative Refinement</span>
+  </div>
+</div>
+
+---
+layout: center
 ---
 
 # ➡️ Next Up: Module 4
 
-<div class="mt-12 space-y-6">
-
-<div class="p-6 bg-gradient-to-r from-blue-900/60 to-purple-900/60 rounded-lg border-2 border-blue-400">
-  <div class="text-xl font-bold text-white mb-3">Custom Instructions</div>
-  <div class="text-gray-300 text-sm mb-4">
-    While prompt files handle specific tasks, custom instructions apply context to <strong>every Copilot interaction</strong>, shaping how AI understands your role, codebase, and preferences.
+<div class="p-8 bg-gradient-to-br from-purple-900/60 to-purple-800/40 rounded-xl shadow-lg max-w-3xl">
+  <div class="text-5xl mb-4 text-center">🎯</div>
+  <h2 class="text-3xl text-center text-white font-bold mb-4">
+    Custom Instructions
+  </h2>
+  <div class="text-lg text-center text-purple-200 mb-6">
+    Monday 1:30 PM
   </div>
-  <blockquote class="text-sm italic text-gray-400 border-l-4 border-blue-400 pl-4">
-    "I love the prompt files, but I'm still explaining the same context in every chat session. Can I make Copilot remember who I am and what I care about?"
+  <div class="text-base text-gray-300 text-center mb-4">
+    Prompt files handle specific tasks. Now let's teach Copilot about <strong>you</strong>—your role, preferences, and context that applies to every interaction.
+  </div>
+  <blockquote class="text-lg text-center text-white italic">
+    "I love the prompt files, but I'm still explaining the same context in every chat session. Can I make Copilot remember who I am?"
   </blockquote>
-  <div class="text-right text-sm text-gray-400 mt-2">— David</div>
-</div>
-
-<div class="text-center">
-  <a href="../04-custom-instructions/README.md" class="text-blue-400 hover:text-blue-300 font-bold">
-    Continue to Module 4 →
-  </a>
-</div>
-
+  <div class="mt-2 text-center text-purple-300">
+    — David, about to discover custom instructions
+  </div>
 </div>
 
 ---
 layout: end
 ---
 
-# Ready to Transform Repetition into Reuse?
+# Module 3 Complete! 🎉
 
-<div class="mt-8">
-  <div class="text-2xl text-gray-400 mb-4">Start with Exercise 3.1</div>
-  <div class="text-sm text-gray-500">Create your first prompt file and save 14.5 minutes per day</div>
+<div class="text-center mt-12">
+  <div class="text-6xl mb-6">✅</div>
+  <div class="text-2xl text-gray-300 mb-4">
+    You've transformed repetitive prompts into reusable functions
+  </div>
+  <div class="text-lg text-gray-400">
+    Prompt files created. Standards referenced. Time saved.
+  </div>
 </div>
 
-<div class="abs-br m-6 text-sm opacity-50">
-  CopilotWorkshop Training
+<div class="mt-12 text-center text-sm text-gray-500">
+  Continue to Module 4: Custom Instructions →
 </div>

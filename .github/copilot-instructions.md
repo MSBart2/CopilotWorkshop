@@ -120,3 +120,20 @@ Before submitting content, verify:
 - [ ] **Evidence-based** — Demonstrates through action, not claims understanding
 - [ ] **Persona-authentic** — Uses the persona's unique lens (Sarah=ROI, David=expertise, etc.)
 - [ ] **Professional tone** — Treats all as experienced professionals validating tools
+
+---
+
+## Agent Invocation Guidelines
+
+When calling subagents (via `runSubagent`), keep prompts minimal:
+
+- **Trust agent configuration** — Agents already have access to this file and their own `.agent.md` instructions
+- **Don't repeat rules** — Never re-state guidelines from copilot-instructions.md or agent definitions
+- **Be concise** — Just specify the target (e.g., "Generate slides for workshop/03-custom-prompts")
+- **Let agents work** — They're configured to follow workspace conventions automatically
+
+**Bad example:**
+> "Generate slides following the slide generation guidelines, using emoji vocabulary, dark cockpit-style, max 15-20 slides..."
+
+**Good example:**
+> "Generate slides for workshop/03-custom-prompts"

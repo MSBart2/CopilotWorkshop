@@ -338,15 +338,6 @@ tools: ['effort-estimator/*', 'github/*']
 
 ---
 
-## ➡️ Next Module
-
-**[Module 8: Copilot Web](../08-copilot-web/README.md)** — Leverage Copilot on github.copilot.com for web-based workflows including workspace search and multi-file refactoring without local environment setup.
-
-> *"Wait, I can use all these capabilities—agents, skills, MCP servers—without even opening VS Code?"*
-> — Rafael, discovering web-based development workflows
-
----
-
 ## 📌 Practices Used
 
 | Practice | How It Applied in This Module |
