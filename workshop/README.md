@@ -40,7 +40,7 @@
 
 **Monday, 9:00 AM**: Sarah (skeptical senior dev) throws down the challenge. The team looks at the starter code—it's rough. Generic content, inconsistent patterns, zero documentation. Copilot gives confused suggestions because it has nothing to work with.
 
-**Monday, 9:00 AM - 6:00 PM**: Over the next 11-13 hours (your time, your pace), you'll follow the team as they:
+**Monday, 9:00 AM - 6:00 PM**: Over the next 8-9 hours (your time, your pace), you'll follow the team as they:
 
 1. **Document architecture** and establish team standards (watch suggestions improve instantly)
 2. **Master plan mode** for structured thinking and systematic AI collaboration
@@ -48,10 +48,7 @@
 4. **Add custom instructions** for context-aware code generation
 5. **Encode domain expertise** with Agent Skills that Copilot loads automatically
 6. **Connect to external systems** via MCP for database queries, API calls, and deployment awareness
-7. **Unleash autonomous agents** that leverage ALL the context you've built — THE PAYOFF
-8. **Integrate web and CLI workflows** for comprehensive AI assistance
-9. **Orchestrate everything together** with agentic development lifecycle
-10. **Ship and reflect** on the transformation
+7. **Unleash autonomous agents** that leverage ALL the context you've built — THE FINALE
 
 Each module builds on the previous. Each customization compounds. By the end, you'll have a production app and a completely transformed understanding of AI-assisted development.
 
@@ -127,7 +124,7 @@ Every module connects back to these core ideas:
 
 ## 📚 Workshop Structure
 
-**Total Time**: 10-12 hours (self-paced) · **Format**: Story-driven with hands-on exercises
+**Total Time**: 8-9 hours (self-paced) · **Format**: Story-driven with hands-on exercises
 
 | Module | Time | What You'll Build | Transformation | Key Skills |
 |--------|------|-------------------|----------------|------------|
@@ -138,12 +135,7 @@ Every module connects back to these core ideas:
 | **4: Custom Instructions** | 90 min | File-scoped context with `applyTo` patterns | Generic → Context-aware | Custom instructions |
 | **5: Agent Skills** | 90 min | Domain expertise in `.github/skills/` | Generic → Domain expert | SKILL.md format |
 | **6: MCP Servers** | 75 min | Connect to SQLite, GitHub via Model Context Protocol | Knowledge → Action | MCP config, databases |
-| **7: Custom Agents** ⭐ | 90 min | **THE PAYOFF** — Autonomous agent builds Character Detail v2 using ALL context | Sequential → Autonomous | Agent design, orchestration |
-| **8: Copilot Web** | 60 min | PR validation, issue refinement, docs from browser | Code-only → Full lifecycle | github.com workflows |
-| **9: Copilot CLI** | 90 min | Terminal automation, scripted workflows | Manual → Scripted | CLI automation |
-| **10: Agentic SDLC** | 120 min | Orchestrate VS Code + Web + CLI simultaneously, ship! | Sequential → Parallel | Multi-interface orchestration |
-| **11: Enterprise Patterns** | 120 min | Scale to organization: standards, metrics, onboarding | Individual → Organizational | Org instructions, ROI |
-| **SDK (Standalone)** | 45 min | Embed Copilot in custom Python tools | Using AI → Building with AI | Copilot SDK |
+| **7: Custom Agents** ⭐ | 90 min | **THE FINALE** — Autonomous agent orchestrates everything you've built | Sequential → Autonomous | Agent design, orchestration |
 
 **Featured Personas:** Sarah (skeptical senior), Marcus (DevOps), David (architect), Elena (QA), Rafael (product), Priya (junior)
 
@@ -234,7 +226,7 @@ A: All setup instructions are in the [FanHub repository](https://github.com/MSBa
 A: Absolutely! Pick whatever you're passionate about. That's the point.
 
 **Q: Is this only for VS Code?**
-A: Modules 0-6 focus on VS Code. Modules 7-8 cover web and CLI usage. Module 9 orchestrates all interfaces.
+A: The workshop focuses on VS Code for hands-on exercises. For advanced topics on web, CLI, enterprise patterns, and hooks, see the standalone tech talks in the `tech-talks/` directory.
 
 **Q: Can I skip Module 0?**
 A: You could, but you'd miss the "why" that makes everything else meaningful. Start there.
