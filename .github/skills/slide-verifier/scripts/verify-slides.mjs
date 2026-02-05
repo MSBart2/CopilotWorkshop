@@ -49,12 +49,17 @@ const REPORT_DIR = path.join(SLIDES_DIR, "verification-reports");
  */
 async function startSlidevServer(slideFile, port) {
   return new Promise((resolve, reject) => {
-    const server = spawn(
-      "npx",
-      ["slidev", slideFile, "--port", port.toString()],
-      {
+    // Use cmd.exe on Windows to ensure npx is found
+    const isWindows = process.platform === "win32";
+    const command = isWindows ? "cmd.exe" : "npx";
+    const args = isWindows 
+      ? ["/c", "npx", "slidev", slideFile, "--port", port.toString()]
+      : ["slidev", slideFile, "--port", port.toString()];
+    
+    const server = spawn(command, args, {
         cwd: SLIDES_DIR,
         stdio: "pipe",
+        shell: !isWindows,
       },
     );
 

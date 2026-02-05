@@ -20,6 +20,8 @@
     "@slidev/theme-seriph": "^0.25.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "playwright": "^1.58.1",
     "playwright-chromium": "^1.40.0"
   }
 }
