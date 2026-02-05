@@ -40,17 +40,18 @@ Determine which slides to check:
 
 ### Step 2: Run the Verification Script
 
-The skill includes a standalone verification script at `scripts/verify-slides.mjs` that handles:
+The skill includes an enhanced verification script (`verify-slides.mjs`) that provides:
 
-- Starting Slidev dev server
-- Playwright automation
-- Issue detection and reporting
-- Cleanup
+- **Always-on detailed measurements** - Shows height measurements for all containers on every slide
+- **Screenshot capture by default** - Visual evidence for all slides (use `--no-screenshots` to skip)
+- **Configurable tolerance** - Default 5px, use `--tolerance=0` for strictest checking
+- **Multiple selector checking** - Tries `#slide-content`, `.slidev-layout`, `.slidev-page`, `main` to find the right container
+- **CI/CD support** - `--all` and `--fail-on-errors` flags for automation
 
 **Usage:**
 
 ```bash
-# From the workspace root
+# Verify single deck (default: captures all screenshots, 5px tolerance)
 .github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
 
 # Verify all decks
@@ -58,6 +59,12 @@ The skill includes a standalone verification script at `scripts/verify-slides.mj
 
 # Verify with exit code (for CI/CD)
 .github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --fail-on-errors
+
+# Strictest checking (0px tolerance)
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --tolerance=0
+
+# Skip screenshots for faster execution
+.github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
 ```
 
 **The script automatically:**
@@ -65,10 +72,23 @@ The skill includes a standalone verification script at `scripts/verify-slides.mj
 1. Finds the workspace slides directory
 2. Starts a Slidev dev server
 3. Uses Playwright to visit each slide
-4. Performs all checks (overflow, images, errors, readability)
-5. Captures screenshots of problems
-6. Generates a detailed report
+4. Performs all checks:
+   - ✅ **Overflow detection**: Checks `#slide-content` (primary), `.slidev-layout`, and `.slidev-page` selectors with 5px tolerance
+   - ✅ **Broken images**: Detects failed image loads
+   - ✅ **Console errors**: Captures JavaScript errors
+   - ✅ **Readability**: Flags overly long text blocks (>200 chars)
+5. Captures screenshots of problematic slides
+6. Generates a detailed markdown report
 7. Cleans up the server process
+
+**Key Implementation Details:**
+
+- Uses **`#slide-content`** as primary selector (most Slidev slides use this)
+- Falls back to `.slidev-layout`, `.slidev-page`, `main` if needed
+- **5px tolerance** for overflow (configurable with `--tolerance=N`)
+- **Always captures screenshots** by default (use `--no-screenshots` to skip)
+- **Detailed measurements table** in every report showing all container heights
+- Reports show which selector detected overflow issues
 
 **Output directories:**
 
@@ -155,7 +175,7 @@ slides/
 ### Content Overflow
 
 **Symptom**: Content spills off bottom of slide
-**Detection**: `scrollHeight > clientHeight`
+**Detection**: Checks `#slide-content` scrollHeight vs clientHeight (5px tolerance)
 **Fix suggestions**:
 
 - Split into multiple slides ("Topic 1/2", "Topic 2/2")
@@ -232,9 +252,25 @@ The script is self-contained and automatically finds the workspace slides direct
 5. **Keep screenshots**: Visual evidence helps debug issues
 6. **Batch verification**: Check all decks when making global changes (layouts, styles)
 
-## Integration with Slide Generator Agent
+## Integration with Other Skills
 
-The slide-generator agent can invoke this skill at the end of its workflow:
+### slide-fixer Skill
+
+When verification detects critical issues, use the **@slide-fixer** skill to automatically resolve them:
+
+```markdown
+Workflow:
+
+1. @slide-verifier checks slides → finds overflow on slides 2, 9
+2. @slide-fixer reads report → splits overflowing slides
+3. @slide-verifier re-checks → confirms issues resolved
+```
+
+The fixer preserves all content by adding slides rather than reducing content.
+
+### slide-generator Agent
+
+The slide-generator agent should invoke verification at the end of its workflow:
 
 ```markdown
 After generating slides:
@@ -242,9 +278,11 @@ After generating slides:
 1. Write slide file
 2. Update index-custom.html
 3. @slide-verifier verify the deck
-4. Report any issues found
-5. Fix critical issues if found
-6. Re-verify after fixes
+4. If critical issues found:
+   - @slide-fixer resolve issues
+   - @slide-verifier re-verify
+   - Iterate max 3 times
+5. Report final status
 ```
 
 ## Success Criteria
@@ -278,4 +316,41 @@ A slide deck passes verification when:
 - name: Verify slides
   run: |
     .github/skills/slide-verifier/scripts/verify-slides.mjs --all --fail-on-errors
+```
+
+## Troubleshooting
+
+### False Negatives (Script Missing Overflow)
+
+If you see overflow in the browser but the script reports "✅ OK":
+
+1. **Check the detailed measurements table** in the report - it shows heights for all containers
+2. **Try stricter tolerance**: `--tolerance=0` for zero-tolerance checking
+3. **Verify screenshots**: Always captured by default, look in `slides/screenshots/`
+4. **Review the report**: Check which selectors were found vs not found
+
+The verification script now includes all the diagnostic features needed to debug overflow issues:
+
+- Shows measurements for ALL selectors (`.slidev-layout`, `#slide-content`, etc.)
+- Captures screenshots of every slide (unless `--no-screenshots` specified)
+- Generates detailed measurement tables
+- Reports which container detected the issue
+
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for a real case study of diagnosing and fixing false negatives in the agent-orchestration.md deck.
+
+### Script Hanging on Server Startup
+
+If the server doesn't start within 30 seconds:
+
+- Check if port 3030 is already in use: `lsof -i :3030`
+- Kill existing process: `kill $(lsof -t -i:3030)`
+- Check for syntax errors in the slide file
+
+### Screenshots Not Capturing
+
+Ensure the screenshots directory exists and is writable:
+
+```bash
+mkdir -p slides/screenshots
+chmod 755 slides/screenshots
 ```
