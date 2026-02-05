@@ -41,7 +41,7 @@ Multi-Agent Workflows in VS Code
 
 ---
 
-# The Problem: Single-Agent Ceiling
+# The Problem: Single-Agent Ceiling (1/2)
 
 <div class="grid grid-cols-2 gap-6 mt-8">
 <div class="p-6 bg-red-900/30 rounded-lg border-2 border-red-500">
@@ -54,6 +54,13 @@ Multi-Agent Workflows in VS Code
 <h3 class="text-xl font-bold text-red-400 mb-3">Tool Overload</h3>
 <p class="text-sm text-gray-300">An agent with all tools may use the wrong one for the current phase</p>
 </div>
+</div>
+
+---
+
+# The Problem: Single-Agent Ceiling (2/2)
+
+<div class="grid grid-cols-2 gap-6 mt-8">
 <div class="p-6 bg-red-900/30 rounded-lg border-2 border-red-500">
 <div class="text-3xl mb-4">🔄</div>
 <h3 class="text-xl font-bold text-red-400 mb-3">No Specialization</h3>
@@ -278,7 +285,7 @@ Multi-Agent Workflows in VS Code
 
 ---
 
-# Building Your Own: Workflow Phases
+# Building Your Own: Workflow Phases (1/2)
 
 <div class="grid grid-cols-2 gap-4 mt-6 text-sm">
 <div class="p-3 bg-gray-800 rounded-lg">
@@ -321,31 +328,36 @@ Multi-Agent Workflows in VS Code
 </div>
 <div class="text-xs text-gray-500">Finding issues, validating quality</div>
 </div>
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="flex items-center gap-2 mb-2">
-<span class="text-2xl">✅</span>
+</div>
+
+---
+
+# Building Your Own: Workflow Phases (2/2)
+
+<div class="flex flex-col gap-6 mt-8 max-w-2xl mx-auto">
+<div class="p-4 bg-gray-800 rounded-lg">
+<div class="flex items-center gap-3 mb-2">
+<span class="text-3xl">✅</span>
 <div>
-<div class="font-bold text-white">Testing</div>
-<div class="text-xs text-gray-400">Verification mode</div>
+<div class="text-lg font-bold text-white">Testing</div>
+<div class="text-sm text-gray-400">Verification mode</div>
 </div>
 </div>
-<div class="text-xs text-gray-500">Writing tests, running checks</div>
+<div class="text-sm text-gray-500 ml-12">Writing tests, running checks</div>
 </div>
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="flex items-center gap-2 mb-2">
-<span class="text-2xl">📖</span>
+<div class="p-4 bg-gray-800 rounded-lg">
+<div class="flex items-center gap-3 mb-2">
+<span class="text-3xl">📖</span>
 <div>
-<div class="font-bold text-white">Documentation</div>
-<div class="text-xs text-gray-400">Communication mode</div>
+<div class="text-lg font-bold text-white">Documentation</div>
+<div class="text-sm text-gray-400">Communication mode</div>
 </div>
 </div>
-<div class="text-xs text-gray-500">Writing docs, explaining decisions</div>
+<div class="text-sm text-gray-500 ml-12">Writing docs, explaining decisions</div>
 </div>
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-<div class="text-lg font-bold text-white">Each phase is a distinct cognitive mode requiring different tools and constraints</div>
-</div>
+<div class="mt-8 text-center text-sm text-gray-400 italic">Each phase requires different tools and cognitive approaches</div>
 
 ---
 
@@ -431,11 +443,9 @@ You NEVER implement directly.
 
 ---
 
-# Worker Agent Pattern
+# Worker Agent Pattern: Planner
 
-<div class="grid grid-cols-2 gap-6 mt-4">
-<div>
-<h3 class="text-lg font-bold mb-3 text-cyan-400">Planner Agent</h3>
+<div class="text-xs">
 
 ```yaml
 ---
@@ -459,9 +469,14 @@ plans based on discovery findings.
 - Planning only, no implementation
 - Reference explorer findings
 ```
+
 </div>
-<div>
-<h3 class="text-lg font-bold mb-3 text-purple-400">Implementer Agent</h3>
+
+---
+
+# Worker Agent Pattern: Implementer
+
+<div class="text-xs">
 
 ```yaml
 ---
@@ -484,7 +499,7 @@ created by the planner.
 ## Constraints
 - Follow the plan exactly
 ```
-</div>
+
 </div>
 
 ---

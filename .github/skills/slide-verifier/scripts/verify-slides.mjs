@@ -8,10 +8,14 @@
  * - Console errors
  * - Readability issues (overly long text)
  *
+ * Always captures screenshots and detailed measurements for full transparency.
+ *
  * Usage:
  *   node verify-slides.mjs <slide-file>           # Verify single deck
  *   node verify-slides.mjs --all                  # Verify all decks
  *   node verify-slides.mjs --fail-on-errors       # Exit 1 if issues found
+ *   node verify-slides.mjs --tolerance=0          # Set overflow tolerance (default: 5px)
+ *   node verify-slides.mjs --no-screenshots       # Skip screenshots (faster, less visual)
  */
 
 import { chromium } from "playwright";
@@ -52,16 +56,15 @@ async function startSlidevServer(slideFile, port) {
     // Use cmd.exe on Windows to ensure npx is found
     const isWindows = process.platform === "win32";
     const command = isWindows ? "cmd.exe" : "npx";
-    const args = isWindows 
+    const args = isWindows
       ? ["/c", "npx", "slidev", slideFile, "--port", port.toString()]
       : ["slidev", slideFile, "--port", port.toString()];
-    
+
     const server = spawn(command, args, {
-        cwd: SLIDES_DIR,
-        stdio: "pipe",
-        shell: !isWindows,
-      },
-    );
+      cwd: SLIDES_DIR,
+      stdio: "pipe",
+      shell: !isWindows,
+    });
 
     let started = false;
     const timeout = setTimeout(() => {
@@ -101,9 +104,10 @@ async function startSlidevServer(slideFile, port) {
 }
 
 /**
- * Verify a single slide deck
+ * Verify a single slide deck with detailed measurements
  */
-async function verifySlides(slideFile, port) {
+async function verifySlides(slideFile, port, options = {}) {
+  const { captureAll = true, tolerance = 5 } = options;
   const baseUrl = `http://localhost:${port}`;
   const deckName = slideFile.replace(".md", "").replace(/\//g, "-");
 
@@ -114,10 +118,11 @@ async function verifySlides(slideFile, port) {
   const page = await context.newPage();
 
   const issues = [];
-  const consoleErrors = [];
+  const measurements = [];
   let totalSlides = 0;
 
   // Capture console errors
+  const consoleErrors = [];
   page.on("console", (msg) => {
     if (msg.type() === "error") {
       consoleErrors.push(msg.text());
@@ -154,6 +159,10 @@ async function verifySlides(slideFile, port) {
     }
 
     console.log(`🔍 Verifying ${totalSlides} slides in ${slideFile}...`);
+    console.log(`   Viewport: 1280x720, Tolerance: ${tolerance}px\n`);
+
+    // Create screenshots directory
+    await fs.mkdir(SCREENSHOT_DIR, { recursive: true });
 
     // Check each slide
     for (let i = 1; i <= totalSlides; i++) {
@@ -167,39 +176,103 @@ async function verifySlides(slideFile, port) {
       const slideConsoleErrors = [...consoleErrors];
       consoleErrors.length = 0;
 
-      // Check 1: Vertical overflow detection
-      const overflowCheck = await page.evaluate(() => {
-        const slideContent = document.querySelector(".slidev-layout");
-        if (!slideContent) return { hasOverflow: false };
+      // Enhanced overflow detection - check multiple elements
+      const measurement = await page.evaluate((tol) => {
+        const selectors = [
+          "#slide-content",
+          ".slidev-layout",
+          ".slidev-page",
+          "main",
+        ];
 
-        const contentHeight = slideContent.scrollHeight;
-        const viewportHeight = slideContent.clientHeight;
-        const overflow = contentHeight > viewportHeight + 10; // 10px tolerance
+        const results = {};
+        let hasAnyOverflow = false;
+        let primarySelector = null;
+
+        for (const selector of selectors) {
+          const el = document.querySelector(selector);
+          if (el && el.clientHeight > 0) {
+            const scrollH = el.scrollHeight;
+            const clientH = el.clientHeight;
+            const diff = scrollH - clientH;
+            const overflow = diff > tol;
+
+            results[selector] = {
+              scrollHeight: scrollH,
+              clientHeight: clientH,
+              diff: diff,
+              hasOverflow: overflow,
+            };
+
+            if (overflow && !primarySelector) {
+              primarySelector = selector;
+              hasAnyOverflow = true;
+            }
+          } else {
+            results[selector] = { found: false };
+          }
+        }
+
+        // Also check viewport scroll
+        const bodyScrollable =
+          document.body.scrollHeight > window.innerHeight + tol;
+        results["document.body"] = {
+          scrollHeight: document.body.scrollHeight,
+          innerHeight: window.innerHeight,
+          diff: document.body.scrollHeight - window.innerHeight,
+          hasOverflow: bodyScrollable,
+        };
+
+        if (bodyScrollable && !primarySelector) {
+          primarySelector = "document.body";
+          hasAnyOverflow = true;
+        }
 
         return {
-          hasOverflow: overflow,
-          contentHeight,
-          viewportHeight,
-          diff: contentHeight - viewportHeight,
+          hasOverflow: hasAnyOverflow,
+          details: results,
+          primarySelector,
         };
-      });
+      }, tolerance);
 
-      if (overflowCheck.hasOverflow) {
-        const screenshot = `overflow-${deckName}-slide-${i}.png`;
-        await fs.mkdir(SCREENSHOT_DIR, { recursive: true });
+      measurement.slide = i;
+      measurements.push(measurement);
+
+      // Capture screenshot
+      if (captureAll || measurement.hasOverflow) {
+        const screenshotName = measurement.hasOverflow
+          ? `overflow-${deckName}-slide-${i}.png`
+          : `${deckName}-slide-${i}.png`;
+
         await page.screenshot({
-          path: path.join(SCREENSHOT_DIR, screenshot),
-          fullPage: true,
+          path: path.join(SCREENSHOT_DIR, screenshotName),
+          fullPage: false, // Only visible viewport
         });
+
+        measurement.screenshot = screenshotName;
+      }
+
+      // Report overflow
+      if (measurement.hasOverflow) {
+        console.log(`  ❌ Slide ${i}: Content overflow`);
+
+        // Show which containers overflowed
+        for (const [selector, data] of Object.entries(measurement.details)) {
+          if (data.hasOverflow) {
+            console.log(
+              `     └─ ${selector}: ${data.diff}px overflow (${data.scrollHeight}px / ${data.clientHeight || data.innerHeight}px)`,
+            );
+          }
+        }
 
         issues.push({
           slide: i,
           type: "overflow",
           severity: "critical",
-          message: `Content exceeds viewport by ${overflowCheck.diff}px (${overflowCheck.contentHeight}px content in ${overflowCheck.viewportHeight}px viewport)`,
-          screenshot,
+          message: `Content overflow detected`,
+          details: measurement.details,
+          screenshot: measurement.screenshot,
         });
-        console.log(`  ❌ Slide ${i}: Content overflow`);
       } else {
         console.log(`  ✅ Slide ${i}: OK`);
       }
@@ -220,7 +293,7 @@ async function verifySlides(slideFile, port) {
           message: `${brokenImages.length} missing image(s)`,
           details: brokenImages,
         });
-        console.log(`  ❌ Slide ${i}: Broken images`);
+        console.log(`  ⚠️  Slide ${i}: Broken images`);
       }
 
       // Check 3: Console errors during render
@@ -232,7 +305,7 @@ async function verifySlides(slideFile, port) {
           message: "Console errors detected",
           details: slideConsoleErrors,
         });
-        console.log(`  ⚠️ Slide ${i}: Console errors`);
+        console.log(`  ⚠️  Slide ${i}: Console errors`);
       }
 
       // Check 4: Very long text blocks (readability)
@@ -261,14 +334,14 @@ async function verifySlides(slideFile, port) {
     await browser.close();
   }
 
-  return { slideFile, totalSlides, issues };
+  return { slideFile, totalSlides, issues, measurements };
 }
 
 /**
- * Generate markdown report
+ * Generate markdown report with detailed measurements
  */
 async function generateReport(result) {
-  const { slideFile, totalSlides, issues } = result;
+  const { slideFile, totalSlides, issues, measurements } = result;
   const deckName = slideFile.replace(".md", "").replace(/\//g, "-");
   const timestamp = new Date()
     .toISOString()
@@ -299,7 +372,9 @@ async function generateReport(result) {
         report += `- **Screenshot**: [${issue.screenshot}](../screenshots/${issue.screenshot})\n`;
       }
 
-      if (issue.details) {
+      if (issue.details && issue.type === "overflow") {
+        report += `- **Details**:\n\`\`\`json\n${JSON.stringify(issue.details, null, 2)}\n\`\`\`\n`;
+      } else if (issue.details) {
         report += `- **Details**: \`\`\`json\n${JSON.stringify(issue.details, null, 2)}\n\`\`\`\n`;
       }
 
@@ -324,6 +399,33 @@ async function generateReport(result) {
       report += `- **Message**: ${issue.message}\n`;
       report += `- **Fix**: Consider breaking into bullet points or multiple slides\n\n`;
     }
+  }
+
+  // Add detailed measurements section
+  report += `## Detailed Measurements\n\n`;
+  report += `This section shows the actual height measurements for each slide to aid in debugging overflow issues.\n\n`;
+
+  for (const m of measurements) {
+    const status = m.hasOverflow ? "❌ OVERFLOW" : "✅ OK";
+    report += `### Slide ${m.slide} ${status}\n\n`;
+
+    if (m.screenshot) {
+      report += `📸 [Screenshot](../screenshots/${m.screenshot})\n\n`;
+    }
+
+    report += `| Container | Scroll Height | Client Height | Difference | Overflow? |\n`;
+    report += `|-----------|---------------|---------------|------------|----------|\n`;
+
+    for (const [selector, data] of Object.entries(m.details)) {
+      if (data.found === false) {
+        report += `| ${selector} | - | - | - | Not found |\n`;
+      } else {
+        const overflowIcon = data.hasOverflow ? "❌" : "✅";
+        report += `| ${selector} | ${data.scrollHeight}px | ${data.clientHeight || data.innerHeight}px | ${data.diff}px | ${overflowIcon} |\n`;
+      }
+    }
+
+    report += `\n`;
   }
 
   report += `## Summary\n\n`;
@@ -383,17 +485,24 @@ Usage:
   node verify-slides.mjs <slide-file>           Verify single deck
   node verify-slides.mjs --all                  Verify all decks
   node verify-slides.mjs --fail-on-errors       Exit 1 if critical issues found
+  node verify-slides.mjs --tolerance=10         Set overflow tolerance (default: 5px)
+  node verify-slides.mjs --no-screenshots       Skip screenshots (faster, but less visual)
 
 Examples:
   node verify-slides.mjs workshop/03-custom-prompts.md
   node verify-slides.mjs tech-talks/copilot-cli.md
-  node verify-slides.mjs --all
+  node verify-slides.mjs --all --fail-on-errors
+  node verify-slides.mjs tech-talks/agent-orchestration.md --tolerance=0
 `);
     process.exit(0);
   }
 
   const failOnErrors = args.includes("--fail-on-errors");
   const verifyAll = args.includes("--all");
+  const tolerance = parseInt(
+    args.find((arg) => arg.startsWith("--tolerance="))?.split("=")[1] || "5",
+  );
+  const captureAll = !args.includes("--no-screenshots");
 
   let slidesToVerify = [];
 
@@ -425,7 +534,10 @@ Examples:
       console.log("✅ Server ready\n");
 
       // Verify slides
-      const result = await verifySlides(slideFile, BASE_PORT);
+      const result = await verifySlides(slideFile, BASE_PORT, {
+        captureAll,
+        tolerance,
+      });
 
       // Generate report
       const reportPath = await generateReport(result);
@@ -441,6 +553,10 @@ Examples:
         console.log("✅ All slides passed verification!");
       } else {
         console.log(`❌ Found ${criticalIssues.length} critical issue(s)`);
+      }
+
+      if (captureAll) {
+        console.log(`📸 Screenshots saved to: ${SCREENSHOT_DIR}`);
       }
     } catch (error) {
       console.error(`❌ Error verifying ${slideFile}:`, error.message);
