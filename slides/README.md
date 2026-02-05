@@ -1,520 +1,142 @@
 # CopilotTraining Slide Decks
 
-Slidev-based presentation materials for the CopilotTraining training modules and tech talks.
+Beautiful presentation slides for workshop modules, tech talks, and executive briefings.
 
-> **🌐 View Online**: These slides are automatically deployed to GitHub Pages! See [DEPLOYMENT.md](./DEPLOYMENT.md) for setup instructions.
-
----
-
-## What is Slidev?
-
-**Slidev** is a presentation framework for developers that lets us create beautiful slides using Markdown. Key features:
-
-- 📝 **Markdown-based** — Write slides in `.md` files with frontmatter
-- 🎨 **Themeable** — Customizable layouts, components, and styles
-- 🧑‍💻 **Developer-friendly** — Syntax highlighting, live coding, embedded components
-- 📤 **Exportable** — Generate PDFs, PPTXs, or static sites
-- 🔥 **Live reload** — Changes appear instantly during development
+> **🌐 View Online**: [https://msbart2.github.io/CopilotTraining/](https://msbart2.github.io/CopilotTraining/)
+>
+> All slides are automatically built and deployed via GitHub Actions on every commit.
 
 ---
 
-## Quick Start
+## ✨ Creating Slides is Easy
 
-### Installation
+Use the **Slide Generator** agent to create slides from any module README:
+
+```
+@slide-generator workshop/03-custom-prompts
+@slide-generator tech-talks/copilot-cli
+@slide-generator exec-talks/agentic-delivery
+```
+
+**That's it!** The agent:
+- ✅ Extracts content from the module README
+- ✅ Generates beautiful, branded slides
+- ✅ Updates the slides index
+- ✅ Verifies slides for issues
+- ✅ Reports any problems found
+
+---
+
+## 🔍 Verifying & Fixing Slides
+
+If you need to check or fix slides:
+
+```
+@slide-verifier check all slides              # Check for issues
+@slide-fixer fix workshop/04-agent-skills     # Fix problems automatically
+```
+
+---
+
+## 👀 Viewing Slides
+
+Preview slides locally:
 
 ```bash
 cd slides
-npm install
+npx slidev workshop/00-orientation.md
 ```
 
-### Running Presentations
+Opens at `http://localhost:3030` with hot reload.
 
-Start a specific slide deck with live reload:
-
-```bash
-# Run the orientation module
-npm run dev 00-orientation.md
-
-# Run the instructions module
-npm run dev 01-instructions.md
-
-# Run a tech talk
-npm run dev tech-talks-repo-config.md
-```
-
-This starts a local server (usually at `http://localhost:3030`) with hot module reload.
-
-### Keyboard Navigation
-
-| Key | Action |
-|-----|--------|
-| `Space` / `→` | Next slide |
-| `←` | Previous slide |
-| `P` | Presenter mode (notes, timer, next slide preview) |
-| `O` | Slide overview (grid view) |
-| `D` | Toggle dark mode |
-| `F` | Fullscreen |
-| `Esc` | Exit overview/presenter mode |
-
-### Export to PDF
-
-Generate a PDF version of any slide deck:
-
-```bash
-# Export a specific module
-npm run export 00-orientation.md
-
-# Export with custom output name
-npm run export 01-instructions.md -- --output ./exports/instructions.pdf
-
-# Export with dark theme
-npm run export 02-agent-plan-mode.md -- --dark
-```
-
-### Export to PowerPoint
-
-Generate a PowerPoint presentation:
-
-```bash
-# Export to PPTX
-npm run export 00-orientation.md -- --format pptx
-
-# With custom output
-npm run export tech-talks-repo-config.md -- --format pptx --output ./exports/repo-topology.pptx
-```
-
-### Export Options
-
-Common export flags:
-
-```bash
-# Wait for specific timeout (for complex slides)
-npm run export <file> -- --timeout 60000
-
-# Export specific slide range
-npm run export <file> -- --range 1-10
-
-# Export with higher resolution
-npm run export <file> -- --scale 2
-```
-
-### Build for Production
-
-Generate a static site for hosting:
-
-```bash
-# Build specific slide deck
-npm run build 00-orientation.md
-
-# Output goes to dist/ folder
-# Deploy dist/ to any static hosting (GitHub Pages, Netlify, etc.)
-```
+**Navigation:**
+- `Space` / `→` = Next slide
+- `←` = Previous slide
+- `P` = Presenter mode
+- `O` = Overview
+- `F` = Fullscreen
 
 ---
 
-## Directory Structure
+## 📁 What's Available
 
-```
-slides/
-├── package.json              # Slidev dependencies and scripts
-├── 00-orientation.md         # Module 0: Training overview
-├── 01-instructions.md
-├── 02-agent-plan-mode.md
-├── 03-custom-prompts.md
-├── ...                       # Additional module slides
-├── tech-talks-repo-config.md # Tech talk: Agentic delivery topology
-├── agentic-delivery.md       # Executive briefing
-├── components/               # Reusable Vue components
-│   ├── PersonaCard.vue
-│   ├── MetricsTable.vue
-│   └── SlideNumber.vue
-├── layouts/                  # Custom slide layouts
-│   ├── center.vue
-│   └── default.vue
-├── setup/                    # Slidev configuration
-│   └── main.ts
-├── style.css                 # Global styles
-├── GLOBAL-LAYERS.md          # Layer configuration
-└── README.md                 # This file
-```
+### Workshop Modules
 
----
----
-
-## Workshop Module Mapping
-
-| Slide File | Workshop Module | Description |
-|------------|----------------|-------------|
-| `00-orientation.md` | Module 0 | Training overview, personas, principles |
-| `01-instructions.md` | Module 1 | Instructions (magic file + path-based) |
-| `02-agent-plan-mode.md` | Module 2 | Agent plan mode thinking |
-| `03-custom-prompts.md` | Module 3 | Custom prompt engineering |
-| `04-agent-skills.md` | Module 4 | Domain-specific Agent Skills |
-| `05-mcp-servers.md` | Module 5 | Model Context Protocol servers |
-| `06-custom-agents.md` | Module 6 | Building custom agents |
-| `07-copilot-web.md` | Module 7 | Copilot for web workflows |
-| `08-copilot-cli.md` | Module 8 | Copilot CLI automation |
-| `09-agentic-sdlc.md` | Module 9 | Agentic software delivery |
-| `10-enterprise-patterns.md` | Module 10 | Enterprise customization patterns |
+| Module | Topic |
+|--------|-------|
+| `00-orientation.md` | Training overview, personas, principles |
+| `01-instructions.md` | Repository instructions |
+| `02-agent-plan-mode.md` | Agent plan mode thinking |
+| `03-custom-prompts.md` | Custom prompt engineering |
+| `04-agent-skills.md` | Domain-specific Agent Skills |
+| `05-mcp-servers.md` | Model Context Protocol servers |
+| `06-custom-agents.md` | Building custom agents |
 
 ### Tech Talks
 
-| Slide File | Topic |
-|------------|-------|
-| `copilot-hooks.md` | GitHub Copilot Hooks: Programmable AI Governance |
-| `tech-talks-repo-config.md` | Agentic Delivery Repo Topology |
-| `agentic-delivery.md` | Executive briefing on agentic workflows |
+Agent orchestration, CI/CD workflows, memory systems, CLI tools, and more.
+
+### Executive Talks
+
+Agentic delivery, economics, and labor implications.
 
 ---
 
-## Slide Generation
+## 🚀 Deploying Slides
 
-### Automated Generation
+**Automatic deployment:** All slides are automatically built and deployed to GitHub Pages via GitHub Actions on every commit to `main`. No manual deployment needed!
 
-Generate slides from a module README:
+**Manual build** (for local testing):
 
 ```bash
-# Generate slides for a specific module
-npm run generate -- ../workshop/01-instructions
-
-# Regenerate all module slides
-npm run generate -- --all
-
-# Update only stale slides (README newer than slides)
-npm run generate -- --stale
+cd scripts
+./build-all.sh              # Linux/Mac
+build-all.ps1               # Windows/PowerShell
 ```
 
-### Manual Creation
-
-Create slides manually by following this structure:
-
-```markdown
----
-theme: default
-title: Module Title
-highlighter: shiki
-lineNumbers: false
----
-
-# Module Title
-## Subtitle
+Outputs to `dist/` folder for GitHub Pages or any static host.
 
 ---
 
-# Slide 2
-Content here
+## 📚 Quick Reference
 
----
-
-# Slide 3
-More content
+**Create slides:**
+```
+@slide-generator workshop/03-custom-prompts
 ```
 
----
-
-## Slide Structure and Layouts
-
-Each slide deck follows this frontmatter structure:
-
-```markdown
----
-theme: default
-background: https://example.com/image.jpg
-class: text-center
-highlighter: shiki
-lineNumbers: false
-title: Module Title
-mdc: true
----
-```
-
-### Available Layouts
-
-Our slides use these common layouts:
-
-#### Cover Slide
-```markdown
----
-layout: cover
-class: text-center
----
-
-# Module 1: Repository Instructions
-## ⏰ Establishing Foundations
-```
-
-#### Centered Content
-```markdown
----
-layout: center
----
-
-# Key Message
-Centered for emphasis
-```
-
-#### Two Column Layout
-```markdown
----
-layout: two-cols
----
-
-# Left Side
-Content
-
-::right::
-
-# Right Side
-More content
-```
-
-#### Default Layout
-```markdown
----
-layout: default
----
-
-# Standard Slide
-Regular content with header/footer
-```
-
----
-
----
-
-## Custom Components
-
-### Persona Card
-```markdown
-<PersonaCard
-  name="Sarah"
-  role="Skeptical Senior"
-  experience="15"
-  emoji="🔍"
-  quote="Show me the metrics or I'm not interested"
-/>
-```
-
-### Creating Custom Components
-
-Create Vue components in `/components`:
-
-```vue
-<!-- components/MyComponent.vue -->
-<template>
-  <div class="my-component">
-    {{ content }}
-  </div>
-</template>
-
-<script setup>
-const props = defineProps({
-  content: String
-})
-</script>
-
-<style scoped>
-.my-component {
-  /* styles */
-}
-</style>
-```
-
-Use in slides:
-```markdown
-<MyComponent content="Hello!" />
-```
-
----
-
----
-
-## Styling and Aesthetics
-
-### Global Styles
-
-Edit `style.css` for global styling across all slides.
-
-### Theme
-
-We use the default Slidev theme with custom colors matching GitHub branding:
-- Primary: GitHub Blue (#0969da)
-- Secondary: GitHub Purple (#8250df)
-- Code background: GitHub Dark (#161b22)
-
-### Typography
-- **Headings:** System fonts (clean, professional)
-- **Body:** -apple-system, BlinkMacSystemFont, "Segoe UI"
-- **Code:** Fira Code, Cascadia Code, monospace
-
-### Visual Elements
-- **Emojis:** Use consistently with module READMEs (⏰, 📖, 🎯, 🔨, etc.)
-- **Color coding:**
-  - Red/❌ for "before" problems
-  - Green/✨ for "after" solutions
-  - Blue for concepts
-  - Purple for actions
-- **Whitespace:** Keep slides uncluttered
-
-### Custom Theme Overrides
-
-Modify frontmatter in each slide file:
-
-```yaml
----
-theme: default
-highlighter: shiki
-lineNumbers: true
-drawings:
-  persist: false
-themeConfig:
-  primary: '#0969da'
----
-```
-
----
-
----
-
-## Content Guidelines
-
-### What to Include
-- **Module title and timing** - Context for when this fits in the workshop
-- **Learning objectives** - Clear outcomes (2-4 items)
-- **Persona perspectives** - Show relevant personas (1-3 per module)
-- **Before/After metrics** - Concrete, quantifiable improvements
-- **Key concepts** - 2-3 main ideas with visuals
-- **Exercise overview** - Brief summary of hands-on work
-- **Success metrics** - Specific measurements of transformation
-- **Next steps** - Preview of next module
-
-### What to Exclude
-- Detailed exercise instructions (keep in module README)
-- Complete code examples (use snippets only)
-- Exhaustive documentation (link to it instead)
-- More than 15-20 slides per module (attention span!)
-
----
-
-## Maintenance
-
-### Keeping Slides Fresh
-
-Slides should be regenerated when module content changes:
-
-1. **Automated check:** CI workflow flags stale slides
-2. **Manual regeneration:** `npm run generate -- --stale`
-3. **Review changes:** Preview before committing
-4. **Commit together:** Update module README and slides in same PR
-
----
-
-## Presentation Tips
-
-### Instructor-Led
-- Use **presenter mode** (press `P`) for speaker notes
-- Enable **drawing mode** (press `D`) for annotations
-- Control remotely via phone/tablet (QR code in presenter view)
-- Record with built-in recorder if needed
-
-### Self-Paced
-- Export to PDF for offline viewing
-- Include detailed speaker notes
-- Add "pause points" for exercises
-- Link back to module README for full context
-
----
-
-## Troubleshooting
-
-### Port Already in Use
-
-If port 3030 is busy:
-
+**View locally:**
 ```bash
-npm run dev <file> -- --port 3031
+npx slidev workshop/03-custom-prompts.md
 ```
 
-### Slides Not Updating
-
-- Clear browser cache
-- Restart dev server
-- Check for syntax errors in markdown
-
-### Components Not Rendering
-
-- Ensure component is in `/components` directory
-- Check component name matches file name
-- Verify Vue syntax is correct
-
-### Export Hangs or Times Out
-
-Increase timeout for complex slides:
-
-```bash
-npm run export <file> -- --timeout 120000
+**Update slides when content changes:**
+```
+1. Edit the module README
+2. @slide-generator workshop/module-name
+3. Preview and commit both files together
 ```
 
-### Export Failing
+---
 
-- Install Playwright: `npx playwright install chromium`
-- Check for markdown syntax errors
-- Ensure all image paths are valid
+## 🤝 Contributing
 
-### Missing Dependencies
+**Workflow:**
+1. Update module README with new content
+2. Run `@slide-generator workshop/module-name` to regenerate slides
+3. Preview locally with `npx slidev`
+4. Commit README and slides together
 
-Reinstall from slides directory:
-
-```bash
-cd slides
-rm -rf node_modules package-lock.json
-npm install
-```
+The slide-generator agent handles all formatting, styling, and verification automatically.
 
 ---
 
 ## Resources
 
-- 📚 [Slidev Documentation](https://sli.dev/)
-- 🎨 [Slidev Themes Gallery](https://sli.dev/themes/gallery.html)
-- 🧩 [Built-in Components](https://sli.dev/builtin/components.html)
-- 💡 [Slidev Showcases](https://sli.dev/showcases.html)
-- 🎓 [Vue Components Guide](https://vuejs.org/guide/components)
+- [Slidev Documentation](https://sli.dev/) — For advanced customization
+- [DEPLOYMENT.md](./DEPLOYMENT.md) — GitHub Pages setup
+- [Main Workshop README](../README.md) — For questions
 
 ---
 
-## Quick Reference
-
-```bash
-# Common workflow
-cd slides
-npm install                          # One-time setup
-npm run dev 00-orientation.md        # Develop with live reload
-npm run export 00-orientation.md     # Export to PDF
-npm run export 00-orientation.md -- --format pptx  # Export to PowerPoint
-npm run build 00-orientation.md      # Build static site
-```
-
----
-
-## Contributing
-
-When adding or updating slides:
-
-1. Follow the module template structure
-2. Maintain consistent emoji usage
-3. Include concrete metrics in before/after comparisons
-4. Keep slides concise (15-20 max per module)
-5. Test in presenter mode
-6. Export to PDF to verify formatting
-7. Update this README if adding new patterns
-
----
-
-## License
-
-Same as the main CopilotTraining repository.
-
----
-
-For questions or issues, see the [main workshop README](../README.md).
+**License:** Same as main CopilotTraining repository
