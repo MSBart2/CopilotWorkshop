@@ -840,7 +840,7 @@ Enterprise patterns transform individual artifacts into organizational systems w
 Agent Skill: @pci-validator checks:
   - PAN logging patterns
   - Encryption implementation
-  - Token handling compliance  
+  - Token handling compliance
   - Access control enforcement
 ```
 
@@ -874,7 +874,7 @@ Runs automatically on every PR touching /healthcare-data or /patient-records
 
 **Outcome:**
 - Compliance review time: 3-5 days →  4 hours (94% faster)
-- HIPAA violations found in audit: 8 → 0 (eliminated)  
+- HIPAA violations found in audit: 8 → 0 (eliminated)
 - Feature delivery velocity: +55% (bottleneck removed)
 - Audit confidence: Automated evidence bundle reduces prep from 200 hours to 12 hours
 
@@ -896,7 +896,7 @@ Platform Team Investment:
 
 Team Adoption:
 - Week 1-2: Pilot with 3 teams (30 developers)
-- Month 2-3: Expand to 15 teams (120 developers)  
+- Month 2-3: Expand to 15 teams (120 developers)
 - Month 4-6: Organization-wide (500 developers)
 ```
 
@@ -969,12 +969,12 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 - 📖 **[Copilot Metrics API](https://docs.github.com/en/rest/copilot/copilot-metrics)** — Usage data, analytics, and ROI measurement
 
 **Additional Resources:**
-- 🎓 [Scaling Copilot Adoption](https://github.blog/developer-skills/github/how-to-scale-github-copilot-across-your-organization/) — Official blog post on organization-wide patterns
-- 🔧 [Enterprise Adoption Guide](https://resources.github.com/copilot/enterprise-adoption-guide/) — Comprehensive playbook for rollout strategy
+- 🎓 [Scaling Copilot Adoption](https://github.blog/news-insights/product-news/github-copilot-enterprise-is-now-generally-available/) — Official blog post on organization-wide patterns
+- 🔧 [Enterprise Adoption Guide](https://resources.github.com/copilot-trust-center/) — Comprehensive playbook for rollout strategy
 - 📖 [Code Review Best Practices](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot) — AI-specific code review guidance
 
 **GitHub Resources:**
-- 🐙 [Knowledge Bases (Enterprise)](https://docs.github.com/en/enterprise-cloud@latest/copilot/github-copilot-enterprise/copilot-knowledge-bases) — Multi-repository context for Enterprise tier
+- 🐙 [Knowledge Bases (Enterprise)](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization) — Multi-repository context for Enterprise tier
 - 📋 [Agent Skills Documentation](https://docs.github.com/en/copilot) — Creating and managing organizational skills
 
 ---

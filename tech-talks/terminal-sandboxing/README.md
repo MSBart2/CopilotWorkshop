@@ -98,7 +98,7 @@ Sandboxing operates at the process execution layer, intercepting terminal comman
 **Official Documentation:**
 - 📖 [Terminal Sandbox Configuration](https://code.visualstudio.com/docs/copilot/chat/chat-tools#_sandbox-terminal-commands-experimental) — Core setup and configuration
 - 📖 [VS Code 1.109 Release Notes](https://code.visualstudio.com/updates/v1_109#_terminal-sandbox) — Feature announcement and capabilities
-- 📖 [Agentic Mode Security](https://code.visualstudio.com/docs/copilot/chat/agentic-mode) — Complete security model for agent workflows
+- 📖 [Agentic Mode Security](https://code.visualstudio.com/docs/copilot/chat/chat-tools#_sandbox-terminal-commands-experimental) — Complete security model for agent workflows
 
 ---
 
@@ -656,7 +656,7 @@ For audit requirements, diagnostics can be exported:
 
 **Without Sandbox:** AWS credentials leak to attacker server
 
-**With Sandbox:** 
+**With Sandbox:**
 - `cat ~/.aws/credentials` fails (filesystem restriction: home directory blocked)
 - Even if credentials were in workspace, `curl` fails (network restriction: all domains blocked)
 - Agent reports "network error" and continues work
@@ -794,11 +794,11 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 **Primary Documentation:**
 - 📖 **[Terminal Sandbox Configuration](https://code.visualstudio.com/docs/copilot/chat/chat-tools#_sandbox-terminal-commands-experimental)** — Setup guide, settings reference, and examples
 - 📖 **[VS Code 1.109 Release Notes](https://code.visualstudio.com/updates/v1_109#_terminal-sandbox)** — Feature announcement, capabilities, and limitations
-- 📖 **[Agentic Mode Security](https://code.visualstudio.com/docs/copilot/chat/agentic-mode)** — Complete security model for agentic workflows
+- 📖 **[Agentic Mode Security](https://code.visualstudio.com/docs/copilot/chat/chat-tools#_sandbox-terminal-commands-experimental)** — Complete security model for agentic workflows
 
 **Additional Resources:**
 - 🎯 [Terminal Tool Lifecycle](https://code.visualstudio.com/updates/v1_109#_terminal-tool-lifecycle-improvements) — `awaitTerminal`, `killTerminal`, and `timeout` details
-- 🔍 [Chat Diagnostics](https://code.visualstudio.com/docs/copilot/chat/agentic-mode) — Viewing blocked attempts and sandbox status
+- 🔍 [Chat Diagnostics](https://code.visualstudio.com/docs/copilot/chat/chat-tools#_sandbox-terminal-commands-experimental) — Viewing blocked attempts and sandbox status
 - 👥 [Enterprise Security](https://code.visualstudio.com/docs/setup/enterprise) — Organization policies and compliance
 
 **GitHub Resources:**

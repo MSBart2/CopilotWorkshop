@@ -712,7 +712,7 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 **Additional Resources:**
 - 🔧 [Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) — Writing and debugging instruction files
-- 🔧 [Copilot Agents](https://code.visualstudio.com/docs/copilot/customization/copilot-agents) — Building and troubleshooting custom agent configurations
+- 🔧 [Copilot Agents](https://code.visualstudio.com/docs/copilot/customization/custom-agents) — Building and troubleshooting custom agent configurations
 - 💬 [GitHub Copilot for VS Code Discussions](https://github.com/microsoft/vscode-discussions/discussions/categories/copilot) — Community help and troubleshooting patterns
 
 **GitHub Resources:**

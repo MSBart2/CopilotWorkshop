@@ -944,7 +944,7 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 **Community Resources:**
 - 🐙 [Copilot Orchestra Repository](https://github.com/ShepAlderson/copilot-orchestra) — Complete 4-agent system with ADR generation, TDD enforcement
 - 🐙 [GitHub Copilot Atlas Repository](https://github.com/bigguy345/Github-Copilot-Atlas) — Extended 6-agent system with parallel research, context conservation
-- 📋 [VS Code Agent Orchestration Diagram](https://github.com/ShepAlderson/copilot-orchestra/blob/main/docs/orchestration-diagram.png) — Visual reference from Orchestra author
+- 📋 [VS Code Agent Orchestration Diagram](https://github.com/ShepAlderson/copilot-orchestra) — Visual reference from Orchestra author
 
 ---
 

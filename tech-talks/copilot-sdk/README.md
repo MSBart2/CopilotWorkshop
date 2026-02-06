@@ -140,7 +140,7 @@ The separation is intentional: Copilot CLI is the agent runtime (planning, tools
 
 *Referenced but not shown inline — available in SDK repository*
 
-- **[SDK Examples Repository](https://github.com/github/copilot-sdk/tree/main/examples)** — Release automation, test analysis, code review bots
+- **[SDK Examples Repository](https://github.com/github/copilot-sdk)** — Release automation, test analysis, code review bots
 - **[Python SDK Cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md)** — Python-specific patterns and recipes
 - **[Getting Started Guide](https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md)** — Complete installation and setup walkthrough
 
@@ -1052,7 +1052,7 @@ Path('docs/API_REFERENCE.md').write_text(docs)
 **Next Steps After Completion:**
 1. ✅ Share your SDK tool with the team and gather feedback
 2. 📖 Review related talk: [MCP Apps](../mcp-apps/) for extending SDK capabilities
-3. 💬 Explore examples: [SDK Repository Examples](https://github.com/github/copilot-sdk/tree/main/examples)
+3. 💬 Explore examples: [SDK Repository Examples](https://github.com/github/copilot-sdk)
 4. 🚀 Scale to organization: See [Enterprise Patterns](../enterprise-patterns/) for multi-team deployment
 
 ---
@@ -1103,7 +1103,7 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 - 📋 **[Copilot Requests Documentation](https://docs.github.com/en/copilot/concepts/billing/copilot-requests)** — Understanding billing, quotas, and usage tracking
 
 **GitHub Resources:**
-- 🐙 **[SDK Examples Repository](https://github.com/github/copilot-sdk/tree/main/examples)** — Release automation toolkit, test analytics bot, code review assistant
+- 🐙 **[SDK Examples Repository](https://github.com/github/copilot-sdk)** — Release automation toolkit, test analytics bot, code review assistant
 - 📋 **[GitHub Issues](https://github.com/github/copilot-sdk/issues)** — Report bugs, request features, track SDK development
 
 ---

@@ -121,7 +121,7 @@ MCP Apps enable inline interactive visualizations within chat:
 - **Forms collect structured input** — Validation, dropdowns, type-aware fields
 - **Trees navigate hierarchies** — Expand/collapse, icons, selection callbacks
 
-**Note:** The [MCP Apps Playground repository](https://github.com/anthropics/mcp-apps-playground) contains working examples of all component types. Install locally to see live demonstrations.
+**Note:** The [MCP Apps Playground repository](https://github.com/modelcontextprotocol/servers) contains working examples of all component types. Install locally to see live demonstrations.
 
 ---
 
@@ -143,7 +143,7 @@ MCP Apps enable inline interactive visualizations within chat:
 
 *Available in MCP Apps Playground repository*
 
-- **[MCP Apps Playground](https://github.com/anthropics/mcp-apps-playground)** — Working examples of all component types
+- **[MCP Apps Playground](https://github.com/modelcontextprotocol/servers)** — Working examples of all component types
 - **[MCP SDK Documentation](https://github.com/modelcontextprotocol/typescript-sdk)** — TypeScript SDK for building MCP servers
 - **[VS Code MCP Integration Guide](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)** — Setup and debugging
 
@@ -1111,8 +1111,8 @@ if (request.params.name === "generate-scaffold") {
 ## ✅ What You Can Do Today
 
 **Immediate Actions (15 minutes):**
-- [ ] Install MCP Apps Playground: `git clone https://github.com/anthropics/mcp-apps-playground && cd mcp-apps-playground && npm install`
-- [ ] Add to `.vscode/mcp.json` following [setup instructions](https://github.com/anthropics/mcp-apps-playground#readme)
+- [ ] Install MCP Apps Playground: `git clone https://github.com/modelcontextprotocol/servers && cd mcp-apps-playground && npm install`
+- [ ] Add to `.vscode/mcp.json` following [setup instructions](https://github.com/modelcontextprotocol/servers#readme)
 - [ ] Test: In chat, type `@mcp-apps-playground show me the chart demo`
 
 **Short-Term Implementation (1 hour):**
@@ -1167,7 +1167,7 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 - 📖 **[Model Context Protocol Specification](https://modelcontextprotocol.io/)** — Core protocol details, standards, reference
 
 **Additional Resources:**
-- 🐙 [MCP Apps Playground](https://github.com/anthropics/mcp-apps-playground) — Working examples of all component types
+- 🐙 [MCP Apps Playground](https://github.com/modelcontextprotocol/servers) — Working examples of all component types
 - 🐙 [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) — SDK for building MCP servers
 - 📖 [VS Code Release Notes 1.109](https://code.visualstudio.com/updates/v1_109#_support-for-mcp-apps) — MCP Apps announcement and details
 
