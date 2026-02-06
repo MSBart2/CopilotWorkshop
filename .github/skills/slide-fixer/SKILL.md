@@ -580,6 +580,20 @@ A slide deck is successfully fixed when:
 
 ## Workflow Integration
 
+### Automatic Invocation by slide-generator Agent
+
+The slide-generator agent **must** invoke the slide-fixer when verification fails:
+
+```markdown
+Mandatory workflow:
+1. Generate slides
+2. @slide-verifier verify with --port={random_port}
+3. **[MANDATORY]** If critical issues found → @slide-fixer fix {section}/{slug}
+4. **[MANDATORY]** @slide-verifier re-verify with new --port={random_port}
+5. **[MANDATORY]** Repeat 3-4 up to 3 times total
+6. **[MANDATORY]** Report final status only after passing or max iterations
+```
+
 ### Standalone Usage
 
 ```bash
@@ -587,17 +601,27 @@ A slide deck is successfully fixed when:
 @slide-fixer fix overflow in tech-talks/agent-orchestration
 ```
 
-### slide-generator Agent Integration
+### Integration Loop
 
-The slide-generator agent should:
+The fixer is designed to work in an iteration loop with the verifier:
 
-1. Generate slides from README
-2. Invoke @slide-verifier to check for issues
-3. If critical issues found:
-   - Invoke @slide-fixer to resolve
-   - Re-verify to confirm fixes
-   - Iterate max 3 times
-4. Report final status to user
+```
+1. @slide-verifier → finds 2 slides with overflow
+2. @slide-fixer → splits those slides, preserves content
+3. @slide-verifier → re-checks all slides
+4. If issues remain → repeat from step 2 (max 3 iterations)
+5. If all passed → complete
+```
+
+**Port Management**: Each verification in the loop should use a different port to avoid collisions if multiple workflows are running:
+
+```bash
+# First verification
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
+
+# After fixing, second verification with different port
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3789
+```
 
 ## Example: Fixing agent-orchestration.md
 

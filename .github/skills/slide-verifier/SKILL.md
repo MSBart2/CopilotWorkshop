@@ -51,8 +51,11 @@ The skill includes an enhanced verification script (`verify-slides.mjs`) that pr
 **Usage:**
 
 ```bash
-# Verify single deck (default: captures all screenshots, 5px tolerance)
+# Verify single deck (default: captures all screenshots, 5px tolerance, port 3030)
 .github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
+
+# Verify with custom port (to avoid collisions)
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
 
 # Verify all decks
 .github/skills/slide-verifier/scripts/verify-slides.mjs --all
@@ -65,6 +68,11 @@ The skill includes an enhanced verification script (`verify-slides.mjs`) that pr
 
 # Skip screenshots for faster execution
 .github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
+
+# Multiple verifications in parallel (use different ports)
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/01-instructions.md --port=3030 &
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/02-prompts.md --port=3031 &
+wait
 ```
 
 **The script automatically:**
@@ -270,19 +278,36 @@ The fixer preserves all content by adding slides rather than reducing content.
 
 ### slide-generator Agent
 
-The slide-generator agent should invoke verification at the end of its workflow:
+The slide-generator agent **must** invoke verification and fixing as part of its workflow:
 
 ```markdown
 After generating slides:
 
 1. Write slide file
 2. Update index-custom.html
-3. @slide-verifier verify the deck
-4. If critical issues found:
+3. **[MANDATORY]** Generate random port (3030-3999) to avoid collisions
+4. **[MANDATORY]** @slide-verifier verify the deck with --port={random_port}
+5. **[MANDATORY]** If critical issues found:
    - @slide-fixer resolve issues
-   - @slide-verifier re-verify
+   - @slide-verifier re-verify with new --port={random_port}
    - Iterate max 3 times
-5. Report final status
+6. **[MANDATORY]** Report final status only after verification passes
+7. **DO NOT COMPLETE** until slides pass verification or max iterations reached
+```
+
+**Port Management for Multiple Verifications:**
+
+When running multiple verifications (e.g., in a loop or parallel), use different ports to avoid collisions:
+
+```javascript
+// Generate random port between 3030-3999
+const port1 = 3030 + Math.floor(Math.random() * 970); // e.g., 3456
+const port2 = 3030 + Math.floor(Math.random() * 970); // e.g., 3789
+```
+
+Then pass the port to the verification:
+```bash
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
 ```
 
 ## Success Criteria

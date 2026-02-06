@@ -20,7 +20,21 @@ Transform module README markdown into beautiful, concise Slidev presentations th
 4. Present exercise overviews
 5. Maintain visual consistency with workshop branding
 6. **Keep `slides/index-custom.html` synchronized with available slides**
-7. **Verify slides using @slide-verifier skill after generation**
+7. **MANDATORY: Verify slides using @slide-verifier skill after generation**
+8. **MANDATORY: Fix issues using @slide-fixer skill if verification fails**
+9. **MANDATORY: Do not complete until slides pass verification**
+
+## Critical Workflow Requirements
+
+**YOU MUST NOT COMPLETE YOUR TASK UNTIL:**
+
+1. ✅ Slides are generated
+2. ✅ Index is updated
+3. ✅ Slides are verified with Playwright (via @slide-verifier)
+4. ✅ All critical issues are fixed (via @slide-fixer if needed)
+5. ✅ Slides pass re-verification
+
+**Verification and fixing is NOT optional** - it is a mandatory part of slide generation.
 
 ## Workflow
 
@@ -444,17 +458,30 @@ Adding a workshop module:
 - Tech talks: Alphabetical by title
 - Exec talks: Alphabetical by title
 
-### 8. Verify Slides (IMPORTANT)
+### 8. Verify and Fix Slides (MANDATORY)
 
-After generating/updating slides, invoke the `@slide-verifier` skill to check for issues:
+**YOU MUST COMPLETE THIS STEP BEFORE FINISHING YOUR TASK.**
+
+After generating/updating slides, you must invoke verification and fixing:
+
+#### Step 8.1: Generate Unique Port
+
+To avoid port collisions when running multiple verifications:
+
+```javascript
+// Generate random port between 3030-3999
+const port = 3030 + Math.floor(Math.random() * 970);
+```
+
+#### Step 8.2: Invoke slide-verifier Skill
 
 ```
-@slide-verifier verify {section}/{slug}
+@slide-verifier verify {section}/{slug} --port {port}
 ```
 
 The skill will:
 
-1. Start a Slidev dev server for the deck
+1. Start a Slidev dev server on the specified port
 2. Use Playwright to check each slide for:
    - **Content overflow** (content exceeding viewport)
    - **Broken images** (missing assets)
@@ -463,22 +490,72 @@ The skill will:
 3. Generate a report with screenshots of problems
 4. Return pass/fail status
 
-**If critical issues are found:**
+#### Step 8.3: Fix Critical Issues (If Found)
 
-1. **Content overflow**: Split the slide into multiple slides or use two-column layout
-2. **Broken images**: Fix the image path or ensure the file exists
-3. **Console errors**: Check frontmatter syntax and component usage
+**If the verification report shows critical issues:**
 
-**Re-verify after fixes** to ensure all issues are resolved.
+Invoke the `@slide-fixer` skill to automatically resolve them:
 
-**Example workflow:**
+```
+@slide-fixer fix {section}/{slug}
+```
+
+The slide-fixer will:
+- Read the verification report
+- Split overflowing slides (preserving all content)
+- Fix broken image paths
+- Correct console errors
+- Maintain visual consistency
+
+#### Step 8.4: Re-verify After Fixes
+
+**MANDATORY**: After fixes are applied, re-run verification to confirm:
+
+```
+@slide-verifier verify {section}/{slug} --port {new_port}
+```
+
+#### Step 8.5: Iteration Loop
+
+**Repeat the fix-verify cycle up to 3 times** until:
+
+- ✅ All critical issues are resolved, OR
+- ✅ Only acceptable issues remain (e.g., code slides with <50px overflow), OR
+- ❌ Maximum iterations reached (report remaining issues)
+
+**DO NOT COMPLETE YOUR TASK** until one of these conditions is met.
+
+#### Step 8.6: Report Final Status
+
+After verification passes or max iterations reached, report:
+
+```markdown
+## Slide Generation Complete
+
+**Deck**: {section}/{slug}
+**Slides Generated**: {count} slides
+**Verification**: ✅ PASSED (or ⚠️ WARNINGS ONLY)
+
+### Verification Results
+- Iteration 1: {issues} found → Fixed with @slide-fixer
+- Iteration 2: {issues} found → Fixed with @slide-fixer
+- Final verification: ✅ All critical issues resolved
+
+### Files Modified
+- Created: slides/{section}/{slug}.md
+- Updated: slides/index-custom.html
+- Report: slides/verification-reports/{slug}-{timestamp}.md
+```
+
+**Example Complete Workflow:**
 
 1. Generate slides → `slides/workshop/07-copilot-web.md`
 2. Update index → `slides/index-custom.html`
-3. Verify slides → `@slide-verifier verify workshop/07-copilot-web`
-4. If issues found → Fix critical problems
-5. Re-verify → `@slide-verifier verify workshop/07-copilot-web`
-6. Report completion with verification status
+3. **[MANDATORY]** Verify slides → `@slide-verifier verify workshop/07-copilot-web --port 3456`
+4. **[MANDATORY]** If issues found → `@slide-fixer fix workshop/07-copilot-web`
+5. **[MANDATORY]** Re-verify → `@slide-verifier verify workshop/07-copilot-web --port 3789`
+6. **[MANDATORY]** If still issues → Repeat steps 4-5 (max 3 iterations)
+7. **[MANDATORY]** Report final status with verification results
 
 ## Content Guidelines
 
