@@ -57,19 +57,19 @@ Run from the workspace slides directory where dependencies are installed:
 cd slides
 
 # Verify single deck (default settings)
-node ../github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
+node ../.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
 
 # Verify with custom port (avoids collisions)
-node ../github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
+node ../.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
 
 # Verify all decks
-node ../github/skills/slide-verifier/scripts/verify-slides.mjs --all
+node ../.github/skills/slide-verifier/scripts/verify-slides.mjs --all
 
 # Strictest checking
-node ../github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --tolerance=0
+node ../.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --tolerance=0
 
 # Skip screenshots for speed
-node ../github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
+node ../.github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
 ```
 
 **The script automatically:**
