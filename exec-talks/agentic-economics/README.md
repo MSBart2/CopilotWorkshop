@@ -205,6 +205,109 @@ But there's a catch: significant upfront investment and disciplined execution ar
 
 ---
 
+## Quick Wins Economics: The Issue Lifecycle Pattern
+
+Before committing to the full 20% labor shift, most organizations should start with a focused, high-ROI workflow: **automating the complete issue lifecycle** (research → planning → execution → review).
+
+This is the "easy button" approach—minimal infrastructure, immediate value, clear ROI.
+
+### The Math: Issue Lifecycle Automation
+
+**For a 50-person engineering team:**
+
+**Current state (manual):**
+- 20 issues/week requiring implementation
+- Average time per issue: 10 hours (2h research + 1h planning + 6h coding + 1h review)
+- Total labor: 200 hours/week = 10,400 hours/year
+- Cost at $100/hour: **$1,040,000/year**
+
+**With issue lifecycle agents:**
+- Same 20 issues/week
+- Agent time per issue: 2.5 hours (0.1h triage + 0.5h planning + 1.5h coding + 0.4h review)
+- Human time per issue: 0.3 hours (5 min approve plan + 15 min validate outcome)
+- Total human labor: 6 hours/week = 312 hours/year
+- Total agent cost: 50 hours/week × $3/hour = $150/week = **$7,800/year**
+- Human cost: 312 hours × $100 = **$31,200/year**
+- **Total cost: $39,000/year (vs $1,040,000)**
+- **Annual savings: $1,001,000**
+
+### The Investment Required
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│              INVESTMENT FOR ISSUE LIFECYCLE AUTOMATION                           │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│   Setup Phases (total 4-6 hours):                                               │
+│   ────────────────────────────                                                   │
+│   • Phase 1: Issue triage workflow         2-3 hours    (one-time)              │
+│   • Phase 2: Planning workflow             1-2 hours    (one-time)              │
+│   • Phase 3: Code generation               0 hours      (already enabled)       │
+│   • Phase 4: Code review workflow          1-2 hours    (one-time)              │
+│                                                                                  │
+│   Ongoing costs:                                                                 │
+│   ────────────                                                                   │
+│   • Agent API usage                        $7,800/year  (50 hrs/week @ $3/hr)   │
+│   • Monitoring/observability              $2,400/year  (infrastructure)         │
+│                                                                                  │
+│   ─────────────────────────────────────────────────────────────────────────────  │
+│                                                                                  │
+│   TOTAL FIRST-YEAR INVESTMENT:             $10,200                               │
+│   ANNUAL SAVINGS:                          $1,001,000                            │
+│   PAYBACK PERIOD:                          3.6 days                              │
+│   FIRST-YEAR ROI:                          9,714%                                │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Why This Works So Well
+
+**Low barriers to entry:**
+- No repository restructuring required
+- No CI/CD rewrite needed
+- No organizational change management
+- Works with existing GitHub workflows
+- Agents handle the mechanical work, humans make judgment calls
+
+**High immediate value:**
+- 6x faster issue triage (30 min → 5 min)
+- 8x faster execution planning (4 hours → 30 min)
+- 10x faster implementation (6 hours → 1 hour)
+- 12x faster code review (2 hours → 15 min)
+
+**Clear success metrics:**
+- Time-to-triage: Before/after comparison
+- Duplicate issue rate: Drops from 15% to <5%
+- Implementation accuracy: Estimate vs actual within ±20%
+- Production bugs: Reduced by 60%+ from better code review
+
+**Natural expansion path:**
+- Start with 1-2 repos (pilot)
+- Expand to all repos once proven (week 2-3)
+- Scale to full 20% labor shift over 6-12 months
+- Migrate to Gen-4 SDLC when hitting limits (12-18 months)
+
+### When to Upgrade Beyond Quick Wins
+
+Issue lifecycle automation works until you hit these constraints:
+
+| Constraint | Symptom | When It Happens | Upgrade Path |
+|------------|---------|-----------------|--------------|
+| **Multi-repo coordination** | Agents touch 3-5 repos per feature | 30%+ of features | Monorepo consolidation |
+| **CI bottleneck** | Queue time >60 min | 50+ PRs/week | Trust factory CI |
+| **Review overwhelm** | PR backlog >10 days | 100+ PRs/week | Outcome-based workflows |
+| **Test flakiness** | >10% flake rate | Agent velocity increases | Hermetic builds |
+
+At that point, you'll need the full Gen-4 SDLC transformation (3-6 months, $800K-1.6M investment). But you'll have:
+- Proven ROI from quick wins ($1M+ savings already captured)
+- Executive buy-in from demonstrated value
+- Team competency working with agents
+- Clear business case for larger investment
+
+> 📖 **Implementation guide:** See [The Journey to Agentic SDLC](../../tech-talks/agentic-journey/) for step-by-step setup instructions with code examples.
+
+---
+
 ## Where to Attack First: The High-Value Targets
 
 Not all labor arbitrage is equal. Some work transitions easily; other work requires significant infrastructure. Start where the returns are highest and barriers are lowest.
