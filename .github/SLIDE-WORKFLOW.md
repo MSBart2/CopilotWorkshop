@@ -129,12 +129,20 @@ Slides are considered validated when:
 ## Troubleshooting
 
 ### "Server startup timeout"
-- Port 3030 may be in use: `lsof -i :3030` and kill process
+- **Note:** Scripts now use random ports (3030-3130) by default for parallel execution
+- If a specific port is needed, use `--port=XXXX` option
+- Port conflicts are rare with random port selection
 - Check slide syntax is valid
 
 ### "Playwright not installed"
 - Run `npm install` in `slides/` directory
 - Run `npx playwright install chromium` in `slides/` directory
+
+### "Running tests in parallel"
+- Port randomization is enabled by default (range: 3030-3130)
+- Multiple tests can run simultaneously without conflicts
+- Each test automatically selects a random available port
+- Override with `--port=XXXX` if needed for debugging
 
 ### "Verification finds false positives"
 - Check the detailed measurements table in the report

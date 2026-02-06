@@ -51,7 +51,7 @@ The skill includes an enhanced verification script (`verify-slides.mjs`) that pr
 **Usage:**
 
 ```bash
-# Verify single deck (default: captures all screenshots, 5px tolerance)
+# Verify single deck (default: captures all screenshots, 5px tolerance, random port)
 .github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
 
 # Verify all decks
@@ -65,7 +65,15 @@ The skill includes an enhanced verification script (`verify-slides.mjs`) that pr
 
 # Skip screenshots for faster execution
 .github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
+
+# Use specific port (useful for debugging)
+.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3050
 ```
+
+**Port randomization for parallel execution:**
+- By default, a random port (3030-3130) is used
+- Allows multiple verifications to run in parallel without conflicts
+- Use `--port=XXXX` to override with a specific port
 
 **The script automatically:**
 
