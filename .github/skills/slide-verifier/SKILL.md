@@ -50,29 +50,26 @@ The skill includes an enhanced verification script (`verify-slides.mjs`) that pr
 
 **Usage:**
 
-```bash
-# Verify single deck (default: captures all screenshots, 5px tolerance, port 3030)
-.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
+Run from the workspace slides directory where dependencies are installed:
 
-# Verify with custom port (to avoid collisions)
-.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
+```bash
+# Change to slides directory first
+cd slides
+
+# Verify single deck (default settings)
+node ../github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md
+
+# Verify with custom port (avoids collisions)
+node ../github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --port=3456
 
 # Verify all decks
-.github/skills/slide-verifier/scripts/verify-slides.mjs --all
+node ../github/skills/slide-verifier/scripts/verify-slides.mjs --all
 
-# Verify with exit code (for CI/CD)
-.github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --fail-on-errors
+# Strictest checking
+node ../github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --tolerance=0
 
-# Strictest checking (0px tolerance)
-.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/03-custom-prompts.md --tolerance=0
-
-# Skip screenshots for faster execution
-.github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
-
-# Multiple verifications in parallel (use different ports)
-.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/01-instructions.md --port=3030 &
-.github/skills/slide-verifier/scripts/verify-slides.mjs workshop/02-prompts.md --port=3031 &
-wait
+# Skip screenshots for speed
+node ../github/skills/slide-verifier/scripts/verify-slides.mjs tech-talks/copilot-cli.md --no-screenshots
 ```
 
 **The script automatically:**
