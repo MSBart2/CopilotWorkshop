@@ -197,7 +197,7 @@ layout: default
 <div>
   <h2 class="text-2xl mb-3">Gen-4 (Agentic)</h2>
 
-  <div class="flex flex-col gap-1.5 text-xs"
+  <div class="flex flex-col gap-1.5 text-xs">
 
   <div class="p-2 bg-green-900/60 rounded-lg flex items-start gap-2 border-2 border-green-400">
     <span class="text-xl">🤖</span>
