@@ -38,6 +38,11 @@ This repository contains three types of content, each with different purposes an
 - Architectural diagrams and system flows
 - Implementation guidance and tradeoffs
 - Concrete takeaways for immediate application
+- Required working artifacts (configs, workflows, code samples)
+
+**For content creation:** Use `Tech Talk Generator` agent (detailed requirements in `.github/agents/tech-talk-generator.agent.md`)
+
+**Template reference:** [tech-talks/TEMPLATE.md](../tech-talks/TEMPLATE.md)
 
 **Tone:** Expert-to-expert, assumes technical background, focuses on "how" and "why"
 
@@ -105,13 +110,15 @@ When creating Slidev presentations, follow these principles:
 - **Visual hierarchy** — Use emoji vocabulary consistently (🎯, ⏰, 📊, etc.)
 - **Beautiful, polished design** — Dark cockpit-style with Tailwind CSS, never use Mermaid diagrams
 
-**For complete slide lifecycle (generation + verification + fixing):** Use the `slide-manager` agent (see `.github/agents/slide-manager.agent.md`)
+**For complete slide lifecycle (generation + verification):** Use the `slide-manager` agent (see `.github/agents/slide-manager.agent.md`)
 
 **For generation only:** Use the `slide-generator` agent (see `.github/agents/slide-generator.agent.md`)
 
 **For verification:** The `@slide-verifier` skill uses Playwright to check slides for overflow, broken images, and errors
 
-**For fixing:** The `@slide-fixer` skill automatically resolves issues by splitting slides and correcting problems
+**For fixing:** The `@slide-fixer` skill resolves issues by splitting slides and correcting problems (invoke manually if needed)
+
+**Note:** The `slide-manager` agent generates and verifies but does not auto-fix. Issues are reported for manual resolution or targeted fixing via `@slide-fixer` skill.
 
 ### Recommended Workflow
 
@@ -120,11 +127,13 @@ Use slide-manager agent to create slides for workshop/03-custom-prompts
 ```
 
 This orchestrates:
-1. Generation from README
-2. Verification with Playwright
-3. Fixing any issues detected
-4. Re-verification until validation passes (max 3 iterations)
-5. Comprehensive status report with evidence
+
+1. Generation from README (selective, 15-20 slides)
+2. Smart verification (lint-first, Playwright only if errors)
+3. Results report with pass/fail and issue details
+4. Fast completion (~2-6 minutes depending on whether Playwright runs)
+
+**Note:** Issues are reported, not auto-fixed. Use `@slide-fixer` skill or manual edits if fixes needed.
 
 **Persona reference:** [workshop/00-orientation/PERSONAS.md](../workshop/00-orientation/PERSONAS.md)
 

@@ -28,12 +28,14 @@ Invoke this skill when:
 **PRIMARY STRATEGY**: When content overflows, split into multiple slides rather than reducing content.
 
 ❌ **Don't do this:**
+
 - Remove bullet points
 - Shorten text
 - Remove examples or details
 - Reduce font sizes (except for code blocks - see below)
 
 ✅ **Do this instead:**
+
 - Split into "Part 1/2" and "Part 2/2" slides
 - Create progressive builds (concept → details → examples)
 - Use continuation patterns ("...continued")
@@ -44,6 +46,7 @@ Invoke this skill when:
 When overflow is caused by **source code** or **code blocks**, it's acceptable to reduce the font size rather than splitting:
 
 ✅ **For code-heavy slides:**
+
 - Add `class="text-sm"` or `class="text-xs"` to code container
 - Wrap code in `<div class="text-sm">` if using markdown code blocks
 - Use `style="font-size: 0.8em"` for inline adjustments
@@ -61,17 +64,24 @@ slides/verification-reports/<deck-name>-<timestamp>.md
 ```
 
 **Find the latest report:**
+
 ```javascript
 // Example: For tech-talks/agent-orchestration.md
 // Report: slides/verification-reports/tech-talks-agent-orchestration-2026-02-05T16-07-04.md
 ```
 
 **Parse the report to extract:**
+
 - Which slides have issues (slide numbers)
-- Issue types (overflow, broken-images, console-errors, readability)
-- Severity (critical vs warning)
+- Issue types (overflow, broken-images, console-errors)
+- Severity (critical = error)
 - Detailed measurements (scrollHeight, clientHeight, diff in px)
 - Screenshots (for visual confirmation)
+
+**IMPORTANT: Fix errors only, ignore warnings**
+
+- Warnings are readability suggestions (text length, bullet counts) - do not fix
+- Focus on structural issues: broken images, empty slides, overflow, console errors
 
 ### Step 2: Read the Slide Markdown File
 
@@ -108,6 +118,7 @@ More content here
 For **overflow issues** (most common):
 
 1. **Check the measurements** from the report:
+
    ```
    Slide 2: 660px content in 552px viewport = 108px overflow
    ```
@@ -133,6 +144,7 @@ For **overflow issues** (most common):
    - At logical groupings (e.g., "Problems" vs "Solutions")
 
 **Code slide tolerance rule:**
+
 - Overflow < 50px on code-heavy slides is **acceptable** and requires no fix
 - Code blocks are inherently tall; minor overflow doesn't impact comprehension
 - Users can scroll if needed for the last few lines
@@ -146,8 +158,10 @@ For **overflow issues** (most common):
 Use when content is a continuous flow (long bullet list, sequential concepts).
 
 **Before:**
+
 ```markdown
 ---
+
 # The Problem: Single-Agent Ceiling
 
 <div class="grid grid-cols-2 gap-6 mt-8">
@@ -179,6 +193,7 @@ Use when content is a continuous flow (long bullet list, sequential concepts).
 ```
 
 **After (Split into 2 slides):**
+
 ```markdown
 ---
 # The Problem: Single-Agent Ceiling (1/2)
@@ -197,8 +212,8 @@ Use when content is a continuous flow (long bullet list, sequential concepts).
 <p>General-purpose agents can't match specialists</p>
 </div>
 </div>
-
 ---
+
 # The Problem: Single-Agent Ceiling (2/2)
 
 <div class="grid grid-cols-2 gap-6 mt-8">
@@ -218,6 +233,7 @@ Use when content is a continuous flow (long bullet list, sequential concepts).
 ```
 
 **Key techniques:**
+
 - Add "(1/2)" and "(2/2)" to titles
 - Preserve exact formatting and styling
 - Maintain grid/layout structure
@@ -228,22 +244,27 @@ Use when content is a continuous flow (long bullet list, sequential concepts).
 Use when slide covers multiple distinct concepts.
 
 **Before:**
+
 ```markdown
 ---
+
 # Authentication Implementation
 
 ## The Challenge
+
 - User sessions expire inconsistently
 - Token refresh logic is brittle
 - No graceful degradation
 
 ## The Solution
+
 - Implement sliding window expiration
 - Add refresh token rotation
 - Build offline-first with sync
 ```
 
 **After (Split by concept):**
+
 ```markdown
 ---
 # Authentication: The Challenge
@@ -257,6 +278,7 @@ Building robust user sessions reveals three core problems:
 - 🔴 **No degradation** - System breaks entirely when offline
 
 ---
+
 # Authentication: The Solution
 
 <div class="text-xl">
@@ -273,8 +295,10 @@ Modern patterns that solve these problems:
 Use when slide has summary + detailed explanation.
 
 **Before:**
+
 ```markdown
 ---
+
 # Agent Orchestration Patterns
 
 **Pattern 1: Sequential Chain**
@@ -289,6 +313,7 @@ Implementation: Async execution, result aggregation.
 ```
 
 **After (Progressive):**
+
 ```markdown
 ---
 # Agent Orchestration Patterns
@@ -317,6 +342,7 @@ Multiple agents work simultaneously
 </div>
 
 ---
+
 # Pattern Deep Dive: Sequential Chain
 
 ## Implementation Strategy
@@ -339,8 +365,10 @@ Multiple agents work simultaneously
 Use when overflow is caused by source code or code blocks.
 
 **Before:**
-```markdown
+
+````markdown
 ---
+
 # Implementation Example
 
 ```typescript
@@ -357,10 +385,13 @@ export async function orchestrateAgents(task: string) {
 }
 \`\`\`
 ```
+````
 
 **After (Reduced font size):**
-```markdown
+
+````markdown
 ---
+
 # Implementation Example
 
 <div class="text-sm">
@@ -381,8 +412,10 @@ export async function orchestrateAgents(task: string) {
 
 </div>
 ```
+````
 
 **Alternative: Use `text-xs` for even smaller code**
+
 ```markdown
 <div class="text-xs">
 \`\`\`typescript
@@ -392,6 +425,7 @@ export async function orchestrateAgents(task: string) {
 ```
 
 **Key techniques for code overflow:**
+
 - Wrap code blocks in `<div class="text-sm">` or `<div class="text-xs">`
 - Add `class="text-sm"` to the container holding code
 - Use only when code is the primary cause of overflow
@@ -403,12 +437,14 @@ export async function orchestrateAgents(task: string) {
 **Problem:** Image paths are incorrect or files don't exist.
 
 **Fix strategies:**
+
 1. **Correct relative paths**: `./image.png` vs `../image.png`
 2. **Use public assets**: Images in `public/` directory
 3. **Remove broken references**: If image doesn't exist and isn't critical
 4. **Add placeholder**: Use emoji or icon as temporary replacement
 
 **Example fix:**
+
 ```markdown
 <!-- Before: Broken -->
 <img src="./diagrams/architecture.png" />
@@ -425,56 +461,54 @@ export async function orchestrateAgents(task: string) {
 **Problem:** JavaScript errors from malformed syntax or invalid components.
 
 **Common issues:**
+
 - Malformed frontmatter YAML
 - Invalid component usage
 - Typos in layout names
 - Unclosed HTML tags
 
 **Example fix:**
+
 ```markdown
-<!-- Before: Invalid frontmatter -->
----
+## <!-- Before: Invalid frontmatter -->
+
 layout: two-cols
 class: my-class with spaces
+
 ---
 
-<!-- After: Fixed -->
----
+## <!-- After: Fixed -->
+
 layout: two-cols
 class: "my-class with spaces"
+
 ---
 ```
-
-#### Fix Type 4: Long Text Blocks (Warnings)
-
-**Problem:** Single paragraph/list item exceeds 200 characters.
-
-**Fix strategies:**
-1. **Split into multiple bullet points**
-2. **Use sub-bullets** (`  - ` indented)
-3. **Create separate slide** for detailed explanation
-4. **Use two-column layout** to increase visual space
 
 ### Step 5: Preserve Visual Consistency
 
 When splitting slides, maintain:
 
 **1. Title consistency**
+
 - Use "(1/2)", "(2/2)" suffixes
 - Or descriptive suffixes: "Problem" → "Solution"
 - Keep title hierarchy (h1, h2) consistent
 
 **2. Layout consistency**
+
 - Use same `layout:` frontmatter
 - Preserve grid structures (`grid-cols-2`, etc.)
 - Keep color schemes and styling
 
 **3. Visual flow**
+
 - Add transition indicators ("continued →", "⬇️ Next")
 - Use consistent emoji/icons
 - Maintain narrative thread
 
 **4. Frontmatter**
+
 - Frontmatter only on first slide of deck
 - Split slides don't repeat frontmatter
 - Just use `---` as delimiter
@@ -489,6 +523,7 @@ After applying fixes:
 4. **Iterate if needed** - max 3 iterations to prevent loops
 
 **Verification loop:**
+
 ```
 Fix slides → Verify → Issues remain? → Fix again → Verify → Done
 ```
@@ -500,11 +535,12 @@ Fix slides → Verify → Issues remain? → Fix again → Verify → Done
 ```markdown
 ---
 # Slide 1
-
 ---
+
 # Slide 2
 
 ---
+
 # Slide 3
 ```
 
@@ -514,11 +550,12 @@ Fix slides → Verify → Issues remain? → Fix again → Verify → Done
 ---
 layout: center
 ---
+
 # Centered content
 
 ---
-layout: two-cols
----
+
+## layout: two-cols
 
 # Left Column
 
@@ -527,15 +564,17 @@ layout: two-cols
 # Right Column
 
 ---
+
 layout: image-right
 image: /path/to/image.png
+
 ---
 
 # Content on left, image on right
 
 ---
-layout: default
----
+
+## layout: default
 
 # Standard layout with header
 ```
@@ -602,6 +641,7 @@ The slide-generator agent should:
 ## Example: Fixing agent-orchestration.md
 
 **Verification report shows:**
+
 - Slide 2: 108px overflow (660px / 552px)
 - Slide 9: 46px overflow (598px / 552px)
 - Slide 11: 46px overflow (598px / 552px) - code-heavy slide
@@ -618,6 +658,7 @@ The slide-generator agent should:
 6. **Review slide 11** - Code slide with 46px overflow → **No fix needed** (< 50px threshold)
 
 **Result:**
+
 - Slides 2 + 9: Fixed by splitting ✅
 - Slide 11: Accepted as-is (code slide exception) ✅
 
@@ -648,21 +689,25 @@ After fixing slides, report:
 ## Slide Fixes Applied
 
 ### Slide 2 → Slides 2a, 2b
+
 **Issue**: 108px overflow (660px content in 552px viewport)
 **Fix**: Split into 2 slides at natural boundary (4 items → 2+2)
 **Result**: Slide 2a = 552px ✅, Slide 2b = 552px ✅
 
 ### Slide 9 → Slides 9a, 9b
+
 **Issue**: 46px overflow (598px content in 552px viewport)
 **Fix**: Split into 2 slides, moved last 2 items
 **Result**: Slide 9a = 540px ✅, Slide 9b = 520px ✅
 
 ### Slide 11
+
 **Issue**: 46px overflow (598px content in 552px viewport)
 **Fix**: None needed - code slide with acceptable overflow (< 50px threshold)
 **Result**: Accepted as-is ✅
 
 ### Re-verification
+
 ✅ All critical issues resolved
 ✅ 18 slides → 20 slides (added 2)
 ✅ All content preserved

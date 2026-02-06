@@ -153,6 +153,61 @@
       color: #cbd5e1;
       line-height: 1.5;
     }
+    .sub-group {
+      margin-bottom: 2rem;
+    }
+    .sub-group:last-child {
+      margin-bottom: 0;
+    }
+    .sub-group-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      padding-left: 0.25rem;
+    }
+    .sub-group-icon {
+      font-size: 1.15rem;
+      opacity: 0.9;
+    }
+    .sub-group-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+    }
+    .section.tech-talks .sub-group-label {
+      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sub-group-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+      margin-left: 0.5rem;
+    }
+    /* Archived: muted slate */
+    .section.archived {
+      border-color: rgba(100, 116, 139, 0.2);
+      background: rgba(100, 116, 139, 0.03);
+    }
+    .section.archived .section-title {
+      color: #64748b;
+    }
+    .section.archived .card {
+      opacity: 0.7;
+    }
+    .section.archived .card:hover {
+      opacity: 1;
+      border-color: rgba(100, 116, 139, 0.5);
+      box-shadow: 0 4px 20px rgba(100, 116, 139, 0.15);
+    }
+    .section.archived .card h2 {
+      color: #94a3b8;
+    }
     .note {
       margin-top: 1.5rem;
       padding: 1rem;
@@ -178,116 +233,112 @@
           <p class="section-description">Technical deep-dives for practitioners on specific capabilities</p>
         </div>
       </div>
-      <div class="grid">
-        <a href="/CopilotTraining/tech-talks/agent-orchestration/" class="card">
-          <h2>Agent Orchestration</h2>
-          <p>Multi-agent workflows in VS Code. Design coordinated agent systems where specialized agents collaborate on complex development tasks.</p>
-        </a>
+      <!-- Copilot Surfaces -->
+      <div class="sub-group">
+        <div class="sub-group-header">
+          <span class="sub-group-icon">💬</span>
+          <span class="sub-group-label">Copilot Surfaces</span>
+          <span class="sub-group-line"></span>
+        </div>
+        <div class="grid">
+          <a href="/CopilotTraining/tech-talks/copilot-chat/" class="card">
+            <h2>Copilot Chat</h2>
+            <p>Context mastery for AI collaboration. Master #file, @workspace, #codebase, and #fetch for codebase-specific responses.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/copilot-chat-internals/" class="card">
+            <h2>Copilot Chat Internals</h2>
+            <p>Under the hood diagnostics. Chat Debug View, customization diagnostics, and extension logs for systematic troubleshooting.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/copilot-cli/" class="card">
+            <h2>Copilot CLI</h2>
+            <p>AI assistance at the terminal. Natural language to shell commands, git operations, and scripting workflows.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/copilot-web/" class="card">
+            <h2>Copilot Web</h2>
+            <p>AI assistance beyond the IDE. PR reviews in browsers, issue triage on mobile, with full repository customizations.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/copilot-memory/" class="card">
+            <h2>Copilot Memory</h2>
+            <p>Cross-session context persistence. Store preferences, project context, and workflow patterns that persist across all conversations.</p>
+          </a>
+        </div>
+      </div>
 
-        <a href="/CopilotTraining/tech-talks/agent-teams/" class="card">
-          <h2>Agent Teams</h2>
-          <p>Coordinated specialists working together. When you need multiple specialized roles like planners, reviewers, and testers collaborating.</p>
-        </a>
+      <!-- Context & Customization -->
+      <div class="sub-group">
+        <div class="sub-group-header">
+          <span class="sub-group-icon">🧩</span>
+          <span class="sub-group-label">Context & Customization</span>
+          <span class="sub-group-line"></span>
+        </div>
+        <div class="grid">
+          <a href="/CopilotTraining/tech-talks/context-engineering-foundations/" class="card">
+            <h2>Context Engineering Foundations</h2>
+            <p>The foundation that unlocks everything. Master context primitives, persistent layers, and enforcement patterns for expert-level AI assistance.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/copilot-hooks/" class="card">
+            <h2>Copilot Hooks</h2>
+            <p>Programmable governance for AI agents. Real-time prevention, audit trails, and compliance enforcement at execution time.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/copilot-sdk/" class="card">
+            <h2>Copilot SDK</h2>
+            <p>Embedding AI agents in your applications. Build custom tools, bots, and automation with programmatic Copilot access.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/mcp-apps/" class="card">
+            <h2>MCP Apps</h2>
+            <p>Rich UI in chat responses. Transform chat from text-only to interactive visual experiences with component-based MCP tools.</p>
+          </a>
+        </div>
+      </div>
 
-        <a href="/CopilotTraining/tech-talks/agentic-ci/" class="card">
-          <h2>Agentic CI</h2>
-          <p>The Trust Factory. How AI agents transform CI from quality gate to trust manufacturing at scale.</p>
-        </a>
+      <!-- Agent Architecture -->
+      <div class="sub-group">
+        <div class="sub-group-header">
+          <span class="sub-group-icon">🤖</span>
+          <span class="sub-group-label">Agent Architecture</span>
+          <span class="sub-group-line"></span>
+        </div>
+        <div class="grid">
+          <a href="/CopilotTraining/tech-talks/agent-teams/" class="card">
+            <h2>Agent Teams</h2>
+            <p>Coordinated specialists working together. When you need multiple specialized roles like planners, reviewers, and testers collaborating.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/multi-step-tasks/" class="card">
+            <h2>Multi-Step Tasks</h2>
+            <p>Context isolation for complex workflows. Break work into focused phases using subagents—parallel execution without context pollution.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/parallel-execution/" class="card">
+            <h2>Parallel Execution</h2>
+            <p>When agents work simultaneously. Run multiple agents on different branches without conflicts using Git worktree isolation.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/terminal-sandboxing/" class="card">
+            <h2>Terminal Sandboxing</h2>
+            <p>Safe agentic execution. Network restrictions, filesystem limits, and execution controls for secure AI-assisted development.</p>
+          </a>
+        </div>
+      </div>
 
-        <a href="/CopilotTraining/tech-talks/agentic-journey/" class="card">
-          <h2>Agentic Journey</h2>
-          <p>From "assign to copilot" to full SDLC transformation. The 5-phase incremental path with 4-workflow architecture and historical context search.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/agentic-prs/" class="card">
-          <h2>Agentic PRs</h2>
-          <p>When AI generates feature-scale code, how do you review it? Intent-based governance for large AI-generated diffs.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/agentic-repos/" class="card">
-          <h2>Agentic Repos</h2>
-          <p>Rewiring repository topology for AI-as-labor. From quarterly releases to daily agent-driven delivery.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/agentic-sdlc/" class="card">
-          <h2>Agentic SDLC</h2>
-          <p>Infrastructure for AI velocity. Rewire repositories, PR workflows, and CI/CD for AI-as-labor delivery agents (Gen-4 SDLC).</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/agentic-sessions/" class="card">
-          <h2>Agentic Sessions</h2>
-          <p>Multi-environment agent orchestration. Delegate, monitor, and switch between local, background, and cloud agents.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-chat/" class="card">
-          <h2>Copilot Chat</h2>
-          <p>Context mastery for AI collaboration. Master #file, @workspace, #codebase, and #fetch for codebase-specific responses.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-chat-internals/" class="card">
-          <h2>Copilot Chat Internals</h2>
-          <p>Under the hood diagnostics. Chat Debug View, customization diagnostics, and extension logs for systematic troubleshooting.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-cli/" class="card">
-          <h2>Copilot CLI</h2>
-          <p>AI assistance at the terminal. Natural language to shell commands, git operations, and scripting workflows.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-memory/" class="card">
-          <h2>Copilot Memory</h2>
-          <p>Cross-session context persistence. Store preferences, project context, and workflow patterns that persist across all conversations.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-sdk/" class="card">
-          <h2>Copilot SDK</h2>
-          <p>Embedding AI agents in your applications. Build custom tools, bots, and automation with programmatic Copilot access.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/mcp-apps/" class="card">
-          <h2>MCP Apps</h2>
-          <p>Rich UI in chat responses. Transform chat from text-only to interactive visual experiences with component-based MCP tools.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/multi-step-tasks/" class="card">
-          <h2>Multi-Step Tasks</h2>
-          <p>Context isolation for complex workflows. Break work into focused phases using subagents—parallel execution without context pollution.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/parallel-execution/" class="card">
-          <h2>Parallel Execution</h2>
-          <p>When agents work simultaneously. Run multiple agents on different branches without conflicts using Git worktree isolation.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/context-engineering-foundations/" class="card">
-          <h2>Context Engineering Foundations</h2>
-          <p>The foundation that unlocks everything. Master context primitives, persistent layers, and enforcement patterns for expert-level AI assistance.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-hooks/" class="card">
-          <h2>Copilot Hooks</h2>
-          <p>Programmable governance for AI agents. Real-time prevention, audit trails, and compliance enforcement at execution time.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/copilot-web/" class="card">
-          <h2>Copilot Web</h2>
-          <p>AI assistance beyond the IDE. PR reviews in browsers, issue triage on mobile, with full repository customizations.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/enterprise-patterns/" class="card">
-          <h2>Enterprise Patterns</h2>
-          <p>Scaling Copilot across organizations. From team silos to standardized foundations with measurable ROI.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/subagents/" class="card">
-          <h2>Subagents</h2>
-          <p>Autonomous agents with isolated context windows. Solve context bloat, parallelize research, and filter exploratory noise.</p>
-        </a>
-
-        <a href="/CopilotTraining/tech-talks/terminal-sandboxing/" class="card">
-          <h2>Terminal Sandboxing</h2>
-          <p>Safe agentic execution. Network restrictions, filesystem limits, and execution controls for secure AI-assisted development.</p>
-        </a>
+      <!-- Agentic Transformation -->
+      <div class="sub-group">
+        <div class="sub-group-header">
+          <span class="sub-group-icon">🚀</span>
+          <span class="sub-group-label">Agentic Transformation</span>
+          <span class="sub-group-line"></span>
+        </div>
+        <div class="grid">
+          <a href="/CopilotTraining/tech-talks/agentic-journey/" class="card">
+            <h2>Agentic Journey</h2>
+            <p>From "assign to copilot" to full SDLC transformation. The 5-phase incremental path with 4-workflow architecture and historical context search.</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/agentic-sdlc/" class="card">
+            <h2>Agentic SDLC</h2>
+            <p>Infrastructure for AI velocity. Rewire repositories, PR workflows, and CI/CD for AI-as-labor delivery agents (Gen-4 SDLC).</p>
+          </a>
+          <a href="/CopilotTraining/tech-talks/enterprise-patterns/" class="card">
+            <h2>Enterprise Patterns</h2>
+            <p>Scaling Copilot across organizations. From team silos to standardized foundations with measurable ROI.</p>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -361,6 +412,43 @@
         <a href="/CopilotTraining/workshop/06-custom-agents/" class="card">
           <h2>06 - Custom Agents</h2>
           <p>End context-switching overhead. Bundle tools, skills, and instructions into role-based presets you switch instantly.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Archived Talks Section -->
+    <div class="section archived">
+      <div class="section-header">
+        <span class="section-icon">📦</span>
+        <div>
+          <h2 class="section-title">Archived</h2>
+          <p class="section-description">Previous talks — content folded into other modules or superseded</p>
+        </div>
+      </div>
+      <div class="grid">
+        <a href="/CopilotTraining/tech-talks/agent-orchestration/" class="card">
+          <h2>Agent Orchestration</h2>
+          <p>Multi-agent workflows in VS Code. Design coordinated agent systems where specialized agents collaborate.</p>
+        </a>
+        <a href="/CopilotTraining/tech-talks/subagents/" class="card">
+          <h2>Subagents</h2>
+          <p>Autonomous agents with isolated context windows. Solve context bloat and parallelize research.</p>
+        </a>
+        <a href="/CopilotTraining/tech-talks/agentic-ci/" class="card">
+          <h2>Agentic CI</h2>
+          <p>The Trust Factory. How AI agents transform CI from quality gate to trust manufacturing at scale.</p>
+        </a>
+        <a href="/CopilotTraining/tech-talks/agentic-prs/" class="card">
+          <h2>Agentic PRs</h2>
+          <p>Intent-based governance for large AI-generated diffs. When AI generates feature-scale code, how do you review it?</p>
+        </a>
+        <a href="/CopilotTraining/tech-talks/agentic-repos/" class="card">
+          <h2>Agentic Repos</h2>
+          <p>Rewiring repository topology for AI-as-labor. From quarterly releases to daily agent-driven delivery.</p>
+        </a>
+        <a href="/CopilotTraining/tech-talks/agentic-sessions/" class="card">
+          <h2>Agentic Sessions</h2>
+          <p>Multi-environment agent orchestration. Delegate, monitor, and switch between local, background, and cloud agents.</p>
         </a>
       </div>
     </div>

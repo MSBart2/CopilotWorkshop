@@ -1,4 +1,4 @@
-name: "Phase 1: Issue Triage"
+name: "Phase 1: Agentic Intake"
 
 # Automatically triage new issues: check for duplicates, gather context, route to appropriate team
 on:
@@ -7,25 +7,25 @@ on:
 
 jobs:
   triage:
-    name: Triage New Issue
+    name: Analyze New Issue
     runs-on: ubuntu-latest
     permissions:
       issues: write
       contents: read
       pull-requests: read
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      
+          node-version: "20"
+
       - name: Install GitHub Copilot CLI
         run: npm install -g @github/copilot
-      
+
       - name: Get issue details
         id: issue
         env:
@@ -33,98 +33,76 @@ jobs:
         run: |
           # Fetch issue details
           gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }} > issue.json
-          
+
           TITLE=$(jq -r '.title' issue.json)
           BODY=$(jq -r '.body // "No description provided"' issue.json)
-          
+
           echo "title=$TITLE" >> $GITHUB_OUTPUT
           echo "Issue title: $TITLE"
-      
+
       - name: Search for duplicate issues
         id: duplicates
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🔍 Searching for potential duplicates..."
-          
+
           # Search for similar open issues
           TITLE="${{ steps.issue.outputs.title }}"
           gh api --method GET /search/issues \
             -f q="repo:${{ github.repository }} is:issue is:open \"${TITLE}\"" \
             --jq '.items[0:5] | map("- #\(.number): \(.title) (state: \(.state))") | join("\n")' \
             > open-issues.txt || echo "No similar open issues found" > open-issues.txt
-          
+
           # Search for similar closed issues from last 6 months
           gh api --method GET /search/issues \
             -f q="repo:${{ github.repository }} is:issue is:closed created:>=$(date -d '6 months ago' +%Y-%m-%d) \"${TITLE}\"" \
             --jq '.items[0:5] | map("- #\(.number): \(.title) (closed: \(.closed_at))") | join("\n")' \
             > closed-issues.txt || echo "No similar closed issues found" > closed-issues.txt
-          
+
           echo "duplicates_found=true" >> $GITHUB_OUTPUT
-      
+
       - name: Run Copilot CLI for triage analysis
         id: copilot_triage
         env:
           GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
           echo "🤖 Running Copilot CLI for issue triage..."
-          
+
           # Read issue details and duplicates
+          ISSUE_BODY=$(jq -r '.body // "No description provided"' issue.json)
           OPEN_ISSUES=$(cat open-issues.txt)
           CLOSED_ISSUES=$(cat closed-issues.txt)
-          
-          # Create triage instruction file
-          cat > triage_instructions.txt <<'INSTRUCTIONS'
-          Analyze this GitHub issue #${{ github.event.issue.number }} and perform triage:
 
-          ISSUE TITLE: ${{ steps.issue.outputs.title }}
-          
-          SIMILAR OPEN ISSUES:
-          ${OPEN_ISSUES}
-          
-          SIMILAR CLOSED ISSUES (last 6 months):
-          ${CLOSED_ISSUES}
-          
-          YOUR TASK:
-          1. Determine if this is a duplicate of any existing issue (check both open and closed)
-          2. Classify the issue type: bug, feature, documentation, question, or other
-          3. Assess priority: critical, high, medium, or low
-          4. Identify affected area/component of the codebase
-          5. Suggest appropriate team or person to assign
-          6. Generate a brief context summary (2-3 sentences)
-          
-          Respond in this exact format:
-          DUPLICATE: [yes/no] - [issue number if duplicate, otherwise "none"]
-          TYPE: [bug/feature/documentation/question/other]
-          PRIORITY: [critical/high/medium/low]
-          AREA: [affected component]
-          ASSIGN_TO: [team or username suggestion]
-          SUMMARY: [2-3 sentence context summary]
-          INSTRUCTIONS
-          
-          # Run Copilot CLI with triage instructions
-          copilot -p "$(cat triage_instructions.txt)" \
-            --allow-tool 'shell(gh)' \
-            --allow-tool 'shell(git)' > triage_result.txt
-          
+          # Load external prompt template and substitute variables
+          sed -e "s|{{ISSUE_NUMBER}}|${{ github.event.issue.number }}|g" \
+              -e "s|{{ISSUE_TITLE}}|${{ steps.issue.outputs.title }}|g" \
+              -e "s|{{ISSUE_BODY}}|${ISSUE_BODY}|g" \
+              -e "s|{{OPEN_ISSUES}}|${OPEN_ISSUES}|g" \
+              -e "s|{{CLOSED_ISSUES}}|${CLOSED_ISSUES}|g" \
+              .github/prompts/triage-instructions.md > triage_instructions.txt
+
+          # Run Copilot CLI with external instructions
+          copilot -p @triage_instructions.txt > triage_result.txt
+
           # Parse Copilot's output
           cat triage_result.txt
-          
+
           # Extract key information
           IS_DUPLICATE=$(grep "DUPLICATE:" triage_result.txt | cut -d' ' -f2 || echo "no")
           ISSUE_TYPE=$(grep "TYPE:" triage_result.txt | cut -d' ' -f2 || echo "unknown")
           PRIORITY=$(grep "PRIORITY:" triage_result.txt | cut -d' ' -f2 || echo "medium")
-          
+
           echo "is_duplicate=$IS_DUPLICATE" >> $GITHUB_OUTPUT
           echo "issue_type=$ISSUE_TYPE" >> $GITHUB_OUTPUT
           echo "priority=$PRIORITY" >> $GITHUB_OUTPUT
-      
+
       - name: Add labels based on triage
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🏷️ Adding labels based on triage results..."
-          
+
           # Add type label
           TYPE_LABEL="type:${{ steps.copilot_triage.outputs.issue_type }}"
           gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
@@ -133,14 +111,14 @@ jobs:
             "labels": ["${TYPE_LABEL}", "priority:${{ steps.copilot_triage.outputs.priority }}", "status:triaged"]
           }
           EOF
-      
+
       - name: Post triage results
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Read full triage results
           TRIAGE_RESULT=$(cat triage_result.txt)
-          
+
           # Post as comment
           gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
             --input - <<EOF

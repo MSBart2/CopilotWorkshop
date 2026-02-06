@@ -1,115 +1,255 @@
-# The Journey to Agentic SDLC: Starting with "Just Assign It to Copilot"
+# The Agentic Journey: Incremental Path from Issue to PR Automation
 
-*The incremental path from issue triage to full AI-native delivery*
+> **The Question This Talk Answers:**
+> *"How do I start getting value from GitHub Copilot agents without rewiring my entire SDLC?"*
 
-**Barton Mathis**
-
----
-
-## The Easy Button
-
-You've heard about Gen-4 SDLC. You've read about agentic repositories, PR workflows, and CI trust factories. It sounds transformative—and also overwhelming.
-
-**Good news:** You don't need to rewire your entire SDLC to get value from agents.
-
-There's an easier entry point. A pattern so simple that it feels like magic:
-
-> **"Just assign the issue to Copilot."**
-
-That's it. Open an issue, assign it to `copilot-swe-agent[bot]`, and watch the agent:
-- Research the problem
-- Plan the solution
-- Implement the code
-- Create a PR with tests
-- Respond to review feedback
-
-This talk is about that journey—from the first "assign to copilot" to full agentic SDLC transformation. We'll show you how to start small, prove value quickly, and scale incrementally.
+**Duration:** 45 minutes | **Target Audience:** Developers / DevOps / Engineering Managers
 
 ---
 
-## 📖 Navigation Guide
+## 📊 Content Fitness
 
-This talk covers five progressive phases:
+| Criterion | Assessment | Notes |
+|-----------|-----------|-------|
+| **Relevant** | 🟢 High | Every team using GitHub has issues and PRs — this automates the lifecycle with zero repo restructuring |
+| **Compelling** | 🟢 High | Working workflow files you can drop into any repo today; progressive 4-phase approach avoids big-bang risk |
+| **Actionable** | 🟢 High | Copy 4 YAML files, configure secrets, create an issue — agents start working in under 3 hours |
 
-| Phase | What Happens | Time Investment | Value Unlocked |
-|-------|--------------|-----------------|----------------|
-| **Phase 1: Issue Research & Triage** | Agents analyze, gather context, check duplicates | 2-3 hours setup | 6x faster triage |
-| **Phase 2: Execution Planning** | Agents research codebase, propose plans | 1-2 hours setup | 8x faster planning |
-| **Phase 3: Code Generation** | Agents implement, test, create PRs | Already enabled | 10x code velocity |
-| **Phase 4: Code Review** | Agents analyze changes, surface risks | 1-2 hours setup | 12x review speed |
-| **Phase 5: Full SDLC** | Complete Gen-4 transformation | 3-6 months | 100x throughput |
-
-**Start with Phases 1-4. Graduate to Phase 5 when you hit limits.**
+**Overall Status:** 🟢 Ready to use
 
 ---
 
-## Why This Path Works
+## 📽️ Slide Generation Mapping
 
-### The Traditional Problem
+### Slide Sequence (Generated Automatically)
 
-Most organizations try to adopt AI in one of two ways:
+1. **Title/Logo Slide** ← H1 title + subtitle
+2. **Question/Objective Slide** ← "The Question This Talk Answers"
+3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
+4. **Problem Slide** ← "The Problem"
+5. **Solution Overview** ← "The Solution"
+6. **Key Artifacts** ← "Key Artifacts" inventory
+7. **Mental Model Shift** ← Move-Toward/Away/Against
+8. **When to Use Decision Tree** ← "When to Use This Pattern"
+9. **Phase 1: Agentic Intake** ← 🎬 Section 1 (3-4 slides)
+10. **Phase 2: Agentic Planning** ← 🎬 Section 2 (3-4 slides)
+11. **Phase 3: Agentic Coding** ← 🎬 Section 3 (2-3 slides)
+12. **Phase 4: Code Review** ← 🎬 Section 4 (3-4 slides)
+13. **Graduation to Full SDLC** ← 🎬 Section 5 (2-3 slides)
+14. **Use Cases** ← Real-World Use Cases (1-2 slides)
+15. **Actionable Outcomes** ← What You Can Do Today
+16. **Related Patterns** ← Related Patterns
+17. **Official Documentation** ← 📚 section
+18. **End Slide** ← Auto-generated
 
-**❌ The "All In" Approach**
+### Major Sections (TOC Entries)
+
+```markdown
+<!-- 🎬 MAJOR SECTION: Agentic Intake -->
+<!-- 🎬 MAJOR SECTION: Agentic Planning -->
+<!-- 🎬 MAJOR SECTION: Agentic Coding -->
+<!-- 🎬 MAJOR SECTION: Code Review -->
+<!-- 🎬 MAJOR SECTION: Graduating to Full SDLC -->
 ```
-Week 1: Read about Gen-4 SDLC
-Week 2: Restructure all repos into monorepo
-Week 3: Rewrite CI/CD from scratch
-Week 4: Change team processes
-Week 5: Deploy agents
-Week 6: Everything breaks, rollback everything
-```
-
-**❌ The "Experiment Forever" Approach**
-```
-Quarter 1: Pilot with one team
-Quarter 2: Evaluate results, debate
-Quarter 3: Try different team
-Quarter 4: Still in pilot mode
-```
-
-**✅ The Journey Approach**
-```
-Week 1: Enable issue triage agents
-Week 2: See 6x improvement, expand to more repos
-Week 3: Add execution planning agents
-Week 4: See 8x improvement, team asks for more
-Month 2: Full issue-to-PR automation running
-Month 3: Identify limits, plan Gen-4 migration
-Month 6: Complete SDLC transformation with proof of value
-```
-
-> 💡 **The Insight:** Start with highest ROI, lowest risk workflows. Build momentum. Scale when constrained.
-
----
-
-# Phase 1: Issue Research & Triage
-
-*The "Easy Button" — Agents analyze and route issues automatically*
 
 ---
 
 ## The Problem
 
-Every issue that comes in requires investigation:
-- Is this a bug or feature request?
-- Has this been reported before?
-- Which team should own it?
-- What's the priority?
-- Where in the codebase is this?
+### Key Points
 
-**Time cost:** 20-30 minutes per issue for a human.
+- **Every issue requires manual investigation**
+  Duplicate detection, type classification, priority assessment, and team routing cost 20-30 minutes per issue.
 
-**Opportunity cost:** Developers context-switch away from feature work.
+- **Planning is expensive and error-prone**
+  Developers spend 2-4 hours researching codebase, identifying files, and estimating effort — often without learning from similar past work.
+
+- **Code review is the new bottleneck**
+  Agent-generated code arrives faster than humans can review it — 500-2000 lines per PR, 10-15x volume increase.
+
+- **Adoption paralysis: "all in" vs. "experiment forever"**
+  Teams either attempt full SDLC transformation (and fail) or stay in perpetual pilot mode (and stall).
+
+### Narrative
+
+You've heard about Gen-4 SDLC. You've read about agentic repositories, PR workflows, and CI trust factories. It sounds transformative — and also overwhelming.
+
+Most organizations try to adopt AI development in one of two ways, both of which fail. The "all in" approach rewrites CI/CD from scratch, restructures repos, and changes all team processes in a matter of weeks — then everything breaks and rolls back. The "experiment forever" approach pilots with one team per quarter, debates results endlessly, and ends up still in pilot mode after a year.
+
+The better path is incremental. Start with the highest-ROI, lowest-risk workflow — automating issue intake — and prove value in the first week. Add planning agents in week two. Layer in code review automation by month two. Each phase compounds the previous one. And when you hit limits — when coordination overhead exceeds automation gains — you're ready for the full SDLC transformation with proof of value and executive support already in hand.
 
 ---
 
-## The Solution: Issue Triage Agent
+## The Solution: 4-Workflow Issue Lifecycle
 
-An agent that automatically analyzes every new issue:
+### What It Does
+
+Four GitHub Actions workflows coordinate via issue labels to automate the complete issue-to-PR lifecycle. Each phase operates independently, triggered by label state transitions, creating a clean separation of concerns that scales from a single repo to an organization.
+
+### Key Capabilities
+
+- **Agentic Intake**: Automatic triage, duplicate detection, context gathering, and team routing on every new issue (20-30 min → 3 min)
+- **Agentic Planning**: Historical context research, codebase analysis, and execution plan generation with human approval gate (2-4 hours → 15 min)
+- **Agentic Coding**: Implementation from approved plans with test generation and PR creation (8-12 hours → 1-2 hours)
+- **Code Review**: Security analysis, logic review, performance evaluation, and test coverage assessment before human review (2-4 hours → 20 min)
+
+### Architecture Overview
+
+The system uses a **label-based state machine** where each workflow adds a status label that triggers the next phase. This creates a clean, observable pipeline: `issue opened` → `status:triaged` → `status:planned` → `/approve-plan` → `status:in-review` → `status:reviewed` → human approval.
+
+All agent instructions are **externalized as markdown prompt templates** in `.github/prompts/`, keeping workflow YAML focused on orchestration. This means updating agent behavior requires editing a markdown file, not debugging YAML — and non-technical stakeholders can review and improve prompt templates directly.
+
+The architecture deliberately separates the "when to run" (workflow triggers) from the "what to do" (prompt templates), making each concern independently versioned, testable, and maintainable.
+
+**Official Documentation:**
+- 📖 [GitHub Copilot Documentation](https://docs.github.com/en/copilot) — Core concepts and getting started
+- 📖 [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) — Workflow triggers, jobs, and steps
+- 📖 [Copilot for Pull Requests](https://github.com/features/copilot/pull-requests) — Agent-assisted PR workflows
+
+---
+
+## 📦 Key Artifacts
+
+**This talk includes 4 complete, working GitHub Actions workflow files** that implement the full issue-to-PR lifecycle. Each is shown inline in its corresponding major section below.
+
+### Primary Artifacts
+
+*Shown inline with detailed explanation in the major sections*
+
+- **[`1-issue-triage.yml`](1-issue-triage.yml)** — Automated intake: duplicate detection, classification, routing, context summary
+- **[`2-issue-planning.yml`](2-issue-planning.yml)** — Historical context research, codebase analysis, execution plan generation
+- **[`3-issue-execution.yml`](3-issue-execution.yml)** — Implementation from approved plan, test generation, PR creation
+- **[`4-pr-review.yml`](4-pr-review.yml)** — Security analysis, logic review, performance evaluation, test coverage
+
+### Supporting Files
+
+*Referenced but not shown inline — available in repository*
+
+- **[`.github/prompts/`](../../.github/prompts/)** — Externalized prompt templates for all 4 workflows
+- **[Agentic SDLC (Full Guide)](../agentic-sdlc/)** — Complete Gen-4 transformation when ready to graduate
+
+### Externalized Prompt Architecture
+
+All workflows load instructions from `.github/prompts/` using `sed` for variable substitution:
+
+```bash
+sed -e "s|{{ISSUE_NUMBER}}|${ISSUE_NUM}|g" \
+    .github/prompts/triage-instructions.md > instructions.txt
+copilot -p @instructions.txt
+```
+
+**Prompt files:**
+```
+.github/prompts/
+├── triage-instructions.md        # Phase 1 agent behavior
+├── planning-instructions.md      # Phase 2 agent behavior
+├── implementation-instructions.md # Phase 3 agent behavior
+├── review-instructions.md        # Phase 4 agent behavior
+└── README.md                     # Complete documentation
+```
+
+**Benefits:** Easy maintenance (edit markdown, not YAML), version control, non-technical collaboration, reusability across workflows, and prompts serve as documentation of agent behavior.
+
+---
+
+## 🎯 Mental Model Shift
+
+> **The Core Insight:** From "humans drive every step of the issue lifecycle" to "agents handle the routine, humans govern the outcomes"
+
+### Move Toward (Embrace These Patterns)
+
+- ✅ **Label-Driven Orchestration**: Use labels as state transitions between workflow phases → Clean separation, observable pipeline, easy debugging
+- ✅ **Externalized Prompts**: Store agent instructions in markdown files, not embedded in YAML → Version-controlled, reviewable, maintainable prompt evolution
+- ✅ **Historical Context**: Agents research past similar issues and PRs before planning → 60% better estimate accuracy, 40% fewer mid-implementation surprises
+- ✅ **Incremental Adoption**: Deploy one phase at a time, prove value, then expand → Build momentum with evidence, not faith
+
+### Move Away From (Retire These Habits)
+
+- ⚠️ **Manual Triage**: Developers spending 20-30 minutes classifying, routing, and duplicate-checking every issue → Context-switch cost exceeds triage value
+- ⚠️ **Planning from Scratch**: Starting every implementation plan without consulting past work → Misses patterns, underestimates effort, repeats mistakes
+- ⚠️ **Line-by-Line Review**: Reading every line of agent-generated PRs the same way you review human code → Can't scale to 10-15x volume increase
+
+### Move Against (Active Resistance Required)
+
+- 🛑 **All-or-Nothing Transformation**: Attempting full Gen-4 SDLC restructuring before proving value with quick wins → Rollback risk, team fatigue, lost credibility
+- 🛑 **Embedded Prompt Instructions**: Hardcoding agent behavior inside workflow YAML → Unmaintainable, unreviewable, impossible to iterate on
+
+> **Example Transformation:** Before: Issue #4821 "Login fails on mobile Safari" — developer spends 45 minutes researching, discovers it's a duplicate of #4203 fixed 2 weeks ago. After: Triage agent identifies 88% similarity to #4203 in 3 minutes, auto-labels as duplicate, posts fix version. Savings: 40 minutes per duplicate (14 duplicates/month in this repo).
+
+---
+
+## When to Use This Pattern
+
+### Decision Tree
+
+```
+Q: Where are you in your agentic adoption journey?
+├─ "Haven't started yet"
+│  → Start here with Phase 1 (Agentic Intake)
+│  └─ Best for: Any team, any repo, 2-3 hours setup
+│
+├─ "Already assigning issues to Copilot but want more automation"
+│  → Add Phases 2 + 4 (Planning + Code Review)
+│  └─ Best for: Teams with 20+ issues/month
+│
+├─ "Hitting coordination limits across repos"
+│  → Graduate to Full SDLC: See Agentic SDLC talk
+│  └─ Best for: Teams with agents touching 2+ repos per feature
+│
+└─ "Already have full Gen-4 SDLC"
+   → See: Enterprise Patterns talk
+   └─ Best for: Organization-wide scaling
+```
+
+### Use This Pattern When
+
+- You want agentic value without restructuring repos or CI/CD
+- Your team processes 20+ issues/month
+- You need to prove ROI before requesting larger transformation budget
+- Developers spend significant time on triage, planning, or review
+
+### Don't Use This Pattern When
+
+- Agents already touch 2+ repos for >30% of features → Use [Agentic SDLC](../agentic-sdlc/) monorepo approach
+- CI pipeline takes >60 minutes → Fix CI first, or see [Agentic SDLC Part 3](../agentic-sdlc/)
+- You have <5 issues/month → Manual handling may be fine
+
+### Comparison with Related Features
+
+| Aspect | This Talk (Agentic Journey) | Agentic SDLC | Agentic Sessions |
+|--------|----------------------------|--------------|------------------|
+| **Best For** | Getting started, proving value | Full transformation | Interactive agent workflows |
+| **Setup Time** | 2-3 hours | 3-6 months | Minutes per session |
+| **Scope** | Issue lifecycle automation | Repo topology + CI + PRs | Single dev session |
+| **Risk Level** | Low (additive, no restructuring) | High (organizational change) | None (developer tool) |
+
+---
+
+<!-- 🎬 MAJOR SECTION: Agentic Intake -->
+## Phase 1: Agentic Intake
+
+*Agents analyze, classify, and route issues automatically*
+
+### The Problem
+
+Every new issue requires investigation: Is this a bug or feature? Has it been reported before? Who should own it? What's the priority? Where in the codebase is this?
+
+**Time cost:** 20-30 minutes per issue. **Opportunity cost:** Developers context-switch away from feature work.
+
+### How It Works
+
+The triage workflow triggers on every new issue and performs four steps in ~3 minutes:
+
+1. **Context Gathering** — Reads issue title, description, related files, recent similar issues
+2. **Duplicate Detection** — Searches open and closed issues from last 6 months, calculates similarity
+3. **Routing & Labeling** — Classifies type, priority, affected component, suggests assignee
+4. **Context Summary** — Generates analysis for the assignee with affected files, root cause hypothesis, and suggested approach
+
+### The Workflow
 
 ```yaml
-# .github/workflows/issue-triage.yml
-name: Triage New Issues
+# .github/workflows/1-issue-triage.yml
+name: "Phase 1: Agentic Intake"
 
 on:
   issues:
@@ -121,1267 +261,569 @@ jobs:
     permissions:
       issues: write
       contents: read
+      pull-requests: read
     steps:
-      - name: Analyze issue with Copilot
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g @github/copilot
+
+      - name: Get issue details
+        id: issue
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Copilot analyzes the issue and:
-          # 1. Checks for duplicates
-          # 2. Identifies related issues
-          # 3. Suggests labels and priority
-          # 4. Routes to appropriate team
-          # 5. Generates context summary
-          
-          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
-            --input - <<< '{
-              "assignees": ["copilot-swe-agent[bot]"],
-              "agent_assignment": {
-                "target_repo": "${{ github.repository }}",
-                "base_branch": "main",
-                "task": "triage"
-              }
-            }'
+          gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }} > issue.json
+          TITLE=$(jq -r '.title' issue.json)
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+
+      - name: Search for duplicate issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="${{ steps.issue.outputs.title }}"
+          # Search open issues
+          gh api --method GET /search/issues \
+            -f q="repo:${{ github.repository }} is:issue is:open \"${TITLE}\"" \
+            --jq '.items[0:5]' > open-issues.txt
+          # Search closed issues from last 6 months
+          gh api --method GET /search/issues \
+            -f q="repo:${{ github.repository }} is:issue is:closed created:>=$(date -d '6 months ago' +%Y-%m-%d) \"${TITLE}\"" \
+            --jq '.items[0:5]' > closed-issues.txt
+
+      - name: Run Copilot CLI for triage
+        env:
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          # Load externalized prompt template with variable substitution
+          sed -e "s|{{ISSUE_NUMBER}}|${{ github.event.issue.number }}|g" \
+              -e "s|{{ISSUE_TITLE}}|${{ steps.issue.outputs.title }}|g" \
+              .github/prompts/triage-instructions.md > triage_instructions.txt
+          copilot -p @triage_instructions.txt > triage_result.txt
+
+      - name: Add labels and post results
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Parse structured output, apply labels, post comment
+          # Adds: type label, priority label, status:triaged
 ```
+
+> 📁 Full workflow: [`1-issue-triage.yml`](1-issue-triage.yml) (129 lines)
+
+### Prompt Template Design
+
+The triage prompt uses structured output format for reliable parsing:
+
+```markdown
+## Required Output Format
+
+DUPLICATE: [yes/no] - [issue number if duplicate, otherwise "none"]
+TYPE: [bug/feature/documentation/question/other]
+PRIORITY: [critical/high/medium/low]
+AREA: [affected component]
+ASSIGN_TO: [team or username suggestion]
+SUMMARY: [2-3 sentence context summary]
+```
+
+Structured output ensures consistent label application and automated routing regardless of issue content.
+
+### Metrics
+
+| Metric | Before Agents | After | Improvement |
+|--------|---------------|-------|-------------|
+| Time to first triage | 30 min | <5 min | 6x faster |
+| Duplicate detection rate | 60% caught | >90% caught | 50% improvement |
+| Correct initial routing | 60% | >90% | Fewer bounces |
+| Context-gathering time | 45 min | <10 min | 4.5x faster |
+
+**ROI:** At 50 issues/month, saves ~20 hours/month (2.5 developer days). Setup: 2-3 hours one-time.
 
 ---
 
-## What the Agent Does
+<!-- 🎬 MAJOR SECTION: Agentic Planning -->
+## Phase 2: Agentic Planning
 
-### Step 1: Context Gathering (2 minutes)
-```
-Agent reads:
-- Issue title and description
-- Related files mentioned
-- Recent similar issues
-- Relevant documentation
-```
+*Agents research codebase and historical context to generate execution plans*
 
-### Step 2: Duplicate Detection (1 minute)
-```
-Agent checks:
-- Open issues with similar keywords
-- Closed issues from last 6 months
-- Pull requests addressing same area
-```
+### The Problem
 
-**Example output:**
-```
-🔍 Duplicate Analysis
-━━━━━━━━━━━━━━━━━━
-Potential duplicate: #2847 (closed 3 weeks ago)
-Similarity: 87%
-Resolution: Fixed in PR #2851, released in v2.4.1
+After triage, someone needs to understand requirements, research the codebase, identify affected files, design the approach, and estimate effort. **Time cost:** 2-4 hours for non-trivial features. **Risk:** Incomplete research leads to mid-implementation surprises.
 
-Recommendation: Close as duplicate, ask reporter to upgrade
+### The Key Innovation: Historical Context
+
+The planning agent doesn't just analyze the current issue — it searches for similar past issues and their associated PRs:
+
+```
+Agent searches for similar past issues and PRs:
+- "Add Google OAuth" (#2847) → PR #2851: 6 hours, 8 files
+  Lesson: Token refresh edge case required extra test
+- "Add GitHub OAuth" (#3104) → PR #3109: 5 hours, 7 files
+  Lesson: Multi-tenant config needed for enterprise users
 ```
 
-### Step 3: Routing & Labeling (1 minute)
-```
-Agent suggests:
-- Labels: bug, authentication, high-priority
-- Assignee: @auth-team
-- Milestone: v2.5.0
-- Estimated effort: 3-5 hours
-```
+Plans informed by historical data show **±20% estimate accuracy** vs. **±50% without** — and surface edge cases from previous implementations before coding begins.
 
-### Step 4: Context Summary (1 minute)
-```
-Agent generates:
-📋 Issue Summary for Assignee
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-Affected files:
-- src/auth/oauth-handler.ts (lines 147-203)
-- src/middleware/session.ts (lines 89-102)
-
-Root cause hypothesis:
-Token refresh logic doesn't handle edge case where
-refresh token expires during active session.
-
-Suggested approach:
-Add exponential backoff retry logic in oauth-handler.ts
-Update session middleware to detect expired refresh tokens
-Add integration test for token expiration during session
-```
-
----
-
-## Setup Instructions
-
-### Prerequisites
-- GitHub repository with GitHub Actions enabled
-- GitHub Copilot license (or GitHub Copilot for Business)
-- GitHub Personal Access Token with `repo` and `workflow` scopes
-
-### Step 1: Enable GitHub Copilot for Issues
-
-Create `.github/workflows/issue-triage.yml`:
+### The Workflow
 
 ```yaml
-name: Triage New Issues
+# .github/workflows/2-issue-planning.yml
+name: "Phase 2: Agentic Planning"
 
 on:
   issues:
-    types: [opened]
+    types: [labeled]
 
 jobs:
-  triage:
+  planning:
+    if: github.event.label.name == 'status:triaged'
     runs-on: ubuntu-latest
     permissions:
       issues: write
       contents: read
-      pull-requests: write
+      pull-requests: read
     steps:
-      - name: Assign Copilot for triage
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g @github/copilot
+
+      - name: Search for historical similar issues
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
-            --input - <<< '{
-              "assignees": ["copilot-swe-agent[bot]"],
-              "agent_assignment": {
-                "target_repo": "${{ github.repository }}",
-                "base_branch": "main"
-              }
-            }'
+          TITLE=$(cat issue_title.txt)
+          gh api --method GET /search/issues \
+            -f q="repo:${{ github.repository }} is:issue is:closed created:>=$(date -d '6 months ago' +%Y-%m-%d) ${TITLE}" \
+            --jq '.items[0:5]' > similar-issues.txt
+
+      - name: Retrieve PRs from similar issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method GET /search/issues \
+            -f q="repo:${{ github.repository }} is:pr is:merged created:>=$(date -d '6 months ago' +%Y-%m-%d)" \
+            --jq '.items[0:5]' > related-prs.txt
+
+      - name: Generate execution plan with Copilot CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          sed -e "s|{{ISSUE_NUMBER}}|${{ github.event.issue.number }}|g" \
+              -e "s|{{SIMILAR_ISSUES}}|$(cat similar-issues.txt)|g" \
+              -e "s|{{RELATED_PRS}}|$(cat related-prs.txt)|g" \
+              .github/prompts/planning-instructions.md > planning_instructions.txt
+          copilot -p @planning_instructions.txt > execution_plan.txt
+
+      - name: Post plan and await approval
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Post execution plan as comment
+          # Prompt: "Comment /approve-plan to proceed"
+          # Adds label: status:planned
 ```
 
-### Step 2: Configure Secrets
+> 📁 Full workflow: [`2-issue-planning.yml`](2-issue-planning.yml) (155 lines)
 
-1. Create a GitHub Personal Access Token (PAT):
-   - Go to GitHub Settings → Developer settings → Personal access tokens
-   - Create token with `repo`, `workflow`, `issues`, `pull_requests` scopes
-
-2. Add to repository secrets:
-   - Go to repo Settings → Secrets and variables → Actions
-   - Create secret: `GH_TOKEN` with your PAT value
-
-### Step 3: Test the Workflow
-
-1. Create a test issue in your repository
-2. Watch the Actions tab for workflow execution
-3. Observe Copilot analyzing and commenting on the issue
-
----
-
-## Success Metrics
-
-Track these metrics before and after deployment:
-
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Time to first triage** | 30 min | <5 min | Faster routing |
-| **Duplicate issue rate** | 15% | <5% | Less wasted work |
-| **Correct initial routing** | 60% | >90% | Fewer bounces |
-| **Issues closed as "duplicate"** | 10% | <3% | Better detection |
-| **Context-gathering time** | 45 min | <10 min | Ready to code faster |
-
-### Real-World Example
-
-**Before agents (manual triage):**
-- Issue #4821: "Login fails on mobile Safari"
-- Developer sees issue → 15 min to read and research → 20 min digging through code → 10 min finding similar issues → Realizes it's a duplicate of #4203 (fixed 2 weeks ago)
-- **Total time:** 45 minutes wasted on duplicate
-
-**With triage agent:**
-- Issue #4821: "Login fails on mobile Safari"
-- Agent analyzes in 3 minutes → Finds duplicate #4203 (88% similarity) → Posts comment with fix and version → Auto-labels as duplicate → Auto-closes with reference
-- **Total time:** 3 minutes automated, 2 minutes for human to verify
-- **Savings:** 40 minutes per duplicate (and this repo had 14 duplicates last month)
-
----
-
-## Phase 1 ROI
-
-**Investment:**
-- Setup time: 2-3 hours (one-time)
-- Ongoing cost: $0.05-0.15 per issue analyzed (~$2/hour agent time)
-
-**Returns:**
-- Time saved: 25 minutes per issue (on average)
-- At 50 issues/month: **20 hours saved/month** (2.5 developer days)
-- At $100/hour developer cost: **$2,000/month savings**
-- Annual ROI: **~24,000% on a $100 investment**
-
----
-
-# Phase 2: Execution Planning
-
-*Agents research the codebase and generate implementation plans*
-
----
-
-## The Problem
-
-After an issue is triaged, someone needs to:
-- Understand the requirements
-- Research the codebase
-- Identify affected files and dependencies
-- Design the solution approach
-- Estimate effort
-- Create an implementation plan
-
-**Time cost:** 2-4 hours for non-trivial features.
-
-**Risk:** Incomplete research leads to mid-implementation surprises.
-
----
-
-## The Solution: Planning Agent
-
-Once an issue is triaged, the agent digs deeper:
+### Example Plan Output
 
 ```
-Human creates issue: "Add OAuth support for Microsoft accounts"
-  ↓
-Agent researches codebase (10 minutes)
-  ↓
-Agent generates execution plan:
-  • Affected files: 7 files identified
-  • Dependencies: @azure/msal-node (security scan: clean)
-  • Approach: Extend existing OAuth handler, add MS-specific flow
-  • Estimated effort: 8-12 hours
-  • Tests needed: 3 integration tests, 5 unit tests
-  • Migration: Add MS_CLIENT_ID and MS_CLIENT_SECRET to config
-  ↓
-Human reviews plan (5 minutes)
-  ↓
-Human approves or requests changes
-  ↓
-Agent begins implementation (Phase 3)
-```
-
----
-
-## What the Agent Does
-
-### Step 1: Requirement Analysis (5 minutes)
-```
-Agent extracts:
-- Core requirements from issue
-- Acceptance criteria
-- Constraints and edge cases
-- Success metrics
-```
-
-### Step 2: Codebase Research (10 minutes)
-```
-Agent searches:
-- Existing auth implementations (finds OAuthHandler base class)
-- Similar features (Google OAuth, GitHub OAuth)
-- Related configuration (finds auth-config.ts)
-- Test patterns (finds oauth-integration-tests/)
-- Documentation (finds docs/authentication.md)
-```
-
-### Step 2.5: Historical Context Research (5 minutes)
-```
-Agent searches for similar past issues and their PRs:
-- Searches closed issues from last 6 months with similar keywords
-- Identifies issues with comparable requirements
-- Retrieves associated PRs for each similar issue
-- Analyzes implementation patterns from successful resolutions
-- Extracts effort estimates and lessons learned
-- Identifies common pitfalls and edge cases discovered
-
-Example findings:
-- Issue #2847: "Add Google OAuth" (closed 3 months ago)
-  → PR #2851: Implemented in 6 hours, 8 files changed
-  → Lesson: Token refresh edge case required extra test
-  
-- Issue #3104: "Add GitHub OAuth" (closed 1 month ago)
-  → PR #3109: Implemented in 5 hours, 7 files changed
-  → Lesson: Multi-tenant config needed for enterprise users
-```
-
-> 💡 **Key Insight:** Historical context from similar issues dramatically improves plan accuracy. Estimates informed by past implementations are within ±20% actual effort vs ±50% without historical data.
-
-### Step 3: Dependency Analysis (5 minutes)
-```
-Agent evaluates:
-- Required packages (@azure/msal-node)
-- Security scan results (CVE check)
-- License compatibility (MIT ✓)
-- Version conflicts (none)
-```
-
-### Step 4: Plan Generation (5 minutes)
-```
-Agent creates:
 📋 EXECUTION PLAN: Add Microsoft OAuth Support
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Historical Context:**
-Based on analysis of similar past implementations:
-- Issue #2847 "Add Google OAuth" → PR #2851 (6 hours, 8 files)
-- Issue #3104 "Add GitHub OAuth" → PR #3109 (5 hours, 7 files)
+Historical Context:
+Based on Issue #2847 "Add Google OAuth" (6h, 8 files) and
+Issue #3104 "Add GitHub OAuth" (5h, 7 files):
+✓ Token refresh edge cases require explicit testing
+✓ Multi-tenant configuration needed for enterprise
+✓ Rate limiting should be considered from start
 
-Key learnings applied to this plan:
-✓ Token refresh edge cases require explicit testing (from #2847)
-✓ Multi-tenant configuration needed for enterprise (from #3104)
-✓ Rate limiting should be considered from start (from #3104)
-
-**Affected Files:**
-1. src/auth/providers/microsoft-oauth.ts (new file)
-   - Extends OAuthHandler base class
-   - Implements MS-specific token exchange
-   
+Affected Files:
+1. src/auth/providers/microsoft-oauth.ts (new)
 2. src/auth/oauth-handler.ts (modify)
-   - Register Microsoft provider
-   - Add to provider factory
-   
 3. src/config/auth-config.ts (modify)
-   - Add MS_CLIENT_ID and MS_CLIENT_SECRET
-   - Add MS_TENANT_ID for multi-tenant support
-   
-4. src/middleware/auth.ts (modify)
-   - Add Microsoft to allowed providers list
-   
-5. tests/integration/auth/microsoft-oauth.test.ts (new file)
-   - Test successful login flow
-   - Test token refresh (including edge cases from #2847)
-   - Test error handling
-   - Test multi-tenant scenarios (from #3104 learning)
+4. tests/integration/auth/microsoft-oauth.test.ts (new)
 
-**Dependencies:**
-- Add: @azure/msal-node@^2.6.0 (security: clean, license: MIT)
+Dependencies: @azure/msal-node@^2.6.0 (security: clean, license: MIT)
 
-**Implementation Steps:**
-1. Add dependency and run security scan
-2. Create MicrosoftOAuthProvider class
-3. Implement token exchange logic
-4. Update configuration files
-5. Register provider in factory
-6. Write integration tests (including historical edge cases)
-7. Update documentation
-
-**Estimated Effort:** 6-8 hours
-(Based on historical data: Google OAuth took 6h, GitHub OAuth took 5h)
-
-**Risk Level:** Medium (new OAuth provider, tested pattern)
-**Rollback Plan:** Feature flag MS_OAUTH_ENABLED
+Estimated Effort: 6-8 hours (based on historical average)
+Risk Level: Medium | Rollback: Feature flag MS_OAUTH_ENABLED
 ```
+
+### Human Approval Gate
+
+The plan posts as an issue comment and waits for `/approve-plan`. This is the critical human checkpoint — agents plan, humans decide.
+
+### Metrics
+
+| Metric | Before Agents | After | Improvement |
+|--------|---------------|-------|-------------|
+| Time to implementation plan | 4 hours | <30 min | 8x faster |
+| Plan accuracy (estimate vs actual) | ±50% | ±20% | 60% more accurate |
+| Missing requirements found late | 25% | <10% | Less rework |
+| Historical context utilization | 0% | >80% | Learn from past work |
 
 ---
 
-## Setup Instructions
+<!-- 🎬 MAJOR SECTION: Agentic Coding -->
+## Phase 3: Agentic Coding
 
-### The 4-Workflow Architecture
+*Agents implement the approved plan, run tests, and create PRs*
 
-Instead of a single monolithic workflow, the agentic journey uses **4 specialized workflows** that coordinate via issue labels. This creates clean separation of concerns and allows each phase to optimize for its specific task.
+### The Good News
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                        4-WORKFLOW ISSUE LIFECYCLE                                │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│   Issue Created                                                                  │
-│      ↓                                                                           │
-│   ┌──────────────────────────────────────────┐                                  │
-│   │ 1-issue-triage.yml                       │                                  │
-│   │ Trigger: issues.opened                   │                                  │
-│   │ • Check for duplicates                   │                                  │
-│   │ • Gather context                         │                                  │
-│   │ • Route to team                          │                                  │
-│   │ • Add label: status:triaged              │                                  │
-│   └──────────────────────────────────────────┘                                  │
-│      ↓                                                                           │
-│   ┌──────────────────────────────────────────┐                                  │
-│   │ 2-issue-planning.yml                     │                                  │
-│   │ Trigger: issues.labeled (status:triaged) │                                  │
-│   │ • Search historical similar issues       │ ← NEW ENHANCEMENT                │
-│   │ • View associated PRs                    │ ← NEW ENHANCEMENT                │
-│   │ • Research codebase                      │                                  │
-│   │ • Generate execution plan                │                                  │
-│   │ • Add label: status:planned              │                                  │
-│   │ • Wait for /approve-plan comment         │                                  │
-│   └──────────────────────────────────────────┘                                  │
-│      ↓                                                                           │
-│   ┌──────────────────────────────────────────┐                                  │
-│   │ 3-issue-execution.yml                    │                                  │
-│   │ Trigger: issue_comment (/approve-plan)   │                                  │
-│   │ • Verify status:planned label            │                                  │
-│   │ • Implement approved plan                │                                  │
-│   │ • Run tests and iterate                  │                                  │
-│   │ • Create PR with evidence                │                                  │
-│   │ • Add label: status:in-review            │                                  │
-│   └──────────────────────────────────────────┘                                  │
-│      ↓                                                                           │
-│   ┌──────────────────────────────────────────┐                                  │
-│   │ 4-pr-review.yml                          │                                  │
-│   │ Trigger: pull_request.opened (by agent)  │                                  │
-│   │ • Security analysis                      │                                  │
-│   │ • Test coverage check                    │                                  │
-│   │ • Performance analysis                   │                                  │
-│   │ • Post comprehensive review              │                                  │
-│   │ • Add label: status:reviewed             │                                  │
-│   │ • Ready for human validation             │                                  │
-│   └──────────────────────────────────────────┘                                  │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
-```
+**You already have this.** Assigning issues to `copilot-swe-agent[bot]` enables implementation. This workflow formalizes the process by connecting it to the approved plan from Phase 2.
 
-### Label-Based State Machine
-
-The workflows coordinate using labels as state transitions:
-
-| Label | Meaning | Set By | Triggers |
-|-------|---------|--------|----------|
-| `status:triaged` | Issue analyzed, ready for planning | Workflow 1 | Workflow 2 |
-| `status:planned` | Execution plan generated, awaiting approval | Workflow 2 | Workflow 3 (via comment) |
-| `status:in-review` | Implementation complete, PR created | Workflow 3 | Workflow 4 |
-| `status:reviewed` | Automated review complete, ready for human | Workflow 4 | Human approval |
-
-### Step 1: Install the 4 Workflows
-
-Copy these workflow files to your repository:
-
-**1. Issue Triage** (`.github/workflows/1-issue-triage.yml`):
-```yaml
-# Installs: npm install -g @github/copilot
-# Uses: copilot -p "Analyze this issue and perform triage..." --allow-tool 'shell(gh)' 'shell(git)'
-# Triggers on: issues.opened
-# Adds label: status:triaged
-```
-
-**2. Execution Planning** (`.github/workflows/2-issue-planning.yml`):
-```yaml
-# Installs: npm install -g @github/copilot
-# Uses: copilot -p "Generate execution plan..." --allow-tool 'shell(git)' 'shell(gh)' 'shell(find)' 'shell(grep)'
-# Triggers on: issues.labeled (when label = status:triaged)
-# NEW: Searches for historical similar issues and their PRs
-# Adds label: status:planned
-```
-
-**3. Code Execution** (`.github/workflows/3-issue-execution.yml`):
-```yaml
-# Installs: npm install -g @github/copilot
-# Uses: copilot -p "Implement the solution..." --allow-tool 'shell(git)' 'shell(npm)' 'shell(node)'
-# Triggers on: issue_comment.created (when comment contains /approve-plan)
-# Adds label: status:in-review
-```
-
-**4. PR Review** (`.github/workflows/4-pr-review.yml`):
-```yaml
-# Installs: npm install -g @github/copilot
-# Uses: copilot -p "Check the changes made in this PR..." --allow-tool 'shell(git)'
-# Triggers on: pull_request.opened, synchronize, reopened
-# Adds label: status:reviewed
-```
-
-> 📁 **Quick Start:** All 4 workflow files are available in `.github/workflows/` with the `1-`, `2-`, `3-`, `4-` prefix for easy identification.
-
-> ⚠️ **Critical:** All workflows use `copilot -p` (programmatic mode). The `-p` flag is **required** for running Copilot CLI in automated workflows.
-
-### Step 1 (Legacy): Enable Planning in Triage Workflow
-
-**Note:** The section below describes the old single-workflow approach. Use the 4-workflow architecture above for production deployments.
-
-<details>
-<summary>Click to view legacy single-workflow approach</summary>
-
-Modify `.github/workflows/issue-triage.yml`:
+### The Workflow
 
 ```yaml
-name: Triage and Plan Issues
+# .github/workflows/3-issue-execution.yml
+name: "Phase 3: Agentic Coding"
 
 on:
-  issues:
-    types: [opened]
   issue_comment:
     types: [created]
 
 jobs:
-  triage-and-plan:
+  execution:
+    if: |
+      github.event.issue.pull_request == null &&
+      contains(github.event.comment.body, '/approve-plan')
     runs-on: ubuntu-latest
     permissions:
       issues: write
-      contents: read
+      contents: write
       pull-requests: write
     steps:
-      - name: Assign Copilot for triage and planning
-        if: github.event_name == 'issues'
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Verify status:planned label
         run: |
-          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
-            --input - <<< '{
-              "assignees": ["copilot-swe-agent[bot]"],
-              "agent_assignment": {
-                "target_repo": "${{ github.repository }}",
-                "base_branch": "main",
-                "phases": ["triage", "plan"]
-              }
-            }'
-      
-      - name: Handle human approval
-        if: github.event_name == 'issue_comment' && contains(github.event.comment.body, '/approve-plan')
+          LABELS=$(gh api /repos/$REPO/issues/$NUM/labels --jq '.[].name')
+          echo "$LABELS" | grep -q "status:planned" || exit 1
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npm install -g @github/copilot
+
+      - name: Implement solution with Copilot CLI
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
-          # Copilot proceeds to implementation (Phase 3)
-          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
-            --input - <<< '{
-              "body": "✅ Plan approved. Beginning implementation..."
-            }'
+          sed -e "s|{{ISSUE_NUMBER}}|${{ github.event.issue.number }}|g" \
+              .github/prompts/implementation-instructions.md > impl.txt
+          # Append execution plan from Phase 2 comment
+          copilot -p @impl.txt > implementation_log.txt
+
+      - name: Create PR
+        run: |
+          git checkout -b "copilot/issue-${{ github.event.issue.number }}"
+          git add . && git commit -m "Implement #${{ github.event.issue.number }}"
+          git push origin HEAD
+          gh pr create --title "Fix #$NUM" --body "Evidence bundle..."
+          # Adds label: status:in-review
 ```
 
-### Step 2: Configure Human Approval Gates
+> 📁 Full workflow: [`3-issue-execution.yml`](3-issue-execution.yml) (179 lines)
 
-Add to issue template (`.github/ISSUE_TEMPLATE/feature_request.md`):
+### Implementation Guidelines (from prompt template)
 
-```markdown
----
-name: Feature Request
-about: Propose a new feature
-labels: enhancement
----
+The implementation prompt enforces quality standards:
+- Follow existing code style and patterns
+- Write tests for all new functionality
+- Make small, atomic commits with descriptive messages
+- Keep functions focused and single-purpose
+- Ensure proper error handling
 
-## Description
-<!-- Describe the feature you'd like -->
+### Metrics
 
-## Acceptance Criteria
-<!-- What does "done" look like? -->
-- [ ] Criterion 1
-- [ ] Criterion 2
-
----
-
-**⚙️ Automated Agent Workflow:**
-1. 🤖 Phase 1: Copilot will automatically triage this issue
-2. 🤖 Phase 2: Copilot will research historical context and generate an execution plan
-3. 👤 Phase 3: A team member will review and approve with `/approve-plan`
-4. 🤖 Phase 4: Copilot will implement and create a PR
-5. 🤖 Phase 5: Copilot will pre-review the PR for security/quality
-6. 👤 Final: Human validates outcomes and approves merge
-```
-
-</details>
-
-### Step 2: Configure Secrets and GitHub Copilot CLI
-
-**Important:** These workflows use the actual **GitHub Copilot CLI** with programmatic mode (`copilot -p`).
-
-1. **Install GitHub Copilot CLI access:**
-   - Ensure you have GitHub Copilot license (or GitHub Copilot for Business)
-   - Copilot CLI is installed automatically in workflows via: `npm install -g @github/copilot`
-
-2. **Create a GitHub Personal Access Token (PAT):**
-   - Go to GitHub Settings → Developer settings → Personal access tokens (classic)
-   - Create token with these scopes:
-     - `repo` (Full control of private repositories)
-     - `workflow` (Update GitHub Action workflows)
-     - `write:packages` (Upload packages to GitHub Package Registry)
-   - **Important:** The token owner must have GitHub Copilot access
-
-3. **Add to repository secrets:**
-   - Go to repo Settings → Secrets and variables → Actions
-   - Create secret: `COPILOT_GITHUB_TOKEN` with your PAT value
-   - This token is used to authenticate Copilot CLI in workflows
-
-### How the Copilot CLI Works
-
-All workflows use the **programmatic mode** with the `-p` flag:
-
-```bash
-# Example from Workflow 1 (Triage)
-copilot -p "Analyze this issue and perform triage:
-1. Check for duplicate issues
-2. Identify issue type
-3. Suggest labels and priority
-..." \
-  --allow-tool 'shell(gh)' \
-  --allow-tool 'shell(git)' > triage_result.txt
-```
-
-**Key points:**
-- **`-p` flag is CRITICAL**: Enables programmatic (non-interactive) mode for CI/CD
-- **`--allow-tool`**: Grants permission for specific shell commands
-- **Output redirection**: Capture Copilot's response to a file for parsing
-- **`COPILOT_GITHUB_TOKEN`**: Passed as `GITHUB_TOKEN` environment variable
-
-### Step 3: Test the 4-Workflow System
-
-1. **Test Phase 1 (Triage):**
-   - Create a test issue in your repository
-   - Watch `.github/workflows/1-issue-triage.yml` execute
-   - Verify issue gets `status:triaged` label
-
-2. **Test Phase 2 (Planning):**
-   - Verify `.github/workflows/2-issue-planning.yml` triggers automatically
-   - Check that it searches for historical similar issues
-   - Review the execution plan posted as a comment
-   - Verify issue gets `status:planned` label
-
-3. **Test Phase 3 (Execution):**
-   - Comment `/approve-plan` on the issue
-   - Verify `.github/workflows/3-issue-execution.yml` executes
-   - Check that a PR is created
-   - Verify issue gets `status:in-review` label
-
-4. **Test Phase 4 (Review):**
-   - Verify `.github/workflows/4-pr-review.yml` triggers on the new PR
-   - Review the automated code review comments
-   - Verify PR gets `status:reviewed` label
+| Metric | Before Agents | After | Improvement |
+|--------|---------------|-------|-------------|
+| Implementation time | 8-12 hours | 1-2 hours | 6-10x faster |
+| Time to first PR | 1-2 days | 2-4 hours | 4-8x faster |
+| Initial test pass rate | 70% | >90% | Higher quality |
+| PRs requiring rework | 30% | <15% | Less wasted effort |
 
 ---
 
-## Success Metrics
+<!-- 🎬 MAJOR SECTION: Code Review -->
+## Phase 4: Code Review Agent
 
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Time to implementation plan** | 4 hours | <30 min | Developers start faster |
-| **Plan accuracy (estimate vs actual)** | ±50% | ±20% | Better predictability |
-| **Missing requirements found late** | 25% | <10% | Less rework |
-| **PRs blocked by unclear scope** | 15% | <5% | Smoother reviews |
-| **Historical context utilization** | 0% | >80% | Learn from past implementations |
+*Agents pre-review PRs for security, logic, performance, and test coverage*
 
-> 💡 **Impact of Historical Context:** Plans that reference similar past issues show 60% better estimate accuracy and 40% fewer mid-implementation surprises.
+### The Problem
 
----
+Even with agent-generated code, humans must review. But agent volume is 10-15x traditional — and each PR touches 500-2000 lines. **Code review becomes the bottleneck on velocity.**
 
-## Phase 2 ROI
-
-**Investment:**
-- Setup time: 2-3 hours (4 workflows + secrets configuration)
-- Ongoing cost: $0.40-0.60 per plan (~$3/hour agent time × 12-15 min with historical search)
-
-**Returns:**
-- Time saved: 3.5 hours per feature (on average)
-- Improved accuracy: ±20% estimates (vs ±50% without historical context)
-- Reduced rework: 60% fewer mid-implementation surprises
-- At 20 features/month: **70 hours saved/month** (8.75 developer days)
-- At $100/hour: **$7,000/month savings**
-- **Additional value:** Historical learning compounds over time
-
----
-
-# Phase 3: Code Generation & Execution
-
-*Agents implement the plan and create PRs*
-
----
-
-## The Good News
-
-**You already have this.** When you assign issues to `copilot-swe-agent[bot]`, Copilot can already:
-- Implement code based on the approved plan
-- Write unit and integration tests
-- Run tests and iterate on failures
-- Create pull requests with evidence bundles
-
-This is the core capability of GitHub Copilot's agent features.
-
----
-
-## What the Agent Does
-
-### Step 1: Implementation (30-120 minutes)
-```
-Agent reads approved plan
-  ↓
-Agent writes code for each affected file
-  ↓
-Agent runs tests locally
-  ↓
-Agent fixes failures and iterates
-  ↓
-Agent reaches "all tests passing"
-```
-
-### Step 2: PR Creation
-```
-Agent creates PR with:
-- Descriptive title from issue
-- Full context from plan
-- Summary of changes
-- Test results
-- Security scan results
-```
-
-**Example PR description:**
-```markdown
-## Closes #4523: Add Microsoft OAuth Support
-
-### Implementation Summary
-Added Microsoft OAuth provider following our existing OAuth pattern.
-
-**Changes:**
-- ✅ Created `MicrosoftOAuthProvider` extending `OAuthHandler`
-- ✅ Updated auth configuration for MS credentials
-- ✅ Added integration tests (100% coverage on new code)
-- ✅ Updated documentation
-
-### Test Results
-```
-✓ 847 tests passing
-✓ Coverage: 94% (unchanged)
-✓ Security scan: Clean (0 vulnerabilities)
-✓ Performance: No regressions detected
-```
-
-### Evidence Bundle
-- [Test Results](https://github.com/.../actions/runs/123456)
-- [Security Scan](https://github.com/.../security/code-scanning/1)
-- [Performance Baseline](https://github.com/.../actions/runs/123457)
-
-### How to Test
-1. Set `MS_CLIENT_ID` and `MS_CLIENT_SECRET` in `.env`
-2. Navigate to `/login`
-3. Click "Sign in with Microsoft"
-4. Verify successful authentication
-```
-
----
-
-## Configuration
-
-### Enable Auto-PR Creation
-
-Add to repository settings → GitHub Copilot:
-```
-✓ Allow Copilot to create pull requests
-✓ Require test passage before PR creation
-✓ Require security scan before PR creation
-✓ Auto-request review from code owners
-```
-
-### Set Branch Protection Rules
-
-Ensure your main branch has:
-```
-✓ Require pull request reviews (1 approver minimum)
-✓ Require status checks to pass (tests, security scan)
-✓ Require conversation resolution before merging
-```
-
----
-
-## Success Metrics
-
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Implementation time** | 8-12 hours | 1-2 hours | 6-10x faster |
-| **Time to first PR** | 1-2 days | 2-4 hours | Faster feedback |
-| **Initial test pass rate** | 70% | >90% | Higher quality |
-| **PRs requiring rework** | 30% | <15% | Less wasted effort |
-
----
-
-## Phase 3 ROI
-
-**Investment:**
-- Setup time: 0 hours (already included with Copilot)
-- Ongoing cost: $3-5 per implementation (~$3/hour × 1-2 hours)
-
-**Returns:**
-- Time saved: 7-10 hours per feature
-- At 20 features/month: **140-200 hours saved/month** (17-25 developer days)
-- At $100/hour: **$14,000-20,000/month savings**
-
----
-
-# Phase 4: Code Review Agent
-
-*Agents analyze PRs and surface risks before human review*
-
----
-
-## The Problem
-
-Even with agent-generated code, humans must review PRs. But reviewing agent-generated PRs is different:
-- **Volume:** Agents create more PRs (10-15x increase)
-- **Scale:** Each PR may touch 500-2000 lines
-- **Speed:** Agents can create PRs faster than humans can review
-
-**Time cost:** 2-4 hours per PR for thorough review.
-
-**Bottleneck:** Code review becomes the constraint on velocity.
-
----
-
-## The Solution: Code Review Agent
-
-An agent that pre-reviews every PR before human review:
-
-```
-Agent creates PR (Phase 3)
-  ↓
-Code Review Agent analyzes PR (5 minutes)
-  ↓
-Agent posts review comment with:
-  • Security risks identified
-  • Logic errors or edge cases missed
-  • Performance implications
-  • Compliance violations
-  • Test coverage gaps
-  ↓
-Human reviews agent's analysis (10-15 minutes)
-  ↓
-Human approves or requests changes (outcome-based, not line-by-line)
-```
-
----
-
-## What the Code Review Agent Does
-
-### Step 1: Security Analysis (2 minutes)
-```
-Agent scans for:
-- SQL injection vulnerabilities
-- XSS risks
-- Authentication bypasses
-- Secrets in code
-- Unsafe dependencies
-```
-
-**Example output:**
-```
-🔒 Security Review
-━━━━━━━━━━━━━━━━
-✅ No SQL injection risks
-✅ All user inputs sanitized
-✅ No secrets detected
-⚠️ Medium: New dependency @azure/msal-node
-   → Security scan: Clean
-   → License: MIT (compatible)
-   → Recommendation: Approve, monitor for CVEs
-```
-
-### Step 2: Logic & Edge Case Analysis (2 minutes)
-```
-Agent checks:
-- Error handling completeness
-- Edge case coverage
-- Race conditions
-- Resource leaks
-```
-
-**Example output:**
-```
-🧠 Logic Review
-━━━━━━━━━━━━━━━
-✅ Error handling complete
-✅ Edge cases covered
-⚠️ Low: Token refresh during logout
-   → File: src/auth/microsoft-oauth.ts:147
-   → Issue: Race condition if user logs out during token refresh
-   → Recommendation: Add logout flag check before refresh
-```
-
-### Step 3: Performance & Scalability (1 minute)
-```
-Agent evaluates:
-- O(n²) or worse algorithms
-- Database query efficiency
-- Memory usage patterns
-- Caching opportunities
-```
-
-**Example output:**
-```
-⚡ Performance Review
-━━━━━━━━━━━━━━━━━━
-✅ No algorithmic concerns
-✅ Queries are indexed
-✅ No obvious memory leaks
-💡 Suggestion: Cache MS tenant discovery
-   → Current: Fetches on every login
-   → Proposed: Cache for 24 hours (MS recommendation)
-   → Impact: -40% auth latency
-```
-
-### Step 4: Test Coverage Analysis (1 minute)
-```
-Agent checks:
-- New code coverage
-- Critical paths tested
-- Integration test presence
-- Edge case test coverage
-```
-
-**Example output:**
-```
-🧪 Test Coverage Review
-━━━━━━━━━━━━━━━━━━━━━
-✅ 100% coverage on new code
-✅ Integration tests present
-✅ Edge cases tested
-✅ No flaky tests detected
-```
-
----
-
-## Setup Instructions
-
-### Step 1: Enable Code Review Agent
-
-Create `.github/workflows/pr-review.yml`:
+### The Workflow
 
 ```yaml
-name: Agent Code Review
+# .github/workflows/4-pr-review.yml
+name: "Phase 4: PR Code Review"
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
 
 jobs:
-  agent-review:
+  code-review:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
+      issues: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
-      - name: Copilot Code Review
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - run: npm install -g @github/copilot
+
+      - name: Analyze PR changes
         run: |
-          # Trigger Copilot code review
-          gh api POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
-            --input - <<< '{
-              "event": "COMMENT",
-              "body": "@copilot-code-review-agent please review this PR for:\n- Security vulnerabilities\n- Logic errors and edge cases\n- Performance implications\n- Test coverage gaps"
-            }'
+          git diff origin/${{ github.event.pull_request.base.ref }}...HEAD > pr_changes.diff
+          FILES_CHANGED=$(git diff --name-only origin/$BASE...HEAD | wc -l)
+
+      - name: Run security scan
+        run: |
+          # Check for hardcoded secrets, SQL injection, XSS patterns
+          # Report severity levels: Critical/High/Medium/Low
+
+      - name: Run Copilot CLI code review
+        env:
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          sed -e "s|{{PR_NUMBER}}|${{ github.event.pull_request.number }}|g" \
+              .github/prompts/review-instructions.md > review_instructions.txt
+          copilot -p @review_instructions.txt < pr_changes.diff > code_review.txt
+
+      - name: Post comprehensive review
+        run: |
+          # Post structured review: Security + Logic + Performance + Tests
+          # Adds labels: status:reviewed, agent-generated
+          # If critical issues: adds needs-attention label
 ```
 
-### Step 2: Configure Review Automation
+> 📁 Full workflow: [`4-pr-review.yml`](4-pr-review.yml) (218 lines)
 
-Add to `.github/copilot-review-config.yml`:
+### What the Agent Reviews
 
-```yaml
-# Copilot Code Review Configuration
-review:
-  # What to check
-  checks:
-    - security
-    - logic
-    - performance
-    - tests
-    - compliance
-  
-  # Severity thresholds
-  block_on:
-    - critical_security
-    - compliance_violation
-  
-  warn_on:
-    - medium_security
-    - performance_regression
-    - test_coverage_decrease
-  
-  # Auto-approve conditions
-  auto_approve_if:
-    - all_checks_pass: true
-    - pr_author: "copilot-swe-agent[bot]"
-    - changed_files: "<10"
-    - lines_changed: "<500"
-```
+The review prompt covers four focus areas with structured output:
+
+| Focus Area | What It Checks | Time |
+|------------|---------------|------|
+| **Security** | SQL injection, XSS, auth bypasses, hardcoded secrets, unsafe dependencies | 2 min |
+| **Logic** | Error handling, edge cases, race conditions, resource leaks | 2 min |
+| **Performance** | O(n²) algorithms, N+1 queries, blocking operations, caching opportunities | 1 min |
+| **Tests** | Coverage on new code, edge case tests, integration tests, flaky test detection | 1 min |
+
+Human review shifts from "read every line" to **"validate outcomes against intent"** — does the implementation match the approved plan?
+
+### Metrics
+
+| Metric | Before Agents | After | Improvement |
+|--------|---------------|-------|-------------|
+| Time per PR review | 2-4 hours | 15-20 min | 8-12x faster |
+| Critical bugs caught pre-merge | 60% | >95% | Near-complete |
+| Security issues in production | 5/quarter | 0/quarter | Eliminated |
+| Review bottleneck | Yes | No | Unblocked |
 
 ---
 
-## Success Metrics
+<!-- 🎬 MAJOR SECTION: Graduating to Full SDLC -->
+## Phase 5: When to Graduate to Full SDLC
 
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Time per PR review** | 2-4 hours | 15-20 min | 6-10x faster |
-| **Critical bugs caught** | 60% | >95% | Higher quality |
-| **Security issues in production** | 5/quarter | 0/quarter | Risk reduction |
-| **Review bottleneck** | Yes | No | Unblocked velocity |
+*Signals that you've outgrown quick wins and need Gen-4 transformation*
+
+### The Inflection Point
+
+Phases 1-4 work brilliantly — until they don't. Watch for these signals:
+
+| Signal | Symptom | Solution |
+|--------|---------|----------|
+| **Repository Chaos** | Agents touching 3-5 repos per feature | Monorepo consolidation ([Agentic SDLC Part 1](../agentic-sdlc/)) |
+| **CI Bottleneck** | CI queue time >60 minutes | Trust factory CI ([Agentic SDLC Part 3](../agentic-sdlc/)) |
+| **Review Overwhelm** | 50+ PRs open, 10+ days to review | Outcome-based PRs ([Agentic SDLC Part 2](../agentic-sdlc/)) |
+| **Test Flakiness** | >10% flaky test rate | Hermetic builds, deterministic signal |
+| **Manual Governance** | Compliance requires human review | Automated evidence bundles |
+
+### The Upgrade Path
+
+```
+PHASE 1-4 (Quick Wins)              →    PHASE 5 (Full SDLC)
+────────────────────                      ────────────────────
+✓ Issue → PR automation                   ✓ Monorepo with module boundaries
+✓ Agent-generated code                    ✓ Feature-scale PRs (500-2000 lines)
+✓ Code review assistance                  ✓ Intent-based reviews
+~ Manual coordination                     ✓ Atomic merges
+~ Traditional CI (slow)                   ✓ CI as trust factory (<10 min)
+
+THROUGHPUT: 5-10 features/week       →    THROUGHPUT: 10-15 features/day
+```
+
+### Graduation Criteria
+
+| Criterion | Threshold | How to Measure |
+|-----------|-----------|----------------|
+| Agent velocity | >10 PRs/week | GitHub Insights |
+| Human bottleneck | Review queue >5 days | PR aging reports |
+| Multi-repo friction | >30% PRs touch 2+ repos | PR analysis |
+| CI capacity | Queue time >30 min peak | Actions metrics |
 
 ---
 
-## Real-World Example
+## Real-World Use Cases
 
-**Before code review agent:**
-- PR #2481: "Add MS OAuth"
-- Human reviewer spends 3 hours:
-  - 45 min understanding changes
-  - 60 min checking for security issues
-  - 30 min verifying edge cases
-  - 45 min checking tests
-- Misses race condition in token refresh logic
-- Bug found in production 2 weeks later
+### Use Case 1: Duplicate Issue Elimination
 
-**With code review agent:**
-- PR #2481: "Add MS OAuth"
-- Agent reviews in 5 minutes, posts detailed analysis
-- Human reviewer reads agent's analysis (15 min)
-- Human spots the race condition from agent's warning
-- Fixed before merge
-- **Total time:** 20 minutes (vs 3 hours + production incident)
+**The Problem:** A team with 50 issues/month had a 15% duplicate rate. Developers spent 45 minutes per duplicated issue researching before realizing it was already fixed.
+
+**The Solution:** Phase 1 triage agent searches open and closed issues, calculates similarity, and auto-labels duplicates with references to the original fix.
+
+**Outcome:** Duplicate rate dropped from 15% to <3%. Saved 14 × 40 minutes = **9.3 hours/month** on duplicates alone.
 
 ---
 
-## Phase 4 ROI
+### Use Case 2: OAuth Provider Addition
 
-**Investment:**
-- Setup time: 1-2 hours (one-time)
-- Ongoing cost: $0.10-0.20 per PR review (~$3/hour × 5 min)
+**The Problem:** Adding a new OAuth provider required 2-4 hours of planning (researching existing patterns, identifying files, estimating effort) plus 8-12 hours of implementation.
 
-**Returns:**
-- Time saved: 2-3 hours per PR
-- At 40 PRs/month: **80-120 hours saved/month** (10-15 developer days)
-- At $100/hour: **$8,000-12,000/month savings**
-- **Plus:** Reduced production incidents (hard to quantify but massive)
+**The Solution:** Phase 2 found two similar past implementations (Google OAuth, GitHub OAuth), extracted lessons learned (token refresh edge cases, multi-tenant needs), and generated an accurate plan. Phase 3 implemented it.
+
+**Outcome:** Planning time dropped from 4 hours to 15 minutes. Estimates improved from ±50% to ±20% accuracy. Implementation from plan: 1.5 hours vs 10 hours.
 
 ---
 
-# Phase 5: When to Upgrade to Full SDLC
+### Use Case 3: Security Review at Scale
 
-*Signs you've outgrown quick wins and need Gen-4 transformation*
+**The Problem:** A team generating 40 PRs/month spent 2-4 hours per review. A race condition in token refresh logic slipped through manual review and caused a production incident.
 
----
+**The Solution:** Phase 4 code review agent catches security risks, race conditions, and edge cases in 5 minutes per PR. Human reviewer reads agent analysis (15 min) instead of entire diff (3 hours).
 
-## The Inflection Point
-
-Phases 1-4 work brilliantly—until they don't. Here are the signals that you're ready for full SDLC transformation:
-
-### Signal 1: Repository Chaos
-```
-❌ Symptom: Agents touching 3-5 repos per feature
-❌ Impact: Coordination overhead negates velocity gains
-✅ Solution: Monorepo consolidation (agentic-sdlc Part 1)
-```
-
-### Signal 2: CI Bottleneck
-```
-❌ Symptom: CI queue time > 60 minutes
-❌ Impact: Agents wait, humans wait, nobody ships
-✅ Solution: Trust factory CI (agentic-sdlc Part 3)
-```
-
-### Signal 3: Review Overwhelm
-```
-❌ Symptom: 50+ PRs open, 10+ days to review
-❌ Impact: Agents productive, humans drowning
-✅ Solution: Outcome-based PR workflows (agentic-sdlc Part 2)
-```
-
-### Signal 4: Test Flakiness
-```
-❌ Symptom: >10% flaky test rate
-❌ Impact: Agents blocked on false failures
-✅ Solution: Hermetic builds, deterministic signal (agentic-sdlc Part 3)
-```
-
-### Signal 5: Manual Governance
-```
-❌ Symptom: Compliance still requires human review
-❌ Impact: Throughput limited by manual gates
-✅ Solution: Automated evidence bundles (agentic-sdlc Parts 2 & 3)
-```
+**Outcome:** Review time: 3 hours → 20 minutes. The same race condition pattern was flagged automatically in the next PR. Zero security incidents in following quarter.
 
 ---
 
-## The Upgrade Path
+## ✅ What You Can Do Today
 
-Once you hit these limits, it's time to graduate:
+**Immediate Actions (15 minutes):**
+- [ ] Review the 4 workflow files in this talk's repository directory
+- [ ] Identify which of your repositories would benefit most (highest issue volume)
+- [ ] Check prerequisites: GitHub Actions enabled, Copilot license active
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                        THE UPGRADE PATH TO GEN-4 SDLC                            │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│   PHASE 1-4 (Quick Wins)          →    PHASE 5 (Full SDLC)                      │
-│   ──────────────────────                ────────────────────                     │
-│                                                                                  │
-│   ✓ Issue → PR automation                ✓ Monorepo with module boundaries      │
-│   ✓ Agent-generated code                 ✓ Feature-scale PRs (500-2000 lines)   │
-│   ✓ Code review assistance               ✓ Intent-based reviews                 │
-│   ~ Manual coordination                   ✓ Atomic merges                        │
-│   ~ Traditional CI (slow)                 ✓ CI as trust factory (<10 min)       │
-│   ~ Human-scale processes                 ✓ Automated compliance gates           │
-│                                                                                  │
-│   THROUGHPUT: 5-10 features/week    →    THROUGHPUT: 10-15 features/day         │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
-```
+**Short-Term Implementation (2-3 hours):**
+- [ ] Copy [`1-issue-triage.yml`](1-issue-triage.yml) to your repo's `.github/workflows/`
+- [ ] Create externalized prompt templates in `.github/prompts/`
+- [ ] Configure `COPILOT_GITHUB_TOKEN` secret with appropriate scopes
+- [ ] Create a test issue and verify the triage workflow runs
 
----
+**Advanced Exploration (1-2 weeks):**
+- [ ] Add Phases 2-4 progressively (one per week)
+- [ ] Customize prompt templates for your team's coding standards
+- [ ] Track metrics: triage time, plan accuracy, review speed
+- [ ] Monitor for [Phase 5 graduation signals](#phase-5-when-to-graduate-to-full-sdlc)
 
-## Migration Strategy
-
-### Month 1: Assessment & Planning
-- Audit current repos: which need consolidation?
-- Measure baseline: PR count, CI time, review time
-- Identify first candidates for monorepo migration
-
-### Month 2: Repository Consolidation
-- Migrate related repos into monorepo
-- Establish module boundaries
-- Implement affected-only CI
-- Read: [Agentic SDLC Part 1: Repository Topology](../agentic-sdlc/#part-1-repository-topology)
-
-### Month 3: PR Workflow Evolution
-- Shift to intent-based reviews
-- Implement evidence bundles
-- Automate compliance attestations
-- Read: [Agentic SDLC Part 2: PR Workflows](../agentic-sdlc/#part-2-pr-workflows)
-
-### Month 4-6: CI Trust Factory
-- Optimize CI to <10 minute cycles
-- Eliminate flaky tests (quarantine or fix)
-- Add context-aware compliance validation
-- Implement hermetic builds
-- Read: [Agentic SDLC Part 3: Trust Manufacturing](../agentic-sdlc/#part-3-trust-manufacturing-ci-as-factory)
-
----
-
-## Graduation Criteria
-
-You're ready for full Gen-4 SDLC when:
-
-| Criterion | Description | How to Measure |
-|-----------|-------------|----------------|
-| **Agent velocity** | >10 PRs/week from agents | GitHub Insights |
-| **Human bottleneck** | Review queue >5 days | PR aging reports |
-| **Multi-repo friction** | >30% of PRs touch 2+ repos | PR analysis |
-| **CI capacity** | Queue time >30 min peak | Actions metrics |
-| **Executive buy-in** | Leadership committed to transformation | Meeting outcomes |
-
----
-
-# Putting It All Together
-
-*The complete journey from "assign to copilot" to Gen-4 SDLC*
-
----
-
-## The Timeline
-
-**Week 1-2: Phase 1 (Issue Triage)**
-- Setup: 2-3 hours
-- Value: 6x faster triage, 10x better duplicate detection
-- Risk: None (agents suggest, humans decide)
-
-**Week 3-4: Phase 2 (Execution Planning)**
-- Setup: 1-2 hours
-- Value: 8x faster planning, better estimates
-- Risk: Low (humans approve plans)
-
-**Week 5-8: Phase 3 (Code Generation)**
-- Setup: 0 hours (already enabled)
-- Value: 10x code velocity
-- Risk: Medium (mitigated by code review)
-
-**Week 9-12: Phase 4 (Code Review)**
-- Setup: 1-2 hours
-- Value: 12x review speed, fewer bugs
-- Risk: Low (agents assist, humans approve)
-
-**Month 4-6: Phase 5 (Full SDLC)**
-- Setup: 3-6 months
-- Value: 100x throughput at scale
-- Risk: High (organizational transformation)
+**Next Steps After Completion:**
+1. ✅ Complete Phase 1 deployment and validate for 1-2 weeks
+2. 📖 Review [Agentic SDLC](../agentic-sdlc/) for full transformation planning
+3. 📊 Build ROI dashboard from metrics to justify expansion
+4. 🚀 Present results to leadership using [Agentic Delivery](../../exec-talks/agentic-delivery/) framing
 
 ---
 
 ## Expected ROI by Phase
 
-For a 50-person engineering team:
+For a team processing 50 issues/month:
 
-| Phase | Monthly Savings | Annual Savings | Cumulative Annual |
-|-------|-----------------|----------------|-------------------|
-| **Phase 1** | $2,000 | $24,000 | $24,000 |
-| **Phase 2** | $7,000 | $84,000 | $108,000 |
-| **Phase 3** | $17,000 | $204,000 | $312,000 |
-| **Phase 4** | $10,000 | $120,000 | $432,000 |
-| **Phase 5** | $150,000 | $1,800,000 | $2,232,000 |
+| Phase | Setup Time | Monthly Savings | Annual Savings |
+|-------|-----------|-----------------|----------------|
+| **Phase 1: Intake** | 2-3 hours | $2,000 | $24,000 |
+| **Phase 2: Planning** | 2-3 hours | $7,000 | $84,000 |
+| **Phase 3: Coding** | 0 hours | $17,000 | $204,000 |
+| **Phase 4: Review** | 1-2 hours | $10,000 | $120,000 |
+| **Combined Phases 1-4** | ~8 hours | **$36,000** | **$432,000** |
 
-**Note:** Phase 5 requires significant upfront investment ($800K-1.6M) with 12-18 month payback.
-
----
-
-## Common Pitfalls
-
-### 1. Skipping to Phase 5
-❌ **Don't:** "Let's go straight to full SDLC transformation"
-✅ **Do:** Prove value with Phases 1-4 first, build momentum
-
-### 2. Staying in Pilot Mode
-❌ **Don't:** "Let's pilot issue triage for 6 months"
-✅ **Do:** Deploy to all repos after 2-week validation
-
-### 3. Ignoring the Limits
-❌ **Don't:** Scale to 100 PRs/day without upgrading CI
-✅ **Do:** Graduate to Phase 5 when hitting constraints
-
-### 4. Manual Review at Machine Speed
-❌ **Don't:** Line-by-line review every agent PR
-✅ **Do:** Trust code review agent, validate outcomes
+*Based on $100/hour developer cost. Phase 5 (full SDLC) adds $1.8M/year but requires 3-6 month investment.*
 
 ---
 
-## Resources
+## Related Patterns
 
-**Getting Started:**
-- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [Copilot for Pull Requests](https://github.com/features/copilot/pull-requests)
-- Example: [`.github/workflows/assign-copilot.yml`](../../.github/workflows/assign-copilot.yml)
+### Complementary Features
 
-**When Ready for Phase 5:**
-- [Agentic SDLC (Complete Guide)](../agentic-sdlc/) — Full Gen-4 transformation
-- [Decision Guide](../DECISION-GUIDE.md) — Find the right talk for your needs
+- **[Agentic SDLC](../agentic-sdlc/)** — When you graduate beyond Phases 1-4: repository topology, PR workflows, CI trust factory
+- **[Agent Teams](../agent-teams/)** — Specialized agent patterns for complex multi-agent coordination
+- **[Copilot Hooks](../copilot-hooks/)** — Governance and control mechanisms for agent behavior
 
-**Related Topics:**
-- [Agent Teams](../agent-teams/) — Specialized agent patterns
-- [Copilot Hooks](../copilot-hooks/) — Governance and control
-- [Enterprise Patterns](../enterprise-patterns/) — Organization-wide adoption
+### Decision Flow
 
-**Executive Context:**
-- [Agentic Delivery](../../exec-talks/agentic-delivery/) — Strategic framing
-- [Agentic Economics](../../exec-talks/agentic-economics/) — ROI calculations
-- [Agentic Labor](../../exec-talks/agentic-labor/) — Workforce implications
+**If this talk doesn't fit your needs:**
 
----
+```
+Q: What's your actual goal?
+├─ Full SDLC transformation → See: Agentic SDLC
+├─ Interactive dev sessions → See: Agentic Sessions
+├─ Organization-wide adoption → See: Enterprise Patterns
+└─ Executive framing → See: Agentic Delivery (exec-talks)
+```
 
-## Next Steps
-
-### If You're Just Starting
-1. Read Phase 1 in detail
-2. Set up issue triage workflow (2-3 hours)
-3. Watch it work for 1-2 weeks
-4. Add Phase 2 when comfortable
-
-### If You're Already Using Copilot
-1. Assess which phases you have
-2. Identify gaps (especially code review)
-3. Add missing phases incrementally
-4. Monitor for Phase 5 signals
-
-### If You're Ready for Full SDLC
-1. Review your graduation criteria
-2. Get executive sponsorship
-3. Start with [Agentic SDLC Part 1](../agentic-sdlc/#part-1-repository-topology)
-4. Plan 6-month transformation roadmap
+See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 ---
 
-## Final Thought
+## 📚 Official Documentation
 
-The journey to agentic SDLC doesn't require ripping everything out and starting over. It starts with a simple workflow:
+**Primary Documentation:**
+- 📖 **[GitHub Copilot Documentation](https://docs.github.com/en/copilot)** — Core concepts, getting started guide, and overview
+- 📖 **[GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)** — Triggers, jobs, steps, and permissions
+- 📖 **[Copilot for Pull Requests](https://github.com/features/copilot/pull-requests)** — Agent-assisted PR workflows and review
 
-> **"Just assign it to Copilot."**
+**Additional Resources:**
+- 🎓 [GitHub Copilot CLI Guide](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line) — CLI installation and programmatic mode
+- 🔧 [GitHub Actions Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) — Managing tokens and authentication
 
-That one action—automating issue triage—proves the value of agents. It builds confidence. It shows ROI. And it creates demand for more.
-
-From there, you add planning. Then execution. Then code review. Each phase compounds the previous one.
-
-And when you hit the limits—when coordination overhead exceeds automation gains—you're ready for the full transformation. But by then, you'll have proof of value, executive support, and a team that understands how to work with agents.
-
-**You don't need to start with Gen-4 SDLC. You just need to start.**
+**GitHub Resources:**
+- 🐙 [Workflow Files in This Repository](.) — Working reference implementations
+- 📋 [GitHub Copilot Changelog](https://github.blog/changelog/label/copilot/) — Latest updates and capabilities
 
 ---
 
-*From "assign to copilot" to full agentic delivery—one phase at a time.*
+## 🎭 Behind the Scenes
 
-**Barton Mathis**
+### Label-Based State Machine
+
+The 4-workflow architecture uses GitHub issue labels as a state machine:
+
+| Label | Set By | Triggers | Meaning |
+|-------|--------|----------|---------|
+| `status:triaged` | Workflow 1 | Workflow 2 | Issue analyzed, ready for planning |
+| `status:planned` | Workflow 2 | Workflow 3 (via `/approve-plan`) | Plan generated, awaiting human approval |
+| `status:in-review` | Workflow 3 | Workflow 4 | Implementation complete, PR created |
+| `status:reviewed` | Workflow 4 | Human approval | Automated review complete |
+
+**Why labels, not direct triggers?** Labels are observable (anyone can see pipeline state), debuggable (re-add a label to re-trigger), and human-controllable (remove a label to stop the pipeline).
+
+### Copilot CLI Programmatic Mode
+
+All workflows use `copilot -p` (programmatic mode) — the `-p` flag is **critical** for non-interactive CI/CD execution:
+
+```bash
+copilot -p @instructions.txt \
+  --allow-tool 'shell(gh)' \
+  --allow-tool 'shell(git)' > output.txt
+```
+
+- `@file` syntax loads external instructions
+- `--allow-tool` grants permission for specific shell commands
+- Output redirection captures structured responses for parsing
+- `COPILOT_GITHUB_TOKEN` authenticates via environment variable
+
+**Why This Matters:** Understanding the programmatic mode is essential for debugging workflow failures. Common issues: missing `-p` flag (opens interactive mode), insufficient token scopes, and prompt template variable substitution errors.
+
+### Why Externalized Prompts Matter
+
+Embedding instructions in YAML creates a maintenance nightmare — you can't diff prompt changes easily, non-technical stakeholders can't review them, and iterating requires workflow file changes that may trigger unrelated CI.
+
+Externalized prompts in `.github/prompts/*.md` solve all three problems. The `sed` variable substitution pattern is intentionally simple — no templating engine required, works in any shell, and the substitution is visible in workflow logs for debugging.

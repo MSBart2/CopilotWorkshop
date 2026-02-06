@@ -817,7 +817,7 @@ jq -n \
 ```bash
 # Sum costs by user for current month
 cat logs/metrics.jsonl | jq -s '
-  group_by(.user) | 
+  group_by(.user) |
   map({user: .[0].user, totalCost: (map(.estimatedCost) | add)})
 '
 ```
@@ -842,7 +842,7 @@ COMMAND=$(echo "$INPUT" | jq -r '.toolArgs.command // empty')
 # Check for security violation
 if echo "$COMMAND" | grep -qE "rm -rf|sudo|DROP TABLE"; then
   WEBHOOK_URL="$SLACK_WEBHOOK_URL"  # Set in hook env
-  
+
   curl -X POST "$WEBHOOK_URL" \
     -H 'Content-Type: application/json' \
     -d "{
@@ -857,7 +857,7 @@ if echo "$COMMAND" | grep -qE "rm -rf|sudo|DROP TABLE"; then
         }
       ]
     }"
-  
+
   echo '{"permissionDecision":"deny","permissionDecisionReason":"Security policy violation - team alerted"}'
   exit 0
 fi
@@ -904,7 +904,7 @@ ERROR_MSG=$(echo "$INPUT" | jq -r '.error.message')
 # Create incident for critical errors
 if echo "$ERROR_NAME" | grep -qE "FatalError|SecurityViolation|DataLoss"; then
   JIRA_API="$JIRA_BASE_URL/rest/api/3/issue"
-  
+
   curl -X POST "$JIRA_API" \
     -H "Authorization: Bearer $JIRA_TOKEN" \
     -H "Content-Type: application/json" \
@@ -996,7 +996,7 @@ case "$EVENT" in
       violations: 0
     }' > "$SESSION_STATE"
     ;;
-  
+
   preToolUse)
     # Track tool usage
     if [ -f "$SESSION_STATE" ]; then
@@ -1004,7 +1004,7 @@ case "$EVENT" in
       mv "${SESSION_STATE}.tmp" "$SESSION_STATE"
     fi
     ;;
-  
+
   sessionEnd)
     # Generate summary report
     if [ -f "$SESSION_STATE" ]; then

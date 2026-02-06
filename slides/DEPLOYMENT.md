@@ -98,9 +98,22 @@ The workflow (`.github/workflows/deploy-slides.yml`) does the following:
    - Finds all `.md` files (excluding README and GLOBAL-LAYERS)
    - Builds each as a Slidev static site
    - Sets proper base paths for each presentation
-6. **Copy Index**: Moves `index.html` to the dist root
+6. **Copy Index & 404 Handler**: Moves `index.html` and `404.html` to dist root
 7. **Upload Artifact**: Packages everything for Pages
 8. **Deploy**: Publishes to GitHub Pages
+
+### 404.html - Direct Link & Refresh Fix
+
+The `404.html` file is crucial for SPA routing on GitHub Pages:
+
+- **Problem**: Direct links like `/tech-talks/subagents/1` or browser refreshes return 404
+- **Solution**: GitHub Pages serves `404.html` for missing paths, which redirects to the correct Slidev presentation
+- **How it works**: Parses the URL path and redirects to the appropriate presentation's index, preserving slide numbers
+
+This enables:
+- ✅ Direct links to specific slides (e.g., `/tech-talks/subagents/1`)
+- ✅ Browser refresh on any slide without losing your place
+- ✅ Bookmarking and sharing specific slides
 
 ### Build Script
 
@@ -222,7 +235,38 @@ No secrets or credentials are required.
 
 ---
 
-## 📚 Additional Resources
+## � Troubleshooting
+
+### Direct Links or Refreshes Return 404
+
+**Symptom**: Links like `https://username.github.io/repo/tech-talks/subagents/1` show 404, or refreshing a slide returns 404.
+
+**Cause**: GitHub Pages doesn't have server-side routing - it looks for physical files at the URL path.
+
+**Solution**: The `404.html` file handles this by redirecting to the correct presentation. Ensure:
+1. `404.html` exists in the `slides/` directory
+2. The build script copies it to `dist/404.html`
+3. The file is deployed to GitHub Pages
+
+**Verify**: After deployment, check `https://username.github.io/repo/404.html` exists.
+
+### Slides Not Updating
+
+1. Check the Actions tab for deployment status
+2. Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
+3. Verify files were changed in `slides/**` to trigger the workflow
+4. Check if `gh-pages` branch was updated
+
+### Build Failures
+
+1. Run locally: `cd slides && npm run build-all`
+2. Check for syntax errors in slide markdown
+3. Verify all dependencies are installed
+4. Review build logs in GitHub Actions for specific errors
+
+---
+
+## �📚 Additional Resources
 
 - **Slidev Documentation**: https://sli.dev/
 - **GitHub Pages Docs**: https://docs.github.com/en/pages

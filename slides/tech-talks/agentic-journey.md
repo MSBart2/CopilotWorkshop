@@ -5,33 +5,112 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## The Journey to Agentic SDLC
-  From "Assign to Copilot" to Full AI-Native Delivery
+  ## The Agentic Journey: Incremental Path from Issue to PR Automation
+  CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
-title: The Journey to Agentic SDLC
+title: The Agentic Journey
 module: tech-talks/agentic-journey
 mdc: true
 ---
 
-<div class="flex flex-col items-center justify-center h-full">
-<div class="flex items-center gap-8 mb-8">
-<img src="./sdp-logo.png" class="h-32 w-32" alt="SDP Logo" />
-<div>
-<h1 class="text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent !pb-2 !leading-tight">
-The Journey to Agentic SDLC
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"></div>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<div class="absolute inset-0 blur-2xl opacity-50">
+<img src="./sdp-logo.png" class="w-64" alt="" />
+</div>
+<img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+</div>
+<h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10">
+The Agentic Journey
 </h1>
-<p class="text-2xl mt-4 text-gray-300">
-From "Assign to Copilot" to Full AI-Native Delivery
-</p>
+<div class="mt-4 relative z-10">
+<span class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-cyan-500/25">
+Incremental Path from Issue to PR Automation
+</span>
+</div>
+<div class="mt-8 text-lg opacity-70 relative z-10">4-Workflow Issue Lifecycle with Historical Context Planning</div>
+<div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+<span class="text-sm opacity-50">Tech Talk · 45 minutes</span>
+</div>
+
+---
+layout: default
+---
+
+# 🎯 The Question This Talk Answers
+
+<div class="mt-12 flex justify-center">
+<div class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/50 p-10 rounded-xl max-w-3xl">
+<div class="text-3xl font-bold text-white text-center leading-relaxed">
+"How do I start getting value from GitHub Copilot agents without rewiring my entire SDLC?"
 </div>
 </div>
-<div class="text-xl text-gray-400">
-⏰ 45-minute technical deep dive
 </div>
-<div class="text-lg text-gray-500 mt-4">
-Barton Mathis
+
+<div class="grid grid-cols-2 gap-6 mt-10">
+<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+<div class="font-bold text-red-400 mb-2">❌ "All In" Approach</div>
+<div class="text-sm text-gray-300">Restructure repos, rewrite CI/CD → everything breaks, rollback</div>
+</div>
+<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+<div class="font-bold text-red-400 mb-2">❌ "Experiment Forever"</div>
+<div class="text-sm text-gray-300">Pilot with one team, debate results → still in pilot after a year</div>
+</div>
+</div>
+
+<div class="mt-6 p-4 bg-gradient-to-r from-green-600/80 to-blue-600/80 rounded-lg text-center">
+<span class="text-white font-bold text-xl">✅ The Journey: Start small, prove value, scale incrementally</span>
+</div>
+
+---
+layout: default
+---
+
+# 📖 Navigate by Phase
+
+<div class="grid grid-cols-3 gap-4 mt-6">
+<div @click="$nav.go(9)" class="cursor-pointer p-5 bg-cyan-900/40 rounded-lg border-2 border-cyan-500 hover:bg-cyan-900/60 transition-all no-underline">
+<div class="text-2xl mb-2">📥</div>
+<div class="text-lg font-bold text-cyan-300">Phase 1</div>
+<div class="text-sm text-gray-300 mt-1">Agentic Intake</div>
+<div class="text-xs text-gray-400 mt-2">20-30 min → 3 min per issue</div>
+</div>
+
+<div @click="$nav.go(12)" class="cursor-pointer p-5 bg-blue-900/40 rounded-lg border-2 border-blue-500 hover:bg-blue-900/60 transition-all no-underline">
+<div class="text-2xl mb-2">🗺️</div>
+<div class="text-lg font-bold text-blue-300">Phase 2</div>
+<div class="text-sm text-gray-300 mt-1">Agentic Planning</div>
+<div class="text-xs text-gray-400 mt-2">4 hours → 15 min with history</div>
+</div>
+
+<div @click="$nav.go(15)" class="cursor-pointer p-5 bg-indigo-900/40 rounded-lg border-2 border-indigo-500 hover:bg-indigo-900/60 transition-all no-underline">
+<div class="text-2xl mb-2">⚡</div>
+<div class="text-lg font-bold text-indigo-300">Phase 3</div>
+<div class="text-sm text-gray-300 mt-1">Agentic Coding</div>
+<div class="text-xs text-gray-400 mt-2">Already enabled → 6-10x faster</div>
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-4 mt-4 px-16">
+<div @click="$nav.go(17)" class="cursor-pointer p-5 bg-purple-900/40 rounded-lg border-2 border-purple-500 hover:bg-purple-900/60 transition-all no-underline">
+<div class="text-2xl mb-2">🔍</div>
+<div class="text-lg font-bold text-purple-300">Phase 4</div>
+<div class="text-sm text-gray-300 mt-1">Code Review</div>
+<div class="text-xs text-gray-400 mt-2">2-4 hours → 20 min per PR</div>
+</div>
+
+<div @click="$nav.go(20)" class="cursor-pointer p-5 bg-pink-900/40 rounded-lg border-2 border-pink-500 hover:bg-pink-900/60 transition-all no-underline">
+<div class="text-2xl mb-2">🚀</div>
+<div class="text-lg font-bold text-pink-300">Phase 5</div>
+<div class="text-sm text-gray-300 mt-1">Graduate to Full SDLC</div>
+<div class="text-xs text-gray-400 mt-2">When quick wins hit their limits</div>
 </div>
 </div>
 
@@ -39,73 +118,29 @@ Barton Mathis
 layout: default
 ---
 
-# The Easy Button
+# The Problem
 
-<div class="grid grid-cols-2 gap-8">
-<div>
+<div class="grid grid-cols-2 gap-6 mt-6">
 
-## The Overwhelming Vision
-
-You've heard about Gen-4 SDLC:
-- 🏗️ Agentic repositories
-- 🔄 PR workflows
-- 🏭 CI trust factories
-- 🤖 Full automation
-
-**It sounds transformative... and overwhelming.**
-
-</div>
-<div>
-
-## The Simple Start
-
-<div class="p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
-
-### Good News: Start Simple
-
-> **"Just assign the issue to Copilot."**
-
-**The agent will:**
-- ✅ Research the problem
-- ✅ Plan the solution
-- ✅ Implement the code
-- ✅ Create PR with tests
-- ✅ Respond to feedback
-
+<div class="bg-red-900/20 rounded-lg p-5 border-l-4 border-red-500">
+<div class="font-bold text-red-300 text-lg mb-2">Manual Issue Investigation</div>
+<div class="text-sm text-gray-300">Every issue requires duplicate detection, classification, priority assessment, routing — <span class="text-red-400 font-bold">20-30 min each</span></div>
 </div>
 
-**This talk:** The incremental journey from first assignment to full SDLC transformation.
-
-</div>
-</div>
-
----
-layout: default
----
-
-# The 5-Phase Journey
-
-<div class="text-sm">
-
-| Phase | What Happens | Time Investment | Value Unlocked |
-|-------|--------------|-----------------|----------------|
-| **1: Issue Research & Triage** | Agents analyze, gather context, check duplicates | 2-3 hours setup | **6x faster triage** |
-| **2: Execution Planning** | Agents research codebase, propose plans | 1-2 hours setup | **8x faster planning** |
-| **3: Code Generation** | Agents implement, test, create PRs | Already enabled | **10x code velocity** |
-| **4: Code Review** | Agents analyze changes, surface risks | 1-2 hours setup | **12x review speed** |
-| **5: Full SDLC** | Complete Gen-4 transformation | 3-6 months | **100x throughput** |
-
+<div class="bg-red-900/20 rounded-lg p-5 border-l-4 border-red-500">
+<div class="font-bold text-red-300 text-lg mb-2">Expensive Planning</div>
+<div class="text-sm text-gray-300">Research codebase, identify files, estimate effort — without learning from past work — <span class="text-red-400 font-bold">2-4 hours each</span></div>
 </div>
 
-<div class="mt-8 p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
+<div class="bg-red-900/20 rounded-lg p-5 border-l-4 border-red-500">
+<div class="font-bold text-red-300 text-lg mb-2">Code Review Bottleneck</div>
+<div class="text-sm text-gray-300">Agent code arrives faster than humans can review — <span class="text-red-400 font-bold">500-2000 lines, 10-15x volume</span></div>
+</div>
 
-### 💡 The Strategy
-
-**Start with Phases 1-4.** Graduate to Phase 5 when you hit limits.
-
-- Week 1-2: Prove value quickly
-- Month 1-2: Scale incrementally  
-- Month 3-6: Transform strategically
+<div class="bg-red-900/20 rounded-lg p-5 border-l-4 border-red-500">
+<div class="font-bold text-red-300 text-lg mb-2">Adoption Paralysis</div>
+<div class="text-sm text-gray-300">"All in" fails fast, "experiment forever" stalls — <span class="text-red-400 font-bold">neither delivers ROI</span></div>
+</div>
 
 </div>
 
@@ -113,42 +148,43 @@ layout: default
 layout: default
 ---
 
-# Why This Path Works (1/2)
+# The Solution: 4-Workflow Issue Lifecycle
 
-<div class="grid grid-cols-2 gap-8">
-<div>
+<div class="text-sm mt-4">
 
-## ❌ The "All In" Approach
+<div class="bg-slate-800/50 p-4 rounded-lg border border-cyan-500/30">
 
 ```
-Week 1: Read about Gen-4 SDLC
-Week 2: Restructure all repos
-Week 3: Rewrite CI/CD from scratch
-Week 4: Change team processes
-Week 5: Deploy agents
-Week 6: Everything breaks, rollback
+Issue Created
+  ↓ (triggers)
+┌────────────────────────────────────────────┐
+│ 1-issue-triage.yml    → status:triaged     │
+└────────────────────────────────────────────┘
+  ↓ (label triggers)
+┌────────────────────────────────────────────┐
+│ 2-issue-planning.yml  → status:planned     │
+└────────────────────────────────────────────┘
+  ↓ (/approve-plan comment)
+┌────────────────────────────────────────────┐
+│ 3-issue-execution.yml → status:in-review   │
+└────────────────────────────────────────────┘
+  ↓ (PR triggers)
+┌────────────────────────────────────────────┐
+│ 4-pr-review.yml       → status:reviewed    │
+└────────────────────────────────────────────┘
+  ↓ (human approval)
 ```
 
-<div class="text-red-400 font-bold mt-4">
-Result: Transformation failure
 </div>
 
 </div>
-<div>
 
-## ❌ The "Experiment Forever" Approach
-
-```
-Quarter 1: Pilot with one team
-Quarter 2: Evaluate, debate
-Quarter 3: Try different team
-Quarter 4: Still in pilot mode
-```
-
-<div class="text-red-400 font-bold mt-4">
-Result: Analysis paralysis
+<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+<div class="bg-cyan-900/20 p-3 rounded border border-cyan-500/30">
+<span class="font-bold text-cyan-300">Label-Based State Machine:</span> Each workflow adds a label that triggers the next
 </div>
-
+<div class="bg-blue-900/20 p-3 rounded border border-blue-500/30">
+<span class="font-bold text-blue-300">Externalized Prompts:</span> Agent instructions in <code>.github/prompts/*.md</code>, not in YAML
 </div>
 </div>
 
@@ -156,625 +192,62 @@ Result: Analysis paralysis
 layout: default
 ---
 
-# Why This Path Works (2/2)
+# 📦 Key Artifacts
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6 mt-6">
+
 <div>
+<div class="font-bold text-cyan-300 text-lg mb-4">Primary Workflow Files</div>
+<div class="space-y-3">
+<div class="bg-slate-800/50 p-3 rounded border-l-4 border-cyan-500 text-sm">
+<code class="text-cyan-400">1-issue-triage.yml</code>
+<div class="text-xs text-gray-400 mt-1">Duplicate detection, classification, routing</div>
+</div>
+<div class="bg-slate-800/50 p-3 rounded border-l-4 border-blue-500 text-sm">
+<code class="text-blue-400">2-issue-planning.yml</code>
+<div class="text-xs text-gray-400 mt-1">Historical context, codebase analysis, plans</div>
+</div>
+<div class="bg-slate-800/50 p-3 rounded border-l-4 border-indigo-500 text-sm">
+<code class="text-indigo-400">3-issue-execution.yml</code>
+<div class="text-xs text-gray-400 mt-1">Implementation from plan, tests, PR creation</div>
+</div>
+<div class="bg-slate-800/50 p-3 rounded border-l-4 border-purple-500 text-sm">
+<code class="text-purple-400">4-pr-review.yml</code>
+<div class="text-xs text-gray-400 mt-1">Security, logic, performance, test coverage</div>
+</div>
+</div>
+</div>
 
-## ✅ The Journey Approach
+<div>
+<div class="font-bold text-blue-300 text-lg mb-4">Architecture</div>
+<div class="bg-slate-800/50 p-4 rounded border border-blue-500/30 text-xs">
 
 ```
-Week 1: Enable issue triage agents
-Week 2: See 6x improvement, expand
-Week 3: Add execution planning
-Week 4: See 8x improvement, expand
-Month 2: Full issue-to-PR automation
-Month 3: Identify limits
-Month 6: Full SDLC with proof
-```
-
-<div class="text-green-400 font-bold mt-4">
-Result: Value-driven transformation
-</div>
-
-</div>
-<div>
-
-<div class="p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
-
-### 💡 The Insight
-
-**Start with:**
-- Highest ROI
-- Lowest risk  
-- Fastest proof
-
-**Build momentum.**
-
-**Scale when constrained.**
-
-</div>
-
-</div>
-</div>
-
----
-layout: section
----
-
-# Phase 1: Issue Research & Triage
-
-*The "Easy Button" — Agents analyze and route issues automatically*
-
----
-layout: default
----
-
-# Phase 1: The Problem
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Manual Triage is Expensive
-
-Every issue requires investigation:
-- 🔍 Bug or feature request?
-- 🔁 Reported before?
-- 👥 Which team owns it?
-- ⚡ What's the priority?
-- 📂 Where in the codebase?
-
-</div>
-<div>
-
-<div class="p-6 rounded-lg bg-red-900/20 border border-red-500/30">
-
-### The Cost
-
-**Time cost:** 20-30 minutes per issue
-
-**Opportunity cost:** Developers context-switch away from feature work
-
-**At 50 issues/month:**
-- 25 hours of developer time
-- ~3 days of interruptions
-
-</div>
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 1: The Solution
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Issue Triage Agent
-
-An agent that automatically analyzes every new issue:
-
-### What It Does
-1. **Context Gathering** (2 min)
-   - Read issue, files, docs
-   - Find related issues
-
-2. **Duplicate Detection** (1 min)
-   - Check open/closed issues
-   - Find similar PRs
-
-3. **Routing & Labeling** (1 min)
-   - Suggest labels
-   - Route to team
-
-4. **Context Summary** (1 min)
-   - Generate summary
-   - Suggest approach
-
-</div>
-<div class="text-xs">
-
-```yaml
-# .github/workflows/1-issue-triage.yml
-name: Triage New Issues
-
-on:
-  issues:
-    types: [opened]
-
-jobs:
-  triage:
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      contents: read
-    steps:
-      - name: Analyze with Copilot
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          gh api POST /repos/${{ github.repository }}/issues/\
-            ${{ github.event.issue.number }}/assignees \
-            --input - <<< '{
-              "assignees": ["copilot-swe-agent[bot]"],
-              "agent_assignment": {
-                "target_repo": "${{ github.repository }}",
-                "base_branch": "main",
-                "task": "triage"
-              }
-            }'
+.github/
+├── workflows/
+│   ├── 1-issue-triage.yml
+│   ├── 2-issue-planning.yml
+│   ├── 3-issue-execution.yml
+│   └── 4-pr-review.yml
+└── prompts/
+    ├── triage-instructions.md
+    ├── planning-instructions.md
+    ├── implementation-instructions.md
+    └── review-instructions.md
 ```
 
 </div>
-</div>
-
----
-layout: default
----
-
-# Phase 1: Agent Output Example
-
-<div class="grid grid-cols-2 gap-8 text-sm">
-<div>
-
-### Duplicate Detection
-
-```
-🔍 Duplicate Analysis
-━━━━━━━━━━━━━━━━━━
-Potential duplicate: #2847 (closed 3 weeks ago)
-Similarity: 87%
-Resolution: Fixed in PR #2851, released in v2.4.1
-
-Recommendation: Close as duplicate, 
-ask reporter to upgrade
-```
-
-### Routing & Labeling
-
-```
-Agent suggests:
-• Labels: bug, authentication, high-priority
-• Assignee: @auth-team
-• Milestone: v2.5.0
-• Estimated effort: 3-5 hours
-```
-
-</div>
-<div>
-
-### Context Summary
-
-```
-📋 Issue Summary for Assignee
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-Affected files:
-- src/auth/oauth-handler.ts (lines 147-203)
-- src/middleware/session.ts (lines 89-102)
-
-Root cause hypothesis:
-Token refresh logic doesn't handle edge case 
-where refresh token expires during active session.
-
-Suggested approach:
-• Add exponential backoff retry in oauth-handler.ts
-• Update session middleware to detect expired tokens
-• Add integration test for token expiration
-```
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 1: Success Metrics
-
-<div class="text-sm">
-
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Time to first triage** | 30 min | <5 min | Faster routing |
-| **Duplicate issue rate** | 15% | <5% | Less wasted work |
-| **Correct initial routing** | 60% | >90% | Fewer bounces |
-| **Issues closed as duplicate** | 10% | <3% | Better detection |
-| **Context-gathering time** | 45 min | <10 min | Ready to code faster |
-
-</div>
-
-<div class="mt-8 grid grid-cols-2 gap-8">
-<div class="p-4 rounded-lg bg-red-900/20 border border-red-500/30">
-
-### Before: Manual (45 min wasted)
-
-Issue #4821: "Login fails on mobile Safari"
-- Developer reads → 15 min research
-- Digging through code → 20 min
-- Finding similar issues → 10 min
-- Realizes duplicate of #4203 (fixed 2 weeks ago)
-
-</div>
-<div class="p-4 rounded-lg bg-green-900/20 border border-green-500/30">
-
-### After: Agent (5 min total)
-
-- Agent analyzes → 3 min
-- Finds duplicate #4203 (88% similar)
-- Posts comment with fix/version
-- Auto-labels and closes
-- Human verifies → 2 min
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 1: ROI
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Investment
-
-**Setup time:** 2-3 hours (one-time)
-
-**Ongoing cost:** $0.05-0.15 per issue
-- ~$2/hour agent time
-- Very low operational cost
-
-</div>
-<div>
-
-## Returns
-
-**Time saved:** 25 minutes per issue (average)
-
-**At 50 issues/month:**
-- 20 hours saved/month
-- 2.5 developer days
-- $2,000/month savings ($100/hr rate)
-
-**Annual ROI:** ~24,000% on $100 investment
-
-</div>
-</div>
-
-<div class="mt-8 p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
-
-### 💡 Key Insight
-
-This is the **highest ROI, lowest risk** entry point. Perfect first step to prove agent value.
-
-</div>
-
----
-layout: section
----
-
-# Phase 2: Execution Planning
-
-*Agents research the codebase and generate implementation plans*
-
----
-layout: default
----
-
-# Phase 2: The Problem
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Planning is Time-Consuming
-
-After triage, someone needs to:
-- 📖 Understand requirements
-- 🔍 Research the codebase
-- 📂 Identify affected files
-- 🎯 Design solution approach
-- ⏱️ Estimate effort
-- 📋 Create implementation plan
-
-</div>
-<div>
-
-<div class="p-6 rounded-lg bg-red-900/20 border border-red-500/30">
-
-### The Cost
-
-**Time cost:** 2-4 hours for non-trivial features
-
-**Risk:** Incomplete research leads to mid-implementation surprises
-
-**Common issues:**
-- Missing dependencies discovered late
-- Edge cases found during coding
-- Estimates off by 2-3x
-
-</div>
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 2: The Solution (1/2)
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Planning Agent Workflow
-
-```
-Human creates issue
-  ↓
-Agent researches codebase (10 min)
-  ↓
-Agent generates execution plan:
-  • Affected files: 7 identified
-  • Dependencies: checked & clean
-  • Approach: detailed steps
-  • Effort: 8-12 hours
-  • Tests needed: specified
-  ↓
-Human reviews plan (5 min)
-  ↓
-Human approves or requests changes
-  ↓
-Agent begins implementation
-```
-
-</div>
-<div>
-
-## What Agent Researches
-
-### 1. Requirements (5 min)
-- Core requirements
-- Acceptance criteria
-- Constraints & edge cases
-
-### 2. Codebase (10 min)
-- Existing implementations
-- Similar features
-- Configuration files
-- Test patterns
-
-### 3. **Historical Context** ⭐ (5 min)
-- Similar past issues
-- Associated PRs
-- Implementation patterns
-- Lessons learned
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 2: The Solution (2/2) - Historical Context
-
-<div class="p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
-
-### 🎯 NEW Enhancement: Historical Issue Search
-
-Agent searches for similar past issues and their PRs to learn from history:
-
-</div>
-
-<div class="grid grid-cols-2 gap-8 mt-6 text-sm">
-<div>
-
-### What It Finds
-
-- ✅ Closed issues from last 6 months with similar keywords
-- ✅ PRs that resolved those issues
-- ✅ Implementation patterns from successful resolutions
-- ✅ Effort estimates and actual time spent
-- ✅ Common pitfalls and edge cases
-- ✅ Lessons learned from past work
-
-</div>
-<div>
-
-### Example Output
-
-```
-Historical Context:
-━━━━━━━━━━━━━━━━━━
-Issue #2847: "Add Google OAuth"
-→ PR #2851: 6 hours, 8 files
-→ Lesson: Token refresh edge case
-
-Issue #3104: "Add GitHub OAuth"  
-→ PR #3109: 5 hours, 7 files
-→ Lesson: Multi-tenant config needed
-```
-
-</div>
-</div>
-
-<div class="mt-6 p-4 rounded-lg bg-blue-900/20 border border-blue-500/30">
-
-### 💡 Impact
-
-Plans with historical context are **±20% accurate** vs **±50% without**.  
-**60% fewer mid-implementation surprises.**
-
-</div>
-
----
-layout: default
----
-
-# Phase 2: Generated Plan Example (1/2)
-
-<div class="text-xs">
-
-```markdown
-📋 EXECUTION PLAN: Add Microsoft OAuth Support
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-**Historical Context:**
-Based on analysis of similar past implementations:
-- Issue #2847 "Add Google OAuth" → PR #2851 (6 hours, 8 files)
-- Issue #3104 "Add GitHub OAuth" → PR #3109 (5 hours, 7 files)
-
-Key learnings applied to this plan:
-✓ Token refresh edge cases require explicit testing (from #2847)
-✓ Multi-tenant configuration needed for enterprise (from #3104)
-✓ Rate limiting should be considered from start (from #3104)
-
-**Affected Files:**
-1. src/auth/providers/microsoft-oauth.ts (new file)
-   - Extends OAuthHandler base class
-   - Implements MS-specific token exchange
-   
-2. src/auth/oauth-handler.ts (modify)
-   - Register Microsoft provider
-   - Add to provider factory
-   
-3. src/config/auth-config.ts (modify)
-   - Add MS_CLIENT_ID, MS_CLIENT_SECRET, MS_TENANT_ID
-```
-
-</div>
-
----
-layout: default
----
-
-# Phase 2: Generated Plan Example (2/2)
-
-<div class="text-xs">
-
-```markdown
-**Dependencies:**
-- Add: @azure/msal-node@^2.6.0 (security: clean, license: MIT)
-
-**Implementation Steps:**
-1. Add dependency and run security scan
-2. Create MicrosoftOAuthProvider class
-3. Implement token exchange logic
-4. Update configuration files
-5. Register provider in factory
-6. Write integration tests (including historical edge cases)
-7. Update documentation
-
-**Estimated Effort:** 6-8 hours
-(Based on historical data: Google OAuth took 6h, GitHub OAuth took 5h)
-
-**Risk Level:** Medium (new OAuth provider, tested pattern)
-**Rollback Plan:** Feature flag MS_OAUTH_ENABLED
-```
-
-</div>
-
-<div class="mt-6 p-4 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
-
-### 💡 Notice
-
-Historical context informs estimates, risks, and implementation approach.
-
-</div>
-
----
-layout: default
----
-
-# Phase 2: The 4-Workflow Architecture
-
-<div class="text-xs">
-
-Instead of monolithic workflow, use **4 specialized workflows** coordinated via labels:
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-<div>
-
-### Workflow 1: Issue Triage
-- **Trigger:** `issues.opened`
-- Check duplicates, gather context
-- Route to team
-- **Adds label:** `status:triaged`
-
-### Workflow 2: Execution Planning ⭐
-- **Trigger:** `issues.labeled` (status:triaged)
-- **NEW:** Search historical similar issues
-- **NEW:** View associated PRs
-- Research codebase, generate plan
-- **Adds label:** `status:planned`
-
-</div>
-<div>
-
-### Workflow 3: Code Execution
-- **Trigger:** `issue_comment` (/approve-plan)
-- Verify status:planned label
-- Implement approved plan
-- Create PR with evidence
-- **Adds label:** `status:in-review`
-
-### Workflow 4: PR Review
-- **Trigger:** `pull_request.opened`
-- Security & test analysis
-- Post comprehensive review
-- **Adds label:** `status:reviewed`
-
-</div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30 text-sm">
-
-**Label-Based State Machine:** `status:triaged` → `status:planned` → `status:in-review` → `status:reviewed`
-
-</div>
-
----
-layout: default
----
-
-# Phase 2: GitHub Copilot CLI with -p Flag
-
-<div class="p-6 rounded-lg bg-yellow-900/20 border border-yellow-500/30 mb-6">
-
-### ⚠️ Critical: Use Programmatic Mode
-
-All workflows use the `-p` flag for **non-interactive** execution in CI/CD.
-
-</div>
-
-<div class="text-xs">
+<div class="mt-4 bg-cyan-900/20 p-3 rounded border border-cyan-500/30 text-xs">
+<span class="font-bold text-cyan-300">Usage:</span>
 
 ```bash
-# Example from Workflow 2 (Planning)
-copilot -p "Generate execution plan for this issue:
-1. Search for similar historical issues from last 6 months
-2. For each similar issue, retrieve the associated PR
-3. Analyze implementation patterns and lessons learned
-4. Research current codebase for affected files
-5. Generate detailed implementation plan with historical context
-..." \
-  --allow-tool 'shell(gh)' \
-  --allow-tool 'shell(git)' \
-  --allow-tool 'shell(find)' \
-  --allow-tool 'shell(grep)' > plan_result.txt
+sed -e "s|{{VAR}}|${VALUE}|g" \
+  .github/prompts/template.md > tmp.txt
+copilot -p @tmp.txt
 ```
 
-**Key points:**
-- ✅ **`-p` flag is REQUIRED** for automated workflows
-- ✅ **`--allow-tool`** grants permission for specific shell commands
-- ✅ **Output redirection** captures response for parsing
-- ✅ **`COPILOT_GITHUB_TOKEN`** passed as environment variable
+</div>
+</div>
 
 </div>
 
@@ -782,628 +255,473 @@ copilot -p "Generate execution plan for this issue:
 layout: default
 ---
 
-# Phase 2: Success Metrics
+# 🎯 Mental Model Shift
 
+<div class="grid grid-cols-3 gap-4 mt-6 text-sm">
+
+<div class="space-y-3">
+<div class="font-bold text-green-300 text-lg mb-2">✅ Move Toward</div>
+<div class="bg-green-900/20 p-3 rounded border-l-4 border-green-500">
+<div class="font-bold text-green-300">Label-Driven Orchestration</div>
+<div class="text-xs text-gray-300 mt-1">Labels as state transitions between phases</div>
+</div>
+<div class="bg-green-900/20 p-3 rounded border-l-4 border-green-500">
+<div class="font-bold text-green-300">Externalized Prompts</div>
+<div class="text-xs text-gray-300 mt-1">Markdown files, not embedded YAML</div>
+</div>
+<div class="bg-green-900/20 p-3 rounded border-l-4 border-green-500">
+<div class="font-bold text-green-300">Historical Context</div>
+<div class="text-xs text-gray-300 mt-1">60% better estimates from past work</div>
+</div>
+</div>
+
+<div class="space-y-3">
+<div class="font-bold text-yellow-300 text-lg mb-2">⚠️ Move Away From</div>
+<div class="bg-yellow-900/20 p-3 rounded border-l-4 border-yellow-500">
+<div class="font-bold text-yellow-300">Manual Triage</div>
+<div class="text-xs text-gray-300 mt-1">20-30 min classifying every issue</div>
+</div>
+<div class="bg-yellow-900/20 p-3 rounded border-l-4 border-yellow-500">
+<div class="font-bold text-yellow-300">Planning from Scratch</div>
+<div class="text-xs text-gray-300 mt-1">Ignoring patterns from past work</div>
+</div>
+<div class="bg-yellow-900/20 p-3 rounded border-l-4 border-yellow-500">
+<div class="font-bold text-yellow-300">Line-by-Line Review</div>
+<div class="text-xs text-gray-300 mt-1">Can't scale to 10-15x volume</div>
+</div>
+</div>
+
+<div class="space-y-3">
+<div class="font-bold text-red-300 text-lg mb-2">🛑 Move Against</div>
+<div class="bg-red-900/20 p-3 rounded border-l-4 border-red-500">
+<div class="font-bold text-red-300">All-or-Nothing</div>
+<div class="text-xs text-gray-300 mt-1">Full Gen-4 before proving value</div>
+</div>
+<div class="bg-red-900/20 p-3 rounded border-l-4 border-red-500">
+<div class="font-bold text-red-300">Embedded Prompts</div>
+<div class="text-xs text-gray-300 mt-1">Hardcoded instructions in YAML</div>
+</div>
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg text-center text-sm">
+<span class="text-cyan-300 font-bold">Core Insight:</span> <span class="text-white">Agents handle the routine, humans govern the outcomes</span>
+</div>
+
+---
+layout: default
+---
+
+# When to Use This Pattern
+
+<div class="text-sm mt-4">
+
+```
+Q: Where are you in your agentic adoption journey?
+│
+├─ "Haven't started yet"
+│  → Start here with Phase 1 (Agentic Intake)
+│  └─ Any team, any repo, 2-3 hours setup
+│
+├─ "Already assigning issues to Copilot"
+│  → Add Phases 2 + 4 (Planning + Code Review)
+│  └─ Best for teams with 20+ issues/month
+│
+├─ "Hitting coordination limits across repos"
+│  → Graduate to Full SDLC → Agentic SDLC talk
+│  └─ Agents touching 2+ repos per feature
+│
+└─ "Already have full Gen-4 SDLC"
+   → See Enterprise Patterns talk
+```
+
+</div>
+
+<div class="grid grid-cols-4 gap-3 mt-4 text-xs">
+<div class="bg-cyan-900/30 p-3 rounded border border-cyan-500/30 text-center">
+<div class="font-bold text-cyan-300">This Talk</div>
+<div class="text-gray-400 mt-1">Getting started</div>
+<div class="text-gray-400">2-3 hours setup</div>
+</div>
+<div class="bg-blue-900/30 p-3 rounded border border-blue-500/30 text-center">
+<div class="font-bold text-blue-300">Agentic SDLC</div>
+<div class="text-gray-400 mt-1">Full transformation</div>
+<div class="text-gray-400">3-6 months</div>
+</div>
+<div class="bg-indigo-900/30 p-3 rounded border border-indigo-500/30 text-center">
+<div class="font-bold text-indigo-300">Agentic Sessions</div>
+<div class="text-gray-400 mt-1">Interactive agents</div>
+<div class="text-gray-400">Minutes per session</div>
+</div>
+<div class="bg-purple-900/30 p-3 rounded border border-purple-500/30 text-center">
+<div class="font-bold text-purple-300">Enterprise</div>
+<div class="text-gray-400 mt-1">Org-wide scaling</div>
+<div class="text-gray-400">Strategic planning</div>
+</div>
+</div>
+
+---
+layout: center
+name: phase1
+---
+
+# Phase 1
+
+<div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+Agentic Intake
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Intelligent Issue Triage & Enrichment
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Phase 1 of 4 · 20-30 min → 3 min · 2-3 hours setup
+</div>
+
+---
+layout: default
+---
+
+# Phase 1: What the Agent Does
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+
+<div class="space-y-4">
+
+<div class="bg-slate-800/50 p-4 rounded border border-cyan-500/30">
+<div class="font-bold text-cyan-300 mb-2">1. Context Gathering</div>
+<div class="text-sm text-gray-300">Reads issue title, description, related files, recent similar issues</div>
+</div>
+
+<div class="bg-slate-800/50 p-4 rounded border border-cyan-500/30">
+<div class="font-bold text-cyan-300 mb-2">2. Duplicate Detection</div>
+<div class="text-sm text-gray-300">Searches open + closed issues from last 6 months, calculates similarity</div>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-slate-800/50 p-4 rounded border border-blue-500/30">
+<div class="font-bold text-blue-300 mb-2">3. Routing & Labeling</div>
+<div class="text-sm text-gray-300">Classifies type, priority, component; suggests assignee</div>
+</div>
+
+<div class="bg-slate-800/50 p-4 rounded border border-blue-500/30">
+<div class="font-bold text-blue-300 mb-2">4. Context Summary</div>
+<div class="text-sm text-gray-300">Generates analysis with affected files, root cause, suggested approach</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
+<div class="bg-red-900/20 border-l-4 border-red-500 p-3 rounded-r">
+<div class="font-bold text-red-300">❌ Before</div>
+<div class="text-xs text-gray-300 mt-1">Issue #4821 → developer spends 45 min → discovers it's a duplicate of #4203</div>
+</div>
+<div class="bg-green-900/20 border-l-4 border-green-500 p-3 rounded-r">
+<div class="font-bold text-green-300">✅ After</div>
+<div class="text-xs text-gray-300 mt-1">Issue #4821 → agent finds 88% match to #4203 in 3 min → auto-labels duplicate</div>
+</div>
+</div>
+
+---
+layout: default
+---
+
+# Phase 1: Metrics & ROI
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+
+<div>
+<div class="font-bold text-cyan-300 text-lg mb-4">📊 Success Metrics</div>
 <div class="text-sm">
 
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Time to implementation plan** | 4 hours | <30 min | Developers start faster |
-| **Plan accuracy (estimate vs actual)** | ±50% | ±20% | Better predictability |
-| **Missing requirements found late** | 25% | <10% | Less rework |
-| **PRs blocked by unclear scope** | 15% | <5% | Smoother reviews |
-| **Historical context utilization** | 0% | >80% | Learn from past |
+| Metric | Before | After |
+|--------|--------|-------|
+| **Time to triage** | 30 min | <5 min |
+| **Duplicate detection** | 60% | >90% |
+| **Correct routing** | 60% | >90% |
+| **Context gathering** | 45 min | <10 min |
+
+</div>
+</div>
+
+<div>
+<div class="font-bold text-cyan-300 text-lg mb-4">💰 ROI (50 issues/month)</div>
+<div class="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-6 rounded-lg border border-cyan-500/30 space-y-3">
+<div class="text-sm"><strong>Investment:</strong> 2-3 hours one-time setup</div>
+<div class="text-sm"><strong>Time saved:</strong> ~25 min/issue</div>
+<div class="text-sm"><strong>Monthly savings:</strong> 20 hours (2.5 dev days)</div>
+<div class="text-2xl font-bold text-cyan-300 mt-4 text-center">$2,000/month</div>
+</div>
+</div>
 
 </div>
 
-<div class="mt-8 p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
+---
+layout: center
+name: phase2
+---
 
-### 💡 Impact of Historical Context
+# Phase 2
 
-Plans that reference similar past issues show:
-- **60% better estimate accuracy**
-- **40% fewer mid-implementation surprises**
-- **Compound learning over time**
+<div class="text-5xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+Agentic Planning
+</div>
 
+<div class="mt-6 text-xl opacity-80">
+Historical Context Research & Execution Plans
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Phase 2 of 4 · 4 hours → 15 min · 60% better estimates
 </div>
 
 ---
 layout: default
 ---
 
-# Phase 2: ROI
+# Phase 2: The Key Innovation — Historical Context
 
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Investment
-
-**Setup time:** 2-3 hours
-- 4 workflows + secrets config
-
-**Ongoing cost:** $0.40-0.60 per plan
-- ~$3/hour agent time
-- 12-15 min with historical search
-
-</div>
-<div>
-
-## Returns
-
-**Time saved:** 3.5 hours per feature (average)
-
-**At 20 features/month:**
-- 70 hours saved/month (8.75 dev days)
-- $7,000/month savings ($100/hr)
-- **Annual savings:** $84,000
-
-**Plus:** Historical learning compounds over time
-
+<div class="mt-4 text-base">
+<div class="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-l-4 border-blue-500 p-4 rounded-r mb-6">
+<span class="font-bold text-blue-300">💡 The planning agent doesn't just analyze the current issue</span> — it searches for similar past issues and their associated PRs
 </div>
 </div>
 
----
-layout: section
----
+<div class="grid grid-cols-3 gap-4 text-sm">
 
-# Phase 3: Code Generation & Execution
+<div class="bg-cyan-900/20 p-4 rounded border border-cyan-500/30">
+<div class="font-bold text-cyan-300 mb-2">🔍 Research</div>
+<div class="text-xs text-gray-300">Search similar past issues from last 6 months + associated merged PRs</div>
+</div>
 
-*Agents implement the plan and create PRs*
+<div class="bg-blue-900/20 p-4 rounded border border-blue-500/30">
+<div class="font-bold text-blue-300 mb-2">📚 Learn</div>
+<div class="text-xs text-gray-300">Extract lessons: edge cases, effort estimates, patterns that worked</div>
+</div>
 
----
-layout: default
----
-
-# Phase 3: The Good News
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## You Already Have This
-
-When you assign issues to `copilot-swe-agent[bot]`, Copilot can already:
-
-- ✅ Implement code based on approved plan
-- ✅ Write unit and integration tests
-- ✅ Run tests and iterate on failures
-- ✅ Create PRs with evidence bundles
-
-**This is the core capability of GitHub Copilot's agent features.**
+<div class="bg-indigo-900/20 p-4 rounded border border-indigo-500/30">
+<div class="font-bold text-indigo-300 mb-2">📋 Plan</div>
+<div class="text-xs text-gray-300">Generate plan with affected files, dependencies, risks, informed estimates</div>
+</div>
 
 </div>
-<div>
 
-## Agent Workflow
+<div class="bg-slate-800/50 p-4 rounded border border-blue-500/30 mt-6 text-xs">
 
 ```
-Agent reads approved plan
-  ↓
-Agent writes code for affected files
-  ↓
-Agent runs tests locally
-  ↓
-Agent fixes failures and iterates
-  ↓
-Agent reaches "all tests passing"
-  ↓
-Agent creates PR with:
-  • Descriptive title from issue
-  • Full context from plan
-  • Summary of changes
-  • Test results
-  • Security scan results
+Historical Context Search:
+- "Add Google OAuth" (#2847) → PR #2851: 6 hours, 8 files
+  Lesson: Token refresh edge case required extra test
+- "Add GitHub OAuth" (#3104) → PR #3109: 5 hours, 7 files
+  Lesson: Multi-tenant config needed for enterprise
+
+Result: Estimate accuracy ±20% (vs ±50% without historical context)
 ```
 
 </div>
-</div>
 
 ---
-layout: default
+layout: two-cols
 ---
 
-# Phase 3: PR Description Example
+# Phase 2: Plan Example
 
-<div class="text-xs">
+<div class="text-xs space-y-2">
 
 ```markdown
-## Closes #4523: Add Microsoft OAuth Support
+📋 EXECUTION PLAN: Add Microsoft OAuth
 
-### Implementation Summary
-Added Microsoft OAuth provider following our existing OAuth pattern.
+Historical Context:
+✓ Issue #2847 "Add Google OAuth"
+  → PR #2851 (6h, 8 files)
+✓ Issue #3104 "Add GitHub OAuth"
+  → PR #3109 (5h, 7 files)
 
-**Changes:**
-- ✅ Created `MicrosoftOAuthProvider` extending `OAuthHandler`
-- ✅ Updated auth configuration for MS credentials
-- ✅ Added integration tests (100% coverage on new code)
-- ✅ Updated documentation
-
-### Test Results
-✓ 847 tests passing
-✓ Coverage: 94% (unchanged)
-✓ Security scan: Clean (0 vulnerabilities)
-✓ Performance: No regressions detected
-
-### Evidence Bundle
-- [Test Results](https://github.com/.../actions/runs/123456)
-- [Security Scan](https://github.com/.../security/code-scanning/1)
-- [Performance Baseline](https://github.com/.../actions/runs/123457)
-
-### How to Test
-1. Set `MS_CLIENT_ID` and `MS_CLIENT_SECRET` in `.env`
-2. Navigate to `/login`
-3. Click "Sign in with Microsoft"
-4. Verify successful authentication
+Key Learnings:
+✓ Token refresh edge cases
+✓ Multi-tenant config for enterprise
+✓ Rate limiting from start
 ```
 
+**Affected Files:**
+1. `microsoft-oauth.ts` (new)
+2. `oauth-handler.ts` (modify)
+3. `auth-config.ts` (modify)
+4. `microsoft-oauth.test.ts` (new)
+
+</div>
+
+::right::
+
+<div class="pl-6 text-xs space-y-2">
+
+**Estimate:** 6-8 hours
+<div class="text-gray-400">(Based on Google: 6h, GitHub: 5h)</div>
+
+**Risk:** Medium
+**Rollback:** `MS_OAUTH_ENABLED` flag
+
+<div class="bg-blue-900/20 p-3 rounded border border-blue-500/30 mt-4">
+<div class="font-bold text-blue-300 mb-2">Human Approval Gate</div>
+<div class="text-gray-300">Plan posts as issue comment</div>
+<div class="text-gray-300 mt-1">Type <code>/approve-plan</code> to proceed</div>
+<div class="text-gray-400 mt-2 text-xs">Agents plan, humans decide</div>
+</div>
+
+<div class="mt-6">
+
+**📊 Metrics:**
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Planning time | 4h | <30m |
+| Estimate accuracy | ±50% | ±20% |
+| Missing requirements | 25% | <10% |
+
+</div>
+
+<div class="bg-gradient-to-r from-blue-600/80 to-indigo-600/80 rounded-lg p-3 mt-4 text-center">
+<span class="text-white font-bold">$7,000/month savings</span>
+</div>
+
+</div>
+
+---
+layout: center
+name: phase3
+---
+
+# Phase 3
+
+<div class="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+Agentic Coding
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Automated Implementation & PR Creation
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Phase 3 of 4 · Already enabled · 6-10x faster implementation
 </div>
 
 ---
 layout: default
 ---
 
-# Phase 3: Configuration
+# Phase 3: Agentic Coding
 
-<div class="grid grid-cols-2 gap-8">
-<div>
+<div class="mt-6 text-base">
 
-## Enable Auto-PR Creation
-
-Add to repository settings → GitHub Copilot:
-
-```
-✓ Allow Copilot to create pull requests
-✓ Require test passage before PR creation
-✓ Require security scan before PR
-✓ Auto-request review from code owners
-```
-
-</div>
-<div>
-
-## Set Branch Protection
-
-Ensure your main branch has:
-
-```
-✓ Require pull request reviews
-  (1 approver minimum)
-✓ Require status checks to pass
-  (tests, security scan)
-✓ Require conversation resolution
-  before merging
-```
-
-</div>
+<div class="bg-gradient-to-r from-green-500/10 to-green-500/5 p-5 rounded-lg border border-green-500/30 mb-6">
+<div class="text-xl font-bold text-green-300 mb-2">✅ You Already Have This</div>
+<div class="text-sm text-gray-300">Assigning issues to <code>copilot-swe-agent[bot]</code> enables implementation. This workflow formalizes it by connecting to the approved plan from Phase 2.</div>
 </div>
 
----
-layout: default
----
-
-# Phase 3: Success Metrics & ROI
-
-<div class="text-sm mb-8">
-
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Implementation time** | 8-12 hours | 1-2 hours | 6-10x faster |
-| **Time to first PR** | 1-2 days | 2-4 hours | Faster feedback |
-| **Initial test pass rate** | 70% | >90% | Higher quality |
-| **PRs requiring rework** | 30% | <15% | Less wasted effort |
-
-</div>
-
-<div class="grid grid-cols-2 gap-8">
-<div class="p-6 rounded-lg bg-green-900/20 border border-green-500/30">
-
-### Investment
-
-- **Setup:** 0 hours (included with Copilot)
-- **Cost:** $3-5 per implementation
-
-</div>
-<div class="p-6 rounded-lg bg-green-900/20 border border-green-500/30">
-
-### Returns
-
-- **Time saved:** 7-10 hours per feature
-- **At 20 features/month:** 140-200 hours saved
-- **Monthly savings:** $14,000-20,000
-
+<div class="bg-slate-800/50 p-4 rounded border border-indigo-500/30 mb-6">
+<div class="font-bold text-indigo-300 mb-2">Implementation Flow</div>
+<div class="text-sm text-gray-300">
+Read approved plan → Write code → Run tests → Fix failures → All tests pass → Create PR with evidence
 </div>
 </div>
-
----
-layout: section
----
-
-# Phase 4: Code Review Agent
-
-*Agents analyze PRs and surface risks before human review*
-
----
-layout: default
----
-
-# Phase 4: The Problem
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Review Becomes the Bottleneck
-
-Even with agent-generated code, humans must review PRs. But:
-
-- **Volume:** Agents create 10-15x more PRs
-- **Scale:** Each PR may touch 500-2000 lines
-- **Speed:** Agents create PRs faster than humans review
-
-</div>
-<div>
-
-<div class="p-6 rounded-lg bg-red-900/20 border border-red-500/30">
-
-### The Cost
-
-**Time cost:** 2-4 hours per PR for thorough review
-
-**Bottleneck:** Code review becomes the constraint on velocity
-
-**Common issues:**
-- Review queue grows to 50+ PRs
-- 10+ days to get review
-- Developers overwhelmed
-
-</div>
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 4: The Solution
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Code Review Agent Workflow
-
-```
-Agent creates PR (Phase 3)
-  ↓
-Code Review Agent analyzes (5 min)
-  ↓
-Agent posts review with:
-  • Security risks identified
-  • Logic errors or edge cases
-  • Performance implications
-  • Compliance violations
-  • Test coverage gaps
-  ↓
-Human reviews analysis (10-15 min)
-  ↓
-Human approves or requests changes
-  (outcome-based, not line-by-line)
-```
-
-</div>
-<div>
-
-## What Agent Checks
-
-### 1. Security (2 min)
-- SQL injection, XSS risks
-- Authentication bypasses
-- Secrets in code
-- Unsafe dependencies
-
-### 2. Logic & Edge Cases (2 min)
-- Error handling
-- Race conditions
-- Resource leaks
-
-### 3. Performance (1 min)
-- Algorithmic complexity
-- Query efficiency
-- Caching opportunities
-
-### 4. Test Coverage (1 min)
-- New code coverage
-- Critical paths tested
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 4: Review Output Example (1/2)
-
-<div class="text-xs">
 
 <div class="grid grid-cols-2 gap-6">
+
 <div>
-
-```
-🔒 Security Review
-━━━━━━━━━━━━━━━━
-✅ No SQL injection risks
-✅ All user inputs sanitized
-✅ No secrets detected
-⚠️ Medium: New dependency @azure/msal-node
-   → Security scan: Clean
-   → License: MIT (compatible)
-   → Recommendation: Approve, monitor for CVEs
-```
-
-```
-🧠 Logic Review
-━━━━━━━━━━━━━━━
-✅ Error handling complete
-✅ Edge cases covered
-⚠️ Low: Token refresh during logout
-   → File: src/auth/microsoft-oauth.ts:147
-   → Issue: Race condition if user logs out 
-            during token refresh
-   → Recommendation: Add logout flag check
-```
-
-</div>
-<div>
-
-```
-⚡ Performance Review
-━━━━━━━━━━━━━━━━━━
-✅ No algorithmic concerns
-✅ Queries are indexed
-✅ No obvious memory leaks
-💡 Suggestion: Cache MS tenant discovery
-   → Current: Fetches on every login
-   → Proposed: Cache for 24 hours
-   → Impact: -40% auth latency
-```
-
-```
-🧪 Test Coverage Review
-━━━━━━━━━━━━━━━━━━━━━
-✅ 100% coverage on new code
-✅ Integration tests present
-✅ Edge cases tested
-✅ No flaky tests detected
-```
-
-</div>
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Phase 4: Real-World Impact
-
-<div class="grid grid-cols-2 gap-8">
-<div class="p-6 rounded-lg bg-red-900/20 border border-red-500/30">
-
-### Before: Manual Review
-
-**PR #2481: "Add MS OAuth"**
-
-Human reviewer spends 3 hours:
-- 45 min understanding changes
-- 60 min checking security
-- 30 min verifying edge cases
-- 45 min checking tests
-
-**Result:** Misses race condition in token refresh logic. Bug found in production 2 weeks later.
-
-</div>
-<div class="p-6 rounded-lg bg-green-900/20 border border-green-500/30">
-
-### After: Agent-Assisted
-
-**PR #2481: "Add MS OAuth"**
-
-- Agent reviews in 5 minutes
-- Posts detailed analysis
-- Human reads analysis (15 min)
-- Human spots race condition from agent warning
-- Fixed before merge
-
-**Result:** 20 minutes total (vs 3 hours + production incident)
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 4: Success Metrics & ROI
-
-<div class="text-sm mb-8">
-
-| Metric | Before Agents | Target | Why It Matters |
-|--------|---------------|--------|----------------|
-| **Time per PR review** | 2-4 hours | 15-20 min | 6-10x faster |
-| **Critical bugs caught** | 60% | >95% | Higher quality |
-| **Security issues in production** | 5/quarter | 0/quarter | Risk reduction |
-| **Review bottleneck** | Yes | No | Unblocked velocity |
-
-</div>
-
-<div class="grid grid-cols-2 gap-8">
-<div class="p-6 rounded-lg bg-green-900/20 border border-green-500/30">
-
-### Investment
-
-- **Setup:** 1-2 hours (one-time)
-- **Cost:** $0.10-0.20 per PR review
-
-</div>
-<div class="p-6 rounded-lg bg-green-900/20 border border-green-500/30">
-
-### Returns
-
-- **Time saved:** 2-3 hours per PR
-- **At 40 PRs/month:** 80-120 hours saved
-- **Monthly savings:** $8,000-12,000
-- **Plus:** Reduced production incidents
-
-</div>
-</div>
-
----
-layout: section
----
-
-# Phase 5: When to Upgrade to Full SDLC
-
-*Signs you've outgrown quick wins and need Gen-4 transformation*
-
----
-layout: default
----
-
-# Phase 5: The Inflection Point (1/2)
-
-Phases 1-4 work brilliantly—until they don't. Here are the signals:
-
-<div class="grid grid-cols-2 gap-6 text-sm">
-<div>
-
-### Signal 1: Repository Chaos
-```
-❌ Symptom: Agents touching 3-5 repos 
-            per feature
-❌ Impact: Coordination overhead negates 
-           velocity gains
-✅ Solution: Monorepo consolidation
-```
-
-### Signal 2: CI Bottleneck
-```
-❌ Symptom: CI queue time > 60 minutes
-❌ Impact: Agents wait, humans wait, 
-           nobody ships
-✅ Solution: Trust factory CI
-```
-
-</div>
-<div>
-
-### Signal 3: Review Overwhelm
-```
-❌ Symptom: 50+ PRs open, 
-            10+ days to review
-❌ Impact: Agents productive, 
-           humans drowning
-✅ Solution: Outcome-based PR workflows
-```
-
-### Signal 4: Test Flakiness
-```
-❌ Symptom: >10% flaky test rate
-❌ Impact: Agents blocked on false failures
-✅ Solution: Hermetic builds, 
-            deterministic signal
-```
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 5: The Inflection Point (2/2)
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-### Signal 5: Manual Governance
-
-```
-❌ Symptom: Compliance requires 
-            human review
-❌ Impact: Throughput limited by 
-           manual gates
-✅ Solution: Automated evidence bundles
-```
-
-</div>
-<div>
-
-<div class="p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
-
-### Graduation Criteria
-
-You're ready for full Gen-4 when:
-
-- ✅ Agent velocity: >10 PRs/week
-- ✅ Review queue: >5 days
-- ✅ Multi-repo friction: >30% PRs touch 2+ repos
-- ✅ CI capacity: Queue time >30 min peak
-- ✅ Executive buy-in: Leadership committed
-
-</div>
-
-</div>
-</div>
-
----
-layout: default
----
-
-# Phase 5: The Upgrade Path
-
+<div class="font-bold text-indigo-300 mb-3">📊 Metrics</div>
 <div class="text-sm">
 
-<div class="grid grid-cols-2 gap-8">
+| Metric | Before | After |
+|--------|--------|-------|
+| **Implementation** | 8-12h | 1-2h |
+| **Time to first PR** | 1-2 days | 2-4h |
+| **Test pass rate** | 70% | >90% |
+
+</div>
+</div>
+
 <div>
-
-### Phase 1-4: Quick Wins
-
-- ✅ Issue → PR automation
-- ✅ Agent-generated code
-- ✅ Code review assistance
-- ⚠️ Manual coordination
-- ⚠️ Traditional CI (slow)
-- ⚠️ Human-scale processes
-
-**Throughput:** 5-10 features/week
-
-</div>
-<div>
-
-### Phase 5: Full SDLC
-
-- ✅ Monorepo with module boundaries
-- ✅ Feature-scale PRs (500-2000 lines)
-- ✅ Intent-based reviews
-- ✅ Atomic merges
-- ✅ CI as trust factory (<10 min)
-- ✅ Automated compliance gates
-
-**Throughput:** 10-15 features/day
-
+<div class="font-bold text-indigo-300 mb-3">💰 ROI</div>
+<div class="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 p-4 rounded border border-indigo-500/30">
+<div class="text-sm"><strong>Time saved:</strong> 7-10 hours/feature</div>
+<div class="text-sm mt-1"><strong>Monthly (20 features):</strong> 140-200 hours</div>
+<div class="text-xl font-bold text-indigo-300 mt-3 text-center">$17,000/month</div>
 </div>
 </div>
 
 </div>
 
-<div class="mt-8 p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
+</div>
 
-### 💡 Migration Timeline
+---
+layout: center
+name: phase4
+---
 
-**Month 1:** Assessment & Planning  
-**Month 2:** Repository Consolidation  
-**Month 3:** PR Workflow Evolution  
-**Month 4-6:** CI Trust Factory
+# Phase 4
+
+<div class="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+Code Review
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Intelligent PR Analysis & Risk Detection
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Phase 4 of 4 · 2-4 hours → 20 min · Near-complete bug detection
+</div>
+
+---
+layout: default
+---
+
+# Phase 4: What the Agent Reviews
+
+<div class="mt-4 text-sm">
+
+<div class="bg-gradient-to-r from-purple-500/10 to-purple-500/5 border-l-4 border-purple-500 p-3 rounded-r mb-6">
+<span class="font-bold text-purple-300">The Problem:</span> Agents create 10-15x more PRs, each 500-2000 lines. Code review becomes the bottleneck.
+</div>
+
+<div class="grid grid-cols-4 gap-4">
+
+<div class="bg-red-900/20 p-4 rounded border border-red-500/30">
+<div class="font-bold text-red-300 mb-2">🔒 Security</div>
+<div class="text-xs text-gray-300">SQL injection, XSS, auth bypasses, secrets, unsafe deps</div>
+<div class="text-xs text-gray-400 mt-2">~2 min</div>
+</div>
+
+<div class="bg-cyan-900/20 p-4 rounded border border-cyan-500/30">
+<div class="font-bold text-cyan-300 mb-2">🧠 Logic</div>
+<div class="text-xs text-gray-300">Error handling, edge cases, race conditions, resource leaks</div>
+<div class="text-xs text-gray-400 mt-2">~2 min</div>
+</div>
+
+<div class="bg-blue-900/20 p-4 rounded border border-blue-500/30">
+<div class="font-bold text-blue-300 mb-2">⚡ Performance</div>
+<div class="text-xs text-gray-300">O(n²) algorithms, N+1 queries, blocking ops, caching</div>
+<div class="text-xs text-gray-400 mt-2">~1 min</div>
+</div>
+
+<div class="bg-indigo-900/20 p-4 rounded border border-indigo-500/30">
+<div class="font-bold text-indigo-300 mb-2">🧪 Tests</div>
+<div class="text-xs text-gray-300">Coverage on new code, edge cases, integration, flaky detection</div>
+<div class="text-xs text-gray-400 mt-2">~1 min</div>
+</div>
+
+</div>
+
+<div class="mt-6 p-3 bg-gradient-to-r from-purple-600/80 to-blue-600/80 rounded-lg text-center">
+<span class="text-white font-bold">Human review shifts: "read every line" → "validate outcomes against intent"</span>
+</div>
 
 </div>
 
@@ -1411,28 +729,120 @@ layout: default
 layout: default
 ---
 
-# The Complete Timeline
+# Phase 4: Before vs After
 
-<div class="text-sm">
+<div class="grid grid-cols-2 gap-8 mt-6">
 
-| Phase | Timeframe | Setup | Value | Risk |
-|-------|-----------|-------|-------|------|
-| **Phase 1: Triage** | Week 1-2 | 2-3 hours | 6x faster triage | None |
-| **Phase 2: Planning** | Week 3-4 | 1-2 hours | 8x faster planning | Low |
-| **Phase 3: Code Gen** | Week 5-8 | 0 hours | 10x code velocity | Medium |
-| **Phase 4: Review** | Week 9-12 | 1-2 hours | 12x review speed | Low |
-| **Phase 5: Full SDLC** | Month 4-6 | 3-6 months | 100x throughput | High |
+<div>
+<div class="font-bold text-red-300 text-lg mb-3">❌ Before Code Review Agent</div>
+<div class="bg-red-900/20 border-l-4 border-red-500 p-4 rounded-r text-sm space-y-2">
+<div><strong>PR #2481: "Add MS OAuth"</strong></div>
+<div class="text-gray-300">Human reviewer: <span class="text-red-400 font-bold">3 hours</span></div>
+<div class="text-xs text-gray-400">45 min understanding + 60 min security + 30 min edge cases + 45 min tests</div>
+<div class="mt-3 text-red-400 font-bold">Missed race condition in token refresh</div>
+<div class="text-xs text-gray-400">Bug found in production 2 weeks later</div>
+</div>
+</div>
+
+<div>
+<div class="font-bold text-green-300 text-lg mb-3">✅ With Code Review Agent</div>
+<div class="bg-green-900/20 border-l-4 border-green-500 p-4 rounded-r text-sm space-y-2">
+<div><strong>Same PR #2481</strong></div>
+<div class="text-gray-300">Agent analysis: <span class="text-green-400 font-bold">5 min</span></div>
+<div class="text-gray-300">Human validates: <span class="text-green-400 font-bold">15 min</span></div>
+<div class="mt-3 text-green-400 font-bold">Race condition flagged and fixed</div>
+<div class="text-xs text-gray-400">Zero security incidents next quarter</div>
+</div>
+</div>
 
 </div>
 
-<div class="mt-8 p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
+<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
+<div class="bg-purple-900/20 p-3 rounded border border-purple-500/30 text-center">
+<div class="text-gray-400">Time per PR</div>
+<div class="text-lg font-bold text-purple-300">2-4h → 20m</div>
+</div>
+<div class="bg-purple-900/20 p-3 rounded border border-purple-500/30 text-center">
+<div class="text-gray-400">Critical bugs caught</div>
+<div class="text-lg font-bold text-purple-300">60% → >95%</div>
+</div>
+<div class="bg-purple-900/20 p-3 rounded border border-purple-500/30 text-center">
+<div class="text-gray-400">Savings (40 PRs/mo)</div>
+<div class="text-lg font-bold text-purple-300">$10,000/month</div>
+</div>
+</div>
 
-### Strategy
+---
+layout: center
+name: phase5
+---
 
-- **Weeks 1-12:** Prove value quickly with Phases 1-4
-- **Month 4:** Identify limits and constraints
-- **Month 4-6:** Graduate to Phase 5 when justified
+# Phase 5
 
+<div class="text-5xl font-bold bg-gradient-to-r from-pink-400 to-amber-400 bg-clip-text text-transparent">
+Graduating to Full SDLC
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+When Quick Wins Hit Their Limits
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+The inflection point · 5-10 features/week → 10-15 features/day
+</div>
+
+---
+layout: default
+---
+
+# Phase 5: Graduation Signals & Upgrade Path
+
+<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
+
+<div>
+<div class="font-bold text-pink-300 text-lg mb-3">⚠️ Watch for These Signals</div>
+<div class="space-y-3">
+<div class="bg-red-900/20 border-l-4 border-red-500 p-3 rounded-r">
+<div class="font-bold text-red-300">Repository Chaos</div>
+<div class="text-xs text-gray-300">Agents touching 3-5 repos per feature</div>
+</div>
+<div class="bg-orange-900/20 border-l-4 border-orange-500 p-3 rounded-r">
+<div class="font-bold text-orange-300">CI Bottleneck</div>
+<div class="text-xs text-gray-300">Queue time >60 minutes</div>
+</div>
+<div class="bg-yellow-900/20 border-l-4 border-yellow-500 p-3 rounded-r">
+<div class="font-bold text-yellow-300">Review Overwhelm</div>
+<div class="text-xs text-gray-300">50+ PRs open, 10+ days to review</div>
+</div>
+</div>
+</div>
+
+<div>
+<div class="font-bold text-cyan-300 text-lg mb-3">✅ Upgrade Solutions</div>
+<div class="space-y-3">
+<div class="bg-cyan-900/20 border-l-4 border-cyan-500 p-3 rounded-r">
+<div class="font-bold text-cyan-300">Monorepo Consolidation</div>
+<div class="text-xs text-gray-300">Single controlled boundary for agents</div>
+</div>
+<div class="bg-blue-900/20 border-l-4 border-blue-500 p-3 rounded-r">
+<div class="font-bold text-blue-300">Trust Factory CI</div>
+<div class="text-xs text-gray-300"><10 min cycles, hermetic builds</div>
+</div>
+<div class="bg-indigo-900/20 border-l-4 border-indigo-500 p-3 rounded-r">
+<div class="font-bold text-indigo-300">Intent-Based PRs</div>
+<div class="text-xs text-gray-300">Outcome validation vs line-by-line review</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-indigo-500/10 p-5 rounded-lg border border-cyan-500/30 mt-4 text-center">
+<span class="text-slate-300">Phase 1-4:</span>
+<span class="text-cyan-300 font-bold text-xl"> 5-10 features/week</span>
+<span class="text-slate-400 text-xl"> → </span>
+<span class="text-slate-300">Phase 5:</span>
+<span class="text-blue-300 font-bold text-xl"> 10-15 features/day</span>
 </div>
 
 ---
@@ -1441,78 +851,34 @@ layout: default
 
 # Expected ROI by Phase
 
-<div class="text-sm">
+<div class="text-sm mt-4">
 
-For a 50-person engineering team:
+**For a team processing 50 issues/month ($100/hour developer cost):**
 
-| Phase | Monthly Savings | Annual Savings | Cumulative Annual |
-|-------|-----------------|----------------|-------------------|
-| **Phase 1: Triage** | $2,000 | $24,000 | $24,000 |
-| **Phase 2: Planning** | $7,000 | $84,000 | $108,000 |
-| **Phase 3: Code Gen** | $17,000 | $204,000 | $312,000 |
-| **Phase 4: Review** | $10,000 | $120,000 | $432,000 |
-| **Phase 5: Full SDLC** | $150,000 | $1,800,000 | $2,232,000 |
+<div class="mt-4">
 
-</div>
-
-<div class="mt-8 p-6 rounded-lg bg-yellow-900/20 border border-yellow-500/30">
-
-### ⚠️ Phase 5 Investment
-
-Phase 5 requires significant upfront investment ($800K-1.6M) with 12-18 month payback.
-
-**Start with Phases 1-4 to prove value first.**
+| Phase | Setup | Monthly Savings | Annual Savings |
+|-------|-------|-----------------|----------------|
+| **Phase 1: Intake** | 2-3 hours | $2,000 | $24,000 |
+| **Phase 2: Planning** | 2-3 hours | $7,000 | $84,000 |
+| **Phase 3: Coding** | 0 hours | $17,000 | $204,000 |
+| **Phase 4: Review** | 1-2 hours | $10,000 | $120,000 |
+| **Combined 1-4** | **~8 hours** | **$36,000** | **$432,000** |
 
 </div>
 
----
-layout: default
----
-
-# Common Pitfalls
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-### ❌ Don't Do This
-
-**1. Skipping to Phase 5**
-- "Let's go straight to full SDLC"
-- High risk, no proof of value
-
-**2. Staying in Pilot Mode**
-- "Let's pilot triage for 6 months"
-- Analysis paralysis, no momentum
-
-**3. Ignoring the Limits**
-- "Scale to 100 PRs/day without CI upgrade"
-- Agents blocked, velocity lost
-
-**4. Manual Review at Machine Speed**
-- "Line-by-line review every agent PR"
-- Bottleneck returns, gains lost
-
 </div>
-<div>
 
-### ✅ Do This Instead
-
-**1. Start Small, Prove Value**
-- Deploy Phases 1-4 first
-- Build momentum and confidence
-
-**2. Deploy Quickly**
-- 2-week validation, then all repos
-- Fast iteration and learning
-
-**3. Graduate When Constrained**
-- Recognize the signals
-- Upgrade infrastructure when needed
-
-**4. Trust and Validate**
-- Trust code review agent
-- Validate outcomes, not every line
-
+<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-5 rounded-lg border border-cyan-500/30">
+<div class="font-bold text-cyan-300 mb-2">Phases 1-4: Quick Wins</div>
+<div class="text-2xl font-bold text-white">$432K/year</div>
+<div class="text-xs text-slate-300 mt-1">Hours to setup · Immediate value · Low risk</div>
+</div>
+<div class="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 p-5 rounded-lg border border-indigo-500/30">
+<div class="font-bold text-indigo-300 mb-2">Phase 5: Full SDLC</div>
+<div class="text-2xl font-bold text-white">+$1.8M/year</div>
+<div class="text-xs text-slate-300 mt-1">3-6 month investment · Organizational transformation</div>
 </div>
 </div>
 
@@ -1520,100 +886,87 @@ layout: default
 layout: default
 ---
 
-# Key Takeaways
+# ✅ What You Can Do Today
 
-<div class="grid grid-cols-2 gap-8">
-<div>
+<div class="grid grid-cols-3 gap-6 mt-6 text-sm">
 
-### The Journey Approach
-
-1. **Start simple:** Just assign to Copilot
-2. **Prove value:** Phase 1 = 6x improvement
-3. **Build momentum:** Add phases incrementally
-4. **Scale strategically:** Upgrade when constrained
-5. **Transform with proof:** Phase 5 when justified
-
+<div class="bg-cyan-900/40 p-5 rounded-lg border border-cyan-500/30">
+<div class="text-2xl mb-3">🚀</div>
+<div class="font-bold text-cyan-300 text-lg mb-3">Just Starting</div>
+<div class="space-y-2 text-xs">
+<div>1. Copy <code>1-issue-triage.yml</code></div>
+<div>2. Create prompts in <code>.github/prompts/</code></div>
+<div>3. Configure <code>COPILOT_GITHUB_TOKEN</code></div>
+<div>4. Create a test issue and validate</div>
 </div>
-<div>
-
-### Critical Success Factors
-
-- ✅ Use the **4-workflow architecture**
-- ✅ Enable **historical context search**
-- ✅ Use **`copilot -p`** flag in workflows
-- ✅ Deploy to **all repos after validation**
-- ✅ Recognize **graduation signals**
-- ✅ Trust agents, **validate outcomes**
-
-</div>
+<div class="mt-3 text-xs text-gray-400">Setup: 2-3 hours</div>
 </div>
 
-<div class="mt-8 p-6 rounded-lg bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20 border border-cyan-500/30">
+<div class="bg-blue-900/40 p-5 rounded-lg border border-blue-500/30">
+<div class="text-2xl mb-3">🔧</div>
+<div class="font-bold text-blue-300 text-lg mb-3">Already Using Copilot</div>
+<div class="space-y-2 text-xs">
+<div>1. Add Phase 2 (planning with history)</div>
+<div>2. Add Phase 4 (code review agent)</div>
+<div>3. Track metrics for 2-4 weeks</div>
+<div>4. Monitor for graduation signals</div>
+</div>
+<div class="mt-3 text-xs text-gray-400">Add Phases 2+4: 3-4 hours</div>
+</div>
 
-### 💡 The Core Insight
-
-**You don't need to start with Gen-4 SDLC. You just need to start.**
-
-From "assign to copilot" to full agentic delivery—one phase at a time.
+<div class="bg-indigo-900/40 p-5 rounded-lg border border-indigo-500/30">
+<div class="text-2xl mb-3">🎯</div>
+<div class="font-bold text-indigo-300 text-lg mb-3">Ready for Full SDLC</div>
+<div class="space-y-2 text-xs">
+<div>1. Review graduation criteria</div>
+<div>2. Get executive sponsorship</div>
+<div>3. Start with Agentic SDLC Part 1</div>
+<div>4. Plan 6-month transformation</div>
+</div>
+<div class="mt-3 text-xs text-gray-400">See: Agentic SDLC talk</div>
+</div>
 
 </div>
 
----
-layout: default
----
-
-# Resources
-
-<div class="grid grid-cols-2 gap-8 text-sm">
-<div>
-
-### Getting Started
-
-- **[GitHub Copilot Documentation](https://docs.github.com/en/copilot)**
-- **[Copilot for Pull Requests](https://github.com/features/copilot/pull-requests)**
-- **Example workflows in `.github/workflows/`**
-
-### When Ready for Phase 5
-
-- **[Agentic SDLC (Complete Guide)](../agentic-sdlc/)**
-  - Full Gen-4 transformation
-- **[Decision Guide](../DECISION-GUIDE.md)**
-  - Find the right talk for your needs
-
-</div>
-<div>
-
-### Related Topics
-
-- **[Agent Teams](../agent-teams/)** — Specialized agent patterns
-- **[Copilot Hooks](../copilot-hooks/)** — Governance and control
-- **[Enterprise Patterns](../enterprise-patterns/)** — Organization-wide adoption
-
-### Executive Context
-
-- **[Agentic Delivery](../../exec-talks/agentic-delivery/)** — Strategic framing
-- **[Agentic Economics](../../exec-talks/agentic-economics/)** — ROI calculations
-- **[Agentic Labor](../../exec-talks/agentic-labor/)** — Workforce implications
-
-</div>
+<div class="mt-6 p-4 bg-gradient-to-r from-cyan-900/30 via-blue-900/30 to-indigo-900/30 rounded-lg text-center text-sm">
+<span class="text-white font-bold">All 4 workflow files are available in this talk's repository directory — ready to copy and customize</span>
 </div>
 
 ---
-layout: end
+layout: center
+class: text-center
 ---
 
-# Thank You
+<div class="flex flex-col items-center justify-center">
+<div class="relative w-full max-w-4xl">
+<div class="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-indigo-900/20 rounded-3xl blur-3xl"></div>
+<div class="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl rounded-3xl border-2 border-cyan-500/30 shadow-2xl p-16">
 
-<div class="flex flex-col items-center justify-center h-full">
-<div class="text-center">
-<h2 class="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent mb-8">
-Ready to Start Your Agentic Journey?
-</h2>
-<div class="text-xl text-gray-300 mb-8">
-Begin with Phase 1: Just assign it to Copilot
+<div class="text-6xl mb-8">🎯</div>
+
+<h1 class="text-5xl font-bold mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+Start with 4 YAML Files
+</h1>
+
+<div class="text-2xl text-slate-200 leading-relaxed mb-8 space-y-4">
+<p>The journey to agentic SDLC doesn't require</p>
+<p>ripping everything out and starting over.</p>
 </div>
-<div class="text-lg text-gray-400">
-From "assign to copilot" to full agentic delivery—one phase at a time.
+
+<div class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/50 p-8 rounded-xl my-8">
+<div class="text-3xl font-bold text-white mb-2">
+Copy 4 workflows. Create a test issue.
+</div>
+<div class="text-4xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
+Agents start working in under 3 hours.
+</div>
+</div>
+
+<div class="text-xl text-slate-300 space-y-3">
+<p>Prove value with agents. Build confidence. Show ROI.</p>
+<p><strong class="text-cyan-300">When you hit the limits — you're ready for full transformation.</strong></p>
+</div>
+
 </div>
 </div>
 </div>

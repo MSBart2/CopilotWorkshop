@@ -171,7 +171,7 @@ These three layers compound: fast CI enables high PR velocity, which requires st
 
 ```
 Q: What's your current agent throughput vs. target?
-├─ "2-3 features/week, want 10-15/day" 
+├─ "2-3 features/week, want 10-15/day"
 │  → Use: Full Gen-4 SDLC (this talk)
 │  └─ Best for: Platform transformation, sustainable AI velocity
 │
@@ -437,9 +437,9 @@ nx run-many --target=lint --all
 ✓ apps-web - lint succeeded
 ✓ libs-auth - lint succeeded
 ✗ libs-data-access - lint failed
-  
+
 Error: A project tagged with "scope:data-access" cannot depend on
-libraries tagged with "scope:payment". 
+libraries tagged with "scope:payment".
 
 Violating import:
   libs/data-access/src/db.ts:5:
@@ -487,7 +487,7 @@ RUN npm run build
 
 **Why Agents Need Determinism:**
 - **Reproducible failures** — Agent can debug because build is identical across runs
-- **Cacheable artifacts** — Same inputs = same outputs = cache hit  
+- **Cacheable artifacts** — Same inputs = same outputs = cache hit
 - **Trust in green builds** — Green means "this exact code is safe" not "worked on my machine"
 - **Bisectable history** — Can binary search for regressions with confidence
 
@@ -774,7 +774,7 @@ gates:
       required: true
       blocking: true
       severity_threshold: high
-  
+
   quality:
     - name: test-coverage
       required: true
@@ -785,7 +785,7 @@ gates:
       required: true
       blocking: false  # warn only
       p95_threshold: 200ms
-  
+
   architecture:
     - name: module-boundaries
       required: true
@@ -794,7 +794,7 @@ gates:
       required: true
       blocking: true
       disallow: circular_dependencies
-  
+
   compliance:
     - name: gdpr-validation
       required: true
@@ -821,7 +821,7 @@ human_review:
 
 
 - 22 manual approval gates per feature
-- Senior architect reviews every architecture decision  
+- Senior architect reviews every architecture decision
 - Security team reviews every auth change
 - Compliance officer reviews every data change
 - **Result:** 4-7 days from PR to merge
@@ -887,8 +887,8 @@ Organizations ship 10-15 features/day with AI agents, but CI infrastructure was 
 Write code → Run tests → Fix failures → Manual review → Deploy
 ```
 
-**Purpose:** Catch bugs before they reach production  
-**Optimized for:** Infrequent changes, human-readable output, manual intervention  
+**Purpose:** Catch bugs before they reach production
+**Optimized for:** Infrequent changes, human-readable output, manual intervention
 **Speed target:** "Fast enough" (~30-60 minutes acceptable)
 
 #### Agentic CI (Trust Factory)
@@ -897,8 +897,8 @@ Write code → Run tests → Fix failures → Manual review → Deploy
 Agent writes code → CI manufactures trust evidence → Human validates outcomes → Auto-deploy
 ```
 
-**Purpose:** Manufacture trust artifacts at agent velocity  
-**Optimized for:** 10-15 changes/day, machine-readable evidence, automated validation  
+**Purpose:** Manufacture trust artifacts at agent velocity
+**Optimized for:** 10-15 changes/day, machine-readable evidence, automated validation
 **Speed target:** <10 minutes for PR checks (agents idle otherwise)
 
 > 🏭 **The Shift:** From "did the tests pass?" to "do we have sufficient evidence to trust this change?"

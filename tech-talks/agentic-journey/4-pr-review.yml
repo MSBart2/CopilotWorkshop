@@ -13,7 +13,7 @@ jobs:
       contents: read
       pull-requests: write
       issues: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,59 +22,56 @@ jobs:
           # Fetch the head branch of the PR, not the merge commit
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      
+          node-version: "20"
+
       - name: Install GitHub Copilot CLI
         run: npm install -g @github/copilot
-      
+
       - name: Analyze PR changes
         id: analyze
         run: |
           echo "🔍 Analyzing PR changes..."
-          
+
           # Get PR stats
           FILES_CHANGED=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | wc -l)
           LINES_ADDED=$(git diff --shortstat origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -oP '\d+(?= insertion)' || echo "0")
           LINES_DELETED=$(git diff --shortstat origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -oP '\d+(?= deletion)' || echo "0")
-          
+
           echo "files_changed=$FILES_CHANGED" >> $GITHUB_OUTPUT
           echo "lines_added=$LINES_ADDED" >> $GITHUB_OUTPUT
           echo "lines_deleted=$LINES_DELETED" >> $GITHUB_OUTPUT
-          
+
           echo "Files changed: $FILES_CHANGED"
           echo "Lines added: $LINES_ADDED"
           echo "Lines deleted: $LINES_DELETED"
-          
+
           # Save diff for analysis
           git diff origin/${{ github.event.pull_request.base.ref }}...HEAD > pr_changes.diff
-      
+
       - name: Run Copilot CLI code review
         id: copilot_review
         env:
-          # The PAT must be passed as an environment variable for authentication
           GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
           echo "🤖 Running Copilot CLI for code review..."
-          
-          # Run Copilot CLI with the -p flag for programmatic mode
-          # This is CRITICAL - without -p, Copilot runs in interactive mode which won't work in CI
-          copilot -p "Check the changes made in this PR. Report any serious errors you find in these changes. Focus on:
-          1. Security vulnerabilities (SQL injection, XSS, hardcoded secrets, etc.)
-          2. Logic errors and edge cases that could cause bugs
-          3. Performance issues (inefficient algorithms, memory leaks, blocking operations)
-          4. Missing error handling
-          5. Test coverage gaps
-          
-          Provide a structured review with severity levels (Critical/High/Medium/Low) for each issue found." \
-            --allow-tool 'shell(git)' > code_review.txt
-          
+
+          # Load external prompt template and substitute variables
+          sed -e "s|{{PR_NUMBER}}|${{ github.event.pull_request.number }}|g" \
+              -e "s|{{FILES_CHANGED}}|${{ steps.analyze.outputs.files_changed }}|g" \
+              -e "s|{{LINES_ADDED}}|${{ steps.analyze.outputs.lines_added }}|g" \
+              -e "s|{{LINES_DELETED}}|${{ steps.analyze.outputs.lines_deleted }}|g" \
+              .github/prompts/review-instructions.md > review_instructions.txt
+
+          # Run Copilot CLI with external instructions
+          copilot -p @review_instructions.txt < pr_changes.diff > code_review.txt
+
           echo "✅ Code review complete"
           cat code_review.txt
-      
+
       - name: Check for critical issues
         id: check_critical
         run: |
@@ -86,96 +83,96 @@ jobs:
             echo "has_critical=false" >> $GITHUB_OUTPUT
             echo "✅ No critical issues detected"
           fi
-      
+
       - name: Run security scan
         id: security
         run: |
           echo "🔒 Running basic security checks..."
-          
+
           SECURITY_ISSUES=""
-          
+
           # Check for hardcoded secrets (simple patterns)
           if git diff origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -iE '(password|api[_-]?key|secret|token)\s*=\s*["\047][^"\047]+["\047]'; then
             SECURITY_ISSUES="${SECURITY_ISSUES}\n⚠️ Potential hardcoded secrets detected"
           fi
-          
+
           # Check for SQL injection patterns
           if git diff origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -E 'query.*\+.*request\.|execute.*\+'; then
             SECURITY_ISSUES="${SECURITY_ISSUES}\n⚠️ Potential SQL injection risk detected"
           fi
-          
+
           if [ -z "$SECURITY_ISSUES" ]; then
             echo "security_status=✅ No obvious security issues detected" >> $GITHUB_OUTPUT
           else
             echo "security_status=⚠️ Security concerns found:${SECURITY_ISSUES}" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Check test coverage
         id: tests
         run: |
           echo "🧪 Checking test coverage..."
-          
+
           # Count test files
           TEST_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -E '(test|spec)\.' | wc -l)
-          
+
           if [ "$TEST_FILES" -gt 0 ]; then
             echo "test_status=✅ Tests included ($TEST_FILES test files)" >> $GITHUB_OUTPUT
           else
             echo "test_status=⚠️ No test files found in changes" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Post comprehensive review
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Read Copilot's review
           REVIEW=$(cat code_review.txt)
-          
+
           # Compile review summary
           cat > review_comment.md <<EOF
           ## 🤖 Phase 4: Automated Code Review Complete
-          
+
           ### Change Summary
-          
+
           - **Files changed:** ${{ steps.analyze.outputs.files_changed }}
           - **Lines added:** ${{ steps.analyze.outputs.lines_added }}
           - **Lines deleted:** ${{ steps.analyze.outputs.lines_deleted }}
-          
+
           ### Copilot CLI Review
-          
+
           \`\`\`
           ${REVIEW}
           \`\`\`
-          
+
           ### Security Scan
-          
+
           ${{ steps.security.outputs.security_status }}
-          
+
           ### Test Coverage
-          
+
           ${{ steps.tests.outputs.test_status }}
-          
+
           ### Human Review Required
-          
+
           👤 **Next Steps:**
-          
+
           1. Review the automated analysis above
           2. Perform outcome-based validation (does it solve the issue?)
           3. Check if changes match the approved execution plan
           4. Approve or request changes
-          
+
           **To approve:**
           - Click "Approve" in the PR review interface
           - Merge when all checks pass
-          
+
           **To request changes:**
           - Add review comments with specific feedback
           - Agent can iterate on the implementation
-          
+
           ---
           *Automated by [agentic-journey Phase 4](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*
           EOF
-          
+
           # Post review as comment
           gh api POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
             --input - <<EOF
@@ -184,27 +181,27 @@ jobs:
             "body": $(cat review_comment.md | jq -Rs .)
           }
           EOF
-      
+
       - name: Add review complete label
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Add labels based on review results
           LABELS='["status:reviewed", "agent-generated"]'
-          
+
           if [ "${{ steps.check_critical.outputs.has_critical }}" = "true" ]; then
             LABELS='["status:reviewed", "agent-generated", "needs-attention"]'
           fi
-          
+
           gh api POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/labels \
             --input - <<EOF
           {
             "labels": $LABELS
           }
           EOF
-          
+
           echo "✅ Code review complete - ready for human validation"
-      
+
       - name: Block merge if critical issues found
         if: steps.check_critical.outputs.has_critical == 'true'
         env:

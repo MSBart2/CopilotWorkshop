@@ -1,4 +1,4 @@
-name: "Phase 3: Code Execution"
+name: "Phase 3: Agentic Coding"
 
 # Implement the approved plan and create PR
 on:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   execution:
-    name: Execute Approved Plan
+    name: Implement Code
     runs-on: ubuntu-latest
     # Only run when human approves plan with /approve-plan
     if: |
@@ -17,57 +17,57 @@ jobs:
       issues: write
       contents: write
       pull-requests: write
-    
+
     steps:
       - name: Verify issue has planned status
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🔍 Verifying issue #${{ github.event.issue.number }} is ready for execution..."
-          
+
           # Check if issue has status:planned label
           LABELS=$(gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels --jq '.[].name')
-          
+
           if ! echo "$LABELS" | grep -q "status:planned"; then
             echo "❌ Error: Issue must have 'status:planned' label before execution"
             exit 1
           fi
-          
+
           echo "✅ Issue is ready for execution"
-      
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      
+          node-version: "20"
+
       - name: Install GitHub Copilot CLI
         run: npm install -g @github/copilot
-      
+
       - name: Get issue and execution plan
         id: issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "📋 Fetching issue details and execution plan..."
-          
+
           # Get issue details
           gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }} > issue.json
           TITLE=$(jq -r '.title' issue.json)
           BODY=$(jq -r '.body // "No description"' issue.json)
-          
+
           # Get comments to find the execution plan
           gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
             --jq '.[] | select(.body | contains("Phase 2: Execution Plan Ready")) | .body' \
             > execution_plan.txt || echo "No execution plan found" > execution_plan.txt
-          
+
           echo "Issue: $TITLE"
           echo "Plan retrieved"
-      
+
       - name: Acknowledge approval
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -78,91 +78,73 @@ jobs:
             "body": "## 🤖 Phase 3: Implementation Starting\n\n✅ Plan approved by @${{ github.event.comment.user.login }}\n\nCopilot CLI is now implementing the approved execution plan...\n\n---\n*Automated by [agentic-journey Phase 3](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*"
           }
           EOF
-      
+
       - name: Create feature branch
         run: |
           BRANCH_NAME="copilot/issue-${{ github.event.issue.number }}-$(date +%s)"
           git checkout -b "$BRANCH_NAME"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-      
+
       - name: Implement solution with Copilot CLI
         env:
           GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
           echo "🔨 Running Copilot CLI for implementation..."
-          
+
           # Read issue and plan
           TITLE=$(jq -r '.title' issue.json)
           BODY=$(jq -r '.body' issue.json)
           PLAN=$(cat execution_plan.txt)
-          
-          # Create implementation instructions
-          cat > implementation_instructions.txt <<INSTRUCTIONS
-          Implement the solution for GitHub issue #${{ github.event.issue.number }}:
-          
-          ISSUE: ${TITLE}
-          
-          DESCRIPTION:
-          ${BODY}
-          
-          APPROVED EXECUTION PLAN:
-          ${PLAN}
-          
-          YOUR TASK:
-          1. Read the approved execution plan carefully
-          2. Implement all the changes specified in the plan
-          3. Create or modify files as needed
-          4. Follow best practices and coding standards
-          5. Ensure code is properly tested
-          
-          Use git commands to create/modify files as specified in the plan.
-          Make atomic commits for each logical change.
-          INSTRUCTIONS
-          
-          # Run Copilot CLI with implementation instructions
-          # The -p flag is CRITICAL for programmatic mode
-          copilot -p "$(cat implementation_instructions.txt)" \
-            --allow-tool 'shell(git)' \
-            --allow-tool 'shell(npm)' \
-            --allow-tool 'shell(node)' \
-            --allow-tool 'shell(python)' \
-            --allow-tool 'shell(make)' > implementation_log.txt
-          
+
+          # Load external prompt template and substitute variables
+          sed -e "s|{{ISSUE_NUMBER}}|${{ github.event.issue.number }}|g" \
+              -e "s|{{ISSUE_TITLE}}|${TITLE}|g" \
+              -e "s|{{ISSUE_DESCRIPTION}}|${BODY}|g" \
+              .github/prompts/implementation-instructions.md > implementation_instructions_base.txt
+
+          # Append the execution plan
+          echo "" >> implementation_instructions_base.txt
+          echo "${PLAN}" >> implementation_instructions_base.txt
+          mv implementation_instructions_base.txt implementation_instructions.txt
+
+          # Run Copilot CLI with external instructions
+          copilot -p @implementation_instructions.txt > implementation_log.txt
+
           echo "✅ Implementation complete"
           cat implementation_log.txt
-      
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # Stage all changes
           git add .
-          
+
           # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          
+
           # Commit with reference to issue
           git commit -m "Implement solution for issue #${{ github.event.issue.number }}
 
           $(cat implementation_log.txt | head -20)
-          
+
           Closes #${{ github.event.issue.number }}"
-      
+
       - name: Push branch
         run: |
           git push origin "$BRANCH_NAME"
-      
+
       - name: Create pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Read implementation log
           IMPL_LOG=$(cat implementation_log.txt)
-          
+
           # Create PR
           gh pr create \
             --title "Fix: Implement solution for issue #${{ github.event.issue.number }}" \
@@ -188,23 +170,23 @@ jobs:
           *Automated by [agentic-journey Phase 3](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*" \
             --base main \
             --head "$BRANCH_NAME"
-      
+
       - name: Update issue status
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Remove planned label, add in-review label
           gh api DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/status:planned || true
-          
+
           gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
             --input - <<EOF
           {
             "labels": ["status:in-review"]
           }
           EOF
-          
+
           echo "✅ Implementation complete - PR created"
-      
+
       - name: Post completion status
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
