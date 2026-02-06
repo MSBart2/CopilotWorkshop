@@ -1,0 +1,184 @@
+name: "Phase 4: PR Code Review"
+
+# Automated code review when agent creates a PR
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  code-review:
+    name: Agent Code Review
+    runs-on: ubuntu-latest
+    # Only run for PRs created by copilot agent
+    if: github.event.pull_request.user.login == 'copilot-swe-agent[bot]' || contains(github.event.pull_request.labels.*.name, 'agent-generated')
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+      
+      - name: Analyze PR changes
+        id: analyze
+        run: |
+          echo "🔍 Analyzing PR changes..."
+          
+          # Get PR stats
+          FILES_CHANGED=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | wc -l)
+          LINES_ADDED=$(git diff --shortstat origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -oP '\d+(?= insertion)' || echo "0")
+          LINES_DELETED=$(git diff --shortstat origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -oP '\d+(?= deletion)' || echo "0")
+          
+          echo "files_changed=$FILES_CHANGED" >> $GITHUB_OUTPUT
+          echo "lines_added=$LINES_ADDED" >> $GITHUB_OUTPUT
+          echo "lines_deleted=$LINES_DELETED" >> $GITHUB_OUTPUT
+          
+          echo "Files changed: $FILES_CHANGED"
+          echo "Lines added: $LINES_ADDED"
+          echo "Lines deleted: $LINES_DELETED"
+      
+      - name: Security scan
+        id: security
+        run: |
+          echo "🔒 Running security analysis..."
+          
+          # Check for common security issues
+          SECURITY_ISSUES=""
+          
+          # Check for hardcoded secrets (simple patterns)
+          if git diff origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -iE '(password|api[_-]?key|secret|token)\s*=\s*["\047]'; then
+            SECURITY_ISSUES="${SECURITY_ISSUES}\n⚠️ Potential hardcoded secrets detected"
+          fi
+          
+          # Check for SQL injection patterns
+          if git diff origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -E 'query.*\+.*request\.|execute.*\+'; then
+            SECURITY_ISSUES="${SECURITY_ISSUES}\n⚠️ Potential SQL injection risk detected"
+          fi
+          
+          if [ -z "$SECURITY_ISSUES" ]; then
+            echo "security_status=✅ No security issues detected" >> $GITHUB_OUTPUT
+          else
+            echo "security_status=⚠️ Security concerns found:${SECURITY_ISSUES}" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Test coverage check
+        id: tests
+        run: |
+          echo "🧪 Checking test coverage..."
+          
+          # Count test files
+          TEST_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -E '(test|spec)\.' | wc -l)
+          
+          if [ "$TEST_FILES" -gt 0 ]; then
+            echo "test_status=✅ Tests included ($TEST_FILES test files)" >> $GITHUB_OUTPUT
+          else
+            echo "test_status=⚠️ No test files found in changes" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Performance analysis
+        id: performance
+        run: |
+          echo "⚡ Analyzing performance implications..."
+          
+          PERF_CONCERNS=""
+          
+          # Check for nested loops
+          if git diff origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -A5 'for.*in' | grep 'for.*in'; then
+            PERF_CONCERNS="${PERF_CONCERNS}\n💡 Nested loops detected - verify O(n²) complexity is acceptable"
+          fi
+          
+          # Check for synchronous operations that might block
+          if git diff origin/${{ github.event.pull_request.base.ref }}...HEAD | grep -E '(readFileSync|execSync)'; then
+            PERF_CONCERNS="${PERF_CONCERNS}\n💡 Synchronous operations detected - consider async alternatives"
+          fi
+          
+          if [ -z "$PERF_CONCERNS" ]; then
+            echo "performance_status=✅ No obvious performance concerns" >> $GITHUB_OUTPUT
+          else
+            echo "performance_status=💡 Performance considerations:${PERF_CONCERNS}" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Invoke Copilot code review agent
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "🤖 Invoking Copilot code review agent..."
+          
+          gh api POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
+            --input - <<EOF
+          {
+            "event": "COMMENT",
+            "body": "## 🤖 Automated Code Review (Phase 4)\n\nCopilot code review agent analyzing this PR...\n\nPlease review:\n- Security vulnerabilities\n- Logic errors and edge cases\n- Performance implications\n- Test coverage\n- Code quality and maintainability"
+          }
+          EOF
+      
+      - name: Post comprehensive review
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          # Compile review summary
+          cat > /tmp/review.md <<EOF
+          ## 🤖 Phase 4: Automated Code Review Complete
+          
+          ### Change Summary
+          
+          - **Files changed:** ${{ steps.analyze.outputs.files_changed }}
+          - **Lines added:** ${{ steps.analyze.outputs.lines_added }}
+          - **Lines deleted:** ${{ steps.analyze.outputs.lines_deleted }}
+          
+          ### Security Analysis
+          
+          ${{ steps.security.outputs.security_status }}
+          
+          ### Test Coverage
+          
+          ${{ steps.tests.outputs.test_status }}
+          
+          ### Performance Analysis
+          
+          ${{ steps.performance.outputs.performance_status }}
+          
+          ### Human Review Required
+          
+          👤 **Next Steps:**
+          
+          1. Review the automated analysis above
+          2. Perform outcome-based validation (does it solve the issue?)
+          3. Approve or request changes
+          
+          **To approve:**
+          - Click "Approve" in the PR review interface
+          - Merge when all checks pass
+          
+          **To request changes:**
+          - Add review comments with specific feedback
+          - Agent will iterate on the implementation
+          
+          ---
+          *Automated by [agentic-journey Phase 4](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*
+          EOF
+          
+          gh api POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
+            --input - <<EOF
+          {
+            "event": "COMMENT",
+            "body": $(cat /tmp/review.md | jq -Rs .)
+          }
+          EOF
+      
+      - name: Add review complete label
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh api POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/labels \
+            --input - <<EOF
+          {
+            "labels": ["status:reviewed", "agent-generated"]
+          }
+          EOF
+          
+          echo "✅ Code review complete - ready for human validation"

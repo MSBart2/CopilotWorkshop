@@ -1,0 +1,67 @@
+name: "Phase 1: Issue Triage"
+
+# Automatically triage new issues: check for duplicates, gather context, route to appropriate team
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  triage:
+    name: Triage New Issue
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+      pull-requests: read
+    
+    steps:
+      - name: Triage issue with Copilot
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "🔍 Starting issue triage for #${{ github.event.issue.number }}"
+          
+          # Invoke Copilot agent for triage
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
+            --input - <<EOF
+          {
+            "assignees": ["copilot-swe-agent[bot]"],
+            "agent_assignment": {
+              "target_repo": "${{ github.repository }}",
+              "base_branch": "main",
+              "task": "triage",
+              "instructions": "Analyze this issue and perform triage:\n1. Check for duplicate issues (open and closed from last 6 months)\n2. Identify issue type (bug, feature, documentation, etc.)\n3. Suggest appropriate labels and priority\n4. Determine which team should handle this\n5. Generate context summary for assignee\n6. Post triage results as a comment"
+            }
+          }
+          EOF
+      
+      - name: Wait for triage completion
+        run: |
+          echo "⏳ Waiting for Copilot to complete triage..."
+          sleep 30
+      
+      - name: Add triage complete label
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          # Add status:triaged label to trigger next workflow
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
+            --input - <<EOF
+          {
+            "labels": ["status:triaged"]
+          }
+          EOF
+          
+          echo "✅ Triage complete - issue ready for planning"
+      
+      - name: Post workflow status
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
+            --input - <<EOF
+          {
+            "body": "## 🤖 Phase 1: Triage Complete\n\n✅ Issue has been triaged and is ready for execution planning.\n\nNext step: Planning agent will research the codebase and generate an execution plan.\n\n---\n*Automated by [agentic-journey Phase 1](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*"
+          }
+          EOF

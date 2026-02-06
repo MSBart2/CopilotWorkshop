@@ -1,0 +1,110 @@
+name: "Phase 2: Execution Planning"
+
+# Generate execution plan after triage: research historical issues, analyze codebase, create plan
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  planning:
+    name: Generate Execution Plan
+    runs-on: ubuntu-latest
+    # Only run when status:triaged label is added
+    if: github.event.label.name == 'status:triaged'
+    permissions:
+      issues: write
+      contents: read
+      pull-requests: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Search for historical similar issues
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "🔍 Searching for similar historical issues..."
+          
+          # Extract key terms from current issue for search
+          ISSUE_TITLE=$(gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }} --jq '.title')
+          
+          # Search for similar closed issues from last 6 months
+          gh api --method GET /search/issues \
+            -f q="repo:${{ github.repository }} is:issue is:closed created:>=$(date -d '6 months ago' +%Y-%m-%d) ${ISSUE_TITLE}" \
+            --jq '.items[] | "- #\(.number): \(.title) (closed \(.closed_at))"' \
+            > /tmp/similar-issues.txt || echo "No similar issues found" > /tmp/similar-issues.txt
+          
+          echo "Found similar issues:"
+          cat /tmp/similar-issues.txt
+      
+      - name: Retrieve PRs from similar issues
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "🔗 Retrieving PRs associated with similar issues..."
+          
+          # For each similar issue, find linked PRs
+          gh api --method GET /search/issues \
+            -f q="repo:${{ github.repository }} is:pr is:merged linked:issue created:>=$(date -d '6 months ago' +%Y-%m-%d)" \
+            --jq '.items[] | "- PR #\(.number): \(.title)\n  Files changed: \(.changed_files) | +\(.additions) -\(.deletions)"' \
+            > /tmp/related-prs.txt || echo "No related PRs found" > /tmp/related-prs.txt
+          
+          echo "Related PRs:"
+          cat /tmp/related-prs.txt
+      
+      - name: Generate execution plan with Copilot
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "📋 Generating execution plan..."
+          
+          # Read historical context
+          SIMILAR_ISSUES=$(cat /tmp/similar-issues.txt)
+          RELATED_PRS=$(cat /tmp/related-prs.txt)
+          
+          # Invoke Copilot agent for planning
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
+            --input - <<EOF
+          {
+            "assignees": ["copilot-swe-agent[bot]"],
+            "agent_assignment": {
+              "target_repo": "${{ github.repository }}",
+              "base_branch": "main",
+              "task": "plan",
+              "instructions": "Generate a detailed execution plan for this issue:\n\n1. Analyze requirements and acceptance criteria\n2. Research the codebase for relevant implementations\n3. Review historical context:\n\n**Similar Historical Issues:**\n${SIMILAR_ISSUES}\n\n**Related PRs:**\n${RELATED_PRS}\n\n4. Identify affected files and dependencies\n5. Evaluate security and performance implications\n6. Generate implementation steps with effort estimates\n7. Create rollback plan\n\nPost the execution plan as a comment with:\n- Historical Context section referencing similar issues/PRs\n- Affected files\n- Dependencies\n- Implementation steps\n- Estimated effort (informed by historical data)\n- Risk assessment\n- Rollback plan"
+            }
+          }
+          EOF
+      
+      - name: Wait for plan generation
+        run: |
+          echo "⏳ Waiting for Copilot to generate execution plan..."
+          sleep 45
+      
+      - name: Add planning complete label
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          # Remove triaged label, add planned label
+          gh api DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/status:triaged || true
+          
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
+            --input - <<EOF
+          {
+            "labels": ["status:planned"]
+          }
+          EOF
+          
+          echo "✅ Execution plan ready for review"
+      
+      - name: Request human approval
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
+            --input - <<EOF
+          {
+            "body": "## 🤖 Phase 2: Execution Plan Ready\n\n✅ Planning agent has generated an execution plan using historical context from similar issues and PRs.\n\n### Next Steps\n\n👤 **Human review required:** Please review the execution plan above.\n\n**To approve and proceed to implementation:**\nComment \`/approve-plan\` on this issue\n\n**To request changes:**\nComment with your requested modifications\n\n---\n*Automated by [agentic-journey Phase 2](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*"
+          }
+          EOF

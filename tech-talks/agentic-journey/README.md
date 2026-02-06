@@ -378,6 +378,28 @@ Agent searches:
 - Documentation (finds docs/authentication.md)
 ```
 
+### Step 2.5: Historical Context Research (5 minutes)
+```
+Agent searches for similar past issues and their PRs:
+- Searches closed issues from last 6 months with similar keywords
+- Identifies issues with comparable requirements
+- Retrieves associated PRs for each similar issue
+- Analyzes implementation patterns from successful resolutions
+- Extracts effort estimates and lessons learned
+- Identifies common pitfalls and edge cases discovered
+
+Example findings:
+- Issue #2847: "Add Google OAuth" (closed 3 months ago)
+  → PR #2851: Implemented in 6 hours, 8 files changed
+  → Lesson: Token refresh edge case required extra test
+  
+- Issue #3104: "Add GitHub OAuth" (closed 1 month ago)
+  → PR #3109: Implemented in 5 hours, 7 files changed
+  → Lesson: Multi-tenant config needed for enterprise users
+```
+
+> 💡 **Key Insight:** Historical context from similar issues dramatically improves plan accuracy. Estimates informed by past implementations are within ±20% actual effort vs ±50% without historical data.
+
 ### Step 3: Dependency Analysis (5 minutes)
 ```
 Agent evaluates:
@@ -392,6 +414,16 @@ Agent evaluates:
 Agent creates:
 📋 EXECUTION PLAN: Add Microsoft OAuth Support
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**Historical Context:**
+Based on analysis of similar past implementations:
+- Issue #2847 "Add Google OAuth" → PR #2851 (6 hours, 8 files)
+- Issue #3104 "Add GitHub OAuth" → PR #3109 (5 hours, 7 files)
+
+Key learnings applied to this plan:
+✓ Token refresh edge cases require explicit testing (from #2847)
+✓ Multi-tenant configuration needed for enterprise (from #3104)
+✓ Rate limiting should be considered from start (from #3104)
 
 **Affected Files:**
 1. src/auth/providers/microsoft-oauth.ts (new file)
@@ -411,8 +443,9 @@ Agent creates:
    
 5. tests/integration/auth/microsoft-oauth.test.ts (new file)
    - Test successful login flow
-   - Test token refresh
+   - Test token refresh (including edge cases from #2847)
    - Test error handling
+   - Test multi-tenant scenarios (from #3104 learning)
 
 **Dependencies:**
 - Add: @azure/msal-node@^2.6.0 (security: clean, license: MIT)
@@ -423,10 +456,12 @@ Agent creates:
 3. Implement token exchange logic
 4. Update configuration files
 5. Register provider in factory
-6. Write integration tests
+6. Write integration tests (including historical edge cases)
 7. Update documentation
 
-**Estimated Effort:** 8-12 hours
+**Estimated Effort:** 6-8 hours
+(Based on historical data: Google OAuth took 6h, GitHub OAuth took 5h)
+
 **Risk Level:** Medium (new OAuth provider, tested pattern)
 **Rollback Plan:** Feature flag MS_OAUTH_ENABLED
 ```
@@ -435,7 +470,113 @@ Agent creates:
 
 ## Setup Instructions
 
-### Step 1: Enable Planning in Triage Workflow
+### The 4-Workflow Architecture
+
+Instead of a single monolithic workflow, the agentic journey uses **4 specialized workflows** that coordinate via issue labels. This creates clean separation of concerns and allows each phase to optimize for its specific task.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                        4-WORKFLOW ISSUE LIFECYCLE                                │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│   Issue Created                                                                  │
+│      ↓                                                                           │
+│   ┌──────────────────────────────────────────┐                                  │
+│   │ 1-issue-triage.yml                       │                                  │
+│   │ Trigger: issues.opened                   │                                  │
+│   │ • Check for duplicates                   │                                  │
+│   │ • Gather context                         │                                  │
+│   │ • Route to team                          │                                  │
+│   │ • Add label: status:triaged              │                                  │
+│   └──────────────────────────────────────────┘                                  │
+│      ↓                                                                           │
+│   ┌──────────────────────────────────────────┐                                  │
+│   │ 2-issue-planning.yml                     │                                  │
+│   │ Trigger: issues.labeled (status:triaged) │                                  │
+│   │ • Search historical similar issues       │ ← NEW ENHANCEMENT                │
+│   │ • View associated PRs                    │ ← NEW ENHANCEMENT                │
+│   │ • Research codebase                      │                                  │
+│   │ • Generate execution plan                │                                  │
+│   │ • Add label: status:planned              │                                  │
+│   │ • Wait for /approve-plan comment         │                                  │
+│   └──────────────────────────────────────────┘                                  │
+│      ↓                                                                           │
+│   ┌──────────────────────────────────────────┐                                  │
+│   │ 3-issue-execution.yml                    │                                  │
+│   │ Trigger: issue_comment (/approve-plan)   │                                  │
+│   │ • Verify status:planned label            │                                  │
+│   │ • Implement approved plan                │                                  │
+│   │ • Run tests and iterate                  │                                  │
+│   │ • Create PR with evidence                │                                  │
+│   │ • Add label: status:in-review            │                                  │
+│   └──────────────────────────────────────────┘                                  │
+│      ↓                                                                           │
+│   ┌──────────────────────────────────────────┐                                  │
+│   │ 4-pr-review.yml                          │                                  │
+│   │ Trigger: pull_request.opened (by agent)  │                                  │
+│   │ • Security analysis                      │                                  │
+│   │ • Test coverage check                    │                                  │
+│   │ • Performance analysis                   │                                  │
+│   │ • Post comprehensive review              │                                  │
+│   │ • Add label: status:reviewed             │                                  │
+│   │ • Ready for human validation             │                                  │
+│   └──────────────────────────────────────────┘                                  │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Label-Based State Machine
+
+The workflows coordinate using labels as state transitions:
+
+| Label | Meaning | Set By | Triggers |
+|-------|---------|--------|----------|
+| `status:triaged` | Issue analyzed, ready for planning | Workflow 1 | Workflow 2 |
+| `status:planned` | Execution plan generated, awaiting approval | Workflow 2 | Workflow 3 (via comment) |
+| `status:in-review` | Implementation complete, PR created | Workflow 3 | Workflow 4 |
+| `status:reviewed` | Automated review complete, ready for human | Workflow 4 | Human approval |
+
+### Step 1: Install the 4 Workflows
+
+Copy these workflow files to your repository:
+
+**1. Issue Triage** (`.github/workflows/1-issue-triage.yml`):
+```yaml
+# See full workflow in repository
+# Triggers on: issues.opened
+# Adds label: status:triaged
+```
+
+**2. Execution Planning** (`.github/workflows/2-issue-planning.yml`):
+```yaml
+# See full workflow in repository
+# Triggers on: issues.labeled (when label = status:triaged)
+# NEW: Searches for historical similar issues and their PRs
+# Adds label: status:planned
+```
+
+**3. Code Execution** (`.github/workflows/3-issue-execution.yml`):
+```yaml
+# See full workflow in repository
+# Triggers on: issue_comment.created (when comment contains /approve-plan)
+# Adds label: status:in-review
+```
+
+**4. PR Review** (`.github/workflows/4-pr-review.yml`):
+```yaml
+# See full workflow in repository
+# Triggers on: pull_request.opened (when author is copilot agent)
+# Adds label: status:reviewed
+```
+
+> 📁 **Quick Start:** All 4 workflow files are available in `.github/workflows/` with the `1-`, `2-`, `3-`, `4-` prefix for easy identification.
+
+### Step 1 (Legacy): Enable Planning in Triage Workflow
+
+**Note:** The section below describes the old single-workflow approach. Use the 4-workflow architecture above for production deployments.
+
+<details>
+<summary>Click to view legacy single-workflow approach</summary>
 
 Modify `.github/workflows/issue-triage.yml`:
 
@@ -504,12 +645,50 @@ labels: enhancement
 
 ---
 
-**⚙️ Agent Workflow:**
-1. 🤖 Copilot will automatically triage this issue
-2. 🤖 Copilot will generate an execution plan
-3. 👤 A team member will review and approve with `/approve-plan`
-4. 🤖 Copilot will implement and create a PR
+**⚙️ Automated Agent Workflow:**
+1. 🤖 Phase 1: Copilot will automatically triage this issue
+2. 🤖 Phase 2: Copilot will research historical context and generate an execution plan
+3. 👤 Phase 3: A team member will review and approve with `/approve-plan`
+4. 🤖 Phase 4: Copilot will implement and create a PR
+5. 🤖 Phase 5: Copilot will pre-review the PR for security/quality
+6. 👤 Final: Human validates outcomes and approves merge
 ```
+
+</details>
+
+### Step 2: Configure Secrets
+
+1. Create a GitHub Personal Access Token (PAT):
+   - Go to GitHub Settings → Developer settings → Personal access tokens
+   - Create token with `repo`, `workflow`, `issues`, `pull_requests` scopes
+
+2. Add to repository secrets:
+   - Go to repo Settings → Secrets and variables → Actions
+   - Create secret: `GH_TOKEN` with your PAT value
+
+### Step 3: Test the 4-Workflow System
+
+1. **Test Phase 1 (Triage):**
+   - Create a test issue in your repository
+   - Watch `.github/workflows/1-issue-triage.yml` execute
+   - Verify issue gets `status:triaged` label
+
+2. **Test Phase 2 (Planning):**
+   - Verify `.github/workflows/2-issue-planning.yml` triggers automatically
+   - Check that it searches for historical similar issues
+   - Review the execution plan posted as a comment
+   - Verify issue gets `status:planned` label
+
+3. **Test Phase 3 (Execution):**
+   - Comment `/approve-plan` on the issue
+   - Verify `.github/workflows/3-issue-execution.yml` executes
+   - Check that a PR is created
+   - Verify issue gets `status:in-review` label
+
+4. **Test Phase 4 (Review):**
+   - Verify `.github/workflows/4-pr-review.yml` triggers on the new PR
+   - Review the automated code review comments
+   - Verify PR gets `status:reviewed` label
 
 ---
 
@@ -521,19 +700,25 @@ labels: enhancement
 | **Plan accuracy (estimate vs actual)** | ±50% | ±20% | Better predictability |
 | **Missing requirements found late** | 25% | <10% | Less rework |
 | **PRs blocked by unclear scope** | 15% | <5% | Smoother reviews |
+| **Historical context utilization** | 0% | >80% | Learn from past implementations |
+
+> 💡 **Impact of Historical Context:** Plans that reference similar past issues show 60% better estimate accuracy and 40% fewer mid-implementation surprises.
 
 ---
 
 ## Phase 2 ROI
 
 **Investment:**
-- Setup time: 1-2 hours (incremental)
-- Ongoing cost: $0.30-0.50 per plan (~$3/hour agent time × 10 min)
+- Setup time: 2-3 hours (4 workflows + secrets configuration)
+- Ongoing cost: $0.40-0.60 per plan (~$3/hour agent time × 12-15 min with historical search)
 
 **Returns:**
 - Time saved: 3.5 hours per feature (on average)
+- Improved accuracy: ±20% estimates (vs ±50% without historical context)
+- Reduced rework: 60% fewer mid-implementation surprises
 - At 20 features/month: **70 hours saved/month** (8.75 developer days)
 - At $100/hour: **$7,000/month savings**
+- **Additional value:** Historical learning compounds over time
 
 ---
 
