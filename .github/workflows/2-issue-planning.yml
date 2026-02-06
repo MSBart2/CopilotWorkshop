@@ -20,71 +20,150 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+      
+      - name: Get issue details
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch issue details
+          gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }} > issue.json
+          
+          TITLE=$(jq -r '.title' issue.json)
+          BODY=$(jq -r '.body // "No description provided"' issue.json)
+          
+          # Save for later use
+          echo "$TITLE" > issue_title.txt
+          echo "$BODY" > issue_body.txt
+          
+          echo "Issue #${{ github.event.issue.number }}: $TITLE"
+      
       - name: Search for historical similar issues
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🔍 Searching for similar historical issues..."
           
-          # Extract key terms from current issue for search
-          ISSUE_TITLE=$(gh api /repos/${{ github.repository }}/issues/${{ github.event.issue.number }} --jq '.title')
+          TITLE=$(cat issue_title.txt)
           
           # Search for similar closed issues from last 6 months
           gh api --method GET /search/issues \
-            -f q="repo:${{ github.repository }} is:issue is:closed created:>=$(date -d '6 months ago' +%Y-%m-%d) ${ISSUE_TITLE}" \
-            --jq '.items[] | "- #\(.number): \(.title) (closed \(.closed_at))"' \
-            > /tmp/similar-issues.txt || echo "No similar issues found" > /tmp/similar-issues.txt
+            -f q="repo:${{ github.repository }} is:issue is:closed created:>=$(date -d '6 months ago' +%Y-%m-%d) ${TITLE}" \
+            --jq '.items[0:5] | map("Issue #\(.number): \(.title)\n  Closed: \(.closed_at)\n  Labels: \(.labels | map(.name) | join(", "))") | join("\n\n")' \
+            > similar-issues.txt || echo "No similar issues found" > similar-issues.txt
           
-          echo "Found similar issues:"
-          cat /tmp/similar-issues.txt
+          echo "Similar issues found:"
+          cat similar-issues.txt
       
       - name: Retrieve PRs from similar issues
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🔗 Retrieving PRs associated with similar issues..."
           
-          # For each similar issue, find linked PRs
+          # Search for merged PRs from last 6 months
           gh api --method GET /search/issues \
-            -f q="repo:${{ github.repository }} is:pr is:merged linked:issue created:>=$(date -d '6 months ago' +%Y-%m-%d)" \
-            --jq '.items[] | "- PR #\(.number): \(.title)\n  Files changed: \(.changed_files) | +\(.additions) -\(.deletions)"' \
-            > /tmp/related-prs.txt || echo "No related PRs found" > /tmp/related-prs.txt
+            -f q="repo:${{ github.repository }} is:pr is:merged created:>=$(date -d '6 months ago' +%Y-%m-%d)" \
+            --jq '.items[0:5] | map("PR #\(.number): \(.title)\n  Merged: \(.closed_at)\n  Files changed: \(.changed_files) | +\(.additions) -\(.deletions)") | join("\n\n")' \
+            > related-prs.txt || echo "No related PRs found" > related-prs.txt
           
           echo "Related PRs:"
-          cat /tmp/related-prs.txt
+          cat related-prs.txt
       
-      - name: Generate execution plan with Copilot
+      - name: Generate execution plan with Copilot CLI
+        id: copilot_plan
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
-          echo "📋 Generating execution plan..."
+          echo "📋 Generating execution plan with Copilot CLI..."
           
-          # Read historical context
-          SIMILAR_ISSUES=$(cat /tmp/similar-issues.txt)
-          RELATED_PRS=$(cat /tmp/related-prs.txt)
+          # Read context
+          TITLE=$(cat issue_title.txt)
+          BODY=$(cat issue_body.txt)
+          SIMILAR_ISSUES=$(cat similar-issues.txt)
+          RELATED_PRS=$(cat related-prs.txt)
           
-          # Invoke Copilot agent for planning
-          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
+          # Create planning instruction
+          cat > planning_instructions.txt <<INSTRUCTIONS
+          Generate a detailed execution plan for GitHub issue #${{ github.event.issue.number }}:
+          
+          ISSUE TITLE: ${TITLE}
+          
+          ISSUE DESCRIPTION:
+          ${BODY}
+          
+          HISTORICAL CONTEXT - Similar Past Issues:
+          ${SIMILAR_ISSUES}
+          
+          HISTORICAL CONTEXT - Related PRs:
+          ${RELATED_PRS}
+          
+          YOUR TASK:
+          1. Analyze the requirements and acceptance criteria
+          2. Research the codebase to find relevant files and patterns
+          3. Learn from the historical context above (similar issues and their PRs)
+          4. Identify all files that need to be modified or created
+          5. List any dependencies that need to be added or updated
+          6. Provide step-by-step implementation instructions
+          7. Estimate effort based on historical data from similar work
+          8. Identify risks and provide a rollback plan
+          
+          Respond in this format:
+          
+          ## Historical Context
+          [What you learned from similar past issues/PRs]
+          
+          ## Affected Files
+          [List of files to modify or create]
+          
+          ## Dependencies
+          [Any packages to add/update]
+          
+          ## Implementation Steps
+          [Numbered step-by-step instructions]
+          
+          ## Estimated Effort
+          [Hours based on historical data]
+          
+          ## Risks & Rollback
+          [Identified risks and rollback strategy]
+          INSTRUCTIONS
+          
+          # Run Copilot CLI with access to repository
+          copilot -p "$(cat planning_instructions.txt)" \
+            --allow-tool 'shell(git)' \
+            --allow-tool 'shell(gh)' \
+            --allow-tool 'shell(find)' \
+            --allow-tool 'shell(grep)' > execution_plan.txt
+          
+          echo "✅ Execution plan generated"
+          cat execution_plan.txt
+      
+      - name: Post execution plan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Read the plan
+          PLAN=$(cat execution_plan.txt)
+          
+          # Post as comment with approval prompt
+          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
             --input - <<EOF
           {
-            "assignees": ["copilot-swe-agent[bot]"],
-            "agent_assignment": {
-              "target_repo": "${{ github.repository }}",
-              "base_branch": "main",
-              "task": "plan",
-              "instructions": "Generate a detailed execution plan for this issue:\n\n1. Analyze requirements and acceptance criteria\n2. Research the codebase for relevant implementations\n3. Review historical context:\n\n**Similar Historical Issues:**\n${SIMILAR_ISSUES}\n\n**Related PRs:**\n${RELATED_PRS}\n\n4. Identify affected files and dependencies\n5. Evaluate security and performance implications\n6. Generate implementation steps with effort estimates\n7. Create rollback plan\n\nPost the execution plan as a comment with:\n- Historical Context section referencing similar issues/PRs\n- Affected files\n- Dependencies\n- Implementation steps\n- Estimated effort (informed by historical data)\n- Risk assessment\n- Rollback plan"
-            }
+            "body": "## 🤖 Phase 2: Execution Plan Ready\n\n${PLAN}\n\n---\n\n### Next Steps\n\n👤 **Human review required:** Please review the execution plan above.\n\n**To approve and proceed to implementation:**\nComment \`/approve-plan\` on this issue\n\n**To request changes:**\nComment with your requested modifications\n\n---\n*Automated by [agentic-journey Phase 2](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*"
           }
           EOF
       
-      - name: Wait for plan generation
-        run: |
-          echo "⏳ Waiting for Copilot to generate execution plan..."
-          sleep 45
-      
-      - name: Add planning complete label
+      - name: Update issue labels
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Remove triaged label, add planned label
           gh api DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/status:triaged || true
@@ -96,15 +175,4 @@ jobs:
           }
           EOF
           
-          echo "✅ Execution plan ready for review"
-      
-      - name: Request human approval
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          gh api POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
-            --input - <<EOF
-          {
-            "body": "## 🤖 Phase 2: Execution Plan Ready\n\n✅ Planning agent has generated an execution plan using historical context from similar issues and PRs.\n\n### Next Steps\n\n👤 **Human review required:** Please review the execution plan above.\n\n**To approve and proceed to implementation:**\nComment \`/approve-plan\` on this issue\n\n**To request changes:**\nComment with your requested modifications\n\n---\n*Automated by [agentic-journey Phase 2](https://github.com/${{ github.repository }}/tree/main/tech-talks/agentic-journey)*"
-          }
-          EOF
+          echo "✅ Execution plan ready for approval"
