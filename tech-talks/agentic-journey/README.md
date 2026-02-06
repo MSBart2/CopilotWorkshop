@@ -542,14 +542,16 @@ Copy these workflow files to your repository:
 
 **1. Issue Triage** (`.github/workflows/1-issue-triage.yml`):
 ```yaml
-# See full workflow in repository
+# Installs: npm install -g @github/copilot
+# Uses: copilot -p "Analyze this issue and perform triage..." --allow-tool 'shell(gh)' 'shell(git)'
 # Triggers on: issues.opened
 # Adds label: status:triaged
 ```
 
 **2. Execution Planning** (`.github/workflows/2-issue-planning.yml`):
 ```yaml
-# See full workflow in repository
+# Installs: npm install -g @github/copilot
+# Uses: copilot -p "Generate execution plan..." --allow-tool 'shell(git)' 'shell(gh)' 'shell(find)' 'shell(grep)'
 # Triggers on: issues.labeled (when label = status:triaged)
 # NEW: Searches for historical similar issues and their PRs
 # Adds label: status:planned
@@ -557,19 +559,23 @@ Copy these workflow files to your repository:
 
 **3. Code Execution** (`.github/workflows/3-issue-execution.yml`):
 ```yaml
-# See full workflow in repository
+# Installs: npm install -g @github/copilot
+# Uses: copilot -p "Implement the solution..." --allow-tool 'shell(git)' 'shell(npm)' 'shell(node)'
 # Triggers on: issue_comment.created (when comment contains /approve-plan)
 # Adds label: status:in-review
 ```
 
 **4. PR Review** (`.github/workflows/4-pr-review.yml`):
 ```yaml
-# See full workflow in repository
-# Triggers on: pull_request.opened (when author is copilot agent)
+# Installs: npm install -g @github/copilot
+# Uses: copilot -p "Check the changes made in this PR..." --allow-tool 'shell(git)'
+# Triggers on: pull_request.opened, synchronize, reopened
 # Adds label: status:reviewed
 ```
 
 > 📁 **Quick Start:** All 4 workflow files are available in `.github/workflows/` with the `1-`, `2-`, `3-`, `4-` prefix for easy identification.
+
+> ⚠️ **Critical:** All workflows use `copilot -p` (programmatic mode). The `-p` flag is **required** for running Copilot CLI in automated workflows.
 
 ### Step 1 (Legacy): Enable Planning in Triage Workflow
 
@@ -656,15 +662,47 @@ labels: enhancement
 
 </details>
 
-### Step 2: Configure Secrets
+### Step 2: Configure Secrets and GitHub Copilot CLI
 
-1. Create a GitHub Personal Access Token (PAT):
-   - Go to GitHub Settings → Developer settings → Personal access tokens
-   - Create token with `repo`, `workflow`, `issues`, `pull_requests` scopes
+**Important:** These workflows use the actual **GitHub Copilot CLI** with programmatic mode (`copilot -p`).
 
-2. Add to repository secrets:
+1. **Install GitHub Copilot CLI access:**
+   - Ensure you have GitHub Copilot license (or GitHub Copilot for Business)
+   - Copilot CLI is installed automatically in workflows via: `npm install -g @github/copilot`
+
+2. **Create a GitHub Personal Access Token (PAT):**
+   - Go to GitHub Settings → Developer settings → Personal access tokens (classic)
+   - Create token with these scopes:
+     - `repo` (Full control of private repositories)
+     - `workflow` (Update GitHub Action workflows)
+     - `write:packages` (Upload packages to GitHub Package Registry)
+   - **Important:** The token owner must have GitHub Copilot access
+
+3. **Add to repository secrets:**
    - Go to repo Settings → Secrets and variables → Actions
-   - Create secret: `GH_TOKEN` with your PAT value
+   - Create secret: `COPILOT_GITHUB_TOKEN` with your PAT value
+   - This token is used to authenticate Copilot CLI in workflows
+
+### How the Copilot CLI Works
+
+All workflows use the **programmatic mode** with the `-p` flag:
+
+```bash
+# Example from Workflow 1 (Triage)
+copilot -p "Analyze this issue and perform triage:
+1. Check for duplicate issues
+2. Identify issue type
+3. Suggest labels and priority
+..." \
+  --allow-tool 'shell(gh)' \
+  --allow-tool 'shell(git)' > triage_result.txt
+```
+
+**Key points:**
+- **`-p` flag is CRITICAL**: Enables programmatic (non-interactive) mode for CI/CD
+- **`--allow-tool`**: Grants permission for specific shell commands
+- **Output redirection**: Capture Copilot's response to a file for parsing
+- **`COPILOT_GITHUB_TOKEN`**: Passed as `GITHUB_TOKEN` environment variable
 
 ### Step 3: Test the 4-Workflow System
 
