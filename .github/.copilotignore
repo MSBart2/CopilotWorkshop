@@ -1,0 +1,17 @@
+# Copilot Workspace Context Exclusions
+# 
+# This file reduces the context size loaded by GitHub Copilot Workspace  
+# to stay under the 30,000 character limit.
+#
+# Note: This file may not be supported by all Copilot features.
+# Primary solution is to move detailed docs to /docs/ directory.
+
+# Exclude workflow documentation  
+SLIDE-WORKFLOW.md
+
+# Exclude supplementary documentation (keep SKILL.md and .agent.md)
+skills/*/IMPLEMENTATION.md
+skills/*/TROUBLESHOOTING.md
+skills/*/SMART-MODE.md
+skills/*/TEMPLATE.md
+skills/*/EXAMPLE-FILE-GENERATION.md
