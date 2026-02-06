@@ -1,148 +1,311 @@
-# Parallel Execution: When Agents Work Simultaneously
+# Parallel Execution: Autonomous Agents Working Simultaneously
 
-Run multiple agents on different branches without conflicts using Git worktree isolation
+> **The Question This Talk Answers:**
+> *"How do I run multiple AI agents on different tasks at the same time without them interfering with each other or requiring constant supervision?"*
 
----
-
-## 🤔 When to Use This Pattern
-
-**Use parallel execution when:**
-- You have multiple independent tasks that can run simultaneously
-- You want to test different architectural approaches side-by-side
-- You need agents working on different features without blocking each other
-- You want autonomous execution without supervision overhead
-
-**Don't use parallel execution when:**
-- Tasks have dependencies and must run sequentially
-- You just need task decomposition with context isolation (see [multi-step-tasks](../multi-step-tasks/))
-- You need specialized roles working hand-in-hand (see [agent-teams](../agent-teams/))
-- Tasks are simple enough for single agent execution
-
-### Quick Decision Guide
-
-```
-Q: Can your work happen in parallel without conflicts?
-├─ No →
-│   Q: Do different parts need specialized roles?
-│   ├─ Yes → Use agent-teams/ pattern
-│   └─ No → Use multi-step-tasks/ pattern
-└─ Yes → 👉 Use parallel-execution (you are here)
-
-    Examples of parallel work:
-    - Feature A, Feature B, Feature C (independent)
-    - GraphQL approach vs. REST approach (experiments)
-    - Refactor + Tests + Docs (non-conflicting)
-```
+**Duration:** 45 minutes | **Target Audience:** Developers / DevOps / Engineering Managers
 
 ---
 
-## The Supervision Bottleneck
+## 📊 Content Fitness
+
+| Criterion | Assessment | Notes |
+|-----------|-----------|-------|
+| **Relevant** | 🟢 High | Solves the supervision bottleneck—enables parallel agent execution without context switching or workspace conflicts |
+| **Compelling** | 🟢 High | Git worktrees + background agents = 3-10x parallel capacity with zero interference; shifts 85 active minutes → 27 minutes |
+| **Actionable** | 🟢 High | Use VS Code 1.109 features today: session picker, worktree isolation, custom agents in background mode—no repo restructuring required |
+
+**Overall Status:** 🟢 Ready to use
+
+---
+
+## 📽️ Slide Generation Mapping
+
+### Slide Sequence (Generated Automatically)
+
+1. **Title/Logo Slide** ← H1 title + subtitle
+2. **Question/Objective Slide** ← "The Question This Talk Answers"
+3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
+4. **Problem Slide** ← "The Problem"
+5. **Solution Overview** ← "The Solution"
+6. **Key Artifacts** ← Architecture diagrams and workflow examples
+7. **Mental Model Shift** ← Move-Toward/Away/Against
+8. **When to Use Decision Tree** ← "When to Use This Pattern"
+9. **Git Worktree Architecture** ← 🎬 Section 1 (3-4 slides)
+10. **Hand-Off Workflow** ← 🎬 Section 2 (2-3 slides)
+11. **Session Management** ← 🎬 Section 3 (3-4 slides)
+12. **Multi-Agent Patterns** ← 🎬 Section 4 (2-3 slides)
+13. **Custom & Cloud Agents** ← 🎬 Section 5 (2-3 slides)
+14. **Use Cases** ← Real-World Use Cases (1-2 slides)
+15. **Actionable Outcomes** ← What You Can Do Today
+16. **Related Patterns** ← Related Patterns
+17. **Official Documentation** ← 📚 section
+18. **End Slide** ← Auto-generated
+
+### Major Sections (TOC Entries)
+
+```markdown
+<!-- 🎬 MAJOR SECTION: Worktree Architecture -->
+<!-- 🎬 MAJOR SECTION: Hand-Off Workflow -->
+<!-- 🎬 MAJOR SECTION: Session Management -->
+<!-- 🎬 MAJOR SECTION: Multi-Agent Patterns -->
+<!-- 🎬 MAJOR SECTION: Custom & Cloud Agents -->
+```
+
+---
+
+## The Problem
 
 ### Key Points
 
 - **Interactive agents require constant supervision**
-  Traditional AI workflows depend on continuous human guidance and feedback
+  Traditional AI workflows demand continuous human guidance—answering questions, approving approaches, monitoring progress
 
 - **Context switching destroys productivity**
-  Every agent question interrupts flow, requiring mental context reload
+  Every agent interruption breaks flow; mental reload cost exceeds implementation gains
 
 - **Serial execution limits parallelism**
-  Can't start next task while monitoring current agent progress
+  Can't start next task while monitoring current agent; supervision becomes the bottleneck
 
-- **Supervision scales linearly with tasks**
-  Two agents require twice the supervision overhead
-
-### Narrative
-
-Modern development tools provide powerful AI agents, but most operate interactively—requiring constant supervision. When an agent implements a feature, developers must remain engaged: answering clarification questions, approving approaches, monitoring progress. This creates a fundamental bottleneck: human attention becomes the limiting factor in AI-accelerated workflows. You cannot parallelize work because supervision doesn't scale. Starting a second task means abandoning the first agent or constant context switching. The productivity ceiling hits when supervision overhead exceeds implementation gains.
-
----
-
-## Background Agents: Autonomous Execution
-
-### Key Points
-
-- **Complete autonomy from planning through delivery**
-  Agents execute entire workflows without human intervention
-
-- **Git worktree isolation**
-  Independent working directories prevent conflicts with active development
-
-- **Hand-off workflow pattern**
-  Interactive planning transitions seamlessly to autonomous execution
-
-- **Session management interface**
-  Monitor multiple background agents from unified VS Code panel
+- **Workspace conflicts prevent multi-agent work**
+  Multiple agents modifying the same codebase create merge conflicts and file collision risks
 
 ### Narrative
 
-Background agents fundamentally change the supervision equation. Instead of interactive guidance, you define intent and constraints once—then agents work completely autonomously until completion. The breakthrough is Git worktree isolation: each background agent operates in a separate filesystem location, a complete clone of your repository. Changes never touch your active workspace. You continue implementing the next feature while three agents work independently on refactoring, testing, and documentation. When agents complete, you review finished work and integrate selectively. Supervision shifts from continuous to final review.
+You've assigned an agent to refactor the authentication module. It completes in 60 minutes—but requires your active supervision throughout. You answer clarification questions. You approve approaches. You monitor progress. When it finishes, you realize you could have started the testing agent or documentation agent in parallel—but supervision doesn't scale. Starting a second task means abandoning the first agent or constant context switching between them.
+
+The productivity ceiling hits fast: human attention becomes the limiting factor in AI-accelerated workflows. Two agents require twice the supervision overhead. Three agents? Impossible without abandoning work or splitting focus so thin that quality suffers. And even if you had unlimited attention, multiple agents working in the same workspace create file conflicts and merge nightmares.
 
 ---
 
-## Git Worktree Isolation: Technical Architecture
+## The Solution: Background Agents with Git Worktree Isolation
 
-### How It Works
+### What It Does
 
-**Traditional single workspace:**
+Background agents run autonomously in isolated Git worktrees—separate filesystem locations sharing the same repository history. Plan once, hand off, and agents execute independently while you continue other work. Review finished results, merge selectively, or discard experiments with zero risk to your active workspace.
+
+### Key Capabilities
+
+- **Autonomous execution**: Agents work from planning through delivery without human intervention—supervision shifts from continuous to final review
+- **Git worktree isolation**: Each agent operates in independent working directory; changes never touch your active workspace
+- **Hand-off workflow**: Interactive planning transitions seamlessly to background execution with full context preservation
+- **Unified session management**: VS Code 1.109 provides session picker, status indicators, and progress monitoring across local/background/cloud agents
+
+### Architecture Overview
+
+Git worktrees provide native isolation: lightweight checkouts sharing repository data (`.git/`) but with independent working directories. When you start a background agent, VS Code creates a worktree, checks out a feature branch, and runs the agent there. Your main workspace continues unchanged. The agent makes commits in its worktree. When finished, you review the branch and merge—or discard the worktree if the approach didn't work.
+
+The hand-off workflow divides supervision into three phases: **interactive planning** (15 minutes defining intent), **background execution** (0 minutes active time, agent works in parallel), **review and integration** (10 minutes examining finished work). Traditional workflows require 85 minutes of active supervision; background agents reduce this to 27 minutes active time.
+
+**Official Documentation:**
+- 📖 [VS Code: Background Agents](https://code.visualstudio.com/docs/copilot/agents/background-agents) — Autonomous agent execution with worktree isolation
+- 📖 [Git Worktrees](https://git-scm.com/docs/git-worktree) — Technical reference for worktree capabilities
+- 📖 [VS Code 1.109 Release Notes](https://code.visualstudio.com/updates/v1_109#_agent-session-management) — Latest session management and agent features
+
+---
+
+## 📦 Key Artifacts
+
+**This talk demonstrates architectural patterns and workflows** for parallel agent execution using VS Code's built-in features. No custom code required—use session picker, worktree integration, and agent configurations directly.
+
+### Primary Artifacts
+
+*Shown inline with detailed explanation in the major sections*
+
+- **Git Worktree Architecture Diagram** — Visual comparison of traditional single-workspace vs. worktree-based isolation
+- **Hand-Off Workflow Patterns** — Before/after comparison showing supervision time reduction (85 min → 27 min)
+- **Multi-Agent Execution Patterns** — Three parallel patterns: independent tasks, experimental variants, specialized roles
+- **VS Code 1.109 Session Picker** — Unified interface for starting/handing-off local, background, and cloud agents
+
+### Supporting Files
+
+*Available in VS Code and documentation*
+
+- **[Custom Agent Definitions](../../workshop/06-custom-agents/)** — Create repository-defined agents that work in background mode
+- **[Copilot CLI Documentation](https://cli.github.com/manual/gh_copilot)** — Command-line interface for background agent sessions
+- **[Agent Skills Examples](../../workshop/04-agent-skills/)** — Specialized domain knowledge for agent capabilities
+
+---
+
+## 🎯 Mental Model Shift
+
+> **The Core Insight:** From "supervise each agent continuously" to "delegate in parallel, review finished work"
+
+### Move Toward (Embrace These Patterns)
+
+- ✅ **Hand-Off Workflow**: Plan interactively (15 min), hand off to background agent (2 min), review finished work (10 min) → 27 active minutes vs. 85 minutes supervised execution
+- ✅ **Worktree Isolation**: Launch 3-5 background agents in separate worktrees simultaneously → Zero file conflicts, independent branches, risk-free experimentation
+- ✅ **Outcome-Based Review**: Judge finished implementations by correctness and quality, not intermediate steps → Faster iteration, less micromanagement
+- ✅ **Planning Clarity**: Invest 15 minutes defining acceptance criteria, constraints, and non-goals → Agents succeed autonomously without mid-task intervention
+
+### Move Away From (Retire These Habits)
+
+- ⚠️ **Supervised Interactive Development**: Monitoring agent progress continuously, answering every question, approving each step → Can't parallelize work, supervision becomes bottleneck
+- ⚠️ **Serial Task Execution**: Finishing one agent task completely before starting the next → Wastes parallel capacity, limits throughput to single-agent speed
+- ⚠️ **Single Workspace Development**: All agents work in the same active workspace → File conflicts, merge chaos, risky experimentation
+
+### Move Against (Active Resistance Required)
+
+- 🛑 **Vague Hand-Offs**: Starting background agents without clear acceptance criteria → Mid-task clarification requests, incomplete results, wasted cycles
+- 🛑 **Mixing Worktrees Manually**: Manually merging agent changes from worktree to main workspace during execution → Defeats isolation, creates conflicts, loses rollback safety
+
+> **Example Transformation:** Before: Start refactoring agent (60 min supervised), then start testing agent (45 min supervised), then documentation agent (30 min supervised) = 135 minutes active time, serial execution. After: Plan all three (15 min total), hand off to 3 background agents in parallel worktrees (2 min), review all three finished results (30 min) = 47 minutes active time, parallel execution. Savings: 88 minutes (65%) with 3x throughput.
+
+---
+
+## When to Use This Pattern
+
+### Decision Tree
+
+```
+Q: Can your tasks run in parallel without dependencies?
+├─ Yes, independent tasks (Feature A, B, C)
+│  → Use: Parallel Execution (this talk)
+│  └─ Best for: 3-10 simultaneous background agents
+│
+├─ Yes, but need to test competing approaches
+│  → Use: Experimental Variants (section in this talk)
+│  └─ Best for: Compare 2-3 architectural options empirically
+│
+├─ No, tasks have sequential dependencies
+│  → Use: Multi-Step Tasks pattern
+│  └─ Best for: Research → Analysis → Implementation workflows
+│
+└─ No, tasks need specialized roles collaborating
+   → Use: Agent Teams pattern
+   └─ Best for: Planner + Coder + Reviewer coordination
+```
+
+### Use This Pattern When
+
+- You have 3-10 independent tasks that can run simultaneously (refactoring, testing, documentation)
+- You want to compare 2-3 architectural approaches empirically (GraphQL vs REST vs gRPC)
+- You need autonomous execution without supervision overhead—agents work while you focus on planning or next tasks
+- Risk-free experimentation is critical—failed approaches discard without merge conflicts
+
+### Don't Use This Pattern When
+
+- Tasks have strict dependencies—output from Task A feeds into Task B (use [Multi-Step Tasks](../multi-step-tasks/))
+- You need specialized agents with hand-off between roles—planner designs, coder implements, reviewer validates (use [Agent Teams](../agent-teams/))
+- Requirements are ambiguous—agents need iterative clarification, not autonomous execution
+- Tasks are simple enough for single interactive agent—overhead of worktree setup exceeds execution time
+
+### Comparison with Related Features
+
+| Aspect | Parallel Execution (this talk) | Multi-Step Tasks | Agent Teams |
+|--------|-------------------------------|------------------|-------------|
+| **Best For** | Independent simultaneous tasks | Sequential dependent phases | Specialized role coordination |
+| **Agent Count** | 3-10 background agents | 1 agent, multi-phase | 3-5 role-specific agents |
+| **Key Mechanism** | Git worktree isolation | Context carryover | Hand-off with role transition |
+| **Supervision Model** | Plan once, review all | Interactive between phases | Monitor role transitions |
+
+---
+
+<!-- 🎬 MAJOR SECTION: Worktree Architecture -->
+## Git Worktree Isolation: Technical Foundation
+
+*How worktrees enable safe parallel agent execution*
+
+### Traditional Single Workspace Problem
+
+**Single workspace constraint:**
 ```
 repo/
 ├── .git/
 └── src/
-    └── main.js  ← only one checkout
+    └── main.js  ← only one checkout, multiple agents conflict
 ```
 
-**Worktree-based isolation:**
+When two agents work in the same workspace:
+- File modifications collide (Agent A edits `main.js` while Agent B also edits it)
+- Merge conflicts require continuous manual resolution
+- Breaking changes from experimental agent affect active work
+- Rollback means reverting commits, not discarding workspace
+
+### Worktree-Based Isolation Solution
+
+**Multiple independent workspaces:**
 ```
 repo/
-├── .git/  ← shared repository
-├── main/src/main.js  ← your active work
-├── worktree-agent-1/src/main.js  ← agent A workspace
-└── worktree-agent-2/src/main.js  ← agent B workspace
+├── .git/  ← shared repository (single source of truth)
+├── main/src/main.js  ← your active work (untouched)
+├── worktree-agent-1/src/main.js  ← Agent A workspace
+└── worktree-agent-2/src/main.js  ← Agent B workspace
 ```
 
-### Key Benefits
+**Key architecture benefits:**
+- **True isolation**: File changes in `worktree-agent-1` never touch `main/` or `worktree-agent-2`
+- **Shared repository**: All worktrees use same `.git/`, maintaining full history and objects
+- **Branch independence**: Each worktree checks out different branch (feature-A, feature-B, feature-C)
+- **Parallel safety**: Agent A can modify `main.js` while Agent B modifies the same file—different worktrees, zero conflicts
 
-- **True isolation:** File changes in agent worktrees never affect main workspace
-- **Shared repository:** All worktrees use same .git, maintaining full history
-- **Branch independence:** Each worktree checks out different branch
-- **Parallel safety:** Multiple agents modify same files without conflicts
+### How VS Code Creates Worktrees
 
-### Narrative
+When you start a background agent session in VS Code 1.109:
 
-Git worktrees provide the foundation for safe autonomous agent execution. Traditional approaches either risk your active workspace or require complex containerization. Worktrees offer native Git functionality: lightweight checkouts sharing repository data but with independent working directories. When a background agent starts, VS Code creates a new worktree, checks out a feature branch, and runs the agent there. Your main workspace continues unchanged. The agent makes commits in its worktree. When finished, you review the branch and merge—or discard the worktree if the approach didn't work. This enables risk-free experimentation at scale.
+1. **Worktree creation**: `git worktree add worktree-agent-1 -b feature-branch`
+2. **Branch checkout**: New branch created from current `HEAD`, independent history
+3. **Agent execution**: Copilot CLI runs in `worktree-agent-1`, makes commits there
+4. **Isolation guarantee**: Your `main/` workspace never changes during agent execution
+
+**Settings and control:**
+- `git.worktreeIncludeFiles`: Copy git-ignored files (local config, build artifacts) to worktrees
+- Auto-commit per turn: Agent commits changes at end of each turn, aligning session history with Git history
+- View worktrees: Source Control Repositories view (`scm.repositories.explorer`) shows all active worktrees
+
+### Worktree Lifecycle Management
+
+**After agent completes:**
+- **Review branch**: Check code quality, run tests, validate approach
+- **Merge**: `git merge feature-branch` if implementation succeeds
+- **Discard**: `git worktree remove worktree-agent-1` for failed experiments—no merge conflicts, no revert overhead
+
+**Rollback comparison:**
+| Scenario | Traditional Workspace | Worktree Isolation |
+|----------|----------------------|-------------------|
+| **Failed experiment** | 90 minutes reverting commits, resolving conflicts | 5 minutes removing worktree |
+| **Breaking changes** | Affects active work immediately | Isolated, main workspace unaffected |
+| **Merge conflicts** | High risk with parallel work | Zero—each agent has independent branch |
 
 ---
 
+<!-- 🎬 MAJOR SECTION: Hand-Off Workflow -->
 ## The Hand-Off Workflow Pattern
 
-### Phases
+*Transform supervision from continuous to review-based*
 
-1. **Interactive planning (5-15 minutes)**
-   Use VS Code chat to clarify requirements, discuss approach, identify risks
+### Three-Phase Execution Model
 
-2. **Context capture (automatic)**
-   System preserves full conversation history, repository state, and intent
+**Phase 1: Interactive Planning (15 minutes active)**
+- Clarify requirements, identify edge cases, discuss architectural approach
+- Define explicit acceptance criteria: "Generate tests achieving 80%+ coverage for authentication module"
+- Specify constraints and non-goals: "Do not modify database schema or change API contracts"
+- Provide links to related code, documentation, and historical context
 
-3. **Background execution (0 minutes active time)**
-   Agent implements autonomously in isolated worktree while you start next task
+**Phase 2: Background Execution (0 minutes active)**
+- Agent receives full conversation history and planning context automatically
+- Works autonomously in isolated Git worktree with feature branch
+- Makes commits at end of each turn, progressing toward acceptance criteria
+- Signals completion with status update and artifact summary
 
-4. **Review and integration (5-10 minutes)**
-   Examine finished work, run tests, merge or iterate based on results
+**Phase 3: Review and Integration (10 minutes active)**
+- Review finished implementation: code quality, test coverage, edge case handling
+- Run tests and validation checks
+- Merge to main branch if successful, iterate with additional context if needed
 
-### Before: Supervised Interactive Development
+### Before/After Productivity Comparison
 
+**Before: Supervised Interactive Development**
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
 │ Plan        │────▶│ Implement    │────▶│ Review      │
 │ 15 min      │     │ 60 min       │     │ 10 min      │
 │ (active)    │     │ (supervised) │     │ (active)    │
 └─────────────┘     └──────────────┘     └─────────────┘
-Total: 85 minutes, 85 minutes active supervision
+Total: 85 minutes active supervision (serial execution)
 ```
 
-### After: Hand-Off to Background Agent
-
+**After: Hand-Off to Background Agent**
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
 │ Plan        │────▶│ Hand-off     │────▶│ Review      │
@@ -159,387 +322,492 @@ Total: 85 minutes, 85 minutes active supervision
 Total: 27 minutes active time, 60 minutes parallel work
 ```
 
-### Narrative
+**Productivity multiplier:**
+- Single task: 85 min → 27 min (68% reduction in active time)
+- Three parallel tasks: 255 min → 47 min (82% reduction, 5.4x faster)
+- Ten tasks/week: 850 min → 270 min (9.7 hours reclaimed)
 
-The hand-off pattern transforms AI productivity economics. Traditional workflows require 85 minutes of active time: planning, supervised implementation, and review. Background agents reduce this to 27 minutes: plan interactively to establish clear intent, hand off to background execution with full context, then review finished work. The 60 minutes of implementation happens in parallel while you work on the next task. For teams handling 5-10 tasks daily, this compounds dramatically: instead of serial execution requiring 425 minutes, parallel execution needs 135 active minutes. The bottleneck shifts from supervision time to planning clarity.
+### Key to Autonomous Success
 
----
+**Planning quality determines execution success:**
+- ✅ **Clear acceptance criteria**: "Tests must cover happy path, error cases, and edge cases (invalid tokens, expired sessions)"
+- ✅ **Explicit constraints**: "Use existing auth library, maintain backward compatibility with v2 API"
+- ✅ **Context provision**: "See similar implementation in `` for pattern reference"
 
-## Multi-Agent Parallel Patterns
-
-### Parallel Execution (Independent Tasks)
-
-```
-Task A → Agent 1 (worktree-1) → Branch A
-Task B → Agent 2 (worktree-2) → Branch B
-Task C → Agent 3 (worktree-3) → Branch C
-```
-All three agents work simultaneously without conflicts
-
-**Best for:**
-- Independent feature development
-- Non-overlapping refactoring
-- Parallel test/documentation generation
-
-### Experimental Variants (A/B Approaches)
-
-```
-Requirement → Agent 1 (GraphQL approach) → Branch A
-           ↘ Agent 2 (REST approach)   → Branch B
-```
-Compare finished implementations, choose best
-
-**Best for:**
-- Architecture decisions
-- Performance optimization attempts
-- API design exploration
-
-### Specialized Parallel Work
-
-```
-                    ┌→ Refactoring Agent ─┐
-                    │                     │
-Feature Complete ──┼→ Testing Agent ─────┼→ Integration
-                    │                     │
-                    └→ Documentation Agent┘
-```
-Different agents tackle different concerns simultaneously
-
-**Best for:**
-- Post-implementation cleanup
-- Cross-cutting improvements
-- Quality enhancement cycles
-
-### Narrative
-
-Background agents enable sophisticated multi-agent workflows. For independent tasks—refactoring, testing, and documentation—launch three agents in parallel, each in isolated worktrees. They work simultaneously without conflicts. For architectural decisions, run experimental variants: two agents implement different approaches (GraphQL vs REST, microservices vs monolith), you compare finished results and choose the superior implementation. This transforms architecture decisions from theoretical debates into empirical comparisons.
+❌ **Vague hand-offs fail:** "Make the auth module better" → Agent asks clarifying questions mid-execution, breaking autonomy
 
 ---
 
-## Session Management Interface (VS Code 1.109)
+<!-- 🎬 MAJOR SECTION: Session Management -->
+## Unified Session Management (VS Code 1.109)
+
+*Orchestrate multiple parallel agents from single interface*
 
 ### Session Type Picker
 
-The new session type picker in the chat input area serves two purposes:
+**New in VS Code 1.109:** Session type picker in chat input area
 
-- **Choose session type:** Start local, background, cloud, or Claude agent sessions
-- **Hand off sessions:** Transfer an ongoing session to a different environment
+**Serves two purposes:**
+1. **Choose session type**: Start local, background, cloud, or third-party agent sessions
+2. **Hand off sessions**: Transfer ongoing conversation to different environment
 
 **Example workflow:**
-1. Plan interactively in local session
-2. Use picker to "Continue in Cloud" for implementation
-3. Cloud agent works while you start next local session
+```
+1. Plan interactively in local session (Ctrl+Alt+I)
+2. Select "Continue in Background" from session type picker
+3. Background agent works while you start next local session
+4. Monitor progress via Agent Sessions view
+```
 
-> 💡 **Tip:** Bind `workbench.action.chat.newLocalChat` to a keyboard shortcut for quick local session creation.
+**Keyboard shortcut:** Bind `workbench.action.chat.newLocalChat` for instant local session creation
 
 ### Agent Sessions View
 
-**Key features (enhanced in 1.109):**
-- **Resize sessions list:** Adjust when showing side-by-side
-- **Multi-select sessions:** Bulk operations across sessions
-- **Stacked view:** Better navigation with filter support
-- **Active agents list:** See all running agents with status
-- **Progress monitoring:** Real-time updates without interrupting agents
-- **Log streaming:** Review agent decisions and reasoning
+**Enhanced features in 1.109:**
+- **Filter by type**: Show only background agents, cloud agents, or all sessions
+- **Multi-select operations**: Bulk actions across multiple sessions (archive, delete, export)
+- **Resize sessions list**: Adjust when showing chat side-by-side with editor
+- **Stacked view**: Improved navigation with filter/search support
+- **Diff statistics**: Each session shows files changed, lines added/removed
+
+**Monitoring capabilities:**
+- **Real-time progress**: See agent actions without interrupting execution
+- **Log streaming**: Review agent decisions, tool calls, and reasoning
+- **Status indicators**: Visual state (in-progress, completed, attention-needed)
 
 ### Agent Status Indicator
 
-The command center shows an **agent status indicator** (`chat.agentsControl.enabled`):
+**Command center integration (`chat.agentsControl.enabled`):**
 
-| Status | Meaning |
-|--------|---------|
-| 🔵 In-progress | Agent actively working |
-| 🟡 Unread | Session has new updates |
-| 🔴 Attention needed | Agent requires input or approval |
+| Indicator | Meaning | Action |
+|-----------|---------|--------|
+| 🔵 In-progress | Agents actively working | Click to filter active sessions |
+| 🟡 Unread | Sessions have new updates | Click to review unread sessions |
+| 🔴 Attention needed | Agents require input/approval | Click to view sessions needing attention |
 
-Click the indicator to quickly open and filter the sessions list.
+**Status indicator behavior (`chat.agentsControl.clickBehavior`):**
+- Default: Cycles through Chat view states (sidebar, maximized, hidden)
+- Alternative: Opens Agent Sessions view filtered by status type
 
-### Narrative
+### Multi-Session Orchestration Example
 
-VS Code 1.109 transforms session management from single-focus to multi-session orchestration. The session type picker enables seamless hand-offs: plan locally, implement in cloud, review results—all from one interface. The Agent Sessions view now supports bulk operations across multiple parallel sessions. The status indicator in the command center provides at-a-glance visibility: which sessions are working, which have updates, which need attention. This unified approach enables developers to run 5-10 parallel agent sessions without losing track of progress.
+**Scenario:** Three parallel background agents + interactive local agent
+
+```
+Agent Sessions View:
+┌─────────────────────────────────────────┐
+│ 🔵 background-1: Refactor auth module   │
+│ 🔵 background-2: Generate test coverage │
+│ 🔵 background-3: Update documentation   │
+│ ⚪ local-1: Plan next feature (YOU)     │
+└─────────────────────────────────────────┘
+```
+
+**Workflow:**
+1. Plan Feature D in local session (15 min)
+2. Hand off Feature D to background-4 agent via session picker (2 min)
+3. Start planning Feature E in new local session while 4 agents work
+4. Agent Sessions view shows progress on all 4 background agents
+5. Status indicator: 🔵 4 in-progress → Review when first completes
+
+**Result:** 4x parallel capacity without losing track of progress
 
 ---
 
-## Custom Agents in Background Mode
+<!-- 🎬 MAJOR SECTION: Multi-Agent Patterns -->
+## Multi-Agent Parallel Patterns
 
-### Agent Architecture
+*Three architectural patterns for parallel agent execution*
+
+### Pattern 1: Independent Tasks (Parallel Execution)
+
+**When to use:** Tasks have zero dependencies, can run simultaneously
+
+**Architecture:**
+```
+Task A → Agent 1 (worktree-1) → Branch feature-A
+Task B → Agent 2 (worktree-2) → Branch feature-B
+Task C → Agent 3 (worktree-3) → Branch feature-C
+
+All three agents work simultaneously, merge independently
+```
+
+**Best for:**
+- Independent feature development (OAuth, payment gateway, notification service)
+- Non-overlapping refactoring (auth module, logging module, error handling)
+- Parallel quality improvements (test generation, documentation, linting fixes)
+
+**Example:** After implementing new API endpoint:
+- Agent 1: Generate integration tests in `worktree-test` → merge to `main`
+- Agent 2: Write API documentation in `worktree-docs` → merge to `main`
+- Agent 3: Add observability (logging, metrics) in `worktree-observability` → merge to `main`
+
+Result: 3 tasks completed in parallel time of 1 task
+
+### Pattern 2: Experimental Variants (A/B Comparison)
+
+**When to use:** Architectural decision requires empirical comparison
+
+**Architecture:**
+```
+Requirement → Agent 1 (GraphQL implementation) → Branch approach-A
+           ↘ Agent 2 (REST implementation)     → Branch approach-B
+           ↘ Agent 3 (gRPC implementation)     → Branch approach-C
+
+Compare finished implementations, merge winner, discard losers
+```
+
+**Best for:**
+- Architecture decisions (GraphQL vs REST vs gRPC)
+- Performance optimization attempts (different caching strategies)
+- API design exploration (multiple interface approaches)
+
+**Example:** Design new search API:
+- Agent 1: GraphQL with nested queries → measure: flexibility, client complexity
+- Agent 2: REST with hypermedia → measure: simplicity, cacheability
+- Agent 3: gRPC with streaming → measure: performance, type safety
+
+**Evaluation criteria:**
+- Performance: Latency p50/p95, throughput under load
+- Complexity: Lines of code, client integration difficulty
+- Maintainability: Testability, documentation clarity
+
+**Decision:** Compare finished implementations empirically, not theoretically. Merge winner, `git worktree remove` for losers—zero merge conflict risk.
+
+### Pattern 3: Specialized Parallel Work
+
+**When to use:** Cross-cutting concerns applied post-implementation
+
+**Architecture:**
+```
+                    ┌→ Refactoring Agent (worktree-refactor) ─┐
+                    │                                          │
+Feature Complete ──┼→ Testing Agent (worktree-test) ─────────┼→ Integration
+                    │                                          │
+                    └→ Documentation Agent (worktree-docs) ───┘
+
+Three specialized agents tackle different concerns simultaneously
+```
+
+**Best for:**
+- Post-implementation cleanup: New feature complete, needs tests + docs + refactoring
+- Cross-cutting improvements: Apply new pattern across auth, payment, notification modules
+- Quality enhancement cycles: Security audit + performance optimization + accessibility fixes
+
+**Example:** After implementing user profile feature:
+- Refactoring agent: Apply new error handling pattern to profile service
+- Testing agent: Generate 80%+ test coverage for profile endpoints
+- Documentation agent: Write user guide and API reference for profile features
+
+**Coordination:** Each agent works independently, merges non-overlapping changes. Review all three branches together before integration.
+
+---
+
+<!-- 🎬 MAJOR SECTION: Custom & Cloud Agents -->
+## Scaling with Custom and Cloud Agents
+
+*Extend parallel capacity with specialized and cloud-based agents*
+
+### Custom Agents in Background Mode
 
 **Repository-defined agents (`.github/agents/`):**
-- Load automatically in VS Code and CLI
-- Contain specialized instructions and tool restrictions
-- Execute identically in background as in foreground
+- Load automatically in VS Code and Copilot CLI
+- Define specialized instructions, tool restrictions, and behavior patterns
+- Execute identically in background mode as in interactive mode
 
 **Background execution model:**
 - Agent receives full interactive context from hand-off
 - Works in isolated Git worktree with branch checkout
-- Has access to same tools: file operations, Git commands, testing
-- Signals completion with status and artifact summary
+- Has access to same tools as interactive mode: file operations, Git commands, testing
+- Signals completion with status update and artifact summary
 
-### Use Cases
+**Enable custom agents for background:** `github.copilot.chat.cli.customAgents.enabled`
 
-**`@review-enforcer` agent (architecture validation):**
-- Run autonomous reviews on every PR before human review
-- Background execution while team continues development
-- Consistent application of standards without manual oversight
+### Example: Architecture Review Agent
 
-**`@test-generator` agent (coverage automation):**
-- Generate comprehensive test suites from implementation
-- Execute in parallel with next feature development
-- Maintain 80%+ coverage without dedicated testing time
-
-**`@refactor-specialist` agent (technical debt reduction):**
-- Modernize patterns across large codebases
-- Work autonomously on 50+ file changes
-- Human reviews only final diff, not intermediate steps
-
-### Narrative
-
-Custom agents (from your agent configurations) become exponentially more valuable in background mode. The `@review-enforcer` agent you built for interactive code reviews now runs autonomously on every PR—checking architecture compliance, security patterns, and style guidelines without human triggering. The `@test-generator` agent creates test coverage in parallel while you implement the next feature. The `@refactor-specialist` modernizes deprecated patterns across 50 files independently. These agents execute with the same quality as interactive mode but without supervision cost.
-
+**Custom agent definition (`.github/agents/review-enforcer.agent.md`):**
+```markdown
+---
+name: review-enforcer
+tools: ['analyze', 'shell(npm test)', 'file']
+model: 'Claude Sonnet 4.5 (copilot)'
 ---
 
-## Cloud Agents: Large-Scale Operations
+You are an architecture review agent enforcing team standards.
 
-### Cloud Agent Capabilities (1.109)
+**Your responsibilities:**
+- Check approved patterns are used correctly (dependency injection, error handling)
+- Validate dependencies match architecture decision records
+- Ensure performance budgets are not violated (bundle size, query count)
+- Post structured review comments with specific violations and fixes
 
-When starting a cloud agent session:
+**Acceptance criteria:**
+- Zero critical violations
+- All warnings include specific file/line references
+- Suggested fixes include code examples
+```
 
-- **Model selection:** Choose from available models for cloud execution
+**Usage pattern:**
+1. PR created → Trigger background agent via workflow: `copilot @review-enforcer "Review PR #123"`
+2. Agent checks out PR branch in isolated worktree
+3. Agent runs architecture analysis: patterns, dependencies, performance
+4. Agent posts structured review comment on PR
+5. Human reviewer focuses on business logic, not mechanical standards
+
+**Impact:**
+- Manual review: 30 min/PR, inconsistent application
+- Background agent: 2 min/PR, 100% consistency
+- Capacity: 5-6 PRs/day manual → 20+ PRs/day with agent
+
+### Cloud Agents for Large-Scale Operations
+
+**When to use cloud agents (vs. background agents):**
+- **Large refactoring:** Modify 100+ files without local resource constraints
+- **Cross-repository operations:** Coordinate changes across multiple repos
+- **Long-running tasks:** Operations that would timeout locally (8+ hours)
+
+**Cloud agent capabilities (VS Code 1.109):**
+- **Model selection:** Choose from available models for task-specific optimization
 - **Custom agents:** Use repository-defined agents from default branch
-- **Partner agents:** Access third-party agents where available
-- **Multi-root support:** Select which folder to use in multi-root workspaces
+- **Multi-root support:** Select which folder in multi-root workspace
+- **Partner agents:** Access third-party agents (Claude, Codex) where available
 
-### Cloud Agent Use Cases
+**Hybrid architecture example:**
+```
+Local planning:
+- Interactive local session (15 min): Define large refactoring scope
 
-**Large-scale refactoring:**
-- Modify 100+ files without local resource constraints
-- GitHub infrastructure handles compute
+Parallel execution:
+- 3 background agents: Modify auth, payment, notification modules in isolation
+- 10 cloud agents: Process remaining 70+ modules on GitHub infrastructure
 
-**Cross-repository operations:**
-- Access multiple repos in a single session
-- Coordinate changes across microservices
+Review:
+- Background agents complete in 2 hours (local machine)
+- Cloud agents complete in 1.5 hours (GitHub infrastructure)
+- Review all 73 branches together, merge in logical order
+```
 
-**Long-running tasks:**
-- Operations that would timeout locally
-- Continuous execution without IDE dependency
-
-### Narrative
-
-Cloud agents extend agent capabilities beyond local machine limitations. Large refactoring operations that would strain local resources run on GitHub infrastructure. The 1.109 release added model selection for cloud agents—choose the best model for your specific task. Custom agents defined in your repository work identically in cloud as locally. This enables massive parallel execution: run 10 cloud agents simultaneously while your local machine handles 3 background agents, all coordinated from VS Code's unified interface.
+**Result:** Massive parallel capacity (13 agents simultaneously) without local machine limitations.
 
 ---
 
-## Use Case: Isolated Worktree Experiments
+## Real-World Use Cases
 
-### The Problem
+### Use Case 1: Risk-Free Architectural Experimentation
 
-- **Experimental features risk main branch:** Breaking changes affect active work
-- **Rollback overhead:** 90 minutes reverting failed experiments
-- **Merge conflicts:** Competing approaches create integration nightmares
-- **Risk aversion:** Teams avoid experimentation due to costs
+**The Problem:**
+- Experimentation carries high cost: Breaking changes affect active work, rollback requires 90 minutes reverting commits
+- Merge conflicts from competing approaches create integration nightmares
+- Teams avoid exploration, stick with known patterns even when better alternatives exist
 
-### The Solution
+**The Solution:**
+- Launch 3 background agents testing architectural variants: GraphQL, REST, gRPC
+- Each agent works in isolated worktree with independent branch
+- Agents implement complete solutions including tests and documentation
+- Compare finished implementations empirically: performance, complexity, maintainability
 
-- Launch 2-3 background agents with different architectural approaches
-- Each agent works in isolated Git worktree with independent branch
-- Agents implement complete solutions without interference
-- Compare finished implementations empirically
-- Merge winning approach, discard worktrees for failed experiments
+**Implementation:**
+```bash
+# Hand off three experimental variants
+1. Local session: Plan API requirements (15 min)
+2. Session picker → Background: Agent 1 implements GraphQL in worktree-graphql
+3. Session picker → Background: Agent 2 implements REST in worktree-rest
+4. Session picker → Background: Agent 3 implements gRPC in worktree-grpc
+5. Review all three branches when complete (30 min)
+```
 
-### Impact
-
+**Outcome:**
 - **90 minutes → 5 minutes** rollback time (remove worktree vs. complex revert)
 - **0 merge conflicts** (isolation prevents interference)
-- **3x experimentation rate** (negligible cost enables exploration)
-
-### Narrative
-
-Experimentation traditionally carries high risk. Testing an architectural approach in your main workspace means potential breaking changes, difficult rollbacks, and merge conflicts if the approach fails. This discourages exploration—teams stick with known patterns even when better alternatives exist. Git worktrees eliminate this friction. Launch three background agents to test different approaches: GraphQL vs REST vs gRPC. Each works in isolated worktree with independent branch. They implement complete solutions including tests and documentation. When finished, compare the implementations empirically—performance, complexity, maintainability. Merge the winner. Discard failed worktrees with a single command. The cost of experimentation becomes negligible, enabling data-driven architectural decisions.
+- **3x experimentation rate** (negligible cost enables data-driven decisions)
 
 ---
 
-## Use Case: Autonomous Architecture Review
+### Use Case 2: Autonomous Architecture Review at Scale
 
-### The Problem
+**The Problem:**
+- Manual architecture reviews don't scale: Senior architects spend 30 min/PR validating patterns
+- Inconsistent application: Different reviewers apply standards differently
+- Review bottleneck: PRs wait hours/days for senior architect availability
+- Capacity limitation: Can't review 20+ PRs daily with manual process
 
-- **Manual review overhead:** 30 minutes per PR for architecture validation
-- **Inconsistent application:** Different reviewers apply standards differently
-- **Review bottleneck:** PRs wait hours/days for senior architect availability
-- **Scaling limitation:** Can't review 20+ PRs daily with manual process
-
-### The Solution
-
+**The Solution:**
 - Configure `@review-enforcer` custom agent with architecture standards
 - PR creation triggers background agent review in isolated worktree
-- Agent analyzes code against patterns, dependencies, performance budgets
-- Posts structured review comments with specific violations and recommendations
-- Human reviewers focus on business logic, not standards enforcement
+- Agent analyzes code: approved patterns, dependency compliance, performance budgets
+- Agent posts structured review comments with specific violations and recommended fixes
+- Human reviewers focus on business logic and creative problem-solving
 
-### Impact
+**Implementation:**
+```yaml
+# GitHub Actions workflow trigger
+on:
+  pull_request:
+    types: [opened, synchronize]
 
+jobs:
+  architecture-review:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh copilot @review-enforcer "Review PR ${{ github.event.pull_request.number }}"
+```
+
+**Outcome:**
 - **30 minutes → 2 minutes** per PR for standards validation
 - **100% consistent** application of architecture rules
 - **Real-time reviews** (no waiting for architect availability)
 - **20+ PRs daily** handled without scaling review team
 
-### Narrative
+---
 
-Manual architecture reviews don't scale. Senior architects spend 30 minutes per PR validating patterns, checking dependencies, and ensuring performance budgets. Different reviewers apply standards inconsistently. PRs wait hours for availability. Background agents solve this bottleneck. When a PR is created, the `@review-enforcer` agent automatically checks out the branch in an isolated worktree and runs comprehensive architecture analysis: Are approved patterns used correctly? Do dependencies match the architecture decision record? Are performance budgets violated? The agent posts structured comments with specific violations and recommended fixes. Human reviewers focus on business logic and creative problem-solving, not mechanical standards enforcement.
+### Use Case 3: Parallel Quality Enhancement (Post-Implementation)
+
+**The Problem:**
+- After implementing feature, need tests + documentation + refactoring—serial execution takes 8+ hours
+- Test generation waits for documentation, documentation waits for refactoring—artificial dependencies
+
+**The Solution:**
+- Launch 3 background agents in parallel worktrees:
+  - Testing agent: Generate 80%+ test coverage for new profile feature
+  - Documentation agent: Write user guide and API reference for endpoints
+  - Refactoring agent: Apply new error handling pattern to profile service
+
+**Implementation:**
+```bash
+# After feature completion in main branch
+1. Background agent 1: @test-generator → worktree-test → 85% coverage achieved
+2. Background agent 2: @doc-writer → worktree-docs → API reference complete
+3. Background agent 3: @refactor-specialist → worktree-refactor → Pattern applied
+
+All three complete in 2 hours parallel time (vs. 6 hours serial)
+```
+
+**Outcome:**
+- **8 hours serial → 2 hours parallel** (75% time reduction)
+- **Test coverage: 60% manual → 85% agent** (25% improvement)
+- **Zero active time spent** on quality enhancement (parallel while starting next feature)
 
 ---
 
-## Background Agent Enhancements (1.109)
+## ✅ What You Can Do Today
 
-### New Capabilities
+**Immediate Actions (15 minutes):**
+- [ ] Update to VS Code 1.109 to access session type picker and enhanced Agent Sessions view
+- [ ] Review [Background Agents documentation](https://code.visualstudio.com/docs/copilot/agents/background-agents) to understand worktree isolation model
+- [ ] Try creating a background agent session: Open Chat view (Ctrl+Alt+I) → Select "Background" from session type picker
 
-**Custom agents for background:**
-- Use repository-defined agents (`.github/agents/`) in background mode
-- Same agent configuration works across all execution environments
+**Short-Term Implementation (1-2 hours):**
+- [ ] Start first parallel workflow: Plan 2 independent tasks in local session, hand both off to background agents
+- [ ] Enable custom agents for background: Set `github.copilot.chat.cli.customAgents.enabled` to `true`
+- [ ] Create first custom agent in `.github/agents/` for task you frequently delegate (test generation, documentation, code review)
+- [ ] Monitor sessions using Agent Sessions view—filter by "Background Agents", observe progress without interrupting
 
-**Image context support:**
-- Attach images as context in background agent sessions
-- Useful for UI implementation from mockups
+**Advanced Exploration (1 week):**
+- [ ] Implement 3-agent parallel pattern: Refactoring + Testing + Documentation after next feature completion
+- [ ] Run experimental variants: Launch 2-3 background agents testing different architectural approaches, compare empirically
+- [ ] Configure `git.worktreeIncludeFiles` to copy necessary git-ignored files (local config, build artifacts) to agent worktrees
+- [ ] Measure ROI: Track active supervision time before/after adopting background agents (target: 50-70% reduction)
 
-**Multi-root workspace support:**
-- Select which folder to use in multi-root workspaces
-- Clear scope for agent operations
-
-**Auto-commit per turn:**
-- Changes committed to Git worktree at end of each turn
-- Simplified working set display
-- Keep/Undo actions removed (Git history provides rollback)
-
-### Worktree File Inclusion
-
-New setting `git.worktreeIncludeFiles`:
-- Specify additional files copied to worktree after creation
-- Useful for git-ignored files (local config, build artifacts)
-- Ensures agents have complete working environment
-
----
-
-## Best Practices
-
-### When to Use Background Agents
-
-**Ideal scenarios:**
-- Well-defined requirements with clear acceptance criteria
-- Refactoring with established patterns to apply
-- Test generation from implementation
-- Documentation from code
-- Standards enforcement and architecture validation
-
-**Not recommended:**
-- Ambiguous requirements requiring iterative clarification
-- Novel architecture requiring creative exploration
-- Complex debugging needing interactive hypothesis testing
-- Security-critical changes requiring continuous oversight
-
-### Planning for Autonomy
-
-**Maximize success rates:**
-- Spend adequate time on interactive planning (15+ minutes)
-- Define explicit acceptance criteria in hand-off
-- Specify non-goals and constraints clearly
-- Provide architectural context and relevant examples
-- Include links to related code and documentation
-
-**Set clear boundaries:**
-- Define scope limits (files/directories to modify)
-- Specify testing requirements
-- Identify integration points that must remain stable
-- List external dependencies to avoid
-
-### Narrative
-
-Background agents excel at well-defined execution, not ambiguous exploration. The key to success is planning quality. Spend 15 minutes interactively clarifying requirements, discussing approach, and identifying edge cases. When handing off, explicitly state acceptance criteria: "Generate tests achieving 80%+ coverage for the authentication module, covering happy path and error cases." Define non-goals: "Do not modify the database schema or change existing API contracts." This upfront investment ensures autonomous execution succeeds.
-
----
-
-## Common Pitfalls
-
-### Anti-Patterns to Avoid
-
-**Insufficient planning:**
-- ❌ Wrong: H and off vague requirements hoping agent figures it out
-- ✅ Right: Spend 15 minutes clarifying intent, constraints, acceptance criteria
-
-**Over-supervision:**
-- ❌ Wrong: Check agent progress every 5 minutes, interrupt with guidance
-- ✅ Right: Let agents work autonomously, review finished results
-
-**Inappropriate tasks:**
-- ❌ Wrong: Use background agents for creative architecture exploration
-- ✅ Right: Use for well-defined execution (refactoring, testing, documentation)
-
-**Ignoring worktree isolation:**
-- ❌ Wrong: Manually merge agent changes into main workspace during execution
-- ✅ Right: Wait for completion, review branch, merge through normal process
-
----
-
-## Metrics and ROI
-
-### Time Savings
-
-**Per-feature development:**
-- Traditional supervised: 105 minutes active time
-- Background agent: 45 minutes active time
-- **Savings: 57% per feature**
-
-**Weekly capacity gains:**
-- 10 features/week: 600 minutes (10 hours) reclaimed
-- Enables 20+ features/week at same active time investment
-
-### Quality Improvements
-
-**Architecture compliance:**
-- Manual reviews: 30 min/PR, inconsistent application
-- Background agents: 2 min/PR, 100% consistency
-- **20+ PRs daily vs. 5-6 with manual process**
-
-**Test coverage:**
-- Manual writing: 60% average coverage due to time constraints
-- Background agents: 85% coverage through parallel generation
-- **25% coverage improvement with zero active time**
-
----
-
-## Key Takeaways
-
-### 🚀 Hand-Off Pattern Transforms Productivity
-Plan locally → execute autonomously → review finished work
-
-### 💡 Git Worktrees Enable Safe Parallelism
-Multiple agents work simultaneously without conflicts
-
-### ⚡ Supervision Shifts from Continuous to Review
-27 minutes active time vs. 85 minutes with traditional approach
-
-### 🎯 Custom Agents Scale Through Automation
-Same configurations work across local, background, and cloud
-
-### 🛡️ Isolation Enables Risk-Free Experimentation
-Failed experiments discard with one command, no merge conflicts
+**Next Steps After Completion:**
+1. ✅ Run 3-5 parallel background agents successfully for one sprint
+2. 📊 Document time savings and present ROI to team/management
+3. 📖 Review [Agent Teams](../agent-teams/) for specialized role patterns when parallel execution isn't sufficient
+4. 🚀 Scale to cloud agents for large refactoring (100+ files) using [Cloud Agents](https://code.visualstudio.com/docs/copilot/agents/cloud-agents) guide
 
 ---
 
 ## Related Patterns
 
-- **Need task decomposition?** → See [multi-step-tasks](../multi-step-tasks/) for research/analysis phases
-- **Need specialized roles?** → See [agent-teams](../agent-teams/) for planner/coder/reviewer patterns
-- **Building custom agents?** → See [workshop/06-custom-agents](../../workshop/06-custom-agents/)
+### Complementary Features
+
+- **[Multi-Step Tasks](../multi-step-tasks/)** — When tasks have sequential dependencies (research → analysis → implementation)
+- **[Agent Teams](../agent-teams/)** — When specialized roles must collaborate (planner → coder → reviewer hand-offs)
+- **[Agentic SDLC](../agentic-sdlc/)** — When parallel execution hits organizational limits (cross-repo coordination, CI bottlenecks)
+
+### Decision Flow
+
+**If this talk doesn't fit your needs:**
+
+```
+Q: What's your actual constraint?
+├─ Tasks have dependencies → See: Multi-Step Tasks
+├─ Need specialized roles → See: Agent Teams
+├─ Hitting repo/CI limits → See: Agentic SDLC
+└─ Need interactive iteration → Don't use background agents (use local agents)
+```
+
+See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 ---
 
-## Resources
+## 📚 Official Documentation
 
-**Official Documentation:**
-- [VS Code: Background Agents](https://code.visualstudio.com/docs/copilot/agents/background-agents) — Autonomous agent execution
-- [VS Code: Cloud Agents](https://code.visualstudio.com/docs/copilot/agents/cloud-agents) — Large-scale operations
-- [VS Code 1.109: Agent Session Management](https://code.visualstudio.com/updates/v1_109#_agent-session-management) — Session picker and status
-- [Git Worktrees](https://git-scm.com/docs/git-worktree) — Technical reference
+**Primary Documentation:**
+- 📖 **[VS Code: Background Agents](https://code.visualstudio.com/docs/copilot/agents/background-agents)** — Autonomous agent execution with worktree isolation, core concepts and workflows
+- 📖 **[Git Worktrees](https://git-scm.com/docs/git-worktree)** — Technical reference for worktree commands, architecture, and best practices
+- 📖 **[VS Code 1.109 Release Notes](https://code.visualstudio.com/updates/v1_109#_agent-session-management)** — Latest session management features: picker, status indicator, multi-select operations
 
-**Related Talks:**
-- [Agentic SDLC](../agentic-sdlc/) (Part 2) — Gen-4 SDLC workflows
-- [Copilot CLI](../copilot-cli/) — Plan Mode and hand-off patterns
+**Additional Resources:**
+- 🎓 [VS Code: Cloud Agents](https://code.visualstudio.com/docs/copilot/agents/cloud-agents) — Large-scale operations on GitHub infrastructure
+- 🔧 [Custom Agents Guide](https://code.visualstudio.com/docs/copilot/customization/custom-agents) — Create repository-defined agents for specialized tasks
+- 💬 [Copilot CLI Manual](https://cli.github.com/manual/gh_copilot) — Command-line interface for background agent sessions
+
+**GitHub Resources:**
+- 🐙 [Agent Orchestration Examples](https://github.com/ShepAlderson/copilot-orchestra) — Community multi-agent systems with conductor patterns
+- 📋 [GitHub Copilot Changelog](https://github.blog/changelog/label/copilot/) — Latest updates and capabilities
+
+---
+
+## 🎭 Behind the Scenes
+
+*For those who want to understand the deeper mechanics*
+
+### Why Worktrees Solve the Parallel Agent Problem
+
+**Traditional approaches and their failures:**
+
+1. **Single workspace, multiple agents:**
+   - Problem: File collisions require continuous merge conflict resolution
+   - Example: Agent A modifies `auth.ts` line 50 while Agent B modifies same line
+   - Result: Manual intervention breaks autonomy
+
+2. **Docker containers per agent:**
+   - Problem: Full repository clone per container (resource intensive)
+   - Example: 5 agents = 5 full clones, high disk/memory usage
+   - Result: Doesn't scale beyond 2-3 agents on typical developer machine
+
+3. **Git branches without worktrees:**
+   - Problem: Switching branches affects entire workspace
+   - Example: Can't review Agent A's work while Agent B continues
+   - Result: Serial execution, not parallel
+
+**Why worktrees succeed:**
+- Lightweight: Share `.git/` objects, only working directory differs
+- Native Git: No containerization overhead, works with existing tools
+- Independent: Each worktree has own `HEAD`, index, working files
+- Scalable: 10 worktrees use ~1.2x disk space of single clone, not 10x
+
+### Auto-Commit Per Turn Design Decision
+
+**VS Code 1.109 change:** Background agents now commit changes at end of each turn (previously used Keep/Undo UI actions)
+
+**Why this matters:**
+- **Alignment:** Session history matches Git commit history—easier to understand agent's progression
+- **Rollback:** Use `git reset` to undo specific turns, not custom undo mechanism
+- **Review:** `git log` in worktree shows agent's incremental progress, not monolithic final commit
+- **Merge:** Cleaner integration—merge specific turns, not all-or-nothing
+
+**Trade-off accepted:** Slightly noisier commit history in worktree (one commit per agent turn). Benefit: Standard Git workflows for review/rollback.
+
+### Session Type Picker Implementation
+
+**Design goal:** Seamless hand-off between local, background, cloud agents without losing context
+
+**How it works:**
+1. User plans in local session: Chat history, attached files, selected code ranges captured
+2. User selects "Continue in Background" from session type picker
+3. VS Code serializes full conversation context (messages, attachments, workspace state)
+4. Background agent receives context via Copilot CLI programmatic mode (`-p` flag)
+5. Agent continues conversation as if it was always in background mode
+
+**Key insight:** Context serialization is bidirectional—can also hand off background → cloud or cloud → local. This enables "plan locally, implement in cloud, debug locally" workflows.
