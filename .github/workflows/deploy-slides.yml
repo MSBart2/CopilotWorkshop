@@ -106,7 +106,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Build presentations (incremental)
-        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != ''
+        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != '' && steps.download.outputs.needs_rebuild != 'true'
         working-directory: ./slides
         run: |
           echo "🚀 Building changed slides only..."
