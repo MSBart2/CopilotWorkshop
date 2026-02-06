@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: MCP Apps - Rich UI in Chat Responses
+module: tech-talks/mcp-apps
 mdc: true
 ---
 
@@ -125,9 +126,9 @@ VS Code 1.109 — Chat panel becomes a data exploration interface
 
 ---
 
-# How It Works
+# How It Works — Part 1/2
 
-<div class="mt-6 flex flex-col gap-4">
+<div class="mt-8 flex flex-col gap-5">
 
 <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
 <div class="flex items-center gap-3">
@@ -151,7 +152,13 @@ VS Code 1.109 — Chat panel becomes a data exploration interface
 </div>
 </div>
 
-<div class="text-3xl text-gray-400 text-center">↓</div>
+</div>
+
+---
+
+# How It Works — Part 2/2
+
+<div class="mt-8 flex flex-col gap-5">
 
 <div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
 <div class="flex items-center gap-3">
@@ -428,54 +435,60 @@ Quick dashboards without leaving chat
 <div class="text-sm text-green-300">Low: 18</div>
 </div>
 </div>
-<div class="text-center text-xs text-gray-400">[Click file to see detailed breakdown]</div>
 </div>
 
 </div>
 
-<div class="mt-4 text-center text-sm text-gray-400 italic">
+---
+
+# Use Case: Code Analysis — Insight
+
+<div class="mt-12 text-center">
+
+<div class="p-6 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg border-2 border-purple-400/50 max-w-2xl mx-auto">
+<div class="text-xs text-gray-400 mb-2">[Click file to see detailed breakdown]</div>
+<div class="text-lg text-gray-300 italic">
 Visualize codebase structure and metrics
+</div>
+</div>
+
 </div>
 
 ---
 
 # Use Case: Form-Based Workflows
 
-<div class="mt-6">
-
-<div class="p-4 bg-gray-800 rounded-lg mb-6">
+<div class="p-3 bg-gray-800 rounded-lg mb-3">
 <div class="text-cyan-400 font-bold mb-2">User: "I need to create a new API endpoint"</div>
 <div class="text-gray-400 text-sm">Model calls: api-generator-form</div>
 </div>
 
-<div class="p-6 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg border-2 border-blue-400/50 max-w-2xl mx-auto">
-<div class="text-center text-lg font-bold text-white mb-4">🔧 New API Endpoint</div>
-<div class="space-y-3">
-<div class="grid grid-cols-2 gap-3 text-sm">
+<div class="p-4 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg border-2 border-blue-400/50 max-w-2xl mx-auto">
+<div class="text-center text-lg font-bold text-white mb-2">🔧 New API Endpoint</div>
+<div class="space-y-2">
+<div class="grid grid-cols-2 gap-1 text-sm">
 <div class="text-gray-400">Endpoint Path:</div>
-<div class="p-2 bg-gray-800 rounded border border-gray-600 text-white">/api/v1/users</div>
+<div class="p-1.5 bg-gray-800 rounded border border-gray-600 text-white">/api/v1/users</div>
 <div class="text-gray-400">HTTP Method:</div>
-<div class="p-2 bg-gray-800 rounded border border-gray-600 text-white">GET ▼</div>
+<div class="p-1.5 bg-gray-800 rounded border border-gray-600 text-white">GET ▼</div>
 <div class="text-gray-400">Description:</div>
-<div class="p-2 bg-gray-800 rounded border border-gray-600 text-white">Get user by ID</div>
+<div class="p-1.5 bg-gray-800 rounded border border-gray-600 text-white">Get user by ID</div>
 </div>
-<div class="p-3 bg-gray-800/50 rounded-lg">
-<div class="text-white font-bold text-sm mb-2">Parameters:</div>
-<div class="flex gap-2 text-xs text-gray-300">
-<div class="flex-1 p-2 bg-gray-900 rounded">id</div>
-<div class="flex-1 p-2 bg-gray-900 rounded">string</div>
-<div class="p-2 bg-gray-900 rounded">✓ Required</div>
+<div class="p-2 bg-gray-800/50 rounded-lg">
+<div class="text-white font-bold text-sm mb-1">Parameters:</div>
+<div class="flex gap-1 text-xs text-gray-300">
+<div class="flex-1 p-1.5 bg-gray-900 rounded">id</div>
+<div class="flex-1 p-1.5 bg-gray-900 rounded">string</div>
+<div class="p-1.5 bg-gray-900 rounded">✓ Required</div>
 </div>
 </div>
-<button class="w-full p-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg text-white font-bold">
+<button class="w-full p-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg text-white font-bold">
 Generate Endpoint
 </button>
 </div>
 </div>
 
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
+<div class="mt-2 text-center text-sm text-gray-400 italic">
 Structured input collection within chat
 </div>
 
@@ -483,11 +496,9 @@ Structured input collection within chat
 
 # Building MCP Apps
 
-<div class="mt-8">
+**MCP server with tools that return component specifications**
 
-<div class="p-4 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 rounded-lg mb-6">
-<div class="text-lg font-bold text-white mb-2">MCP server with tools that return component specifications</div>
-</div>
+<div class="text-xs mt-4">
 
 ```typescript
 // Return component instead of text
@@ -505,14 +516,22 @@ return {
 };
 ```
 
-<div class="mt-6 grid grid-cols-2 gap-4">
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="text-green-400 font-bold text-sm mb-2">✅ Built-in Security</div>
-<div class="text-xs text-gray-400">Components run in sandboxed iframes</div>
 </div>
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="text-green-400 font-bold text-sm mb-2">✅ Theme Aware</div>
-<div class="text-xs text-gray-400">Use VS Code CSS variables</div>
+
+---
+
+# Building MCP Apps — Security & Theming
+
+<div class="mt-12">
+
+<div class="grid grid-cols-2 gap-6">
+<div class="p-4 bg-gray-800 rounded-lg">
+<div class="text-green-400 font-bold text-lg mb-3">✅ Built-in Security</div>
+<div class="text-sm text-gray-400">Components run in sandboxed iframes</div>
+</div>
+<div class="p-4 bg-gray-800 rounded-lg">
+<div class="text-green-400 font-bold text-lg mb-3">✅ Theme Aware</div>
+<div class="text-sm text-gray-400">Use VS Code CSS variables</div>
 </div>
 </div>
 
@@ -604,31 +623,31 @@ layout: center
 
 # Key Takeaways
 
-<div class="space-y-4 mt-8 text-left max-w-3xl mx-auto">
+<div class="space-y-3 mt-6 text-left max-w-3xl mx-auto">
 
-<div class="p-4 bg-gradient-to-r from-cyan-900/60 to-blue-900/60 rounded-lg border-l-4 border-cyan-400">
-<div class="text-lg font-bold text-white mb-2">📊 Chat Becomes Visual</div>
+<div class="p-3 bg-gradient-to-r from-cyan-900/60 to-blue-900/60 rounded-lg border-l-4 border-cyan-400">
+<div class="text-lg font-bold text-white mb-1">📊 Chat Becomes Visual</div>
 <div class="text-sm text-gray-300">Rich components replace text-only responses</div>
 </div>
 
-<div class="p-4 bg-gradient-to-r from-blue-900/60 to-indigo-900/60 rounded-lg border-l-4 border-blue-400">
-<div class="text-lg font-bold text-white mb-2">🔍 Interactive Exploration</div>
+<div class="p-3 bg-gradient-to-r from-blue-900/60 to-indigo-900/60 rounded-lg border-l-4 border-blue-400">
+<div class="text-lg font-bold text-white mb-1">🔍 Interactive Exploration</div>
 <div class="text-sm text-gray-300">Sort, filter, drill down without new prompts</div>
 </div>
 
-<div class="p-4 bg-gradient-to-r from-indigo-900/60 to-purple-900/60 rounded-lg border-l-4 border-indigo-400">
-<div class="text-lg font-bold text-white mb-2">🎨 Component Library + Extensibility</div>
+<div class="p-3 bg-gradient-to-r from-indigo-900/60 to-purple-900/60 rounded-lg border-l-4 border-indigo-400">
+<div class="text-lg font-bold text-white mb-1">🎨 Component Library + Extensibility</div>
 <div class="text-sm text-gray-300">Built-in charts, tables, forms, trees, cards + custom HTML</div>
 </div>
 
-<div class="p-4 bg-gradient-to-r from-purple-900/60 to-pink-900/60 rounded-lg border-l-4 border-purple-400">
-<div class="text-lg font-bold text-white mb-2">🔗 Seamless Integration</div>
+<div class="p-3 bg-gradient-to-r from-purple-900/60 to-pink-900/60 rounded-lg border-l-4 border-purple-400">
+<div class="text-lg font-bold text-white mb-1">🔗 Seamless Integration</div>
 <div class="text-sm text-gray-300">Works with agents, skills, and memory</div>
 </div>
 
 </div>
 
-<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
 <div class="text-xl font-bold text-white">Complete development environment within the chat panel</div>
 </div>
 

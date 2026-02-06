@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 6 - Custom Agents
+module: workshop/06-custom-agents
 mdc: true
 ---
 
@@ -431,19 +432,19 @@ Location: <code class="bg-gray-800 px-2 py-1 rounded">.github/agents/planner.age
 
 # 💭 David's Transformation
 
-<div class="flex flex-col items-center justify-center h-full">
+<div class="flex flex-col items-center justify-center h-full" style="transform: scale(0.95);">
 
-<div class="p-8 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl shadow-lg max-w-3xl">
-<div class="text-6xl mb-6 text-center">📝</div>
-<blockquote class="text-xl text-white italic text-center leading-relaxed">
+<div class="p-6 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl shadow-lg max-w-3xl">
+<div class="text-5xl mb-3 text-center">📝</div>
+<blockquote class="text-lg text-white italic text-center leading-normal">
 "Manual planning setup took 5 minutes—loading context, preventing accidental edits. The @feature-plan agent has read-only tools configured, feature requirements skill loaded, and GitHub MCP connected. Instant switch, zero setup, perfect focus."
 </blockquote>
-<div class="text-right text-purple-200 mt-6 text-lg">
+<div class="text-right text-purple-200 mt-3 text-base">
 — David, Staff Engineer
 </div>
 </div>
 
-<div class="mt-8 flex gap-8 text-center">
+<div class="mt-6 flex gap-8 text-center">
 <div>
 <div class="text-3xl font-bold text-red-400 line-through">5 min</div>
 <div class="text-sm text-gray-500">Setup before</div>
@@ -542,38 +543,38 @@ Location: <code class="bg-gray-800 px-2 py-1 rounded">.github/agents/planner.age
 
 # 🎉 Workshop Complete!
 
-<div class="flex items-center justify-center h-full">
-<div class="max-w-4xl text-center space-y-6">
+<div class="flex items-center justify-center h-full" style="transform: scale(0.95);">
+<div class="max-w-4xl text-center space-y-4">
 
 <div class="relative inline-block">
 <div class="absolute -inset-4 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 rounded-full blur-xl opacity-60 animate-pulse"></div>
-<div class="relative text-8xl">🏆</div>
+<div class="relative text-7xl">🏆</div>
 </div>
 
-<div class="text-3xl font-bold text-white mt-6">Congratulations!</div>
-<div class="text-xl text-gray-300">You've completed the entire CopilotTraining training</div>
+<div class="text-3xl font-bold text-white mt-3">Congratulations!</div>
+<div class="text-lg text-gray-300">You've completed the entire CopilotTraining training</div>
 
-<div class="grid grid-cols-4 gap-4 mt-8">
-<div class="p-4 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-xl">
+<div class="grid grid-cols-4 gap-4 mt-5">
+<div class="p-3 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-xl">
 <div class="text-3xl font-bold text-blue-300">7</div>
 <div class="text-xs text-gray-400">Modules Completed</div>
 </div>
-<div class="p-4 bg-gradient-to-br from-green-900/60 to-green-800/40 rounded-xl">
+<div class="p-3 bg-gradient-to-br from-green-900/60 to-green-800/40 rounded-xl">
 <div class="text-3xl font-bold text-green-300">20+</div>
 <div class="text-xs text-gray-400">Exercises Practiced</div>
 </div>
-<div class="p-4 bg-gradient-to-br from-purple-900/60 to-purple-800/40 rounded-xl">
+<div class="p-3 bg-gradient-to-br from-purple-900/60 to-purple-800/40 rounded-xl">
 <div class="text-3xl font-bold text-purple-300">85%</div>
 <div class="text-xs text-gray-400">Avg Time Saved</div>
 </div>
-<div class="p-4 bg-gradient-to-br from-orange-900/60 to-orange-800/40 rounded-xl">
+<div class="p-3 bg-gradient-to-br from-orange-900/60 to-orange-800/40 rounded-xl">
 <div class="text-3xl font-bold text-orange-300">∞</div>
 <div class="text-xs text-gray-400">Potential Unlocked</div>
 </div>
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-green-600/30 to-blue-600/30 rounded-xl border border-green-500/30">
-<div class="text-lg italic text-gray-300">
+<div class="mt-3 p-3 bg-gradient-to-r from-green-600/30 to-blue-600/30 rounded-xl border border-green-500/30">
+<div class="text-base italic text-gray-300">
 "From skeptic to advocate. From manual to AI-assisted. From individual to team multiplier."
 </div>
 </div>

@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Terminal Sandboxing - Safe Agentic Execution
+module: tech-talks/terminal-sandboxing
 mdc: true
 ---
 
@@ -315,29 +316,29 @@ await killTerminal({ terminalId: "stuck-server" });
 
 # Security Model: Defense in Depth
 
-<div class="flex flex-col items-center gap-3 mt-6">
-<div class="p-4 bg-blue-900/60 rounded-lg w-full border-2 border-blue-400">
+<div class="flex flex-col items-center gap-2 mt-4">
+<div class="p-3 bg-blue-900/60 rounded-lg w-full border-2 border-blue-400">
 <div class="text-center font-bold text-blue-300">Layer 1: User Approval</div>
 <div class="text-xs text-center text-gray-300 mt-1">Require confirmation for terminal commands</div>
 </div>
 
 <div class="text-2xl text-gray-400">↓</div>
 
-<div class="p-4 bg-green-900/60 rounded-lg w-full border-2 border-green-400">
+<div class="p-3 bg-green-900/60 rounded-lg w-full border-2 border-green-400">
 <div class="text-center font-bold text-green-300">Layer 2: Terminal Sandboxing</div>
 <div class="text-xs text-center text-gray-300 mt-1">Restricts what approved commands can do</div>
 </div>
 
 <div class="text-2xl text-gray-400">↓</div>
 
-<div class="p-4 bg-purple-900/60 rounded-lg w-full border-2 border-purple-400">
+<div class="p-3 bg-purple-900/60 rounded-lg w-full border-2 border-purple-400">
 <div class="text-center font-bold text-purple-300">Layer 3: VS Code Permissions</div>
 <div class="text-xs text-center text-gray-300 mt-1">Extension and workspace trust controls</div>
 </div>
 
 <div class="text-2xl text-gray-400">↓</div>
 
-<div class="p-4 bg-orange-900/60 rounded-lg w-full border-2 border-orange-400">
+<div class="p-3 bg-orange-900/60 rounded-lg w-full border-2 border-orange-400">
 <div class="text-center font-bold text-orange-300">Layer 4: OS Permissions</div>
 <div class="text-xs text-center text-gray-300 mt-1">User account and system-level access controls</div>
 </div>

@@ -763,7 +763,7 @@ Starting enterprise Copilot adoption requires baseline assessment, initial stand
 - [Code Review Best Practices](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
 
 **Related Talks:**
-- [Agentic Sessions](../agentic-sessions/README.md) — Multi-environment agent orchestration
+- [Parallel Execution](../parallel-execution/) — Multi-environment agent orchestration
 - [GitHub Copilot Web](../copilot-web/README.md) — Multi-interface AI assistance
 
 ---

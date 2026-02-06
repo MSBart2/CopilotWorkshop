@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Agentic Economics - Making the Business Case
+module: exec-talks/agentic-economics
 mdc: true
 ---
 
@@ -45,88 +46,84 @@ mdc: true
   <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining Executive Talk</span>
-</div>
-
 ---
 
 # The $2/Hour Engineer
 
-<div class="p-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center mb-8">
-  <div class="text-4xl font-bold text-white mb-2">$2/hour</div>
-  <div class="text-xl text-blue-100">Fully-engaged AI agent cost</div>
+<div class="p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center mb-4">
+  <div class="text-3xl font-bold text-white mb-1">$2/hour</div>
+  <div class="text-base text-blue-100">Fully-engaged AI agent cost</div>
 </div>
 
-<div class="grid grid-cols-2 gap-6 text-sm">
-  <div class="p-4 bg-gray-800 rounded-lg">
-    <div class="text-2xl mb-2">👨‍💻</div>
+<div class="grid grid-cols-2 gap-3 text-sm">
+  <div class="p-2 bg-gray-800 rounded-lg">
+    <div class="text-xl mb-1">👨‍💻</div>
     <div class="text-white font-bold">Junior Developer (US)</div>
     <div class="text-gray-400">$75-100/hour</div>
-    <div class="text-red-400 mt-2">37-50x more expensive</div>
+    <div class="text-red-400 mt-1">37-50x more expensive</div>
   </div>
 
-  <div class="p-4 bg-gray-800 rounded-lg">
-    <div class="text-2xl mb-2">🎯</div>
+  <div class="p-2 bg-gray-800 rounded-lg">
+    <div class="text-xl mb-1">🎯</div>
     <div class="text-white font-bold">Senior Developer (US)</div>
     <div class="text-gray-400">$125-175/hour</div>
-    <div class="text-red-400 mt-2">62-87x more expensive</div>
+    <div class="text-red-400 mt-1">62-87x more expensive</div>
   </div>
 
-  <div class="p-4 bg-gray-800 rounded-lg">
-    <div class="text-2xl mb-2">⭐</div>
+  <div class="p-2 bg-gray-800 rounded-lg">
+    <div class="text-xl mb-1">⭐</div>
     <div class="text-white font-bold">Staff Engineer (US)</div>
     <div class="text-gray-400">$175-250/hour</div>
-    <div class="text-red-400 mt-2">87-125x more expensive</div>
+    <div class="text-red-400 mt-1">87-125x more expensive</div>
   </div>
 
-  <div class="p-4 bg-gray-800 rounded-lg">
-    <div class="text-2xl mb-2">🌍</div>
+  <div class="p-2 bg-gray-800 rounded-lg">
+    <div class="text-xl mb-1">🌍</div>
     <div class="text-white font-bold">Offshore Developer</div>
     <div class="text-gray-400">$35-75/hour</div>
-    <div class="text-red-400 mt-2">17-37x more expensive</div>
+    <div class="text-red-400 mt-1">17-37x more expensive</div>
   </div>
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">The question isn't whether agents are cheaper.</div>
-  <div class="text-xl font-bold text-white">The question is: what work can we move to $2/hour?</div>
+<div class="mt-3 p-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-base font-bold text-white">The question isn't whether agents are cheaper.</div>
+  <div class="text-base font-bold text-white">The question is: what work can we move to $2/hour?</div>
 </div>
 
 ---
 
 # The Labor Cost Spectrum
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-2">
 
-<div class="p-6 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="flex items-center gap-3 mb-3">
-    <span class="text-3xl">💰</span>
-    <h3 class="text-xl font-bold text-blue-300">HIGH-VALUE WORK</h3>
+<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
+  <div class="flex items-center gap-2 mb-1">
+    <span class="text-xl">💰</span>
+    <h3 class="text-base font-bold text-blue-300">HIGH-VALUE WORK</h3>
   </div>
-  <div class="text-sm text-gray-300 ml-12">
+  <div class="text-sm text-gray-300 ml-8">
     <div class="mb-1">• Architecture decisions • Strategic planning • Complex debugging</div>
     <div class="text-blue-400 font-semibold">Must stay human • $150-250/hr is appropriate</div>
   </div>
 </div>
 
-<div class="p-6 bg-yellow-900/40 rounded-lg border-l-4 border-yellow-500">
-  <div class="flex items-center gap-3 mb-3">
-    <span class="text-3xl">⚙️</span>
-    <h3 class="text-xl font-bold text-yellow-400">ROUTINE WORK</h3>
+<div class="p-4 bg-yellow-900/40 rounded-lg border-l-4 border-yellow-500">
+  <div class="flex items-center gap-2 mb-1">
+    <span class="text-xl">⚙️</span>
+    <h3 class="text-base font-bold text-yellow-400">ROUTINE WORK</h3>
   </div>
-  <div class="text-sm text-gray-300 ml-12">
+  <div class="text-sm text-gray-300 ml-8">
     <div class="mb-1">• Code review • Test writing • Bug investigation • Documentation</div>
     <div class="text-yellow-400 font-semibold">Could be $2/hr • Pattern-based • Context-gathering</div>
   </div>
 </div>
 
-<div class="p-6 bg-green-900/60 rounded-lg border-l-4 border-green-400">
-  <div class="flex items-center gap-3 mb-3">
-    <span class="text-3xl">🔁</span>
-    <h3 class="text-xl font-bold text-green-300">PURE TOIL</h3>
+<div class="p-4 bg-green-900/60 rounded-lg border-l-4 border-green-400">
+  <div class="flex items-center gap-2 mb-1">
+    <span class="text-xl">🔁</span>
+    <h3 class="text-base font-bold text-green-300">PURE TOIL</h3>
   </div>
-  <div class="text-sm text-gray-300 ml-12">
+  <div class="text-sm text-gray-300 ml-8">
     <div class="mb-1">• Issue triage • Compliance checking • Status reports • Audit prep</div>
     <div class="text-green-400 font-semibold">Best at $2/hr • Rule-following • Pattern matching</div>
   </div>
@@ -134,14 +131,14 @@ mdc: true
 
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-lg font-bold text-white">The arbitrage: 98% cost reduction on routine work</div>
+<div class="mt-3 p-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-base font-bold text-white">The arbitrage: 98% cost reduction on routine work</div>
   <div class="text-sm text-blue-100 mt-1">But we cannot capture this without investment</div>
 </div>
 
 ---
 
-# Why Savings Don't Happen Automatically
+# Why Savings Don't Happen Automatically (Part 1/2)
 
 <div class="grid grid-cols-2 gap-4 text-xs">
 
@@ -178,6 +175,14 @@ mdc: true
   <div class="text-red-400 mt-2">→ Total time unchanged</div>
 </div>
 
+</div>
+
+---
+
+# Why Savings Don't Happen Automatically (Part 2/2)
+
+<div class="grid grid-cols-2 gap-4 text-xs">
+
 <div class="p-4 bg-red-900/40 rounded-lg border-2 border-red-500">
   <div class="flex items-center gap-2 mb-2">
     <span class="text-2xl">❓</span>
@@ -210,63 +215,63 @@ mdc: true
 
 # The 20% at $2/Hour Goal
 
-<div class="p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg mb-6">
-  <div class="text-2xl font-bold text-white text-center">
+<div class="p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg mb-4">
+  <div class="text-xl font-bold text-white text-center">
     "We want 20% of our engineering labor to cost $2/hour within 18 months."
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">📊 The Math (50-person team)</h3>
+  <h3 class="text-lg font-bold text-blue-400 mb-3">📊 The Math (50-person team)</h3>
   <div class="space-y-2 text-sm">
-    <div class="p-3 bg-gray-800 rounded-lg">
+    <div class="p-2 bg-gray-800 rounded-lg">
       <div class="text-gray-400">Total labor hours/year</div>
       <div class="text-white font-bold">100,000 hours</div>
     </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
+    <div class="p-2 bg-gray-800 rounded-lg">
       <div class="text-gray-400">Current cost @ $150/hr</div>
       <div class="text-white font-bold">$15M/year</div>
     </div>
-    <div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
+    <div class="p-2 bg-blue-900/60 rounded-lg border-2 border-blue-400">
       <div class="text-blue-300">20% target (20K hours)</div>
       <div class="text-white font-bold">$40K agent cost</div>
       <div class="text-gray-400">vs. $3M human cost</div>
     </div>
-    <div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400">
+    <div class="p-2 bg-green-900/60 rounded-lg border-2 border-green-400">
       <div class="text-green-300">Annual savings</div>
-      <div class="text-white font-bold text-xl">$2,960,000</div>
+      <div class="text-white font-bold text-lg">$2,960,000</div>
     </div>
   </div>
 </div>
 
 <div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">💼 The Investment</h3>
-  <div class="space-y-2 text-sm">
-    <div class="p-2 bg-gray-800 rounded-lg flex justify-between">
+  <h3 class="text-lg font-bold text-blue-400 mb-3">💼 The Investment</h3>
+  <div class="space-y-1 text-sm">
+    <div class="p-1 bg-gray-800 rounded-lg flex justify-between">
       <span class="text-gray-300">Instrumentation</span>
       <span class="text-white">$350-600K</span>
     </div>
-    <div class="p-2 bg-gray-800 rounded-lg flex justify-between">
+    <div class="p-1 bg-gray-800 rounded-lg flex justify-between">
       <span class="text-gray-300">Knowledge Codification</span>
       <span class="text-white">$125-250K</span>
     </div>
-    <div class="p-2 bg-gray-800 rounded-lg flex justify-between">
+    <div class="p-1 bg-gray-800 rounded-lg flex justify-between">
       <span class="text-gray-300">Platform Engineering</span>
       <span class="text-white">$250-500K</span>
     </div>
-    <div class="p-2 bg-gray-800 rounded-lg flex justify-between">
+    <div class="p-1 bg-gray-800 rounded-lg flex justify-between">
       <span class="text-gray-300">Organizational Change</span>
       <span class="text-white">$125-250K</span>
     </div>
-    <div class="mt-4 p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-      <div class="flex justify-between text-base">
+    <div class="mt-2 p-2 bg-blue-900/60 rounded-lg border-2 border-blue-400">
+      <div class="flex justify-between">
         <span class="text-blue-300 font-bold">Total Investment</span>
         <span class="text-white font-bold">$800K-1.6M</span>
       </div>
     </div>
-    <div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400">
+    <div class="p-2 bg-green-900/60 rounded-lg border-2 border-green-400">
       <div class="text-green-300 text-center font-bold">Payback: 4-8 months</div>
       <div class="text-white text-center font-bold">3-Year ROI: 450-900%</div>
     </div>
@@ -518,7 +523,7 @@ mdc: true
 
 ---
 
-# The Critical Constraints
+# The Critical Constraints (Part 1/2)
 
 <div class="grid grid-cols-2 gap-6">
 
@@ -554,6 +559,14 @@ mdc: true
     Automated verification is the multiplier
   </div>
 </div>
+
+</div>
+
+---
+
+# The Critical Constraints (Part 2/2)
+
+<div class="grid grid-cols-2 gap-6">
 
 <div class="p-5 bg-orange-900/40 rounded-lg border-l-4 border-orange-500">
   <h3 class="text-orange-400 font-bold text-lg mb-3">⚠️ Context Acquisition</h3>
@@ -716,16 +729,16 @@ mdc: true
 
 ---
 
-# 3-Year Financial Outlook
+# 3-Year Financial Outlook (Part 1/2)
 
-<div class="space-y-4">
+<div class="space-y-3">
 
-<div class="p-6 bg-gray-800 rounded-lg">
+<div class="p-4 bg-gray-800 rounded-lg">
   <div class="flex justify-between items-center mb-2">
-    <div class="text-xl font-bold text-white">Year 1</div>
-    <div class="text-gray-400">Foundation + Scaling + Transform</div>
+    <div class="text-lg font-bold text-white">Year 1</div>
+    <div class="text-gray-400 text-sm">Foundation + Scaling + Transform</div>
   </div>
-  <div class="grid grid-cols-3 gap-4 text-sm">
+  <div class="grid grid-cols-3 gap-3 text-sm">
     <div>
       <div class="text-gray-400">Investment</div>
       <div class="text-white font-bold">$1,060,000</div>
@@ -741,12 +754,12 @@ mdc: true
   </div>
 </div>
 
-<div class="p-6 bg-blue-900/40 rounded-lg border-2 border-blue-500">
+<div class="p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500">
   <div class="flex justify-between items-center mb-2">
-    <div class="text-xl font-bold text-blue-300">Year 2</div>
-    <div class="text-blue-400">Infrastructure complete, full returns</div>
+    <div class="text-lg font-bold text-blue-300">Year 2</div>
+    <div class="text-blue-400 text-sm">Infrastructure complete, full returns</div>
   </div>
-  <div class="grid grid-cols-3 gap-4 text-sm">
+  <div class="grid grid-cols-3 gap-3 text-sm">
     <div>
       <div class="text-blue-300">Investment</div>
       <div class="text-white font-bold">$0</div>
@@ -762,12 +775,20 @@ mdc: true
   </div>
 </div>
 
-<div class="p-6 bg-green-900/60 rounded-lg border-2 border-green-400">
+</div>
+
+---
+
+# 3-Year Financial Outlook (Part 2/2)
+
+<div class="space-y-3">
+
+<div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
   <div class="flex justify-between items-center mb-2">
-    <div class="text-xl font-bold text-green-300">Year 3</div>
-    <div class="text-green-400">Compounding returns</div>
+    <div class="text-lg font-bold text-green-300">Year 3</div>
+    <div class="text-green-400 text-sm">Compounding returns</div>
   </div>
-  <div class="grid grid-cols-3 gap-4 text-sm">
+  <div class="grid grid-cols-3 gap-3 text-sm">
     <div>
       <div class="text-green-300">Investment</div>
       <div class="text-white font-bold">$0</div>
@@ -794,38 +815,38 @@ mdc: true
 
 # The Multiplier Effect at Scale
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-4">
 
 <div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">📈 Infrastructure Amortization</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-4 bg-gray-800 rounded-lg">
-      <div class="text-gray-400 mb-2">50-person team</div>
-      <div class="flex justify-between">
+  <h3 class="text-base font-bold text-blue-400 mb-1">📈 Infrastructure Amortization</h3>
+  <div class="space-y-1 text-sm">
+    <div class="p-2 bg-gray-800 rounded-lg">
+      <div class="text-gray-400 mb-1 text-xs">50-person team</div>
+      <div class="flex justify-between text-xs">
         <span class="text-white">Investment:</span>
         <span class="text-white font-bold">$1.06M</span>
       </div>
-      <div class="flex justify-between">
+      <div class="flex justify-between text-xs">
         <span class="text-white">Savings:</span>
         <span class="text-green-400 font-bold">$2.24M/yr</span>
       </div>
-      <div class="flex justify-between mt-2 pt-2 border-t border-gray-700">
+      <div class="flex justify-between mt-1 pt-1 border-t border-gray-700 text-xs">
         <span class="text-blue-300">Payback:</span>
         <span class="text-blue-300 font-bold">6 months</span>
       </div>
     </div>
 
-    <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-      <div class="text-blue-300 mb-2">500-person team (10x scale)</div>
-      <div class="flex justify-between">
+    <div class="p-2 bg-blue-900/60 rounded-lg border-2 border-blue-400">
+      <div class="text-blue-300 mb-1 text-xs">500-person team (10x scale)</div>
+      <div class="flex justify-between text-xs">
         <span class="text-white">Investment:</span>
         <span class="text-white font-bold">~$1.06M</span>
       </div>
-      <div class="flex justify-between">
+      <div class="flex justify-between text-xs">
         <span class="text-white">Savings:</span>
         <span class="text-green-400 font-bold">$22.4M/yr</span>
       </div>
-      <div class="flex justify-between mt-2 pt-2 border-t border-blue-700">
+      <div class="flex justify-between mt-1 pt-1 border-t border-blue-700 text-xs">
         <span class="text-green-300">Payback:</span>
         <span class="text-green-300 font-bold">&lt; 1 month</span>
       </div>
@@ -834,10 +855,10 @@ mdc: true
 </div>
 
 <div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">🚀 Capacity Multiplication</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-4 bg-red-900/30 rounded-lg">
-      <div class="text-red-400 font-bold mb-2">❌ Before Agents</div>
+  <h3 class="text-base font-bold text-blue-400 mb-1">🚀 Capacity Multiplication</h3>
+  <div class="space-y-1 text-sm">
+    <div class="p-2 bg-red-900/30 rounded-lg">
+      <div class="text-red-400 font-bold mb-1 text-xs">❌ Before Agents</div>
       <div class="text-gray-300 text-xs mb-1">Per developer, annually:</div>
       <div class="text-xs">
         <div>Routine: 1,200 hrs @ $150 = <span class="text-white">$180K</span></div>
@@ -845,17 +866,17 @@ mdc: true
       </div>
     </div>
 
-    <div class="text-3xl text-gray-400 text-center">↓</div>
+    <div class="text-xl text-gray-400 text-center">↓</div>
 
-    <div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
-      <div class="text-green-400 font-bold mb-2">✨ After Agents</div>
+    <div class="p-2 bg-green-900/60 rounded-lg border-2 border-green-400">
+      <div class="text-green-400 font-bold mb-1 text-xs">✨ After Agents</div>
       <div class="text-gray-300 text-xs mb-1">Per developer, annually:</div>
       <div class="text-xs">
         <div>Routine: 400 hrs @ $150 = <span class="text-white">$60K</span></div>
         <div>Agent-assisted: 800 hrs @ $2-50 = <span class="text-white">$16-40K</span></div>
         <div class="text-green-400">Strategic: 1,200 hrs (50% more!)</div>
       </div>
-      <div class="mt-3 pt-3 border-t border-green-700 text-green-300 font-bold">
+      <div class="mt-2 pt-2 border-t border-green-700 text-green-300 font-bold text-xs">
         $120K saved + 50% more strategic output
       </div>
     </div>
@@ -864,15 +885,15 @@ mdc: true
 
 </div>
 
-<div class="mt-6 text-center text-sm text-gray-400 italic">
+<div class="mt-3 text-center text-xs text-gray-400 italic">
   Savings on routine work fund MORE high-value work, compounding over time
 </div>
 
 ---
 
-# Build vs. Buy vs. Wait
+# Build vs. Buy vs. Wait (Part 1/2)
 
-<div class="grid grid-cols-3 gap-4 text-xs">
+<div class="grid grid-cols-2 gap-4 text-xs">
 
 <div class="p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500">
   <div class="text-blue-400 font-bold mb-3 text-sm">🔨 Build Now</div>
@@ -934,6 +955,14 @@ mdc: true
   </div>
 </div>
 
+</div>
+
+---
+
+# Build vs. Buy vs. Wait (Part 2/2)
+
+<div class="grid grid-cols-2 gap-4 text-xs">
+
 <div class="p-4 bg-gray-800 rounded-lg border-2 border-gray-600">
   <div class="text-gray-400 font-bold mb-3 text-sm">⏳ Wait & Learn</div>
   <div class="space-y-2">
@@ -977,7 +1006,7 @@ mdc: true
 
 ---
 
-# Executive Summary
+# Executive Summary (Part 1/2)
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -1002,9 +1031,17 @@ mdc: true
   </div>
 </div>
 
-<div class="space-y-4">
-  <div class="p-5 bg-red-900/40 rounded-lg border-l-4 border-red-500">
-    <div class="text-red-400 font-bold text-lg mb-3">⚠️ The Constraints</div>
+</div>
+
+---
+
+# Executive Summary (Part 2/2)
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-3">
+  <div class="p-4 bg-red-900/40 rounded-lg border-l-4 border-red-500">
+    <div class="text-red-400 font-bold text-base mb-2">⚠️ The Constraints</div>
     <div class="text-sm text-gray-300 space-y-1">
       <div>• Requires automated verification</div>
       <div>• Requires knowledge codification</div>
@@ -1013,8 +1050,8 @@ mdc: true
     </div>
   </div>
 
-  <div class="p-5 bg-purple-900/40 rounded-lg border-l-4 border-purple-500">
-    <div class="text-purple-300 font-bold text-lg mb-3">🎯 The Recommendation</div>
+  <div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-500">
+    <div class="text-purple-300 font-bold text-base mb-2">🎯 The Recommendation</div>
     <div class="text-sm text-gray-300 space-y-1">
       <div>• Start with quick wins to build confidence</div>
       <div>• Invest in instrumentation (benefits all)</div>
@@ -1026,9 +1063,9 @@ mdc: true
 
 </div>
 
-<div class="mt-8 p-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white mb-2">Organizations that invest now will achieve 20%+ labor arbitrage within 18 months.</div>
-  <div class="text-xl text-blue-100">Organizations that wait will face a widening competitive gap.</div>
+<div class="mt-6 p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-xl font-bold text-white mb-2">Organizations that invest now will achieve 20%+ labor arbitrage within 18 months.</div>
+  <div class="text-lg text-blue-100">Organizations that wait will face a widening competitive gap.</div>
 </div>
 
 ---
@@ -1082,17 +1119,17 @@ mdc: true
 
 ---
 
-# The $2/Hour Future
+# The $2/Hour Future (Part 1/2)
 
-<div class="p-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg mb-8">
-  <div class="text-3xl font-bold text-white text-center mb-4">The math is unambiguous.</div>
-  <div class="text-2xl text-blue-100 text-center">$2/hour labor exists.</div>
-  <div class="text-xl text-blue-200 text-center mt-2">The only question is whether our organizations can access it.</div>
+<div class="p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg mb-6">
+  <div class="text-2xl font-bold text-white text-center mb-3">The math is unambiguous.</div>
+  <div class="text-xl text-blue-100 text-center">$2/hour labor exists.</div>
+  <div class="text-lg text-blue-200 text-center mt-2">The only question is whether our organizations can access it.</div>
 </div>
 
-<div class="grid grid-cols-2 gap-6 mb-8">
-  <div class="p-5 bg-green-900/30 rounded-lg">
-    <div class="text-green-400 font-bold text-lg mb-3">✅ Barriers Are Surmountable</div>
+<div class="grid grid-cols-2 gap-5">
+  <div class="p-4 bg-green-900/30 rounded-lg">
+    <div class="text-green-400 font-bold text-base mb-2">✅ Barriers Are Surmountable</div>
     <div class="text-sm text-gray-300 space-y-1">
       <div>• Instrumentation can be built</div>
       <div>• Knowledge can be codified</div>
@@ -1101,8 +1138,8 @@ mdc: true
     </div>
   </div>
 
-  <div class="p-5 bg-blue-900/60 rounded-lg">
-    <div class="text-blue-400 font-bold text-lg mb-3">🚀 Different Cost Structure</div>
+  <div class="p-4 bg-blue-900/60 rounded-lg">
+    <div class="text-blue-400 font-bold text-base mb-2">🚀 Different Cost Structure</div>
     <div class="text-sm text-gray-300">
       <p class="mb-2">Organizations that do this work will operate fundamentally differently.</p>
       <p class="text-blue-300 font-semibold">Not 10% more efficient—50-100% more efficient on significant portions of engineering labor.</p>
@@ -1110,12 +1147,16 @@ mdc: true
   </div>
 </div>
 
-<div class="p-8 bg-gradient-to-r from-red-600 to-red-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white mb-3">The question isn't whether we can afford to invest in agentic infrastructure.</div>
-  <div class="text-3xl font-bold text-white">The question is whether we can afford NOT to.</div>
+---
+
+# The $2/Hour Future (Part 2/2)
+
+<div class="p-6 bg-gradient-to-r from-red-600 to-red-800 rounded-xl shadow-lg text-center mb-6">
+  <div class="text-xl font-bold text-white mb-2">The question isn't whether we can afford to invest in agentic infrastructure.</div>
+  <div class="text-2xl font-bold text-white">The question is whether we can afford NOT to.</div>
 </div>
 
-<div class="mt-8 text-center text-gray-400 italic text-lg">
+<div class="text-center text-gray-400 italic text-base">
   The organizations that win aren't those that hire the most engineers.<br/>
   They're those that multiply the capacity of the engineers they have.
 </div>

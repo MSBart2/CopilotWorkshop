@@ -67,8 +67,8 @@ This repository contains three distinct types of content for different audiences
 - Concrete takeaways for immediate application
 
 **Topics include**:
-- **[Agentic PRs](tech-talks/agentic-prs/)** — PR workflows for feature-scale AI-generated changes
-- **[Agentic Repos](tech-talks/agentic-repos/)** — Repository-level AI customization patterns
+- **[Agentic SDLC](tech-talks/agentic-sdlc/)** — Infrastructure for AI velocity (repos, PRs, CI)
+- **[Agentic Repos](tech-talks/agentic-repos/)** — *Moved to Agentic SDLC Part 1*
 - **[Context Engineering Foundations](tech-talks/context-engineering-foundations/)** — Building effective AI context systems
 - **[Copilot SDK](tech-talks/copilot-sdk/)** — Embedding Copilot in custom tools
 
@@ -162,7 +162,7 @@ The [Workshop Training](workshop/) includes facilitator guidance and customizabl
 4. [Workshop Modules 7-10](workshop/) — Scale and orchestrate
 
 **Path 2: Team Enablement**
-1. [Agentic Repos](tech-talks/agentic-repos/) — Understand customization options
+1. [Agentic SDLC](tech-talks/agentic-sdlc/) — Understand Gen-4 infrastructure
 2. [Workshop Modules 1-3](workshop/) — Establish team standards
 3. [Enterprise Patterns](workshop/10-enterprise-patterns/) — Scale across organization
 

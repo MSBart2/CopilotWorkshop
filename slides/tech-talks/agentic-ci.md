@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Agentic CI - The Trust Factory
+module: tech-talks/agentic-ci
 mdc: true
 ---
 

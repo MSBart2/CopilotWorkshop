@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Enterprise Patterns for GitHub Copilot
+module: tech-talks/enterprise-patterns
 mdc: true
 ---
 
@@ -416,16 +417,33 @@ Balance capability with cost—teams access appropriate AI power, leadership mai
 
 </div>
 
+---
+
+# 💼 Flexible Licensing: ROI Example
+
 <div class="mt-8 p-5 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-lg">
   <div class="text-center">
-    <div class="text-xl font-bold text-white mb-2">Example: 200-person organization</div>
-    <div class="grid grid-cols-3 gap-4 text-sm">
-      <div>80 full seats (core devs)</div>
-      <div>40 usage-based (contractors)</div>
-      <div>80 review-only (product/QA)</div>
+    <div class="text-2xl font-bold text-white mb-4">Example: 200-person organization</div>
+    <div class="grid grid-cols-3 gap-6 text-base">
+      <div class="p-3 bg-green-900/30 rounded">
+        <div class="font-bold">80 full seats</div>
+        <div class="text-sm text-gray-200">Core developers</div>
+      </div>
+      <div class="p-3 bg-green-900/30 rounded">
+        <div class="font-bold">40 usage-based</div>
+        <div class="text-sm text-gray-200">Contractors</div>
+      </div>
+      <div class="p-3 bg-green-900/30 rounded">
+        <div class="font-bold">80 review-only</div>
+        <div class="text-sm text-gray-200">Product/QA</div>
+      </div>
     </div>
-    <div class="mt-3 text-lg font-bold text-green-200">30-40% cost reduction vs. all full seats</div>
+    <div class="mt-6 text-2xl font-bold text-green-200">30-40% cost reduction vs. all full seats</div>
   </div>
+</div>
+
+<div class="mt-8 text-center text-sm text-gray-400 italic">
+Optimize costs by aligning license types with actual usage patterns
 </div>
 
 ---
@@ -434,9 +452,9 @@ layout: center
 
 # 📚 Copilot Knowledge Bases (Enterprise)
 
-<div class="mt-6">
+<div class="mt-8">
 
-<div class="flex flex-col items-center gap-3">
+<div class="flex flex-col items-center gap-4">
 
 <div class="p-4 bg-yellow-900/40 rounded-lg border-2 border-yellow-500 w-96 text-center">
   <div class="font-bold text-yellow-300">❌ The Problem</div>
@@ -471,22 +489,30 @@ layout: center
   </div>
 </div>
 
-<div class="text-3xl text-gray-400">↓</div>
+</div>
 
-<div class="p-4 bg-green-900/40 rounded-lg w-full">
+</div>
+
+---
+layout: center
+---
+
+# 📚 Knowledge Bases: Developer Experience
+
+<div class="mt-8 flex flex-col items-center gap-4">
+
+<div class="p-5 bg-green-900/40 rounded-lg w-full max-w-3xl">
   <div class="text-center">
-    <div class="text-lg font-bold text-green-300 mb-2">Developer asks:</div>
-    <div class="text-sm text-gray-300 italic">"How does fraud detection integrate with payment flow?"</div>
-    <div class="text-lg font-bold text-green-400 mt-3">✅ Copilot answers with context from all 5 repos</div>
+    <div class="text-xl font-bold text-green-300 mb-3">Developer asks:</div>
+    <div class="text-base text-gray-300 italic mb-4">"How does fraud detection integrate with payment flow?"</div>
+    <div class="text-xl font-bold text-green-400">✅ Copilot answers with context from all 5 repos</div>
   </div>
 </div>
 
-</div>
-
-</div>
-
-<div class="mt-6 text-center text-sm text-gray-400 italic">
+<div class="mt-4 text-center text-base text-gray-400 italic">
 Enterprise-tier: Query across entire systems, not single repositories
+</div>
+
 </div>
 
 ---
@@ -651,9 +677,28 @@ layout: center
 
 </div>
 
-<div class="mt-8 p-5 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">50 teams onboard simultaneously without platform team bottleneck</div>
-  <div class="text-sm text-green-200 mt-2">Target: <2 support tickets per team, 90%+ satisfaction</div>
+---
+layout: center
+---
+
+# 🚀 Onboarding: Scale & Quality Targets
+
+<div class="mt-12 p-6 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-lg">
+  <div class="text-center">
+    <div class="text-2xl font-bold text-white mb-4">50 teams onboard simultaneously</div>
+    <div class="text-lg text-green-200">without platform team bottleneck</div>
+  </div>
+</div>
+
+<div class="mt-8 grid grid-cols-2 gap-6 max-w-2xl mx-auto">
+  <div class="p-5 bg-blue-900/40 rounded-lg border-2 border-blue-500 text-center">
+    <div class="text-3xl mb-2">< 2</div>
+    <div class="text-sm text-gray-300">Support tickets per team</div>
+  </div>
+  <div class="p-5 bg-green-900/40 rounded-lg border-2 border-green-500 text-center">
+    <div class="text-3xl mb-2">90%+</div>
+    <div class="text-sm text-gray-300">Satisfaction rating</div>
+  </div>
 </div>
 
 ---
@@ -697,22 +742,30 @@ layout: center
 
 </div>
 
-<div class="mt-8">
-  <h3 class="text-lg font-bold text-green-400 mb-4 text-center">Compliance Automation Examples</h3>
+<div class="mt-6 text-center text-sm text-gray-400 italic">
+Transform compliance from manual checklist to automated enforcement
+</div>
 
-  <div class="grid grid-cols-2 gap-4">
-    <div class="p-4 bg-gray-800 rounded-lg">
-      <div class="text-sm font-bold text-green-300 mb-2">@security-validator agent</div>
-      <div class="text-xs text-gray-400 space-y-1">
+---
+
+# 🏛️ Compliance Automation Examples
+
+<div class="mt-8">
+  <h3 class="text-xl font-bold text-green-400 mb-6 text-center">Automated Validation Patterns</h3>
+
+  <div class="grid grid-cols-2 gap-6">
+    <div class="p-5 bg-gray-800 rounded-lg">
+      <div class="text-base font-bold text-green-300 mb-3">@security-validator agent</div>
+      <div class="text-sm text-gray-400 space-y-2">
         <div>✓ OWASP Top 10 vulnerabilities</div>
         <div>✓ Hardcoded secrets detection</div>
         <div>✓ Unapproved dependencies</div>
         <div>✓ Data exposure risks</div>
       </div>
     </div>
-    <div class="p-4 bg-gray-800 rounded-lg">
-      <div class="text-sm font-bold text-blue-300 mb-2">hipaa-compliance-check skill</div>
-      <div class="text-xs text-gray-400 space-y-1">
+    <div class="p-5 bg-gray-800 rounded-lg">
+      <div class="text-base font-bold text-blue-300 mb-3">hipaa-compliance-check skill</div>
+      <div class="text-sm text-gray-400 space-y-2">
         <div>✓ PHI encryption requirements</div>
         <div>✓ Audit logging completeness</div>
         <div>✓ Access control enforcement</div>
@@ -720,10 +773,6 @@ layout: center
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-Transform compliance from manual checklist to automated enforcement
 </div>
 
 ---
@@ -771,23 +820,33 @@ layout: center
   </div>
 </div>
 
-<div class="flex gap-8 items-center">
-  <div class="text-sm text-gray-400">Contribute patterns</div>
-  <div class="text-2xl text-gray-400">↑</div>
 </div>
 
-<div class="p-4 bg-purple-900/40 rounded-lg w-96 text-center">
-  <div class="text-xl mb-2">🎓</div>
-  <div class="font-bold text-purple-300">Community of Practice</div>
-  <div class="text-xs text-gray-400 mt-2">
+---
+layout: center
+---
+
+# 🤝 Community of Practice
+
+<div class="mt-12 flex flex-col items-center gap-6">
+
+<div class="flex gap-8 items-center">
+  <div class="text-sm text-gray-400">Teams contribute patterns</div>
+  <div class="text-3xl text-gray-400">↑</div>
+</div>
+
+<div class="p-6 bg-purple-900/40 rounded-lg border-2 border-purple-500 w-96 text-center">
+  <div class="text-3xl mb-3">🎓</div>
+  <div class="text-xl font-bold text-purple-300 mb-3">Community of Practice</div>
+  <div class="text-sm text-gray-400 mt-3">
     Monthly sessions • Skill catalog • Slack channel • Metrics reviews
   </div>
 </div>
 
+<div class="mt-8 text-center text-base text-gray-400 italic max-w-2xl">
+Balance central governance with team autonomy—consistency AND velocity
 </div>
 
-<div class="mt-6 text-center text-sm text-gray-400 italic">
-Balance central governance with team autonomy—consistency AND velocity
 </div>
 
 ---
@@ -846,9 +905,13 @@ Balance central governance with team autonomy—consistency AND velocity
 
 </div>
 
-<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Knowledge stops fragmenting, starts compounding systematically</div>
-  <div class="text-sm text-blue-200 mt-2">Every new developer benefits automatically • ROI increases with org growth</div>
+---
+
+# 📈 Knowledge Multiplication: The Bottom Line
+
+<div class="mt-12 p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-2xl font-bold text-white mb-4">Knowledge stops fragmenting, starts compounding systematically</div>
+  <div class="text-lg text-blue-200 mt-3">Every new developer benefits automatically • ROI increases with org growth</div>
 </div>
 
 ---
@@ -1016,72 +1079,78 @@ layout: center
 
 ---
 
-# 🎯 Getting Started: Immediate Actions
+# 🎯 Getting Started: This Week
 
-<div class="grid grid-cols-2 gap-8 mt-8">
+<div class="mt-8">
 
-<div>
-  <h3 class="text-lg font-bold text-blue-400 mb-4">This Week</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-blue-900/30 rounded-lg flex items-start gap-3">
-      <span class="text-xl">1️⃣</span>
-      <div>
-        <div class="font-bold text-blue-300">Assess current state</div>
-        <div class="text-xs text-gray-400">Survey teams for existing configs & pain points</div>
-      </div>
-    </div>
+<h3 class="text-xl font-bold text-blue-400 mb-6 text-center">Immediate Actions (Week 1)</h3>
 
-    <div class="p-3 bg-blue-900/30 rounded-lg flex items-start gap-3">
-      <span class="text-xl">2️⃣</span>
-      <div>
-        <div class="font-bold text-blue-300">Define org instructions</div>
-        <div class="text-xs text-gray-400">Security, frameworks, coding standards</div>
-      </div>
-    </div>
-
-    <div class="p-3 bg-blue-900/30 rounded-lg flex items-start gap-3">
-      <span class="text-xl">3️⃣</span>
-      <div>
-        <div class="font-bold text-blue-300">Build metrics baseline</div>
-        <div class="text-xs text-gray-400">Acceptance rate, active users, PR velocity</div>
-      </div>
+<div class="space-y-4 max-w-3xl mx-auto">
+  <div class="p-4 bg-blue-900/30 rounded-lg flex items-start gap-4">
+    <span class="text-2xl">1️⃣</span>
+    <div>
+      <div class="font-bold text-blue-300 text-base">Assess current state</div>
+      <div class="text-sm text-gray-400 mt-1">Survey teams for existing configs & pain points</div>
     </div>
   </div>
-</div>
 
-<div>
-  <h3 class="text-lg font-bold text-green-400 mb-4">Next 4 Weeks</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg flex items-start gap-3">
-      <span class="text-xl">4️⃣</span>
-      <div>
-        <div class="font-bold text-green-300">Create onboarding template</div>
-        <div class="text-xs text-gray-400">30-min quick start with working examples</div>
-      </div>
+  <div class="p-4 bg-blue-900/30 rounded-lg flex items-start gap-4">
+    <span class="text-2xl">2️⃣</span>
+    <div>
+      <div class="font-bold text-blue-300 text-base">Define org instructions</div>
+      <div class="text-sm text-gray-400 mt-1">Security, frameworks, coding standards</div>
     </div>
+  </div>
 
-    <div class="p-3 bg-green-900/30 rounded-lg flex items-start gap-3">
-      <span class="text-xl">5️⃣</span>
-      <div>
-        <div class="font-bold text-green-300">Establish governance</div>
-        <div class="text-xs text-gray-400">Model policies, content filtering, audit</div>
-      </div>
-    </div>
-
-    <div class="p-3 bg-green-900/30 rounded-lg flex items-start gap-3">
-      <span class="text-xl">6️⃣</span>
-      <div>
-        <div class="font-bold text-green-300">Pilot with 2-3 teams</div>
-        <div class="text-xs text-gray-400">Validate approach, document results</div>
-      </div>
+  <div class="p-4 bg-blue-900/30 rounded-lg flex items-start gap-4">
+    <span class="text-2xl">3️⃣</span>
+    <div>
+      <div class="font-bold text-blue-300 text-base">Build metrics baseline</div>
+      <div class="text-sm text-gray-400 mt-1">Acceptance rate, active users, PR velocity</div>
     </div>
   </div>
 </div>
 
 </div>
 
-<div class="mt-8 text-center text-sm text-gray-400 italic">
+---
+
+# 🎯 Getting Started: Next 4 Weeks
+
+<div class="mt-8">
+
+<h3 class="text-xl font-bold text-green-400 mb-6 text-center">Building Foundation (Weeks 2-5)</h3>
+
+<div class="space-y-4 max-w-3xl mx-auto">
+  <div class="p-4 bg-green-900/30 rounded-lg flex items-start gap-4">
+    <span class="text-2xl">4️⃣</span>
+    <div>
+      <div class="font-bold text-green-300 text-base">Create onboarding template</div>
+      <div class="text-sm text-gray-400 mt-1">30-min quick start with working examples</div>
+    </div>
+  </div>
+
+  <div class="p-4 bg-green-900/30 rounded-lg flex items-start gap-4">
+    <span class="text-2xl">5️⃣</span>
+    <div>
+      <div class="font-bold text-green-300 text-base">Establish governance</div>
+      <div class="text-sm text-gray-400 mt-1">Model policies, content filtering, audit</div>
+    </div>
+  </div>
+
+  <div class="p-4 bg-green-900/30 rounded-lg flex items-start gap-4">
+    <span class="text-2xl">6️⃣</span>
+    <div>
+      <div class="font-bold text-green-300 text-base">Pilot with 2-3 teams</div>
+      <div class="text-sm text-gray-400 mt-1">Validate approach, document results</div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8 text-center text-base text-gray-400 italic">
 6-month timeline achieves full organizational adoption with proven ROI
+</div>
+
 </div>
 
 ---

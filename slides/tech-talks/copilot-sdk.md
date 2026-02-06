@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Copilot SDK - Embedding AI Agents
+module: tech-talks/copilot-sdk
 mdc: true
 ---
 
@@ -153,7 +154,7 @@ The SDK manages the CLI process lifecycle automatically. You write code, the SDK
 
 # 📊 When to Use: SDK vs CLI vs IDE
 
-<div class="text-sm">
+<div class="text-xs">
 
 | Capability | VS Code/IDE | Copilot CLI | Copilot SDK |
 |------------|-------------|-------------|-------------|
@@ -271,7 +272,7 @@ for issue in parse_review(response): post_github_comment(pr_num, issue)
 
 # 🎯 More Use Cases
 
-<div class="grid grid-cols-2 gap-4 text-sm">
+<div class="grid grid-cols-2 gap-4 text-xs">
 <div class="p-4 bg-gray-800 rounded-lg">
 <div class="flex items-center gap-2 mb-2">
 <span class="text-2xl">📚</span>
@@ -332,7 +333,7 @@ for issue in parse_review(response): post_github_comment(pr_num, issue)
 
 ---
 
-# 🔧 Getting Started
+# 🔧 Getting Started · Part 1
 
 <div class="grid grid-cols-2 gap-6">
 <div>
@@ -365,8 +366,12 @@ for issue in parse_review(response): post_github_comment(pr_num, issue)
 </div>
 </div>
 
-<div class="mt-6 p-4 bg-gray-800 rounded-lg">
-<div class="font-bold mb-2">💡 Basic Usage</div>
+---
+
+# 🔧 Getting Started · Part 2
+
+<div class="p-4 bg-gray-800 rounded-lg">
+<div class="font-bold mb-3 text-cyan-300">💡 Basic Usage</div>
 <div class="text-xs font-mono">
 ```python
 from github_copilot_sdk import CopilotClient
@@ -385,15 +390,19 @@ for chunk in client.chat_stream("Generate a README"):
 </div>
 </div>
 
+<div class="mt-6 p-4 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-xl text-center">
+<span class="text-white font-bold text-lg">The SDK manages CLI process lifecycle automatically</span>
+</div>
+
 ---
 
 # 🎨 Integration Patterns
 
-<div class="grid grid-cols-3 gap-4 text-xs">
+<div class="grid grid-cols-3 gap-4 text-[10px]">
 <div class="p-4 bg-gray-800 rounded-lg border-2 border-cyan-400">
 <div class="text-lg mb-2">🔧</div>
 <div class="font-bold text-cyan-300 mb-2">CLI Tool</div>
-<div class="font-mono text-[10px] space-y-1">
+<div class="font-mono text-[9px] space-y-1">
 <div>#!/usr/bin/env python3</div>
 <div>import argparse</div>
 <div>from github_copilot_sdk</div>
@@ -409,7 +418,7 @@ for chunk in client.chat_stream("Generate a README"):
 <div class="p-4 bg-gray-800 rounded-lg border-2 border-blue-400">
 <div class="text-lg mb-2">🌐</div>
 <div class="font-bold text-blue-300 mb-2">Web API</div>
-<div class="font-mono text-[10px] space-y-1">
+<div class="font-mono text-[9px] space-y-1">
 <div>from flask import Flask</div>
 <div>app = Flask(__name__)</div>
 <div>client = CopilotClient()</div>
@@ -424,7 +433,7 @@ for chunk in client.chat_stream("Generate a README"):
 <div class="p-4 bg-gray-800 rounded-lg border-2 border-indigo-400">
 <div class="text-lg mb-2">⏰</div>
 <div class="font-bold text-indigo-300 mb-2">Scheduled Jobs</div>
-<div class="font-mono text-[10px] space-y-1">
+<div class="font-mono text-[9px] space-y-1">
 <div>import schedule</div>
 <div>from github_copilot_sdk</div>
 <div>  import CopilotClient</div>
@@ -438,7 +447,7 @@ for chunk in client.chat_stream("Generate a README"):
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-4 mt-4 text-xs">
+<div class="grid grid-cols-2 gap-4 mt-4 text-[10px]">
 <div class="p-4 bg-gray-800 rounded-lg border-2 border-purple-400">
 <div class="text-lg mb-2">🤖</div>
 <div class="font-bold text-purple-300 mb-2">GitHub Bot</div>
@@ -465,7 +474,7 @@ for chunk in client.chat_stream("Generate a README"):
 
 ---
 
-# 🧠 Advanced Features
+# 🧠 Advanced Features · Part 1
 
 <div class="grid grid-cols-2 gap-6">
 <div>
@@ -515,7 +524,11 @@ client.chat(
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-6 mt-4">
+---
+
+# 🧠 Advanced Features · Part 2
+
+<div class="grid grid-cols-2 gap-6">
 <div>
 <div class="text-lg font-bold mb-4 text-purple-300">🔑 Bring Your Own Key</div>
 <div class="text-xs font-mono p-3 bg-gray-800 rounded-lg">
@@ -576,9 +589,9 @@ client = CopilotClient(
 </div>
 </div>
 
-<div class="mt-6 p-4 bg-gray-800 rounded-lg">
-<div class="font-bold mb-2 text-blue-300">🔐 Restricting Tools</div>
-<div class="text-xs font-mono">
+<div class="mt-3 p-2 bg-gray-800 rounded-lg">
+<div class="font-bold mb-1 text-blue-300 text-sm">🔐 Restricting Tools</div>
+<div class="text-[10px] font-mono">
 ```python
 from github_copilot_sdk import CopilotClient
 
@@ -590,8 +603,8 @@ client = CopilotClient(
 </div>
 </div>
 
-<div class="mt-4 p-3 bg-gradient-to-r from-yellow-600/80 to-red-600/80 rounded-lg text-center">
-<span class="text-white font-bold">⚠️ Consider sandboxing for untrusted inputs or production contexts</span>
+<div class="mt-2 p-2 bg-gradient-to-r from-yellow-600/80 to-red-600/80 rounded-lg text-center">
+<span class="text-white font-bold text-xs">⚠️ Consider sandboxing for untrusted inputs or production</span>
 </div>
 
 ---

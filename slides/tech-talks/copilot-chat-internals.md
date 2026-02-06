@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Under the Hood - Copilot Chat Internals
+module: tech-talks/copilot-chat-internals
 mdc: true
 ---
 
@@ -42,10 +43,6 @@ mdc: true
 
   <!-- Decorative line -->
   <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining Tech Talk</span>
 </div>
 
 ---
@@ -144,7 +141,7 @@ mdc: true
 
 ---
 
-# Anatomy of a Chat Request
+# Anatomy of a Chat Request (Part 1/2)
 
 <div class="flex flex-col items-center gap-3 mt-4 text-sm">
 
@@ -167,7 +164,13 @@ mdc: true
 <div class="text-gray-300">Base Copilot instructions + agent-specific + custom instructions + tool definitions</div>
 </div>
 
-<div class="text-2xl text-gray-400">↓</div>
+</div>
+
+---
+
+# Anatomy of a Chat Request (Part 2/2)
+
+<div class="flex flex-col items-center gap-3 mt-4 text-sm">
 
 <div class="p-3 bg-orange-900/60 rounded-lg border-2 border-orange-400 w-full">
 <div class="text-white font-bold">4. MODEL INFERENCE</div>
@@ -181,6 +184,10 @@ mdc: true
 <div class="text-gray-300">Streamed to Chat view with formatted code blocks and actions</div>
 </div>
 
+</div>
+
+<div class="mt-6 p-4 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-xl text-center">
+<div class="text-white font-semibold">Each step in the pipeline transforms and enriches your request</div>
 </div>
 
 ---
@@ -319,10 +326,10 @@ mdc: true
 
 # Context Window Awareness
 
-<div class="mt-8">
+<div class="mt-6">
 
-<div class="p-5 bg-yellow-900/40 rounded-lg border-2 border-yellow-500 mb-6">
-<h3 class="text-lg font-bold text-white mb-3">⚠️ Token Limits Matter</h3>
+<div class="p-4 bg-yellow-900/40 rounded-lg border-2 border-yellow-500 mb-5">
+<h3 class="text-lg font-bold text-white mb-2">⚠️ Token Limits Matter</h3>
 <div class="text-sm text-gray-300">
 When context window is exceeded:
 <ul class="mt-2 space-y-1">
@@ -333,7 +340,7 @@ When context window is exceeded:
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 <h3 class="text-lg font-bold text-white mb-3">📊 Monitor Usage</h3>

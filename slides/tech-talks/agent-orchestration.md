@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Agent Orchestration - Multi-Agent Workflows
+module: tech-talks/agent-orchestration
 mdc: true
 ---
 
@@ -409,7 +410,7 @@ Multi-Agent Workflows in VS Code
 
 ---
 
-# Conductor Agent Pattern
+# Conductor Agent Pattern (1/2)
 
 ```yaml
 # .github/agents/conductor.agent.md
@@ -427,8 +428,16 @@ handoffs:
   - label: Start Workflow
     agent: explorer
     prompt: Analyze the codebase for this request
+```
+
+<div class="mt-4 text-sm text-center text-gray-400 italic">Conductors coordinate but never implement directly</div>
+
 ---
 
+# Conductor Agent Pattern (2/2)
+
+```yaml
+---
 You orchestrate multi-phase development workflows.
 You NEVER implement directly.
 
@@ -439,7 +448,16 @@ You NEVER implement directly.
 4. Review → @reviewer validates the implementation
 ```
 
-<div class="mt-4 text-sm text-center text-gray-400 italic">Conductors delegate, never execute</div>
+<div class="mt-6 grid grid-cols-2 gap-4">
+<div class="p-4 bg-purple-900/30 rounded-lg border-2 border-purple-500">
+<div class="text-xl font-bold text-purple-400 mb-2">🎭 Role</div>
+<div class="text-sm text-gray-300">Delegates tasks; never executes</div>
+</div>
+<div class="p-4 bg-blue-900/30 rounded-lg border-2 border-blue-500">
+<div class="text-xl font-bold text-blue-400 mb-2">🔄 Flow</div>
+<div class="text-sm text-gray-300">4-phase development cycle</div>
+</div>
+</div>
 
 ---
 

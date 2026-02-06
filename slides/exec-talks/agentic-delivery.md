@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: No Instruments, No Delivery - Executive Briefing
+module: exec-talks/agentic-delivery
 mdc: true
 ---
 
@@ -186,9 +187,9 @@ layout: center
 
 ---
 
-# 🏢 The Complete Flight Operations System
+# 🏢 The Complete Flight Operations System (1/2)
 
-<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+<div class="grid grid-cols-2 gap-4 mt-6 text-sm">
 
 <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded">
   <h3 class="font-bold mb-2">🤖 Autopilot → Agentic AI</h3>
@@ -210,6 +211,18 @@ layout: center
   - **Take responsibility**
 </div>
 
+</div>
+
+<div class="mt-6 text-center text-base text-gray-500 dark:text-gray-400 italic">
+  The coordinated system that enables safe, scalable agentic delivery...
+</div>
+
+---
+
+# 🏢 The Complete Flight Operations System (2/2)
+
+<div class="grid grid-cols-2 gap-4 mt-6 text-sm">
+
 <div class="p-4 bg-blue-50 dark:bg-blue-900/30 rounded">
   <h3 class="font-bold mb-2">🗼 ATC → CTO / VP Engineering</h3>
 
@@ -230,7 +243,7 @@ layout: center
 
 </div>
 
-<div class="mt-4 p-3 bg-purple-50 dark:bg-purple-900/30 rounded text-center">
+<div class="mt-8 p-3 bg-purple-50 dark:bg-purple-900/30 rounded text-center">
   <h3 class="font-bold">🏛️ FAA → Security / Compliance / Legal</h3>
     Set regulations • Certify pipelines • Audit operations • Enforce standards
 </div>

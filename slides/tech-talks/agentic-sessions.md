@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Agentic Sessions - Multi-Environment Agent Orchestration
+module: tech-talks/agentic-sessions
 mdc: true
 ---
 
@@ -49,10 +50,6 @@ mdc: true
   <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining Tech Talk</span>
-</div>
-
 ---
 
 # The Problem: Supervision Bottleneck
@@ -69,12 +66,6 @@ mdc: true
 - **Context switching destroys productivity**
   Mental reload for each interaction
 
-- **Serial execution only**
-  Can't parallelize supervised work
-
-- **Supervision scales linearly**
-  2 agents = 2x overhead
-
 </div>
 
 <div class="p-6 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-green-400">
@@ -86,6 +77,32 @@ mdc: true
 
 - **Git worktree isolation**
   Independent working directories
+
+</div>
+
+</div>
+
+---
+
+# The Problem: Supervision Bottleneck (2/2)
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div class="p-6 bg-red-50 dark:bg-red-900/30 rounded-lg border-2 border-red-400">
+
+### ❌ Interactive Agents
+
+- **Serial execution only**
+  Can't parallelize supervised work
+
+- **Supervision scales linearly**
+  2 agents = 2x overhead
+
+</div>
+
+<div class="p-6 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-green-400">
+
+### ✅ Background Agents
 
 - **Parallel execution enabled**
   3+ agents work simultaneously
@@ -296,12 +313,6 @@ layout: two-cols
 - Cloud (large-scale)
 - Claude Agent (extended reasoning)
 
-**Hand-off workflow:**
-1. Plan interactively in local
-2. "Continue in Background"
-3. Monitor from status indicator
-4. Review finished work
-
 </div>
 
 <div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600">
@@ -322,9 +333,29 @@ Command center badge shows:
 </div>
 </div>
 
-**Click to filter sessions list**
+</div>
 
 </div>
+
+---
+
+# Session Management: Hand-Off Workflow
+
+<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600 mt-8">
+
+### 🔄 Hand-off Workflow
+
+1. **Plan interactively in local**
+   Define requirements and approach
+
+2. **"Continue in Background"**
+   Delegate to autonomous agent
+
+3. **Monitor from status indicator**
+   Track progress without interruption
+
+4. **Review finished work**
+   Evaluate results and merge
 
 </div>
 
@@ -338,13 +369,13 @@ Command center badge shows:
 
 # Subagents: Parallel Task Decomposition
 
-<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="grid grid-cols-2 gap-6 mt-8">
 
 <div>
 
 ### The Problem: Context Bloat
 
-<div class="p-4 bg-red-900/30 rounded-lg mt-3 text-sm">
+<div class="p-4 bg-red-900/30 rounded-lg mt-3">
 
 **Complex task in single context:**
 - Search iterations consume tokens
@@ -360,7 +391,7 @@ Command center badge shows:
 
 ### The Solution: Subagents
 
-<div class="p-4 bg-green-900/30 rounded-lg mt-3 text-sm">
+<div class="p-4 bg-green-900/30 rounded-lg mt-3">
 
 **Each subagent in dedicated context:**
 - Own isolated context window
@@ -374,7 +405,11 @@ Command center badge shows:
 
 </div>
 
-<div class="mt-6 p-5 bg-gray-800 rounded-lg border-2 border-gray-600">
+---
+
+# Subagents: Search Implementation
+
+<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600 mt-8">
 
 ### 🔍 Search Subagent (Experimental)
 
@@ -382,14 +417,17 @@ Command center badge shows:
 // Enable: github.copilot.chat.searchSubagent.enabled
 ```
 
-<div class="grid grid-cols-4 gap-2 mt-3 text-xs">
+<div class="grid grid-cols-4 gap-3 mt-4 text-xs">
 <div class="p-2 bg-blue-900/60 rounded">Isolated agent loop</div>
 <div class="p-2 bg-green-900/60 rounded">Refines queries</div>
 <div class="p-2 bg-purple-900/60 rounded">Multiple approaches</div>
 <div class="p-2 bg-yellow-900/60 rounded">Focused results</div>
 </div>
 
-**Visibility:** Task performed, custom agent used, tools, initial prompt, result
+<div class="mt-4 p-3 bg-blue-900/40 rounded">
+<div class="text-white font-bold mb-2">Visibility:</div>
+<div class="text-gray-300 text-sm">Task performed, custom agent used, tools, initial prompt, result</div>
+</div>
 
 </div>
 
@@ -452,9 +490,7 @@ Compare finished, choose best
 
 # Custom Agents in Background Mode
 
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600">
+<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600 mt-8">
 
 ### 📚 Architecture
 
@@ -472,34 +508,30 @@ Compare finished, choose best
 
 </div>
 
-<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600">
+---
 
-### 🎯 Use Cases
+# Custom Agents: Use Cases
 
-<div class="space-y-3 text-sm mt-3">
+<div class="space-y-4 mt-8">
 
-<div class="p-3 bg-blue-900/40 rounded border-l-4 border-blue-400">
-<div class="font-bold text-blue-300">@review-enforcer</div>
-<div class="text-gray-400">Autonomous architecture reviews on every PR</div>
+<div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400">
+<div class="text-xl font-bold text-blue-300 mb-2">@review-enforcer</div>
+<div class="text-gray-300">Autonomous architecture reviews on every PR</div>
 </div>
 
-<div class="p-3 bg-green-900/40 rounded border-l-4 border-green-400">
-<div class="font-bold text-green-300">@test-generator</div>
-<div class="text-gray-400">Comprehensive test suites in parallel</div>
+<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400">
+<div class="text-xl font-bold text-green-300 mb-2">@test-generator</div>
+<div class="text-gray-300">Comprehensive test suites in parallel</div>
 </div>
 
-<div class="p-3 bg-purple-900/40 rounded border-l-4 border-purple-400">
-<div class="font-bold text-purple-300">@refactor-specialist</div>
-<div class="text-gray-400">Modernize patterns across 50+ files</div>
-</div>
-
-</div>
-
+<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
+<div class="text-xl font-bold text-purple-300 mb-2">@refactor-specialist</div>
+<div class="text-gray-300">Modernize patterns across 50+ files</div>
 </div>
 
 </div>
 
-<div class="mt-4 text-center text-sm text-gray-400 italic">
+<div class="mt-6 text-center text-sm text-gray-400 italic">
 Investment in agent customization → Continuous autonomous application
 </div>
 
@@ -554,7 +586,7 @@ Investment in agent customization → Continuous autonomous application
 
 # Use Case: Isolated Worktree Experiments
 
-<div class="grid grid-cols-2 gap-8 mt-6">
+<div class="grid grid-cols-2 gap-8 mt-8">
 
 <div class="p-5 bg-red-50 dark:bg-red-900/30 rounded-lg border-2 border-red-400">
 
@@ -590,21 +622,25 @@ Negligible cost enables exploration
 
 </div>
 
-<div class="mt-6 grid grid-cols-3 gap-4 text-xs">
-<div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400 text-center">
-<div class="text-2xl mb-1">⚡</div>
-<div class="font-bold text-blue-300">90 min → 5 min</div>
-<div class="text-gray-400">Rollback time</div>
+---
+
+# Isolated Worktree Experiments: Impact
+
+<div class="grid grid-cols-3 gap-6 mt-12 text-sm">
+<div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400 text-center">
+<div class="text-3xl mb-2">⚡</div>
+<div class="font-bold text-blue-300 text-xl">90 min → 5 min</div>
+<div class="text-gray-300 mt-2">Rollback time</div>
 </div>
-<div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400 text-center">
-<div class="text-2xl mb-1">✅</div>
-<div class="font-bold text-green-300">0 conflicts</div>
-<div class="text-gray-400">Isolation prevents</div>
+<div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400 text-center">
+<div class="text-3xl mb-2">✅</div>
+<div class="font-bold text-green-300 text-xl">0 conflicts</div>
+<div class="text-gray-300 mt-2">Isolation prevents</div>
 </div>
-<div class="p-3 bg-purple-900/60 rounded-lg border-2 border-purple-400 text-center">
-<div class="text-2xl mb-1">🔬</div>
-<div class="font-bold text-purple-300">3x experiments</div>
-<div class="text-gray-400">Exploration rate</div>
+<div class="p-4 bg-purple-900/60 rounded-lg border-2 border-purple-400 text-center">
+<div class="text-3xl mb-2">🔬</div>
+<div class="font-bold text-purple-300 text-xl">3x experiments</div>
+<div class="text-gray-300 mt-2">Exploration rate</div>
 </div>
 </div>
 
@@ -777,9 +813,7 @@ Negligible cost enables exploration
 
 # Claude Agent Integration (Preview)
 
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600">
+<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600 mt-8">
 
 ### 🤖 Native Claude Agent SDK
 
@@ -795,11 +829,15 @@ Negligible cost enables exploration
 
 </div>
 
-<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600">
+---
+
+# Claude Agent: Configuration
+
+<div class="p-5 bg-gray-800 rounded-lg border-2 border-gray-600 mt-8">
 
 ### ⚙️ Configuration
 
-<div class="text-xs mt-3 space-y-2">
+<div class="text-sm mt-4">
 
 ```javascript
 // Thinking token budget
@@ -814,10 +852,8 @@ github.copilot.chat.anthropic.contextEditing.enabled
 
 </div>
 
-<div class="mt-4 p-3 bg-purple-900/40 rounded text-center text-xs">
+<div class="mt-6 p-3 bg-purple-900/40 rounded text-center">
 <span class="text-white font-bold">Visibility into model decision-making</span>
-</div>
-
 </div>
 
 </div>
@@ -943,15 +979,13 @@ github.copilot.chat.anthropic.contextEditing.enabled
 
 ---
 
-# Getting Started
+# Getting Started: Immediate Actions
 
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div class="p-5 bg-blue-50 dark:bg-blue-900/30 rounded-lg border-2 border-blue-400">
+<div class="p-5 bg-blue-50 dark:bg-blue-900/30 rounded-lg border-2 border-blue-400 mt-8">
 
 ### 🚀 Immediate Actions
 
-<div class="space-y-3 text-sm mt-3">
+<div class="space-y-3 mt-4">
 
 1. **Try session type picker**
    Start local, continue in background
@@ -972,11 +1006,15 @@ github.copilot.chat.anthropic.contextEditing.enabled
 
 </div>
 
-<div class="p-5 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-green-400">
+---
+
+# Getting Started: Next Steps
+
+<div class="p-5 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-green-400 mt-8">
 
 ### ⭐ Next Steps
 
-<div class="space-y-3 text-sm mt-3">
+<div class="space-y-4 mt-4">
 
 - **Multi-agent parallel execution**
   Independent tasks simultaneously
@@ -989,8 +1027,6 @@ github.copilot.chat.anthropic.contextEditing.enabled
 
 - **Scale to 5-10 parallel sessions**
   Across local, background, cloud
-
-</div>
 
 </div>
 

@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 2 - Agent Plan Mode
+module: workshop/02-agent-plan-mode
 mdc: true
 ---
 
@@ -50,10 +51,6 @@ mdc: true
   <div class="mt-4 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"></div>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining</span>
-</div>
-
 ---
 
 # 📖 The Challenge
@@ -90,25 +87,25 @@ Result: Wasted time, missed requirements, conflicts in PR review
 
 <div class="flex flex-col items-center justify-center h-full">
 
-<div class="p-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg max-w-4xl">
-  <div class="text-2xl font-bold text-white mb-6 text-center">
+<div class="p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg max-w-4xl">
+  <div class="text-2xl font-bold text-white mb-3 text-center">
     From Implementation to Orchestration
   </div>
 
-  <div class="grid grid-cols-2 gap-8 text-sm">
-<div class="space-y-3">
+  <div class="grid grid-cols-2 gap-6 text-sm">
+<div class="space-y-2">
 <div class="font-bold text-red-300">Traditional Thinking:</div>
 <div class="text-white italic">"I need to figure out all the steps before I start coding."</div>
 </div>
 
-<div class="space-y-3">
+<div class="space-y-2">
 <div class="font-bold text-green-300">AI-Native Thinking:</div>
 <div class="text-white italic">"AI can research my codebase and propose a plan—I validate the architecture, then execute."</div>
 </div>
 </div>
 </div>
 
-<div class="mt-6 text-center text-sm text-gray-400 italic max-w-3xl">
+<div class="mt-2 text-center text-sm text-gray-400 italic max-w-3xl">
 This isn't about letting AI make decisions for you. It's about using AI to do comprehensive analysis so you can focus on what requires human judgment.
 </div>
 
@@ -581,28 +578,28 @@ AI amplifies expertise—it doesn't replace it. Senior judgment validates what A
 
 <div class="flex flex-col items-center justify-center h-full">
 
-<div class="p-8 bg-gradient-to-r from-purple-900/60 to-gray-800 rounded-xl max-w-3xl text-center">
-  <div class="text-5xl mb-4">📝</div>
-  <div class="text-2xl font-bold text-purple-300 mb-4">Module 3: Custom Prompts</div>
-  <div class="text-lg text-gray-300 mb-6">
+<div class="p-6 bg-gradient-to-r from-purple-900/60 to-gray-800 rounded-xl max-w-3xl text-center">
+  <div class="text-4xl mb-2">📝</div>
+  <div class="text-2xl font-bold text-purple-300 mb-3">Module 3: Custom Prompts</div>
+  <div class="text-lg text-gray-300 mb-3">
     Turn repeated requests into reusable prompt templates that capture domain expertise and accelerate common workflows.
   </div>
   <div class="text-sm text-gray-400 italic">
     "I just ran the same planning workflow three times. There has to be a way to template this..."
   </div>
-  <div class="text-xs text-gray-500 mt-2">— Sarah, noticing patterns</div>
+  <div class="text-xs text-gray-500 mt-1">— Sarah, noticing patterns</div>
 </div>
 
-<div class="mt-8 grid grid-cols-3 gap-4 text-xs w-full max-w-3xl">
-  <div class="p-3 bg-gray-800 rounded-lg text-center">
+<div class="mt-5 grid grid-cols-3 gap-4 text-xs w-full max-w-3xl">
+  <div class="p-2 bg-gray-800 rounded-lg text-center">
     <div class="text-green-400 font-bold">✓ Module 1</div>
     <div class="text-gray-400">Foundation set</div>
   </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg text-center border-2 border-blue-400">
+  <div class="p-2 bg-blue-900/60 rounded-lg text-center border-2 border-blue-400">
     <div class="text-blue-300 font-bold">→ Module 2</div>
     <div class="text-gray-300">Plan mode mastered</div>
   </div>
-  <div class="p-3 bg-gray-800 rounded-lg text-center">
+  <div class="p-2 bg-gray-800 rounded-lg text-center">
     <div class="text-gray-500 font-bold">Module 3</div>
     <div class="text-gray-600">Custom prompts next</div>
   </div>

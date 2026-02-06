@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 3 - Custom Prompts
+module: workshop/03-custom-prompts
 mdc: true
 ---
 
@@ -47,10 +48,6 @@ mdc: true
 
   <!-- Decorative line -->
   <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining</span>
 </div>
 
 ---

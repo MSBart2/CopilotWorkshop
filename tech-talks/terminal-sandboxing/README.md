@@ -391,6 +391,36 @@ Terminal sandboxing solves a fundamental problem of agentic AI: how do you give 
 
 ---
 
+## 🛠️ Agent Governance Toolkit
+
+**Terminal Sandboxing** and **Copilot Hooks** are complementary tools for agent governance:
+
+| Use Case | Tool | This Talk |
+|----------|------|----------|
+| Limit *what* agents can access | Terminal Sandboxing | 👉 You are here |
+| Control *when* agents can act | Copilot Hooks | [→ View talk](../copilot-hooks/) |
+
+### When to Use Which
+
+**Use Terminal Sandboxing when:**
+- You want blanket restrictions on network/filesystem access
+- You need defense against prompt injection attacks
+- You want to prevent data exfiltration
+- You need OS-level execution controls
+
+**Use Copilot Hooks when:**
+- You need lifecycle control (sessionStart, preToolUse, postToolUse, errorOccurred)
+- You want to approve/deny actions before they happen (beyond sandboxing)
+- You need audit trails and compliance evidence
+- You want to enforce project-specific policies
+
+**Use Both Together:**
+- Sandboxing provides baseline safety (network/filesystem limits)
+- Hooks provide policy enforcement (project rules, approval gates)
+- **Result:** Defense in depth for agent governance
+
+---
+
 ## Resources
 
 **Official Documentation:**
@@ -399,8 +429,8 @@ Terminal sandboxing solves a fundamental problem of agentic AI: how do you give 
 - [Workspace Trust](https://code.visualstudio.com/docs/editor/workspace-trust) — Understanding VS Code trust model
 
 **Related Tech Talks:**
-- [Agentic Sessions: Orchestrated AI Workflows](../agentic-sessions/README.md) — Context for agent execution
-- [Copilot Chat Internals](../copilot-chat-internals/README.md) — Debug view for understanding what agents do
+- [Parallel Execution](../parallel-execution/) — Context for agent execution
+- [Copilot Chat Internals](../copilot-chat-internals/) — Debug view for understanding what agents do
 
 **VS Code 1.109 Release Notes:**
 - [Terminal Sandboxing Announcement](https://code.visualstudio.com/updates/v1_109#_terminal-sandbox) — Feature introduction

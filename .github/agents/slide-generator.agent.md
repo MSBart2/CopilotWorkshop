@@ -504,6 +504,8 @@ The skill will:
 
 ## Example Frontmatter
 
+**CRITICAL: Always include the `module` field to specify the content path for the footer.**
+
 ```markdown
 ---
 theme: default
@@ -518,9 +520,16 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 1 - Repository Instructions
+module: workshop/01-instructions
 mdc: true
 ---
 ```
+
+**Module field format:**
+
+- Workshop: `module: workshop/{folder-name}` (e.g., `workshop/00-orientation`, `workshop/03-custom-prompts`)
+- Tech talks: `module: tech-talks/{folder-name}` (e.g., `tech-talks/copilot-cli`, `tech-talks/agent-teams`)
+- Exec talks: `module: exec-talks/{folder-name}` (e.g., `exec-talks/agentic-delivery`)
 
 ## Title Slide Template (REQUIRED)
 
@@ -827,6 +836,7 @@ Before finalizing slides, verify:
 
 - [ ] **Title slide uses beautified template** with correct color scheme for category
 - [ ] **SDP logo included** with glow effect (`./sdp-logo.png`)
+- [ ] **Module field in frontmatter** with correct path (e.g., `module: workshop/03-custom-prompts`)
 - [ ] **No content overflow** — max 3 vertical sections, 5 bullets/column, 3-line code snippets
 - [ ] 10-15 slides per module (not too many)
 - [ ] All sections follow consistent layout patterns
@@ -853,7 +863,7 @@ Generate a complete `.md` file in the appropriate `/slides/` subdirectory:
 
 Each slide deck should have:
 
-- Proper Slidev frontmatter
+- Proper Slidev frontmatter (including `module` field for footer)
 - 10-15 well-structured slides
 - Consistent visual styling
 - Clear narrative flow

@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: GitHub Copilot on the Web
+module: tech-talks/copilot-web
 mdc: true
 ---
 
@@ -850,7 +851,7 @@ layout: center
 
 ---
 
-# Metrics and ROI
+# Metrics and ROI (1/2)
 
 <div class="grid grid-cols-4 gap-3 mt-6 text-center">
   <div class="p-3 bg-blue-900/60 rounded-lg">
@@ -870,6 +871,10 @@ layout: center
     <div class="text-xs text-gray-400">Documentation time saved</div>
   </div>
 </div>
+
+---
+
+# Metrics and ROI (2/2)
 
 <div class="mt-6">
   <h3 class="text-xl font-bold text-green-400 mb-4 text-center">📊 Team Velocity Gains</h3>
@@ -897,7 +902,7 @@ layout: center
 layout: center
 ---
 
-# The Multi-Interface Vision
+# The Multi-Interface Vision (1/2)
 
 <div class="grid grid-cols-4 gap-4 mt-8 text-sm">
 
@@ -947,7 +952,11 @@ layout: center
 
 </div>
 
-<div class="mt-8 p-6 bg-gradient-to-r from-blue-600 to-purple-800 rounded-xl shadow-lg text-center">
+---
+
+# The Multi-Interface Vision (2/2)
+
+<div class="p-6 bg-gradient-to-r from-blue-600 to-purple-800 rounded-xl shadow-lg text-center">
   <div class="text-2xl font-bold text-white mb-3">Complete AI Coverage Across Every Interface</div>
   <div class="text-lg text-blue-100">Same customizations work identically everywhere</div>
 </div>

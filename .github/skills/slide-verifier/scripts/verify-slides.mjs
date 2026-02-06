@@ -486,13 +486,14 @@ Usage:
   node verify-slides.mjs --all                  Verify all decks
   node verify-slides.mjs --fail-on-errors       Exit 1 if critical issues found
   node verify-slides.mjs --tolerance=10         Set overflow tolerance (default: 5px)
+  node verify-slides.mjs --port=3031            Use custom port (default: 3030)
   node verify-slides.mjs --no-screenshots       Skip screenshots (faster, but less visual)
 
 Examples:
   node verify-slides.mjs workshop/03-custom-prompts.md
   node verify-slides.mjs tech-talks/copilot-cli.md
   node verify-slides.mjs --all --fail-on-errors
-  node verify-slides.mjs tech-talks/agent-orchestration.md --tolerance=0
+  node verify-slides.mjs tech-talks/agent-orchestration.md --tolerance=0 --port=3031
 `);
     process.exit(0);
   }
@@ -501,6 +502,10 @@ Examples:
   const verifyAll = args.includes("--all");
   const tolerance = parseInt(
     args.find((arg) => arg.startsWith("--tolerance="))?.split("=")[1] || "5",
+  );
+  const port = parseInt(
+    args.find((arg) => arg.startsWith("--port="))?.split("=")[1] ||
+      BASE_PORT.toString(),
   );
   const captureAll = !args.includes("--no-screenshots");
 
@@ -530,11 +535,11 @@ Examples:
     try {
       // Start server
       console.log("🚀 Starting Slidev server...");
-      server = await startSlidevServer(slideFile, BASE_PORT);
+      server = await startSlidevServer(slideFile, port);
       console.log("✅ Server ready\n");
 
       // Verify slides
-      const result = await verifySlides(slideFile, BASE_PORT, {
+      const result = await verifySlides(slideFile, port, {
         captureAll,
         tolerance,
       });

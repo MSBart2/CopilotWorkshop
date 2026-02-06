@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 4 - Agent Skills
+module: workshop/04-agent-skills
 mdc: true
 ---
 
@@ -157,7 +158,7 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
 
 # ❌ Before → ✨ After
 
-<div class="grid grid-cols-3 gap-4 mt-6">
+<div class="grid grid-cols-3 gap-3 mt-4">
 
 <div class="rounded-xl overflow-hidden border border-gray-700">
 <div class="bg-gradient-to-r from-red-900/80 to-red-800/60 p-3 text-center">
@@ -215,7 +216,7 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
 
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-green-600/30 to-green-800/30 rounded-xl border border-green-500/50 text-center">
+<div class="mt-4 p-3 bg-gradient-to-r from-green-600/30 to-green-800/30 rounded-xl border border-green-500/50 text-center">
 <div class="text-2xl font-bold text-green-300">346 minutes saved per sprint</div>
 <div class="text-sm text-gray-400 mt-1">That's nearly 6 hours of developer time recovered</div>
 </div>
@@ -224,7 +225,7 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
 
 # 🧠 Key Insight
 
-<div class="flex flex-col items-center justify-center h-full space-y-8">
+<div class="flex flex-col items-center justify-center h-full space-y-6">
 
 <div class="text-2xl text-gray-300 text-center max-w-2xl">
   Traditional thinking: Write detailed instructions and hope Copilot figures it out
@@ -238,7 +239,7 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
   </div>
 </div>
 
-<div class="mt-6 text-center text-base text-gray-400 italic">
+<div class="mt-4 text-center text-base text-gray-400 italic">
   Instructions = behavior guidelines | Skills = new capabilities
 </div>
 
@@ -616,7 +617,7 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
 
 # 🔗 Compounding Value
 
-<div class="space-y-6 mt-8">
+<div class="space-y-4 mt-6">
 
 <div class="flex items-center gap-4">
   <div class="flex-shrink-0 w-32 p-3 bg-blue-900/60 rounded text-center text-sm font-bold text-blue-200">Module 1</div>
@@ -636,9 +637,9 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
   <div class="flex-1 text-sm text-gray-300">Agent skills teach specialized workflows with scripts + examples</div>
 </div>
 
-<div class="text-3xl text-center text-gray-400 my-4">↓</div>
+<div class="text-3xl text-center text-gray-400 my-3">↓</div>
 
-<div class="p-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-center">
+<div class="p-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-center">
   <div class="text-xl font-bold text-white mb-2">Copilot becomes a domain specialist</div>
   <div class="text-sm text-gray-200">Standards + Context + Specialized Capabilities = Expert-level assistance</div>
 </div>
@@ -650,7 +651,7 @@ Instructions tell Copilot **how** to behave, but they can't teach it **how to do
 # ➡️ Next Up: MCP Servers
 
 <div class="flex items-center justify-center h-full">
-<div class="max-w-3xl space-y-6">
+<div class="max-w-3xl space-y-5">
 
 <div class="text-center text-xl text-gray-300">
 Skills teach Copilot specialized workflows with static resources...
@@ -667,7 +668,7 @@ MCP servers connect Copilot to databases, APIs, and cloud platforms
 </div>
 </div>
 
-<div class="mt-8 p-4 bg-gray-800 rounded-lg border-l-4 border-purple-500">
+<div class="mt-6 p-4 bg-gray-800 rounded-lg border-l-4 border-purple-500">
 <div class="text-sm italic text-gray-300">
 "Skills taught Copilot how to validate against our API schema. But the schema is static. What if I need Copilot to query our actual PostgreSQL database or call our live TV show API?"
 </div>
