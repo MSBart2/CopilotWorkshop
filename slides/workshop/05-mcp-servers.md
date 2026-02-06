@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 5 - MCP Servers
+module: workshop/05-mcp-servers
 mdc: true
 ---
 
@@ -427,28 +428,46 @@ Config: <code class="bg-gray-800 px-2 py-1 rounded">.vscode/mcp.json</code> (wor
 
 # 💭 Marcus's Transformation
 
-<div class="flex flex-col items-center justify-center h-full">
+<div class="flex flex-col items-center justify-center py-12">
 
-<div class="p-8 bg-gradient-to-r from-blue-600 to-cyan-700 rounded-xl shadow-lg max-w-3xl">
-<div class="text-6xl mb-6 text-center">💻</div>
-<blockquote class="text-xl text-white italic text-center leading-relaxed">
+<div class="p-5 bg-gradient-to-r from-blue-600 to-cyan-700 rounded-xl shadow-lg max-w-3xl">
+<div class="text-4xl mb-3 text-center">💻</div>
+<blockquote class="text-base text-white italic text-center leading-relaxed">
 "Manual schema lookups used to take 2-5 minutes per query, with constant context switching between IDE and database tools. SQLite MCP server eliminated that entirely—I query the FanHub database directly from chat. Zero context switches, zero time wasted."
 </blockquote>
-<div class="text-right text-cyan-200 mt-6 text-lg">
+<div class="text-right text-cyan-200 mt-3 text-sm">
 — Marcus, DevOps Developer
 </div>
 </div>
 
-<div class="mt-8 flex gap-8 text-center">
-<div>
-<div class="text-3xl font-bold text-red-400 line-through">2-5 min</div>
-<div class="text-sm text-gray-500">Before</div>
 </div>
-<div class="text-3xl text-gray-500">→</div>
-<div>
-<div class="text-3xl font-bold text-green-400">0 min</div>
-<div class="text-sm text-gray-500">After</div>
+
+---
+
+# 💭 Marcus's Transformation (Impact)
+
+<div class="flex flex-col items-center justify-center py-12">
+
+<div class="text-xl text-gray-300 mb-5 text-center">
+Database query transformation with MCP
 </div>
+
+<div class="flex gap-10 text-center items-center">
+<div>
+<div class="text-4xl font-bold text-red-400 line-through">2-5 min</div>
+<div class="text-sm text-gray-400 mt-1">Before</div>
+<div class="text-xs text-gray-500 mt-1">Manual lookups</div>
+</div>
+<div class="text-4xl text-gray-500">→</div>
+<div>
+<div class="text-4xl font-bold text-green-400">0 min</div>
+<div class="text-sm text-gray-400 mt-1">After</div>
+<div class="text-xs text-gray-500 mt-1">Direct chat queries</div>
+</div>
+</div>
+
+<div class="mt-5 p-3 bg-gradient-to-r from-green-600/30 to-cyan- 600/30 rounded-xl border border-green-500/30 text-center max-w-2xl">
+<div class="text-lg font-bold text-green-300">100% elimination of context switches</div>
 </div>
 
 </div>
@@ -491,34 +510,66 @@ Config: <code class="bg-gray-800 px-2 py-1 rounded">.vscode/mcp.json</code> (wor
 
 # ➡️ Next Up: Custom Agents
 
-<div class="flex items-center justify-center h-full">
-<div class="max-w-3xl space-y-6">
+<div class="flex items-center justify-center py-12">
+<div class="max-w-3xl space-y-4">
 
-<div class="text-center text-xl text-gray-300">
+<div class="text-center text-lg text-gray-300">
 You have skills, MCP servers, prompts, instructions...
 </div>
 
-<div class="p-4 bg-red-900/30 rounded-lg border border-red-500/50 text-center">
+<div class="p-3 bg-red-900/30 rounded-lg border border-red-500/50 text-center">
 <div class="text-red-300">But you're constantly switching contexts:</div>
-<div class="text-lg text-gray-400 mt-2">Planning mode → Implementation mode → Review mode</div>
+<div class="text-base text-gray-400 mt-1">Planning mode → Implementation mode → Review mode</div>
 </div>
 
-<div class="text-4xl text-center text-gray-400">↓</div>
+<div class="text-3xl text-center text-gray-400">↓</div>
 
-<div class="p-6 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl text-center">
-<div class="text-2xl font-bold text-white mb-3">
+<div class="p-5 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl text-center">
+<div class="text-xl font-bold text-white mb-2">
 Module 6: Custom Agents
 </div>
-<div class="text-base text-orange-100">
+<div class="text-sm text-orange-100">
 Bundle everything into role-based agents you can switch between instantly
 </div>
 </div>
 
-<div class="mt-6 p-4 bg-gray-800 rounded-lg border-l-4 border-orange-500">
-<div class="text-sm italic text-gray-300">
+</div>
+</div>
+
+---
+
+# ➡️ Next Up: Custom Agents (Sarah's Need)
+
+<div class="flex items-center justify-center py-12">
+<div class="max-w-3xl space-y-5">
+
+<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-orange-500">
+<div class="text-base italic text-gray-300">
 "I keep reconfiguring Copilot for different tasks—planning needs different context than reviewing. Can I save these configurations?"
 </div>
-<div class="text-xs text-gray-500 mt-2">— Sarah, ready for role-based presets</div>
+<div class="text-xs text-gray-400 mt-2">— Sarah, ready for role-based presets</div>
+</div>
+
+<div class="p-4 bg-gradient-to-r from-orange-600/30 to-purple-600/30 rounded-xl border border-orange-500/30 text-center">
+<div class="text-lg font-bold mb-2">The Solution: Custom Agents</div>
+<div class="text-sm text-gray-300">
+Save complete configurations (skills + MCP + prompts + instructions) as switchable agent presets
+</div>
+</div>
+
+<div class="grid grid-cols-3 gap-3 text-center text-xs">
+<div class="p-2 bg-blue-900/40 rounded">
+<div class="text-xl mb-1">📋</div>
+<div class="font-bold text-blue-300">Planning Agent</div>
+</div>
+<div class="p-2 bg-green-900/40 rounded">
+<div class="text-xl mb-1">⚡</div>
+<div class="font-bold text-green-300">Implementation Agent</div>
+</div>
+<div class="p-2 bg-purple-900/40 rounded">
+<div class="text-xl mb-1">🔍</div>
+<div class="font-bold text-purple-300">Review Agent</div>
+</div>
 </div>
 
 </div>

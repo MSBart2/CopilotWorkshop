@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: GitHub Copilot Hooks - Governance & Compliance
+module: tech-talks/copilot-hooks
 mdc: true
 ---
 
@@ -50,11 +51,9 @@ mdc: true
 
 ---
 
-# The Governance Problem
+# The Governance Problem (1/2)
 
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
+<div class="mt-8">
 
 ### 🤖 The Challenge
 
@@ -82,11 +81,15 @@ mdc: true
 
 </div>
 
-<div>
+---
+
+# The Governance Problem (2/2)
+
+<div class="mt-8">
 
 ### 💡 The Solution
 
-<div class="p-6 bg-gradient-to-br from-green-900/60 to-blue-900/60 rounded-lg border-2 border-green-400 mt-4">
+<div class="p-6 bg-gradient-to-br from-green-900/60 to-blue-900/60 rounded-lg border-2 border-green-400">
   <div class="text-2xl font-bold text-green-300 mb-4">GitHub Copilot Hooks</div>
   <div class="text-gray-200 space-y-3 text-sm">
     <div>✅ Programmable control points at critical moments</div>
@@ -96,18 +99,16 @@ mdc: true
   </div>
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+<div class="mt-8 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
   <div class="text-xl font-bold text-white">Velocity with visibility</div>
   <div class="text-blue-200 text-sm mt-1">Automation with accountability</div>
 </div>
 
 </div>
 
-</div>
-
 ---
 
-# Hook Architecture: Lifecycle Events
+# Hook Architecture: Lifecycle Events (1/2)
 
 <div class="grid grid-cols-3 gap-4 mt-6 text-xs">
 
@@ -143,6 +144,14 @@ mdc: true
   </div>
   <div class="mt-3 text-green-400 italic text-xs font-bold">⭐ MOST POWERFUL</div>
 </div>
+
+</div>
+
+---
+
+# Hook Architecture: Lifecycle Events (2/2)
+
+<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
 
 <div class="p-4 bg-orange-900/60 rounded-lg border-2 border-orange-400">
   <div class="text-2xl mb-2">📊</div>
@@ -186,7 +195,7 @@ mdc: true
 
 ---
 
-# Hook Execution Flow
+# Hook Execution Flow (Part 1/2)
 
 <div class="flex flex-col gap-4 mt-6">
 
@@ -208,7 +217,13 @@ mdc: true
   </div>
 </div>
 
-<div class="text-3xl text-gray-400 text-center">↓</div>
+</div>
+
+---
+
+# Hook Execution Flow (Part 2/2)
+
+<div class="flex flex-col gap-4 mt-6">
 
 <div class="flex items-center gap-4">
   <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
@@ -281,6 +296,8 @@ mdc: true
 
 ### 📝 Implementation
 
+<div class="text-sm">
+
 ```bash {1-4|6-10|12-16|18-20}
 #!/bin/bash
 INPUT=$(cat)
@@ -303,32 +320,36 @@ fi
 exit 0
 ```
 
-### ✨ Results
-
-<div class="grid grid-cols-3 gap-2 mt-4 text-xs">
-  <div class="p-3 bg-blue-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-blue-300">0 min</div>
-    <div class="text-gray-400">Review time</div>
-    <div class="text-gray-500 text-xs">was 60 min</div>
-  </div>
-  <div class="p-3 bg-green-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-green-300">0</div>
-    <div class="text-gray-400">Violations</div>
-    <div class="text-gray-500 text-xs">was 2/sprint</div>
-  </div>
-  <div class="p-3 bg-purple-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-purple-300">&lt;2s</div>
-    <div class="text-gray-400">Detection</div>
-    <div class="text-gray-500 text-xs">was 30 min</div>
-  </div>
 </div>
 
 </div>
 
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Security policies as code, enforced at runtime</div>
+---
+
+# Use Case 1: Results
+
+<div class="grid grid-cols-3 gap-6 mt-12">
+  <div class="p-6 bg-blue-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-blue-300">0 min</div>
+    <div class="text-gray-400 mt-2">Review time</div>
+    <div class="text-gray-500 text-sm mt-1">was 60 min</div>
+  </div>
+  <div class="p-6 bg-green-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-green-300">0</div>
+    <div class="text-gray-400 mt-2">Violations</div>
+    <div class="text-gray-500 text-sm mt-1">was 2/sprint</div>
+  </div>
+  <div class="p-6 bg-purple-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-purple-300">&lt;2s</div>
+    <div class="text-gray-400 mt-2">Detection</div>
+    <div class="text-gray-500 text-sm mt-1">was 30 min</div>
+  </div>
+</div>
+
+<div class="mt-12 p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-2xl font-bold text-white">Security policies as code, enforced at runtime</div>
 </div>
 
 ---
@@ -363,6 +384,8 @@ exit 0
 
 ### 📊 Example Queries
 
+<div class="text-sm">
+
 ```bash
 # Count tool usage
 cat audit.jsonl | jq -r '.toolName' | sort | uniq -c
@@ -376,9 +399,13 @@ cat audit.jsonl | jq -r '[.timestamp, .toolName] | @csv'
 
 </div>
 
+</div>
+
 <div>
 
 ### 📋 Audit Log Format
+
+<div class="text-sm">
 
 ```jsonl
 {"timestamp":"2025-06-15T17:30:00Z",
@@ -402,32 +429,36 @@ cat audit.jsonl | jq -r '[.timestamp, .toolName] | @csv'
  "toolsUsed":3,"violations":0}
 ```
 
-### ✨ Results
-
-<div class="grid grid-cols-3 gap-2 mt-4 text-xs">
-  <div class="p-3 bg-blue-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-blue-300">2 min</div>
-    <div class="text-gray-400">Audit time</div>
-    <div class="text-gray-500 text-xs">was 20 min</div>
-  </div>
-  <div class="p-3 bg-green-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-green-300">100%</div>
-    <div class="text-gray-400">Coverage</div>
-    <div class="text-gray-500 text-xs">was ~70%</div>
-  </div>
-  <div class="p-3 bg-purple-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-purple-300">SQL</div>
-    <div class="text-gray-400">Query capability</div>
-    <div class="text-gray-500 text-xs">was none</div>
-  </div>
 </div>
 
 </div>
 
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-purple-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Programmatic compliance replaces manual log parsing</div>
+---
+
+# Use Case 2: Results
+
+<div class="grid grid-cols-3 gap-6 mt-12">
+  <div class="p-6 bg-blue-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-blue-300">2 min</div>
+    <div class="text-gray-400 mt-2">Audit time</div>
+    <div class="text-gray-500 text-sm mt-1">was 20 min</div>
+  </div>
+  <div class="p-6 bg-green-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-green-300">100%</div>
+    <div class="text-gray-400 mt-2">Coverage</div>
+    <div class="text-gray-500 text-sm mt-1">was ~70%</div>
+  </div>
+  <div class="p-6 bg-purple-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-purple-300">SQL</div>
+    <div class="text-gray-400 mt-2">Query capability</div>
+    <div class="text-gray-500 text-sm mt-1">was none</div>
+  </div>
+</div>
+
+<div class="mt-12 p-6 bg-gradient-to-r from-purple-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-2xl font-bold text-white">Programmatic compliance replaces manual log parsing</div>
 </div>
 
 ---
@@ -460,23 +491,10 @@ cat audit.jsonl | jq -r '[.timestamp, .toolName] | @csv'
   </div>
 </div>
 
-### ✨ Results
-
-<div class="grid grid-cols-3 gap-2 mt-4 text-xs">
-  <div class="p-3 bg-blue-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-blue-300">0 min</div>
-    <div class="text-gray-400">Rework time</div>
-    <div class="text-gray-500 text-xs">was 75 min</div>
-  </div>
-  <div class="p-3 bg-green-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-green-300">1</div>
-    <div class="text-gray-400">Rounds</div>
-    <div class="text-gray-500 text-xs">was 3</div>
-  </div>
-  <div class="p-3 bg-purple-900/60 rounded-lg text-center">
-    <div class="text-2xl font-bold text-purple-300">0</div>
-    <div class="text-gray-400">CI violations</div>
-    <div class="text-gray-500 text-xs">was 12</div>
+<div class="mt-6 p-4 bg-gradient-to-br from-yellow-900/60 to-orange-900/60 rounded-lg border-2 border-yellow-500">
+  <div class="text-yellow-300 font-bold mb-2">💡 Key Insight</div>
+  <div class="text-gray-300 text-sm">
+    Validate at point of creation, not post-commit cleanup
   </div>
 </div>
 
@@ -485,6 +503,8 @@ cat audit.jsonl | jq -r '[.timestamp, .toolName] | @csv'
 <div>
 
 ### 📝 Implementation
+
+<div class="text-sm">
 
 ```bash {1-5|7-10|12-17|19-23}
 #!/bin/bash
@@ -512,19 +532,36 @@ if ! npx eslint "$TEMP_FILE" > /dev/null 2>&1; then
 fi
 ```
 
-<div class="mt-6 p-4 bg-gradient-to-br from-yellow-900/60 to-orange-900/60 rounded-lg border-2 border-yellow-500">
-  <div class="text-yellow-300 font-bold mb-2">💡 Key Insight</div>
-  <div class="text-gray-300 text-sm">
-    Validate at point of creation, not post-commit cleanup
+</div>
+
+</div>
+
+</div>
+
+---
+
+# Use Case 3: Results
+
+<div class="grid grid-cols-3 gap-6 mt-12">
+  <div class="p-6 bg-blue-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-blue-300">0 min</div>
+    <div class="text-gray-400 mt-2">Rework time</div>
+    <div class="text-gray-500 text-sm mt-1">was 75 min</div>
+  </div>
+  <div class="p-6 bg-green-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-green-300">1</div>
+    <div class="text-gray-400 mt-2">Rounds</div>
+    <div class="text-gray-500 text-sm mt-1">was 3</div>
+  </div>
+  <div class="p-6 bg-purple-900/60 rounded-lg text-center">
+    <div class="text-4xl font-bold text-purple-300">0</div>
+    <div class="text-gray-400 mt-2">CI violations</div>
+    <div class="text-gray-500 text-sm mt-1">was 12</div>
   </div>
 </div>
 
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-green-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Agents generate compliant code on first attempt</div>
+<div class="mt-12 p-6 bg-gradient-to-r from-green-600 to-blue-800 rounded-xl shadow-lg text-center">
+  <div class="text-2xl font-bold text-white">Agents generate compliant code on first attempt</div>
 </div>
 
 ---
@@ -560,37 +597,37 @@ fi
 
 ### 🚀 Optimization Patterns
 
-<div class="space-y-4 text-sm">
+<div class="space-y-3 text-sm">
 
 <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">💾</span>
+  <span class="text-xl">💾</span>
   <div>
     <div class="text-white font-bold">Cache expensive computations</div>
-    <div class="text-gray-400">Compiled regex, policy lookups</div>
+    <div class="text-gray-400 text-xs">Compiled regex, policy lookups</div>
   </div>
 </div>
 
 <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">⚡</span>
+  <span class="text-xl">⚡</span>
   <div>
     <div class="text-white font-bold">Asynchronous logging</div>
-    <div class="text-gray-400">Append to file, don't wait for I/O</div>
+    <div class="text-gray-400 text-xs">Append to file, don't wait for I/O</div>
   </div>
 </div>
 
 <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">🔄</span>
+  <span class="text-xl">🔄</span>
   <div>
     <div class="text-white font-bold">Background processing</div>
-    <div class="text-gray-400">Offload slow work to jobs triggered by hooks</div>
+    <div class="text-gray-400 text-xs">Offload slow work to jobs triggered by hooks</div>
   </div>
 </div>
 
 <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">📊</span>
+  <span class="text-xl">📊</span>
   <div>
     <div class="text-white font-bold">Profile scripts</div>
-    <div class="text-gray-400"><code>time ./hook.sh &lt; test-input.json</code></div>
+    <div class="text-gray-400 text-xs"><code>time ./hook.sh &lt; test-input.json</code></div>
   </div>
 </div>
 
@@ -669,26 +706,86 @@ fi
 <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
   <span class="text-2xl">✅</span>
   <div>
+    <div class="text-white font-bold">Restrict file system access</div>
+    <div class="text-gray-400">Validate paths, prevent traversal</div>
+  </div>
+</div>
+
+<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
+  <span class="text-2xl">✅</span>
+  <div>
+    <div class="text-white font-bold">Error handling</div>
+    <div class="text-gray-400">Fail securely, log failures</div>
+  </div>
+</div>
+
+<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
+  <span class="text-2xl">✅</span>
+  <div>
     <div class="text-white font-bold">Least privilege</div>
-    <div class="text-gray-400">Don't require sudo for hooks</div>
+    <div class="text-gray-400">Run scripts with minimal permissions</div>
   </div>
 </div>
 
 </div>
 
-### 🧪 Testing & Debugging
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-gradient-to-r from-red-900/40 to-gray-800 rounded-lg text-center">
+  <span class="text-white font-bold">🔐 Security is not optional—hooks run with repository access</span>
+</div>
+
+---
+
+# Testing & Debugging Hooks
+
+<div class="mt-8">
+
+### 🧪 Local Testing
+
+<div class="text-sm">
 
 ```bash
-# Test hooks locally
+# Test hooks with sample input
 echo '{"toolName":"bash","args":{"command":"rm -rf /"}}' \
   | ./security-check.sh
 
-# Enable verbose logging
-export DEBUG=true
-
-# Monitor execution time
-time ./hook.sh < test-input.json
+# Verify permission decision
+echo '{"toolName":"edit","args":{"path":"src/app.js"}}' \
+  | ./pre-tool-use.sh
 ```
+
+</div>
+
+### 🐛 Debugging Techniques
+
+<div class="space-y-3 text-sm mt-4">
+
+<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
+  <span class="text-xl">📝</span>
+  <div>
+    <div class="text-white font-bold">Enable verbose logging</div>
+    <div class="text-gray-400 text-xs"><code>export DEBUG=true</code></div>
+  </div>
+</div>
+
+<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
+  <span class="text-xl">⏱️</span>
+  <div>
+    <div class="text-white font-bold">Monitor execution time</div>
+    <div class="text-gray-400 text-xs"><code>time ./hook.sh &lt; test-input.json</code></div>
+  </div>
+</div>
+
+<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
+  <span class="text-xl">🔍</span>
+  <div>
+    <div class="text-white font-bold">Check outputs and exit codes</div>
+    <div class="text-gray-400 text-xs">Validate JSON format and decisions</div>
+  </div>
+</div>
 
 </div>
 
@@ -793,15 +890,11 @@ jq -s 'group_by(.sessionId)
 
 ---
 
-# Integration Patterns
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
+# Integration Patterns (Part 1/2)
 
 ### 🔗 Combining with Other Customizations
 
-<div class="space-y-4 text-sm">
+<div class="space-y-4 text-sm mt-8">
 
 <div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-500">
   <div class="font-bold text-blue-300 mb-2">Hooks + Custom Instructions</div>
@@ -832,13 +925,13 @@ jq -s 'group_by(.sessionId)
 
 </div>
 
-</div>
+---
 
-<div>
+# Integration Patterns (Part 2/2)
 
 ### 🌐 External System Integration
 
-<div class="space-y-4 text-xs">
+<div class="space-y-4 text-xs mt-8">
 
 <div class="p-3 bg-gray-800 rounded-lg">
   <div class="font-bold text-white mb-2">💬 Slack Notifications</div>
@@ -874,22 +967,18 @@ jq -s 'group_by(.sessionId)
   </div>
 </div>
 
-</div>
-
-</div>
-
 ---
 
-# Advanced Patterns
+# Advanced Patterns (1/2)
 
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
+<div class="mt-8">
 
 ### 🎯 Conditional Policies by Context
 
 <div class="mb-6">
 <div class="font-bold text-blue-300 mb-2 text-sm">Environment-Aware Enforcement</div>
+
+<div class="text-sm">
 
 ```bash
 # Stricter policies in production
@@ -902,10 +991,14 @@ if [[ "$WORKING_DIR" =~ /production/ ]]; then
   fi
 fi
 ```
+
+</div>
 </div>
 
 <div>
 <div class="font-bold text-green-300 mb-2 text-sm">User-Based Permissions</div>
+
+<div class="text-sm">
 
 ```bash
 # Junior developers restricted
@@ -915,11 +1008,17 @@ if [[ "$USER_ROLE" == "junior" ]] &&
   exit 0
 fi
 ```
+
+</div>
 </div>
 
 </div>
 
-<div>
+---
+
+# Advanced Patterns (2/2)
+
+<div class="mt-8">
 
 ### 🔄 Multi-Hook Coordination
 
@@ -975,8 +1074,6 @@ fi
   <div class="p-2 bg-gray-800 rounded">
     <span class="text-yellow-400">4️⃣</span> Monitor for false positives, iterate
   </div>
-</div>
-
 </div>
 
 </div>
@@ -1042,46 +1139,38 @@ fi
 
 # Key Takeaways: Strategic
 
-<div class="grid grid-cols-2 gap-6 mt-8">
+<div class="space-y-6 mt-10">
 
-<div class="space-y-4">
-
-<div class="p-4 bg-green-900/60 rounded-lg border-l-4 border-green-400">
-  <div class="text-2xl mb-2">⬅️</div>
-  <div class="font-bold text-green-300 mb-2">Shift-Left Enforcement</div>
-  <div class="text-gray-300 text-sm">
+<div class="p-5 bg-green-900/60 rounded-lg border-l-4 border-green-400">
+  <div class="text-3xl mb-2">⬅️</div>
+  <div class="font-bold text-green-300 text-lg mb-2">Shift-Left Enforcement</div>
+  <div class="text-gray-300">
     Validate at creation, not in post-commit review—eliminate rework cycles
   </div>
 </div>
 
-<div class="p-4 bg-red-900/60 rounded-lg border-l-4 border-red-400">
-  <div class="text-2xl mb-2">🔒</div>
-  <div class="font-bold text-red-300 mb-2">Deny-by-Default Security</div>
-  <div class="text-gray-300 text-sm">
+<div class="p-5 bg-red-900/60 rounded-lg border-l-4 border-red-400">
+  <div class="text-3xl mb-2">🔒</div>
+  <div class="font-bold text-red-300 text-lg mb-2">Deny-by-Default Security</div>
+  <div class="text-gray-300">
     Safer than allow-with-filtering—reduce attack surface for policy bypass
   </div>
 </div>
 
-</div>
-
-<div class="space-y-4">
-
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="text-2xl mb-2">📊</div>
-  <div class="font-bold text-blue-300 mb-2">Measurement Drives Improvement</div>
-  <div class="text-gray-300 text-sm">
+<div class="p-5 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
+  <div class="text-3xl mb-2">📊</div>
+  <div class="font-bold text-blue-300 text-lg mb-2">Measurement Drives Improvement</div>
+  <div class="text-gray-300">
     Track what's prevented, how fast, and coverage gaps—justify investment
   </div>
 </div>
 
-<div class="p-4 bg-purple-900/60 rounded-lg border-l-4 border-purple-400">
-  <div class="text-2xl mb-2">🎯</div>
-  <div class="font-bold text-purple-300 mb-2">Governance as Code</div>
-  <div class="text-gray-300 text-sm">
+<div class="p-5 bg-purple-900/60 rounded-lg border-l-4 border-purple-400">
+  <div class="text-3xl mb-2">🎯</div>
+  <div class="font-bold text-purple-300 text-lg mb-2">Governance as Code</div>
+  <div class="text-gray-300">
     Automated compliance, self-enforcing security, creation-time quality gates
   </div>
-</div>
-
 </div>
 
 </div>
@@ -1095,9 +1184,7 @@ fi
 
 # Key Takeaways: Organizational
 
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div class="space-y-6">
+<div class="space-y-5 mt-10">
 
 <div class="p-5 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-lg border-2 border-blue-400">
   <div class="text-3xl mb-3">🤖</div>
@@ -1115,10 +1202,6 @@ fi
   </div>
 </div>
 
-</div>
-
-<div class="space-y-6">
-
 <div class="p-5 bg-gradient-to-br from-purple-900/60 to-purple-800/40 rounded-lg border-2 border-purple-400">
   <div class="text-3xl mb-3">✨</div>
   <div class="font-bold text-purple-300 text-lg mb-3">Zero-Rework Quality</div>
@@ -1133,8 +1216,6 @@ fi
   <div class="text-gray-300 text-sm">
     AI agents operate within guardrails—trusted for autonomous work in regulated environments.
   </div>
-</div>
-
 </div>
 
 </div>

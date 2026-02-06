@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: The Labor Multiplier - What Agents Actually Do
+module: exec-talks/agentic-labor
 mdc: true
 ---
 
@@ -92,7 +93,7 @@ layout: center
 
 ---
 
-# The Software Delivery Labor Map
+# The Software Delivery Labor Map (1/2)
 
 <div class="grid grid-cols-3 gap-3 text-xs mt-4">
 
@@ -168,10 +169,18 @@ layout: center
   <div class="mt-3 text-yellow-400 font-bold">↗️ Medium Leverage</div>
 </div>
 
+</div>
+
+---
+
+# The Software Delivery Labor Map (2/2)
+
+<div class="grid grid-cols-3 gap-3 text-xs mt-4">
+
 <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
   <div class="text-2xl mb-2">📚</div>
   <div class="text-lg font-bold text-blue-300 mb-2">KNOWLEDGE</div>
-  <div class="text-gray-400">
+  <div class="text-gray-300">
     • Documentation sync<br/>
     • Onboarding materials<br/>
     • Decision records<br/>
@@ -183,7 +192,7 @@ layout: center
 <div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
   <div class="text-2xl mb-2">🔒</div>
   <div class="text-lg font-bold text-green-300 mb-2">GOVERNANCE</div>
-  <div class="text-gray-400">
+  <div class="text-gray-300">
     • Compliance checking<br/>
     • Policy enforcement<br/>
     • Audit trail generation<br/>
@@ -195,7 +204,7 @@ layout: center
 <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
   <div class="text-2xl mb-2">🔄</div>
   <div class="text-lg font-bold text-blue-300 mb-2">MAINTENANCE</div>
-  <div class="text-gray-400">
+  <div class="text-gray-300">
     • Dependency updates<br/>
     • Technical debt triage<br/>
     • Health monitoring<br/>
@@ -206,114 +215,96 @@ layout: center
 
 </div>
 
-<div class="mt-4 text-center text-sm text-gray-400 italic">
+<div class="mt-6 text-center text-sm text-gray-400 italic">
   Code generation is just 1 of 9 categories—and not even the highest leverage
 </div>
 
 ---
 
-# Why Agents Excel Outside the Editor
+# Why Agents Excel Beyond Coding
 
-<div class="flex flex-col gap-4 mt-8">
+<div class="grid grid-cols-2 gap-2 mt-2 text-xs">
 
-<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-blue-400">
-  <div class="flex items-center gap-3">
-    <span class="text-3xl">🔁</span>
-    <div>
-      <div class="text-lg font-bold text-white">Repetitive Tasks</div>
-      <div class="text-sm text-gray-400">Agents excel at consistent execution without fatigue</div>
-    </div>
+<div class="p-2 bg-gray-800 rounded border-l-4 border-blue-400">
+  <div class="flex items-center gap-1 mb-1">
+    <span class="text-xl">🔁</span>
+    <div class="text-sm font-bold text-white">Repetitive Tasks</div>
   </div>
+  <div class="text-gray-400">Agents excel at consistent execution without fatigue</div>
 </div>
 
-<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-green-400">
-  <div class="flex items-center gap-3">
-    <span class="text-3xl">📊</span>
-    <div>
-      <div class="text-lg font-bold text-white">Information-Dense Work</div>
-      <div class="text-sm text-gray-400">Agents can process more context than humans (thousands of issues, entire codebases)</div>
-    </div>
+<div class="p-2 bg-gray-800 rounded border-l-4 border-green-400">
+  <div class="flex items-center gap-1 mb-1">
+    <span class="text-xl">📊</span>
+    <div class="text-sm font-bold text-white">Information-Dense Work</div>
   </div>
+  <div class="text-gray-400">Agents can process more context than humans</div>
 </div>
 
-<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-yellow-400">
-  <div class="flex items-center gap-3">
-    <span class="text-3xl">🛡️</span>
-    <div>
-      <div class="text-lg font-bold text-white">Low-Risk Operations</div>
-      <div class="text-sm text-gray-400">Mistakes are caught before code exists—analysis errors have minimal blast radius</div>
-    </div>
+<div class="p-2 bg-gray-800 rounded border-l-4 border-yellow-400">
+  <div class="flex items-center gap-1 mb-1">
+    <span class="text-xl">🛡️</span>
+    <div class="text-sm font-bold text-white">Low-Risk Operations</div>
   </div>
+  <div class="text-gray-400">Mistakes are caught before code exists</div>
 </div>
 
-<div class="p-5 bg-gray-800 rounded-lg border-l-4 border-red-400">
-  <div class="flex items-center gap-3">
-    <span class="text-3xl">⏱️</span>
-    <div>
-      <div class="text-lg font-bold text-white">Time-Consuming Toil</div>
-      <div class="text-sm text-gray-400">Humans hate this work; agents don't complain</div>
-    </div>
+<div class="p-2 bg-gray-800 rounded border-l-4 border-red-400">
+  <div class="flex items-center gap-1 mb-1">
+    <span class="text-xl">⏱️</span>
+    <div class="text-sm font-bold text-white">Time-Consuming Toil</div>
   </div>
+  <div class="text-gray-400">Humans hate this work; agents don't complain</div>
 </div>
 
 </div>
 
 ---
 
-# 🔍 Discovery: The Issue Triage Problem
+# 🔍 Discovery: Issue Triage Backlog
 
-<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="text-xs mt-2">
 
-<div>
-  <div class="text-sm font-bold text-blue-400 mb-3">THE BACKLOG REALITY</div>
-  <div class="p-4 bg-gray-800 rounded-lg text-xs">
-    <div class="mb-2 text-gray-400">New issues per month: <span class="text-white font-bold">88</span></div>
-    <div class="mb-2 text-gray-400">Triaged this month: <span class="text-yellow-400 font-bold">32 (36%)</span></div>
-    <div class="mb-4 text-gray-400">Awaiting triage: <span class="text-red-400 font-bold">56 (64%)</span></div>
+<div class="grid grid-cols-3 gap-2">
 
-    <div class="border-t border-gray-700 pt-3 mt-3">
-      <div class="font-bold text-red-400 mb-2">⚠️ HIDDEN COSTS</div>
-      <div class="text-gray-400">
-        • Duplicate issues filed: <span class="text-white">12</span><br/>
-        • Related issues unflagged: <span class="text-white">18</span><br/>
-        • Stale issues needing closure: <span class="text-white">34</span><br/>
-        • Wrong component assignments: <span class="text-white">8</span>
-      </div>
-    </div>
+<div class="p-2 bg-gray-800 rounded-lg">
+  <div class="font-bold text-blue-300 mb-1 text-sm">BACKLOG REALITY</div>
+  <div class="text-gray-400">
+    • New issues/month: <span class="text-white font-bold">88</span><br/>
+    • Triaged: <span class="text-yellow-400 font-bold">32 (36%)</span><br/>
+    • Awaiting: <span class="text-red-400 font-bold">56 (64%)</span>
   </div>
 </div>
 
-<div>
-  <div class="text-sm font-bold text-green-400 mb-3">MONTHLY LABOR COST</div>
-  <div class="p-4 bg-gradient-to-br from-red-900/40 to-gray-800 rounded-lg text-xs">
-    <div class="mb-2">
-      <div class="text-white font-bold">~40 engineer-hours</div>
-      <div class="text-gray-400">Manual triage</div>
-    </div>
-    <div class="mb-2">
-      <div class="text-white font-bold">~15 engineer-hours</div>
-      <div class="text-gray-400">Duplicate investigation</div>
-    </div>
-    <div class="mb-2">
-      <div class="text-white font-bold">~10 engineer-hours</div>
-      <div class="text-gray-400">Issue ping-pong between teams</div>
-    </div>
-    <div class="border-t border-gray-700 pt-3 mt-3">
-      <div class="text-2xl text-red-400 font-bold">65 hours/month</div>
-      <div class="text-gray-400">of pure toil</div>
-    </div>
+<div class="p-2 bg-gray-800 rounded-lg">
+  <div class="font-bold text-red-400 mb-1 text-sm">⚠️ HIDDEN COSTS</div>
+  <div class="text-gray-400">
+    • Duplicates filed: <span class="text-white">12</span><br/>
+    • Related unflagged: <span class="text-white">18</span><br/>
+    • Stale issues: <span class="text-white">34</span><br/>
+    • Wrong routing: <span class="text-white">8</span>
+  </div>
+</div>
+
+<div class="p-2 bg-gradient-to-br from-red-900/40 to-gray-800 rounded-lg">
+  <div class="font-bold text-green-300 mb-1 text-sm text-center">MONTHLY COST</div>
+  <div class="text-gray-400">
+    ~40 hrs: Manual triage<br/>
+    ~15 hrs: Duplicates<br/>
+    ~10 hrs: Ping-pong
+  </div>
+  <div class="border-t border-gray-700 mt-1 pt-1 text-center">
+    <div class="text-xl text-red-400 font-bold">65 hrs/mo</div>
   </div>
 </div>
 
 </div>
 
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  The backlog grows faster than humans can triage, creating compounding hidden costs
 </div>
 
 ---
 
-# Agentic Issue Triage: Speed Comparison
+# Agentic Issue Triage: Speed Comparison (1/2)
 
 <div class="mt-6">
 
@@ -322,6 +313,22 @@ layout: center
 | Read issue, understand intent | 3-5 min | <1 sec | ⚡ Consistent attention to every issue |
 | Search for duplicates | 5-10 min | <2 sec | 🔍 Searches ALL issues, not just recent |
 | Check if already fixed | 10-15 min | <5 sec | 💻 Examines actual code changes |
+
+</div>
+
+<div class="mt-6 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
+  <div class="text-2xl font-bold text-white mb-2">30 minutes → 2 minutes</div>
+  <div class="text-sm text-blue-100">The human still makes the call. But instead of 30 min investigating, they spend 2 min reviewing.</div>
+</div>
+
+---
+
+# Agentic Issue Triage: Speed Comparison (2/2)
+
+<div class="mt-6">
+
+| Task | Human Time | Agent Time | Agent Advantage |
+|------|------------|------------|-----------------|
 | Identify related issues | 5-10 min | <3 sec | 🧠 Pattern matching across entire history |
 | Route to correct team | 2-5 min | <1 sec | 🎯 Knows component ownership from codebase |
 | Suggest labels/priority | 3-5 min | <2 sec | ✅ Consistent application of criteria |
@@ -422,7 +429,7 @@ layout: center
 
 ---
 
-# 🔒 Governance: The Compliance Burden
+# 🔒 Governance: The Compliance Burden (1/2)
 
 <div class="grid grid-cols-2 gap-4 text-xs mt-4">
 
@@ -445,6 +452,14 @@ layout: center
     ☐ BAA with all vendors
   </div>
 </div>
+
+</div>
+
+---
+
+# 🔒 Governance: The Compliance Burden (2/2)
+
+<div class="grid grid-cols-2 gap-4 text-xs mt-4">
 
 <div class="p-3 bg-gray-800 rounded-lg">
   <div class="font-bold text-yellow-300 mb-2">📋 PCI DSS</div>
@@ -482,12 +497,12 @@ layout: center
 
 # Agentic Compliance Checking
 
-<div class="text-xs mt-4">
+<div class="text-xs mt-2">
 
-<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="grid grid-cols-2 gap-3 mb-2">
 
 <div class="p-3 bg-green-900/30 rounded-lg border-l-4 border-green-400">
-  <div class="font-bold text-green-300 mb-2">✅ PASSING CHECKS</div>
+  <div class="font-bold text-green-300 mb-1">✅ PASSING CHECKS</div>
   <div class="text-gray-400">
     • PII encryption at rest: Uses EncryptedField<br/>
     • Audit logging: AuditLog.record() on mutations<br/>
@@ -497,7 +512,7 @@ layout: center
 </div>
 
 <div class="p-3 bg-yellow-900/40 rounded-lg border-l-4 border-yellow-400">
-  <div class="font-bold text-yellow-300 mb-2">⚠️ WARNINGS</div>
+  <div class="font-bold text-yellow-300 mb-1">⚠️ WARNINGS</div>
   <div class="text-gray-400">
     • GDPR: billing_history lacks cascade delete<br/>
     • SOC 2: No TTL on payment_attempts records
@@ -506,15 +521,15 @@ layout: center
 
 </div>
 
-<div class="p-3 bg-red-900/40 rounded-lg border-l-4 border-red-500 mb-4">
-  <div class="font-bold text-red-400 mb-2">🔴 BLOCKING ISSUES</div>
+<div class="p-2 bg-red-900/40 rounded-lg border-l-4 border-red-500 mb-2">
+  <div class="font-bold text-red-400 mb-1">🔴 BLOCKING ISSUES</div>
   <div class="text-gray-400">
     <strong>PCI DSS violation:</strong> test/fixtures/billing.json contains test card number 4111111111111111<br/>
     <strong>Required action:</strong> Replace with tokenized test card before merge
   </div>
 </div>
 
-<div class="p-3 bg-blue-900/40 rounded-lg">
+<div class="p-2 bg-blue-900/40 rounded-lg">
   <div class="font-bold text-blue-300 mb-1">📊 AUDIT TRAIL GENERATED</div>
   <div class="text-gray-400">
     Timestamp: 2024-01-15T14:32:00Z · PR #893 · Analyzer v2.3.1 · Logged to compliance dashboard
@@ -523,7 +538,7 @@ layout: center
 
 </div>
 
-<div class="mt-4 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
+<div class="mt-2 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
   <span class="text-lg font-bold text-white">4-hour compliance review → 2-minute confirmation</span>
 </div>
 
@@ -531,51 +546,57 @@ layout: center
 
 # 📚 Knowledge: Documentation Decay
 
-<div class="flex flex-col items-center gap-3 mt-6">
+<div class="text-xs mt-2">
 
-<div class="p-3 bg-green-900/30 rounded-lg w-full max-w-lg text-center border-2 border-green-500">
-  <div class="text-sm font-bold text-green-300">Day 0: Documentation written</div>
-  <div class="text-xs text-gray-400">📗 Accurate</div>
+<div class="flex items-center justify-center gap-2 mb-3">
+
+<div class="p-2 bg-green-900/30 rounded border-2 border-green-500 w-44 text-center">
+  <div class="font-bold text-green-300">Day 0</div>
+  <div class="text-gray-400">📗 Accurate</div>
 </div>
 
-<div class="text-2xl text-gray-400">↓</div>
+<div class="text-gray-400">→</div>
 
-<div class="p-3 bg-yellow-900/30 rounded-lg w-full max-w-lg text-center border-2 border-yellow-500">
-  <div class="text-sm font-bold text-yellow-300">Month 3: Partially outdated</div>
-  <div class="text-xs text-gray-400">📙 Feature changes not reflected</div>
+<div class="p-2 bg-yellow-900/30 rounded border-2 border-yellow-500 w-44 text-center">
+  <div class="font-bold text-yellow-300">Month 3</div>
+  <div class="text-gray-400">📙 Outdated</div>
 </div>
 
-<div class="text-2xl text-gray-400">↓</div>
+<div class="text-gray-400">→</div>
 
-<div class="p-3 bg-orange-900/30 rounded-lg w-full max-w-lg text-center border-2 border-orange-500">
-  <div class="text-sm font-bold text-orange-300">Month 12: Actively misleading</div>
-  <div class="text-xs text-gray-400">📕 Causes more harm than good</div>
+<div class="p-2 bg-orange-900/30 rounded border-2 border-orange-500 w-44 text-center">
+  <div class="font-bold text-orange-300">Month 12</div>
+  <div class="text-gray-400">📕 Misleading</div>
 </div>
 
-<div class="text-2xl text-gray-400">↓</div>
+<div class="text-gray-400">→</div>
 
-<div class="p-3 bg-red-900/40 rounded-lg w-full max-w-lg text-center border-2 border-red-500">
-  <div class="text-sm font-bold text-red-400">Month 18: Abandoned</div>
-  <div class="text-xs text-gray-400">🚫 Team uses Slack/tribal knowledge instead</div>
+<div class="p-2 bg-red-900/40 rounded border-2 border-red-500 w-44 text-center">
+  <div class="font-bold text-red-400">Month 18</div>
+  <div class="text-gray-400">🚫 Abandoned</div>
 </div>
 
 </div>
 
-<div class="mt-4 p-4 bg-gray-800 rounded-lg text-xs text-center">
-  <div class="text-gray-400">
+<div class="p-3 bg-gray-800 rounded-lg text-center">
+  <div class="text-gray-400 mb-1">
     Onboarding: <span class="text-red-400 font-bold">2-3 weeks</span> (should be 1) ·
-    Finding "how X works": <span class="text-red-400 font-bold">30-60 min Slack archaeology</span> ·
+    Finding "how X works": <span class="text-red-400 font-bold">30-60 min Slack archaeology</span>
+  </div>
+  <div class="text-gray-400">
     Knowledge loss on turnover: <span class="text-red-400 font-bold">~40%</span>
   </div>
+</div>
+
 </div>
 
 ---
 
 # Agentic Documentation Sync
 
-<div class="text-xs mt-4">
+<div class="text-xs mt-2">
 
-<div class="mb-4">
+<div class="mb-3">
   <div class="font-bold text-blue-300 mb-2">📄 API Reference: docs/api/users.md</div>
 
   | Documented | Actual Code | Status | Fix |
@@ -586,7 +607,7 @@ layout: center
 
 </div>
 
-<div class="mb-4">
+<div class="mb-3">
   <div class="font-bold text-green-300 mb-2">🏗️ Architecture Doc: ARCHITECTURE.md</div>
 
   | Documented | Actual Code | Status |
@@ -656,88 +677,70 @@ layout: center
 
 # The Labor Allocation Matrix
 
-<div class="text-xs mt-4">
+<div class="text-xs mt-2">
 
 <div class="grid grid-cols-3 gap-2">
 
-<div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400">
-  <div class="text-lg font-bold text-green-300 mb-2">🤖 AUTOMATE</div>
-  <div class="text-gray-400 mb-2">High leverage, low judgment</div>
-  <div class="text-gray-300">
-    • Issue triage<br/>
-    • Compliance checks<br/>
-    • Doc sync<br/>
-    • Audit logging
+<div class="p-2 bg-green-900/60 rounded-lg border-2 border-green-400">
+  <div class="text-base font-bold text-green-300 mb-1">🤖 AUTOMATE</div>
+  <div class="text-gray-400 text-xs">High leverage, low judgment</div>
+  <div class="text-gray-300 text-xs mt-1">
+    Issue triage · Compliance · Doc sync · Audit logging
   </div>
-  <div class="mt-2 p-2 bg-green-900/40 rounded text-green-300 text-center">End-to-end</div>
+  <div class="mt-1 p-1 bg-green-900/40 rounded text-green-300 text-center text-xs">End-to-end</div>
 </div>
 
-<div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-  <div class="text-lg font-bold text-blue-300 mb-2">🤝 AUGMENT</div>
-  <div class="text-gray-400 mb-2">High leverage, medium judgment</div>
-  <div class="text-gray-300">
-    • Test strategy<br/>
-    • Code review<br/>
-    • Impact analysis<br/>
-    • Execution planning
+<div class="p-2 bg-blue-900/60 rounded-lg border-2 border-blue-400">
+  <div class="text-base font-bold text-blue-300 mb-1">🤝 AUGMENT</div>
+  <div class="text-gray-400 text-xs">High leverage, medium judgment</div>
+  <div class="text-gray-300 text-xs mt-1">
+    Test strategy · Code review · Impact analysis · Planning
   </div>
-  <div class="mt-2 p-2 bg-blue-900/40 rounded text-blue-300 text-center">Agent prepares</div>
+  <div class="mt-1 p-1 bg-blue-900/40 rounded text-blue-300 text-center text-xs">Agent prepares</div>
 </div>
 
-<div class="p-3 bg-yellow-900/40 rounded-lg border-2 border-yellow-500">
-  <div class="text-lg font-bold text-yellow-300 mb-2">👁️ ASSIST</div>
-  <div class="text-gray-400 mb-2">Medium leverage, high judgment</div>
-  <div class="text-gray-300">
-    • Architecture decisions<br/>
-    • Design trade-offs<br/>
-    • Priority calls<br/>
-    • Strategy
+<div class="p-2 bg-yellow-900/40 rounded-lg border-2 border-yellow-500">
+  <div class="text-base font-bold text-yellow-300 mb-1">👁️ ASSIST</div>
+  <div class="text-gray-400 text-xs">Medium leverage, high judgment</div>
+  <div class="text-gray-300 text-xs mt-1">
+    Architecture · Design trade-offs · Priority calls · Strategy
   </div>
-  <div class="mt-2 p-2 bg-yellow-900/40 rounded text-yellow-300 text-center">Human decides</div>
+  <div class="mt-1 p-1 bg-yellow-900/40 rounded text-yellow-300 text-center text-xs">Human decides</div>
 </div>
 
-<div class="p-3 bg-purple-900/40 rounded-lg border-2 border-purple-500">
-  <div class="text-lg font-bold text-purple-300 mb-2">🔁 BATCH</div>
-  <div class="text-gray-400 mb-2">Medium leverage, low judgment</div>
-  <div class="text-gray-300">
-    • Dependency updates<br/>
-    • Migration scripts<br/>
-    • Code formatting<br/>
-    • Dead code removal
+<div class="p-2 bg-purple-900/40 rounded-lg border-2 border-purple-500">
+  <div class="text-base font-bold text-purple-300 mb-1">🔁 BATCH</div>
+  <div class="text-gray-400 text-xs">Medium leverage, low judgment</div>
+  <div class="text-gray-300 text-xs mt-1">
+    Dependency updates · Migrations · Formatting · Dead code
   </div>
-  <div class="mt-2 p-2 bg-purple-900/40 rounded text-purple-300 text-center">Bulk off-hours</div>
+  <div class="mt-1 p-1 bg-purple-900/40 rounded text-purple-300 text-center text-xs">Bulk off-hours</div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg border-2 border-gray-600">
-  <div class="text-lg font-bold text-gray-300 mb-2">🔄 ACCELERATE</div>
-  <div class="text-gray-400 mb-2">Medium leverage, medium judgment</div>
-  <div class="text-gray-300">
-    • Bug investigation<br/>
-    • Feature implementation<br/>
-    • Refactoring<br/>
-    • Performance tuning
+<div class="p-2 bg-gray-800 rounded-lg border-2 border-gray-600">
+  <div class="text-base font-bold text-gray-300 mb-1">🔄 ACCELERATE</div>
+  <div class="text-gray-400 text-xs">Medium leverage, medium judgment</div>
+  <div class="text-gray-300 text-xs mt-1">
+    Bug investigation · Features · Refactoring · Performance
   </div>
-  <div class="mt-2 p-2 bg-gray-700 rounded text-gray-300 text-center">Agent speeds up</div>
+  <div class="mt-1 p-1 bg-gray-700 rounded text-gray-300 text-center text-xs">Agent speeds up</div>
 </div>
 
-<div class="p-3 bg-gray-900/60 rounded-lg border-2 border-gray-700">
-  <div class="text-lg font-bold text-gray-400 mb-2">🧠 HUMAN</div>
-  <div class="text-gray-400 mb-2">Low leverage, high judgment</div>
-  <div class="text-gray-300">
-    • Strategy<br/>
-    • Stakeholder mgmt<br/>
-    • Team dynamics<br/>
-    • Politics
+<div class="p-2 bg-gray-900/60 rounded-lg border-2 border-gray-700">
+  <div class="text-base font-bold text-gray-400 mb-1">🧠 HUMAN</div>
+  <div class="text-gray-400 text-xs">Low leverage, high judgment</div>
+  <div class="text-gray-300 text-xs mt-1">
+    Strategy · Stakeholder mgmt · Team dynamics · Politics
   </div>
-  <div class="mt-2 p-2 bg-gray-800 rounded text-gray-400 text-center">Human only</div>
+  <div class="mt-1 p-1 bg-gray-800 rounded text-gray-400 text-center text-xs">Human only</div>
 </div>
 
 </div>
 
 </div>
 
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  Highest ROI: upper-left quadrant (high agent leverage, low human judgment required)
+<div class="mt-2 text-center text-xs text-gray-400 italic">
+  Highest ROI: upper-left quadrant (high agent leverage, low human judgment)
 </div>
 
 ---
@@ -802,45 +805,45 @@ layout: center
 
 # Measuring Agent Labor ROI
 
-<div class="grid grid-cols-2 gap-4 text-xs mt-4">
+<div class="grid grid-cols-2 gap-2 text-xs mt-2">
 
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-blue-300 mb-2">🔍 Discovery Metrics</div>
+<div class="p-2 bg-gray-800 rounded-lg">
+  <div class="font-bold text-blue-300 mb-1">🔍 Discovery</div>
   <div class="text-gray-400">
-    • Issue triage time: <span class="text-red-400">30 min</span> → <span class="text-green-400">5 min</span><br/>
-    • Duplicate issue rate: <span class="text-red-400">15%</span> → <span class="text-green-400"><5%</span><br/>
-    • Correct initial routing: <span class="text-red-400">60%</span> → <span class="text-green-400">90%+</span><br/>
-    • Issues closed "already fixed": <span class="text-red-400">10%</span> → <span class="text-green-400"><3%</span>
+    Triage time: <span class="text-red-400">30 min</span> → <span class="text-green-400">5 min</span><br/>
+    Duplicates: <span class="text-red-400">15%</span> → <span class="text-green-400"><5%</span><br/>
+    Correct routing: <span class="text-red-400">60%</span> → <span class="text-green-400">90%+</span><br/>
+    Already fixed: <span class="text-red-400">10%</span> → <span class="text-green-400"><3%</span>
   </div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-green-300 mb-2">🗺️ Planning Metrics</div>
+<div class="p-2 bg-gray-800 rounded-lg">
+  <div class="font-bold text-green-300 mb-1">🗺️ Planning</div>
   <div class="text-gray-400">
-    • Issue to actionable plan: <span class="text-red-400">4-8 hrs</span> → <span class="text-green-400"><1 hr</span><br/>
-    • Plan accuracy (±): <span class="text-red-400">50%</span> → <span class="text-green-400">20%</span><br/>
-    • Missing requirements late: <span class="text-red-400">25%</span> → <span class="text-green-400"><10%</span><br/>
-    • PRs blocked by unclear scope: <span class="text-red-400">15%</span> → <span class="text-green-400"><5%</span>
+    Issue to plan: <span class="text-red-400">4-8 hrs</span> → <span class="text-green-400"><1 hr</span><br/>
+    Plan accuracy: <span class="text-red-400">50%</span> → <span class="text-green-400">20%</span><br/>
+    Late requirements: <span class="text-red-400">25%</span> → <span class="text-green-400"><10%</span><br/>
+    Blocked PRs: <span class="text-red-400">15%</span> → <span class="text-green-400"><5%</span>
   </div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-yellow-300 mb-2">🔒 Governance Metrics</div>
+<div class="p-2 bg-gray-800 rounded-lg">
+  <div class="font-bold text-yellow-300 mb-1">🔒 Governance</div>
   <div class="text-gray-400">
-    • Compliance issues in prod: <span class="text-red-400">5/qtr</span> → <span class="text-green-400">0</span><br/>
-    • Compliance review time: <span class="text-red-400">4 hrs</span> → <span class="text-green-400">10 min</span><br/>
-    • Audit preparation: <span class="text-red-400">160 hrs/yr</span> → <span class="text-green-400">40 hrs</span><br/>
-    • Violations caught pre-merge: <span class="text-red-400">30%</span> → <span class="text-green-400">95%+</span>
+    Compliance issues: <span class="text-red-400">5/qtr</span> → <span class="text-green-400">0</span><br/>
+    Review time: <span class="text-red-400">4 hrs</span> → <span class="text-green-400">10 min</span><br/>
+    Audit prep: <span class="text-red-400">160 hrs/yr</span> → <span class="text-green-400">40 hrs</span><br/>
+    Pre-merge catches: <span class="text-red-400">30%</span> → <span class="text-green-400">95%+</span>
   </div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-purple-300 mb-2">📚 Knowledge Metrics</div>
+<div class="p-2 bg-gray-800 rounded-lg">
+  <div class="font-bold text-purple-300 mb-1">📚 Knowledge</div>
   <div class="text-gray-400">
-    • Documentation accuracy: <span class="text-red-400">~60%</span> → <span class="text-green-400">90%+</span><br/>
-    • New engineer onboarding: <span class="text-red-400">3 weeks</span> → <span class="text-green-400">1 week</span><br/>
-    • "Ask in Slack" queries: <span class="text-red-400">50/wk</span> → <span class="text-green-400"><15/wk</span><br/>
-    • Time to find "how X works": <span class="text-red-400">30 min</span> → <span class="text-green-400">5 min</span>
+    Doc accuracy: <span class="text-red-400">~60%</span> → <span class="text-green-400">90%+</span><br/>
+    Onboarding: <span class="text-red-400">3 weeks</span> → <span class="text-green-400">1 week</span><br/>
+    Slack queries: <span class="text-red-400">50/wk</span> → <span class="text-green-400"><15/wk</span><br/>
+    Find how X works: <span class="text-red-400">30 min</span> → <span class="text-green-400">5 min</span>
   </div>
 </div>
 

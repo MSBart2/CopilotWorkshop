@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Subagents - Context Isolation for Complex Workflows
+module: tech-talks/subagents
 mdc: true
 ---
 

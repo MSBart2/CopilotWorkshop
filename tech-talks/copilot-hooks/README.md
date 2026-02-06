@@ -533,6 +533,36 @@ Advanced patterns enable context-aware governance—stricter in production, perm
 
 ---
 
+## 🛠️ Agent Governance Toolkit
+
+**Copilot Hooks** and **Terminal Sandboxing** are complementary tools for agent governance:
+
+| Use Case | Tool | This Talk |
+|----------|------|----------|
+| Control *when* agents can act | Copilot Hooks | 👉 You are here |
+| Limit *what* agents can access | Terminal Sandboxing | [→ View talk](../terminal-sandboxing/) |
+
+### When to Use Which
+
+**Use Copilot Hooks when:**
+- You need lifecycle control (sessionStart, preToolUse, postToolUse, errorOccurred)
+- You want to approve/deny actions before they happen
+- You need audit trails and compliance evidence
+- You want to enforce project-specific policies
+
+**Use Terminal Sandboxing when:**
+- You want blanket restrictions on network/filesystem access
+- You need defense against prompt injection attacks
+- You want to prevent data exfiltration
+- You need OS-level execution controls
+
+**Use Both Together:**
+- Sandboxing provides baseline safety (network/filesystem limits)
+- Hooks provide policy enforcement (project rules, approval gates)
+- **Result:** Defense in depth for agent governance
+
+---
+
 ## Resources
 
 ### Official Documentation

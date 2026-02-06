@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Agentic SDLC - Agentic PRs
+module: tech-talks/agentic-prs
 mdc: true
 ---
 
@@ -122,7 +123,7 @@ mdc: true
 
 ---
 
-# Four Generations of SDLC
+# Four Generations of SDLC (1/2)
 
 <div class="flex flex-col items-center gap-4 mt-8">
 
@@ -149,6 +150,14 @@ mdc: true
 </div>
 
 <div class="text-2xl text-gray-400">↓</div>
+
+</div>
+
+---
+
+# Four Generations of SDLC (2/2)
+
+<div class="flex flex-col items-center gap-4 mt-8">
 
 <div class="p-4 bg-gray-800 rounded-lg w-full border-l-4 border-purple-500">
   <div class="flex items-center gap-4">
@@ -301,7 +310,7 @@ layout: two-cols
 
 ---
 
-# The Gen-4 SDLC Loop
+# The Gen-4 SDLC Loop (1/2)
 
 <div class="flex flex-col items-center gap-3 mt-8">
 
@@ -325,6 +334,14 @@ layout: two-cols
 </div>
 
 <div class="text-2xl text-gray-400">↓</div>
+
+</div>
+
+---
+
+# The Gen-4 SDLC Loop (2/2)
+
+<div class="flex flex-col items-center gap-3 mt-8">
 
 <div class="p-4 bg-yellow-900/60 rounded-lg w-full max-w-2xl border-2 border-yellow-400 text-center">
   <div class="text-2xl font-bold text-yellow-300">4️⃣ Human Outcome Validation</div>

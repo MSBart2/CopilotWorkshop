@@ -4,6 +4,14 @@ The foundation of effective AI-assisted development—providing the right contex
 
 ---
 
+## 🎯 Start Here
+
+This talk covers the **fundamentals of using GitHub Copilot Chat**—context mechanisms, chat architecture, and prompt engineering best practices.
+
+**Next Steps:** Once you understand how to use Copilot Chat effectively, see [Copilot Chat Internals](../copilot-chat-internals/) to learn how to **troubleshoot and debug** when things don't work as expected.
+
+---
+
 ## The Context Problem
 
 ### Key Points
@@ -342,6 +350,20 @@ Context mastery is the foundation of effective AI-assisted development. It's not
 ### Narrative
 
 Start with the fundamentals: explicit context mechanisms. Once you're comfortable providing context manually, move to persistent context through instructions and agents. Each layer builds on the previous, compounding your effectiveness. The goal is less manual context management over time as your customizations encode institutional knowledge.
+
+---
+
+## ➡️ Next Steps
+
+Now that you understand how to use Copilot Chat effectively:
+
+### Learn to Debug and Troubleshoot
+👉 **[Copilot Chat Internals](../copilot-chat-internals/)** — Understand what Copilot actually sees, troubleshoot failed prompts, and master the Debug View
+
+### Apply This Knowledge
+- [Custom Instructions Workshop](../../workshop/01-instructions/) — Customize Copilot for your codebase
+- [Custom Agents Workshop](../../workshop/06-custom-agents/) — Build specialized agents
+- [Context Engineering Foundations](../../workshop/context-engineering-foundations/) — Hands-on exercises
 
 ---
 

@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Module 1 - Instructions
+module: workshop/01-instructions
 mdc: true
 ---
 
@@ -47,10 +48,6 @@ mdc: true
 
   <!-- Decorative line -->
   <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent rounded-full relative z-10"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining</span>
 </div>
 
 ---
@@ -258,7 +255,7 @@ layout: two-cols
 
 ---
 
-# 🔗 How They Work Together
+# 🔗 How They Work Together (1/2)
 
 <div class="flex flex-col items-center gap-4 mt-8">
 
@@ -277,6 +274,22 @@ layout: two-cols
   <div class="text-sm text-purple-300 font-semibold mb-2">Gives Copilot the "HOW"</div>
   <div class="text-xs text-gray-300 italic">
     "Always use async/await, prefer functional components, handle errors with our middleware"
+  </div>
+</div>
+
+</div>
+
+---
+
+# 🔗 How They Work Together (2/2)
+
+<div class="flex flex-col items-center gap-4 mt-8">
+
+<div class="p-5 bg-purple-900/60 rounded-lg border-2 border-purple-400 w-full max-w-2xl">
+  <div class="text-2xl mb-2">⚙️ copilot-instructions.md</div>
+  <div class="text-sm text-purple-300 font-semibold mb-2">Gives Copilot the "HOW"</div>
+  <div class="text-xs text-gray-300 italic opacity-50">
+    (from previous slide)
   </div>
 </div>
 

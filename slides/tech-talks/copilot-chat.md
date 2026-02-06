@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Copilot Chat - Context Mastery
+module: tech-talks/copilot-chat
 mdc: true
 ---
 
@@ -47,10 +48,6 @@ mdc: true
 
   <!-- Decorative line -->
   <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">CopilotTraining Tech Talk</span>
 </div>
 
 ---
@@ -446,7 +443,7 @@ Brings authoritative external sources into the conversation
 
 ---
 
-# Context Layering Strategy
+# Context Layering Strategy (Part 1)
 
 <div class="flex flex-col items-center gap-4 mt-8">
 
@@ -462,7 +459,15 @@ Brings authoritative external sources into the conversation
 <div class="text-sm text-gray-400 mt-1">Find relevant files semantically</div>
 </div>
 
-<div class="text-3xl text-gray-400">↓</div>
+<div class="text-3xl text-gray-400 text-2xl">↓ continues...</div>
+
+</div>
+
+---
+
+# Context Layering Strategy (Part 2)
+
+<div class="flex flex-col items-center gap-4 mt-8">
 
 <div class="p-4 bg-green-100 dark:bg-green-900/60 rounded-lg w-full text-center border-2 border-green-400">
 <div class="text-xl font-bold text-green-300">3. Focus: #file</div>

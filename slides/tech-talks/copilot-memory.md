@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Copilot Memory
+module: tech-talks/copilot-memory
 mdc: true
 ---
 

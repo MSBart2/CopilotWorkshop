@@ -11,6 +11,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Context Engineering Foundations
+module: tech-talks/context-engineering-foundations
 mdc: true
 ---
 

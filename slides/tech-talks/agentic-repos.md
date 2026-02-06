@@ -10,6 +10,7 @@ drawings:
   persist: false
 transition: slide-left
 title: Agentic Delivery Repo Topology
+module: tech-talks/agentic-repos
 mdc: true
 ---
 
@@ -131,10 +132,12 @@ layout: center
 layout: default
 ---
 
+# Gen-3 vs Gen-4: How We Work (Part 1)
+
 <div class="grid grid-cols-2 gap-6">
 
 <div>
-  <h1 class="mb-4">Gen-3 (Traditional)</h1>
+  <h2 class="text-2xl mb-4">Gen-3 (Traditional)</h2>
 
   <div class="flex flex-col gap-3 text-xs">
 
@@ -173,10 +176,28 @@ layout: default
   </div>
 </div>
 
-<div>
-  <h1 class="mb-4">Gen-4 (Agentic)</h1>
+<div class="flex items-center justify-center">
+  <div class="text-6xl">⬇️</div>
+</div>
 
-  <div class="flex flex-col gap-3 text-xs">
+</div>
+
+---
+layout: default
+---
+
+# Gen-3 vs Gen-4: How We Work (Part 2)
+
+<div class="grid grid-cols-2 gap-4">
+
+<div class="flex items-center justify-center">
+  <div class="text-6xl">⬇️</div>
+</div>
+
+<div>
+  <h2 class="text-2xl mb-3">Gen-4 (Agentic)</h2>
+
+  <div class="flex flex-col gap-1.5 text-xs"
 
   <div class="p-2 bg-green-900/60 rounded-lg flex items-start gap-2 border-2 border-green-400">
     <span class="text-xl">🤖</span>
@@ -215,7 +236,7 @@ layout: default
 
 </div>
 
-<div class="mt-6 p-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
+<div class="mt-3 p-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
   <div class="text-sm font-bold text-white">💡 The Shift: Humans used to write code and delegate review.<br/>Now humans delegate coding and review outcomes.</div>
 </div>
 
@@ -223,9 +244,7 @@ layout: default
 
 # Max Throughput Without Losing Trust
 
-<div class="mt-6">
-
-<div class="p-4 bg-gradient-to-r from-green-600 to-green-800 rounded-xl text-center mb-6">
+<div class="p-4 bg-gradient-to-r from-green-600 to-green-800 rounded-xl text-center my-8">
   <div class="text-2xl font-bold text-white">Agent velocity × Human confidence = Sustainable delivery at scale</div>
 </div>
 
@@ -261,26 +280,20 @@ layout: default
 
 </div>
 
-</div>
-
-<div class="mt-6 p-3 bg-gradient-to-r from-red-900/40 to-gray-800 rounded-lg text-center">
-  <span class="text-white font-bold">⚡ Remember: Flaky CI = flying blind. Slow builds = stuck in traffic.</span>
-</div>
-
 ---
 layout: center
 ---
 
 # ⚠️ War Story: The 6-Hour Feature
 
-<div class="flex flex-col gap-4 max-w-3xl mx-auto text-sm">
+<div class="flex flex-col gap-3 max-w-3xl mx-auto text-sm">
 
 <div class="p-4 bg-red-900/40 rounded-lg border-2 border-red-500">
   <div class="font-bold text-red-300 mb-2">The Problem: 18 Microservice Repos</div>
   <div class="text-gray-300">SaaS company, feature touching 3 services...</div>
 </div>
 
-<div class="grid grid-cols-3 gap-3">
+<div class="grid grid-cols-3 gap-2">
 
 <div class="p-3 bg-gray-800 rounded-lg">
   <div class="font-bold text-yellow-400">Day 1</div>
@@ -315,7 +328,7 @@ layout: center
 
 # Monorepo vs Multi-Repo Decision
 
-<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mt-6">
 
 <div>
   <div class="text-xl font-bold text-green-400 mb-4">✅ Monorepo (Default for 80%)</div>
@@ -365,7 +378,7 @@ layout: center
 
 </div>
 
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
+<div class="mt-4 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
   <div class="text-lg font-bold text-white">🎯 Decision Rule: If agents touch >1 repo for >30% of features → monorepo</div>
 </div>
 
@@ -444,7 +457,7 @@ layout: center
 
 ---
 
-# Non-Negotiables for Agent-Native Repos
+# Non-Negotiables for Agent-Native Repos (Part 1)
 
 <div class="text-center text-red-400 font-bold mb-4 text-sm">
   ⚠️ If you skip these, agents will wreck your codebase
@@ -482,6 +495,18 @@ layout: center
   <div class="text-gray-400 mt-1">Flaky tests = infinite agent loops.</div>
 </div>
 
+</div>
+
+---
+
+# Non-Negotiables for Agent-Native Repos (Part 2)
+
+<div class="text-center text-red-400 font-bold mb-4 text-sm">
+  ⚠️ If you skip these, agents will wreck your codebase
+</div>
+
+<div class="grid grid-cols-2 gap-3 text-xs">
+
 <div class="p-3 bg-gray-800 rounded-lg">
   <div class="flex items-center gap-2 mb-2">
     <span class="text-2xl">⚡</span>
@@ -492,15 +517,13 @@ layout: center
   <div class="text-gray-400 mt-1">Slow CI = blocked agents = blocked humans.</div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg col-span-2">
+<div class="p-3 bg-gray-800 rounded-lg">
   <div class="flex items-center gap-2 mb-2">
     <span class="text-2xl">📐</span>
     <div class="font-bold text-yellow-300">5. Consistent Repository Shape</div>
   </div>
-  <div class="grid grid-cols-2 gap-2">
-    <div class="text-red-400">❌ Each team invents structure (17 patterns)</div>
-    <div class="text-green-400">✅ Standard /apps, /libs, /platform everywhere</div>
-  </div>
+  <div class="text-red-400">❌ Each team invents structure (17 patterns)</div>
+  <div class="text-green-400">✅ Standard /apps, /libs, /platform everywhere</div>
   <div class="text-gray-400 mt-1">Agents navigate by pattern. Inconsistency = hallucinations.</div>
 </div>
 
@@ -514,11 +537,11 @@ layout: center
 
 # Governance Guardrails
 
-<div class="text-center text-sm text-gray-400 mb-4">
+<div class="text-center text-sm text-gray-400 mb-3">
   Scale review without humans everywhere
 </div>
 
-<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="grid grid-cols-2 gap-3 text-xs">
 
 <div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
   <div class="font-bold text-blue-300 mb-2 flex items-center gap-2">
@@ -574,7 +597,7 @@ layout: center
 
 </div>
 
-<div class="mt-4 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
+<div class="mt-4 p-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-center">
   <div class="text-base font-bold text-white">💡 Agents prove it's safe. Humans decide if it's right.</div>
 </div>
 
@@ -839,7 +862,7 @@ platform-standards/
 
 ---
 
-# 🚩 Red Flags Our Repo Isn't Ready
+# 🚩 Red Flags Our Repo Isn't Ready (Part 1)
 
 <div class="grid grid-cols-2 gap-2 text-xs">
 
@@ -890,6 +913,14 @@ platform-standards/
     <div class="text-gray-400">Coordination > team size</div>
   </div>
 </div>
+
+</div>
+
+---
+
+# 🚩 Red Flags Our Repo Isn't Ready (Part 2)
+
+<div class="grid grid-cols-2 gap-2 text-xs">
 
 <div class="p-2 bg-red-900/40 rounded-lg flex items-start gap-2">
   <span class="text-xl">❌</span>

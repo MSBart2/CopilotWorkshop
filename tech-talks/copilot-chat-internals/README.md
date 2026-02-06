@@ -4,6 +4,17 @@ Understand what Copilot actually sees—system prompts, context loading, tool in
 
 ---
 
+## 📚 Prerequisite
+
+**Start with [Copilot Chat](../copilot-chat/) first** if you're not yet familiar with:
+- Context mechanisms (#file, @workspace, #codebase)
+- Chat vs. inline chat architecture
+- Prompt engineering basics
+
+This talk assumes you understand **how to use** Copilot Chat and focuses on **how to debug** when things go wrong.
+
+---
+
 ## The Visibility Problem
 
 ### Key Points
@@ -499,10 +510,22 @@ The difference between frustrating trial-and-error and systematic debugging is v
 
 ### Next Steps
 
-1. **Enable trace logs** when debugging complex issues
+1. **Enable traced logs** when debugging complex issues
 2. **Review MCP server status** if using external tools
 3. **Develop with Debug View visible** to iterate faster
 4. **Request Mermaid diagrams** for complex flow visualization
+
+---
+
+## Related Content
+
+### Prerequisites
+👈 **[Copilot Chat](../copilot-chat/)** — Learn the fundamentals before debugging
+
+### Apply This Knowledge
+- [Custom Instructions Workshop](../../workshop/01-instructions/) — Debug why instructions aren't loading
+- [Custom Agents Workshop](../../workshop/06-custom-agents/) — Troubleshoot agent tool invocations
+- [Copilot Hooks](../copilot-hooks/) — Inspect hook execution in Debug View
 
 ---
 
