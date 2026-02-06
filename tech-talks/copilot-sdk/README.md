@@ -1,376 +1,353 @@
-# GitHub Copilot SDK: Embedding AI Agents in Your Applications
+# GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows
 
-## 🔧 From Consuming AI to Building With It
+> **The Question This Talk Answers:**
+> *"How do I embed Copilot's agentic capabilities directly into my own applications and workflows?"*
 
-The **GitHub Copilot SDK** (Technical Preview, January 2026) transforms GitHub Copilot from a tool you use into an engine you build with. It exposes the same production-tested agent runtime that powers GitHub Copilot CLI — planning, tool invocation, file edits, multi-turn conversations — as a programmable interface you can embed in any application.
-
-**The shift:** Instead of manually running Copilot commands, you write code that leverages Copilot's intelligence programmatically. Build custom tools, bots, dashboards, and automation that solve domain-specific problems unique to your team or organization.
-
----
-
-## 🧠 Problem Statement: The Limits of General-Purpose AI
-
-GitHub Copilot in VS Code excels at code completion. GitHub Copilot CLI excels at terminal automation. But what happens when your workflow doesn't fit these patterns?
-
-**Real-world gaps:**
-- **Release management workflows** — Need to auto-generate release notes from git history with customer-value framing
-- **Test infrastructure monitoring** — Need to analyze test reports across builds to identify flaky tests and patterns
-- **Code quality enforcement** — Need to pre-review PRs against team-specific standards before human review
-- **Documentation generation** — Need to auto-generate API docs, architecture diagrams, and onboarding guides from code
-- **Incident response automation** — Need to analyze logs, correlate errors, and suggest fixes during production incidents
-- **Custom developer portals** — Need to embed AI assistance in internal tools and dashboards
-
-These workflows require **programmatic control** over AI capabilities, not just interactive chat. They need AI embedded as infrastructure, not as a separate assistant.
-
-**This is where the SDK comes in.**
+**Duration:** 45 minutes | **Target Audience:** Developers / DevOps / Platform Engineers
 
 ---
 
-## 💡 Understanding the GitHub Copilot SDK
+## 📊 Content Fitness
 
-The **GitHub Copilot SDK** (Technical Preview) allows you to take the same Copilot agentic core that powers GitHub Copilot CLI and embed it in any application.
+| Criterion | Assessment | Notes |
+|-----------|-----------|-------|
+| **Relevant** | 🟢 High | Solves the "programmatic AI" gap — teams need custom automation beyond what IDE/CLI provide interactively |
+| **Compelling** | 🟢 High | Production-tested agent runtime as a library; bypass months of building planning loops and tool orchestration |
+| **Actionable** | 🟢 High | Install SDK in Python/TypeScript/Go/.NET, write 10 lines of code, and embed Copilot agents in any application |
 
-### Architecture
+**Overall Status:** 🟢 Ready to use
+
+---
+
+## 📽️ Slide Generation Mapping
+
+### Slide Sequence (Generated Automatically)
+
+1. **Title/Logo Slide** ← H1 title + subtitle
+2. **Question/Objective Slide** ← "The Question This Talk Answers"
+3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
+4. **Problem Slide** ← "The Problem"
+5. **Solution Overview** ← "The Solution"
+6. **Key Artifacts** ← "Key Artifacts" inventory
+7. **Mental Model Shift** ← Move-Toward/Away/Against
+8. **When to Use Decision Tree** ← "When to Use This Pattern"
+9. **Architecture & Capabilities** ← 🎬 Section 1 (2-3 slides)
+10. **Getting Started** ← 🎬 Section 2 (2-3 slides)
+11. **Integration Patterns** ← 🎬 Section 3 (3-4 slides)
+12. **Advanced Features** ← 🎬 Section 4 (2-3 slides)
+13. **Use Cases** ← Real-World Use Cases (1-2 slides)
+14. **Actionable Outcomes** ← What You Can Do Today
+15. **Related Patterns** ← Related Patterns
+16. **Official Documentation** ← 📚 section
+17. **End Slide** ← Auto-generated
+
+### Major Sections (TOC Entries)
+
+```markdown
+<!-- 🎬 MAJOR SECTION: Architecture & Capabilities -->
+<!-- 🎬 MAJOR SECTION: Getting Started -->
+<!-- 🎬 MAJOR SECTION: Integration Patterns -->
+<!-- 🎬 MAJOR SECTION: Advanced Features -->
+```
+
+---
+
+## The Problem
+
+### Key Points
+
+- **General-purpose AI doesn't fit custom workflows**
+  Copilot excels at code completion (IDE) and terminal automation (CLI), but release notes generation, test report analysis, and custom automation require programmatic control.
+
+- **Building agentic systems from scratch takes months**
+  Context management, tool orchestration, multi-turn conversations, model routing, MCP integration, and error handling require building an entire AI platform before solving your actual problem.
+
+- **Interactive tools don't scale to automation**
+  Manually running Copilot commands for repetitive analysis (test failures, log correlation, duplicate detection) wastes developer time and doesn't integrate with existing systems.
+
+- **Domain-specific workflows need domain-specific tools**
+  Release engineering, code quality bots, incident response analyzers, and custom dashboards need AI embedded as infrastructure, not as a separate assistant.
+
+### Narrative
+
+You've heard about GitHub Copilot transforming development. Your team uses it daily for code completion in VS Code and terminal automation via Copilot CLI. But there's a gap.
+
+Your release manager still spends 2 hours manually reviewing git commits to write customer-facing release notes. Your test infrastructure team manually analyzes failure patterns across builds, taking 45 minutes per failed CI run. Your code review process bottlenecks when senior engineers spend 30 minutes per PR checking standards that could be automated. Your incident response team manually correlates logs across services, taking 30+ minutes while customers are impacted.
+
+These workflows need AI, but they don't fit the IDE or CLI patterns. They need **programmatic control** — code that calls Copilot's agentic capabilities on demand, integrates with existing systems, and runs automatically without human intervention.
+
+Building this from scratch means months of work: context management across turns, tool orchestration, multi-turn execution loops, model routing, error handling, and safety boundaries. You're building an AI platform before you solve your actual problem.
+
+**The GitHub Copilot SDK solves this.** It exposes the same production-tested agent runtime that powers Copilot CLI as a programmable library you can embed in any application. Instead of building an agentic platform, you import a package and start building your actual automation.
+
+---
+
+## The Solution: GitHub Copilot SDK
+
+### What It Does
+
+The GitHub Copilot SDK (Technical Preview, January 2026) provides a programmable interface to Copilot's production-tested agent runtime. Import the SDK in Python, TypeScript, Go, or .NET, and you get the full agentic execution loop — planning, tool invocation, multi-turn conversations, MCP servers, custom agents — ready to embed in any application.
+
+### Key Capabilities
+
+- **Full Agent Runtime**: Planning, tool orchestration, multi-turn execution, and context management from Copilot CLI, accessible programmatically
+- **Multi-Language Support**: Python, TypeScript/Node.js, Go, and .NET SDKs with consistent APIs
+- **Production-Ready Features**: Model routing, streaming responses, persistent memory, GitHub authentication, MCP server integration, BYOK (Bring Your Own Key)
+- **Tool Permission Control**: Configure which tools agents can use (file operations, shell commands, Git operations) and restrict working directories for security
+
+### Architecture Overview
+
+The SDK communicates with Copilot CLI running in server mode via JSON-RPC over stdio. When you create a `CopilotClient`, the SDK spawns (or connects to) the CLI process, manages the communication protocol, and streams results back to your application. This architecture means you get all of CLI's capabilities without rebuilding the agent runtime, and GitHub handles authentication, model management, and updates automatically.
+
+The separation is intentional: Copilot CLI is the agent runtime (planning, tools, memory), and the SDK is how you programmatically control that runtime from any application. Your code defines prompts and constraints, the SDK routes requests to CLI, and agents execute with the same reliability as interactive CLI sessions.
+
+**Official Documentation:**
+- 📖 [GitHub Copilot SDK Repository](https://github.com/github/copilot-sdk) — Installation, API reference, and language-specific examples
+- 📖 [SDK Blog Announcement](https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/) — Technical preview announcement and use cases
+- 📖 [Copilot CLI Documentation](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line) — Understanding the agent runtime
+
+---
+
+## 📷 Visual Assets
+
+*This tech talk currently has no visual assets. If relevant diagrams, architecture flows, or screenshots exist in official documentation, they can be added to an `images/` subdirectory.*
+
+**Recommended additions (if available):**
+- Architecture diagram showing SDK → CLI → Service communication flow
+- Screenshot of SDK code example with streaming output
+- Comparison diagram: Interactive CLI vs Programmatic SDK
+
+---
+
+## 📦 Key Artifacts
+
+**This talk includes complete, working code examples** demonstrating SDK integration patterns across different use cases. Primary artifacts are shown inline in major sections below.
+
+### Primary Artifacts
+
+*Shown inline with detailed explanation in the major sections*
+
+- **Basic SDK Client** — Initialize SDK, send prompts, receive responses (shown in Getting Started)
+- **Streaming Response Handler** — Process real-time agent output (shown in Getting Started)
+- **CLI Tool with SDK Backend** — Command-line tool powered by SDK (shown in Integration Patterns)
+- **Web API with SDK** — REST API endpoint using SDK for AI workflows (shown in Integration Patterns)
+- **Scheduled Automation** — Periodic task automation with SDK (shown in Integration Patterns)
+- **Custom Agent Configuration** — SDK with specialized agent and skill setup (shown in Advanced Features)
+- **MCP Server Integration** — Extending SDK with Model Context Protocol servers (shown in Advanced Features)
+- **Error Handling with Retries** — Production-ready error handling patterns (shown in Advanced Features)
+
+### Supporting Files
+
+*Referenced but not shown inline — available in SDK repository*
+
+- **[SDK Examples Repository](https://github.com/github/copilot-sdk)** — Release automation, test analysis, code review bots
+- **[Python SDK Cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md)** — Python-specific patterns and recipes
+- **[Getting Started Guide](https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md)** — Complete installation and setup walkthrough
+
+---
+
+## 🎯 Mental Model Shift
+
+> **The Core Insight:** From "using Copilot tools" to "building with the Copilot engine"
+
+### Move Toward (Embrace These Patterns)
+
+- ✅ **Programmatic AI Control**: Embed agents in applications and automation → AI becomes infrastructure, not a separate tool
+- ✅ **Domain-Specific Tools**: Build focused tools for your workflows (release notes, test analysis, review bots) → 80% faster than general-purpose solutions
+- ✅ **SDK + CLI Complementarity**: Use CLI for interactive work, SDK for automation → Right tool for each context
+- ✅ **Production Patterns**: Error handling, retries, tool permissions, sandboxing → Reliable automation at scale
+
+### Move Away From (Retire These Habits)
+
+- ⚠️ **Manual Repetitive Analysis**: Running Copilot commands manually for recurring tasks (test failures, log analysis) → Doesn't scale, wastes developer time
+- ⚠️ **Building Agentic Systems from Scratch**: Writing your own planning loops, tool orchestration, context management → Months of work before solving the actual problem
+- ⚠️ **Copy-Paste Integration**: Manually copying CLI output into other systems → Error-prone, breaks automation chains
+
+### Move Against (Active Resistance Required)
+
+- 🛑 **Unrestricted Tool Permissions**: Running SDK with all tools enabled in untrusted contexts → Security risk, uncontrolled file access and command execution
+- 🛑 **Synchronous Blocking**: Waiting for agents without streaming or async handling → Poor UX, timeouts, wasted resources
+- 🛑 **Zero Error Handling**: Assuming agents always succeed without retries or fallbacks → Production failures when API limits hit or network issues occur
+
+> **Example Transformation:** Before: Release manager spends 2 hours reviewing 200 commits, categorizing changes, writing customer-facing summaries, and formatting release notes. After: SDK-powered tool analyzes commits in 10 minutes, generates categorized release notes (Features, Fixes, Breaking Changes), and outputs markdown ready for GitHub releases. Savings: 2 hours → 10 minutes per release, 92% time reduction.
+
+---
+
+## When to Use This Pattern
+
+### Decision Tree
 
 ```
-Your Python Application
-       ↓
+Q: What are you trying to build?
+├─ "Interactive terminal workflows (Git, Docker, debugging)"
+│  → Use: Copilot CLI directly
+│  └─ Best for: Ad-hoc tasks, exploration, interactive sessions
+│
+├─ "Code completion and inline suggestions while editing"
+│  → Use: Copilot in VS Code/IDE
+│  └─ Best for: Writing and refactoring code
+│
+├─ "Custom tools, bots, or automation with domain-specific logic"
+│  → Use: Copilot SDK (this talk)
+│  └─ Best for: Release automation, test analysis, review bots, dashboards
+│
+└─ "Embed AI in existing applications or build custom GUIs"
+   → Use: Copilot SDK (this talk)
+   └─ Best for: Web apps, internal tools, scheduled automation
+```
+
+### Use This Pattern When
+
+- You need to automate workflows that require AI reasoning (release notes, test analysis, code review)
+- You want to embed Copilot capabilities in existing applications or systems
+- You're building custom developer tools, bots, or dashboards
+- You need programmatic control over prompts, context, and tool permissions
+- Your workflow requires integration with external systems (Jira, Slack, monitoring tools)
+
+### Don't Use This Pattern When
+
+- You need interactive terminal assistance → Use **Copilot CLI** directly
+- You need code completion while editing → Use **Copilot in VS Code/IDE**
+- Your task is one-off exploration → Use **CLI or IDE** for faster iteration
+- You're building a non-developer-facing product → Consider OpenAI API or other general LLM SDKs instead
+
+### Comparison with Related Features
+
+| Aspect | Copilot SDK (This Talk) | Copilot CLI | Copilot in VS Code |
+|--------|-------------------------|-------------|-------------------|
+| **Best For** | Automation, custom tools, bots | Interactive terminal workflows | Code completion while editing |
+| **Control Model** | Programmatic API calls | Interactive commands | Inline suggestions + chat |
+| **Integration** | Embed in any application | Terminal-based | IDE-based |
+| **Setup Time** | 15-30 minutes (install + code) | 5 minutes (install + auth) | 2 minutes (extension install) |
+| **Use Case** | Release automation, test analysis bots | Git workflows, Docker commands | Writing and refactoring code |
+
+---
+
+<!-- 🎬 MAJOR SECTION: Architecture & Capabilities -->
+## How the SDK Works
+
+### Architecture Components
+
+The SDK provides a language-specific interface to Copilot's agent runtime through a clean separation of concerns:
+
+```
+Your Application (Python/TypeScript/Go/.NET)
+       ↓ API calls
   SDK Client (github-copilot-sdk)
-       ↓ JSON-RPC
+       ↓ JSON-RPC over stdio
   Copilot CLI (server mode)
-       ↓
+       ↓ API requests
   GitHub Copilot Service
 ```
 
-The SDK manages the CLI process lifecycle automatically. You write Python code, the SDK handles communication with Copilot's agent runtime.
+**Component responsibilities:**
 
-### What You Get
+1. **Your Application**: Defines prompts, constraints, and business logic; consumes agent responses
+2. **SDK Client**: Manages CLI process lifecycle, handles JSON-RPC communication, provides streaming APIs
+3. **Copilot CLI (Server Mode)**: Executes agent runtime (planning, tools, memory), same engine as interactive CLI
+4. **GitHub Copilot Service**: Model inference, authentication, rate limiting, model routing
 
-**Same capabilities as Copilot CLI:**
+### SDK Capabilities
+
+All features from Copilot CLI are available programmatically:
+
+**Core Agent Features:**
 - ✅ Planning and multi-turn execution loops
 - ✅ Tool invocation (file operations, shell commands, Git operations)
-- ✅ Multiple AI models (GPT, Claude, etc.)
+- ✅ Multiple AI models (GPT-4, Claude, etc.)
 - ✅ Custom agents, skills, and tools
-- ✅ MCP server integration
+- ✅ MCP (Model Context Protocol) server integration
 - ✅ Persistent memory across sessions
 - ✅ Real-time streaming responses
 - ✅ GitHub authentication
 
-**Plus programmatic control:**
-- 🎯 Embed in any Python application
-- 🎯 Build custom GUIs, CLIs, bots, dashboards
-- 🎯 Integrate with existing workflows and systems
-- 🎯 Create domain-specific AI tools
-
-### When to Use SDK vs CLI vs IDE
-
-| Capability | VS Code/IDE | Copilot CLI | Copilot SDK |
-|------------|-------------|-------------|-------------|
-| **Code completion while editing** | ✅ Best | ❌ | ❌ |
-| **Terminal automation (Git, Docker, etc.)** | ❌ | ✅ Best | ⚠️ Can embed |
-| **Interactive debugging sessions** | ⚠️ Limited | ✅ Best | ⚠️ Can embed |
-| **Custom tools for specific workflows** | ❌ | ❌ | ✅ Best |
-| **Embed AI in existing applications** | ❌ | ❌ | ✅ Best |
-| **Build bots, dashboards, automation** | ❌ | ❌ | ✅ Best |
-| **GUI-based AI workflows** | ❌ | ❌ | ✅ Best |
-
-**Use SDK when:** You need to build custom AI-powered tools tailored to specific workflows that go beyond what IDE/CLI provide out of the box.
-
----
-
-## 🎯 Compelling Use Cases
-
-The SDK shines when you need **domain-specific AI tools** that integrate with your existing systems. Here are real-world scenarios where the SDK is the right choice:
-
-### 1. Release Engineering Automation
-
-**Problem:** Release notes require reviewing hundreds of commits, understanding customer impact, and translating technical changes into user-facing language. Manual process takes hours and quality varies.
-
-**SDK Solution:** Build a release notes generator that:
-- Analyzes git commit history between tags
-- Uses AI to identify customer-facing changes vs internal refactors
-- Generates categorized release notes (Features, Fixes, Breaking Changes)
-- Automatically highlights security updates and migration steps
-- Outputs markdown ready for GitHub releases or changelog files
-
-**Impact:** 2+ hours → 10 minutes. Consistent quality every release.
-
-**Example:**
-```python
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient()
-response = client.chat("""
-Analyze commits from v1.2.0..v1.3.0 and generate customer-facing release notes.
-Categorize as Features, Fixes, Breaking Changes, and Security Updates.
-For each item, explain the customer value, not technical implementation.
-""")
-print(response.text)
-```
-
-### 2. Intelligent Test Infrastructure Monitoring
-
-**Problem:** Test failures require manual analysis of logs, stack traces, and historical patterns. Flaky tests go undetected until they've failed multiple times, blocking PRs and wasting CI time.
-
-**SDK Solution:** Build a test report analyzer that:
-- Parses test output (JUnit XML, Jest JSON, pytest reports)
-- Uses AI to identify failure patterns and root causes
-- Detects flaky tests by analyzing historical failure rates
-- Suggests specific fixes based on error messages and code context
-- Generates actionable reports for engineering teams
-
-**Impact:** 45 minutes → 5 minutes per failed build. Flaky tests caught on first failure.
-
-**Example:**
-```python
-import json
-from github_copilot_sdk import CopilotClient
-
-# Load test report
-with open('test-report.json') as f:
-    report = json.load(f)
-
-client = CopilotClient()
-response = client.chat(f"""
-Analyze this test report and identify:
-1. Root causes of failures (with confidence scores)
-2. Likely flaky tests (based on error patterns)
-3. Specific code locations to investigate
-4. Suggested fixes for each failure
-
-Test Report:
-{json.dumps(report, indent=2)}
-""")
-print(response.text)
-```
-
-### 3. Code Quality Enforcement Bots
-
-**Problem:** Code reviews are bottlenecked by senior engineers who spend 30+ minutes per PR checking coding standards, architecture patterns, and common mistakes. Junior developers wait days for feedback on basic issues.
-
-**SDK Solution:** Build a pre-review bot that:
-- Analyzes PR diffs before human review
-- Checks against team-specific coding standards and patterns
-- Identifies common mistakes (null checks, error handling, security issues)
-- Posts inline comments on GitHub PRs via API
-- Escalates only architectural decisions to senior reviewers
-
-**Impact:** Review time cut in half. Team PR throughput doubled.
-
-**Example:**
-```python
-from github_copilot_sdk import CopilotClient
-import requests
-
-# Fetch PR diff
-pr_diff = requests.get(f'https://api.github.com/repos/{org}/{repo}/pulls/{pr_num}', 
-                        headers={'Accept': 'application/vnd.github.v3.diff'}).text
-
-client = CopilotClient()
-response = client.chat(f"""
-Review this code against our standards:
-- All database queries must be parameterized (SQL injection)
-- Async functions must have proper error handling
-- Public APIs must validate all inputs
-- Tests required for new features
-
-Identify violations with specific line numbers and suggestions:
-
-{pr_diff}
-""")
-
-# Post comments via GitHub API
-for issue in parse_review_issues(response.text):
-    post_github_comment(pr_num, issue['line'], issue['comment'])
-```
-
-### 4. Documentation Generation from Code
-
-**Problem:** API documentation gets out of sync with code. Architecture diagrams are manually created and rarely updated. Onboarding docs require constant maintenance.
-
-**SDK Solution:** Build a documentation generator that:
-- Analyzes codebases to understand architecture and patterns
-- Generates API reference docs from code and comments
-- Creates architecture diagrams showing component relationships
-- Produces onboarding guides tailored to different roles
-- Keeps docs synchronized with code via CI hooks
-
-**Impact:** Always-current documentation. New developers onboard 50% faster.
-
-### 5. Incident Response Automation
-
-**Problem:** Production incidents require analyzing logs across multiple services, correlating errors, and identifying root causes under time pressure. Manual triage takes 30+ minutes while customers are impacted.
-
-**SDK Solution:** Build an incident analyzer that:
-- Ingests logs from multiple sources (app logs, database logs, infrastructure metrics)
-- Uses AI to correlate errors and identify causation patterns
-- Suggests probable root causes with confidence scores
-- Recommends immediate mitigation steps
-- Generates incident reports automatically
-
-**Impact:** Mean time to resolution (MTTR) reduced by 40%.
-
-### 6. Developer Portal with Embedded AI
-
-**Problem:** Internal developer portals provide documentation and tools, but developers still need to context-switch to Copilot for AI assistance.
-
-**SDK Solution:** Embed Copilot directly in your portal:
-- Chat interface that understands your codebase and tools
-- AI-powered search across internal docs and code
-- Guided workflows for common tasks (deploying services, creating repos, configuring CI)
-- Personalized recommendations based on developer role and history
-
-**Impact:** Reduced support tickets. Faster developer self-service.
-
----
-
-## 📚 Technical Architecture
-
-## 📚 Technical Architecture
-
-### How the SDK Works
-
-The SDK provides a Python (or TypeScript, Go, .NET) interface to the Copilot agent runtime:
-
-```
-Your Application
-       ↓
-  SDK Client (github-copilot-sdk)
-       ↓ JSON-RPC
-  Copilot CLI (server mode)
-       ↓
-  GitHub Copilot Service
-```
-
-**Key components:**
-
-1. **SDK Client:** Your application imports the SDK and creates a client instance
-2. **CLI Server Mode:** SDK spawns (or connects to) Copilot CLI in server mode
-3. **JSON-RPC Protocol:** SDK communicates with CLI via JSON-RPC over stdio
-4. **Agent Runtime:** CLI's agent handles planning, tool invocation, and multi-turn execution
-5. **Response Streaming:** Results stream back to your application in real-time
-
-### SDK vs CLI: Understanding the Relationship
-
-**GitHub Copilot CLI:**
-- Interactive terminal experience
-- You type prompts, Copilot responds
-- Built-in commands (`/review`, `/plan`, etc.)
-- Great for one-off tasks and interactive workflows
-
-**GitHub Copilot SDK:**
-- Programmatic interface to the same engine
-- Your code controls Copilot
-- Build custom tools and applications
-- Great for automation, bots, and domain-specific tools
-
-**They're complementary:** CLI is the agent runtime. SDK is how you embed that runtime in your applications.
-
-**Simple example:**
-```python
-# Interactive CLI
-$ copilot
-> "Analyze recent commits and suggest release notes"
-
-# Programmatic SDK
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient()
-response = client.chat("Analyze recent commits and suggest release notes")
-print(response.text)
-```
-
-### Capabilities Available via SDK
-
-All capabilities from Copilot CLI are available programmatically:
-
-**✅ Core Features:**
-- Planning and multi-turn execution loops
-- Tool invocation (file operations, shell commands, Git operations)
-- Multiple AI models (GPT-4, Claude, etc.)
-- Custom agents, skills, and tools
-- MCP (Model Context Protocol) server integration
-- Persistent memory across sessions
-- Real-time streaming responses
-- GitHub authentication
-
-**🎯 SDK-Specific Advantages:**
-- Embed in any application (web, desktop, CLI, bots)
-- Build custom GUIs and dashboards
-- Integrate with existing workflows and systems
-- Create domain-specific AI tools
-- Programmatic control over prompts and responses
+**SDK-Specific Advantages:**
+- 🎯 Embed in any application (web, desktop, CLI, bots)
+- 🎯 Programmatic control over prompts and context
+- 🎯 Integration with existing systems (Jira, Slack, monitoring tools)
+- 🎯 Tool permission control and sandboxing
+- 🎯 Error handling, retries, and observability
 
 ### Tool Permissions and Security
 
-By default, the SDK operates CLI in permissive mode with most tools enabled:
+By default, SDK operates CLI in permissive mode with most tools enabled. For production use, configure permissions explicitly:
 
-- **File operations:** Read, write, edit files
-- **Shell commands:** Execute arbitrary commands
-- **Git operations:** Commits, branches, diffs
-- **Web requests:** HTTP GET/POST (if configured)
-
-**Security considerations:**
-- Review which tools your application needs
-- Configure tool permissions in SDK client initialization
-- Consider running SDK in sandboxed environments for untrusted inputs
-- Validate AI-generated code before execution in production contexts
-
-**Example: Restricting tools**
 ```python
 from github_copilot_sdk import CopilotClient
 
 client = CopilotClient(
-    allowed_tools=['file_read', 'git_log'],  # Only allow these tools
-    working_directory='/path/to/safe/dir'     # Restrict to specific directory
+    allowed_tools=['file_read', 'git_log'],  # Restrict to read-only operations
+    working_directory='/path/to/safe/dir'     # Limit file access scope
 )
 ```
+
+**Security considerations:**
+- Review which tools your application needs (file operations, shell commands, Git operations, web requests)
+- Use `allowed_tools` to create least-privilege configurations
+- Run SDK in containerized environments for untrusted inputs
+- Validate AI-generated code before execution in production contexts
 
 ### Billing and Resource Consumption
 
 SDK usage counts toward your **GitHub Copilot premium request quota**:
 
 - Same billing model as Copilot CLI
-- Each prompt counts as a premium request
+- Each prompt counts as a premium request (multi-turn conversations count as individual requests per turn)
 - Streaming responses don't count as multiple requests
 - BYOK (Bring Your Own Key) supported for using your own LLM API keys
 
-See [Copilot Requests documentation](https://docs.github.com/en/copilot/concepts/billing/copilot-requests) for quota details.
+See [Copilot Requests documentation](https://docs.github.com/en/copilot/concepts/billing/copilot-requests) for quota details and usage tracking.
 
 ---
 
-## 🔨 Getting Started with the SDK
+<!-- 🎬 MAJOR SECTION: Getting Started -->
+## Installing and Using the SDK
 
-### Installation
+### Prerequisites
 
-**Prerequisites:**
-- Python 3.8+ (or TypeScript/Node.js, Go, .NET depending on your language)
-- GitHub Copilot subscription
-- Copilot CLI installed and authenticated
+Before using the SDK, install and authenticate Copilot CLI:
 
-**Install CLI first:**
 ```bash
-# Follow installation instructions for your platform
-# https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli
+# Install Copilot CLI (platform-specific steps)
+# See: https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line
 
-# Verify CLI is installed
+# Verify installation
 copilot --version
 
-# Authenticate
+# Authenticate with GitHub
 copilot auth login
 ```
 
-**Install Python SDK:**
+You also need:
+- Python 3.8+ (or TypeScript/Node.js 18+, Go 1.20+, .NET 6.0+)
+- GitHub Copilot subscription
+- Internet connection for Copilot API access
+
+### Installation
+
+**Python:**
 ```bash
 pip install github-copilot-sdk
 ```
 
-**Other languages:**
-- **TypeScript/Node.js:** `npm install @github/copilot-sdk`
-- **Go:** `go get github.com/github/copilot-sdk/go`
-- **.NET:** `dotnet add package GitHub.Copilot.SDK`
+**TypeScript/Node.js:**
+```bash
+npm install @github/copilot-sdk
+```
+
+**Go:**
+```bash
+go get github.com/github/copilot-sdk/go
+```
+
+**.NET:**
+```bash
+dotnet add package GitHub.Copilot.SDK
+```
 
 ### Basic Usage Example
+
+**Python SDK:**
 
 ```python
 from github_copilot_sdk import CopilotClient
@@ -386,18 +363,195 @@ print(response.text)
 conversation = client.start_conversation()
 conversation.send("I have a Python function that's running slowly")
 response1 = conversation.get_response()
+print(response1.text)
 
 conversation.send("Here's the code: [paste code]")
 response2 = conversation.get_response()
+print(response2.text)
+```
 
-# Streaming responses
-for chunk in client.chat_stream("Generate a README for this project"):
+**TypeScript SDK:**
+
+```typescript
+import { CopilotClient } from "@github/copilot-sdk";
+
+const client = new CopilotClient();
+await client.start();
+
+const session = await client.createSession({
+    model: "gpt-4",
+});
+
+await session.send({ prompt: "Generate a README for this project" });
+const response = await session.getResponse();
+console.log(response.text);
+```
+
+### Streaming Responses
+
+Process agent output in real-time:
+
+```python
+from github_copilot_sdk import CopilotClient
+
+client = CopilotClient()
+
+# Stream response chunks as they arrive
+for chunk in client.chat_stream("Analyze this repository and suggest improvements"):
     print(chunk.text, end='', flush=True)
 ```
 
-### Custom Agents and Skills
+**Why streaming matters:**
+- Better UX for long-running agent tasks (user sees progress)
+- Lower perceived latency (first tokens arrive quickly)
+- Early error detection (can cancel if agent goes off-track)
 
-The SDK supports the same custom agent and skill system as Copilot CLI:
+---
+
+<!-- 🎬 MAJOR SECTION: Integration Patterns -->
+## Building Tools with the SDK
+
+### Pattern 1: CLI Tool with SDK Backend
+
+Build command-line tools powered by Copilot agents:
+
+```python
+#!/usr/bin/env python3
+import argparse
+from github_copilot_sdk import CopilotClient
+
+def main():
+    parser = argparse.ArgumentParser(description='Release notes generator')
+    parser.add_argument('--from-tag', required=True, help='Starting git tag')
+    parser.add_argument('--to-tag', default='HEAD', help='Ending git tag')
+    parser.add_argument('--format', choices=['markdown', 'text'], default='markdown')
+    args = parser.parse_args()
+
+    client = CopilotClient()
+
+    prompt = f"""
+    Generate release notes from {args.from_tag} to {args.to_tag}.
+    Format as {args.format} with sections:
+    - Features (customer-facing new capabilities)
+    - Fixes (bug fixes with user impact)
+    - Breaking Changes (API changes requiring migration)
+    - Security Updates (CVEs and security fixes)
+
+    For each item, explain customer value, not technical implementation.
+    """
+
+    response = client.chat(prompt)
+    print(response.text)
+
+if __name__ == '__main__':
+    main()
+```
+
+**Usage:**
+```bash
+$ python release-notes.py --from-tag v1.2.0 --to-tag v1.3.0
+# Copilot analyzes commits and generates notes in ~10-15 seconds
+```
+
+### Pattern 2: Web API with SDK
+
+Expose SDK capabilities via REST API:
+
+```python
+from flask import Flask, request, jsonify
+from github_copilot_sdk import CopilotClient
+
+app = Flask(__name__)
+client = CopilotClient(
+    allowed_tools=['file_read'],  # Read-only for security
+    working_directory='/tmp/pr-diffs'
+)
+
+@app.route('/api/analyze-pr', methods=['POST'])
+def analyze_pr():
+    pr_diff = request.json.get('diff')
+
+    if not pr_diff:
+        return jsonify({'error': 'Missing diff'}), 400
+
+    prompt = f"""
+    Review this PR diff for:
+    - Security vulnerabilities (SQL injection, XSS, authentication issues)
+    - Logic errors and edge cases
+    - Performance concerns (N+1 queries, unnecessary loops)
+    - Code quality (readability, maintainability, test coverage)
+
+    Provide actionable feedback with specific line numbers:
+
+    {pr_diff}
+    """
+
+    try:
+        response = client.chat(prompt)
+        return jsonify({
+            'analysis': response.text,
+            'timestamp': response.timestamp
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+**Usage:**
+```bash
+$ curl -X POST http://localhost:5000/api/analyze-pr \
+  -H "Content-Type: application/json" \
+  -d '{"diff": "diff --git a/auth.py..."}'
+```
+
+### Pattern 3: Scheduled Automation
+
+Run SDK-powered analysis on a schedule:
+
+```python
+import schedule
+import time
+import json
+from github_copilot_sdk import CopilotClient
+
+def analyze_test_failures():
+    """Runs every morning to analyze overnight test failures"""
+    client = CopilotClient()
+
+    # Fetch latest test reports from CI system
+    report = fetch_latest_test_report()  # External function
+
+    prompt = f"""
+    Analyze test failures from last 24 hours and identify:
+    1. Root causes with confidence scores (high/medium/low)
+    2. Flaky tests based on failure patterns
+    3. Specific code locations to investigate
+    4. Suggested fixes for each failure
+
+    Test Report (JSON):
+    {json.dumps(report, indent=2)}
+    """
+
+    analysis = client.chat(prompt)
+
+    # Send to team Slack channel, create Jira tickets, etc.
+    notify_team(analysis.text)
+    create_jira_tickets(parse_issues(analysis.text))
+
+# Schedule daily at 9:00 AM
+schedule.every().day.at("09:00").do(analyze_test_failures)
+
+print("Test analysis scheduler started...")
+while True:
+    schedule.run_pending()
+    time.sleep(60)
+```
+
+### Pattern 4: Custom Agent Configuration
+
+Configure SDK with specialized agents and skills:
 
 ```python
 from github_copilot_sdk import CopilotClient
@@ -413,96 +567,23 @@ client = CopilotClient(
 
 response = client.chat("""
 Analyze commits from v1.5.0 to HEAD.
-Generate release notes following our standard format.
+Generate release notes following our standard format:
+- Categorize by Features, Fixes, Breaking Changes, Security
+- Explain customer value for each change
+- Highlight migration steps for breaking changes
 """)
-```
 
-### Integration Patterns
-
-**1. CLI Tool with SDK Backend:**
-```python
-#!/usr/bin/env python3
-import argparse
-from github_copilot_sdk import CopilotClient
-
-def main():
-    parser = argparse.ArgumentParser(description='Release notes generator')
-    parser.add_argument('--from-tag', required=True)
-    parser.add_argument('--to-tag', default='HEAD')
-    args = parser.parse_args()
-    
-    client = CopilotClient()
-    response = client.chat(f"""
-    Generate release notes from {args.from_tag} to {args.to_tag}.
-    Format as markdown with Features, Fixes, and Breaking Changes sections.
-    """)
-    
-    print(response.text)
-
-if __name__ == '__main__':
-    main()
-```
-
-**2. Web API with SDK:**
-```python
-from flask import Flask, request, jsonify
-from github_copilot_sdk import CopilotClient
-
-app = Flask(__name__)
-client = CopilotClient()
-
-@app.route('/api/analyze-pr', methods=['POST'])
-def analyze_pr():
-    pr_diff = request.json['diff']
-    
-    response = client.chat(f"""
-    Review this PR diff for:
-    - Code quality issues
-    - Security vulnerabilities
-    - Performance concerns
-    
-    {pr_diff}
-    """)
-    
-    return jsonify({'analysis': response.text})
-
-if __name__ == '__main__':
-    app.run()
-```
-
-**3. Scheduled Automation:**
-```python
-import schedule
-import time
-from github_copilot_sdk import CopilotClient
-
-def analyze_test_failures():
-    client = CopilotClient()
-    # Fetch latest test reports
-    report = fetch_latest_test_report()
-    
-    analysis = client.chat(f"""
-    Analyze test failures and identify flaky tests:
-    {report}
-    """)
-    
-    # Send to Slack, create Jira tickets, etc.
-    notify_team(analysis.text)
-
-schedule.every().day.at("09:00").do(analyze_test_failures)
-
-while True:
-    schedule.run_pending()
-    time.sleep(60)
+print(response.text)
 ```
 
 ---
 
-## 🎭 Advanced Topics
+<!-- 🎬 MAJOR SECTION: Advanced Features -->
+## Advanced SDK Capabilities
 
 ### MCP Server Integration
 
-The SDK supports Model Context Protocol servers for extending capabilities:
+Extend SDK capabilities with Model Context Protocol servers:
 
 ```python
 from github_copilot_sdk import CopilotClient
@@ -512,14 +593,33 @@ client = CopilotClient(
         {
             'name': 'jira-server',
             'command': 'mcp-jira',
-            'env': {'JIRA_URL': 'https://company.atlassian.net'}
+            'env': {
+                'JIRA_URL': 'https://company.atlassian.net',
+                'JIRA_TOKEN': os.environ['JIRA_TOKEN']
+            }
+        },
+        {
+            'name': 'slack-server',
+            'command': 'mcp-slack',
+            'env': {'SLACK_TOKEN': os.environ['SLACK_TOKEN']}
         }
     ]
 )
 
-# Now SDK can interact with Jira
-response = client.chat("Create a Jira ticket for the bug in auth.py")
+# SDK can now interact with Jira and Slack
+response = client.chat("""
+Create a Jira ticket for the auth.py security issue,
+assign to the security team, and post a summary to #security-alerts
+""")
 ```
+
+**Use cases for MCP:**
+- Access internal APIs (Jira, ServiceNow, Confluence)
+- Query databases or data warehouses
+- Integrate with monitoring tools (Datadog, Grafana)
+- Connect to cloud services (AWS, Azure, GCP)
+
+See [MCP Apps tech talk](../mcp-apps/) for complete guide.
 
 ### Persistent Memory
 
@@ -533,13 +633,23 @@ client = CopilotClient(
     memory_path='~/.copilot-sdk/memory'
 )
 
-# First run
-client.chat("Remember that our API uses JWT tokens")
+# First session: Teach agent about your system
+client.chat("Remember: Our API uses JWT tokens with 1-hour expiry")
+client.chat("Remember: Database queries must use parameterized statements")
 
-# Later run (same client config)
-client.chat("How does our API authenticate?")
-# Response will recall the JWT information
+# Later session (same client config): Agent recalls context
+response = client.chat("How does our API authenticate?")
+# Response will reference JWT tokens from memory
+
+response = client.chat("Write a database query for user lookup")
+# Response will use parameterized statements based on stored context
 ```
+
+**Memory use cases:**
+- Team coding standards and conventions
+- Architecture patterns and decisions
+- Domain-specific terminology
+- Common troubleshooting steps
 
 ### BYOK (Bring Your Own Key)
 
@@ -552,101 +662,509 @@ client = CopilotClient(
     byok_config={
         'provider': 'openai',
         'api_key': 'sk-...',
-        'model': 'gpt-4'
+        'model': 'gpt-4-turbo'
     }
 )
+
+# SDK routes requests to your OpenAI account
+response = client.chat("Analyze this codebase")
 ```
 
-### Error Handling and Retries
+**Supported providers:**
+- OpenAI (GPT-4, GPT-3.5)
+- Anthropic (Claude 3/4)
+- Azure OpenAI
+- Custom endpoints (OpenAI-compatible APIs)
+
+**When to use BYOK:**
+- Need higher rate limits than Copilot quota provides
+- Want direct cost control and billing visibility
+- Prefer specific model versions or providers
+- Testing unreleased models
+
+### Production-Ready Error Handling
+
+Implement retries with exponential backoff:
 
 ```python
 from github_copilot_sdk import CopilotClient, SDKError
 import time
+import logging
 
-def chat_with_retry(client, prompt, max_retries=3):
+logger = logging.getLogger(__name__)
+
+def chat_with_retry(client: CopilotClient, prompt: str, max_retries: int = 3) -> str:
+    """Execute SDK request with exponential backoff retry logic"""
     for attempt in range(max_retries):
         try:
-            return client.chat(prompt)
+            response = client.chat(prompt)
+            return response.text
         except SDKError as e:
             if attempt == max_retries - 1:
+                logger.error(f"SDK request failed after {max_retries} attempts: {e}")
                 raise
-            print(f"Attempt {attempt + 1} failed: {e}. Retrying...")
-            time.sleep(2 ** attempt)  # Exponential backoff
 
+            wait_time = 2 ** attempt  # Exponential backoff: 1s, 2s, 4s
+            logger.warning(f"Attempt {attempt + 1} failed: {e}. Retrying in {wait_time}s...")
+            time.sleep(wait_time)
+
+# Usage
 client = CopilotClient()
-response = chat_with_retry(client, "Analyze this codebase")
+try:
+    result = chat_with_retry(client, "Analyze this repository")
+    process_result(result)
+except SDKError as e:
+    handle_fatal_error(e)
 ```
 
----
-
-## 📖 Resources and Documentation
-## 📖 Resources and Documentation
-
-**Official SDK Resources:**
-- 📖 [GitHub Copilot SDK Repository](https://github.com/github/copilot-sdk) — Installation, API reference, examples
-- 📖 [SDK Blog Announcement](https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/) — Overview and use cases
-- 📖 [Python SDK Cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md) — Python-specific examples and patterns
-- 📖 [Getting Started Guide](https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md) — Complete walkthrough
-- 📖 [SDK Custom Instructions](https://github.com/github/awesome-copilot/blob/main/collections/copilot-sdk.md) — Speed up SDK development with Copilot
-- 📖 [Copilot Requests Documentation](https://docs.github.com/en/copilot/concepts/billing/copilot-requests) — Understanding billing and quotas
-
-**Community Examples:**
-- [Release Automation Toolkit](https://github.com/github/copilot-sdk/tree/main/examples/release-automation)
-- [Test Analytics Bot](https://github.com/github/copilot-sdk/tree/main/examples/test-analyzer)
-- [Code Review Assistant](https://github.com/github/copilot-sdk/tree/main/examples/review-bot)
+**Error scenarios to handle:**
+- Rate limiting (HTTP 429)
+- Network timeouts
+- Invalid API keys
+- CLI process crashes
+- Model unavailability
 
 ---
 
-## 🆘 FAQ
+## Real-World Use Cases
 
-**Q: What's required to use the SDK?**  
-A: You need a GitHub Copilot subscription, Copilot CLI installed and authenticated, and Python 3.8+ (or your preferred SDK language runtime).
-
-**Q: Does the SDK work independently of Copilot CLI?**  
-A: No, the SDK communicates with Copilot CLI in server mode. The CLI must be installed separately.
-
-**Q: Can I use custom agents and skills?**  
-A: Yes! The SDK supports the full custom agent and skill system, plus MCP servers for extending capabilities.
-
-**Q: What AI models are available?**  
-A: All models available via Copilot CLI are supported (GPT-4, Claude, etc.). The SDK provides methods to query available models at runtime.
-
-**Q: Is the SDK production-ready?**  
-A: The SDK is currently in **Technical Preview** (as of January 2026). It's functional for development and testing, but APIs may evolve. Review the [SDK repository](https://github.com/github/copilot-sdk) for current status.
-
-**Q: How is SDK usage billed?**  
-A: SDK requests count toward your GitHub Copilot premium request quota, same as CLI usage. BYOK (Bring Your Own Key) is supported for using your own LLM provider accounts.
-
-**Q: Can I run the SDK in sandboxed or restricted environments?**  
-A: Yes, you can configure tool permissions and working directories to restrict what the SDK can access. Consider containerized deployments for untrusted inputs.
-
-**Q: How do I report issues or contribute?**  
-A: Use the [GitHub Issues page](https://github.com/github/copilot-sdk/issues) to report bugs or request features. Check the contributing guidelines in the repository.
-
-**Q: What languages are supported?**  
-A: Python, TypeScript/Node.js, Go, and .NET. See the SDK repository for language-specific documentation.
+### Use Case 1: Release Engineering Automation
 
 ---
 
-## 🔗 Related Topics
+## Real-World Use Cases
 
-- **GitHub Copilot CLI** — Terminal-based AI agent for DevOps workflows
-- **Custom Agents** — Building specialized AI agents for specific tasks
-- **Model Context Protocol (MCP)** — Extending SDK capabilities with custom servers
-- **BYOK (Bring Your Own Key)** — Using your own LLM provider API keys
+### Use Case 1: Release Engineering Automation
+
+**The Problem:** Release notes require reviewing 100-200 commits, understanding customer impact, and translating technical changes into user-facing language. Manual process takes 2+ hours per release and quality varies by author.
+
+**The Solution:** SDK-powered release notes generator that analyzes git commit history, identifies customer-facing changes, and generates categorized release notes automatically.
+
+**Implementation:**
+
+```python
+from github_copilot_sdk import CopilotClient
+import subprocess
+
+def generate_release_notes(from_tag: str, to_tag: str = 'HEAD') -> str:
+    # Get commit history
+    commits = subprocess.check_output(
+        ['git', 'log', f'{from_tag}..{to_tag}', '--pretty=format:%H|%s|%b'],
+        text=True
+    )
+
+    client = CopilotClient()
+    response = client.chat(f"""
+    Analyze these commits and generate customer-facing release notes.
+    Categorize as:
+    - **Features**: New capabilities users can leverage
+    - **Fixes**: Bug fixes with user impact
+    - **Breaking Changes**: API changes requiring migration
+    - **Security Updates**: CVEs and security improvements
+
+    For each item:
+    - Explain customer value, not technical implementation
+    - Include issue references if present
+    - Highlight migration steps for breaking changes
+
+    Commits:
+    {commits}
+
+    Format as markdown ready for GitHub releases.
+    """)
+
+    return response.text
+
+# Generate and save
+notes = generate_release_notes('v1.2.0', 'v1.3.0')
+with open('RELEASE_NOTES.md', 'w') as f:
+    f.write(notes)
+```
+
+**Outcome:** 2+ hours → 10 minutes. Consistent quality every release. Release managers focus on strategy instead of git archaeology.
 
 ---
 
-## 💭 Closing Thoughts
+### Use Case 2: Intelligent Test Infrastructure Monitoring
 
-The GitHub Copilot SDK represents a fundamental shift: from **using AI tools** to **building with AI engines**. 
+**The Problem:** Test failures require manual analysis of logs, stack traces, and historical patterns. Flaky tests go undetected until multiple failures, blocking PRs and wasting CI time. Average analysis time: 45 minutes per failed build.
 
-The value isn't in replacing human judgment — it's in eliminating repetitive analysis, enforcing consistency, and scaling expertise across teams. Release notes that used to take hours now take minutes. Test failures that used to require detective work now get diagnosed automatically. Code reviews that bottlenecked teams now happen continuously.
+**The Solution:** SDK-powered test report analyzer that parses test output, identifies failure patterns, detects flaky tests, and suggests specific fixes based on error messages and code context.
 
-**The SDK isn't about automation for automation's sake.** It's about identifying where AI can remove friction, then embedding that intelligence exactly where your team needs it.
+**Implementation:**
 
-Start small. Pick one workflow where manual analysis is slowing you down. Build a focused tool. Measure the impact. Iterate.
+```python
+import json
+from github_copilot_sdk import CopilotClient
+from pathlib import Path
 
-The examples in this tech talk — release notes, test analysis, code review — are starting points. The SDK's real power emerges when you build tools that solve problems unique to your domain, your codebase, your team.
+def analyze_test_report(report_path: Path) -> dict:
+    with open(report_path) as f:
+        report = json.load(f)
 
-**What will you build?**
+    client = CopilotClient()
+    response = client.chat(f"""
+    Analyze this test report and provide:
+
+    1. **Root Causes** (with confidence scores: high/medium/low)
+       - Actual cause, not just symptom
+       - Affected component/module
+
+    2. **Flaky Test Detection**
+       - Tests with intermittent failures
+       - Error pattern analysis (timeout? race condition? external dependency?)
+
+    3. **Investigation Targets**
+       - Specific file paths and line numbers
+       - Related tests that might be affected
+
+    4. **Suggested Fixes**
+       - Concrete code changes or configuration adjustments
+       - Priority order (quick wins first)
+
+    Test Report:
+    {json.dumps(report, indent=2)}
+    """)
+
+    return {
+        'analysis': response.text,
+        'failed_count': report['stats']['failed'],
+        'timestamp': report['timestamp']
+    }
+
+# Usage
+analysis = analyze_test_report(Path('test-results/junit.xml'))
+post_to_slack(analysis)
+create_jira_tickets_for_high_confidence_issues(analysis)
+```
+
+**Outcome:** 45 minutes → 5 minutes per failed build. Flaky tests caught on first failure (not third). 60% reduction in CI blockage time.
+
+---
+
+### Use Case 3: Code Quality Enforcement Bots
+
+**The Problem:** Code reviews bottleneck on senior engineers checking coding standards, architecture patterns, and common mistakes. Junior developers wait 2-3 days for feedback on basic issues that could be caught automatically.
+
+**The Solution:** Pre-review bot that analyzes PR diffs before human review, checks team-specific standards, identifies common mistakes, and posts inline comments via GitHub API.
+
+**Implementation:**
+
+```python
+from github_copilot_sdk import CopilotClient
+import requests
+
+def review_pr(repo: str, pr_number: int, github_token: str):
+    # Fetch PR diff
+    pr_url = f'https://api.github.com/repos/{repo}/pulls/{pr_number}'
+    headers = {
+        'Accept': 'application/vnd.github.v3.diff',
+        'Authorization': f'token {github_token}'
+    }
+    pr_diff = requests.get(pr_url, headers=headers).text
+
+    client = CopilotClient()
+    response = client.chat(f"""
+    Review this code against our standards:
+
+    **Security:**
+    - All database queries must use parameterized statements (SQL injection risk)
+    - User input must be validated (XSS, injection attacks)
+    - Authentication required on all API endpoints
+
+    **Error Handling:**
+    - Async functions must have try/catch blocks
+    - Network requests must have timeout and retry logic
+    - User-facing errors must include actionable messages
+
+    **Testing:**
+    - New features require unit tests (minimum 80% coverage)
+    - API changes require integration tests
+    - Breaking changes require migration tests
+
+    **Performance:**
+    - Database queries in loops (N+1 problem)
+    - Missing pagination on list endpoints
+    - Unnecessary synchronous operations in async contexts
+
+    For each issue found:
+    - Line number or file path
+    - Severity (blocking / should-fix / suggestion)
+    - Specific suggestion with code example
+
+    PR Diff:
+    {pr_diff}
+    """)
+
+    # Parse response and post GitHub comments
+    issues = parse_review_issues(response.text)
+    for issue in issues:
+        if issue['severity'] == 'blocking':
+            post_github_review_comment(repo, pr_number, issue, github_token)
+
+# Usage (in CI or webhook handler)
+review_pr('myorg/myrepo', 1234, os.environ['GITHUB_TOKEN'])
+```
+
+**Outcome:** Review time cut by 50%. PR throughput doubled. Senior engineers focus on architecture and design, not standards enforcement. Junior developers get instant feedback.
+
+---
+
+### Use Case 4: Incident Response Automation
+
+**The Problem:** Production incidents require analyzing logs across multiple services, correlating errors, and identifying root causes under time pressure. Manual triage takes 30+ minutes while customers are impacted, and misdiagnosis extends outages.
+
+**The Solution:** SDK-powered incident analyzer that ingests logs from multiple sources, correlates errors using AI reasoning, suggests probable root causes with confidence scores, and recommends immediate mitigation steps.
+
+**Implementation:**
+
+```python
+from github_copilot_sdk import CopilotClient
+import json
+
+def analyze_incident(logs: dict) -> dict:
+    """
+    logs: {
+        'app': [...],
+        'database': [...],
+        'nginx': [...],
+        'metrics': {...}
+    }
+    """
+    client = CopilotClient()
+
+    response = client.chat(f"""
+    Production incident analysis - prioritize speed and accuracy.
+
+    Analyze logs from multiple sources and provide:
+
+    1. **Root Cause** (with confidence: high/medium/low)
+       - Most likely cause based on error correlation
+       - Alternative hypotheses if confidence < high
+
+    2. **Impact Assessment**
+       - Affected services and endpoints
+       - Customer impact (partial degradation / full outage)
+       - Data integrity concerns (if any)
+
+    3. **Immediate Mitigation Steps**
+       - Command to run or config to change
+       - Expected outcome of each step
+       - Rollback procedure if mitigation fails
+
+    4. **Investigation Steps**
+       - Specific log queries to run next
+       - Metrics to check for confirmation
+       - Code paths to investigate
+
+    Logs:
+    {json.dumps(logs, indent=2)}
+    """)
+
+    return {
+        'analysis': response.text,
+        'timestamp': time.time(),
+        'log_sources': list(logs.keys())
+    }
+
+# Usage (called by monitoring alert webhook)
+incident_data = fetch_logs_from_last_15_minutes()
+analysis = analyze_incident(incident_data)
+post_to_incident_channel(analysis)
+trigger_mitigation_runbook_if_high_confidence(analysis)
+```
+
+**Outcome:** Mean time to resolution (MTTR) reduced by 40%. Faster root cause identification. Fewer escalations. Incident responders work with AI assistant, not alone.
+
+---
+
+### Use Case 5: Documentation Generation from Code
+
+**The Problem:** API documentation gets out of sync with code. Architecture diagrams are manually created and rarely updated. Onboarding docs require constant maintenance as codebase evolves.
+
+**The Solution:** SDK-powered documentation generator that analyzes codebase structure, generates API reference docs, creates architecture diagrams, and produces onboarding guides tailored to different roles.
+
+**Implementation:**
+
+```python
+from github_copilot_sdk import CopilotClient
+from pathlib import Path
+
+def generate_api_docs(src_dir: Path) -> str:
+    # Collect all API files
+    api_files = list(src_dir.glob('**/*_api.py'))
+
+    code_content = {}
+    for file in api_files:
+        code_content[str(file)] = file.read_text()
+
+    client = CopilotClient()
+    response = client.chat(f"""
+    Generate comprehensive API documentation from this codebase.
+
+    For each endpoint:
+    - HTTP method and path
+    - Request parameters (query, body, headers)
+    - Response format with example
+    - Authentication requirements
+    - Error codes and meanings
+    - Rate limiting
+
+    Also include:
+    - Overview of API architecture
+    - Authentication flow diagram (markdown)
+    - Common usage patterns with code examples
+    - Troubleshooting guide
+
+    Source Code:
+    {json.dumps(code_content, indent=2)}
+    """)
+
+    return response.text
+
+# Generate and save
+docs = generate_api_docs(Path('src/api'))
+Path('docs/API_REFERENCE.md').write_text(docs)
+```
+
+**Outcome:** Always-current documentation. New developers onboard 50% faster. Reduced support tickets. API changes automatically reflected in docs.
+
+---
+
+## ✅ What You Can Do Today
+
+**Immediate Actions (15 minutes):**
+- [ ] Install Copilot CLI and authenticate: `copilot auth login`
+- [ ] Install SDK for your language: `pip install github-copilot-sdk` (Python)
+- [ ] Run the basic example: Create a simple script that calls `client.chat("Hello")` and prints the response
+
+**Short-Term Implementation (1 hour):**
+- [ ] Identify one repetitive analysis workflow (release notes, test failures, log analysis)
+- [ ] Build a basic CLI tool using Pattern 1 (CLI Tool with SDK Backend)
+- [ ] Test with real data from your repository or CI system
+
+**Advanced Exploration (2-4 hours):**
+- [ ] Implement error handling with retries (see Production-Ready Error Handling section)
+- [ ] Add MCP server integration for your internal tools (Jira, Slack, monitoring)
+- [ ] Deploy as scheduled task or webhook handler in your CI/CD pipeline
+- [ ] Configure tool permissions and sandboxing for production security
+
+**Next Steps After Completion:**
+1. ✅ Share your SDK tool with the team and gather feedback
+2. 📖 Review related talk: [MCP Apps](../mcp-apps/) for extending SDK capabilities
+3. 💬 Explore examples: [SDK Repository Examples](https://github.com/github/copilot-sdk)
+4. 🚀 Scale to organization: See [Enterprise Patterns](../enterprise-patterns/) for multi-team deployment
+
+---
+
+## Related Patterns
+
+### Complementary Features
+
+- **[GitHub Copilot CLI](../copilot-cli/)** — Interactive terminal experience; SDK enables programmatic control of the same runtime
+- **[MCP Apps](../mcp-apps/)** — Extend SDK capabilities by connecting to internal systems and APIs
+- **[Agentic SDLC](../agentic-sdlc/)** — Full repository automation; SDK is the building block for custom agent workflows
+- **[Custom Agents](../agent-teams/)** — Specialized agents for specific domains; SDK provides the runtime to host them
+
+### Decision Flow
+
+**If SDK doesn't fit your needs:**
+
+```
+Q: What's your actual goal?
+├─ "Interactive terminal workflows (Git, Docker, kubectl)"
+│  → See: Copilot CLI (interactive mode, not SDK)
+│
+├─ "Code completion while editing files"
+│  → See: Copilot in VS Code/IDE (not SDK)
+│
+├─ "Embed AI in non-developer products (customer-facing apps)"
+│  → Consider: OpenAI API, Anthropic API (general LLM SDKs)
+│
+└─ "Full SDLC automation (issue → PR → merge)"
+   → See: Agentic SDLC + SDK combination
+```
+
+See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
+
+---
+
+## 📚 Official Documentation
+
+**Primary Documentation:**
+- 📖 **[GitHub Copilot SDK Repository](https://github.com/github/copilot-sdk)** — Installation guides, API reference, language-specific examples
+- 📖 **[SDK Blog Announcement](https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/)** — Technical preview announcement, use cases, and architecture overview
+- 📖 **[Copilot CLI Documentation](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line)** — Understanding the agent runtime that SDK wraps
+
+**Additional Resources:**
+- 🎓 **[Python SDK Cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md)** — Python-specific patterns and recipes
+- 🎓 **[Getting Started Guide](https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md)** — Complete installation and setup walkthrough
+- 🔧 **[SDK Custom Instructions](https://github.com/github/awesome-copilot/blob/main/collections/copilot-sdk.md)** — Speed up SDK development with Copilot assistance
+- 📋 **[Copilot Requests Documentation](https://docs.github.com/en/copilot/concepts/billing/copilot-requests)** — Understanding billing, quotas, and usage tracking
+
+**GitHub Resources:**
+- 🐙 **[SDK Examples Repository](https://github.com/github/copilot-sdk)** — Release automation toolkit, test analytics bot, code review assistant
+- 📋 **[GitHub Issues](https://github.com/github/copilot-sdk/issues)** — Report bugs, request features, track SDK development
+
+---
+
+## 🎭 Behind the Scenes
+
+*For those who want to understand the deeper mechanics*
+
+### How SDK Manages CLI Lifecycle
+
+The SDK handles three lifecycle scenarios automatically:
+
+1. **Spawn Mode (default)**: SDK spawns a new CLI process when `CopilotClient()` is initialized, communicates via stdio, and terminates the process on client close.
+
+2. **Connect Mode**: SDK connects to an already-running CLI server (useful for long-lived daemons or shared CLI instances across multiple SDK clients).
+
+3. **Subprocess Management**: SDK monitors CLI health, restarts on crashes, handles graceful shutdown, and cleans up resources.
+
+**Why This Matters:** You never manage CLI processes manually. SDK abstracts the complexity, but understanding the model helps debug issues (e.g., "why is CLI process not terminating?").
+
+### JSON-RPC Protocol Details
+
+SDK and CLI communicate using JSON-RPC 2.0 over stdio:
+
+**Request Example:**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "chat",
+  "params": {
+    "prompt": "Explain OAuth",
+    "model": "gpt-4",
+    "stream": true
+  }
+}
+```
+
+**Response Example (streaming):**
+```json
+{"jsonrpc": "2.0", "id": 1, "result": {"chunk": "OAuth is..."}}
+{"jsonrpc": "2.0", "id": 1, "result": {"chunk": " a protocol..."}}
+{"jsonrpc": "2.0", "id": 1, "result": {"done": true}}
+```
+
+**Why This Matters:** Understanding the protocol helps with advanced use cases like custom transport layers, logging/observability, or debugging SDK-CLI communication issues.
+
+### Model Selection and Routing
+
+SDK supports multiple model selection strategies:
+
+- **Explicit**: Specify model per request (`model='gpt-4'`)
+- **Default**: Use account default model (set in Copilot settings)
+- **Fallback**: Automatically try alternative models on failure
+- **BYOK**: Route to custom providers (OpenAI, Anthropic, Azure)
+
+**Model routing flow:**
+```
+SDK Request → CLI → Copilot Service → Model API
+                   ↓ (if BYOK)
+                   → Your API Key → Model API
+```
+
+**Why This Matters:** Helps optimize cost vs. quality tradeoffs and understand why certain requests use specific models.

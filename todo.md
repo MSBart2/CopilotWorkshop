@@ -19,3 +19,14 @@ Adding custom instructions for Copilot CLI - GitHub Docs: https://docs.github.co
 About agentic memory for GitHub Copilot - GitHub Enterprise Cloud Docs: https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/agents/copilot-memory
 AGENTS.md: https://agents.md/
 Using agents in Visual Studio Code: https://code.visualstudio.com/docs/copilot/agents/overview#_types-of-agents
+
+---
+
+new tech talk for reporting based on https://docs.github.com/en/enterprise-cloud@latest/rest/copilot/copilot-usage-metrics?apiVersion=2022-11-28
+"how to hold developers/managers accountable for copilot usage?" "how to measure the impact of copilot on your org?"  "what metrics should you be looking at to understand usage and impact?"  "how to set goals for copilot usage and track progress towards those goals?"
+
+---
+
+investigate this :  https://search.app/1fZRT
+
+---

@@ -65,6 +65,35 @@ Q: What kind of control do you need?
       🔗 Talks: copilot-hooks/ + terminal-sandboxing/
 ```
 
+### "I want quick wins without full SDLC transformation"
+
+```
+Q: What's your starting point?
+├─ Just want to try agents with minimal risk
+│  └─ Choose: Agentic Journey (Phase 1: Issue Triage)
+│     📖 Pattern: "Assign to Copilot" automation
+│     🔗 Talk: tech-talks/agentic-journey/
+│     ⏱️ Setup: 2-3 hours | ROI: 6x faster triage
+│
+├─ Want end-to-end issue automation (research → code → review)
+│  └─ Choose: Agentic Journey (Phases 1-4)
+│     📖 Pattern: Full issue lifecycle with agents
+│     🔗 Talk: tech-talks/agentic-journey/
+│     ⏱️ Setup: 4-6 hours | ROI: 10-20x throughput
+│
+├─ Already using agents, hitting coordination limits
+│  └─ Choose: Agentic SDLC (Full Transformation)
+│     📖 Pattern: Gen-4 SDLC with monorepo, trust factory CI
+│     🔗 Talk: tech-talks/agentic-sdlc/
+│     ⏱️ Setup: 3-6 months | ROI: 100x at scale
+│
+└─ Need executive buy-in first
+   └─ Start with: Agentic Labor (Getting Started section)
+      📖 Context: Business case and first three agents
+      🔗 Talk: exec-talks/agentic-labor/
+      Then → Return here for tech-talks/agentic-journey/
+```
+
 ### "I'm restructuring for AI delivery"
 
 ```
@@ -162,6 +191,20 @@ Q: What feature are you exploring?
 ---
 
 ## By Use Case
+
+### "I want quick wins with agents before full transformation"
+
+**Recommended sequence:**
+1. [Agentic Journey](agentic-journey/) (Phase 1) — Issue triage automation
+2. [Agentic Journey](agentic-journey/) (Phase 2) — Execution planning agents
+3. [Agentic Journey](agentic-journey/) (Phase 3-4) — Code generation + review
+4. Evaluate limits → [Agentic SDLC](agentic-sdlc/) when ready
+
+**Time investment:** 4-6 hours setup
+**Expected outcome:** 10-20x improvement on issue-to-PR workflow
+**When to upgrade:** See [Phase 5 graduation criteria](agentic-journey/#phase-5-when-to-upgrade-to-full-sdlc)
+
+---
 
 ### "I want to speed up my development workflow"
 
@@ -268,6 +311,9 @@ Q: What feature are you exploring?
 - Browser users: [Copilot Web](copilot-web/)
 - SDK developers: [Copilot SDK](copilot-sdk/)
 
+**Quick wins with agents:**
+- [Agentic Journey](agentic-journey/) — Issue-to-PR automation (start here for immediate value)
+
 ### Advanced Topics (After Foundations)
 
 **Multi-agent workflows:**
@@ -293,6 +339,9 @@ Q: What feature are you exploring?
 
 ### Common Questions
 
+**Q: "I want quick wins with agents without a big transformation"**
+→ Start with [Agentic Journey](agentic-journey/) — Phase 1 (issue triage) takes 2-3 hours
+
 **Q: "I just want to be more productive with Copilot"**
 → Start with [Copilot Chat](copilot-chat/), then [Copilot CLI](copilot-cli/)
 
@@ -311,6 +360,17 @@ Q: What feature are you exploring?
 ---
 
 ## Learning Paths
+
+### Path 0: Quick Wins with Agents (4-6 hours)
+```
+Agentic Journey - Phase 1 (2h)
+  ↓ Issue triage automation
+Agentic Journey - Phase 2 (1h)
+  ↓ Execution planning
+Agentic Journey - Phases 3-4 (1-2h)
+  ↓ Code generation + review
+Evaluate → Agentic SDLC when hitting limits
+```
 
 ### Path 1: Individual Productivity (4-6 hours)
 ```

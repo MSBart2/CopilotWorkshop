@@ -131,10 +131,11 @@ jobs:
             fi
           done <<< "${{ steps.changes.outputs.changed_slides }}"
 
-          # Ensure index.html exists
+          # Ensure index.html and 404.html exist
           if [ ! -f dist/index.html ]; then
             cp index-custom.html dist/index.html
           fi
+          cp 404.html dist/404.html
 
           echo "✨ Incremental build complete!"
 
@@ -194,9 +195,10 @@ jobs:
             fi
           done
 
-          # Copy custom index.html to dist root
-          echo "📄 Copying index.html to dist root..."
+          # Copy custom index.html and 404.html to dist root
+          echo "📄 Copying index.html and 404.html to dist root..."
           cp index-custom.html dist/index.html
+          cp 404.html dist/404.html
 
           echo "✨ All presentations built successfully!"
 
