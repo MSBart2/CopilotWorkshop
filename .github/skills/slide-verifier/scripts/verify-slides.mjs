@@ -44,9 +44,18 @@ const WORKSPACE_ROOT = findWorkspaceRoot();
 const SLIDES_DIR = path.join(WORKSPACE_ROOT, "slides");
 
 // Configuration
-const BASE_PORT = 3030;
+const PORT_RANGE_START = 3030;
+const PORT_RANGE_END = 3130;
 const SCREENSHOT_DIR = path.join(SLIDES_DIR, "screenshots");
 const REPORT_DIR = path.join(SLIDES_DIR, "verification-reports");
+
+/**
+ * Get a random port in the configured range
+ * Useful for parallel test execution to avoid port conflicts
+ */
+function getRandomPort() {
+  return Math.floor(Math.random() * (PORT_RANGE_END - PORT_RANGE_START + 1)) + PORT_RANGE_START;
+}
 
 /**
  * Start Slidev dev server for a slide file
@@ -486,8 +495,10 @@ Usage:
   node verify-slides.mjs --all                  Verify all decks
   node verify-slides.mjs --fail-on-errors       Exit 1 if critical issues found
   node verify-slides.mjs --tolerance=10         Set overflow tolerance (default: 5px)
-  node verify-slides.mjs --port=3031            Use custom port (default: 3030)
+  node verify-slides.mjs --port=3031            Use custom port (default: random 3030-3130)
   node verify-slides.mjs --no-screenshots       Skip screenshots (faster, but less visual)
+
+Note: Random port is used by default to allow parallel test execution.
 
 Examples:
   node verify-slides.mjs workshop/03-custom-prompts.md
@@ -503,10 +514,11 @@ Examples:
   const tolerance = parseInt(
     args.find((arg) => arg.startsWith("--tolerance="))?.split("=")[1] || "5",
   );
-  const port = parseInt(
-    args.find((arg) => arg.startsWith("--port="))?.split("=")[1] ||
-      BASE_PORT.toString(),
-  );
+  // Use random port by default for parallel execution, or explicit port if specified
+  const portArg = args.find((arg) => arg.startsWith("--port="));
+  const port = portArg 
+    ? parseInt(portArg.split("=")[1])
+    : getRandomPort();
   const captureAll = !args.includes("--no-screenshots");
 
   let slidesToVerify = [];
@@ -534,7 +546,7 @@ Examples:
     let server;
     try {
       // Start server
-      console.log("🚀 Starting Slidev server...");
+      console.log(`🚀 Starting Slidev server on port ${port}...`);
       server = await startSlidevServer(slideFile, port);
       console.log("✅ Server ready\n");
 

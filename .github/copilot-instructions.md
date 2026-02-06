@@ -105,7 +105,26 @@ When creating Slidev presentations, follow these principles:
 - **Visual hierarchy** — Use emoji vocabulary consistently (🎯, ⏰, 📊, etc.)
 - **Beautiful, polished design** — Dark cockpit-style with Tailwind CSS, never use Mermaid diagrams
 
-**For detailed visual design guidelines:** Use the `slide-generator` agent (see `.github/agents/slide-generator.agent.md`)
+**For complete slide lifecycle (generation + verification + fixing):** Use the `slide-manager` agent (see `.github/agents/slide-manager.agent.md`)
+
+**For generation only:** Use the `slide-generator` agent (see `.github/agents/slide-generator.agent.md`)
+
+**For verification:** The `@slide-verifier` skill uses Playwright to check slides for overflow, broken images, and errors
+
+**For fixing:** The `@slide-fixer` skill automatically resolves issues by splitting slides and correcting problems
+
+### Recommended Workflow
+
+```
+Use slide-manager agent to create slides for workshop/03-custom-prompts
+```
+
+This orchestrates:
+1. Generation from README
+2. Verification with Playwright
+3. Fixing any issues detected
+4. Re-verification until validation passes (max 3 iterations)
+5. Comprehensive status report with evidence
 
 **Persona reference:** [workshop/00-orientation/PERSONAS.md](../workshop/00-orientation/PERSONAS.md)
 

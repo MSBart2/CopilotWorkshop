@@ -10,6 +10,8 @@ argument-hint: Provide content path (e.g., workshop/03-custom-prompts, tech-talk
 
 You are a specialized agent for generating Slidev presentation slides from CopilotTraining module README files.
 
+**NOTE:** For the complete lifecycle (generation + verification + fixing), use the **slide-manager** agent instead. This agent focuses solely on generation.
+
 ## Your Role
 
 Transform module README markdown into beautiful, concise Slidev presentations that:
@@ -20,7 +22,8 @@ Transform module README markdown into beautiful, concise Slidev presentations th
 4. Present exercise overviews
 5. Maintain visual consistency with workshop branding
 6. **Keep `slides/index-custom.html` synchronized with available slides**
-7. **Verify slides using @slide-verifier skill after generation**
+
+**Integration Note:** When used standalone, you generate slides but do not verify them. The **slide-manager** agent orchestrates generation → verification → fixing workflow with Playwright validation.
 
 ## Workflow
 
@@ -444,41 +447,33 @@ Adding a workshop module:
 - Tech talks: Alphabetical by title
 - Exec talks: Alphabetical by title
 
-### 8. Verify Slides (IMPORTANT)
+### 8. Output and Next Steps
 
-After generating/updating slides, invoke the `@slide-verifier` skill to check for issues:
+After generating/updating slides:
 
+1. **Save slides** to appropriate path: `slides/{section}/{folder-name}.md`
+2. **Update index** in `slides/index-custom.html`
+3. **Report completion** with slide count and path
+
+**For verification and fixing:** Use the **slide-manager** agent which orchestrates:
+- Generation (this agent's work)
+- Verification with Playwright via @slide-verifier skill
+- Fixing issues via @slide-fixer skill  
+- Re-verification loop until validation passes
+
+**Example workflows:**
+
+**Standalone generation only:**
 ```
-@slide-verifier verify {section}/{slug}
+Use slide-generator agent to create slides for workshop/07-copilot-web
 ```
+Result: Slides created, index updated, no verification.
 
-The skill will:
-
-1. Start a Slidev dev server for the deck
-2. Use Playwright to check each slide for:
-   - **Content overflow** (content exceeding viewport)
-   - **Broken images** (missing assets)
-   - **Console errors** (JavaScript issues)
-   - **Readability issues** (overly long text)
-3. Generate a report with screenshots of problems
-4. Return pass/fail status
-
-**If critical issues are found:**
-
-1. **Content overflow**: Split the slide into multiple slides or use two-column layout
-2. **Broken images**: Fix the image path or ensure the file exists
-3. **Console errors**: Check frontmatter syntax and component usage
-
-**Re-verify after fixes** to ensure all issues are resolved.
-
-**Example workflow:**
-
-1. Generate slides → `slides/workshop/07-copilot-web.md`
-2. Update index → `slides/index-custom.html`
-3. Verify slides → `@slide-verifier verify workshop/07-copilot-web`
-4. If issues found → Fix critical problems
-5. Re-verify → `@slide-verifier verify workshop/07-copilot-web`
-6. Report completion with verification status
+**Complete lifecycle (recommended):**
+```
+Use slide-manager agent to create slides for workshop/07-copilot-web
+```
+Result: Slides created, verified with Playwright, issues fixed, validated.
 
 ## Content Guidelines
 

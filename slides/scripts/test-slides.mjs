@@ -20,8 +20,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const SLIDES_DIR = join(__dirname, "..");
 
+const PORT_RANGE_START = 3030;
+const PORT_RANGE_END = 3130;
+
+/**
+ * Get a random port in the configured range
+ * Useful for parallel test execution to avoid port conflicts
+ */
+function getRandomPort() {
+  return Math.floor(Math.random() * (PORT_RANGE_END - PORT_RANGE_START + 1)) + PORT_RANGE_START;
+}
+
 const CONFIG = {
-  port: 3030,
+  port: getRandomPort(), // Use random port for parallel execution
   serverStartupTimeout: 30000, // 30 seconds to start server
   slideNavigationDelay: 500, // 500ms between slides
   maxSlidesPerModule: 100, // Safety limit
@@ -63,7 +74,7 @@ function startSlidevServer(slideFile) {
     const warnings = [];
     let serverReady = false;
 
-    log(`\n📦 Starting Slidev server for ${slideFile}...`, "cyan");
+    log(`\n📦 Starting Slidev server for ${slideFile} on port ${CONFIG.port}...`, "cyan");
 
     const proc = spawn("npx", ["slidev", slideFile, "--port", CONFIG.port], {
       cwd: SLIDES_DIR,

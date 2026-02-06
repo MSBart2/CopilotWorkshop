@@ -7,12 +7,25 @@ import { dirname } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+const PORT_RANGE_START = 3030;
+const PORT_RANGE_END = 3130;
+
+/**
+ * Get a random port in the configured range
+ * Useful for parallel test execution to avoid port conflicts
+ */
+function getRandomPort() {
+  return Math.floor(Math.random() * (PORT_RANGE_END - PORT_RANGE_START + 1)) + PORT_RANGE_START;
+}
+
 async function quickTest() {
+  const port = getRandomPort();
+  
   // Start server
-  console.log("Starting Slidev server...");
+  console.log(`Starting Slidev server on port ${port}...`);
   const server = spawn(
     "npx",
-    ["slidev", "workshop/00-orientation.md", "--port", "3030"],
+    ["slidev", "workshop/00-orientation.md", "--port", port],
     {
       cwd: __dirname,
       stdio: "pipe",
@@ -40,7 +53,7 @@ async function quickTest() {
   });
 
   try {
-    await page.goto("http://localhost:3030/2");
+    await page.goto(`http://localhost:${port}/2`);
     await page.waitForTimeout(2000);
 
     // Check for footer
