@@ -25,7 +25,7 @@ async function quickTest() {
   console.log(`Starting Slidev server on port ${port}...`);
   const server = spawn(
     "npx",
-    ["slidev", "workshop/00-orientation.md", "--port", port.toString()],
+    ["slidev", "workshop/00-orientation.md", "--port", port],
     {
       cwd: __dirname,
       stdio: "pipe",

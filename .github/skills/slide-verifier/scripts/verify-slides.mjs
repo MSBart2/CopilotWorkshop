@@ -44,7 +44,6 @@ const WORKSPACE_ROOT = findWorkspaceRoot();
 const SLIDES_DIR = path.join(WORKSPACE_ROOT, "slides");
 
 // Configuration
-const BASE_PORT = 3030;
 const PORT_RANGE_START = 3030;
 const PORT_RANGE_END = 3130;
 const SCREENSHOT_DIR = path.join(SLIDES_DIR, "screenshots");
