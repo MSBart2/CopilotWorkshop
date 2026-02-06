@@ -29,35 +29,222 @@ Transform module README markdown into beautiful, concise Slidev presentations th
 
 ### 1. Parse Module README
 
+**CRITICAL: Be Selective, Not Comprehensive**
+
+For large READMEs (800+ lines), prioritize core narrative over exhaustive coverage:
+
+- **Target 15-20 slides maximum** - Quality over quantity
+- **Prioritize:** Goals, architecture diagrams, before/after metrics, actionable outcomes
+- **Skip:** Implementation details, extensive how-to content, redundant examples
+- **Focus on 'what' and 'why'**, not 'how'
+- **Extract executive summary** of key concepts, don't transcribe every section
+
 Extract these sections from the module README:
 
 - **Title and timing** (H1 and ⏰ heading)
-- **Story section** (📖 The Story)
-- **Learning objectives** (🎯)
-- **Personas and quotes** (look for **Name** patterns with quotes)
-- **Before/After comparisons** (❌ and ✨ sections)
-- **Key concepts** (📚 Key Concepts)
-- **Exercises table** (🔨 Exercises)
-- **Persona realizations** (💭 quotes)
-- **Metrics** (numeric values: "15 minutes", "3 rounds", etc.)
+- **Story section** (📖 The Story) - condense if > 200 words
+- **Learning objectives** (🎯) - top 3-5 only
+- **Personas and quotes** (look for **Name** patterns with quotes) - 1-2 key personas
+- **Before/After comparisons** (❌ and ✨ sections) - highest impact metrics
+- **Key concepts** (📚 Key Concepts) - 2-4 core concepts only
+- **Exercises table** (🔨 Exercises) - overview, not every detail
+- **Persona realizations** (💭 quotes) - most impactful transformation
+- **Metrics** (numeric values: "15 minutes", "3 rounds", etc.) - top 3-4 metrics
 - **Next up** (➡️ Next Up)
 
 ### 2. Generate Slide Structure
 
-Follow this slide sequence (10-15 slides per module):
+Follow this slide sequence (12-20 slides per module):
 
 1. **Cover Slide** - Title, timing, emoji
-2. **Story Slide** - Problem context (2-3 sentences)
-3. **Objectives Slide** - What you'll learn and build
-4. **Personas Slide** - Key personas (1-3 cards)
-5. **Before/After Slide** - Two-column comparison
-6. **Key Concepts Slide** - Main ideas (2-3 concepts)
-7. **Exercises Slide** - Table of exercises
-8. **Quote/Realization Slide** - Persona transformation
-9. **Metrics Slide** - Quantified transformation
-10. **Compounding Value Slide** - How this helps future modules
-11. **Next Up Slide** - Preview next module
-12. **End Slide** - Completion message
+2. **Story/Context Slide** - Problem context or "Why We're Here"
+3. **Table of Contents Slide** - Navigation to major sections (AUTO-GENERATED, see section 2a below)
+4. **Objectives Slide** - What you'll learn and build
+5. **Personas Slide** - Key personas (1-3 cards)
+6. **Before/After Slide** - Two-column comparison
+7. **Key Concepts Slide** - Main ideas (2-3 concepts)
+8. **Exercises Slide** - Table of exercises
+9. **Quote/Realization Slide** - Persona transformation
+10. **Metrics Slide** - Quantified transformation
+11. **Compounding Value Slide** - How this helps future modules
+12. **Next Up Slide** - Preview next module
+13. **End Slide** - Completion message
+
+### 2a. Table of Contents Slide (REQUIRED)
+
+**Position:** Always slide 3 (after title and context, before objectives)
+
+**Purpose:** Provide clickable navigation to jump to major sections within the presentation.
+
+#### How to Create TOC
+
+1. **Identify Major Sections** from the README:
+
+   **PRIORITY: Look for 🎬 Major Section Markers**
+   - Scan the README for `<!-- 🎬 MAJOR SECTION: [Name] -->` HTML comments
+   - These markers explicitly designate sections for the TOC
+   - Extract the `[Name]` portion for the TOC card title
+   - Use the H2 heading immediately following the marker for the full section title
+   - Generate a slug from the H2 heading for the `name:` attribute (e.g., "Phase 1: Agentic Intake" → `name: phase1`)
+
+   **Example:**
+
+   ```markdown
+   <!-- 🎬 MAJOR SECTION: Phase 1 -->
+
+   ## Phase 1: Agentic Intake
+   ```
+
+   → TOC card shows "Phase 1", section divider uses `name: phase1`, title is "Phase 1: Agentic Intake"
+
+   **FALLBACK: If NO 🎬 markers found, use headings:**
+   - Look for top-level headings (H1 `#` or H2 `##`)
+   - Ignore metadata sections (Prerequisites, Installation, etc.)
+   - Focus on content sections:
+     - **Workshop modules:** Exercises, Key Concepts, major topic areas
+     - **Tech talks:** Main parts/phases (e.g., "Part 1: Repository Topology", "Phase 1: Agentic Intake")
+     - **Exec talks:** Main arguments or strategic themes
+   - Typically 3-6 major sections
+
+2. **Create Section Divider Slides** with named anchors:
+   - Before each major section's first slide, insert a centered divider
+   - Use `layout: center` and `name: sectionId` in frontmatter
+   - Example pattern:
+
+   ```markdown
+   ---
+   layout: center
+   name: phase1
+   ---
+
+   # Phase 1
+
+   <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+   Agentic Intake
+   </div>
+
+   <div class="mt-6 text-xl opacity-80">
+   Intelligent Issue Triage & Enrichment
+   </div>
+
+   <div class="mt-8 text-sm opacity-60">
+   Phase 1 of 4 • 6x faster triage
+   </div>
+   ```
+
+3. **Generate TOC Cards** with click navigation to section slides:
+   - Use 2×2 grid for 4 sections, 3-column for 3 or 6 sections
+   - Each card should have:
+     - Icon/emoji representing the section
+     - Section number/name
+     - Brief description (1 line)
+     - Key metric or time estimate
+   - **CRITICAL: Use `@click="$nav.go(N)"` for navigation** (where N = the slide number of the section divider)
+   - ❌ Do NOT use `<a href="#sectionId">` — hash anchors don't work in Slidev's SPA routing
+   - Use `<div>` with `cursor-pointer` class instead of `<a>` tags
+   - Add hover effects and gradient borders
+   - You must count the slide numbers after generating all slides to set the correct `$nav.go(N)` values
+
+#### TOC Slide Template
+
+**For modules with 4 major sections (2×2 grid):**
+
+```markdown
+---
+layout: default
+---
+
+# 📖 Navigate by Section
+
+<div class="grid grid-cols-2 gap-6 mt-8">
+<div @click="$nav.go(5)" class="cursor-pointer p-6 bg-cyan-900/40 rounded-lg border-2 border-cyan-500 hover:bg-cyan-900/60 transition-all">
+<div class="text-2xl mb-2">🎯</div>
+<div class="text-lg font-bold text-cyan-300">Section 1</div>
+<div class="text-sm text-gray-300 mt-1">Brief Title</div>
+<div class="text-xs text-gray-400 mt-2">Key metric or context</div>
+</div>
+
+<div @click="$nav.go(8)" class="cursor-pointer p-6 bg-blue-900/40 rounded-lg border-2 border-blue-500 hover:bg-blue-900/60 transition-all">
+<div class="text-2xl mb-2">🔨</div>
+<div class="text-lg font-bold text-blue-300">Section 2</div>
+<div class="text-sm text-gray-300 mt-1">Brief Title</div>
+<div class="text-xs text-gray-400 mt-2">Key metric or context</div>
+</div>
+
+<div @click="$nav.go(11)" class="cursor-pointer p-6 bg-indigo-900/40 rounded-lg border-2 border-indigo-500 hover:bg-indigo-900/60 transition-all">
+<div class="text-2xl mb-2">💡</div>
+<div class="text-lg font-bold text-indigo-300">Section 3</div>
+<div class="text-sm text-gray-300 mt-1">Brief Title</div>
+<div class="text-xs text-gray-400 mt-2">Key metric or context</div>
+</div>
+
+<div @click="$nav.go(14)" class="cursor-pointer p-6 bg-purple-900/40 rounded-lg border-2 border-purple-500 hover:bg-purple-900/60 transition-all">
+<div class="text-2xl mb-2">🚀</div>
+<div class="text-lg font-bold text-purple-300">Section 4</div>
+<div class="text-sm text-gray-300 mt-1">Brief Title</div>
+<div class="text-xs text-gray-400 mt-2">Key metric or context</div>
+</div>
+</div>
+
+<div class="mt-8 p-4 bg-gradient-to-r from-cyan-900/30 to-purple-900/30 rounded-lg text-center">
+<span class="text-white font-bold">💡 Click any section to jump directly there</span>
+</div>
+```
+
+**For modules with 3 major sections (3-column grid):**
+
+```markdown
+---
+layout: default
+---
+
+# 📖 Table of Contents
+
+<div class="grid grid-cols-3 gap-6 mt-8">
+<div @click="$nav.go(5)" class="cursor-pointer p-4 bg-cyan-900/40 rounded-lg border-2 border-cyan-500 hover:bg-cyan-900/60 transition-all">
+<div class="text-2xl mb-2">🏗️</div>
+<div class="text-lg font-bold text-cyan-300">Part 1</div>
+<div class="text-sm text-gray-300 mt-1">Topic Name</div>
+<div class="text-xs text-gray-400 mt-2">Brief description</div>
+</div>
+
+<div @click="$nav.go(10)" class="cursor-pointer p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500 hover:bg-blue-900/60 transition-all">
+<div class="text-2xl mb-2">📋</div>
+<div class="text-lg font-bold text-blue-300">Part 2</div>
+<div class="text-sm text-gray-300 mt-1">Topic Name</div>
+<div class="text-xs text-gray-400 mt-2">Brief description</div>
+</div>
+
+<div @click="$nav.go(15)" class="cursor-pointer p-4 bg-indigo-900/40 rounded-lg border-2 border-indigo-500 hover:bg-indigo-900/60 transition-all">
+<div class="text-2xl mb-2">🏭</div>
+<div class="text-lg font-bold text-indigo-300">Part 3</div>
+<div class="text-sm text-gray-300 mt-1">Topic Name</div>
+<div class="text-xs text-gray-400 mt-2">Brief description</div>
+</div>
+</div>
+
+<div class="mt-8 p-4 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-lg text-center">
+<span class="text-white font-bold">Each part is independent → Jump to what you need</span>
+</div>
+```
+
+#### Color Progression Guidelines
+
+Use gradient colors that progress logically:
+
+- **4 sections:** cyan → blue → indigo → purple (cool to warm)
+- **3 sections:** cyan → blue → indigo
+- **5-6 sections:** cyan → blue → indigo → purple → pink (+ amber for 6th)
+
+#### When to Skip TOC
+
+Skip the TOC slide ONLY if:
+
+- Content is very short (< 10 total slides)
+- No clear major sections (single-topic deep dive)
+- Linear flow where jumping would break continuity
+
+For all other cases, **include the TOC at slide 3**.
 
 ### 3. Use Slidev Layouts
 
@@ -75,15 +262,19 @@ Apply appropriate layouts:
 
 **PREFER SPLITTING over condensing.** When content exceeds limits, create multiple slides rather than reducing information.
 
-#### Content Limits Per Slide
+#### Content Limits Per Slide (HARD LIMITS - DO NOT EXCEED)
 
-| Element                  | Maximum       | If Exceeded → Split Into                    |
-| ------------------------ | ------------- | ------------------------------------------- |
-| Bullet points per column | 5 items       | "Topic (1/2)" and "Topic (2/2)"             |
-| Use cases                | 2 per slide   | "Use Cases: Part 1" and "Use Cases: Part 2" |
-| Code examples            | 1 per slide   | Separate "Code Example" slide               |
-| Comparison pairs         | 3 pairs       | Split into multiple comparison slides       |
-| Grid items               | 6 items (2x3) | "Features (1/2)" continuation               |
+| Element                  | Maximum       | Status         | If Exceeded → Split Into                    |
+| ------------------------ | ------------- | -------------- | ------------------------------------------- |
+| Bullet points per column | 5 items       | **HARD LIMIT** | "Topic (1/2)" and "Topic (2/2)"             |
+| Paragraphs               | 200 chars max | **HARD LIMIT** | Break into multiple paragraphs or slides    |
+| Use cases                | 2 per slide   | **HARD LIMIT** | "Use Cases: Part 1" and "Use Cases: Part 2" |
+| Code examples            | 1 per slide   | **HARD LIMIT** | Separate "Code Example" slide               |
+| Comparison pairs         | 3 pairs       | **HARD LIMIT** | Split into multiple comparison slides       |
+| Grid items               | 6 items (2x3) | **HARD LIMIT** | "Features (1/2)" continuation               |
+| Vertical div stacks      | 3 sections    | **HARD LIMIT** | Split into multiple slides                  |
+
+**These are HARD LIMITS, not suggestions.** Lint validation will flag violations. Count carefully before generating.
 
 #### Multi-Slide Splitting Patterns
 
@@ -261,6 +452,70 @@ Markdown treats 4+ spaces at the start of a line as a code block. This causes ne
 
 **Rule:** All HTML elements must be flush-left (no leading spaces) regardless of nesting depth.
 
+### 5a. HTML Syntax Safety Checklist (CRITICAL)
+
+**Before completing ANY slide with HTML, perform these checks:**
+
+#### 1. Tag Balance Verification
+
+```text
+Count opening tags:  <div>   <span>   <a>
+Count closing tags:  </div>  </span>  </a>
+RULE: Counts MUST match EXACTLY for each tag type
+```
+
+**Common mistakes:**
+
+- Forgetting `</div>` after nested content
+- Missing `</span>` in inline text
+- Unclosed `<a>` tags in navigation
+
+#### 2. Attribute Quote Consistency
+
+```html
+✅ CORRECT: class="text-center" (double quotes, closed) ✅ CORRECT:
+class='text-center' (single quotes, closed) ❌ WRONG: class="text-center' (mixed
+quotes) ❌ WRONG: class="text-center (missing closing quote)
+```
+
+**Rule:** Pick double or single quotes and stick with it. Always close quotes.
+
+#### 3. Code Block Backtick Matching
+
+```markdown
+✅ CORRECT: `python ... ` (3 opening = 3 closing)
+✅ CORRECT: `inline code` (1 opening = 1 closing)
+❌ WRONG: `python ...         (3 opening, 0 closing)
+❌ WRONG:   `python ... `` (3 opening, 2 closing)
+```
+
+**Rule:** Count backticks. Opening count MUST equal closing count.
+
+#### 4. Self-Closing Tags
+
+```html
+✅ CORRECT: <br />
+<img src="..." />
+<hr />
+❌ WRONG: <br />
+<img src="..." />
+<hr />
+```
+
+**Rule:** Always use `/>` for self-closing tags in React/JSX contexts.
+
+#### 5. Pre-Generation Mental Checklist
+
+Before generating a slide with HTML, ask yourself:
+
+- [ ] How many `<div>` tags will I open? Will I close all of them?
+- [ ] Are all my attribute quotes using the same style (" or ')?
+- [ ] Do I have any code blocks? Are the backticks balanced?
+- [ ] Am I nesting correctly? (Never 4+ space indent)
+- [ ] Are any tags self-closing? Did I add `/>` ?
+
+**If you can't confidently answer YES to all checks, simplify the HTML.**
+
 **Color coding conventions:**
 
 | Purpose           | Background                                   | Border/Accent       | Text              |
@@ -392,17 +647,48 @@ After generating or removing slides, update `slides/index-custom.html` to keep t
 
 **Read the current index file** at `slides/index-custom.html` and:
 
-1. **For new slides**: Add a card entry in the appropriate section
-2. **For removed slides**: Remove the corresponding card entry
-3. **Maintain alphabetical order** within each section (after any numbered workshop modules)
+1. **For new slides**: Add a card entry in the appropriate section and sub-group
+2. **For removed/archived slides**: Move the card to the archived section (or remove entirely)
+3. **Maintain alphabetical order** within each sub-group (after any numbered workshop modules)
 
 **Index Structure:**
 
-The index has three sections identified by CSS classes:
+The index has four top-level sections identified by CSS classes:
 
-- `section.tech-talks` — Tech Talks (purple accent)
-- `section.exec-talks` — Executive Talks (yellow accent)
-- `section.workshop` — Workshop Modules (blue accent)
+- `section.tech-talks` — Tech Talks (cyan/blue accent) — contains **4 sub-groups**
+- `section.exec-talks` — Executive Talks (blue/green accent)
+- `section.workshop` — Workshop Modules (orange/red accent)
+- `section.archived` — Archived talks (muted slate) — at bottom of page
+
+**Tech-talks sub-groups** (inside `section.tech-talks`):
+
+Each sub-group is a `<div class="sub-group">` containing a header and its own `.grid`:
+
+| Sub-group                   | Icon | Talks                                                                  |
+| --------------------------- | ---- | ---------------------------------------------------------------------- |
+| **Copilot Surfaces**        | 💬   | Chat, Chat Internals, CLI, Web, Memory                                 |
+| **Context & Customization** | 🧩   | Context Engineering, Hooks, SDK, MCP Apps                              |
+| **Agent Architecture**      | 🤖   | Agent Teams, Multi-Step Tasks, Parallel Execution, Terminal Sandboxing |
+| **Agentic Transformation**  | 🚀   | Agentic Journey, Agentic SDLC, Enterprise Patterns                     |
+
+**When adding a new tech talk**, place it in the most appropriate sub-group based on topic. If unsure, read the sub-group contents to determine best fit.
+
+**Sub-group HTML structure:**
+
+```html
+<div class="sub-group">
+  <div class="sub-group-header">
+    <span class="sub-group-icon">{emoji}</span>
+    <span class="sub-group-label">{GROUP NAME}</span>
+    <span class="sub-group-line"></span>
+  </div>
+  <div class="grid">
+    <!-- cards go here, alphabetical -->
+  </div>
+</div>
+```
+
+**Archived section:** Talks moved to `tech-talks/archive/` should have their cards moved from the active sub-groups into `section.archived` at the bottom of the page.
 
 **Card Template:**
 
@@ -444,8 +730,9 @@ Adding a workshop module:
 **Ordering rules:**
 
 - Workshop modules: Order by module number (00, 01, 02...)
-- Tech talks: Alphabetical by title
+- Tech talks: Alphabetical within each sub-group
 - Exec talks: Alphabetical by title
+- Archived: Alphabetical by title
 
 ### 8. Output and Next Steps
 
@@ -456,23 +743,28 @@ After generating/updating slides:
 3. **Report completion** with slide count and path
 
 **For verification and fixing:** Use the **slide-manager** agent which orchestrates:
+
 - Generation (this agent's work)
 - Verification with Playwright via @slide-verifier skill
-- Fixing issues via @slide-fixer skill  
+- Fixing issues via @slide-fixer skill
 - Re-verification loop until validation passes
 
 **Example workflows:**
 
 **Standalone generation only:**
+
 ```
 Use slide-generator agent to create slides for workshop/07-copilot-web
 ```
+
 Result: Slides created, index updated, no verification.
 
 **Complete lifecycle (recommended):**
+
 ```
 Use slide-manager agent to create slides for workshop/07-copilot-web
 ```
+
 Result: Slides created, verified with Playwright, issues fixed, validated.
 
 ## Content Guidelines
@@ -829,20 +1121,41 @@ layout: two-cols
 
 Before finalizing slides, verify:
 
+### Content Compliance
+
+- [ ] **No bullets exceed 5 per column** (HARD LIMIT - will fail lint)
+- [ ] **No paragraphs exceed 200 characters** (HARD LIMIT - will fail lint)
+- [ ] **No more than 3 vertical div sections per slide** (HARD LIMIT - will fail lint)
+- [ ] **Code blocks on dedicated slides** (not mixed with heavy text)
+- [ ] 15-20 slides per module (split content, don't cram)
+
+### HTML Syntax
+
+- [ ] **All `<div>` tags have matching `</div>` tags** (count them!)
+- [ ] **All `<span>` tags have matching `</span>` tags**
+- [ ] **All attribute quotes are closed** (`class="..."` not `class="...`)
+- [ ] **All code block backticks are balanced** (`opens,` closes)
+- [ ] **All HTML is flush-left** (no 4+ space indentation)
+- [ ] **Self-closing tags use `/>` syntax** (`<br />` not `<br>`)
+
+### Visual & Structure
+
 - [ ] **Title slide uses beautified template** with correct color scheme for category
 - [ ] **SDP logo included** with glow effect (`./sdp-logo.png`)
 - [ ] **Module field in frontmatter** with correct path (e.g., `module: workshop/03-custom-prompts`)
-- [ ] **No content overflow** — max 3 vertical sections, 5 bullets/column, 3-line code snippets
-- [ ] 10-15 slides per module (not too many)
 - [ ] All sections follow consistent layout patterns
 - [ ] Colors match category scheme (workshop=orange/red/purple, tech=cyan/blue/indigo, exec=blue/cyan/green)
 - [ ] Metrics are concrete and quantified
 - [ ] Persona quotes are accurate from README
-- [ ] No text walls (max 50 words per slide)
 - [ ] Visual hierarchy is clear (headings, spacing)
 - [ ] Markdown syntax is valid for Slidev
 - [ ] Emojis match module README conventions
 - [ ] **index-custom.html updated** with correct entry
+
+### Quick Validation
+
+- [ ] **Run lint check immediately after generation** to catch violations early
+- [ ] **Fix any errors before submitting** (don't wait for Playwright)
 
 ## Output
 
@@ -866,6 +1179,132 @@ Each slide deck should have:
 
 **Also update `slides/index-custom.html`** to add/remove the navigation entry for the slide deck.
 
+## Common Mistakes & How to Avoid Them
+
+### Mistake 1: Unclosed HTML Tags
+
+❌ **BAD:**
+
+```html
+<div class="grid grid-cols-2 gap-4">
+  <div class="p-4 bg-blue-900/30">
+    Content here
+    <!-- Missing </div> for inner element! -->
+  </div>
+</div>
+```
+
+✅ **GOOD:**
+
+```html
+<div class="grid grid-cols-2 gap-4">
+  <div class="p-4 bg-blue-900/30">Content here</div>
+</div>
+```
+
+**Prevention:** Count tags before generating. Open: 2 `<div>`, Close: 2 `</div>`.
+
+### Mistake 2: Too Many Bullets (Causes Overflow)
+
+❌ **BAD:** 8 bullets on one slide
+
+```markdown
+- Bullet 1
+- Bullet 2
+- Bullet 3
+- Bullet 4
+- Bullet 5
+- Bullet 6 ← OVERFLOW STARTS HERE
+- Bullet 7
+- Bullet 8
+```
+
+✅ **GOOD:** Split into (1/2) and (2/2)
+
+```markdown
+# Features (1/2)
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+- Bullet 4
+- Bullet 5
+
+---
+
+# Features (2/2)
+
+- Bullet 6
+- Bullet 7
+- Bullet 8
+```
+
+**Prevention:** Count bullets as you write. If > 5, split immediately.
+
+### Mistake 3: Mixed Quote Styles
+
+❌ **BAD:**
+
+```html
+<div class="text-center" id='header">  <!-- Mixed " and ' --></div>
+```
+
+✅ **GOOD:**
+
+```html
+<div class="text-center" id="header"><!-- Consistent " --></div>
+```
+
+**Prevention:** Pick double quotes (`"`) for all HTML attributes.
+
+### Mistake 4: Long Paragraphs (Unreadable)
+
+❌ **BAD:** 450-character paragraph
+
+```markdown
+This is a very long paragraph that explains the concept in great detail with lots of context and examples and additional information that really should be broken up into smaller chunks for better readability and comprehension because nobody wants to read a wall of text on a presentation slide when they could be looking at concise bullet points instead.
+```
+
+✅ **GOOD:** Break into bullets
+
+```markdown
+**Key Concept:**
+
+- Explains the main idea clearly
+- Provides relevant context
+- Shows practical examples
+- Keeps each point focused
+```
+
+**Prevention:** If a paragraph exceeds ~150 characters, convert to bullets or split.
+
+### Mistake 5: Stacking Too Many Vertical Sections
+
+❌ **BAD:** 4 vertical sections (overflows)
+
+```html
+<div class="space-y-4">
+  <div class="p-4 bg-blue">Section 1</div>
+  <div class="p-4 bg-green">Section 2</div>
+  <div class="p-4 bg-red">Section 3</div>
+  <div class="p-4 bg-yellow">Section 4</div>
+  ← OVERFLOW
+</div>
+```
+
+✅ **GOOD:** Use 2-column grid or split slides
+
+```html
+<div class="grid grid-cols-2 gap-4">
+  <div class="p-4 bg-blue">Section 1</div>
+  <div class="p-4 bg-green">Section 2</div>
+  <div class="p-4 bg-red">Section 3</div>
+  <div class="p-4 bg-yellow">Section 4</div>
+</div>
+```
+
+**Prevention:** Max 3 vertical sections. Use grids for 4+ items.
+
 ## Error Handling
 
 If you encounter:
@@ -874,5 +1313,6 @@ If you encounter:
 - **Unclear metrics**: Use qualitative descriptions
 - **No persona quotes**: Use section summaries instead
 - **Formatting issues**: Simplify to basic markdown
+- **Complex nested HTML**: Flatten to 2 levels max or use basic markdown
 
 Always generate valid Slidev markdown even if some data is incomplete.

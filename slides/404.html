@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: 'Avenir Next', Arial, sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .loader {
+      text-align: center;
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-left-color: #3b82f6;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .message {
+      font-size: 1.2rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="spinner"></div>
+    <div class="message">Redirecting to slide presentation...</div>
+  </div>
+
+  <script>
+    // GitHub Pages SPA redirect handler for Slidev presentations
+    // This script handles direct links and browser refreshes for Slidev slide routes
+
+    (function() {
+      const path = window.location.pathname;
+      const repo = '/CopilotTraining';
+
+      // Remove repo base from path if present
+      const trimmedPath = path.startsWith(repo) ? path.slice(repo.length) : path;
+
+      // Split path into segments (filter out empty strings)
+      const segments = trimmedPath.split('/').filter(s => s);
+
+      // Handle different routing scenarios
+      if (segments.length === 0) {
+        // Root path - redirect to index
+        window.location.replace(repo + '/');
+      } else if (segments.length === 2) {
+        // Category + basename (e.g., /tech-talks/subagents)
+        const category = segments[0];
+        const basename = segments[1];
+        window.location.replace(repo + '/' + category + '/' + basename + '/');
+      } else if (segments.length >= 3) {
+        // Slide route (e.g., /tech-talks/subagents/1)
+        const category = segments[0];
+        const basename = segments[1];
+        const slideRoute = segments.slice(2).join('/');
+
+        // Redirect to the presentation's index with the slide route preserved
+        // The Slidev SPA router will handle the route
+        window.location.replace(repo + '/' + category + '/' + basename + '/' + slideRoute);
+      } else {
+        // Single segment - might be a category, redirect to home
+        window.location.replace(repo + '/');
+      }
+    })();
+  </script>
+</body>
+</html>

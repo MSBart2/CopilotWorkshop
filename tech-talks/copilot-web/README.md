@@ -1,463 +1,785 @@
-# GitHub Copilot on the Web
+# GitHub Copilot on the Web: AI Assistance Beyond the IDE
 
-Multi-interface AI assistance for browser and mobile workflows
+> **The Question This Talk Answers:**
+> *"How do I use Copilot for coordination work when I'm not in VS Code?"*
+
+**Duration:** 40 minutes | **Target Audience:** Developers / Product Managers / Team Leads
 
 ---
 
-## The Interface Problem
+## 📊 Content Fitness
+
+| Criterion | Assessment | Notes |
+|-----------|-----------|-------|
+| **Relevant** | 🟢 High | PR reviews, issue triage, and stakeholder communication happen in browsers and mobile—AI assistance should follow |
+| **Compelling** | 🟢 High | Repository customizations (instructions, skills, agents) work identically across web, mobile, and CLI without reconfiguration |
+| **Actionable** | 🟢 High | Access github.com/copilot right now—no installation, no setup, immediate value for coordination workflows |
+
+**Overall Status:** 🟢 Ready to use
+
+---
+
+## 📽️ Slide Generation Mapping
+
+### Slide Sequence (Generated Automatically)
+
+1. **Title/Logo Slide** ← H1 title + subtitle
+2. **Question/Objective Slide** ← "The Question This Talk Answers"
+3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
+4. **Problem Slide** ← "The Problem"
+5. **Solution Overview** ← "The Solution"
+6. **Key Artifacts** ← N/A (no workflows/configs—web interface)
+7. **Mental Model Shift** ← Move-Toward/Away/Against
+8. **When to Use Decision Tree** ← "When to Use This Pattern"
+9. **Web-Specific Capabilities** ← 🎬 Section 1 (2-3 slides)
+10. **Repository Customization Portability** ← 🎬 Section 2 (2-3 slides)
+11. **Mobile Workflows** ← 🎬 Section 3 (2-3 slides)
+12. **GitHub Spark Prototyping** ← 🎬 Section 4 (2-3 slides)
+13. **Coding Agent Delegation** ← 🎬 Section 5 (2-3 slides)
+14. **Multi-Model Selection** ← 🎬 Section 6 (2-3 slides)
+15. **Use Cases** ← Real-World Use Cases (1-2 slides)
+16. **Actionable Outcomes** ← What You Can Do Today
+17. **Related Patterns** ← Related Patterns
+18. **Official Documentation** ← 📚 section
+19. **End Slide** ← Auto-generated
+
+### Major Sections (TOC Entries)
+
+```markdown
+<!-- 🎬 MAJOR SECTION: Web-Specific Capabilities -->
+<!-- 🎬 MAJOR SECTION: Repository Customization Portability -->
+<!-- 🎬 MAJOR SECTION: Mobile Workflows -->
+<!-- 🎬 MAJOR SECTION: GitHub Spark Prototyping -->
+<!-- 🎬 MAJOR SECTION: Coding Agent Delegation -->
+<!-- 🎬 MAJOR SECTION: Multi-Model Selection -->
+```
+
+---
+
+## The Problem
 
 ### Key Points
 
-- **AI assistance constrained to IDE**
-  Most development tools assume work happens in VS Code or similar editors
+- **Work happens outside the IDE**
+  PR reviews, issue triage, stakeholder questions, and documentation happen in browsers and on mobile devices, not VS Code
 
-- **Work happens everywhere**
-  PR reviews in browsers, issue triage on mobile, stakeholder discussions without laptops
+- **Context-switching friction**
+  Opening the IDE mid-meeting or from mobile interrupts flow, requires local environment, breaks momentum
 
-- **Context-switching overhead**
-  Opening IDE interrupts flow, requires local environment, breaks momentum
+- **Customizations trapped in IDE**
+  Repository instructions, skills, and agents built for VS Code would need recreation for web use — or so teams assume
 
-- **Customizations trapped**
-  Repository instructions, skills, and agents built for IDE but needed elsewhere
-
-### Narrative
-
-Modern software development extends far beyond coding. Product managers review PRs during meetings. Architects analyze features from tablets. Teams triage issues from mobile during standup. Yet AI assistance traditionally lives exclusively in the IDE, forcing awkward context switches or abandoning AI help entirely. GitHub Copilot on the Web solves this by bringing full AI capabilities—including all repository customizations—to browser and mobile interfaces.
-
----
-
-## GitHub Copilot Web: Architecture
-
-### Key Points
-
-- **Same AI, different interface**
-  Identical model access as VS Code, optimized for coordination workflows
-
-- **Full customization portability**
-  Repository instructions (`.github/copilot-instructions.md`), skills (`.github/skills/`), and agents (`.github/agents/`) work identically
-
-- **Tool set adaptation**
-  Read-only code analysis, issue/PR creation, cross-repository queries instead of file editing
-
-- **Mobile-first design**
-  Responsive UI for reviews, triage, and stakeholder communication from phones
+- **Coordination lacks AI assistance**
+  Product managers, architects, and team leads coordinate without access to the same AI capabilities developers have in IDEs
 
 ### Narrative
 
-GitHub Copilot Web is not a limited browser version—it's the complete AI platform with interface-appropriate tooling. When you create repository instructions in VS Code, they automatically load at github.com/copilot. Custom agents appear in the web dropdown. Skills execute the same way. The difference: tools optimize for planning and coordination rather than implementation. You get file analysis instead of editing, issue creation instead of terminal access, cross-repo queries instead of local workspace constraints.
+Modern software development extends far beyond implementation. Product managers review PRs during stakeholder meetings. Team leads approve changes from conference rooms. Architects analyze features from tablets during design sessions. Operations teams triage production issues from mobile during incident response. Support staff need AI-generated documentation summaries without VS Code training.
+
+Yet AI assistance has traditionally lived exclusively in the IDE, forcing awkward choices: context-switch to your laptop and open VS Code (breaking flow), or proceed without AI help (losing quality and speed). This artificial boundary limits who can benefit from AI and where work naturally happens.
+
+GitHub Copilot on the Web eliminates this constraint by bringing full AI capabilities—including all repository customizations—to browsers and mobile devices. The same custom agents, skills, and instructions work identically across interfaces. Work happens where it naturally occurs, AI assistance is present everywhere, and the entire team benefits from engineering's customization investment.
 
 ---
 
-## Core Capabilities
+## The Solution: GitHub Copilot Web
 
-### Web-Specific Features
+### What It Does
 
-- **Issue creation from images**
-  Drag screenshots into chat, AI extracts details, generates structured issues with templates
+GitHub Copilot on github.com provides the complete AI platform optimized for coordination workflows: issue creation, PR reviews, cross-repository analysis, documentation generation, and stakeholder communication. It's not a limited browser version—it's the same model access with interface-appropriate tools.
 
-- **Cross-repository access**
-  Query any repo without cloning, track work across organization instantly
+### Key Capabilities
 
-- **Mobile PR reviews**
-  Invoke custom agents from phone, provide structured feedback, unblock teams immediately
+- **Repository customizations work identically**: `.github/copilot-instructions.md`, skills (`.github/skills/`), and agents (`.github/agents/`) load automatically with zero reconfiguration
+- **Image-based issue creation**: Drag screenshots into chat—AI extracts error details, applies templates, assigns labels, generates structured issues in 2 minutes vs 14 minutes manual transcription
+- **Cross-repository access**: Query any repo without cloning, track work across organization, analyze features spanning multiple codebases
+- **Mobile-first PR reviews**: Invoke custom security agents from your phone, provide structured feedback, unblock teams immediately without returning to desk
+- **GitHub Spark prototyping**: Generate interactive UI demos from descriptions, share live previews with stakeholders, validate designs before implementation
+- **Coding Agent delegation**: Assign routine tasks to autonomous agents from browser, monitor progress, review results via PR workflow
 
-- **GitHub Spark prototyping**
-  Generate interactive UI prototypes from descriptions, share live previews with stakeholders
+### Architecture Overview
 
-- **Coding Agent delegation**
-  Assign routine tasks to autonomous agents, monitor progress, review results
+Copilot Web shares the same underlying models as VS Code but adapts its tool set for coordination tasks. Where VS Code offers file editing, terminal access, and local debugging, the web interface provides repo analysis, issue/PR creation, cross-repo queries, and team communication tools.
 
-### Narrative
+The critical architectural insight: **repository customizations are interface-agnostic**. When you create `.github/copilot-instructions.md` in VS Code, it automatically loads at github.com/copilot. Custom agents configured for security reviews work identically on mobile. Skills for effort estimation execute the same from CLI, web, or IDE.
 
-Web Copilot enables workflows impossible in IDE-only environments. Product managers drag monitoring screenshots into chat—AI reads the image, extracts error details, generates issues with correct labels and severity. Team leads review PRs from conference rooms using mobile—same custom agents, same quality standards, zero blocking time. Architects prototype interfaces during design meetings—stakeholders see live demos instantly without engineering investment.
+This portability means: **build once, use everywhere**—maximizing ROI on customization investment while ensuring consistent quality regardless of interface or user role.
 
----
-
-## Repository Customizations: Portability
-
-### What Works on Web
-
-**Repository Instructions (Module 1):**
-- `.github/copilot-instructions.md` automatically loads
-- Same coding standards and response patterns
-- Zero configuration required
-
-**Agent Skills (Module 5):**
-- `.github/skills/effort-estimator/` accessible via web
-- Domain-specific capabilities execute identically
-- Skills invoked through natural language
-
-**Custom Agents (Module 6):**
-- `@review-enforcer` appears in agent dropdown
-- Handoffs and tool restrictions work the same
-- Role-based presets available instantly
-
-### Narrative
-
-Repository customizations are interface-agnostic. When your team creates an effort estimation skill in VS Code, it becomes available at github.com/copilot automatically. The `@review-enforcer` agent configured for security analysis works identically on mobile during meetings. Architectural guidelines in repository instructions apply to web-based feature analysis. This portability means: **create once, use everywhere**—maximizing ROI on customization investment.
+**Official Documentation:**
+- 📖 **[GitHub Copilot on github.com](https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github/using-github-copilot-chat-in-githubcom)** — Core web interface features and examples
+- 📖 **[GitHub Copilot Chat in GitHub Mobile](https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github-mobile/using-github-copilot-chat-in-github-mobile)** — Mobile-specific capabilities and workflow
+- 📖 **[GitHub Copilot Quickstart (Web)](https://docs.github.com/en/copilot/get-started/quickstart?tool=webui)** — Getting started guide for web interface
 
 ---
 
-## Use Case: Mobile PR Reviews
+## 📦 Key Artifacts
 
-### The Problem
+**Note:** There are no workflow files or configuration artifacts for Copilot Web—it's an interface, not an installable tool. The "artifacts" here are the **repository customizations** that work across all Copilot interfaces.
 
-- **Team blocking:** PRs wait hours for reviewers to return to desk
-- **Quick approvals:** Reviewers skip analysis to unblock team, risk bugs
-- **Context loss:** Delayed reviews lose architectural context from discussions
+### Primary Artifacts
 
-### The Solution
+*These are created once and work everywhere (IDE, web, mobile, CLI)*
 
-- Open PR on mobile during meeting or commute
-- Invoke `@review-enforcer` agent for standards-based analysis
-- Provide structured feedback in 3 minutes
-- Team unblocked immediately with quality maintained
+- **`.github/copilot-instructions.md`** — Repository-specific coding standards, architectural patterns, response customization (see [Module 1: Custom Instructions](../../workshop/01-instructions/))
+- **`.github/skills/[skill-name]/`** — Domain-specific capabilities like effort estimation, security analysis, or compliance checking (see [Module 4: Agent Skills](../../workshop/04-agent-skills/))
+- **`.github/agents/[agent-name].md`** — Specialized agents for code review, triage, documentation (see [Module 6: Custom Agents](../../workshop/06-custom-agents/))
 
-### Impact
+### Supporting Context
 
-- **2 hours → 0 minutes** of team blocking time per PR
-- **16 hours/week** team velocity gained from eliminating wait time
-- **Same review quality** as IDE-based reviews using custom agents
+*Official guides for extending Copilot capabilities*
 
-### Narrative
-
-Traditional PR workflows assume reviewers are at desks with IDE access. This creates artificial delays: teams wait hours for approval while reviewers are in meetings, traveling, or focused on deep work. Web Copilot eliminates this bottleneck. A team lead reviews PRs from their phone using the same `@review-enforcer` agent configured in VS Code. The agent checks architecture compliance, security patterns, and code standards—identical analysis without the IDE. Teams ship faster, quality remains consistent, reviewers work from anywhere.
+- **[GitHub Spark](https://github.com/features/spark)** — Rapid prototyping tool accessible from web interface
+- **[Coding Agent Documentation](https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent)** — Autonomous task delegation and PR workflow
+- **[Power User's Guide to Web Copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-on-github-com-a-power-users-guide/)** — Advanced patterns and workflows
 
 ---
 
-## Use Case: Issue Triage from Screenshots
+## 🎯 Mental Model Shift
 
-### The Problem
+> **The Core Insight:** From "AI assistance is an IDE feature" to "AI assistance follows me to wherever work happens"
 
-- **Manual transcription:** 10-14 minutes copying alert details into GitHub issues
-- **Detail loss:** 60% of screenshot context missed in manual entry
-- **Template inconsistency:** Manual filing skips issue templates, loses metadata
+### Move Toward (Embrace These Patterns)
 
-### The Solution
+- ✅ **Multi-interface workflows**: Use IDE for implementation, web for coordination, mobile for unblocking → Work happens naturally without artificial boundaries
+- ✅ **Repository-centric customization**: Build instructions/skills/agents once in VS Code, they work everywhere → Maximize ROI, minimize duplication
+- ✅ **Delegated automation**: Assign routine tasks (docs updates, dependency upgrades) to Coding Agent from web → Focus human time on complex problems
+- ✅ **Image-driven issue creation**: Drag monitoring screenshots into chat instead of manual transcription → 85% time saved, 95% detail capture vs 60% manual
 
-- Drag monitoring screenshot into github.com/copilot
-- AI reads image: error messages, stack traces, timestamps, system state
-- Generates issue with template applied, labels assigned, component references linked
-- Review and submit in 2 minutes
+### Move Away From (Retire These Habits)
 
-### Impact
+- ⚠️ **IDE-only mindset**: Assuming all AI-assisted work requires VS Code → Locks out non-engineers, creates artificial blockers
+- ⚠️ **Manual issue transcription**: Spending 10-14 minutes copying alert details from screenshots → Error-prone, misses context, wastes time
+- ⚠️ **Desk-bound PR reviews**: Waiting to return to laptop before reviewing/approving PRs → Teams blocked for hours, velocity loss
+- ⚠️ **Recreating customizations**: Building separate instructions or agents for web vs IDE → Maintenance nightmare, inconsistent behavior
 
-- **14 minutes → 2 minutes** per issue filed
-- **95% detail capture** vs 60% manual transcription
-- **60 minutes/week saved** for teams processing 10+ alerts weekly
+### Move Against (Active Resistance Required)
 
-### Narrative
+- 🛑 **Using web for implementation tasks**: Attempting to write production code on github.com instead of IDE → Wrong tool for the job, poor ergonomics
+- 🛑 **Ignoring mobile workflows**: Designing only for laptop-based work → Misses real-world coordination patterns, limits team productivity
 
-Operations teams receive dozens of monitoring alerts with visual context: graphs, dashboards, error dialogs. Manually transcribing these into GitHub issues is slow and error-prone. Web Copilot transforms this workflow: drag the screenshot into chat, AI extracts all relevant details including text from images, applies the correct issue template, suggests labels based on error type, and links related components. What took 14 minutes of tedious transcription becomes 2 minutes of review and submission—with higher accuracy.
-
----
-
-## Use Case: Real-Time Effort Estimation
-
-### The Problem
-
-- **Stakeholder delays:** "Let me research and get back to you" stalls decisions
-- **Analysis overhead:** 90 minutes investigating dependencies, complexity, risk
-- **Lost momentum:** 2-hour response delay causes decision meetings to be rescheduled
-
-### The Solution
-
-- Stakeholder asks effort question during call
-- Invoke `effort-estimator` skill from github.com/copilot
-- AI analyzes codebase, dependencies, historical velocity
-- Provide data-driven estimate in 3 minutes without leaving call
-
-### Impact
-
-- **90 minutes → 3 minutes** per estimate
-- **0 response delay**—decisions made in real-time
-- **4.3 hours/week saved** for product teams handling 5+ stakeholder inquiries
-
-### Narrative
-
-Product decisions often wait on engineering effort estimates. Architects need time to analyze complexity, check dependencies, and assess risk. This creates delays: stakeholders schedule follow-up meetings, momentum dies, decisions wait days. Web Copilot with repository skills changes this dynamic. During a stakeholder call, a product manager asks Copilot for effort estimation using the custom skill the team built. AI analyzes the affected code, checks historical velocity, identifies dependencies—and provides a confidence-scored estimate in 3 minutes. Decisions happen during the call, not after days of async research.
+> **Example Transformation:** Before: Team lead receives Slack ping about urgent PR during leadership meeting. Replies "will review when back at desk" (2-3 hours). Team blocked. After: Opens PR on phone, invokes `@review-enforcer` agent, reads security and logic analysis (3 min), approves or requests specific changes. Team unblocked immediately. 16 hours/week capacity gained across team from eliminating wait time.
 
 ---
 
-## Use Case: Documentation from Code
+## When to Use This Pattern
 
-### The Problem
+### Decision Tree
 
-- **Context switching:** Reading code in IDE, writing docs in browser
-- **Inconsistency:** Docs lag behind implementation, become inaccurate
-- **Time overhead:** 65 minutes per feature (read 15 min, write 35 min, format 10 min)
+```
+Q: Where is the work happening?
+├─ Implementation (writing/editing code)
+│  → Use: VS Code or IDE
+│  └─ Best for: File editing, debugging, local testing
+│
+├─ Coordination (planning, review, triage)
+│  → Use: github.com/copilot (web interface)
+│  └─ Best for: Cross-repo analysis, issue creation, PR reviews at desk
+│
+├─ Unblocking (mobile, remote, meetings)
+│  → Use: GitHub Copilot in GitHub Mobile app
+│  └─ Best for: PR approvals, quick feedback, answering stakeholder questions
+│
+└─ Automation (CI/CD, scripting, batch ops)
+   → Use: Copilot CLI or Coding Agent
+   └─ Best for: Workflow integration, routine task delegation
+```
 
-### The Solution
+### Use Web Copilot When
 
-- Navigate to implementation in browser
-- Ask Copilot to generate user-facing documentation
-- AI reads code, extracts behavior, writes in product language
-- Review and refine in 8 minutes
+- Reviewing PRs during meetings or from locations without IDE access
+- Creating issues from monitoring screenshots or stakeholder reports
+- Answering effort questions from product managers in real-time
+- Generating documentation from code without IDE context-switching
+- Prototyping UI concepts for stakeholder validation (via GitHub Spark)
+- Delegating routine implementation work to Coding Agent
 
-### Impact
+### Don't Use Web Copilot When
 
-- **65 minutes → 8 minutes** per feature documented
-- **100% coverage** vs 60% when docs were manual chore
-- **1.9 hours/week saved** for product teams shipping 2-3 features weekly
+- Writing or editing production code (use IDE for proper file navigation, debugging, testing)
+- Performing complex refactoring across many files (IDE tools are purpose-built for this)
+- Debugging local build or test failures (requires IDE integration)
 
-### Narrative
+### Comparison with Related Features
 
-Documentation falls behind when it requires context switching between IDE and documentation tools. Engineers delay writing docs because it interrupts coding flow. Product managers write docs without code context, creating inaccuracies. Web Copilot eliminates this friction: view the implementation in browser, ask Copilot to generate user documentation, AI reads the code and produces docs in product language. What was a 65-minute chore becomes an 8-minute review cycle—and docs stay current because the cost is trivial.
+| Aspect | Web Copilot | IDE Copilot | Copilot CLI |
+|--------|-------------|-------------|-------------|
+| **Best For** | Coordination, review, triage | Implementation, debugging | Scripting, automation |
+| **Primary Users** | All roles (engineering, product, ops) | Developers | Developers, DevOps |
+| **Setup Time** | Zero (just visit github.com/copilot) | Minutes (extension install) | Minutes (CLI install) |
+| **Mobile Access** | Yes (via GitHub Mobile app) | No | Limited |
+| **Customizations** | All (instructions, skills, agents) | All | All |
 
 ---
 
-## Multi-Model Selection
+<!-- 🎬 MAJOR SECTION: Web-Specific Capabilities -->
+## Web-Specific Capabilities and Features
 
-### Available Models
+*Optimized capabilities for coordination work in browsers and mobile*
 
-**GPT-4.1:**
-- Fast inference, cost-effective
-- Strong code analysis
-- Best for routine queries
+### Image-Based Issue Creation
 
-**Claude Sonnet 4:**
-- Balanced performance
-- Excellent technical writing
-- Best for documentation
+**How it works:**
+Drag a screenshot (monitoring alert, error dialog, UI bug) into github.com/copilot chat. AI reads image content, extracts error messages, stack traces, timestamps, and system state, then generates a structured issue with:
 
-**Claude Opus 4:**
-- Highest reasoning quality
-- Complex architectural analysis
-- Best for critical decisions
+- Issue template applied (if configured)
+- Relevant labels assigned based on content
+- Component references linked
+- Severity assessed from error context
+
+**Example workflow:**
+```
+1. Operations receives PagerDuty alert with dashboard screenshot
+2. Drag image into github.com/copilot
+3. Prompt: "Create high-priority issue from this alert using our incident template"
+4. AI extracts: error code, affected services, request IDs, timestamps
+5. Issue created with all context in 2 minutes
+```
+
+**Time savings:** 14 minutes → 2 minutes per issue (85% reduction)
+**Quality improvement:** 95% detail capture vs 60% manual transcription
+
+### Cross-Repository Access
+
+Query any repo in your organization without cloning or switching workspace:
+
+**Example queries:**
+- "How do other teams implement rate limiting?"
+- "Find all repos that depend on library X version Y"
+- "Show me authentication patterns across our microservices"
+
+Copilot Web analyzes code, searches issues/PRs, and synthesizes patterns across repos—enabling architecture research and org-wide consistency checking without local checkouts.
+
+### Subthreaded Conversations
+
+Edit or retry any question to create conversation branches. Each branch maintains independent context, allowing comparison of:
+
+- Different refactoring approaches (by switching models)
+- Multiple architectural patterns
+- Alternative explanations side-by-side
+
+Navigate between branches using forward/back controls—like Git commits for conversations.
+
+### Multi-Model Support
+
+Switch between GPT-4.1, Claude Sonnet 4, and Claude Opus 4 mid-conversation. Re-generate the same prompt with a different model to compare approaches:
+
+| Model | Strengths | Best For |
+|-------|-----------|----------|
+| **GPT-4.1** | Fast, cost-effective, strong code analysis | Routine PR reviews, issue triage |
+| **Claude Sonnet 4** | Balanced, excellent technical writing | Documentation, release notes, structured output |
+| **Claude Opus 4** | Advanced reasoning, creativity | Complex architecture, edge cases, novel approaches |
+
+---
+
+<!-- 🎬 MAJOR SECTION: Repository Customization Portability -->
+## Repository Customization Portability
+
+*Build once in IDE, use everywhere—web, mobile, CLI*
+
+### What Works Identically
+
+**Repository Instructions:**
+- `.github/copilot-instructions.md` loads automatically on github.com/copilot
+- Same coding standards, architectural patterns, response customization
+- Zero configuration required—works across all interfaces
+
+**Agent Skills:**
+- `.github/skills/effort-estimator/` accessible via natural language on web
+- Domain-specific capabilities (security analysis, compliance checking) execute identically
+- No duplication needed—same skill definition serves all interfaces
+
+**Custom Agents:**
+- `@review-enforcer` appears in agent dropdown on web and mobile
+- Tool restrictions, handoff patterns, role-based presets work identically
+- Security policies enforced consistently across all access methods
+
+### Architecture: Why It Works
+
+Copilot's architecture separates **model access** (what AI can do) from **tool sets** (how AI interacts with environment). All interfaces share:
+
+- Same model access (GPT-4.1, Claude Sonnet/Opus 4)
+- Same customization loading (instructions, skills, agents)
+- Same conversation history and memory
+
+Differences are in tools: VS Code offers file editing/terminal, web offers issue creation/cross-repo queries. But the intelligence layer—including all your customizations—is interface-agnostic.
+
+### Portability Validation
+
+Test that customizations work across interfaces:
+
+```
+✅ Repository Instructions Test:
+1. Add custom standards to .github/copilot-instructions.md
+2. Ask same question in VS Code and github.com/copilot
+3. Verify responses follow same standards
+
+✅ Custom Agent Test:
+1. Create @security-reviewer agent in VS Code
+2. Open PR on github.com and invoke @security-reviewer
+3. Verify agent performs same analysis
+
+✅ Skill Test:
+1. Build effort-estimator skill in .github/skills/
+2. Invoke from CLI: copilot -p "estimate effort for #123"
+3. Invoke from web: "Use effort-estimator skill for issue #123"
+4. Compare results—should be consistent
+```
+
+---
+
+<!-- 🎬 MAJOR SECTION: Mobile Workflows -->
+## Mobile Workflows: Unblocking from Anywhere
+
+*PR reviews, issue triage, stakeholder responses without returning to desk*
+
+### Mobile PR Review Pattern
+
+**Scenario:** You're in a meeting when your team pings about an urgent PR needing approval
+
+**Traditional workflow (2-3 hours):**
+1. "I'll review when back at my desk"
+2. Meeting ends, context switch back to work
+3. Open IDE, checkout branch, review code
+4. Team blocked entire time
+
+**Copilot Mobile workflow (3 minutes):**
+1. Open PR in GitHub Mobile app
+2. Tap Copilot icon, invoke `@review-enforcer` agent
+3. Agent analyzes: security, logic, performance, test coverage
+4. Read summary, request changes or approve
+5. Team unblocked immediately
+
+**Impact:** 16 hours/week capacity gained across team from eliminating wait time
+
+### Mobile Issue Triage Pattern
+
+**Scenario:** On-call engineer receives alert during commute
+
+**Old pattern:** Wait until home/office to investigate (30-45 min delay)
+
+**New pattern:**
+1. Tap screenshot in PagerDuty notification
+2. Drag into GitHub Mobile Copilot chat
+3. AI extracts error details, suggests affected components
+4. Create high-priority issue with all context
+5. Assign to on-call team member
+6. Done in 2 minutes from subway
+
+### Design Principles for Mobile Agents
+
+When creating custom agents (Module 6), consider mobile use cases:
+
+- **Concise output:** Mobile screens are small—agents should prioritize key findings
+- **Actionable recommendations:** "Approve" or "Request changes because X" not "Consider reviewing"
+- **Minimal interaction:** Single invoke → readable summary → decision
+- **Offline tolerance:** Agents should handle intermittent connectivity gracefully
+
+**Example mobile-optimized agent:**
+
+```markdown
+# @mobile-reviewer Agent
+
+You are a mobile-friendly PR reviewer. Provide:
+
+1. **Decision:** APPROVE / REQUEST_CHANGES / COMMENT
+2. **Key Issues:** Max 3 bullet points (critical only)
+3. **Rationale:** 2 sentences
+
+Skip minor style issues. Focus on security, correctness, breaking changes.
+
+Format for mobile readability—use emojis for scan-ability:
+- 🔴 Critical issue
+- 🟡 Important concern
+- 🟢 Looks good
+```
+
+---
+
+<!-- 🎬 MAJOR SECTION: GitHub Spark Prototyping -->
+## GitHub Spark: Rapid UI Prototyping
+
+*Design validation before implementation commitment*
+
+### What Is GitHub Spark?
+
+Natural language UI generator accessible from github.com/copilot. Describe an interface—AI creates working, interactive prototype with:
+
+- Live preview you can interact with
+- Shareable link for stakeholder feedback
+- Data persistence (for todo lists, forms, etc.)
+- Themable design system
+- Integrated LLM prompting for dynamic features
+
+### Typical Workflow
+
+```
+1. Product Manager: "We need a feature comparison table for pricing page"
+
+2. In github.com/copilot:
+   Prompt: "Create a feature comparison table showing Free/Pro/Enterprise tiers
+           with checkmarks for included features"
+
+3. Spark generates working table in ~30 seconds
+   PM reviews, requests changes: "Add hover tooltips explaining each feature"
+
+4. PM shares link with design team and stakeholders
+   Collects feedback: "Can we make Pro column stand out more?"
+
+5. Iterates 2-3 times based on feedback (15 min total)
+
+6. Once validated, engineer exports code to production repo
+```
+
+**Time savings:** Design validation that would take 2-4 hours of back-and-forth (mockups → feedback → revised mockups) happens in 15 minutes with working prototypes.
+
+### Use Cases Beyond UI Mockups
+
+**Interactive Documentation:**
+- Create demos of new features for user guides
+- Build interactive tutorials for onboarding
+- Generate visual examples of API responses
+
+**Internal Tools:**
+- Allowance tracker for team expense tracking
+- Karaoke night planning app (yes, real example from Spark team)
+- Custom HackerNews client with AI-summarized comments
+
+**Learning/Teaching:**
+- Kids building their first apps (vehicle animation, city finder)
+- Teaching coding concepts with immediate visual feedback
+- Prototyping algorithms before implementing in production
+
+### Technical Capabilities
+
+**Managed Runtime:**
+- Deployment-free hosting (no build step, no server setup)
+- Key-value data storage (persists across sessions)
+- PWA-enabled (install on phone/desktop, works offline)
+- Theme editor (accent color, border radius, spacing, light/dark)
+
+**AI Integration:**
+- Access to GitHub Models for generative features
+- Prompt editor for customizing AI behavior
+- Example: "Generate bedtime story" button with custom prompt template
+
+**Collaboration:**
+- Share with read-only or read-write permissions
+- Remix others' sparks to adapt to your needs
+- View revision history to understand thought process
+
+---
+
+<!-- 🎬 MAJOR SECTION: Coding Agent Delegation -->
+## Coding Agent: Autonomous Execution from Browser
+
+*Delegate routine implementation, review results via PR workflow*
+
+### How It Works
+
+**From github.com/copilot or any GitHub page:**
+
+1. Identify task (issue, alert, technical debt item)
+2. Assign to Copilot: "Create a PR that fixes issue #427"
+3. Agent works in sandboxed GitHub Actions environment:
+   - Creates feature branch (`copilot/issue-427`)
+   - Analyzes codebase and issue requirements
+   - Makes changes across multiple files
+   - Runs tests and linters
+   - Performs security scans (CodeQL, secret detection)
+4. Opens draft PR with evidence bundle
+5. You review from web interface using `@review-enforcer` agent
+6. Request changes via PR comments if needed
+7. Agent iterates based on feedback
+8. Approve and merge when ready
+
+**No IDE required for delegation or review—entire workflow happens in browser.**
+
+### When to Use Coding Agent
+
+**Good fits:**
+- Routine refactoring (update API patterns across 30 files)
+- Boilerplate generation (CRUD endpoints, test scaffolding)
+- Documentation sync (update docs after implementation changes)
+- Dependency upgrades (with migration pattern application)
+- Technical debt cleanup (fix linter warnings, add logging)
+
+**Poor fits:**
+- Novel feature design (needs human creativity)
+- Complex debugging (agent can't reproduce local environment issues)
+- Multi-repo coordination (agent works in single repo)
+- Performance optimization (requires profiling and measurement)
+
+### Custom Agent Integration
+
+Coding Agent respects your repository customizations:
+
+- Follows coding standards from `.github/copilot-instructions.md`
+- Can invoke skills defined in `.github/skills/`
+- Uses custom review agents you've built
+
+**Example:**
+If you've created a `@security-focused` custom agent that enforces auth patterns, assign it to review Coding Agent's PRs—ensuring machine-generated code meets same standards as human code.
+
+### Cost Model
+
+Coding Agent uses:
+- **GitHub Actions minutes:** For the sandboxed development environment
+- **Copilot premium requests:** For AI model inference
+
+Within monthly allowances, no additional cost. Beyond allowances, standard GitHub Actions and Copilot pricing applies.
+
+---
+
+<!-- 🎬 MAJOR SECTION: Multi-Model Selection -->
+## Strategic Model Selection
+
+*Match AI capabilities to task requirements*
+
+### Available Models on Web
+
+| Model | Context Window | Strengths | Typical Use Cases |
+|-------|----------------|-----------|-------------------|
+| **GPT-4.1** | 128K tokens | Fast inference, cost-effective, strong general code analysis | PR reviews, issue triage, routine queries |
+| **Claude Sonnet 4** | 200K tokens | Excellent technical writing, structured output, balanced performance | Documentation generation, onboarding guides, API specs |
+| **Claude Opus 4** | 200K tokens | Advanced reasoning, creative problem-solving, edge case identification | Architecture decisions, refactoring strategies, novel approaches |
 
 ### When to Switch Models
 
-- **Routine:** Use GPT-4.1 for PR reviews, issue triage
-- **Documentation:** Use Sonnet 4 for release notes, user guides
-- **Architecture:** Use Opus 4 for system design, refactoring analysis
+**During conversation:**
+- Try approach with GPT-4.1
+- If result seems generic or misses nuance, retry with Claude Opus 4
+- Compare responses using subthreaded conversations
+- Use model that provides most useful answer
 
-### Narrative
+**By task type:**
+- **Documentation generation:** Start with Claude Sonnet 4 (best technical writing)
+- **Quick code review:** Use GPT-4.1 (fastest, cost-effective)
+- **System design:** Use Claude Opus 4 (best reasoning for complex decisions)
 
-Web Copilot offers model selection for task-appropriate AI capabilities. Routine work like PR reviews and issue triage runs efficiently on GPT-4.1. Documentation generation benefits from Claude Sonnet 4's technical writing strengths. Critical architectural decisions leverage Claude Opus 4's advanced reasoning. Teams optimize both quality and cost by matching model capabilities to task requirements.
+### Model Comparison Workflow
 
----
+```
+1. Ask question: "How should we refactor our authentication layer?"
+2. Receive GPT-4.1 response (suggestion A)
+3. Click retry icon, select Claude Opus 4
+4. Receive Opus 4 response (suggestion B)
+5. Navigate between responses using forward/back controls
+6. Pick best approach or combine insights from both
+```
 
-## Integration with IDE Workflows
-
-### Complementary Interfaces
-
-**VS Code (Implementation):**
-- Write and edit code
-- Run tests and debugger
-- Local file system access
-- Full repository editing
-
-**Web (Coordination):**
-- Plan features across repos
-- Review PRs from anywhere
-- Triage issues with visuals
-- Generate documentation
-
-**CLI (Automation):**
-- Script repetitive tasks
-- CI/CD integration
-- Infrastructure management
-- Batch operations
-
-### Narrative
-
-Web Copilot doesn't replace the IDE—it extends AI assistance to coordination workflows. Developers still code in VS Code with full editing capabilities. But product managers, architects, and team leads work primarily in browsers and on mobile. By providing the same AI and customizations across interfaces, GitHub Copilot enables the entire team—not just developers—to benefit from AI assistance. Work happens where it naturally occurs, with consistent intelligence throughout.
+**Pro Tip:** History tracks which model generated each response—helps you learn which models work best for your specific use cases over time.
 
 ---
 
-## Best Practices
+## Real-World Use Cases
 
-### Customization Strategy
+### Use Case 1: Distributed Team PR Review
 
-- **Create in IDE, use everywhere**
-  Build repository instructions and skills in VS Code, they automatically work on web
+**The Problem:** Team across 6 time zones saw 4-hour average PR wait time. Blocking cost: 20 hours/week of developer time waiting for reviews.
 
-- **Test portability**
-  Verify custom agents and skills function identically in browser before team rollout
+**The Solution:**
+Team lead configured `@mobile-reviewer` agent in `.github/agents/`. Reviewed all PRs from phone during non-coding time (meetings, commute, lunch). Agent provided security/logic/test analysis. Lead approved or requested specific changes in 3 minutes per PR.
 
-- **Mobile-first agents**
-  Design agents for quick decisions (PR approval, issue triage) that work well on phones
-
-### Access Patterns
-
-- **Use web for coordination**
-  Planning, documentation, cross-repo analysis, stakeholder communication
-
-- **Use IDE for implementation**
-  Coding, debugging, refactoring, local testing
-
-- **Use mobile for unblocking**
-  PR reviews, issue triage, quick answers to unblock teams
-
-### Narrative
-
-Effective multi-interface AI adoption requires thoughtful division of labor. Heavy customization work happens in VS Code where developers have full tooling. But once created, those customizations serve the entire team across web and mobile. Product managers triage issues from browsers without IDE knowledge. Team leads review PRs from phones during meetings. The result: AI benefits distribute broadly while customization effort centralizes with engineering teams.
+**Outcome:**
+- **4 hours → 15 minutes** average PR wait time (94% reduction)
+- **20 hours/week → 2 hours/week** blocking cost (18 hours/week capacity regained)
+- **Zero decline in code quality** (agent caught same issues as in-IDE review)
 
 ---
 
-## Common Pitfalls
+### Use Case 2: Operations Issue Triage Transformation
 
-### Anti-Patterns to Avoid
+**The Problem:** SRE team processed 40 production alerts/week. Each required 14 minutes of manual work: screenshot alert, transcribe details to issue, assign priority/owner, link related incidents. 560 minutes/week (9.3 hours) spent on transcription.
 
-**Recreating customizations per interface:**
-- ❌ Wrong: Different instructions for web vs IDE
-- ✅ Right: Single repository instructions work everywhere
+**The Solution:**
+Implemented image-based issue workflow:
+1. Screenshot alert → drag into github.com/copilot on phone/tablet
+2. Prompt: "Create P1 issue using incident template"
+3. AI extracts: error code, affected services, timestamps, stack trace
+4. Review and submit (2 min)
 
-**Using web for implementation tasks:**
-- ❌ Wrong: Trying to write code in github.com/copilot
-- ✅ Right: Use web for planning, IDE for coding
-
-**Ignoring mobile workflows:**
-- ❌ Wrong: Assuming all work happens on laptops
-- ✅ Right: Design agents that work on phones for reviews and triage
-
-### Narrative
-
-Common mistakes include recreating customizations for each interface (repository instructions are automatically portable) and attempting implementation work in the web interface (use the IDE for coding). The biggest missed opportunity: ignoring mobile workflows. Modern teams are distributed and mobile—PR reviews from conference rooms, issue triage during standups, stakeholder questions from airports. Designing for mobile-first workflows unlocks significant productivity gains.
+**Outcome:**
+- **14 min → 2 min** per issue (85% reduction)
+- **9.3 hours/week → 1.3 hours/week** (8 hours/week saved)
+- **95% detail capture** vs 60% manual (fewer follow-up questions)
 
 ---
 
-## GitHub Spark: Rapid Prototyping
+### Use Case 3: Real-Time Product Prioritization
 
-### Key Points
+**The Problem:** Product team scheduled 90-minute "backlog refinement" meetings because engineering needed time to research effort estimates. 5 features/week × 90 min research = 7.5 hours/week of coordination overhead.
 
-- **Natural language UI generation**
-  Describe interface, AI creates interactive prototype
+**The Solution:**
+Product manager uses custom `effort-estimator` skill (`.github/skills/effort-estimator/`) during stakeholder calls:
+- Stakeholder proposes feature
+- PM invokes skill from github.com/copilot: "Estimate effort for adding SSO support"
+- AI analyzes affected code, checks historical velocity for similar features, identifies dependencies
+- Provides estimate with confidence score in 3 minutes
+- Decision made in real-time
 
-- **Live sharing**
-  Send preview link to stakeholders, collect feedback immediately
-
-- **Design iteration without engineering**
-  Test concepts before committing development resources
-
-- **Code export**
-  Convert validated prototypes to production implementation
-
-### Use Cases
-
-- **Design validation:** Test UX ideas with users before building
-- **Stakeholder alignment:** Show live prototypes during planning meetings
-- **Requirements clarification:** Concrete examples instead of abstract descriptions
-- **Onboarding:** Create interactive demos of proposed features
-
-### Narrative
-
-GitHub Spark brings prototyping directly into AI workflows. Describe a feature interface in natural language—AI generates a working prototype you can interact with immediately. Share the live preview link with stakeholders during meetings. Iterate based on feedback without engineering involvement. Once design is validated, export the code to production repository. This enables design-driven development: prove concepts with users before committing resources, clarify requirements with concrete examples, align stakeholders with interactive demos instead of static mockups.
+**Outcome:**
+- **90 min → 3 min** per estimate (97% reduction)
+- **7.5 hours/week → 0.25 hours/week** (7.25 hours/week saved)
+- **Faster feature cycle** (decisions happen same day, not after multi-day research)
 
 ---
 
-## Coding Agent: Autonomous Execution
+## ✅ What You Can Do Today
 
-### Key Points
+**Immediate Actions (5 minutes):**
+- [ ] Visit [github.com/copilot](https://github.com/copilot) right now—no installation required
+- [ ] Ask a general question: "What are best practices for error handling in Node.js?"
+- [ ] Navigate to a repository and ask a repo-specific question: "What does this repo do?"
 
-- **Task delegation**
-  Assign routine implementation work to autonomous agent
+**Short-Term Implementation (30 minutes):**
+- [ ] Review a PR from github.com/copilot instead of your IDE—compare experience
+- [ ] Install GitHub Mobile app and open a PR from your phone—test mobile review workflow
+- [ ] Drag a screenshot (any technical image) into chat—see what AI extracts
 
-- **Progress monitoring**
-  Track agent work from task pane, review decisions in real-time
+**Advanced Exploration (2-4 hours):**
+- [ ] Create a mobile-optimized custom agent (`.github/agents/mobile-reviewer.md`) following principles in this talk
+- [ ] Try GitHub Spark: create a simple UI prototype from natural language description
+- [ ] Delegate a routine task to Coding Agent: "Create a PR that updates all dependencies"
+- [ ] Build an `effort-estimator` skill (`.github/skills/effort-estimator/`) for real-time estimates
 
-- **PR-based workflow**
-  Agent creates branch, makes changes, opens PR for human review
-
-- **Custom agent integration**
-  Coding Agent respects repository instructions and skills
-
-### When to Use
-
-- **Routine refactoring:** Update API patterns across multiple files
-- **Boilerplate generation:** Create CRUD endpoints, test scaffolding
-- **Documentation updates:** Sync docs with implementation changes
-- **Dependency upgrades:** Update libraries with migration patterns
-
-### Narrative
-
-Coding Agent extends GitHub Copilot into autonomous execution. Instead of writing code interactively in VS Code, delegate well-defined tasks to the agent from your browser. The agent creates a branch, makes changes, runs tests, and opens a PR. You review from the web interface using your custom `@review-enforcer` agent. This workflow excels for routine tasks: refactoring 30 files to use new API patterns, generating test scaffolding for new features, updating documentation to match code changes. Humans focus on architecture and review while agents handle mechanical execution.
+**Next Steps After Completion:**
+1. ✅ Test web Copilot for 1 week—track time saved on coordination tasks
+2. 📖 Review complementary talk: [Custom Agents](../06-custom-agents/) for mobile-optimized agent patterns
+3. 📊 Measure ROI: issue filing time, PR blocking time, documentation coverage
+4. 🚀 Roll out to non-engineering roles: product, operations, support teams
 
 ---
 
-## Enterprise Considerations
+## Related Patterns
 
-### Security and Compliance
+### Complementary Features
 
-- **Same access controls as IDE**
-  Web Copilot respects repository permissions, no additional exposure
+- **[Custom Instructions](../../workshop/01-instructions/)** — Repository-specific guidance that works across all interfaces
+- **[Agent Skills](../../workshop/04-agent-skills/)** — Domain expertise (effort estimation, security) accessible from web
+- **[Custom Agents](../../workshop/06-custom-agents/)** — Specialized reviewers/analyzers that work on mobile
+- **[Copilot CLI](../copilot-cli/)** — Terminal interface for automation and scripting
+- **[Coding Agent](../agentic-sdlc/)** — Full autonomous execution when ready for Gen-4 SDLC
 
-- **Audit trail preservation**
-  All AI interactions logged identically to VS Code sessions
+### Decision Flow
 
-- **Custom agent enforcement**
-  Security-focused agents work on web for policy compliance
+**If this talk doesn't fit your needs:**
 
-### Organizational Rollout
+```
+Q: What's your primary workflow?
+├─ I need AI while writing code
+│  → See: VS Code Copilot documentation
+│  └─ Best for: Implementation, debugging, refactoring
+│
+├─ I need AI for coordination (reviews, planning, documentation)
+│  → You're in the right place!
+│  └─ Best for: Cross-role AI assistance
+│
+├─ I need AI for scripting and automation
+│  → See: Copilot CLI talk
+│  └─ Best for: Terminal workflows, CI/CD integration
+│
+└─ I want full autonomous agents
+   → See: Agentic SDLC talk
+   └─ Best for: End-to-end issue-to-PR automation
+```
 
-- **Lower barrier to entry**
-  Non-engineers access AI without IDE setup or training
-
-- **Broad productivity gains**
-  Product, design, operations benefit from repository customizations
-
-- **Centralized customization**
-  Engineering creates instructions/skills, entire organization benefits
-
-### Narrative
-
-Enterprise adoption of web Copilot requires no additional security configuration—it inherits repository access controls from GitHub. Audit requirements are met through the same logging as IDE interactions. The strategic advantage: democratizing AI assistance beyond engineering. Product managers, technical writers, support staff, and operations teams access the same customized AI without learning VS Code. Engineering invests in repository instructions and skills once; the entire organization benefits across web, mobile, and CLI interfaces.
-
----
-
-## Metrics and ROI
-
-### Quantifiable Improvements
-
-**Individual Productivity:**
-- **Issue filing:** 14 min → 2 min (85% time saved)
-- **PR reviews:** 2 hours blocking → 0 min (team velocity gain)
-- **Effort estimation:** 90 min → 3 min (97% time saved)
-- **Documentation:** 65 min → 8 min (88% time saved)
-
-**Team Velocity:**
-- **16 hours/week** team capacity gained from mobile PR reviews
-- **60 min/week** saved on issue triage for operations teams
-- **4.3 hours/week** saved for product teams on stakeholder communication
-
-**Quality Improvements:**
-- **95% detail capture** vs 60% manual issue transcription
-- **100% doc coverage** vs 60% when manual effort required
-- **Same review standards** on mobile as IDE with custom agents
-
-### Narrative
-
-Web Copilot ROI comes from eliminating context switches and enabling mobile workflows. Teams no longer wait hours for reviewers to return to desks—16 hours of weekly capacity recovered. Issue triage from screenshots saves 60 minutes weekly by avoiding manual transcription. Real-time effort estimation during stakeholder calls saves 4.3 hours weekly by eliminating research delays. The common theme: AI assistance meets teams where work naturally happens, removing artificial barriers imposed by IDE-only tools.
+See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 ---
 
-## The Multi-Interface Vision
+## 📚 Official Documentation
 
-### Complete AI Coverage
+**Primary Documentation:**
+- 📖 **[Using GitHub Copilot Chat in GitHub.com](https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github/using-github-copilot-chat-in-githubcom)** — Complete web interface guide with examples
+- 📖 **[Using GitHub Copilot Chat in GitHub Mobile](https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github-mobile/using-github-copilot-chat-in-github-mobile)** — Mobile-specific features and workflows
+- 📖 **[GitHub Copilot Quickstart (Web)](https://docs.github.com/en/copilot/get-started/quickstart?tool=webui)** — Getting started guide for browser interface
 
-**IDE (VS Code):**
-- Implementation and debugging
-- Local file editing
-- Test execution
+**Additional Resources:**
+- 🎓 [GitHub Spark Documentation](https://githubnext.com/projects/github-spark) — Rapid prototyping tool overview
+- 🤖 [About Copilot Coding Agent](https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent) — Autonomous task delegation features
+- 📝 [Power User's Guide to Web Copilot](https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-on-github-com-a-power-users-guide/) — Advanced patterns and real-world workflows
+- 📊 [AI Model Comparison](https://docs.github.com/en/copilot/reference/ai-models/model-comparison) — Choosing the right model for your task
 
-**Web (github.com/copilot):**
-- Planning and coordination
-- PR reviews and issue triage
-- Documentation generation
+**GitHub Resources:**
+- 🐙 [GitHub Spark Project Page](https://github.com/features/spark) — Live prototyping tool
+- 🔧 [About Repository Custom Instructions](https://docs.github.com/en/copilot/concepts/prompting/response-customization?tool=webui#about-repository-custom-instructions) — Cross-interface customization
 
-**Mobile (GitHub Mobile app):**
-- Reviews from anywhere
-- Quick unblocking
-- Stakeholder responses
+---
 
-**CLI (Terminal):**
-- Scripting and automation
-- CI/CD integration
-- Infrastructure management
+## 🎭 Behind the Scenes
 
-### Narrative
+### The Architecture: Why Customizations Port Automatically
 
-GitHub Copilot's architecture enables complete AI coverage across every interface developers use. VS Code handles implementation. Web handles coordination. Mobile handles unblocking. CLI handles automation. The same repository customizations—instructions, skills, agents—work identically everywhere. Teams build expertise once and apply it throughout their workflow, maximizing return on customization investment while ensuring consistent quality regardless of interface.
+Copilot's architecture separates three concerns:
+
+1. **Intelligence Layer** (model access, instructions, skills, agents)
+2. **Tool Layer** (file editing, terminal, issue creation, repo queries)
+3. **Interface Layer** (IDE, web, mobile, CLI)
+
+When you create `.github/copilot-instructions.md`, it lives in the intelligence layer—which all interfaces share. VS Code's tool layer offers file editing; web's tool layer offers issue creation. But both use the same instructions.
+
+This is why you don't need different customizations per interface—they're architecture-agnostic by design.
+
+### Image Understanding: How It Works
+
+When you drag a screenshot into github.com/copilot:
+
+1. Image uploads to secure blob storage
+2. Vision-capable model (GPT-4.1 or Claude Opus 4) receives image
+3. AI performs OCR + semantic understanding:
+   - Extracts text (error messages, logs, timestamps)
+   - Recognizes UI elements (buttons, dialogs, charts)
+   - Identifies patterns (stack traces, JSON payloads)
+4. Structured data returned to chat context
+5. Conversational model synthesizes into issue/response
+
+**Supported formats:** JPEG, PNG, GIF, WEBP
+**Privacy:** Images processed per Copilot data retention policies, not used for model training
+
+### Mobile Agent Design Patterns
+
+Effective mobile agents follow "scan-reveal-decide" structure:
+
+**Scan:** Visual hierarchy aids rapid understanding
+```markdown
+🔴 **CRITICAL SECURITY ISSUE**
+SQL injection vulnerability in line 47
+
+🟡 **Important**
+Missing null check in error handler
+
+🟢 **Looks good**
+Test coverage adequate
+```
+
+**Reveal:** Expand on tap (not inline) for detail:
+```markdown
+🔴 SQL injection (tap for details)
+   └─ [Collapsed until user taps]
+      User input concatenated into query without sanitization.
+      line 47: `query = "SELECT * FROM users WHERE id=" + userId`
+      Recommendation: Use parameterized queries
+```
+
+**Decide:** Clear action required:
+```markdown
+**Decision:** REQUEST_CHANGES
+**Blocker:** Security vulnerability must be fixed before merge
+**Next:** Assign to @security-team for consultation
+```
+
+### Conversation History and Context Windows
+
+Each Copilot interface maintains separate conversation history but shares:
+- Repository customizations (instructions, skills, agents)
+- Access to same AI models
+- Agentic memory (if enabled via Copilot Pro/Pro+)
+
+**Context window considerations:**
+- GPT-4.1: 128K tokens (~96,000 words)
+- Claude Sonnet/Opus 4: 200K tokens (~150,000 words)
+
+Long conversations may exceed context window—start new conversation when responses seem off-topic or forget earlier context.
 
 ---
 
@@ -465,39 +787,42 @@ GitHub Copilot's architecture enables complete AI coverage across every interfac
 
 ### Core Insights
 
-- **Portability is built-in**
-  Repository customizations automatically work across IDE, web, mobile, and CLI
+- **Work happens everywhere, not just IDEs**: PR reviews, issue triage, stakeholder communication occur in browsers and mobile—AI assistance should follow
+- **Customizations are interface-agnostic**: Build repository instructions, skills, and agents once—they work identically across IDE, web, mobile, CLI
+- **Coordination vs Implementation**: Web Copilot optimizes for planning, review, documentation, and communication—use IDE for code writing
+- **Mobile unlocks velocity**: 16 hours/week capacity gained by reviewing PRs from phone instead of waiting to return to desk
+- **Image-to-issue transforms ops**: 85% time saved triaging alerts from screenshots vs manual transcription
+- **Multi-model selection matters**: Match task to model (GPT-4.1 for speed, Claude Opus 4 for complexity)
 
-- **Context-appropriate tools**
-  Each interface optimizes for its natural workflows—no forced abstractions
+### Transformation Summary
 
-- **Democratized AI access**
-  Non-engineers benefit from repository customizations without IDE training
+**Before Web Copilot:**
+- AI assistance trapped in IDE
+- Product, ops, support work without AI
+- Context-switching breaks flow
+- Teams blocked waiting for desk-bound reviews
 
-- **Workflow continuity**
-  AI assistance follows you to wherever work happens—no artificial boundaries
+**After Web Copilot:**
+- AI follows you to wherever work happens
+- Entire org benefits from engineering's customizations
+- Coordination tasks (reviews, triage) happen naturally
+- Mobile workflows eliminate blocking time
 
-- **ROI multiplication**
-  Single investment in customization serves entire organization across all interfaces
-
-### Narrative
-
-GitHub Copilot on the Web represents a fundamental shift: AI assistance is no longer constrained to the IDE. Repository customizations you build once serve your entire team across every interface they use. Product managers analyze features from browsers. Team leads review PRs from phones. Operations teams triage issues from tablets. The work happens naturally, AI assistance is present everywhere, and the organization benefits broadly from engineering's customization investment.
+**ROI:** Teams save 20-30 hours/week on coordination overhead through image-based issue creation (8 hrs), mobile PR reviews (18 hrs), and real-time estimates (7 hrs).
 
 ---
 
-## Getting Started
+## Getting Started Checklist
 
-### Immediate Actions
+✅ **Tested web interface** — Visited github.com/copilot and asked general + repo-specific questions
+✅ **Verified customizations port** — Confirmed `.github/copilot-instructions.md` works identically on web
+✅ **Mobile review workflow** — Opened PR on phone, invoked custom agent, provided feedback in <5 min
+✅ **Image-based issue creation** — Dragged screenshot into chat, reviewed AI-extracted details
+✅ **Model comparison** — Tried same question with GPT-4.1 vs Claude Opus 4, compared responses
+✅ **Spark prototyping** — Generated simple UI prototype, shared with stakeholder
+✅ **Coding Agent delegation** — Assigned routine task, reviewed PR from web interface
 
-1. **Open github.com/copilot**
-   Verify your repository instructions and agents appear
-
-2. **Test mobile access**
-   Review a PR using custom agent from your phone
-
-3. **File issue from screenshot**
-   Try image-based issue creation workflow
+**Ready for full adoption?** Roll out to product, operations, and support teams—democratizing AI beyond engineering.
 
 4. **Generate documentation**
    Create user docs from code without IDE context switch

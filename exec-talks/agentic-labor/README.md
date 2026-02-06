@@ -836,7 +836,9 @@ Work comes in → Agent prepares → Human decides → Agent executes → Agent 
 
 ## Getting Started: The First Three Agents
 
-If you're convinced and want to begin, start with these three agent capabilities:
+If you're convinced and want to begin, start with these three agent capabilities. These form the foundation of the complete issue lifecycle: **research → planning → execution → review**.
+
+> 💡 **For detailed implementation:** See [The Journey to Agentic SDLC](../../tech-talks/agentic-journey/) tech talk for step-by-step setup instructions, code examples, and troubleshooting guidance.
 
 ### 1. Issue Triage Agent
 
@@ -850,21 +852,11 @@ If you're convinced and want to begin, start with these three agent capabilities
 
 **Success metric:** Time-to-triage drops from 30 minutes to 5 minutes per issue.
 
-### 2. Compliance Check Agent
+**Example:** See [`.github/workflows/assign-copilot.yml`](../../.github/workflows/assign-copilot.yml) for a working implementation that auto-assigns issues to `copilot-swe-agent[bot]`.
 
-**Why second:** High value in regulated environments. Clear rules mean clear agent instructions.
+### 2. Execution Planning Agent
 
-**What it does:**
-- Validates every PR against compliance requirements
-- Surfaces specific violations with line numbers
-- Generates audit trail automatically
-- Blocks merging for critical issues
-
-**Success metric:** Compliance issues found in production drops to zero.
-
-### 3. Execution Planning Agent
-
-**Why third:** Transforms how work is handed off. Preparation agents enable execution agents.
+**Why second:** Transforms how work is handed off. Preparation agents enable execution agents.
 
 **What it does:**
 - Analyzes issue and generates execution plan
@@ -873,6 +865,50 @@ If you're convinced and want to begin, start with these three agent capabilities
 - Creates ready-to-implement specification
 
 **Success metric:** Time from issue to implementation start drops from 4 hours to 30 minutes.
+
+### 3. Code Review Agent
+
+**Why third:** Scales review capacity to match agent-generated PR volume. Maintains quality at velocity.
+
+**What it does:**
+- Pre-reviews every PR before human review
+- Surfaces security risks, logic errors, edge cases
+- Checks performance implications and test coverage
+- Enables outcome-based human validation
+
+**Success metric:** Review time drops from 2-4 hours to 15-20 minutes per PR while catching 95%+ of critical issues.
+
+### The Complete Cycle
+
+These three agents work together to automate the full issue lifecycle:
+
+```
+Issue opened
+  ↓
+🤖 Triage Agent: Analyzes + routes (5 min)
+  ↓
+🤖 Planning Agent: Researches + plans (30 min)
+  ↓
+👤 Human: Approves plan (5 min)
+  ↓
+🤖 Execution Agent: Implements + tests (1-2 hours)
+  ↓
+🤖 Review Agent: Pre-reviews PR (5 min)
+  ↓
+👤 Human: Validates outcomes (15 min)
+  ↓
+✅ Deployed
+
+Total time: ~2-3 hours (vs 2-3 days manual)
+Human time: ~20 minutes (vs 8-12 hours)
+```
+
+**ROI for 50-person team:**
+- Manual process: 20 issues/week × 10 hours each = 200 hours/week
+- With agents: 20 issues/week × 0.3 hours human time = 6 hours/week
+- **Savings: 194 hours/week = $19,400/week @ $100/hour**
+
+> 📖 **Ready to implement?** Follow the step-by-step guide in [The Journey to Agentic SDLC](../../tech-talks/agentic-journey/) to set up each phase with working code examples and metrics dashboards.
 
 ---
 

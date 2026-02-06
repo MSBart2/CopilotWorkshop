@@ -1,9 +1,16 @@
 # Build script for all Slidev presentations
 # This script builds each .md file in the slides subdirectories
-# Usage: build-all.ps1 [-Verbose]
+# Usage: build-all.ps1 [-Verbose] [-Folder <name>]
+#   -Folder: optional category to build (workshop, tech-talks, exec-talks)
+#   Examples:
+#     build-all.ps1                          # build all categories
+#     build-all.ps1 -Folder exec-talks       # build only exec-talks
+#     build-all.ps1 -Verbose -Folder tech-talks  # build only tech-talks (verbose)
 
 param(
-    [switch]$Verbose
+    [switch]$Verbose,
+    [ValidateSet('workshop', 'tech-talks', 'exec-talks')]
+    [string]$Folder
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,11 +19,18 @@ $StartTime = Get-Date
 $SlidesDir = Split-Path -Parent $PSScriptRoot
 $OutputDir = Join-Path $SlidesDir "dist"
 
-Write-Host "🚀 Building all Slidev presentations..." -ForegroundColor Cyan
+if ($Folder) {
+    Write-Host "🚀 Building $Folder Slidev presentations..." -ForegroundColor Cyan
+} else {
+    Write-Host "🚀 Building all Slidev presentations..." -ForegroundColor Cyan
+}
 Write-Host "📁 Slides directory: $SlidesDir" -ForegroundColor Gray
 Write-Host "📦 Output directory: $OutputDir" -ForegroundColor Gray
 if ($Verbose) {
     Write-Host "📢 Verbose mode enabled" -ForegroundColor Yellow
+}
+if ($Folder) {
+    Write-Host "📂 Folder filter: $Folder" -ForegroundColor Yellow
 }
 Write-Host ""
 
@@ -68,34 +82,40 @@ function Build-Slide {
 }
 
 # Build workshop slides
-Write-Host "📚 Building workshop slides..." -ForegroundColor Cyan
-$WorkshopSlides = Get-ChildItem -Path "$SlidesDir/workshop" -Filter "*.md" -File
-foreach ($SlideFile in $WorkshopSlides) {
-    $BaseName = $SlideFile.BaseName
-    Build-Slide -Category "workshop" -BaseName $BaseName
-    $TotalBuilt++
+if (-not $Folder -or $Folder -eq 'workshop') {
+    Write-Host "📚 Building workshop slides..." -ForegroundColor Cyan
+    $WorkshopSlides = Get-ChildItem -Path "$SlidesDir/workshop" -Filter "*.md" -File
+    foreach ($SlideFile in $WorkshopSlides) {
+        $BaseName = $SlideFile.BaseName
+        Build-Slide -Category "workshop" -BaseName $BaseName
+        $TotalBuilt++
+    }
+    Write-Host ""
 }
-Write-Host ""
 
 # Build tech-talks slides
-Write-Host "🔬 Building tech-talks slides..." -ForegroundColor Cyan
-$TechTalksSlides = Get-ChildItem -Path "$SlidesDir/tech-talks" -Filter "*.md" -File
-foreach ($SlideFile in $TechTalksSlides) {
-    $BaseName = $SlideFile.BaseName
-    Build-Slide -Category "tech-talks" -BaseName $BaseName
-    $TotalBuilt++
+if (-not $Folder -or $Folder -eq 'tech-talks') {
+    Write-Host "🔬 Building tech-talks slides..." -ForegroundColor Cyan
+    $TechTalksSlides = Get-ChildItem -Path "$SlidesDir/tech-talks" -Filter "*.md" -File
+    foreach ($SlideFile in $TechTalksSlides) {
+        $BaseName = $SlideFile.BaseName
+        Build-Slide -Category "tech-talks" -BaseName $BaseName
+        $TotalBuilt++
+    }
+    Write-Host ""
 }
-Write-Host ""
 
 # Build exec-talks slides
-Write-Host "💼 Building exec-talks slides..." -ForegroundColor Cyan
-$ExecTalksSlides = Get-ChildItem -Path "$SlidesDir/exec-talks" -Filter "*.md" -File
-foreach ($SlideFile in $ExecTalksSlides) {
-    $BaseName = $SlideFile.BaseName
-    Build-Slide -Category "exec-talks" -BaseName $BaseName
-    $TotalBuilt++
+if (-not $Folder -or $Folder -eq 'exec-talks') {
+    Write-Host "💼 Building exec-talks slides..." -ForegroundColor Cyan
+    $ExecTalksSlides = Get-ChildItem -Path "$SlidesDir/exec-talks" -Filter "*.md" -File
+    foreach ($SlideFile in $ExecTalksSlides) {
+        $BaseName = $SlideFile.BaseName
+        Build-Slide -Category "exec-talks" -BaseName $BaseName
+        $TotalBuilt++
+    }
+    Write-Host ""
 }
-Write-Host ""
 
 # Copy index.html to dist root
 Write-Host "📄 Copying index-custom.html to dist root..." -ForegroundColor Gray

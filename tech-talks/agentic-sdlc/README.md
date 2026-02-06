@@ -1,139 +1,308 @@
 # Agentic SDLC: Infrastructure for AI Velocity
 
-How to rewire repositories, PR workflows, and CI/CD for AI-as-labor delivery agents (Gen-4 SDLC)
+> **The Question This Talk Answers:**
+> *"How do I rewire repositories, PR workflows, and CI/CD to scale from 2-3 features/week to 10-15 features/day with AI agents?"*
 
-**Barton Mathis**
-
----
-
-## 📖 Navigation Guide
-
-This comprehensive talk covers three interconnected aspects of Gen-4 SDLC. Each section can be consumed independently: ## 🔍 Quick Decision: Which Section Do You Need?
-
-**Start with Repository Topology if:**
-- You're restructuring repos for agent-first workflows
-- Agents are touching 2+ repos for most features
-- You're debating monorepo vs multi-repo
-
-**Start with PR Workflows if:**
-- You're shipping feature-scale AI-generated changes daily
-- Traditional PR reviews are becoming bottlenecks
-- You need governance that scales with AI velocity
-
-**Start with Trust Manufacturing if:**
-- Your CI was designed for 2-3 features/week, now handling 10-15/day
-- You need to manufacture trust at agent velocity
-- Compliance and security checks are blocking agent throughput
+**Duration:** 90 minutes | **Target Audience:** Architects / Platform Engineers / Engineering Leaders
 
 ---
 
-## Gen-4 SDLC: The Core Transformation
+## 📊 Content Fitness
 
-### What Changes in Gen-4 (AI-as-Labor)
+| Criterion | Assessment | Notes |
+|-----------|-----------|-------|
+| **Relevant** | 🟢 High | AI agents generate 10-15x more code than humans can review — traditional SDLC collapses at this velocity |
+| **Compelling** | 🟢 High | Complete architectural blueprint with working artifacts (Nx configs, Dockerfiles, GitHub Actions) for 100x throughput increase |
+| **Actionable** | 🟢 High | Three-part implementation roadmap: repo topology → PR workflows → CI trust factory with measurable metrics at each phase |
 
-#### Traditional (Gen-3)
-- **Humans produce code** — 10-50 lines/hour, context-switching every 23 minutes
-- **PRs are collaboration forums** — "Can you explain this?" "Why did you...?" "LGTM 🚀"
-- **Repo structure optimized for teams** — "Frontend in one repo, backend in another"
-- **CI is supporting infrastructure** — "The build is red again, someone look at it"
-
-#### Agentic (Gen-4)
-- **Agents produce feature-scale payloads** — 500-2000 lines in 15 minutes, zero context switching
-- **Humans govern safety and outcomes** — "Ship the feature" or "Roll it back" (not "move this function to line 47")
-- **Repo structure optimized for agents** — "Everything this agent needs is in one atomic boundary"
-- **CI becomes the trust factory** — "If CI is green, we ship. If CI is red, nobody moves."
-
-> 💡 **The Shift:** Humans used to write code and delegate review. Now humans delegate coding and review outcomes.
-
-### The Four Generations
-
-**Gen-1:** Manual coding by individual developers
-**Gen-2:** Team workflows with PRs and CI/CD
-**Gen-3:** AI assistance (autocomplete, refactoring) with humans as authors
-**Gen-4:** AI agents as primary producers from intent specifications
-
-**The Breakpoint:** When AI-generated code volume surpasses human review capacity
+**Overall Status:** 🟢 Ready to use
 
 ---
 
-# Part 1: Repository Topology
+## 📽️ Slide Generation Mapping
 
-*How to rewire repositories for AI-native delivery*
+### Slide Sequence (Generated Automatically)
+
+1. **Title/Logo Slide** ← H1 title + subtitle
+2. **Question/Objective Slide** ← "The Question This Talk Answers"
+3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
+4. **Problem Slide** ← "The Problem"
+5. **Solution Overview** ← "The Solution"
+6. **Key Artifacts** ← "Key Artifacts" inventory
+7. **Mental Model Shift** ← Move-Toward/Away/Against
+8. **When to Use Decision Tree** ← "When to Use This Pattern"
+9. **Repository Topology** ← 🎬 Section 1 (5-6 slides)
+10. **PR Workflows** ← 🎬 Section 2 (5-6 slides)
+11. **Trust Manufacturing** ← 🎬 Section 3 (6-7 slides)
+12. **Implementation Roadmap** ← 🎬 Section 4 (2-3 slides)
+13. **Use Cases** ← Real-World Use Cases (2 slides)
+14. **Actionable Outcomes** ← What You Can Do Today
+15. **Related Patterns** ← Related Patterns
+16. **Official Documentation** ← 📚 section
+17. **End Slide** ← Auto-generated
+
+### Major Sections (TOC Entries)
+
+```markdown
+<!-- 🎬 MAJOR SECTION: Repository Topology -->
+<!-- 🎬 MAJOR SECTION: PR Workflows -->
+<!-- 🎬 MAJOR SECTION: Trust Manufacturing -->
+<!-- 🎬 MAJOR SECTION: Implementation Roadmap -->
+```
 
 ---
 
 ## The Problem
 
-Our repo structure was designed for humans collaborating on quarterly releases.
+### Key Points
 
-Now we're running agents that ship features daily.
+- **Code volume explosion**
+  AI agents generate 500-2000 lines per feature in 15 minutes — 10-15 features/day vs. 2-3/week from human teams.
 
-**This is like running a Formula 1 car on roads designed for horses.**
+- **Traditional SDLC wasn't designed for this velocity**
+  Repo structures optimized for human collaboration create coordination overhead when agents touch 2+ repos per feature.
 
-The car is fast. The road wasn't built for that speed. Something breaks.
+- **Review capacity bottleneck**
+  Humans can't review 15,000 lines/day at the detail level trained for 300 lines/day — the bottleneck shifts from coding to governance.
 
----
+- **CI becomes the critical path**
+  When CI takes 60+ minutes, agents sit idle. When test flake rate >10%, nobody trusts green builds.
 
-## The Solution (TL;DR)
+### Narrative
 
-- Default to an **agent-native product monorepo** with enforced module boundaries (not suggestions)
-- Pair it with a **separate control-plane repo** for policies, golden workflows, and scaffolding
-- Optimize for **deterministic signal**: hermetic builds, "affected" CI, and aggressive caching
-- Treat PRs as **governance evidence bundles** (intent → diff → checks → attestations), not collaboration forums
+Your organization just adopted GitHub Copilot agents. Within weeks, agents are generating feature-scale code — 500 to 2000 lines per implementation, touching 5-8 files, with tests and documentation included. Velocity skyrockets from 2-3 features per week to potentially 10-15 per day.
 
----
+Then reality hits. The repository structure forces agents to coordinate changes across 3-5 repos for a single feature. PRs pile up because reviewers can't keep pace — line-by-line review of 15,000 lines/day is impossible. CI queues grow to 60-90 minutes because the pipeline was designed for 3 builds/day, not 30. Test flakiness that was "annoying but tolerable" at 5% failure rate becomes catastrophic when it blocks 15 PRs/day. Security and compliance checks that took 4 hours with manual sign-offs can't scale to agent velocity.
 
-## Goal: Max Throughput Without Losing Trust
+The infrastructure designed for Gen-3 SDLC (humans assisted by AI autocomplete) collapses under Gen-4 pressure (AI agents as primary producers). Your agents can write code faster than your infrastructure can prove it's safe to ship.
 
-**The Formula:** Agent velocity × Human confidence = Sustainable delivery at scale
-
-### What We're Optimizing For
-
-- **Minimize coordination overhead** — 6 repos × 3 teams = 18 handoffs per feature → 1 repo × atomic merge = 0 handoffs
-- **Maximize agent situational awareness** — "Where's the auth code?" → 3 grep results, not 3 repo searches
-- **Make verification cheap and fast** — 4-hour CI runs → 8-minute affected tests with caching
-- **Scale governance** — 22 manual approval gates → 4 human checkpoints + automated evidence
-
-> ⚡ **Remember:** If our CI is flaky, our agents are flying blind. If our builds are slow, our agents are stuck in traffic.
+This talk provides the architectural blueprint to rewire your SDLC for AI velocity: repository topology that minimizes coordination, PR workflows that scale to feature-scale payloads, and CI pipelines that manufacture trust at 10-15 features/day.
 
 ---
 
-## Topology Decision: Monorepo vs Multi-Repo
+## The Solution: Gen-4 SDLC Architecture
 
-> ⚠️ **War Story: The 6-Hour Feature**
->
-> A SaaS company had 18 microservice repos. To ship a feature touching 3 services:
-> - Day 1: Open PR in repo A, wait for CI (45 min), wait for review (4 hours)
-> - Day 2: Open PR in repo B, discover contract mismatch, go back to repo A
-> - Day 3: Coordinate deploy order, staging fails, debug across repos
->
-> **Result:** 6 hours of agent work, 3 days of human coordination, 2 rollbacks
->
-> After monorepo migration: 45 minutes, 1 atomic PR, 0 coordination overhead
+### What It Does
 
-### Monorepo (Default for 80% of Product Teams)
+The Gen-4 SDLC architecture transforms three critical infrastructure layers — repositories, pull request workflows, and continuous integration — from human-optimized collaboration tools into agent-native delivery infrastructure capable of sustainable 10-15 features/day throughput.
+
+### Key Capabilities
+
+- **Agent-Native Repository Topology**: Monorepo with enforced module boundaries, hermetic builds, and affected analysis — agents navigate via grep, not GitHub search
+- **Outcome-Focused PR Workflows**: Intent-based specifications, evidence-bundle reviews, and policy-gated merges — humans validate outcomes, not implementation details
+- **CI as Trust Factory**: Fast feedback (<10 min), context-aware validation with agents, zero-flake tolerance, and attestation generation — manufacturing trust at agent velocity
+- **100x Throughput Scaling**: From 150 features/year (Gen-3) to 3,600 features/year (Gen-4) with maintained or improved quality and compliance
+
+### Architecture Overview
+
+The Gen-4 transformation operates at three layers that stack and reinforce each other:
+
+**Layer 1 (Foundation): Repository Topology** reorganizes code boundaries so agents can find everything they need in a single atomic workspace. This eliminates the coordination tax — when agents must touch 3 repos to implement a feature, you pay 3x merge + 3x deploy + N handoffs in overhead. Monorepo structure with tools like Nx provides module boundary enforcement (not suggestions), hermetic builds (deterministic CI signals), and affected analysis (test only what changed).
+
+**Layer 2 (Governance): PR Workflows** move human review up-stack from "read every line" to "validate outcomes against intent." PRs become evidence bundles: intent specification + code diff + automated check results + attestations. Humans answer "does this meet requirements?" not "why did you use a Map on line 47?" This shifts bottleneck capacity from 300 lines/day/reviewer to 15,000 lines/day/reviewer.
+
+**Layer 3 (Trust Manufacturing): CI Pipeline** transforms from quality gate to trust factory. Speed matters — 60-minute CI means agents idle 80% of the time. The target is <10 minutes for PR checks via parallelization, caching, and affected analysis. Context-aware validation uses agents to apply judgment (not just pattern matching) for compliance. Zero-flake tolerance makes green builds trustworthy again. Attestations provide audit trails for regulated environments.
+
+These three layers compound: fast CI enables high PR velocity, which requires streamlined review, which depends on atomic repo changes. Miss any layer and the system bottlenecks.
+
+**Official Documentation:**
+- 📖 [Nx Monorepo Tools](https://nx.dev/) — Build orchestration, module boundaries, and affected analysis
+- 📖 [GitHub Actions Documentation](https://docs.github.com/en/actions) — CI/CD workflow automation
+- 📖 [SLSA Framework](https://slsa.dev/) — Supply chain security and attestation standards
+
+---
+
+## 📦 Key Artifacts
+
+**This talk includes comprehensive infrastructure examples** spanning repository configuration, CI workflows, and governance policies. All artifacts are working code you can adapt.
+
+### Primary Artifacts
+
+*Shown inline with detailed explanation in the major sections*
+
+- **`nx.json` + `tsconfig.base.json`** — Monorepo structure with enforced module boundaries
+- **`Dockerfile` (hermetic build example)** — Deterministic builds with exact dependency versions
+- **`.github/workflows/pr-checks.yml`** — Fast feedback CI pipeline with affected analysis
+- **`.github/policies/CODEOWNERS`** — Automated code ownership and routing
+
+### Supporting Files
+
+*Referenced but not shown inline — architectural patterns*
+
+- **Control-plane repository structure** — Enterprise policies separated from product code
+- **Evidence-bundle PR template** — Required artifacts for outcome-based review
+- **Attestation generation workflow** — SLSA compliance and audit trails
+
+**Guidance:** Primary artifacts demonstrate the "what" (actual configs). Supporting patterns show the "how" (organizational implementation). Together they form a complete Gen-4 SDLC blueprint.
+
+---
+
+## 🎯 Mental Model Shift
+
+> **The Core Insight:** From "infrastructure supports human collaboration" to "infrastructure enables agent velocity while humans govern outcomes"
+
+### Move Toward (Embrace These Patterns)
+
+- ✅ **Monorepo by Default**: Consolidate when agents touch 2+ repos for >30% of features → Atomic changes, zero coordination, unified tooling
+- ✅ **Outcome-Based Review**: Validate "does implementation match intent?" not "why line 47?" → 50x review capacity increase
+- ✅ **CI as Trust Factory**: Manufacture evidence at agent velocity with <10 min feedback → Agents productive 95% of time vs. 20%
+- ✅ **Enforced Boundaries**: Build-time module constraints (not comments or conventions) → Architectural decay prevention at scale
+- ✅ **Zero-Flake Tolerance**: Quarantine on first flake, fix within 2 days or disable → Green builds become trustworthy signals
+
+### Move Away From (Retire These Habits)
+
+- ⚠️ **Multi-Repo Without Justification**: "We've always had separate repos" → Agent coordination overhead exceeds any organizational benefits
+- ⚠️ **Line-by-Line Code Review**: Reading every line of 500-2000 line diffs → Can't scale to 15 PRs/day, misses forest for trees
+- ⚠️ **Tolerating Flaky CI**: "Just rerun until it passes" → When 10% flake rate × 15 PRs/day = nobody trusts green builds
+- ⚠️ **Manual Governance at Machine Speed**: 22 approval gates per feature → Agent velocity collapses to human bottleneck speed
+
+### Move Against (Active Resistance Required)
+
+- 🛑 **Suggested Boundaries**: Comments like `// @internal - don't import this!` → Agents don't read comments; boundaries must be enforced at build time
+- 🛑 **Non-Hermetic Builds**: `npm install` without lockfile, `apt-get update` in Dockerfiles → Non-deterministic CI creates false confidence in green builds
+
+> **Example Transformation:** Before: Agent implements feature touching 3 repos. Day 1: open PR in repo A (45 min CI), wait 4 hours for human review. Day 2: open PR in repo B, discover contract mismatch, return to repo A. Day 3: coordinate deploy order, staging fails, debug across repos. Result: 6 hours of agent work, 3 days of coordination, 2 rollbacks. After: Monorepo enables atomic change across all 3 modules in single PR. 8 minutes CI, 20 minutes outcome-based review, one deploy. Result: 6 hours agent work, 2 hours human time, zero rollbacks.
+
+---
+
+## When to Use This Pattern
+
+### Decision Tree
+
+```
+Q: What's your current agent throughput vs. target?
+├─ "2-3 features/week, want 10-15/day"
+│  → Use: Full Gen-4 SDLC (this talk)
+│  └─ Best for: Platform transformation, sustainable AI velocity
+│
+├─ "Haven't started with agents yet"
+│  → Use: Agentic Journey (incremental adoption)
+│  └─ Best for: Proving value before infrastructure investment
+│
+├─ "Already doing 5-10/day but hitting scaling limits"
+│  → Use: Identify bottleneck layer
+│  ├─ Repo coordination → Apply Part 1 (Repository Topology)
+│  ├─ Review capacity → Apply Part 2 (PR Workflows)
+│  └─ CI speed/flakiness → Apply Part 3 (Trust Manufacturing)
+│
+└─ "Need executive framing for transformation"
+   → See: Agentic Delivery (exec-talks)
+   └─ Best for: Budget approval, org change management
+```
+
+### Use This Pattern When
+
+- Agents are touching 2+ repos for >30% of features (coordination overhead exceeds value)
+- PR review queue exceeds 5 days (human review is the bottleneck)
+- CI pipeline takes >30 minutes or has >5% flake rate (trust manufacturing can't keep pace)
+- You're ready for 3-6 month infrastructure investment with 100x annual output ROI
+
+### Don't Use This Pattern When
+
+- You haven't proven agent value yet → Start with [Agentic Journey](../agentic-journey/) quick wins
+- Team size <5 developers → Infrastructure overhead may exceed benefits
+- Regulatory requires physical repo separation → Multi-repo is mandatory, focus on Parts 2-3 only
+- You need immediate results in <1 month → Incremental adoption path is better fit
+
+### Comparison with Related Features
+
+| Aspect | This Talk (Agentic SDLC) | Agentic Journey | Enterprise Patterns |
+|--------|--------------------------|-----------------|---------------------|
+| **Best For** | Platform transformation for sustained AI velocity | Quick wins without restructuring | Organization-wide scaling |
+| **Setup Time** | 3-6 months | 2-3 hours per phase | 6-12 months |
+| **Throughput Gain** | 100x annual (150 → 3,600 features/year) | 15-20x (3/week → 10/week) | 200x+ (multi-team compounding) |
+| **Risk Level** | High (infrastructure change) | Low (additive only) | Very High (organizational) |
+| **Prerequisites** | Agent adoption + bottleneck pain | GitHub Actions + Copilot license | Executive sponsorship |
+
+---
+
+<!-- 🎬 MAJOR SECTION: Repository Topology -->
+## Part 1: Repository Topology
+
+*Rewiring code boundaries for agents that navigate via grep, not GitHub search*
+
+### The Core Challenge
+
+Repository structures were designed for human team collaboration — frontend in one repo, backend in another, microservices each in their own. This organizational clarity becomes coordination overhead when agents touch 3-5 repos to ship a single feature.
+
+**The Formula:** Agent velocity × Repo coordination overhead = Actual throughput
+
+When agents cross repo boundaries frequently, you pay exponential coordination costs: multiple PRs, coordinated deploys, contract synchronization, and handoff delays.
+
+### Why Traditional Structures Fail
+
+**Traditional (Gen-3) Assumptions:**
+- **Humans produce code** — 10-50 lines/hour, context-switching every 23 minutes
+- **PRs are collaboration forums** — "Can you explain this?" "Why did you...?" "LGTM 🚀"
+- **Repo structure optimized for teams** — "Frontend in one repo, backend in another"
+- **Boundaries are social contracts** — Comments, conventions, and code review
+
+**Agentic (Gen-4) Reality:**
+- **Agents produce feature-scale payloads** — 500-2000 lines in 15 minutes, zero context switching
+- **Humans govern safety and outcomes** — "Ship the feature" or "Roll it back" (not line-level review)
+- **Repo structure optimized for agents** — "Everything this agent needs is in one atomic boundary"
+- **Boundaries must be enforced** — Build-time failures, not suggestions
+
+> 💡 **The Shift:** Agents don't read comments or respect conventions — they follow import rules enforced at build time.
+
+### Goal: Maximum Throughput Without Losing Trust
+
+
+**What We're Optimizing For:**
+
+| Traditional Metric | Gen-4 Metric | Target |
+|--------------------|--------------|--------|
+| Lines of code written | Features shipped | 10-15/day |
+| Code review depth | Outcome validation speed | <20 min/PR |
+| Manual quality gates | Automated trust evidence | 90% automated |
+| Repository count | Coordination overhead | <30% cross-repo |
+
+**The Trade-Off:** Monorepo adds tooling complexity (Nx, Bazel, Lerna) in exchange for eliminating coordination overhead. Worth it when agents touch multiple repos >30% of the time.
+
+### Monorepo vs Multi-Repo Decision
+
+#### The 6-Hour Feature (War Story)
+
+A SaaS company had 18 microservice repos. To ship a feature touching 3 services:
+
+- **Day 1:** Open PR in repo A, wait for CI (45 min), wait for review (4 hours)
+- **Day 2:** Open PR in repo B, discover contract mismatch, go back to repo A
+- **Day 3:** Coordinate deploy order, staging fails, debug across repos
+
+**Result:** 6 hours of agent work, 3 days of human coordination, 2 rollbacks
+
+**After monorepo migration:** 45 minutes end-to-end, 1 atomic PR, 0 coordination overhead
+
+#### Monorepo (Default for 80% of Product Teams)
 
 **Advantages:**
 - **Atomic cross-module changes** — Change API + all 7 call sites in one PR, not 8 coordinated PRs
 - **Shared patterns are local** — `import { validateEmail } from '@libs/validation'`, not "which version?"
-- **Agent navigation is grep, not GitHub search** — "Where's the auth middleware?" → One `rg` command
-- **One CI pipeline to rule them all** — Unified standards, consistent tooling, shared cache
+- **Agent navigation via grep** — "Where's the auth middleware?" → One `rg` command instead of GitHub search across repos
+- **Unified CI pipeline** — Consistent standards, shared tooling, single cache
 
-### Multi-Repo (When You Actually Need It)
+**When This Works Best:**
+- Product teams building cohesive applications
+- High feature interdependency across modules
+- Agents frequently touch 2+ components per feature
+- Team size 5-100 developers (scales with tooling)
 
-**Use cases:**
+#### Multi-Repo (When You Actually Need It)
+
+**Valid Use Cases:**
 - **Hard access boundaries** — PCI-regulated payment processing physically separated from marketing site
-- **Truly independent products** — Mobile app (6-month releases) + web app (daily deploys)
-- **Regulatory/compliance mandates** — "The auditor said these must be separate"
-- **Organizational constraints** — Acquired company not ready to merge (yet)
+- **Independent lifecycles** — Mobile app (6-month releases) + web app (daily deploys) truly don't share code
+- **Regulatory/compliance mandates** — Auditor requires physical separation
+- **Organizational constraints** — Acquired company not ready to merge (temporary state)
 
-> 🎯 **Decision Rule:** If our agents touch >1 repo for >30% of features, we need a monorepo.
+**Warning Signs You Don't Need Multi-Repo:**
+- "We've always done it this way" — Not a technical reason
+- "Different teams own them" — Solved by CODEOWNERS, not repo boundaries
+- "They deploy at different rates" — Solved by independent deploy pipelines, not repos
 
----
+> 🎯 **Decision Rule:** If agents touch >1 repo for >30% of features, consolidate into monorepo.
 
-## Recommended Baseline Structure
-
-### Agent-Native Product Monorepo
+### Recommended Baseline: Agent-Native Monorepo Structure
 
 ```
 product-monorepo/
@@ -172,7 +341,14 @@ product-monorepo/
 └── tsconfig.base.json          # Shared TypeScript config
 ```
 
+**Why This Structure:**
+- **`apps/`** = deployable boundaries (each can ship independently)
+- **`libs/`** = shared code with enforced dependencies
+- **`.github/agents/`** = agent behaviors colocated with code they modify
+- **`tools/`** = scaffolding that agents use to generate consistent code
+
 ### Control-Plane Repo (Separate)
+
 
 ```
 enterprise-control-plane/
@@ -195,228 +371,262 @@ enterprise-control-plane/
     └── compliance-validator.agent.md
 ```
 
-### Why Separate Control Plane?
+**Why Separate Control Plane:**
+- **Security:** Policies don't live in product code — stricter access control
+- **Consistency:** One source of truth for standards across all product repos
+- **Auditability:** Clear governance trail for compliance and regulatory needs
+- **Update independence:** Change policies without triggering product deploys
 
-- **Security:** Policies don't live in product code
-- **Consistency:** One source of truth for standards
-- **Auditability:** Clear governance trail
-- **Updates:** Change policies without product deploys
+### Enforced Module Boundaries
 
----
+#### Suggested Boundaries (Fail in Gen-4)
 
-## Module Boundaries That Agents Respect
-
-### Enforced vs. Suggested Boundaries
-
-**Suggested (Fails in Gen-4):**
 ```typescript
 // Hope developers notice the comment
 // @internal - Don't import this!
 export class PaymentProcessor {}
 ```
 
-**Enforced (Works in Gen-4):**
-```typescript
-// nx.json module boundary rule
+**Problem:** Agents don't read comments. They follow import patterns they observe in the codebase.
+
+#### Enforced Boundaries (Work in Gen-4)
+
+```json
+// nx.json module boundary configuration
 {
-  "sourceTag": "scope:payment",
-  "onlyDependOnLibsWithTags": ["scope:shared", "scope:payment"]
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*"],
+    "production": ["!{projectRoot}/**/*.spec.ts"]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "generators": {
+    "@nx/react": {
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  }
 }
 ```
 
-### Why Enforcement Matters for Agents
+```json
+// tsconfig.base.json with path mappings
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@libs/auth/*": ["libs/auth/src/*"],
+      "@libs/data-access/*": ["libs/data-access/src/*"],
+      "@libs/ui-components/*": ["libs/ui-components/src/*"],
+      "@libs/validation/*": ["libs/validation/src/*"]
+    }
+  }
+}
+```
 
-- **Agents don't read comments** — They follow import rules
+**Enforcement Example:**
+
+```bash
+# CI fails if agent violates boundary
+nx run-many --target=lint --all
+✓ apps-web - lint succeeded
+✓ libs-auth - lint succeeded
+✗ libs-data-access - lint failed
+
+Error: A project tagged with "scope:data-access" cannot depend on
+libraries tagged with "scope:payment".
+
+Violating import:
+  libs/data-access/src/db.ts:5:
+  import { PaymentProcessor } from '@libs/payment'
+```
+
+**Why This Matters for Agents:**
 - **Build-time failures prevent runtime issues** — CI catches violations before merge
-- **Architectural decay is automatic** — Without enforcement, boundaries erode over time
+- **Clear error messages guide corrections** — Agent learns the constraint from failure
+- **Architectural decay is prevented** — Can't accidentally create circular dependencies
+- **Documentation via enforcement** — The rules ARE the documentation
 
-> 💡 **Pattern:** Use tools like Nx, Lerna, or Bazel to enforce boundaries at build time
+### Hermetic Builds for Deterministic Trust
 
----
+#### Non-Hermetic (Breaks in Gen-4)
 
-## Deterministic Builds for Agent Confidence
-
-### The Hermetic Build Requirement
-
-**Non-Hermetic (Breaks in Gen-4):**
-```yaml
-# Dockerfile
+```dockerfile
+# Dockerfile - DON'T DO THIS
+FROM node:18
 RUN npm install    # Uses whatever version is latest today
-RUN apt-get update # Gets latest packages from internet
+RUN apt-get update && apt-get install -y curl  # Gets latest packages
+COPY . .
+RUN npm run build
 ```
 
-**Hermetic (Works in Gen-4):**
-```yaml
-# Dockerfile
-COPY package-lock.json ./
-RUN npm ci          # Exact versions from lockfile
-RUN apt-get install curl=7.74.0-1.3+deb11u7
+**Problem:** Same git commit produces different builds on different days. CI becomes unreliable signal.
+
+#### Hermetic (Works in Gen-4)
+
+```dockerfile
+# Dockerfile - DO THIS
+FROM node:18.19.0-alpine3.19@sha256:7cc9f5e...  # Exact image digest
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts  # Exact versions from lockfile, no arbitrary scripts
+COPY . .
+RUN npm run build
 ```
 
-### Why Agents Need Determinism
+**Key Principles:**
+- **Pinned base images with digests** — `node:18` → `node:18.19.0-alpine3.19@sha256:abc...`
+- **Locked dependencies** — `npm install` → `npm ci` (uses lockfile verbatim)
+- **No network calls during build** — All inputs declared upfront
+- **Reproducible outputs** — Same inputs = byte-identical outputs
 
-- **Reproducible failures** — Agent can debug because build is identical
+**Why Agents Need Determinism:**
+- **Reproducible failures** — Agent can debug because build is identical across runs
 - **Cacheable artifacts** — Same inputs = same outputs = cache hit
-- **Trust in green builds** — Green means safe, not "worked on this machine"
+- **Trust in green builds** — Green means "this exact code is safe" not "worked on my machine"
+- **Bisectable history** — Can binary search for regressions with confidence
 
-> 🎯 **Goal:** Two agents running the same commit should get byte-identical builds
+### Affected Analysis for Fast Feedback
 
----
-
-## Affected Analysis for Fast Feedback
-
-### The Problem: Testing Everything
+#### The Problem: Testing Everything
 
 ```bash
 # Naive approach: test entire codebase on every PR
-npm test              # 45 minutes
-npm run lint          # 12 minutes
-npm run build         # 23 minutes
-# Total: 80 minutes
+npm test              # 45 minutes - runs 1,247 tests
+npm run lint          # 12 minutes - checks 8,932 files
+npm run build         # 23 minutes - rebuilds 47 packages
+# Total: 80 minutes of agent idle time
 ```
 
-### The Solution: Test What Changed
+**Impact on velocity:** Agent generates 5 PRs/day, each waits 80 minutes for CI = agents productive only 4 hours/day (50% idle).
+
+#### The Solution: Test What Changed
 
 ```bash
 # Affected approach: test only impacted code
-nx affected:test      # 4 minutes
-nx affected:lint      # 1 minute
-nx affected:build     # 3 minutes
-# Total: 8 minutes
+nx affected:test --base=main     # 4 minutes - runs 89 affected tests
+nx affected:lint --base=main     # 1 minute - checks 234 affected files
+nx affected:build --base=main    # 3 minutes - rebuilds 3 affected packages
+# Total: 8 minutes (10x speedup)
 ```
 
-### How Affected Analysis Works
+**How Affected Analysis Works:**
 
-1. **Detect changes:** Git diff between base branch and PR
-2. **Build dependency graph:** Which modules depend on changed files?
-3. **Run affected commands:** Test/lint/build only impacted modules
-4. **Cache everything else:** Reuse results from previous runs
+1. **Build dependency graph:** Map all imports/dependencies between modules
+2. **Detect changes:** Git diff between base branch and PR branch
+3. **Calculate affected scope:** Which modules are impacted (directly or transitively)?
+4. **Run only affected commands:** Test/lint/build only that subset
+5. **Cache unaffected results:** Reuse previous successful runs for unchanged modules
 
-**Impact on agent velocity:**
-- 80 minutes → 8 minutes CI feedback
-- 10x faster iteration cycles
-- Agents can ship 10-15 features/day instead of 2-3
+**Example Dependency Graph:**
 
----
+```
+apps/web
+  → libs/ui-components
+    → libs/validation
+  → libs/auth
+    → libs/validation
 
-## Key Takeaways: Repository Topology
+libs/data-access
+  → libs/validation
+```
 
-### 🎯 Core Principles
+**Scenario:** PR changes `libs/validation`
 
-1. **Monorepo by default** — Multi-repo only for hard boundaries
-2. **Enforced module boundaries** — Build-time failures, not comments
-3. **Hermetic builds** — Deterministic, reproducible, cacheable
-4. **Affected analysis** — Test what changed, cache the rest
-5. **Control-plane separation** — Policies outside product code
+**Affected modules:** ALL (everything depends on validation)
+- Must test: `libs/validation`, `libs/ui-components`, `libs/auth`, `libs/data-access`, `apps/web`
 
-### 🚀 Implementation Steps
+**Scenario:** PR changes `libs/data-access`
 
-1. Audit current repos: How often do agents touch 2+ repos?
-2. If >30%, consolidate into monorepo with Nx/Lerna/Bazel
-3. Define module boundaries with enforcement rules
-4. Enable affected analysis for fast CI feedback
-5. Create separate control-plane repo for policies
+**Affected modules:** Only `libs/data-access` (no downstream dependencies)
+- Must test: `libs/data-access`
+- Can skip: 80% of test suite
 
----
+**Impact on Agent Velocity:**
 
-# Part 2: PR Workflows
-
-*Why traditional pull requests collapse at feature-scale payloads*
-
----
-
-## The Problem
-
-Traditional PRs were designed for humans to collaborate on 50-line changes.
-
-AI agents generate 500-2000 line feature diffs in 15 minutes.
-
-**Human reviewers can't keep up. The bottleneck isn't coding—it's governance.**
+| Metric | Before Affected | After Affected | Improvement |
+|--------|----------------|----------------|-------------|
+| Average CI time | 80 min | 8 min | 10x faster |
+| Agents productive time | 50% | 95% | 2x effective capacity |
+| Features/day per agent | 2-3 | 10-15 | 5x throughput |
 
 ---
 
-## Why Traditional PRs Fail in Gen-4
+<!-- 🎬 MAJOR SECTION: PR Workflows -->
+## Part 2: PR Workflows
 
-### PR Design Assumptions (Gen-2/Gen-3)
 
-- **Small, incremental changes** — 50-200 lines, human-comprehensible
-- **Line-by-line review** — "Can you explain line 47?" "Why this approach?"
-- **Synchronous collaboration** — Back-and-forth discussion until consensus
-- **Trust through scrutiny** — Read every line, understand intent
+*Scaling governance from line-by-line review to outcome validation*
 
-### Reality of Gen-4 Agent Output
+### The Core Challenge
 
-- **Feature-scale payloads** — 500-2000 lines, 5-15 files, atomic features
-- **Intent-driven generation** — Specified at goal level, not implementation level
-- **Machine velocity** — 15 minutes from intent to PR, 24/7 availability
-- **Volume explosion** — 10-15 features/day vs. 2-3/week
+Traditional PRs were designed for humans collaborating on 50-200 line changes with line-by-line review and synchronous discussion. AI agents generate 500-2000 line feature diffs in 15 minutes. **Human reviewers can't keep up — the bottleneck isn't coding, it's governance.**
 
-> ⚠️ **The Mismatch:** Humans can't review 15,000 lines/day at the detail level trained for 300 lines/day
+### The Four Generations Context
 
----
+Understanding the shift from Gen-3 to Gen-4 explains why PR workflows must transform:
 
-## Four Generations of SDLC
+| Generation | Primary Producer | Review Mode | PR Characteristics |
+|------------|------------------|-------------|-------------------|
+| **Gen-1** | Individual devs | Manual testing | Waterfall, no PRs |
+| **Gen-2** | Team collaboration | Code review | 50-200 lines, discussion |
+| **Gen-3** | Human + AI assist | Line-by-line | 100-400 lines, still readable |
+| **Gen-4** | AI agents | Outcome validation | 500-2000 lines, feature-complete |
 
-### Gen-1: Individual Contributors (1970s-1990s)
-- Developers work independently
-- Waterfall planning
-- Limited tooling
+**The Breakpoint:** When AI-generated code volume exceeds human review capacity (happening now).
 
-### Gen-2: Team Collaboration (2000s-2010s)
-- Pull requests introduced
-- CI/CD pipelines
-- Agile workflows
+### Why Traditional PR Practices Fail
 
-### Gen-3: AI-Assisted Development (2020-2024)
-- Copilot autocomplete
-- AI refactoring tools
-- Humans still write and review
+**Gen-3 Design Assumptions:**
+- **Small, incremental changes** — 50-200 lines, human-comprehensible in 30-minute review
+- **Line-by-line scrutiny** — "Can you explain line 47?" "Why this approach?" "Move function to utils"
+- **Synchronous collaboration** — Back-and-forth discussion until consensus reached
+- **Trust through detailed inspection** — Read every line, understand every decision
 
-### Gen-4: AI-as-Labor (2025+)
-- AI agents as primary producers
-- Intent-first specifications
-- Humans govern outcomes
+**Gen-4 Reality:**
+- **Feature-scale payloads** — 500-2000 lines, 5-15 files, entire features atomically
+- **Intent-driven generation** — Specified at goal level ("add OAuth"), not implementation level
+- **Machine velocity** — 15 minutes from intent to PR, 15 PRs/day, 24/7 availability
+- **Volume explosion** — 15,000 lines/day vs. 300 lines/day (50x increase)
 
-**The Breakpoint:** When AI code volume exceeds human review capacity (happening now)
+> ⚠️ **The Mismatch:** Humans trained to review 300 lines/day can't scale to 15,000 lines/day at the same detail level.
 
----
+### The Economic Shift
 
-## Where Code Is No Longer Scarce, Trust Is
+#### Where Scarcity Moves
 
-### Traditional Economics
+| Gen-3 Scarcity | Gen-4 Scarcity |
+|----------------|----------------|
+| Developer time to write code | Governance capacity to review |
+| Code quality (bugs in implementation) | Trust at scale (can we ship this velocity?) |
+| Implementation speed | Architectural coherence |
+| Review thoroughness | Compliance verification speed |
 
+**Traditional Economics:**
 ```
 Bottleneck: Writing code
 Solution: Hire more developers
 Control: Code reviews catch bugs
 ```
 
-### Gen-4 Economics
-
+**Gen-4 Economics:**
 ```
 Bottleneck: Trusting code
 Solution: Automate trust manufacturing
 Control: Policy enforcement + outcome validation
 ```
 
-### What Becomes Scarce
-
-| Gen-3 | Gen-4 |
-|-------|-------|
-| Developer time | Governance capacity |
-| Code quality | Trust at scale |
-| Implementation speed | Architectural coherence |
-| Review thoroughness | Compliance verification |
-
 > 💡 **The Shift:** From "can we write it fast enough?" to "can we trust it at this velocity?"
 
----
+### Gen-4 Control Surfaces
 
-## Gen-4 Control Surfaces
+#### 1. Intent Specification (What Humans Provide)
 
-### Intent Specification
-
-**What humans provide:**
 ```markdown
 ## Feature Intent
 - Add password reset flow to user settings
@@ -428,111 +638,187 @@ Control: Policy enforcement + outcome validation
 - Use existing email service (SendGrid)
 - Follow OWASP password guidelines
 - No changes to authentication middleware
+
+## Acceptance Criteria
+- [ ] User receives email within 2 minutes
+- [ ] Link expires after 1 hour
+- [ ] Rate limiting blocks >3 attempts/hour
+- [ ] All attempts logged to audit table
 ```
 
-**What agents generate:**
+**What agents generate from this:**
 - Implementation code (500-800 lines)
 - Tests (300-400 lines)
 - Documentation (100-200 lines)
 - Database migrations (50-100 lines)
+- **Total: 1,000-1,500 lines in ~15 minutes**
 
-### Policy Enforcement
+#### 2. Policy Enforcement (Automated Checks)
 
-**Automated checks:**
-- Security: SAST, dependency scanning, secrets detection
-- Architecture: Module boundary violations, circular dependencies
-- Compliance: GDPR data handling, PCI requirements
-- Quality: Test coverage, performance budgets, accessibility
+```yaml
+# .github/workflows/pr-checks.yml
+required_policy_checks:
+  security:
+    - secrets_detection: no hardcoded keys/tokens
+    - sast_scan: no SQL injection, XSS patterns
+    - dependency_audit: no critical vulnerabilities
+  architecture:
+    - boundary_enforcement: no module violations
+    - circular_dependencies: none allowed
+  compliance:
+    - gdpr_data_handling: PII properly protected
+    - pci_requirements: payment data isolated
+  quality:
+    - test_coverage: >= 80% on new code
+    - performance_budget: p95 < 200ms
+    - accessibility: WCAG AA compliance
+```
 
-### Outcome Validation
+**Automation rate:** 90% of checks automated, 10% require human judgment
 
-**Human review focuses on:**
-- Does implementation match intent?
+#### 3. Outcome Validation (Human Review Focus)
+
+**Questions humans answer:**
+- Does implementation match stated intent?
 - Are edge cases handled appropriately?
-- Does feature integrate correctly?
-- Are non-functional requirements met?
+- Does feature integrate correctly with existing system?
+- Are non-functional requirements met (performance, security, UX)?
 
----
+**NOT:**
+- "Why did you use a Map on line 47?" (implementation details)
+- "Can you extract this function?" (code style)
+- "Add more comments" (documentation pedantics)
 
-## The Gen-4 SDLC Loop
+### Three PR Models That Scale
+
+#### Model 1: Intent-Based PRs
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│  1. Human specifies INTENT                          │
-│     ↓                                               │
-│  2. Agent generates IMPLEMENTATION                  │
-│     ↓                                               │
-│  3. Automated POLICY CHECKS                         │
-│     ↓                                               │
-│  4. Human validates OUTCOMES                        │
-│     ↓                                               │
-│  5. Ship or Iterate                                 │
-│     │                                               │
-│     └────→ (if iterate, refine intent and repeat)  │
-│                                                     │
-└─────────────────────────────────────────────────────┘
-```
-
-**Cycle time:** 2-4 hours (vs. 2-4 days in Gen-3)
-
----
-
-## Three PR Models That Survive Gen-4
-
-### Model 1: Intent-Based PRs
-
-**Structure:**
-```
-Feature-X-password-reset/
+feature-password-reset/
 ├── .intent/
 │   ├── requirements.md      # What we're building
 │   ├── constraints.md       # What we can't change
 │   └── acceptance.md        # How we know it works
 ├── src/                     # Agent-generated implementation
-├── tests/                   # Agent-generated tests
-└── docs/                    # Agent-generated docs
+│   ├── api/
+│   ├── services/
+│   └── tests/
+├── docs/                    # Agent-generated docs
+│   └── password-reset.md
+└── migrations/              # Agent-generated schema changes
+    └── 2026-02-add-reset-tokens.sql
 ```
 
 **Review Process:**
-1. Verify intent matches implementation
-2. Check automated policy results
-3. Validate acceptance criteria met
-4. Approve or request intent clarification
+1. Read intent specification (2 min)
+2. Verify implementation matches intent (10 min)
+3. Check automated policy results (5 min)
+4. Validate acceptance criteria met (3 min)
+5. Approve or request intent clarification (not code changes)
 
-### Model 2: Evidence-Bundle PRs
+**Total time:** 20 minutes vs. 3 hours for line-by-line review
+
+#### Model 2: Evidence-Bundle PRs
 
 **Required Artifacts:**
-- Intent specification
-- Code diff
-- Test results (coverage, performance)
-- Security scan results
-- Architecture compliance check
-- Deployment simulation logs
+
+```markdown
+## Evidence Bundle
+
+### 1. Intent Specification
+[Link to requirements doc]
+
+### 2. Implementation Diff
+- Files changed: 12
+- Lines added: 847
+- Lines removed: 123
+
+### 3. Automated Test Results
+- Unit tests: 47/47 passed (100%)
+- Integration tests: 12/12 passed (100%)
+- Coverage: 87% (target: 80%) ✓
+
+### 4. Security Scan Results
+- SAST: 0 high/critical issues ✓
+- Secrets detection: No exposed credentials ✓
+- Dependency audit: 0 vulnerabilities ✓
+
+### 5. Architecture Compliance
+- Module boundaries: No violations ✓
+- Circular dependencies: None detected ✓
+
+### 6. Performance Validation
+- API endpoint p95 latency: 147ms (budget: 200ms) ✓
+- Database query analysis: No N+1 issues ✓
+
+### 7. Deployment Simulation
+- Staging deploy: Successful ✓
+- Smoke tests: 8/8 passed ✓
+- Rollback test: Successful ✓
+```
 
 **Review Question:** "Do we have sufficient evidence to trust this change?"
 
-### Model 3: Policy-Gated PRs
+#### Model 3: Policy-Gated PRs
 
-**Automated Gates:**
+**Automated Gates Configuration:**
+
 ```yaml
-required_checks:
-  - security-scan: pass
-  - test-coverage: >= 80%
-  - performance: < 200ms p95
-  - architecture: no-violations
-  - compliance: all-checks-pass
+# .github/policies/required-checks.yml
+gates:
+  security:
+    - name: secrets-scan
+      required: true
+      blocking: true
+    - name: sast-analysis
+      required: true
+      blocking: true
+      severity_threshold: high
+
+  quality:
+    - name: test-coverage
+      required: true
+      blocking: true
+      threshold: 80
+      scope: changed_files
+    - name: performance-budget
+      required: true
+      blocking: false  # warn only
+      p95_threshold: 200ms
+
+  architecture:
+    - name: module-boundaries
+      required: true
+      blocking: true
+    - name: dependency-graph
+      required: true
+      blocking: true
+      disallow: circular_dependencies
+
+  compliance:
+    - name: gdpr-validation
+      required: true
+      blocking: true
+    - name: pci-compliance
+      required: true
+      blocking: true
+      scope: payment_module
+
+human_review:
+  required_when:
+    - any_gate_failed: true
+    - security_risk_high: true
+    - architectural_change: true
+  minimum_approvers: 1
+  require_owner_approval: true
 ```
 
-**Human Review:** Only if all automated gates pass
+**Human Approval:** Only after all automated gates pass, and only 1 sign-off on outcomes
 
-**Approval:** 1 human sign-off on outcomes, not implementation
+### Enterprise Governance That Scales
 
----
+#### Traditional Governance (Doesn't Scale)
 
-## Enterprise Governance at Scale
-
-### Traditional Governance (Doesn't Scale)
 
 - 22 manual approval gates per feature
 - Senior architect reviews every architecture decision
@@ -540,15 +826,15 @@ required_checks:
 - Compliance officer reviews every data change
 - **Result:** 4-7 days from PR to merge
 
-### Gen-4 Governance (Scales to 10-15 Features/Day)
+#### Gen-4 Governance (Scales to 10-15 Features/Day)
 
-- 4 human checkpoints: intent, security risk, architectural fit, outcome validation
+- 4 human checkpoints: intent validation, security risk assessment, architectural fit, outcome validation
 - Automated enforcement: 90% of checks
-- Senior architect reviews violations, not every change
-- Security/compliance automated with human escalation
+- Senior architect reviews violations and exceptions, not every change
+- Security/compliance automated with escalation for high-risk
 - **Result:** 2-4 hours from PR to merge
 
-### The Governance Pyramid
+#### The Governance Pyramid
 
 ```
          Human Governance (10%)
@@ -564,133 +850,78 @@ Automated Governance (90%)
 └── Dependency audits
 ```
 
----
+### The PR Review Transformation
 
-## The Enterprise Takeaway
-
-**PRs don't go away—they move up-stack.**
-
-### From Code-Level to Outcome-Level
+#### From Code-Level to Outcome-Level
 
 | Gen-3 PR Review | Gen-4 PR Review |
 |-----------------|-----------------|
 | "Why did you use a Map here?" | "Does this meet the intent?" |
 | "Can you extract this function?" | "Are edge cases handled?" |
-| "Add more comments" | "Is this compliant?" |
-| "LGTM 🚀" | "Evidence bundle complete?" |
+| "Add more comments" | "Is this compliant and secure?" |
+| "Move this to line 47" | "Evidence bundle complete?" |
+| "LGTM 🚀" (after 3 hours) | "Approved ✓" (after 20 minutes) |
 
-### The Human Role Shifts
+#### The Human Role Shifts
 
-- **Less:** Line-by-line code review
-- **More:** Intent validation, risk assessment, architectural coherence
-- **Still Critical:** Human judgment on ambiguous cases, strategic decisions
-
----
-
-## Key Takeaways: PR Workflows
-
-### 🎯 Core Principles
-
-1. **Intent-first** — Specify goals, not implementation
-2. **Evidence-based** — Trust through automated checks, not scrutiny
-3. **Outcome-focused** — Does it meet requirements?
-4. **Policy-gated** — 90% automated, 10% human judgment
-5. **Move up-stack** — Review intent and outcomes, not lines
-
-### 🚀 Implementation Steps
-
-1. Create intent templates for common feature types
-2. Automate 80% of current manual checks
-3. Build evidence bundle requirements
-4. Train reviewers to validate outcomes, not implementation
-5. Measure: time-to-merge, defect rate, compliance violations
+- **Less:** Line-by-line code scrutiny, style feedback, implementation suggestions
+- **More:** Intent validation, risk assessment, architectural coherence, outcome evaluation
+- **Still Critical:** Human judgment on ambiguous cases, strategic decisions, novel patterns
 
 ---
 
-# Part 3: Trust Manufacturing (CI as Factory)
+<!-- 🎬 MAJOR SECTION: Trust Manufacturing -->
+## Part 3: Trust Manufacturing (CI as Factory)
 
-*How AI agents transform CI from quality gate to trust manufacturing at scale*
+*Transforming CI from quality gate to trust evidence production at agent velocity*
 
----
+### The Core Challenge
 
-## The Problem
+Organizations ship 10-15 features/day with AI agents, but CI infrastructure was designed for 2-3 features/week from humans. **The bottleneck isn't agent velocity — it's trust production.** Agents can write code faster than CI can prove it's safe to ship.
 
-We're shipping 10-15 features per day with AI agents.
+### CI as Trust Factory (Not Quality Gate)
 
-But our CI is still optimized for 2-3 features per week from humans.
+#### Traditional CI (Quality Gate)
 
-**The bottleneck isn't agent velocity—it's trust production.**
-
-Agents can write code faster than CI can prove it's safe.
-
----
-
-## The Core Insight
-
-**CI isn't a quality gate anymore. It's a trust factory.**
-
-### Traditional CI (Quality Gate)
 ```
 Write code → Run tests → Fix failures → Manual review → Deploy
 ```
+
 **Purpose:** Catch bugs before they reach production
 **Optimized for:** Infrequent changes, human-readable output, manual intervention
+**Speed target:** "Fast enough" (~30-60 minutes acceptable)
 
-### Agentic CI (Trust Factory)
+#### Agentic CI (Trust Factory)
+
 ```
 Agent writes code → CI manufactures trust evidence → Human validates outcomes → Auto-deploy
 ```
+
 **Purpose:** Manufacture trust artifacts at agent velocity
 **Optimized for:** 10-15 changes/day, machine-readable evidence, automated validation
+**Speed target:** <10 minutes for PR checks (agents idle otherwise)
 
 > 🏭 **The Shift:** From "did the tests pass?" to "do we have sufficient evidence to trust this change?"
 
----
-
-## What "Trust Factory" Actually Means
-
 ### Manufacturing Principles Applied to CI
 
-**1. Repeatable Processes**
-- Same checks, same order, every time
-- Zero variation = reliable trust signals
-- Hermetic builds (no "works on my machine")
-
-**2. Quality Gates**
-- Can't proceed without passing inspection
-- Branch protection enforces the gates
-- No human bypass (not even for "urgent" fixes)
-
-**3. Automated Inspection**
-- Machines check faster and more consistently than humans
-- 327 tests run in 8 minutes
-- Security scan: 10,000 patterns in 45 seconds
-- Compliance validation: GDPR, PCI, FedRamp checks automated
-
-**4. Evidence Trails**
-- Every check produces attestations
-- Auditable, reproducible, tamper-evident
-- "Show me the evidence this was compliant" → Link to PR
-
-**5. Continuous Improvement**
-- Flake rate: <2% (or disable the test)
-- Build time: tracked weekly, optimized monthly
-- False positive rate: measured and reduced
-
-**6. Scale Economics**
-- First feature costs 8 minutes of CI time
-- 15th feature that day: 2 minutes (cached dependencies)
-- Marginal cost approaches zero
+| Manufacturing Principle | CI Implementation |
+|------------------------|-------------------|
+| **Repeatable Processes** | Same checks, same order, every time — zero variation creates reliable trust signals |
+| **Quality Gates** | Can't proceed without passing inspection — branch protection enforces gates |
+| **Automated Inspection** | 327 tests in 8 minutes, 10,000 security patterns in 45 seconds |
+| **Evidence Trails** | Every check produces attestations — auditable, reproducible, tamper-evident |
+| **Continuous Improvement** | Flake rate <2%, build time optimized monthly, false positives measured and reduced |
+| **Scale Economics** | First feature: 8 minutes CI; 15th feature: 2 minutes (cached) — marginal cost→0 |
 
 > 🎯 **The Goal:** Trust that scales linearly with agent output, not quadratically with human review time.
 
----
+### Context-Aware Validation with Agents
 
-## The Agent Advantage: Context-Aware Validation
+#### The Problem: Compliance Is Contextual
 
-### Problem: Compliance Is Contextual
+**Deterministic Rules (Traditional):**
 
-#### Traditional Approach (Deterministic Rules)
 ```yaml
 # .compliance-rules.yml
 patterns:
@@ -705,7 +936,8 @@ patterns:
 - Developers ignore all warnings
 - Actual PII violation ships to production
 
-#### Agentic Approach (Context-Aware)
+#### Agentic Validation (Context-Aware)
+
 ```yaml
 # .github/agents/compliance-validator.agent.md
 ---
@@ -727,18 +959,16 @@ Explain your reasoning for each flagged instance.
 - Developers trust the signal
 - Actual violations caught before merge
 
-### Why Agents Outperform Rules
+#### Why Agents Outperform Rules
 
-- **Read context:** Understand if email is in test vs. production
-- **Apply judgment:** "This is a mock email" vs. "This handles user PII"
-- **Explain reasoning:** "Flagged because function processes real user input"
-- **Learn patterns:** Improve over time as policies evolve
+- **Read context:** Understand if email is in test fixture vs. production code
+- **Apply judgment:** Distinguish between `user@example.com` (mock) and `req.body.email` (real PII)
+- **Explain reasoning:** "Flagged because this function processes actual user input from API"
+- **Learn patterns:** Improve over time as compliance policies evolve
 
----
+### Fast Feedback: The 10-Minute Rule
 
-## Fast Feedback: The 10-Minute Rule
-
-### Why 10 Minutes Matters
+#### Why 10 Minutes Matters
 
 **Agent iteration cycle:**
 ```
@@ -757,19 +987,17 @@ Generate code (5 min) → Wait for CI (? min) → Fix issues → Repeat
 
 > ⚡ **Target:** <10 minutes for PR checks, <30 minutes for full pipeline
 
-### How to Achieve Fast CI
+#### How to Achieve Fast CI
 
-1. **Affected analysis:** Test only changed modules
-2. **Distributed execution:** Parallelize across runners
+1. **Affected analysis:** Test only changed modules (80 min → 8 min)
+2. **Distributed execution:** Parallelize across runners (8 min → 4 min with 2× parallelism)
 3. **Aggressive caching:** Cache dependencies, build artifacts, test results
 4. **Incremental builds:** Rebuild only what changed
-5. **Strategic test splitting:** Fast smoke tests first, slow integration tests last
+5. **Strategic test splitting:** Fast smoke tests first (fail fast), slow integration tests last
 
----
+### The Trust Pipeline Architecture
 
-## The Trust Pipeline
-
-### Stage 1: Fast Feedback (< 10 minutes)
+#### Stage 1: Fast Feedback (<10 minutes)
 
 **Purpose:** Catch obvious issues immediately
 
@@ -781,7 +1009,7 @@ Generate code (5 min) → Wait for CI (? min) → Fix issues → Repeat
 
 **On failure:** Block PR, fast feedback to agent
 
-### Stage 2: Comprehensive Validation (< 30 minutes)
+#### Stage 2: Comprehensive Validation (<30 minutes)
 
 **Purpose:** Full trust evidence generation
 
@@ -791,11 +1019,11 @@ Generate code (5 min) → Wait for CI (? min) → Fix issues → Repeat
 - Performance benchmarks
 - Architecture compliance
 - Dependency vulnerability scan
-- Compliance validation (GDPR, PCI, etc.)
+- Compliance validation (GDPR, PCI)
 
 **On failure:** Block merge, detailed report for human review
 
-### Stage 3: Pre-Production (< 60 minutes)
+#### Stage 3: Pre-Production (<60 minutes)
 
 **Purpose:** Final validation before production
 
@@ -808,11 +1036,9 @@ Generate code (5 min) → Wait for CI (? min) → Fix issues → Repeat
 
 **On failure:** Block production deploy, page on-call
 
----
+### Evidence Attestations
 
-## Evidence Attestations
-
-### What Are Attestations?
+#### What Are Attestations?
 
 Machine-readable artifacts proving checks ran and passed:
 
@@ -837,14 +1063,14 @@ Machine-readable artifacts proving checks ran and passed:
 }
 ```
 
-### Why Attestations Matter
+#### Why Attestations Matter
 
-- **Auditability:** "Prove this change was compliant"
-- **Supply chain security:** SLSA compliance
-- **Regulatory requirements:** SOC 2, ISO 27001
-- **Reproducibility:** Re-run identical checks
+- **Auditability:** "Prove this change was compliant" → Link to attestation
+- **Supply chain security:** SLSA compliance for regulated environments
+- **Regulatory requirements:** SOC 2, ISO 27001, FedRAMP
+- **Reproducibility:** Re-run identical checks with tamper-evident records
 
-### Generating Attestations
+#### Generating Attestations
 
 ```yaml
 # .github/workflows/attestation.yml
@@ -854,43 +1080,42 @@ Machine-readable artifacts proving checks ran and passed:
     subject-path: 'dist/*.tar.gz'
 ```
 
----
+### Flake Management: Zero Tolerance
 
-## Flake Management: Zero Tolerance
-
-### The Problem with Flaky Tests
+#### The Problem with Flaky Tests
 
 **Single flaky test (5% failure rate):**
 - 20 PRs/day × 5% = 1 spurious failure/day
 - 10 flaky tests = 10 failures/day
 - Developers lose trust in CI
-- "Just rerun it" becomes default
+- "Just rerun it" becomes default response
 
-### Zero Tolerance Policy
+**Impact:** When CI becomes unreliable, green builds mean nothing.
+
+#### Zero Tolerance Policy
 
 **Rules:**
-1. **Quarantine on first flake:** Move test to quarantine suite
+1. **Quarantine on first flake:** Move test to quarantine suite immediately
 2. **Fix within 2 days:** Owner must fix or delete
 3. **After 2 days:** Auto-disabled, blocks future PRs until fixed
 4. **Track flake rate:** <2% target, measured weekly
 
-### How to Fix Flaky Tests
+#### How to Fix Flaky Tests
 
-- **Race conditions:** Add proper waits, not fixed sleeps
+- **Race conditions:** Add proper waits (`waitFor()`), not fixed sleeps (`sleep(1000)`)
 - **External dependencies:** Mock API calls, don't hit real services
-- **Time-dependent:** Mock system time
-- **Order-dependent:** Isolate test data
-- **Environment-dependent:** Get Hermetic builds
+- **Time-dependent:** Mock system time (`jest.useFakeTimers()`)
+- **Order-dependent:** Isolate test data (unique IDs per test)
+- **Environment-dependent:** Use hermetic builds with exact dependencies
 
-> 🎯 **Goal:** Zero flaky tests in critical path (PR checks)
+> 🎯 **Goal:** Zero flaky tests in critical path (PR checks).
 
----
+### Caching Strategies
 
-## Caching Strategies
-
-### What to Cache
+#### What to Cache
 
 **Dependencies:**
+
 ```yaml
 - uses: actions/cache@v3
   with:
@@ -899,6 +1124,7 @@ Machine-readable artifacts proving checks ran and passed:
 ```
 
 **Build artifacts:**
+
 ```yaml
 - uses: actions/cache@v3
   with:
@@ -907,6 +1133,7 @@ Machine-readable artifacts proving checks ran and passed:
 ```
 
 **Test results:**
+
 ```yaml
 - uses: actions/cache@v3
   with:
@@ -914,128 +1141,69 @@ Machine-readable artifacts proving checks ran and passed:
     key: ${{ runner.os }}-tests-${{ hashFiles('**/src/**') }}
 ```
 
-### Cache Invalidation Strategy
+#### Cache Invalidation Strategy
 
-- **Dependency cache:** Invalidate on lockfile change
-- **Build cache:** Invalidate on source file change
+- **Dependency cache:** Invalidate on lockfile change (`package-lock.json`)
+- **Build cache:** Invalidate on source file change (git hash)
 - **Test cache:** Invalidate on test or source change
 
 **Impact:**
 - First build: 23 minutes
 - Cached build: 3 minutes
-- 7.6x speedup
+- **7.6x speedup**
 
----
+### Continuous Improvement Metrics
 
-## Continuous Improvement Metrics
+#### Track These Weekly
 
-### Track These Weekly
-
-| Metric | Target | Action |
-|--------|--------|--------|
-| PR check time | < 10 min | Optimize if > 10 min |
-| Full pipeline time | < 30 min | Optimize if > 30 min |
-| Flake rate | < 2% | Quarantine if > 2% |
-| Cache hit rate | > 80% | Investigate if < 80% |
-| False positive rate | < 5% | Tune rules if > 5% |
+| Metric | Target | Action If Exceeded |
+|--------|--------|-------------------|
+| PR check time | < 10 min | Optimize, parallelize, or cache |
+| Full pipeline time | < 30 min | Identify slowest checks |
+| Flake rate | < 2% | Quarantine and fix |
+| Cache hit rate | > 80% | Investigate cache misses |
+| False positive rate | < 5% | Tune rules or add agent validation |
 | Throughput | 10-15 PRs/day | Scale infrastructure |
 
-### Monthly Reviews
+#### Monthly Reviews
 
-- **Slowest checks:** Parallelize or optimize
-- **Most flaky tests:** Fix or delete
+- **Slowest checks:** Candidates for parallelization or optimization
+- **Most flaky tests:** Prioritize fixes or deletions
 - **Cache efficiency:** Tune invalidation strategy
-- **False positives:** Adjust rules or add agent validation
+- **False positives:** Adjust rules or enhance agent validation
 
 ---
 
-## Key Takeaways: Trust Manufacturing
+<!-- 🎬 MAJOR SECTION: Implementation Roadmap -->
+## Part 4: Implementation Roadmap
 
-### 🎯 Core Principles
-
-1. **CI is a factory** — Manufacturing trust at agent velocity
-2. **Fast feedback** — <10 minutes for PR checks
-3. **Zero flakes** — Quarantine on first flake, fix within 2 days
-4. **Context-aware validation** — Use agents for complex compliance
-5. **Evidence-based trust** — Attestations for auditability
-6. **Continuous improvement** — Track metrics, optimize weekly
-
-### 🚀 Implementation Steps
-
-1. Measure current CI time and flake rate
-2. Implement affected analysis for fast feedback
-3. Add caching for dependencies and builds
-4. Create agent-based compliance validators
-5. Generate attestations for all checks
-6. Establish zero-tolerance flake policy
-7. Track metrics weekly, optimize monthly
-
----
-
-# Putting It All Together
-
----
-
-## The Complete Gen-4 System
-
-```
-┌──────────────────────────────────────────────────────┐
-│                                                      │
-│  Repository Topology (Part 1)                        │
-│  ├── Agent-native monorepo                           │
-│  ├── Enforced module boundaries                      │
-│  ├── Hermetic builds                                 │
-│  └── Affected analysis                               │
-│                                                      │
-│  ↓ Enables ↓                                         │
-│                                                      │
-│  PR Workflows (Part 2)                               │
-│  ├── Intent-first specifications                     │
-│  ├── Evidence-bundle PRs                             │
-│  ├── Policy-gated merges                             │
-│  └── Outcome-focused review                          │
-│                                                      │
-│  ↓ Validated by ↓                                    │
-│                                                      │
-│  Trust Manufacturing (Part 3)                        │
-│  ├── Fast feedback (<10 min)                         │
-│  ├── Context-aware validation                        │
-│  ├── Evidence attestations                           │
-│  └── Zero-flake tolerance                            │
-│                                                      │
-│  = Sustainable 10-15 features/day with confidence    │
-│                                                      │
-└──────────────────────────────────────────────────────┘
-```
-
----
-
-## Implementation Roadmap
+*Phased approach to Gen-4 SDLC transformation*
 
 ### Phase 1: Foundation (Weeks 1-4)
 
 **Repository:**
-- [ ] Audit current repos: how often do agents touch 2+?
+- [ ] Audit current repos: how often do agents touch 2+ repos?
 - [ ] If >30%, plan monorepo migration
 - [ ] Set up Nx/Lerna/Bazel for build orchestration
+- [ ] Define module boundaries with enforcement rules
 - [ ] Enable affected analysis
 
 **CI:**
-- [ ] Measure current feedback time
-- [ ] Identify slowest checks
+- [ ] Measure current PR check time and flake rate
+- [ ] Identify slowest checks (candidates for parallelization)
 - [ ] Add caching for dependencies and builds
 - [ ] Target: <10 min PR checks
 
 ### Phase 2: Automation (Weeks 5-8)
 
 **Governance:**
-- [ ] Create intent templates for common features
-- [ ] Automate 80% of manual checks
+- [ ] Create intent templates for common feature types
+- [ ] Automate 80% of current manual checks
 - [ ] Build evidence-bundle requirements
 - [ ] Set up attestation generation
 
 **Quality:**
-- [ ] Identify flaky tests
+- [ ] Identify all flaky tests
 - [ ] Implement quarantine policy
 - [ ] Add agent-based compliance validation
 - [ ] Target: <2% flake rate
@@ -1044,122 +1212,146 @@ Machine-readable artifacts proving checks ran and passed:
 
 **Velocity:**
 - [ ] Measure agent throughput
-- [ ] Identify bottlenecks
+- [ ] Identify bottlenecks (repo coordination, review capacity, CI speed)
 - [ ] Optimize slowest checks
-- [ ] Scale infrastructure
+- [ ] Scale infrastructure (more runners, better caching)
 - [ ] Target: 10-15 features/day
 
 **Governance:**
-- [ ] Train reviewers on outcome validation
-- [ ] Refine policy gates
+- [ ] Train reviewers on outcome validation (not line-by-line)
+- [ ] Refine policy gates based on feedback
 - [ ] Measure false positive rate
-- [ ] Iterate based on feedback
+- [ ] Iterate on agent validation prompts
 
 ---
 
-## Success Metrics
+## Real-World Use Cases
 
-### Engineering Velocity
+### Use Case 1: Multi-Repo Coordination Eliminated
 
-| Before (Gen-3) | After (Gen-4) | Improvement |
-|----------------|---------------|-------------|
-| 2-3 features/week | 10-15 features/day | 15-20x |
-| 4-7 days PR-to-merge | 2-4 hours | 20-40x |
-| 80 min CI time | 8 min | 10x |
+**The Problem:** A fintech company had 12 microservice repos. Agents implementing features typically touched 3-4 repos, requiring coordinated PRs, sequential reviews, and coordinated deploys. Time from agent completion to production: 3-5 days.
 
-### Trust & Quality
+**The Solution:** Consolidated into monorepo with Nx enforced module boundaries. 3-4 repos × 3 PRs became 1 atomic PR. Affected analysis reduced CI time from 60 minutes to 8 minutes.
 
-| Before (Gen-3) | After (Gen-4) | Improvement |
-|----------------|---------------|-------------|
-| 22 manual gates | 4 human checkpoints | 80% reduction |
-| 15% flaky tests | <2% flaky | 7x improvement |
-| 803 false positives | 2 false positives | 400x accuracy |
+**Implementation:**
+- Week 1-2: Planned migration strategy with module boundary design
+- Week 3-6: Migrated repos sequentially (2 repos/week)
+- Week 7-8: Set up Nx with path mappings and boundary enforcement
 
-### Human Experience
-
-| Before (Gen-3) | After (Gen-4) | Change |
-|----------------|---------------|--------|
-| Line-by-line review | Outcome validation | Up-stack focus |
-| 4 hours/PR reviewing | 20 min/PR reviewing | 12x time savings |
-| Coordination overhead | Atomic merges | 90% reduction |
+**Outcome:** Time to production: 3-5 days → 4-6 hours. Agent velocity: 3 features/week → 12 features/day. Developer coordination time: 40% → 5%.
 
 ---
 
-## Common Pitfalls
+### Use Case 2: CI Flake Elimination
 
-### 1. Keeping Human-Scale Processes
+**The Problem:** An e-commerce platform had 18% flake rate across 847 tests. Agents generated 15 PRs/day, but 2-3 would fail spuriously, requiring manual intervention. Developers stopped trusting green builds.
 
-❌ **Don't:** Try to review 15,000 lines/day at Gen-3 detail level
-✅ **Do:** Move to intent and outcome validation
+**The Solution:** Implemented zero-tolerance flake policy. First flake → quarantine. Fixed or deleted within 2 days. Migrated to hermetic builds with mocked external services.
 
-### 2. Tolerating Flaky CI
+**Implementation:**
+- Week 1: Identified 89 flaky tests (10% of suite)
+- Week 2-4: Fixed 67 tests (race conditions, external deps, time mocking)
+- Week 5-6: Deleted 22 unfixable tests (duplicates or low value)
 
-❌ **Don't:** "Just rerun it until it passes"
-✅ **Do:** Quarantine on first flake, fix within 2 days
-
-### 3. Multi-Repo for Insufficient Reasons
-
-❌ **Don't:** "We've always had separate repos"
-✅ **Do:** Consolidate if agents cross repos >30% of the time
-
-### 4. Slow Feedback Loops
-
-❌ **Don't:** Accept 60-minute CI times
-✅ **Do:** Optimize to <10 minutes with caching and affected analysis
-
-### 5. Manual Governance at Machine Speed
-
-❌ **Don't:** Require human approval for every change
-✅ **Do:** Automate 90%, human review 10% (high-risk only)
+**Outcome:** Flake rate: 18% → 1.2%. Agent idle time: 35% → 8%. Developer trust in CI: restored. Manual PR reruns: 45/week → 2/week.
 
 ---
 
-## The Strategic Imperative
+## ✅ What You Can Do Today
 
-### Why This Matters Now
+**Immediate Actions (15 minutes):**
+- [ ] Audit last 50 PRs: How many touched 2+ repos? (If >30%, monorepo candidate)
+- [ ] Measure current PR check time and identify slowest checks
+- [ ] Calculate flake rate: failed PR runs ÷ total PR runs × 100
 
-**The window is narrowing:**
-- AI agents are already generating feature-scale code
-- Organizations using Gen-4 practices are shipping 10-15x faster
-- Traditional SDLC is becoming uncompetitive
-- First-movers establish patterns that become industry standards
+**Short-Term Implementation (1-2 weeks):**
+- [ ] Set up affected analysis for existing monorepo (or plan migration if multi-repo)
+- [ ] Add caching for dependencies and build artifacts in CI
+- [ ] Implement flake quarantine policy (fail test on second flake)
+- [ ] Create intent template for one common feature type
 
-**The competitive gap:**
-- Gen-3: 2-3 features/week per team
-- Gen-4: 10-15 features/day per team
-- **100x annual output difference** (150 features/year vs. 3,600 features/year)
+**Advanced Exploration (1-3 months):**
+- [ ] Execute monorepo migration if needed (follow Phase 1 roadmap)
+- [ ] Deploy agent-based compliance validation for one domain (e.g., GDPR)
+- [ ] Build evidence-bundle PR template with required artifacts
+- [ ] Train team on outcome-based review vs. line-by-line
 
-### What Success Looks Like
-
-**In 6 months:**
-- Shipping 10-15 features/day with confidence
-- Human reviewers focused on strategic decisions
-- CI manufacturing trust at agent velocity
-- Compliance and security automated
-
-**In 12 months:**
-- Gen-4 SDLC is muscle memory
-- Agents handle 90% of feature implementation
-- Humans govern outcomes and set direction
-- Organization achieves sustainable AI velocity
+**Next Steps After Completion:**
+1. ✅ Complete Phase 1 (foundation) and measure baseline metrics
+2. 📖 Review [Agentic Journey](../agentic-journey/) if you need quick wins before full transformation
+3. 📊 Build ROI dashboard tracking: time-to-merge, agent velocity, flake rate, review capacity
+4. 🚀 Present transformation plan using [Agentic Delivery](../../exec-talks/agentic-delivery/) executive framing
 
 ---
 
-## Resources
+## Related Patterns
 
-**Official Documentation:**
-- [Nx Monorepo Tools](https://nx.dev/) — Build orchestration and affected analysis
-- [SLSA Framework](https://slsa.dev/) — Supply chain security attestations
-- [GitHub Actions Caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
+### Complementary Features
 
-**Community Examples:**
-- [Copilot Orchestra](https://github.com/ShepAlderson/copilot-orchestra) — Agent workflow patterns
-- [GitHub Copilot Atlas](https://github.com/bigguy345/Github-Copilot-Atlas) — Multi-agent orchestration
+- **[Agentic Journey](../agentic-journey/)** — Incremental issue-to-PR automation when you're not ready for full SDLC transformation
+- **[Agent Teams](../agent-teams/)** — Specialized multi-agent coordination patterns for complex workflows
+- **[Parallel Execution](../parallel-execution/)** — Worktree-based independence for multiple agents working simultaneously
+- **[Copilot Hooks](../copilot-hooks/)** — Governance mechanisms and agent behavior controls
 
-**Related Talks:**
-- [Agent Teams](../agent-teams/) — Specialized agent coordination
-- [Parallel Execution](../parallel-execution/) — Worktree-based autonomy
-- [Copilot Hooks](../copilot-hooks/) — Agent governance
+### Decision Flow
+
+**If this talk doesn't fit your needs:**
+
+```
+Q: What's blocking your agent velocity?
+├─ "Haven't started with agents" → See: Agentic Journey
+├─ "Agents work but no pain yet" → Wait until pain manifests, then return
+├─ "Need executive buy-in" → See: Agentic Delivery (exec-talks)
+├─ "Organization-wide scaling" → See: Enterprise Patterns
+└─ "Interactive dev workflows" → See: Agentic Sessions
+```
+
+See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
+
+---
+
+## 📚 Official Documentation
+
+**Primary Documentation:**
+- 📖 **[Nx Monorepo Tools](https://nx.dev/)** — Build orchestration, module boundaries, affected analysis, and caching
+- 📖 **[GitHub Actions Documentation](https://docs.github.com/en/actions)** — CI/CD workflow automation, caching, and parallelization
+- 📖 **[SLSA Framework](https://slsa.dev/)** — Supply chain security levels and attestation standards
+
+**Additional Resources:**
+- 🎓 [Nx Tutorial: Monorepo Setup](https://nx.dev/getting-started/intro) — Step-by-step monorepo creation
+- 🔧 [GitHub Actions Caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows) — Dependency and artifact caching
+- 📖 [Hermetic Builds Guide](https://bazel.build/basics/hermeticity) — Deterministic build principles
+
+**GitHub Resources:**
+- 🐙 [Copilot Orchestra](https://github.com/ShepAlderson/copilot-orchestra) — Agent workflow patterns and examples
+- 🐙 [GitHub Copilot Atlas](https://github.com/bigguy345/Github-Copilot-Atlas) — Multi-agent orchestration patterns
+
+---
+
+## 🎭 Behind the Scenes
+
+### Why Module Boundary Enforcement Matters
+
+The difference between comments and enforcement is the difference between documentation and compliance. Agents don't "respect" architectural boundaries—they follow what the import system allows.
+
+When you write `// @internal - don't use this`, you're writing documentation for humans. When you configure Nx with:
+
+```json
+{
+  "sourceTag": "scope:payment",
+  "onlyDependOnLibsWithTags": ["scope:shared", "scope:payment"]
+}
+```
+
+You're programming the build system to reject invalid imports. The agent attempts the import, CI fails with a clear error, and the agent corrects the mistake. This **learning through enforcement** is how agents respect architecture at scale.
+
+### The Economics of Flake Tolerance
+
+Why is 2% the target, not 0%? Because pursuing absolute zero flakiness has diminishing returns. The last 2% often represents environmental edge cases that occur once per 1,000 runs—fixing them costs more than the occasional manual rerun.
+
+However, above 2%, the cost curve inverts. At 5% flake rate with 20 PRs/day, you get ~1 false failure/day. At 10%, it's ~2/day. That's where developers stop trusting CI and start shipping without green builds—which defeats the entire purpose of automated testing.
+
+The 2% threshold is the economic inflection point where enforcement cost equals failure cost.
 
 ---
 
