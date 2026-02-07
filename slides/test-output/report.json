@@ -1,0 +1,10 @@
+[
+  {
+    "slideFile": "tech-talks/enterprise-patterns",
+    "passed": false,
+    "compilerErrors": [],
+    "compilerWarnings": [],
+    "playwrightResults": null,
+    "error": "Slidev exited with code 1 before server ready.\nOutput:\nnpm error code E404\nnpm error 404 Not Found - GET https://registry.npmjs.org/slidev - Not found\nnpm error 404\nnpm error 404  The requested resource 'slidev@*' could not be found or you do not have permission to access it.\nnpm error 404\nnpm error 404 Note that you can also install from a\nnpm error 404 tarball, folder, http url, or git url.\nnpm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-02-07T00_07_09_978Z-debug-0.log\n\nErrors: "
+  }
+]
