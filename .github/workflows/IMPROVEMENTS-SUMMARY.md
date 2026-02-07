@@ -173,7 +173,7 @@ Human: Adds tech-talk:complete label when satisfied
 1. Check if `.research/[topic]/` directory exists
 2. Review `phase1-research.md` and `phase2-plan.md` if they exist
 3. If research is incomplete, manually edit the files or re-trigger Phase 2
-4. When satisfied, manually add `tech-talk:built` label to progress
+4. When satisfied, manually add `tech-talk:ready` label to progress
 
 **Documentation**:
 - `.github/workflows/ISSUE-54-INVESTIGATION.md` - Detailed root cause analysis
@@ -239,7 +239,7 @@ Human: Adds tech-talk:complete label when satisfied
    - Review `phase2-plan.md` - content outline
    - Edit files if needed
    - Commit any changes
-   - Add `tech-talk:built` label when satisfied
+   - Add `tech-talk:ready` label when satisfied
 
 5. **Phase 3 Runs Automatically**:
    - Reads approved research and plan
@@ -270,7 +270,7 @@ Human: Adds tech-talk:complete label when satisfied
 If Issue 54 is still in progress:
 
 1. Check if research directory exists: `tech-talks/.research/[topic]/`
-2. If yes, review the files and add `tech-talk:built` label
+2. If yes, review the files and add `tech-talk:ready` label
 3. If no, ensure issue has `tech-talk:planned` label and re-trigger Phase 2
 4. Can manually trigger by commenting: `@copilot-swe-agent[bot] please complete Phase 2 research`
 

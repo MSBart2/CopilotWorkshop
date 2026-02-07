@@ -47,9 +47,9 @@ Use the issue template: `.github/ISSUE_TEMPLATE/tech-talk-request.yml`
 - Populates `phase1-research.md` with findings
 - Creates `phase2-plan.md` with content outline
 - **Human review checkpoint** — Review research and plan files
-- Manually add `tech-talk:built` label to proceed
+- Manually add `tech-talk:ready` label to proceed
 
-**Phase 3: Build** (`tech-talk:built`)
+**Phase 3: Build** (`tech-talk:ready`)
 - Reads research and plan files from `.research/` directory
 - Generates complete README.md following TEMPLATE.md
 - Downloads visual assets to images/ directory
@@ -119,12 +119,12 @@ For source URLs with content >20K characters:
 | `tech-talk` | Identifies tech talk issues | ✅ Template |
 | `tech-talk:intake` | Phase 1 active | ✅ Template |
 | `tech-talk:planned` | Phase 2 active | ✅ Phase 1 |
-| `tech-talk:built` | Phase 3 active | ⚠️ Manual (after reviewing research) |
+| `tech-talk:ready` | Phase 3 active | ⚠️ Manual (after reviewing research) |
 | `tech-talk:slides` | Phase 4 active | ⚠️ Manual (after reviewing README) |
 | `tech-talk:complete` | All phases done | ⚠️ Manual |
 
 **Manual review points:**
-- After Phase 2: Review `.research/[topic]/` files before adding `tech-talk:built`
+- After Phase 2: Review `.research/[topic]/` files before adding `tech-talk:ready`
 - After Phase 3: Review PR with README.md before adding `tech-talk:slides`
 
 ## Manual Overrides

@@ -93,7 +93,7 @@ If you want fully automated progression without human review, we can:
 1. **Phase 1 (Intake)** runs automatically
 2. **Phase 2 (Research & Plan)** runs automatically when `tech-talk:planned` label added
 3. **HUMAN REVIEW** of `.research/[topic]/` files
-4. **Human adds** `tech-talk:built` label when satisfied
+4. **Human adds** `tech-talk:ready` label when satisfied
 5. **Phase 3 (Build)** runs automatically
 6. **HUMAN REVIEW** of generated PR
 7. **Human adds** `tech-talk:slides` label when satisfied
@@ -108,7 +108,7 @@ For Issue 54 specifically:
 1. Check if `.research/` directory was created
 2. Review `phase1-research.md` and `phase2-plan.md` (if they exist)
 3. If research is incomplete, manually edit the files
-4. When satisfied, manually add `tech-talk:built` label to progress to Phase 3
+4. When satisfied, manually add `tech-talk:ready` label to progress to Phase 3
 
 If the research files don't exist yet, you can manually trigger Phase 2 by:
 - Commenting: `@copilot-swe-agent[bot] please complete Phase 2 research`
@@ -167,7 +167,8 @@ Progress when maintainer adds 👍 reaction to research comment.
 2. Phase 1 runs automatically → creates research directory
 3. Phase 2 runs automatically → populates research files
 4. **You review** `.research/[topic]/` files
-5. **You add** `tech-talk:built` label when ready
+5. **You add** `tech-talk:ready` label when ready
+6. Phase 3 generates content → creates PR
 6. Phase 3 generates content → creates PR
 7. **You review** PR
 8. **You add** `tech-talk:slides` label when ready

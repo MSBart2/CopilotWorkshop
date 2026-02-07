@@ -55,7 +55,7 @@
                          │
                          │ 👤 MANUAL (human adds label when satisfied)
                          ▼
-              ✅ Human Adds: tech-talk:built
+              ✅ Human Adds: tech-talk:ready
                          │
                          │ 🤖 AUTOMATED - Phase 3 Workflow Runs
                          │
@@ -115,7 +115,7 @@
 | `tech-talk` | 🤖 Template | No | Identifies tech-talk issues | Issue creation | Never (permanent) |
 | `tech-talk:intake` | 🤖 Template | ✅ Phase 1 | Starts intake process | Issue creation | After Phase 1 completes |
 | `tech-talk:planned` | 🤖 Phase 1 Workflow | ✅ Phase 2 | Research & planning phase | Phase 1 completion | Optional (can keep) |
-| `tech-talk:built` | 👤 Human | ✅ Phase 3 | Content generation phase | After reviewing research | Optional (can keep) |
+| `tech-talk:ready` | 👤 Human | ✅ Phase 3 | Content generation phase | After reviewing research | Optional (can keep) |
 | `tech-talk:slides` | 👤 Human | ✅ Phase 4 | Slide generation phase | After reviewing README | Optional (can keep) |
 | `tech-talk:complete` | 👤 Human | No | Marks workflow complete | After merging PR | Never |
 
@@ -144,7 +144,7 @@
 
 **After Phase 2** (research complete):
 - 👤 Human reviews `.research/[topic]/` files
-- 👤 Human adds `tech-talk:built` to trigger Phase 3
+- 👤 Human adds `tech-talk:ready` to trigger Phase 3
 
 **After Phase 3** (README complete):
 - 👤 Human reviews PR with generated content
@@ -178,11 +178,11 @@
 
 ### Phase 3: Build (tech-talk-phase3-build.yml)
 **Triggers when**:
-- Issue has BOTH labels: `tech-talk` AND `tech-talk:built`
+- Issue has BOTH labels: `tech-talk` AND `tech-talk:ready`
 - Event: `issues` with type `[labeled]`
 
 **What it does**:
-- Runs when human adds `tech-talk:built` label
+- Runs when human adds `tech-talk:ready` label
 - Agent generates README and creates PR
 - Waits for human to add `tech-talk:slides` label
 
@@ -206,7 +206,7 @@
 - `phase2-plan.md` - Content outline and structure
 
 **Actions**:
-- ✅ If satisfied: Add `tech-talk:built` label → Phase 3 runs
+- ✅ If satisfied: Add `tech-talk:ready` label → Phase 3 runs
 - ✏️ If needs changes: Edit files, commit, then add label
 - 🔄 If incomplete: Comment for agent to revise, wait
 
@@ -245,7 +245,7 @@
 | Add `tech-talk:planned` label | 🤖 Phase 1 | Automatic |
 | Run Phase 2 (Research) | 🤖 Workflow | Automatic (label trigger) |
 | Review research files | 👤 Human | Manual |
-| Add `tech-talk:built` label | 👤 Human | Manual (after review) |
+| Add `tech-talk:ready` label | 👤 Human | Manual (after review) |
 | Run Phase 3 (Build) | 🤖 Workflow | Automatic (label trigger) |
 | Review PR with README | 👤 Human | Manual |
 | Add `tech-talk:slides` label | 👤 Human | Manual (after review) |
@@ -259,7 +259,7 @@
 ### Progress Labels (track current phase)
 - `tech-talk:intake` - Phase 1 in progress
 - `tech-talk:planned` - Phase 2 in progress
-- `tech-talk:built` - Phase 3 in progress or complete
+- `tech-talk:ready` - Phase 3 in progress or complete
 - `tech-talk:slides` - Phase 4 in progress or complete
 - `tech-talk:complete` - All phases done, PR merged
 
@@ -285,7 +285,7 @@
 00:03 - Phase 2 runs (15 min)
         ↓ Agent populates research files
 00:18 - 👤 Human reviews research (manual)
-        ↓ 👤 Human adds tech-talk:built
+        ↓ 👤 Human adds tech-talk:ready
 00:20 - Phase 3 runs (20 min)
         ↓ Agent creates PR with README
 00:40 - 👤 Human reviews PR (manual)
@@ -305,14 +305,14 @@
 **Expected**: Phase 2 does NOT add labels. Human must review and add manually.
 
 ### "Phase 3 didn't start after Phase 2"
-**Expected**: Human must add `tech-talk:built` label after reviewing research files.
+**Expected**: Human must add `tech-talk:ready` label after reviewing research files.
 
 ### "Agent tried to update labels but failed"
 **Fixed**: New workflow design uses manual label progression for reliability.
 
 ### "How do I skip a phase?"
 Add the next phase's label directly. For example:
-- Skip Phase 2: Add `tech-talk:built` immediately after Phase 1
+- Skip Phase 2: Add `tech-talk:ready` immediately after Phase 1
 - Skip Phase 3: Add `tech-talk:slides` after research review
 
 ### "How do I restart a phase?"

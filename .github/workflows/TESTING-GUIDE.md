@@ -103,17 +103,18 @@ Use this guide to validate the improved workflow works as expected.
    - Adjust section structure
    - Commit changes
 
-4. When satisfied, add label: `tech-talk:built`
+4. When satisfied, add label: `tech-talk:ready`
 
 **Expected Behavior**:
 - Issue should have `tech-talk:planned` label initially
-- After review, manually add `tech-talk:built` label
+- After review, manually add `tech-talk:ready` label
+- This triggers Phase 3
 - This triggers Phase 3
 
 ### 5. Verify Phase 3 (Build) - Should Run When Label Added
 
 **Expected Results**:
-- Workflow runs when `tech-talk:built` label added
+- Workflow runs when `tech-talk:ready` label added
 - Comment appears: "🔨 Phase 3: Build Started"
 - Agent reads research and plan files
 - Agent generates `tech-talks/test-copilot-edits/README.md`
@@ -261,7 +262,7 @@ If test fails:
 - [ ] Research files populated
 - [ ] Label does NOT auto-update
 - [ ] Review research files manually
-- [ ] Add `tech-talk:built` label manually
+- [ ] Add `tech-talk:ready` label manually
 - [ ] Phase 3 runs automatically
 - [ ] PR created with README.md
 - [ ] Review PR content manually

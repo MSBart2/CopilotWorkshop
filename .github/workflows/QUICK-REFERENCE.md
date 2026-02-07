@@ -107,7 +107,7 @@
 │  HUMAN REVIEW       │ (👤 Manual) ⚠️
 │  Review .research/  │
 │  Edit if needed     │
-│  Add tech-talk:built│ ← 👤 Human adds label
+│  Add tech-talk:ready│ ← 👤 Human adds label
 └──────────┬──────────┘
            │
            ▼
@@ -174,7 +174,7 @@
 3. Fill form → Submit
 4. Wait for Phase 1 and 2 to complete (15-20 min)
 5. Review: `tech-talks/.research/[topic]/` files
-6. When satisfied: Add `tech-talk:built` label
+6. When satisfied: Add `tech-talk:ready` label
 7. Wait for Phase 3 to complete (15-20 min)
 8. Review: PR with generated content
 9. When satisfied: Add `tech-talk:slides` label
@@ -198,7 +198,7 @@ Question: How does Copilot Edits differ from inline suggestions?
 1. Check: Does `tech-talks/.research/[topic]/` exist?
 2. If yes:
    - Review files
-   - Add `tech-talk:built` label
+   - Add `tech-talk:ready` label
 3. If no:
    - Ensure issue has `tech-talk:planned` label
    - Comment: `@copilot-swe-agent[bot] please complete Phase 2 research`

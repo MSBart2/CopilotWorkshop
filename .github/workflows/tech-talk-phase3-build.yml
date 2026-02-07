@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       contains(github.event.issue.labels.*.name, 'tech-talk') &&
-      contains(github.event.issue.labels.*.name, 'tech-talk:built')
+      contains(github.event.issue.labels.*.name, 'tech-talk:ready')
     permissions:
       issues: write
       contents: write
