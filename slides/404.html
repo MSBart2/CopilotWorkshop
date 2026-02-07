@@ -57,7 +57,10 @@
       if (attemptedPath === currentPath) {
         // We've already tried this redirect, clear flag and don't loop
         sessionStorage.removeItem(redirectKey);
-        console.warn('404 redirect loop detected for:', currentPath);
+        // Only log in development mode (when running locally)
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.warn('404 redirect loop detected for:', currentPath);
+        }
         return;
       }
 

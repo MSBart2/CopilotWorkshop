@@ -68,11 +68,13 @@ const testCases = [
     expectedLoopPrevention: false
   },
   {
-    name: 'Deep slide route',
+    name: 'Deep slide route (testing URL encoding)',
     input: '/CopilotTraining/tech-talks/subagents/1/2/3',
     expectedAction: 'redirect',
     expectedTo: '/CopilotTraining/tech-talks/subagents/?slide=1%2F2%2F3',
     expectedLoopPrevention: true
+    // Note: This tests URL encoding behavior. Slidev doesn't typically use nested paths,
+    // but if someone manually creates such a URL, we handle it gracefully by encoding it.
   }
 ];
 

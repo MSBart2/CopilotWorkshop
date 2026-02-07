@@ -12,12 +12,14 @@ export default defineAppSetup(({ app, router }) => {
       router.isReady().then(() => {
         const slideNumber = parseInt(targetSlide, 10)
         if (!isNaN(slideNumber) && slideNumber > 0) {
-          // Navigate to the slide
-          router.push(`/${slideNumber}`)
-          
-          // Clean up the URL by removing the query parameter
-          const cleanUrl = window.location.pathname + window.location.hash
-          window.history.replaceState({}, '', cleanUrl)
+          // Use replace() instead of push() to avoid polluting browser history
+          // This is restoring state after a 404 redirect, not user-initiated navigation
+          router.replace(`/${slideNumber}`).then(() => {
+            // Clean up the URL by removing the query parameter
+            // Do this after router navigation completes to ensure URL is updated
+            const cleanUrl = window.location.pathname + window.location.hash
+            window.history.replaceState({}, '', cleanUrl)
+          })
         }
       })
     }
