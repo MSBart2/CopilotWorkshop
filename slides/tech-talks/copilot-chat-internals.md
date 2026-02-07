@@ -3,579 +3,799 @@ theme: default
 class: text-center
 highlighter: shiki
 lineNumbers: false
-info: |
-  ## Under the Hood: Copilot Chat Internals
-  CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
-title: Under the Hood - Copilot Chat Internals
-module: tech-talks/copilot-chat-internals
+title: Copilot Chat Internals
 mdc: true
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"></div>
+# 🔍 Copilot Chat Internals
 
-  <!-- Glowing orb -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
+## Debugging AI Interactions
 
-  <!-- Logo with glow -->
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-64" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+⏰ **Duration** • 40 minutes | 👥 **Audience** • Developers / DevOps / Technical Leads
+
+---
+layout: center
+---
+
+# ❓ The Question
+
+<div class="text-2xl mb-8">
+
+> *"Why didn't Copilot do what I expected—*
+>
+> *and how do I systematically debug AI interactions?"*
+
+</div>
+
+<div class="text-lg opacity-80">
+
+Every developer using Copilot encounters unexpected results.
+
+This talk shows you how to investigate, not guess.
+
+</div>
+
+---
+layout: center
+---
+
+# 📖 Table of Contents
+
+<div class="grid grid-cols-2 gap-6">
+  <div @click="$nav.go(7)" class="cursor-pointer p-6 rounded-lg border-2 border-blue-400 hover:border-blue-500 hover:bg-blue-400/10 transition-all">
+    <div class="text-3xl mb-2">🔎</div>
+    <div class="font-semibold text-lg">Chat Debug View</div>
+    <div class="text-sm opacity-70">Complete request inspection</div>
   </div>
-
-  <!-- Gradient text title -->
-  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10">
-    Under the Hood
-  </h1>
-
-  <!-- Pill subtitle -->
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-cyan-500/25">
-      Copilot Chat Internals
-    </span>
+  <div @click="$nav.go(11)" class="cursor-pointer p-6 rounded-lg border-2 border-purple-400 hover:border-purple-500 hover:bg-purple-400/10 transition-all">
+    <div class="text-3xl mb-2">🧠</div>
+    <div class="font-semibold text-lg">Thinking Tokens</div>
+    <div class="text-sm opacity-70">See model reasoning</div>
   </div>
+  <div @click="$nav.go(13)" class="cursor-pointer p-6 rounded-lg border-2 border-green-400 hover:border-green-500 hover:bg-green-400/10 transition-all">
+    <div class="text-3xl mb-2">⚙️</div>
+    <div class="font-semibold text-lg">Diagnostics View</div>
+    <div class="text-sm opacity-70">Configuration validation</div>
+  </div>
+  <div @click="$nav.go(15)" class="cursor-pointer p-6 rounded-lg border-2 border-orange-400 hover:border-orange-500 hover:bg-orange-400/10 transition-all">
+    <div class="text-3xl mb-2">📋</div>
+    <div class="font-semibold text-lg">Extension Logs & MCP</div>
+    <div class="text-sm opacity-70">Deep troubleshooting</div>
+  </div>
+</div>
 
-  <!-- Decorative line -->
-  <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
+<div @click="$nav.go(17)" class="mt-6 cursor-pointer p-4 rounded-lg border-2 border-cyan-400 hover:border-cyan-500 hover:bg-cyan-400/10 transition-all">
+  <div class="text-center">
+    <span class="text-2xl mr-2">🔧</span>
+    <span class="font-semibold">Troubleshooting Patterns</span>
+    <span class="text-sm opacity-70 ml-2">• Systematic debugging workflows</span>
+  </div>
 </div>
 
 ---
 
-# The Visibility Problem
+# ⚠️ The Problem
 
-<div class="grid grid-cols-2 gap-8 mt-8">
+<div class="text-xl mb-6">Why debugging AI interactions is hard</div>
 
-<div class="p-6 bg-red-900/40 rounded-lg border-2 border-red-500">
-<h3 class="text-xl font-bold text-white mb-4">❌ Black Box Frustration</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>Prompts don't produce expected results</li>
-<li>Can't see why AI responded incorrectly</li>
-<li>Which files were actually sent?</li>
-<li>Were instructions loaded?</li>
-</ul>
+<div class="grid grid-cols-1 gap-4">
+
+<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
+  <div class="font-semibold">🔒 Black box frustration</div>
+  <div class="text-sm opacity-80">No visibility into what the model received</div>
 </div>
 
-<div class="p-6 bg-yellow-900/40 rounded-lg border-2 border-yellow-500">
-<h3 class="text-xl font-bold text-white mb-4">⚠️ Trial-and-Error Cycle</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>Improving prompts becomes guesswork</li>
-<li>Context mystery—what did Copilot see?</li>
-<li>Tool invocations hidden</li>
-<li>No systematic debugging approach</li>
-</ul>
+<div class="p-4 bg-orange-400/10 rounded border-l-4 border-orange-400">
+  <div class="font-semibold">❓ Context mystery</div>
+  <div class="text-sm opacity-80">Which files were sent? Were custom instructions loaded?</div>
 </div>
 
+<div class="p-4 bg-yellow-400/10 rounded border-l-4 border-yellow-400">
+  <div class="font-semibold">🔁 Trial-and-error debugging</div>
+  <div class="text-sm opacity-80">20-40 minutes per failed interaction</div>
 </div>
 
-<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-<div class="text-xl font-bold text-white">Without visibility, debugging AI interactions is guesswork.</div>
-</div>
-
----
-
-# Chat Debug View: Your X-Ray Vision
-
-<div class="grid grid-cols-3 gap-4 mt-8 text-xs">
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-2">
-<span class="text-2xl">📋</span>
-<div>
-<div class="text-white font-bold">System Prompt</div>
-<div class="text-gray-400">Base instructions for AI behavior</div>
-</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-2">
-<span class="text-2xl">💬</span>
-<div>
-<div class="text-white font-bold">User Prompt</div>
-<div class="text-gray-400">Your actual request as sent</div>
-</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-2">
-<span class="text-2xl">📚</span>
-<div>
-<div class="text-white font-bold">Context</div>
-<div class="text-gray-400">Files and instructions sent</div>
-</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-2">
-<span class="text-2xl">🔧</span>
-<div>
-<div class="text-white font-bold">Tool Invocations</div>
-<div class="text-gray-400">Which tools were called</div>
-</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-2">
-<span class="text-2xl">🤖</span>
-<div>
-<div class="text-white font-bold">Model Response</div>
-<div class="text-gray-400">Full response from LLM</div>
-</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-2">
-<span class="text-2xl">🎯</span>
-<div>
-<div class="text-white font-bold">Token Usage</div>
-<div class="text-gray-400">Context window consumption</div>
-</div>
-</div>
-
-</div>
-
-<div class="mt-8 p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-<div class="text-white font-bold mb-2">💡 How to Open</div>
-<div class="text-sm text-gray-300">Chat view → Overflow menu <code>...</code> → <strong>Show Chat Debug View</strong></div>
-<div class="text-sm text-gray-300 mt-1">OR: Command Palette → <strong>Developer: Show Chat Debug View</strong></div>
-</div>
-
----
-
-# Anatomy of a Chat Request (Part 1/2)
-
-<div class="flex flex-col items-center gap-3 mt-4 text-sm">
-
-<div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400 w-full">
-<div class="text-white font-bold">1. YOUR PROMPT</div>
-<div class="text-gray-300 italic">"Add error handling to this function"</div>
-</div>
-
-<div class="text-2xl text-gray-400">↓</div>
-
-<div class="p-3 bg-green-900/60 rounded-lg border-2 border-green-400 w-full">
-<div class="text-white font-bold">2. CONTEXT ASSEMBLY</div>
-<div class="text-gray-300">Active file, selections, #file, @workspace, instructions, agent definitions, skills</div>
-</div>
-
-<div class="text-2xl text-gray-400">↓</div>
-
-<div class="p-3 bg-purple-900/60 rounded-lg border-2 border-purple-400 w-full">
-<div class="text-white font-bold">3. SYSTEM PROMPT CONSTRUCTION</div>
-<div class="text-gray-300">Base Copilot instructions + agent-specific + custom instructions + tool definitions</div>
+<div class="p-4 bg-purple-400/10 rounded border-l-4 border-purple-400">
+  <div class="font-semibold">⚙️ Customization uncertainty</div>
+  <div class="text-sm opacity-80">Are my agents and instructions actually working?</div>
 </div>
 
 </div>
 
 ---
 
-# Anatomy of a Chat Request (Part 2/2)
+# ✅ The Solution
 
-<div class="flex flex-col items-center gap-3 mt-4 text-sm">
+<div class="text-xl mb-6">Built-in observability tools</div>
 
-<div class="p-3 bg-orange-900/60 rounded-lg border-2 border-orange-400 w-full">
-<div class="text-white font-bold">4. MODEL INFERENCE</div>
-<div class="text-gray-300">Model processes request → may invoke tools → tool results fed back → response generated</div>
-</div>
-
-<div class="text-2xl text-gray-400">↓</div>
-
-<div class="p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400 w-full">
-<div class="text-white font-bold">5. RESPONSE DELIVERY</div>
-<div class="text-gray-300">Streamed to Chat view with formatted code blocks and actions</div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-xl text-center">
-<div class="text-white font-semibold">Each step in the pipeline transforms and enriches your request</div>
-</div>
-
----
-
-# What to Look For in Debug View
-
-<div class="grid grid-cols-3 gap-6 mt-8">
-
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-<h3 class="text-lg font-bold text-white mb-3">📚 Context Section</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>✓ Are the right files included?</li>
-<li>✓ Is context window full?</li>
-<li>✓ Are instructions loaded?</li>
-<li>✓ Check token usage</li>
-</ul>
-</div>
-
-<div class="p-4 bg-green-900/60 rounded-lg border-l-4 border-green-400">
-<h3 class="text-lg font-bold text-white mb-3">🔧 Tool Invocations</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>✓ Which tools were called?</li>
-<li>✓ Did they succeed or fail?</li>
-<li>✓ What data did they return?</li>
-<li>✓ Error messages?</li>
-</ul>
-</div>
-
-<div class="p-4 bg-purple-900/60 rounded-lg border-l-4 border-purple-400">
-<h3 class="text-lg font-bold text-white mb-3">🤖 Response</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>✓ Does model reference instructions?</li>
-<li>✓ Are codebase patterns followed?</li>
-<li>✓ Context properly applied?</li>
-<li>✓ Response quality matches expectations?</li>
-</ul>
-</div>
-
-</div>
-
----
-
-# Customization Diagnostics
-
-<div class="grid grid-cols-2 gap-8 mt-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
-<h3 class="text-xl font-bold text-white mb-4">🔍 What Diagnostics Reveals</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>📁 All active customization files</li>
-<li>✅ Load status for each file</li>
-<li>❌ Error messages for failed files</li>
-<li>📋 Application order for instructions</li>
-</ul>
 
-<div class="mt-4 p-3 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-<div class="text-white font-bold text-sm">How to Open</div>
-<div class="text-xs text-gray-300 mt-1">Right-click in Chat → <strong>Diagnostics</strong></div>
-</div>
+### What It Provides
+
+- **Request Inspection**: View system prompts, context, and tool invocations
+- **Reasoning Visibility**: See model thinking tokens
+- **Configuration Validation**: Verify customizations loaded correctly
+- **Network Diagnostics**: Troubleshoot connectivity issues
+
 </div>
 
 <div>
-<h3 class="text-xl font-bold text-white mb-4">⚠️ Common Issues</h3>
-<div class="space-y-2 text-xs">
-<div class="p-2 bg-red-900/40 rounded-lg">
-<div class="text-white font-bold">Agent not available</div>
-<div class="text-gray-400">→ Syntax error in YAML frontmatter</div>
+
+### Four Diagnostic Systems
+
+1. **Chat Debug View** → Request/response details
+2. **Thinking Tokens** → Model reasoning
+3. **Diagnostics View** → Config validation
+4. **Extension Logs** → Infrastructure debugging
+
 </div>
-<div class="p-2 bg-yellow-900/40 rounded-lg">
-<div class="text-white font-bold">Instructions ignored</div>
-<div class="text-gray-400">→ File in wrong location (needs .github/)</div>
+
 </div>
-<div class="p-2 bg-orange-900/40 rounded-lg">
-<div class="text-white font-bold">Skills not triggering</div>
-<div class="text-gray-400">→ applyTo pattern doesn't match</div>
+
+<div class="mt-6 p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="font-semibold">💡 Core Insight</div>
+  <div class="text-sm">Transform AI debugging from guesswork into systematic investigation</div>
 </div>
-<div class="p-2 bg-red-900/40 rounded-lg">
-<div class="text-white font-bold">Duplicate agents</div>
-<div class="text-gray-400">→ Multiple files with same name</div>
+
+---
+layout: center
+name: chatdebugview
+---
+
+# 🔎 Chat Debug View
+
+<div class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+Complete Request Inspection
 </div>
+
+<div class="mt-6 text-xl opacity-80">
+See exactly what every AI request sends and receives
 </div>
+
+<div class="mt-8 text-sm opacity-60">
+Section 1 of 5 • No more black boxes
+</div>
+
+---
+
+# 🔎 Chat Debug View: What It Shows
+
+<div class="text-lg mb-4">Every component of each AI interaction</div>
+
+<div class="grid grid-cols-2 gap-4">
+
+<div class="space-y-3">
+
+<div class="p-3 bg-blue-400/10 rounded">
+  <div class="font-semibold">📝 System Prompt</div>
+  <div class="text-sm opacity-80">Base instructions for AI behavior</div>
+</div>
+
+<div class="p-3 bg-green-400/10 rounded">
+  <div class="font-semibold">💬 User Prompt</div>
+  <div class="text-sm opacity-80">Your actual request as sent</div>
+</div>
+
+<div class="p-3 bg-purple-400/10 rounded">
+  <div class="font-semibold">📁 Context</div>
+  <div class="text-sm opacity-80">Files, instructions, and context sent</div>
+</div>
+
+</div>
+
+<div class="space-y-3">
+
+<div class="p-3 bg-orange-400/10 rounded">
+  <div class="font-semibold">🔧 Tool Invocations</div>
+  <div class="text-sm opacity-80">Which tools were called and results</div>
+</div>
+
+<div class="p-3 bg-cyan-400/10 rounded">
+  <div class="font-semibold">✨ Model Response</div>
+  <div class="text-sm opacity-80">Full response from language model</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-yellow-400/10 rounded border-l-4 border-yellow-400">
+  <div class="font-semibold">🎯 How to Open</div>
+  <div class="text-sm">Command Palette → <code>Developer: Show Chat Debug View</code></div>
+</div>
+
+---
+
+# 🔎 The Request Pipeline
+
+<div class="text-sm mb-4">What happens when you send a chat message</div>
+
+<div class="grid grid-cols-5 gap-2 text-xs">
+
+<div class="p-3 bg-blue-400/10 rounded text-center">
+  <div class="text-2xl mb-1">1️⃣</div>
+  <div class="font-semibold">Your Prompt</div>
+</div>
+
+<div class="flex items-center justify-center">
+  <div class="text-2xl">→</div>
+</div>
+
+<div class="p-3 bg-purple-400/10 rounded text-center">
+  <div class="text-2xl mb-1">2️⃣</div>
+  <div class="font-semibold">Context Assembly</div>
+</div>
+
+<div class="flex items-center justify-center">
+  <div class="text-2xl">→</div>
+</div>
+
+<div class="p-3 bg-pink-400/10 rounded text-center">
+  <div class="text-2xl mb-1">3️⃣</div>
+  <div class="font-semibold">System Prompt</div>
+</div>
+
+</div>
+
+<div class="grid grid-cols-5 gap-2 text-xs mt-2">
+
+<div class="col-start-2 flex items-center justify-center">
+  <div class="text-2xl">↓</div>
+</div>
+
+</div>
+
+<div class="grid grid-cols-5 gap-2 text-xs">
+
+<div class="col-start-2 p-3 bg-orange-400/10 rounded text-center">
+  <div class="text-2xl mb-1">5️⃣</div>
+  <div class="font-semibold">Response</div>
+</div>
+
+<div class="flex items-center justify-center">
+  <div class="text-2xl">←</div>
+</div>
+
+<div class="p-3 bg-green-400/10 rounded text-center">
+  <div class="text-2xl mb-1">4️⃣</div>
+  <div class="font-semibold">Model Inference</div>
+</div>
+
+</div>
+
+<div class="mt-6 text-sm">
+  <strong>Key Assembly Steps:</strong> Active files + #file refs + @workspace + instructions + agent defs + tools
+</div>
+
+---
+
+# 🔎 What to Look For
+
+<div class="text-lg mb-4">Key things to check in Debug View</div>
+
+<div class="space-y-4">
+
+<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="font-semibold mb-2">📁 Context Section</div>
+  <div class="text-sm opacity-90">
+    • Are the right files included?<br/>
+    • Is the context window full? (check token usage)<br/>
+    • Are instructions being loaded?
+  </div>
+</div>
+
+<div class="p-4 bg-purple-400/10 rounded border-l-4 border-purple-400">
+  <div class="font-semibold mb-2">🔧 Tool Invocations</div>
+  <div class="text-sm opacity-90">
+    • Which tools were called?<br/>
+    • Did they succeed or fail?<br/>
+    • What data did they return?
+  </div>
+</div>
+
+<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
+  <div class="font-semibold mb-2">✨ Response</div>
+  <div class="text-sm opacity-90">
+    • Does the model reference your instructions?<br/>
+    • Are patterns from your codebase being followed?
+  </div>
+</div>
+
+</div>
+
+---
+layout: center
+name: thinkingtoken
+---
+
+# 🧠 Thinking Tokens
+
+<div class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+See the Model Reason
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Watch the model's reasoning process in real-time
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Section 2 of 5 • VS Code 1.109+
+</div>
+
+---
+
+# 🧠 Thinking Tokens: What They Reveal
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+### What Are Thinking Tokens?
+
+Some models (Claude, o-series) produce **internal reasoning steps** before generating a response.
+
+VS Code 1.109+ can display these tokens, showing *how* the model approaches your request.
+
+### Enable Thinking Display
+
+Setting: `chat.renderThinking`
+
+- **"collapsed"** (default) — Shown collapsed
+- **"expanded"** — Shown expanded
+- **"hidden"** — Not displayed
+
+</div>
+
+<div>
+
+### What Thinking Reveals
+
+<div class="space-y-3">
+
+<div class="p-3 bg-blue-400/10 rounded">
+  <div class="font-semibold text-sm">Problem decomposition</div>
+  <div class="text-xs opacity-80">How the model breaks down your request</div>
+</div>
+
+<div class="p-3 bg-purple-400/10 rounded">
+  <div class="font-semibold text-sm">Tool selection reasoning</div>
+  <div class="text-xs opacity-80">Why specific tools were chosen</div>
+</div>
+
+<div class="p-3 bg-green-400/10 rounded">
+  <div class="font-semibold text-sm">Context evaluation</div>
+  <div class="text-xs opacity-80">How files influenced decisions</div>
+</div>
+
+<div class="p-3 bg-orange-400/10 rounded">
+  <div class="font-semibold text-sm">Uncertainty signals</div>
+  <div class="text-xs opacity-80">When multiple approaches considered</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: center
+name: diagnosticsview
+---
+
+# ⚙️ Diagnostics View
+
+<div class="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+Configuration Validation
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Verify custom agents, instructions, and skills are loading correctly
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Section 3 of 5 • Catch config errors early
+</div>
+
+---
+
+# ⚙️ Diagnostics View: What It Shows
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+### When Customizations Don't Apply
+
+Custom agents, instructions, prompts, and skills can fail to load **silently**.
+
+### What Diagnostics Reveals
+
+- All active customization files
+- Load status (loaded, failed, skipped)
+- Error messages for failed files
+- Application order for instructions
+
+### How to Open
+
+Right-click in Chat view → **Diagnostics**
+
+</div>
+
+<div>
+
+### Common Issues Revealed
+
+<div class="space-y-3 text-sm">
+
+<div class="p-3 bg-red-400/10 rounded">
+  <div class="font-semibold">Agent not available</div>
+  <div class="text-xs opacity-80">File failed to load due to syntax error</div>
+  <div class="text-xs text-green-400">→ Check YAML frontmatter</div>
+</div>
+
+<div class="p-3 bg-orange-400/10 rounded">
+  <div class="font-semibold">Instructions ignored</div>
+  <div class="text-xs opacity-80">File in wrong location</div>
+  <div class="text-xs text-green-400">→ Move to .github/ folder</div>
+</div>
+
+<div class="p-3 bg-yellow-400/10 rounded">
+  <div class="font-semibold">Skills not triggering</div>
+  <div class="text-xs opacity-80">Not matching applyTo pattern</div>
+  <div class="text-xs text-green-400">→ Update glob pattern</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: center
+name: extensionlogs
+---
+
+# 📋 Extension Logs & MCP
+
+<div class="text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+Deep Troubleshooting
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Infrastructure-level debugging for network, auth, and external tools
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Section 4 of 5 • When things really break
+</div>
+
+---
+
+# 📋 Extension Logs: Trace Mode
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+### Enable Detailed Logging
+
+1. Command Palette (`Ctrl+Shift+P`)
+2. **Developer: Set Log Level**
+3. Set to **Trace** for:
+   - GitHub Copilot
+   - GitHub Copilot Chat
+
+### View Logs
+
+1. **Output: Show Output Channels**
+2. Select **GitHub Copilot** from dropdown
+3. Review detailed logs
+
+</div>
+
+<div>
+
+### What Logs Reveal
+
+<div class="space-y-3 text-sm">
+
+<div class="p-3 bg-blue-400/10 rounded">
+  <div class="font-semibold">Network requests</div>
+  <div class="text-xs opacity-80">Request/response patterns, timeouts</div>
+</div>
+
+<div class="p-3 bg-purple-400/10 rounded">
+  <div class="font-semibold">Authentication</div>
+  <div class="text-xs opacity-80">Auth status, token validation</div>
+</div>
+
+<div class="p-3 bg-green-400/10 rounded">
+  <div class="font-semibold">Extension lifecycle</div>
+  <div class="text-xs opacity-80">Initialization, crashes, restarts</div>
+</div>
+
+<div class="p-3 bg-orange-400/10 rounded">
+  <div class="font-semibold">Performance timing</div>
+  <div class="text-xs opacity-80">Identify bottlenecks</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: center
+name: troubleshooting
+---
+
+# 🔧 Troubleshooting Patterns
+
+<div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+Systematic Debugging Workflows
+</div>
+
+<div class="mt-6 text-xl opacity-80">
+Proven diagnostic workflows for common AI interaction problems
+</div>
+
+<div class="mt-8 text-sm opacity-60">
+Section 5 of 5 • From symptoms to solutions
+</div>
+
+---
+
+# 🔧 Pattern 1: Instructions Ignored
+
+<div class="space-y-4">
+
+<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
+  <div class="font-semibold mb-2">❌ Symptom</div>
+  <div class="text-sm">Copilot generates code that violates your custom instructions</div>
+</div>
+
+<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="font-semibold mb-2">🔍 Diagnostic Steps</div>
+  <div class="text-sm space-y-1">
+    1. Open <strong>Diagnostics</strong> (right-click in Chat)<br/>
+    2. Verify instruction file is listed and loaded<br/>
+    3. Open <strong>Chat Debug View</strong><br/>
+    4. Check if instructions appear in context section<br/>
+    5. Look for "References" section in response
+  </div>
+</div>
+
+<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
+  <div class="font-semibold mb-2">✅ Common Causes</div>
+  <div class="text-sm">
+    • File not in <code>.github/copilot-instructions.md</code><br/>
+    • Syntax error in YAML frontmatter<br/>
+    • Instructions too long, truncated by context limits
+  </div>
 </div>
 
 </div>
 
 ---
 
-# Troubleshooting Patterns
+# 🔧 Pattern 2: Wrong Files in Context
 
-<div class="grid grid-cols-2 gap-4 mt-6 text-xs">
+<div class="space-y-4">
 
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="text-white font-bold mb-2">🚫 "Copilot Ignores My Instructions"</div>
-<div class="text-gray-400">
-<strong>Check:</strong><br/>
-1. Diagnostics → verify file loaded<br/>
-2. Debug View → check context section<br/>
-3. Look for References in response<br/>
-<strong>Common causes:</strong> Wrong location, syntax error, too long
-</div>
+<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
+  <div class="font-semibold mb-2">❌ Symptom</div>
+  <div class="text-sm">Generated code ignores critical utilities or patterns</div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="text-white font-bold mb-2">📁 "Wrong Files in Context"</div>
-<div class="text-gray-400">
-<strong>Check:</strong><br/>
-1. Debug View → expand context<br/>
-2. Review actual files included<br/>
-<strong>Common causes:</strong> @workspace returned unexpected, #file path incorrect, implicit context wrong
-</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="text-white font-bold mb-2">🔧 "Tool Invocation Failed"</div>
-<div class="text-gray-400">
-<strong>Check:</strong><br/>
-1. Debug View → tool invocations<br/>
-2. Check error message<br/>
-<strong>Common causes:</strong> MCP server not running, auth required, input format incorrect
-</div>
+<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="font-semibold mb-2">🔍 Diagnostic Steps</div>
+  <div class="text-sm space-y-1">
+    1. Open <strong>Chat Debug View</strong><br/>
+    2. Expand the <strong>context section</strong><br/>
+    3. Review which files were actually included<br/>
+    4. Check token usage percentage
+  </div>
 </div>
 
-<div class="p-3 bg-gray-800 rounded-lg">
-<div class="text-white font-bold mb-2">🎯 "Response Doesn't Match Patterns"</div>
-<div class="text-gray-400">
-<strong>Check:</strong><br/>
-1. Debug View → what context sent<br/>
-2. Verify instructions mention patterns<br/>
-<strong>Common causes:</strong> Relevant files not in context, instructions weak, context truncated
-</div>
+<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
+  <div class="font-semibold mb-2">✅ Common Causes & Fixes</div>
+  <div class="text-sm">
+    • <code>@workspace</code> returned unexpected results → Use explicit <code>#file</code><br/>
+    • Context window 95% full → Critical files truncated<br/>
+    • Implicit context (active file) wasn't expected
+  </div>
 </div>
 
 </div>
 
 ---
 
-# Context Window Awareness
+# 🔧 Pattern 3: Tool Invocation Failed
 
-<div class="mt-6">
+<div class="space-y-4">
 
-<div class="p-4 bg-yellow-900/40 rounded-lg border-2 border-yellow-500 mb-5">
-<h3 class="text-lg font-bold text-white mb-2">⚠️ Token Limits Matter</h3>
-<div class="text-sm text-gray-300">
-When context window is exceeded:
-<ul class="mt-2 space-y-1">
-<li>• Oldest context is truncated</li>
-<li>• Instructions may be dropped</li>
-<li>• File contents may be incomplete</li>
-</ul>
+<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
+  <div class="font-semibold mb-2">❌ Symptom</div>
+  <div class="text-sm">Agent produces generic code without using external tools</div>
 </div>
+
+<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="font-semibold mb-2">🔍 Diagnostic Steps</div>
+  <div class="text-sm space-y-1">
+    1. Open <strong>Chat Debug View</strong><br/>
+    2. Expand <strong>tool invocations section</strong><br/>
+    3. Check error message or response<br/>
+    4. Run <strong>MCP: List Servers</strong><br/>
+    5. Select server → <strong>Show Output</strong>
+  </div>
+</div>
+
+<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
+  <div class="font-semibold mb-2">✅ Common Causes</div>
+  <div class="text-sm">
+    • MCP server not running → Restart server<br/>
+    • Tool requires authentication → Update credentials<br/>
+    • Timeout due to VPN latency → Increase timeout config
+  </div>
+</div>
+
+</div>
+
+---
+
+# 📊 Real-World Impact
+
+<div class="text-lg mb-4">Measurable improvements from diagnostic tools</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="text-3xl font-bold mb-2">41 min</div>
+  <div class="font-semibold">Time saved per config error</div>
+  <div class="text-sm opacity-80 mt-2">Using Diagnostics View instead of trial-and-error</div>
+</div>
+
+<div class="p-4 bg-purple-400/10 rounded border-l-4 border-purple-400">
+  <div class="text-3xl font-bold mb-2">80%</div>
+  <div class="font-semibold">Reduction in missed context</div>
+  <div class="text-sm opacity-80 mt-2">Monitoring context indicator proactively</div>
+</div>
+
+<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
+  <div class="text-3xl font-bold mb-2">1-1.5 hrs</div>
+  <div class="font-semibold">Daily time saved (team of 4)</div>
+  <div class="text-sm opacity-80 mt-2">MCP server timeout debugging</div>
+</div>
+
+<div class="p-4 bg-orange-400/10 rounded border-l-4 border-orange-400">
+  <div class="text-3xl font-bold mb-2">80%</div>
+  <div class="font-semibold">Faster prompt debugging</div>
+  <div class="text-sm opacity-80 mt-2">Using thinking tokens to identify ambiguity</div>
+</div>
+
+</div>
+
+---
+
+# ✅ What You Can Do Today
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+### Immediate (5 minutes)
+
+- ✅ Open **Chat Debug View** now
+- ✅ Enable thinking display: `chat.renderThinking` → "expanded"
+- ✅ Check **Diagnostics** (right-click in Chat)
+- ✅ Bookmark key commands
+
+### Short-Term (30 minutes)
+
+- ✅ Develop with Debug View open
+- ✅ Monitor context window indicator
+- ✅ Enable trace logs if needed
+- ✅ Validate customizations after changes
+
+</div>
+
+<div>
+
+### Advanced (1-2 hours)
+
+- ✅ Build personal debugging runbook
+- ✅ Analyze thinking patterns
+- ✅ Set up MCP monitoring routine
+- ✅ Create team documentation
+
+### Next Steps
+
+1. Make Debug View a habit
+2. Review [Copilot Chat](../copilot-chat/) foundations
+3. Share diagnostic wins with team
+4. Explore [Custom Agents Workshop](../../workshop/06-custom-agents/)
+
+</div>
+
+</div>
+
+---
+
+# 🎯 Mental Model Shift
+
+<div class="text-xl mb-6 text-center">
+From <span class="text-red-400">"AI is unpredictable"</span> to <span class="text-green-400">"every interaction is debuggable"</span>
 </div>
 
 <div class="grid grid-cols-2 gap-6">
 
 <div>
-<h3 class="text-lg font-bold text-white mb-3">📊 Monitor Usage</h3>
-<div class="text-sm text-gray-300">
-<strong>New in VS Code 1.109:</strong> Context window indicator in chat input
-</div>
-<div class="mt-3 p-3 bg-blue-900/60 rounded-lg text-xs">
-<div class="text-white">Hover to see breakdown:</div>
-<ul class="text-gray-300 mt-2 space-y-1">
-<li>• System prompt tokens</li>
-<li>• User message tokens</li>
-<li>• Context tokens</li>
-<li>• Remaining capacity</li>
-</ul>
-</div>
-</div>
 
-<div>
-<h3 class="text-lg font-bold text-white mb-3">🎯 Optimize Context</h3>
-<div class="space-y-2 text-xs">
-<div class="p-2 bg-gray-800 rounded-lg flex items-start gap-2">
-<span>🔹</span>
-<div>
-<div class="text-white font-bold">Context window full</div>
-<div class="text-gray-400">Use specific #file instead of @workspace</div>
-</div>
-</div>
-<div class="p-2 bg-gray-800 rounded-lg flex items-start gap-2">
-<span>🔹</span>
-<div>
-<div class="text-white font-bold">Important context dropped</div>
-<div class="text-gray-400">Reference critical files explicitly</div>
-</div>
-</div>
-<div class="p-2 bg-gray-800 rounded-lg flex items-start gap-2">
-<span>🔹</span>
-<div>
-<div class="text-white font-bold">Long conversations</div>
-<div class="text-gray-400">Start new session or use /compact</div>
-</div>
-</div>
-</div>
+### ✅ Move Toward
+
+<div class="space-y-2 text-sm">
+
+- **Debug-View-First**: Keep it open during iteration
+- **Thinking Token Analysis**: Read model reasoning
+- **Diagnostics-As-Validation**: Check after every change
+- **Evidence-Based Refinement**: Base improvements on actual data
+
 </div>
 
 </div>
 
+<div>
+
+### 🛑 Move Away From
+
+<div class="space-y-2 text-sm">
+
+- **Blind Iteration**: Tweaking without checking context
+- **Assuming Loads**: Not verifying instructions applied
+- **Reload as First Step**: Masks root causes
+- **Black Box Acceptance**: AI is fundamentally unpredictable
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
+  <div class="font-semibold">Example Transformation</div>
+  <div class="text-sm">Before: 35 minutes of prompt tweaking and window reloads • After: 4 minutes to identify YAML syntax error in line 14</div>
 </div>
 
 ---
 
-# Extension Logs: Deep Debugging
+# 📚 Official Documentation
 
-<div class="grid grid-cols-2 gap-8 mt-8">
+<div class="grid grid-cols-1 gap-4">
 
-<div>
-<h3 class="text-xl font-bold text-white mb-4">🔍 Enable Trace Logs</h3>
-<div class="p-4 bg-gray-800 rounded-lg">
-<ol class="text-sm text-gray-300 space-y-2">
-<li><strong>1.</strong> Command Palette → <code>Ctrl+Shift+P</code></li>
-<li><strong>2.</strong> Run <strong>Developer: Set Log Level</strong></li>
-<li><strong>3.</strong> Set to <strong>Trace</strong> for:
-<ul class="ml-4 mt-1">
-<li>• GitHub Copilot</li>
-<li>• GitHub Copilot Chat</li>
-</ul>
-</li>
-</ol>
+<div class="p-4 bg-blue-400/10 rounded">
+  <div class="font-semibold mb-2">📖 Primary Documentation</div>
+  <div class="text-sm space-y-1">
+    • <a href="https://code.visualstudio.com/docs/copilot/chat/chat-debug-view" class="text-blue-400">Chat Debug View</a> — Complete guide to request inspection<br/>
+    • <a href="https://code.visualstudio.com/docs/copilot/troubleshooting" class="text-blue-400">Troubleshoot AI in VS Code</a> — Comprehensive troubleshooting reference<br/>
+    • <a href="https://code.visualstudio.com/docs/copilot/customization/mcp-servers" class="text-blue-400">MCP Servers</a> — Configuring and debugging external tools
+  </div>
 </div>
 
-<div class="mt-4 p-3 bg-blue-900/60 rounded-lg text-xs">
-<div class="text-white font-bold">View Logs</div>
-<div class="text-gray-300 mt-1">Output: Show Output Channels → Select GitHub Copilot</div>
-</div>
-</div>
-
-<div>
-<h3 class="text-xl font-bold text-white mb-4">📋 What Logs Reveal</h3>
-<div class="space-y-2">
-<div class="p-2 bg-gray-800 rounded-lg text-sm">
-<div class="text-white">🌐 Network requests and responses</div>
-</div>
-<div class="p-2 bg-gray-800 rounded-lg text-sm">
-<div class="text-white">⚙️ Extension initialization</div>
-</div>
-<div class="p-2 bg-gray-800 rounded-lg text-sm">
-<div class="text-white">🔐 Authentication status</div>
-</div>
-<div class="p-2 bg-gray-800 rounded-lg text-sm">
-<div class="text-white">❌ Error stack traces</div>
-</div>
-<div class="p-2 bg-gray-800 rounded-lg text-sm">
-<div class="text-white">⏱️ Performance timing</div>
-</div>
-</div>
-</div>
-
-</div>
-
----
-
-# MCP Server Troubleshooting
-
-<div class="mt-8">
-
-<div class="p-5 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl mb-6 text-center">
-<div class="text-xl font-bold text-white">MCP servers extend Copilot with external capabilities</div>
-</div>
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-<h3 class="text-lg font-bold text-white mb-3">🔍 Diagnostic Commands</h3>
-<div class="p-4 bg-gray-800 rounded-lg">
-<div class="text-sm text-white mb-2"><strong>Command Palette:</strong></div>
-<div class="text-sm text-gray-300 mb-4">Run <strong>MCP: List Servers</strong></div>
-<div class="text-sm text-white mb-2"><strong>For each server:</strong></div>
-<ul class="text-xs text-gray-300 space-y-1">
-<li>• Status (running, stopped, error)</li>
-<li>• Show Output (view logs)</li>
-<li>• Restart Server</li>
-<li>• Stop Server</li>
-</ul>
-</div>
-</div>
-
-<div>
-<h3 class="text-lg font-bold text-white mb-3">⚠️ Common Issues</h3>
-<div class="space-y-2 text-xs">
-<div class="p-2 bg-red-900/40 rounded-lg">
-<div class="text-white font-bold">Server not starting</div>
-<div class="text-gray-400">Check output logs → Fix config/dependencies</div>
-</div>
-<div class="p-2 bg-yellow-900/40 rounded-lg">
-<div class="text-white font-bold">Tools not appearing</div>
-<div class="text-gray-400">Verify status → Restart server</div>
-</div>
-<div class="p-2 bg-orange-900/40 rounded-lg">
-<div class="text-white font-bold">Timeout errors</div>
-<div class="text-gray-400">Check performance → Optimize or increase timeout</div>
-</div>
-<div class="p-2 bg-red-900/40 rounded-lg">
-<div class="text-white font-bold">Auth failures</div>
-<div class="text-gray-400">Review logs → Update API keys</div>
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
----
-
-# Best Practices for Observability
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div class="space-y-4">
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-<h3 class="text-lg font-bold text-white mb-2">🔍 Develop with Debug View Open</h3>
-<ul class="text-sm text-gray-300 space-y-1">
-<li>• Keep in split editor</li>
-<li>• Watch context assembly real-time</li>
-<li>• Iterate based on what you see</li>
-</ul>
-</div>
-
-<div class="p-4 bg-green-900/60 rounded-lg border-l-4 border-green-400">
-<h3 class="text-lg font-bold text-white mb-2">✅ Regular Diagnostics Checks</h3>
-<ul class="text-sm text-gray-300 space-y-1">
-<li>• After adding customizations</li>
-<li>• Verify loading status</li>
-<li>• Confirm application</li>
-</ul>
-</div>
-</div>
-
-<div class="space-y-4">
-<div class="p-4 bg-purple-900/60 rounded-lg border-l-4 border-purple-400">
-<h3 class="text-lg font-bold text-white mb-2">📊 Log Strategic Moments</h3>
-<ul class="text-sm text-gray-300 space-y-1">
-<li>• Setting up new MCP servers</li>
-<li>• Debugging auth issues</li>
-<li>• Investigating performance</li>
-</ul>
-</div>
-
-<div class="p-4 bg-yellow-900/60 rounded-lg border-l-4 border-yellow-400">
-<h3 class="text-lg font-bold text-white mb-2">📝 Document Working Patterns</h3>
-<ul class="text-sm text-gray-300 space-y-1">
-<li>• Note context included</li>
-<li>• Record active instructions</li>
-<li>• Save Debug View output</li>
-</ul>
-</div>
-</div>
-
-</div>
-
----
-
-# Key Takeaways
-
-<div class="mt-8 space-y-4">
-
-<div class="p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg">
-<div class="text-xl font-bold text-white text-center">🔍 Visibility enables improvement — You can't fix what you can't see</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4 text-sm">
-
-<div class="p-4 bg-gray-800 rounded-lg border-l-4 border-blue-400">
-<div class="text-white font-bold mb-2">🎯 Debug View is Essential</div>
-<div class="text-gray-300">System prompts, context, tool invocations—all visible and inspectable</div>
-</div>
-
-<div class="p-4 bg-gray-800 rounded-lg border-l-4 border-green-400">
-<div class="text-white font-bold mb-2">✅ Diagnostics Catches Config Issues</div>
-<div class="text-gray-300">Load failures, syntax errors, wrong paths revealed immediately</div>
-</div>
-
-<div class="p-4 bg-gray-800 rounded-lg border-l-4 border-purple-400">
-<div class="text-white font-bold mb-2">📊 Context Window Matters</div>
-<div class="text-gray-300">Monitor token usage, optimize what's sent to avoid truncation</div>
-</div>
-
-<div class="p-4 bg-gray-800 rounded-lg border-l-4 border-yellow-400">
-<div class="text-white font-bold mb-2">🔧 Logs for Deep Issues</div>
-<div class="text-gray-300">Network, auth, and extension problems require trace logging</div>
-</div>
-
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-Make opening the Debug View a habit—understanding what Copilot sees is the fastest path to better results
+<div class="p-4 bg-purple-400/10 rounded">
+  <div class="font-semibold mb-2">🔧 Additional Resources</div>
+  <div class="text-sm space-y-1">
+    • <a href="https://code.visualstudio.com/docs/copilot/customization/custom-instructions" class="text-blue-400">Custom Instructions</a> — Writing and debugging instruction files<br/>
+    • <a href="https://code.visualstudio.com/docs/copilot/customization/custom-agents" class="text-blue-400">Copilot Agents</a> — Building and troubleshooting agents<br/>
+    • <a href="https://github.com/microsoft/vscode-discussions/discussions/categories/copilot" class="text-blue-400">VS Code Discussions</a> — Community troubleshooting patterns
+  </div>
 </div>
 
 </div>
@@ -584,37 +804,36 @@ Make opening the Debug View a habit—understanding what Copilot sees is the fas
 layout: center
 ---
 
-# Getting Started
+# 🎉 You're Ready!
 
-<div class="mt-8 space-y-4 text-left max-w-2xl mx-auto">
+<div class="text-2xl mb-8">
 
-<div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-<h3 class="text-lg font-bold text-white mb-3">🚀 Immediate Actions</h3>
-<ol class="text-sm text-gray-300 space-y-2">
-<li><strong>1.</strong> Open Chat Debug View now — Make a request and examine every section</li>
-<li><strong>2.</strong> Check Diagnostics — Right-click in Chat to verify your customizations</li>
-<li><strong>3.</strong> Monitor context window — Watch the indicator as you add context</li>
-</ol>
-</div>
-
-<div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
-<h3 class="text-lg font-bold text-white mb-3">➡️ Next Steps</h3>
-<ul class="text-sm text-gray-300 space-y-2">
-<li>• Enable trace logs when debugging complex issues</li>
-<li>• Review MCP server status if using external tools</li>
-<li>• Develop with Debug View visible to iterate faster</li>
-</ul>
-</div>
+**Make AI interactions transparent and debuggable**
 
 </div>
 
----
-layout: end
----
+<div class="grid grid-cols-3 gap-6 text-center">
 
-# Master the Tools
+<div>
+  <div class="text-4xl mb-2">🔎</div>
+  <div class="font-semibold">Chat Debug View</div>
+  <div class="text-sm opacity-70">See every request</div>
+</div>
 
-<div class="text-center mt-8">
-<div class="text-2xl text-gray-300 mb-4">Systematic debugging beats trial-and-error</div>
-<div class="text-lg text-gray-400">Use Chat Debug View, Diagnostics, and Extension Logs to see what Copilot actually sees</div>
+<div>
+  <div class="text-4xl mb-2">🧠</div>
+  <div class="font-semibold">Thinking Tokens</div>
+  <div class="text-sm opacity-70">Understand reasoning</div>
+</div>
+
+<div>
+  <div class="text-4xl mb-2">⚙️</div>
+  <div class="font-semibold">Diagnostics</div>
+  <div class="text-sm opacity-70">Validate configs</div>
+</div>
+
+</div>
+
+<div class="mt-12 text-center opacity-70">
+  <div>Start with <code>Developer: Show Chat Debug View</code> today!</div>
 </div>
