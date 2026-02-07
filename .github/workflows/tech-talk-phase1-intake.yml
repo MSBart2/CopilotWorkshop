@@ -1,4 +1,4 @@
-name: Tech Talk Automation - Phase 1 (Intake)
+name: Tech Talk Automation - Phase 1 (Intake & Research)
 
 on:
   issues:
@@ -47,6 +47,35 @@ jobs:
             
             return { topic, sourceUrls, primaryQuestion, audience, duration };
 
+      - name: Create research directory
+        run: |
+          topic="${{ steps.extract.outputs.topic }}"
+          mkdir -p "tech-talks/.research/${topic}"
+          echo "Created research directory: tech-talks/.research/${topic}"
+
+      - name: Save metadata
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const topic = '${{ steps.extract.outputs.topic }}';
+            const metadata = {
+              topic: topic,
+              issue_number: context.issue.number,
+              primary_question: '${{ steps.extract.outputs.primary_question }}',
+              audience: '${{ steps.extract.outputs.audience }}',
+              duration: '${{ steps.extract.outputs.duration }}',
+              source_urls: '${{ steps.extract.outputs.source_urls }}'.split('\n').filter(u => u.trim()),
+              phase1_started: new Date().toISOString(),
+              phase1_completed: null,
+              phase2_completed: null
+            };
+            
+            fs.writeFileSync(
+              `tech-talks/.research/${topic}/metadata.json`,
+              JSON.stringify(metadata, null, 2)
+            );
+
       - name: Validate source URLs
         id: validate
         run: |
@@ -68,16 +97,64 @@ jobs:
           echo "validation_complete=true" >> $GITHUB_OUTPUT
           echo "all_valid=$valid" >> $GITHUB_OUTPUT
 
+      - name: Initialize research document
+        run: |
+          topic="${{ steps.extract.outputs.topic }}"
+          cat > "tech-talks/.research/${topic}/phase1-research.md" << 'EOF'
+          # Research Findings for ${{ steps.extract.outputs.topic }}
+
+          **Issue**: #${{ github.event.issue.number }}
+          **Primary Question**: ${{ steps.extract.outputs.primary_question }}
+          **Research Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          ---
+
+          ## Source URLs
+
+          ${{ steps.extract.outputs.source_urls }}
+
+          ---
+
+          ## Research Instructions
+
+          This document will be populated by the tech-talk-generator agent in Phase 2.
+
+          The agent should:
+          1. Use **web_search** (not web_fetch) to research each URL
+          2. For large content (>20K chars), process in sections
+          3. Extract technical details: capabilities, architecture, examples
+          4. Identify decision criteria and tradeoffs
+          5. List visual assets (diagrams, screenshots)
+          6. Note official documentation links
+          7. Identify 2-5 primary artifacts
+          8. Map 3-6 major technical sections
+
+          ---
+
+          ## Research Findings
+
+          [Agent will populate this section in Phase 2]
+          EOF
+
+      - name: Commit research files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tech-talks/.research/
+          git commit -m "Initialize research directory for tech-talk: ${{ steps.extract.outputs.topic }} (Issue #${{ github.event.issue.number }})"
+          git push
+
       - name: Comment on issue - Phase 1 Complete
         uses: actions/github-script@v7
         with:
           script: |
             const validation = '${{ steps.validate.outputs.all_valid }}' === 'true';
             const status = validation ? '✅' : '⚠️';
+            const topic = '${{ steps.extract.outputs.topic }}';
             
             const comment = `## ${status} Phase 1: Intake Complete
             
-            **Tech Talk Topic**: ${{ steps.extract.outputs.topic }}
+            **Tech Talk Topic**: ${topic}
             **Primary Question**: ${{ steps.extract.outputs.primary_question }}
             **Target Audience**: ${{ steps.extract.outputs.audience }}
             **Duration**: ${{ steps.extract.outputs.duration }}
@@ -87,14 +164,22 @@ jobs:
             
             ${validation ? '✅ All URLs are accessible' : '⚠️ Some URLs may require authentication or VPN access'}
             
+            ### 📁 Research Storage
+            
+            Research files created at:
+            - \`tech-talks/.research/${topic}/metadata.json\`
+            - \`tech-talks/.research/${topic}/phase1-research.md\`
+            
+            [View Research Files](https://github.com/${context.repo.owner}/${context.repo.repo}/tree/main/tech-talks/.research/${topic})
+            
             ---
             
             **Next Steps**:
             - Phase 2 will begin automatically
-            - Agent will research source material and create content outline
+            - Agent will research source URLs and populate research document
+            - Agent will create content outline based on findings
+            - You can review/edit research files before Phase 3
             - Estimated time: 10-15 minutes
-            
-            To manually trigger Phase 2, add the \`tech-talk:planned\` label.
             `;
             
             await github.rest.issues.createComment({
