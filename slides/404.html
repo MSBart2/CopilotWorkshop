@@ -47,11 +47,25 @@
     // This script handles direct links and browser refreshes for Slidev slide routes
 
     (function() {
-      const path = window.location.pathname;
+      const currentPath = window.location.pathname;
       const repo = '/CopilotTraining';
 
+      // Prevent infinite loops: Check if we've already tried redirecting
+      const redirectKey = 'slidev-404-redirect-attempted';
+      const attemptedPath = sessionStorage.getItem(redirectKey);
+      
+      if (attemptedPath === currentPath) {
+        // We've already tried this redirect, clear flag and don't loop
+        sessionStorage.removeItem(redirectKey);
+        // Only log in development mode (when running locally)
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.warn('404 redirect loop detected for:', currentPath);
+        }
+        return;
+      }
+
       // Remove repo base from path if present
-      const trimmedPath = path.startsWith(repo) ? path.slice(repo.length) : path;
+      const trimmedPath = currentPath.startsWith(repo) ? currentPath.slice(repo.length) : currentPath;
 
       // Split path into segments (filter out empty strings)
       const segments = trimmedPath.split('/').filter(s => s);
@@ -64,6 +78,7 @@
         // Category + basename (e.g., /tech-talks/subagents)
         const category = segments[0];
         const basename = segments[1];
+        // Add trailing slash to load the presentation's index.html
         window.location.replace(repo + '/' + category + '/' + basename + '/');
       } else if (segments.length >= 3) {
         // Slide route (e.g., /tech-talks/subagents/1)
@@ -71,9 +86,14 @@
         const basename = segments[1];
         const slideRoute = segments.slice(2).join('/');
 
-        // Redirect to the presentation's index with the slide route preserved
-        // The Slidev SPA router will handle the route
-        window.location.replace(repo + '/' + category + '/' + basename + '/' + slideRoute);
+        // Mark that we're attempting a redirect to prevent loops
+        sessionStorage.setItem(redirectKey, currentPath);
+
+        // Redirect to the presentation's base directory (which has index.html)
+        // Pass the slide number via query parameter so Slidev can navigate to it
+        const baseUrl = repo + '/' + category + '/' + basename + '/';
+        const slideParam = '?slide=' + encodeURIComponent(slideRoute);
+        window.location.replace(baseUrl + slideParam);
       } else {
         // Single segment - might be a category, redirect to home
         window.location.replace(repo + '/');
