@@ -1,0 +1,138 @@
+name: Tech Talk Automation - Phase 1 (Intake)
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.issue.labels.*.name, 'tech-talk') &&
+      contains(github.event.issue.labels.*.name, 'tech-talk:intake')
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract issue fields
+        id: extract
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body;
+            
+            // Parse the issue body to extract fields
+            const extractField = (label) => {
+              const regex = new RegExp(`### ${label}\\s*\\n\\s*([^#]+)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+            
+            const topic = extractField('Tech Talk Topic');
+            const sourceUrls = extractField('Source URLs');
+            const primaryQuestion = extractField('Primary Question');
+            const audience = extractField('Target Audience');
+            const duration = extractField('Expected Duration');
+            
+            core.setOutput('topic', topic);
+            core.setOutput('source_urls', sourceUrls);
+            core.setOutput('primary_question', primaryQuestion);
+            core.setOutput('audience', audience);
+            core.setOutput('duration', duration);
+            
+            return { topic, sourceUrls, primaryQuestion, audience, duration };
+
+      - name: Validate source URLs
+        id: validate
+        run: |
+          echo "Validating source URLs..."
+          urls="${{ steps.extract.outputs.source_urls }}"
+          
+          # Check if URLs are accessible (basic validation)
+          valid=true
+          while IFS= read -r url; do
+            if [[ -n "$url" && "$url" =~ ^https?:// ]]; then
+              echo "Checking: $url"
+              if ! curl -f -s -I "$url" > /dev/null 2>&1; then
+                echo "⚠️ Warning: URL may be inaccessible: $url"
+                valid=false
+              fi
+            fi
+          done <<< "$urls"
+          
+          echo "validation_complete=true" >> $GITHUB_OUTPUT
+          echo "all_valid=$valid" >> $GITHUB_OUTPUT
+
+      - name: Comment on issue - Phase 1 Complete
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const validation = '${{ steps.validate.outputs.all_valid }}' === 'true';
+            const status = validation ? '✅' : '⚠️';
+            
+            const comment = `## ${status} Phase 1: Intake Complete
+            
+            **Tech Talk Topic**: ${{ steps.extract.outputs.topic }}
+            **Primary Question**: ${{ steps.extract.outputs.primary_question }}
+            **Target Audience**: ${{ steps.extract.outputs.audience }}
+            **Duration**: ${{ steps.extract.outputs.duration }}
+            
+            ### Source URLs Validated
+            ${{ steps.extract.outputs.source_urls }}
+            
+            ${validation ? '✅ All URLs are accessible' : '⚠️ Some URLs may require authentication or VPN access'}
+            
+            ---
+            
+            **Next Steps**:
+            - Phase 2 will begin automatically
+            - Agent will research source material and create content outline
+            - Estimated time: 10-15 minutes
+            
+            To manually trigger Phase 2, add the \`tech-talk:planned\` label.
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+
+      - name: Progress to Phase 2
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Remove intake label, add planned label
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              name: 'tech-talk:intake'
+            });
+            
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['tech-talk:planned']
+            });
+
+      - name: Assign to tech-talk-generator agent
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Re-assign to ensure agent picks up the planned phase
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees \
+            --input - <<< '{
+              "assignees": ["copilot-swe-agent[bot]"]
+            }'

@@ -1,0 +1,134 @@
+name: 🎤 Tech Talk Request
+description: Request creation of a new technical deep-dive presentation
+title: "[Tech Talk] "
+labels: ["tech-talk", "tech-talk:intake"]
+assignees:
+  - copilot-swe-agent[bot]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Tech Talk Generation Workflow
+        
+        This issue will progress through 4 phases:
+        1. **Intake/Research** (`tech-talk:intake`) - Validate URLs and gather source material
+        2. **Plan** (`tech-talk:planned`) - Research and create content outline
+        3. **Build** (`tech-talk:built`) - Generate complete README.md
+        4. **Slides** (`tech-talk:slides`) - Create Slidev presentation
+        
+        Labels will be updated as each phase completes.
+
+  - type: input
+    id: topic
+    attributes:
+      label: Tech Talk Topic
+      description: Short, descriptive name for the tech talk (will be used for directory name)
+      placeholder: "e.g., copilot-memory, agent-teams, context-engineering"
+    validations:
+      required: true
+
+  - type: textarea
+    id: source_urls
+    attributes:
+      label: Source URLs
+      description: Primary documentation or blog posts to research (one per line)
+      placeholder: |
+        https://docs.github.com/copilot/...
+        https://code.visualstudio.com/docs/...
+        https://github.blog/...
+    validations:
+      required: true
+
+  - type: input
+    id: primary_question
+    attributes:
+      label: Primary Question
+      description: The ONE clear question this tech talk should answer
+      placeholder: "e.g., How do I get Copilot assistance without leaving the terminal?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Target Audience
+      description: Primary audience for this technical content
+      options:
+        - Developers
+        - Architects
+        - DevOps Engineers
+        - Technical Leaders
+        - Mixed Audience
+    validations:
+      required: true
+
+  - type: dropdown
+    id: duration
+    attributes:
+      label: Expected Duration
+      description: Target presentation length
+      options:
+        - "30 minutes"
+        - "45 minutes"
+        - "60 minutes"
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: key_capabilities
+    attributes:
+      label: Key Capabilities to Cover
+      description: Specific features or capabilities that must be included (optional)
+      placeholder: |
+        - Feature A: Why it matters
+        - Feature B: Use cases
+        - Feature C: Implementation patterns
+
+  - type: textarea
+    id: related_talks
+    attributes:
+      label: Related Tech Talks
+      description: Existing tech talks that should be cross-referenced (optional)
+      placeholder: |
+        - copilot-cli (prerequisite)
+        - agentic-sdlc (advanced follow-up)
+
+  - type: textarea
+    id: special_requirements
+    attributes:
+      label: Special Requirements
+      description: Any specific needs, constraints, or considerations (optional)
+      placeholder: |
+        - Must include architecture diagrams
+        - Focus on enterprise scenarios
+        - Integration with specific tools
+
+  - type: checkboxes
+    id: content_fitness
+    attributes:
+      label: Content Fitness Pre-Check
+      description: Preliminary assessment - all must be checked to proceed
+      options:
+        - label: "**Relevant**: Addresses current practitioner needs or solves a clear technical problem"
+          required: true
+        - label: "**Compelling**: Offers insights beyond standard product documentation"
+          required: true
+        - label: "**Actionable**: Practitioners can implement something today after reading"
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## What Happens Next?
+        
+        1. **Agent Assignment**: Copilot agent will be automatically assigned
+        2. **Phase 1 - Intake**: Agent validates URLs and extracts source material
+        3. **Phase 2 - Plan**: Agent creates content outline and artifact inventory
+        4. **Phase 3 - Build**: Agent generates complete tech talk README.md
+        5. **Phase 4 - Slides**: Agent creates Slidev presentation from README
+        
+        You'll be notified as each phase completes. Review and provide feedback at any stage.
