@@ -67,11 +67,11 @@ class ImageExtractor(HTMLParser):
     
     def handle_data(self, data):
         # Capture heading text for context
-        if hasattr(self, 'in_heading') and self.in_heading:
+        if self.in_heading:
             self.current_heading_text += data.strip()
     
     def handle_endtag(self, tag):
-        if tag in ['h1', 'h2', 'h3'] and hasattr(self, 'in_heading'):
+        if tag in ['h1', 'h2', 'h3']:
             self.current_section = self.current_heading_text
             self.in_heading = False
             self.current_heading_text = ""
