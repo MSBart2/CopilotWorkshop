@@ -1,0 +1,68 @@
+name: Tech Talk Automation - Phase 2 (Plan)
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.issue.labels.*.name, 'tech-talk') &&
+      contains(github.event.issue.labels.*.name, 'tech-talk:planned')
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Comment - Starting Phase 2
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## 🔍 Phase 2: Planning Started
+              
+              The tech-talk-generator agent will now:
+              1. Research all provided source URLs
+              2. Extract key capabilities and architecture
+              3. Identify required artifacts (configs, code samples)
+              4. Create content outline based on TEMPLATE.md
+              5. Map 3-6 major technical sections
+              
+              **Estimated time**: 10-15 minutes
+              
+              The agent will comment with the content plan when complete.`
+            });
+
+      - name: Add instructions for agent
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            
+            const instructions = `
+            @copilot-swe-agent[bot]
+            
+            Please complete Phase 2 (Planning) for this tech talk:
+            
+            1. Use the tech-talk-generator agent to research the provided source URLs
+            2. Create a detailed content outline following tech-talks/TEMPLATE.md structure
+            3. Identify 2-5 primary artifacts that must be included
+            4. Map out 3-6 major technical sections with 🎬 markers
+            5. Assess content fitness (Relevant/Compelling/Actionable)
+            6. Post the outline as a comment on this issue
+            
+            Do NOT generate the full README yet - only create the plan/outline.
+            
+            After posting the outline, add label \`tech-talk:built\` to trigger Phase 3.
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: instructions
+            });

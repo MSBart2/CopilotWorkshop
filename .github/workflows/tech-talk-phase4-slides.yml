@@ -1,0 +1,75 @@
+name: Tech Talk Automation - Phase 4 (Slides)
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  slides:
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.issue.labels.*.name, 'tech-talk') &&
+      contains(github.event.issue.labels.*.name, 'tech-talk:slides')
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Comment - Starting Phase 4
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## 🎬 Phase 4: Slides Generation Started
+              
+              The slide-manager agent will now:
+              1. Generate Slidev presentation from README.md
+              2. Extract objectives, key concepts, and major sections
+              3. Create 15-20 focused slides with dark cockpit-style design
+              4. Verify slides render correctly (lint + Playwright)
+              5. Report any issues found
+              
+              **Estimated time**: 5-10 minutes
+              
+              Slides will be added to the existing PR or a new PR will be created.`
+            });
+
+      - name: Add instructions for agent
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const instructions = `
+            @copilot-swe-agent[bot]
+            
+            Please complete Phase 4 (Slides) for this tech talk:
+            
+            1. Use the slide-manager agent to generate and verify slides
+            2. Input: The README.md created in Phase 3
+            3. Generate slides following slide generation guidelines:
+               - Maximum 15-20 slides
+               - Extract content from README (persona quotes, metrics, exercises)
+               - Dark cockpit-style with Tailwind CSS
+               - Use emoji vocabulary consistently
+               - Never use Mermaid diagrams
+            4. Verify slides:
+               - Lint-first validation
+               - Playwright verification only if lint passes
+               - Check for overflow, broken images, layout errors
+            5. Report results (pass/fail with issue details)
+            6. Add slides to existing PR or create new PR if needed
+            
+            Note: slide-manager generates and verifies but does not auto-fix issues.
+            If issues are found, report them for manual resolution.
+            
+            When complete, add label \`tech-talk:complete\` to mark the workflow finished.
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: instructions
+            });

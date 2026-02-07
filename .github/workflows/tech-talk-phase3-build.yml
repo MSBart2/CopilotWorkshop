@@ -1,0 +1,75 @@
+name: Tech Talk Automation - Phase 3 (Build)
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.issue.labels.*.name, 'tech-talk') &&
+      contains(github.event.issue.labels.*.name, 'tech-talk:built')
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Comment - Starting Phase 3
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## 🔨 Phase 3: Build Started
+              
+              The tech-talk-generator agent will now:
+              1. Generate complete README.md with all sections
+              2. Download and organize visual assets to images/ subdirectory
+              3. Create primary artifacts (configs, code samples)
+              4. Validate against quality checklist
+              5. Create pull request with the tech talk content
+              
+              **Estimated time**: 15-20 minutes
+              
+              A PR will be created when the build is complete.`
+            });
+
+      - name: Add instructions for agent
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const instructions = `
+            @copilot-swe-agent[bot]
+            
+            Please complete Phase 3 (Build) for this tech talk:
+            
+            1. Use the tech-talk-generator agent to generate the complete README.md
+            2. Follow the approved outline from Phase 2
+            3. Include all sections from tech-talks/TEMPLATE.md:
+               - Problem statement
+               - Solution overview
+               - Visual Assets (download images to images/ subdirectory)
+               - Key Artifacts (2-5 primary, shown inline)
+               - Mental Model Shift (move toward/away/against)
+               - Decision Tree (when to use/not use)
+               - Major Sections (3-6 with 🎬 markers)
+               - Real-World Use Cases (3-5 with metrics)
+               - Actionable Checklist (15min/1hr/2-4hr)
+               - Related Patterns
+               - Official Documentation (minimum 2 links)
+            4. Create artifacts in appropriate locations
+            5. Validate against quality checklist
+            6. Create a pull request with all content
+            
+            After PR is created, add label \`tech-talk:slides\` to trigger Phase 4.
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: instructions
+            });
