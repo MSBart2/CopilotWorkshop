@@ -87,9 +87,10 @@
         sessionStorage.setItem(redirectKey, currentPath);
 
         // Redirect to the presentation's base directory (which has index.html)
-        // The slide number will be lost, but this prevents infinite loops
+        // Pass the slide number via query parameter so Slidev can navigate to it
         const baseUrl = repo + '/' + category + '/' + basename + '/';
-        window.location.replace(baseUrl);
+        const slideParam = '?slide=' + encodeURIComponent(slideRoute);
+        window.location.replace(baseUrl + slideParam);
       } else {
         // Single segment - might be a category, redirect to home
         window.location.replace(repo + '/');
