@@ -27,7 +27,7 @@ jobs:
               
               The tech-talk-generator agent will now:
               1. Generate complete README.md with all sections
-              2. Download and organize visual assets to images/ subdirectory
+              2. Download visual assets using \`scripts/download-images.py\`
               3. Create primary artifacts (configs, code samples)
               4. Validate against quality checklist
               5. Create pull request with the tech talk content
@@ -51,7 +51,7 @@ jobs:
             3. Include all sections from tech-talks/TEMPLATE.md:
                - Problem statement
                - Solution overview
-               - Visual Assets (download images to images/ subdirectory)
+               - Visual Assets (use \`scripts/download-images.py\` to download from source URL)
                - Key Artifacts (2-5 primary, shown inline)
                - Mental Model Shift (move toward/away/against)
                - Decision Tree (when to use/not use)

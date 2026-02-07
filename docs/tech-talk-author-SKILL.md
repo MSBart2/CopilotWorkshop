@@ -109,10 +109,13 @@ If the user provides a URL (blog post, docs page, announcement):
    - Should artifacts be shown inline or linked?
 
 5. **Download images (if applicable):**
-   - Create `tech-talks/[talk-name]/images/` directory
-   - Download 3-7 most valuable images from source
-   - Rename with descriptive filenames (e.g., `architecture-overview.png`, not `img1.png`)
-   - Note: Only download if source has relevant technical images
+   - Use the image download helper: `python3 scripts/download-images.py <source_url> tech-talks/[talk-name]/images --limit 7`
+   - The script automatically:
+     - Extracts technical images (screenshots, diagrams, architecture)
+     - Filters out marketing/decorative content
+     - Creates descriptive filenames from alt text
+     - Generates markdown snippet for README
+   - Note: Only needed if source has relevant technical images
 
 6. **Find official docs:**
    - Primary documentation URL (VS Code docs preferred)
@@ -120,7 +123,7 @@ If the user provides a URL (blog post, docs page, announcement):
    - Best practices guide
    - Related GitHub documentation
 
-5. **Identify related patterns:**
+7. **Identify related patterns:**
    - What other tech talks are complementary?
    - What features work together?
    - What alternative approaches exist?

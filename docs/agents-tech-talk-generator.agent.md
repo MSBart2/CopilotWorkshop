@@ -119,12 +119,15 @@ Use the `tech-talk-author` skill to generate the README.md:
 3. **Frame the question:** Write ONE clear question this talk answers
 4. **Assess content fitness:** Fill the rubric (Relevant/Compelling/Actionable) - all must be 🟢
 5. **Download images (if found during research):**
-   - Create `images/` subdirectory in tech talk folder
-   - Download 3-7 most valuable images from source documentation
-   - Rename with descriptive filenames (e.g., `architecture-overview.png`)
-   - Update image references to use local paths: `![Description](images/filename.png)`
-   - Add captions explaining what each image shows
-   - Note: Skip this if no relevant technical images found
+   - Use the image download helper script: `python3 scripts/download-images.py <source_url> <output_dir> --limit 7`
+   - Example: `python3 scripts/download-images.py https://code.visualstudio.com/updates/v1_109 tech-talks/copilot-updates/images --limit 7`
+   - The script will:
+     - Extract technical images (screenshots, diagrams, architecture) from the source page
+     - Filter out marketing/decorative content (logos, banners, hero images)
+     - Download 3-7 most valuable images with descriptive filenames
+     - Generate a markdown snippet for including in README.md
+   - Copy the generated markdown into the Visual Assets section
+   - Note: Skip this step if no relevant technical images found or source URL unavailable
 6. **Fill all required sections:**
    - Visual Assets section (3-7 images if available from source)
    - Problem statement with key points and narrative
