@@ -1,5 +1,7 @@
 # Tech-Talk Workflow Improvements Summary
 
+**Quick Label Reference**: See `.github/workflows/LABEL-FLOW.md` for visual label flow diagram
+
 ## Overview
 
 This document summarizes the changes made to address the issues raised in the problem statement regarding tech-talk creation workflows.

@@ -85,18 +85,18 @@
 │  Create Issue       │ (Manual)
 │  with template      │
 └──────────┬──────────┘
-           │
+           │ 🤖 Template adds: tech-talk + tech-talk:intake
            ▼
 ┌─────────────────────┐
-│  Phase 1: Intake    │ (Automatic)
+│  Phase 1: Intake    │ (🤖 Automatic - triggered by labels)
 │  - Validate URLs    │
 │  - Create .research │
 │  - Save metadata    │
 └──────────┬──────────┘
-           │ Auto-adds tech-talk:planned
+           │ 🤖 Phase 1 adds: tech-talk:planned
            ▼
 ┌─────────────────────┐
-│  Phase 2: Research  │ (Automatic)
+│  Phase 2: Research  │ (🤖 Automatic - triggered by label)
 │  - web_search URLs  │
 │  - Populate files   │
 │  - Create plan      │
@@ -104,15 +104,15 @@
            │
            ▼
 ┌─────────────────────┐
-│  HUMAN REVIEW       │ (Manual) ⚠️
+│  HUMAN REVIEW       │ (👤 Manual) ⚠️
 │  Review .research/  │
 │  Edit if needed     │
-│  Add tech-talk:built│
+│  Add tech-talk:built│ ← 👤 Human adds label
 └──────────┬──────────┘
            │
            ▼
 ┌─────────────────────┐
-│  Phase 3: Build     │ (Automatic)
+│  Phase 3: Build     │ (🤖 Automatic - triggered by label)
 │  - Read research    │
 │  - Generate README  │
 │  - Create PR        │
@@ -120,25 +120,30 @@
            │
            ▼
 ┌─────────────────────┐
-│  HUMAN REVIEW       │ (Manual) ⚠️
+│  HUMAN REVIEW       │ (👤 Manual) ⚠️
 │  Review PR          │
 │  Provide feedback   │
-│  Add tech-talk:slides│
+│  Add tech-talk:slides│ ← 👤 Human adds label
 └──────────┬──────────┘
            │
            ▼
 ┌─────────────────────┐
-│  Phase 4: Slides    │ (Automatic)
+│  Phase 4: Slides    │ (🤖 Automatic - triggered by label)
 │  - Generate slides  │
 │  - Add to PR        │
 └──────────┬──────────┘
            │
            ▼
 ┌─────────────────────┐
-│  Complete           │ (Manual)
+│  Complete           │ (👤 Manual)
 │  Review & merge PR  │
+│  Add tech-talk:complete│ ← 👤 Human adds label (optional)
 └─────────────────────┘
 ```
+
+**Legend**: 🤖 = Automated | 👤 = Manual/Human
+
+**Detailed Label Flow**: See `.github/workflows/LABEL-FLOW.md` for complete label reference
 
 ## Key Files to Know
 
@@ -234,10 +239,11 @@ A: Technically yes, but defeats purpose of human review. Not recommended.
 
 ## Need Help?
 
-1. Check documentation: `.github/workflows/IMPROVEMENTS-SUMMARY.md`
-2. Test with guide: `.github/workflows/TESTING-GUIDE.md`
-3. Understand design: `.github/workflows/RESEARCH-STORAGE.md`
-4. See workflow: `.github/workflows/TECH-TALK-WORKFLOW.md`
+1. **Label flow**: `.github/workflows/LABEL-FLOW.md` ⭐ (who does what, when)
+2. Check documentation: `.github/workflows/IMPROVEMENTS-SUMMARY.md`
+3. Test with guide: `.github/workflows/TESTING-GUIDE.md`
+4. Understand design: `.github/workflows/RESEARCH-STORAGE.md`
+5. See workflow: `.github/workflows/TECH-TALK-WORKFLOW.md`
 
 ## Summary
 
