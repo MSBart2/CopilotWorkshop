@@ -1,108 +1,159 @@
 ---
-theme: ./theme
-title: "MCP Apps: Rich Interactive UI in Chat"
+theme: default
 class: text-center
 highlighter: shiki
-lineNumbers: true
+lineNumbers: false
+info: |
+  ## MCP Apps: Rich Interactive UI in Chat
+  CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
+title: MCP Apps - Rich Interactive UI
+module: tech-talks/mcp-apps
 mdc: true
-overviewSnapshots: true
 ---
 
-# MCP Apps
-## Rich Interactive UI in Chat
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20"></div>
 
-<div class="abs-bottom-2 text-sm opacity-50">
-⏱️ 40 minutes
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
+
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-64" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Gradient text title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent relative z-10">
+    MCP Apps
+  </h1>
+
+  <!-- Pill subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-purple-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-purple-500/25">
+      Rich Interactive UI in Chat
+    </span>
+  </div>
+
+  <!-- Tagline -->
+  <div class="mt-8 text-lg opacity-70 relative z-10">
+    Eliminate context-switching • Transform chat into visual workspace
+  </div>
+
+  <!-- Decorative line -->
+  <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent rounded-full relative z-10"></div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <span class="text-sm opacity-50">Tech Talk · 40 minutes</span>
 </div>
 
 ---
 layout: default
 ---
 
-# The Question This Talk Answers
+# 🎯 The Question This Talk Answers
 
-<div class="text-xl mt-8 text-center">
-
-*"How do I create interactive visualizations and UI components within chat instead of exporting data to external tools?"*
-
+<div class="mt-12 flex justify-center">
+  <div class="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-2 border-purple-500/50 p-10 rounded-xl max-w-3xl">
+    <div class="text-3xl font-bold text-white text-center leading-relaxed">
+      "How do I create interactive visualizations and UI components within chat instead of exporting data to external tools?"
+    </div>
+  </div>
 </div>
 
-<div class="mt-12 text-center opacity-75">
-<carbon-chart-line class="text-6xl inline-block" />
-<carbon-table class="text-6xl inline-block ml-8" />
-<carbon-tree-view class="text-6xl inline-block ml-8" />
-</div>
-
----
-layout: table-of-contents
----
-
-# What We'll Cover
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div v-click>
-<div class="toc-card" name="component-types">
-<carbon-application class="text-3xl mb-2" />
-<div class="font-bold text-lg">Component Types</div>
-<div class="text-sm opacity-75">Charts, tables, forms, trees, cards</div>
-</div>
-</div>
-
-<div v-click>
-<div class="toc-card" name="building">
-<carbon-code class="text-3xl mb-2" />
-<div class="font-bold text-lg">Building MCP Apps</div>
-<div class="text-sm opacity-75">Server structure and callbacks</div>
-</div>
-</div>
-
-<div v-click>
-<div class="toc-card" name="patterns">
-<carbon-light-filled class="text-3xl mb-2" />
-<div class="font-bold text-lg">Real-World Patterns</div>
-<div class="text-sm opacity-75">Practical implementation examples</div>
-</div>
-</div>
-
-<div v-click>
-<div class="toc-card" name="integration">
-<carbon-connect class="text-3xl mb-2" />
-<div class="font-bold text-lg">Integration</div>
-<div class="text-sm opacity-75">Agents, skills, and memory</div>
-</div>
-</div>
-
+<div class="mt-12 flex justify-center gap-8 opacity-75">
+  <div class="flex flex-col items-center">
+    <carbon-chart-line class="text-5xl" />
+    <div class="text-sm mt-2">Charts</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <carbon-table class="text-5xl" />
+    <div class="text-sm mt-2">Tables</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <carbon-tree-view class="text-5xl" />
+    <div class="text-sm mt-2">Trees</div>
+  </div>
 </div>
 
 ---
-layout: two-cols
+layout: center
 ---
 
-# The Problem
+# 📖 Table of Contents
 
-<div class="text-sm">
+<div class="grid grid-cols-2 gap-6 mt-8">
+  <div @click="$nav.go(8)" class="cursor-pointer p-6 bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl border border-purple-500/30 hover:border-purple-400/60 transition-all hover:scale-105">
+    <div class="text-3xl mb-2">📊</div>
+    <div class="font-semibold text-lg">Component Types</div>
+    <div class="text-sm opacity-70 mt-2">Charts, tables, forms, trees, cards</div>
+  </div>
 
-### Data visualization trapped in text
-Charts, tables, diagrams rendered as ASCII or markdown—hard to read, impossible to interact with
+  <div @click="$nav.go(15)" class="cursor-pointer p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
+    <div class="text-3xl mb-2">🔨</div>
+    <div class="font-semibold text-lg">Building MCP Apps</div>
+    <div class="text-sm opacity-70 mt-2">Server structure and callbacks</div>
+  </div>
 
-### No interactive elements
-Can't click, filter, sort without leaving chat and opening external tools
+  <div @click="$nav.go(20)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
+    <div class="text-3xl mb-2">💡</div>
+    <div class="font-semibold text-lg">Real-World Patterns</div>
+    <div class="text-sm opacity-70 mt-2">Practical implementation examples</div>
+  </div>
 
-### Context switching for visuals
-Copy data to spreadsheets, export to visualization tools—**5-10 minute detour per query**
+  <div @click="$nav.go(24)" class="cursor-pointer p-6 bg-gradient-to-br from-indigo-500/10 to-indigo-600/5 rounded-xl border border-indigo-500/30 hover:border-indigo-400/60 transition-all hover:scale-105">
+    <div class="text-3xl mb-2">🔗</div>
+    <div class="font-semibold text-lg">Integration</div>
+    <div class="text-sm opacity-70 mt-2">Agents, skills, and memory</div>
+  </div>
+</div>
 
-### Static responses
-Can't explore data differently without crafting new prompts and starting over
+---
+layout: default
+---
+
+# ❌ The Problem
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+
+<div>
+
+<div class="text-sm space-y-4">
+
+<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+<div class="font-bold text-red-400 mb-2">📉 Data visualization trapped in text</div>
+<div class="text-gray-300">Charts, tables, diagrams rendered as ASCII or markdown—hard to read, impossible to interact with</div>
+</div>
+
+<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+<div class="font-bold text-red-400 mb-2">🚫 No interactive elements</div>
+<div class="text-gray-300">Can't click, filter, sort without leaving chat and opening external tools</div>
+</div>
+
+<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+<div class="font-bold text-red-400 mb-2">⚠️ Context switching for visuals</div>
+<div class="text-gray-300">Copy data to spreadsheets, export to visualization tools—<strong>5-10 minute detour per query</strong></div>
+</div>
+
+<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
+<div class="font-bold text-red-400 mb-2">⏸️ Static responses</div>
+<div class="text-gray-300">Can't explore data differently without crafting new prompts and starting over</div>
+</div>
 
 </div>
 
-::right::
+</div>
 
-<div class="ml-4 mt-16 text-center">
+<div class="ml-4 flex flex-col justify-center">
+
+<div class="bg-gray-800/50 p-4 rounded-lg border border-gray-600">
 
 ```
 ┌─────────────────────────────┐
@@ -115,16 +166,23 @@ Can't explore data differently without crafting new prompts and starting over
 └─────────────────────────────┘
 ```
 
-<div class="text-2xl mt-8 mb-4">⬇️</div>
+</div>
 
-<div class="text-sm opacity-75">
+<div class="text-center my-4">
+<div class="text-3xl">⬇️</div>
+</div>
+
+<div class="bg-orange-900/20 p-4 rounded-lg border border-orange-500/30 text-center text-sm">
+<div class="text-orange-300">
 Copy to Excel → Create chart<br/>
 → Realize need different date range<br/>
 → Return to chat → Repeat
 </div>
+<div class="mt-4 text-red-400 font-bold text-lg">
+⏱️ 15 minutes lost per analysis
+</div>
+</div>
 
-<div class="mt-4 text-red-500 font-bold">
-15 minutes lost per analysis
 </div>
 
 </div>
@@ -133,27 +191,33 @@ Copy to Excel → Create chart<br/>
 layout: default
 ---
 
-# The Solution: MCP Apps
+# ✨ The Solution: MCP Apps
 
 <div class="grid grid-cols-2 gap-8 mt-8">
 
-<div>
+<div class="bg-gradient-to-br from-green-500/10 to-green-600/5 rounded-xl border border-green-500/30 p-6">
 
 ### What It Does
+
+<div class="text-sm mt-4 space-y-3">
 
 MCP Apps extend Model Context Protocol to return **rich UI component specifications** instead of plain text
 
 Components render directly in VS Code chat with **full interactivity** preserved
 
-<div class="mt-4 text-sm opacity-75">
+<div class="mt-4 opacity-75 italic">
 When model calls MCP tool, server responds with interactive elements that VS Code renders inline
 </div>
 
 </div>
 
-<div>
+</div>
+
+<div class="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 p-6">
 
 ### Key Capabilities
+
+<div class="text-sm mt-4 space-y-2">
 
 - 📊 **Interactive Charts**: Bar, line, pie with hover, zoom, drill-down
 - 📋 **Data Tables**: Sortable, filterable, paginated grids
@@ -166,64 +230,71 @@ When model calls MCP tool, server responds with interactive elements that VS Cod
 
 </div>
 
-<div class="mt-8 text-center text-sm opacity-75">
-<carbon-arrow-right class="inline-block" /> Architecture: Prompt → MCP Tool → Component Spec → VS Code Render → User Interaction → Callback
+</div>
+
+<div class="mt-8 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg border border-purple-500/30">
+<div class="text-center text-sm">
+<carbon-arrow-right class="inline-block" /> <strong>Architecture:</strong> Prompt → MCP Tool → Component Spec → VS Code Render → User Interaction → Callback
+</div>
 </div>
 
 ---
 layout: default
 ---
 
-# Mental Model Shift
+# 🧠 Mental Model Shift
 
-<div class="grid grid-cols-3 gap-4 mt-8 text-sm">
+<div class="grid grid-cols-3 gap-4 mt-6 text-sm">
 
-<div class="border-2 border-green-500 p-4 rounded">
-<div class="font-bold text-green-500 mb-3">✅ Move Toward</div>
+<div class="border-2 border-green-500/50 p-4 rounded-lg bg-green-500/5">
+<div class="font-bold text-green-400 mb-3 text-base">✅ Move Toward</div>
 
-**Component-First Responses**
+**Component-First Responses**  
 Return UI components for visual data, not markdown tables
 
-**Progressive Disclosure**
+**Progressive Disclosure**  
 Summary visualizations first, drill-down through interactions
 
-**Callback-Driven Updates**
+**Callback-Driven Updates**  
 Form submissions trigger new MCP tool calls
 
-**Inline Data Exploration**
+**Inline Data Exploration**  
 Filter, sort, paginate without new prompts → **5-10x faster**
 
 </div>
 
-<div class="border-2 border-yellow-500 p-4 rounded">
-<div class="font-bold text-yellow-500 mb-3">⚠️ Move Away From</div>
+<div class="border-2 border-yellow-500/50 p-4 rounded-lg bg-yellow-500/5">
+<div class="font-bold text-yellow-400 mb-3 text-base">⚠️ Move Away From</div>
 
-**ASCII Art Charts**
+**ASCII Art Charts**  
 Rendering bar charts with █ characters
 
-**"Export to CSV" Workflows**
+**"Export to CSV" Workflows**  
 Instructing users to copy data and visualize externally
 
-**Static Code Blocks**
+**Static Code Blocks**  
 Returning HTML that users must save and open in browser
 
 </div>
 
-<div class="border-2 border-red-500 p-4 rounded">
-<div class="font-bold text-red-500 mb-3">🛑 Move Against</div>
+<div class="border-2 border-red-500/50 p-4 rounded-lg bg-red-500/5">
+<div class="font-bold text-red-400 mb-3 text-base">🛑 Move Against</div>
 
-**Massive Markdown Tables**
+**Massive Markdown Tables**  
 500-row tables as text exceeds context window
 
-**Unsandboxed Custom HTML**
+**Unsandboxed Custom HTML**  
 Arbitrary HTML/JS without iframe isolation → XSS vulnerabilities
 
 </div>
 
 </div>
 
-<div class="mt-6 text-center text-sm opacity-75 italic">
-Before: Show sales → 180-line table → Copy to Excel → 12 min | After: Interactive chart renders → Click to filter → 45 sec
+<div class="mt-6 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg border border-purple-500/30">
+<div class="text-center text-sm italic">
+<strong>Before:</strong> Show sales → 180-line table → Copy to Excel → 12 min  
+<strong>After:</strong> Interactive chart renders → Click to filter → 45 sec
+</div>
 </div>
 
 ---
@@ -294,8 +365,15 @@ layout: section
 name: component-types
 ---
 
-# Component Types Deep-Dive
-## Five built-in components for most visualization needs
+<div class="h-full flex flex-col items-center justify-center">
+<div class="text-6xl mb-6">📊</div>
+<h1 class="text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+Component Types Deep-Dive
+</h1>
+<div class="mt-4 text-xl opacity-70">
+Five built-in components for most visualization needs
+</div>
+</div>
 
 ---
 layout: two-cols
@@ -467,8 +545,15 @@ layout: section
 name: building
 ---
 
-# Building MCP Apps
-## Complete server implementation and callbacks
+<div class="h-full flex flex-col items-center justify-center">
+<div class="text-6xl mb-6">🔨</div>
+<h1 class="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+Building MCP Apps
+</h1>
+<div class="mt-4 text-xl opacity-70">
+Complete server implementation and callbacks
+</div>
+</div>
 
 ---
 layout: default
@@ -704,8 +789,15 @@ layout: section
 name: patterns
 ---
 
-# Real-World Patterns
-## Practical use cases that demonstrate value
+<div class="h-full flex flex-col items-center justify-center">
+<div class="text-6xl mb-6">💡</div>
+<h1 class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+Real-World Patterns
+</h1>
+<div class="mt-4 text-xl opacity-70">
+Practical use cases that demonstrate value
+</div>
+</div>
 
 ---
 layout: two-cols
@@ -827,17 +919,21 @@ if (name === "generate-endpoint-code") {
 layout: default
 ---
 
-# Real-World Use Cases
+# 🎯 Real-World Use Cases
 
-<div class="grid grid-cols-3 gap-4 text-xs">
+<div class="grid grid-cols-3 gap-4 text-xs mt-4">
 
-<div class="border-2 border-blue-500 p-3 rounded">
+<div class="border-2 border-blue-500/50 p-3 rounded-lg bg-blue-500/5">
 
 ### System Metrics Dashboard
 
-**Problem:** DevOps team queries Prometheus → Export CSV → Import Grafana → 15-20 min per analysis
+<div class="bg-blue-900/20 p-2 rounded text-red-300 mb-2 text-xs">
+<strong>Problem:</strong> DevOps team queries Prometheus → Export CSV → Import Grafana → <strong>15-20 min per analysis</strong>
+</div>
 
-**Solution:** MCP App queries Prometheus, returns interactive dashboard
+<div class="bg-green-900/20 p-2 rounded text-green-300 text-xs">
+<strong>Solution:</strong> MCP App queries Prometheus, returns interactive dashboard
+</div>
 
 ```typescript
 return {
@@ -855,18 +951,24 @@ return {
 };
 ```
 
-**Outcome:** **15-20 min → 90 sec**
-Team analyzes 8x more frequently, catches issues 40% faster
+<div class="mt-2 p-2 bg-green-600/20 rounded text-center">
+<strong>✅ 15-20 min → 90 sec</strong><br/>
+<span class="text-xs">Team analyzes 8x more frequently, catches issues 40% faster</span>
+</div>
 
 </div>
 
-<div class="border-2 border-green-500 p-3 rounded">
+<div class="border-2 border-green-500/50 p-3 rounded-lg bg-green-500/5">
 
 ### Database Query Results
 
-**Problem:** Analysts query DB, receive 500-row text, copy to Excel for filtering → 10 min per query × 30 queries/day
+<div class="bg-blue-900/20 p-2 rounded text-red-300 mb-2 text-xs">
+<strong>Problem:</strong> Analysts query DB, receive 500-row text, copy to Excel for filtering → <strong>10 min per query × 30 queries/day</strong>
+</div>
 
-**Solution:** MCP App returns interactive table
+<div class="bg-green-900/20 p-2 rounded text-green-300 text-xs">
+<strong>Solution:</strong> MCP App returns interactive table
+</div>
 
 ```typescript
 return {
@@ -888,18 +990,24 @@ return {
 };
 ```
 
-**Outcome:** **10 min → 2 min per query**
-240 minutes saved per day (3-person team)
+<div class="mt-2 p-2 bg-green-600/20 rounded text-center">
+<strong>✅ 10 min → 2 min per query</strong><br/>
+<span class="text-xs">240 minutes saved per day (3-person team)</span>
+</div>
 
 </div>
 
-<div class="border-2 border-purple-500 p-3 rounded">
+<div class="border-2 border-purple-500/50 p-3 rounded-lg bg-purple-500/5">
 
 ### Project Scaffolding Forms
 
-**Problem:** Developers create microservices → 20-min Slack thread with infra team → Manual setup
+<div class="bg-blue-900/20 p-2 rounded text-red-300 mb-2 text-xs">
+<strong>Problem:</strong> Developers create microservices → <strong>20-min Slack thread</strong> with infra team → Manual setup
+</div>
 
-**Solution:** MCP App form collects structured input, generates scaffold
+<div class="bg-green-900/20 p-2 rounded text-green-300 text-xs">
+<strong>Solution:</strong> MCP App form collects structured input, generates scaffold
+</div>
 
 ```typescript
 return {
@@ -920,8 +1028,10 @@ return {
 };
 ```
 
-**Outcome:** **20-min Slack → 3-min form**
-100% config accuracy, self-serve without infra bottleneck
+<div class="mt-2 p-2 bg-green-600/20 rounded text-center">
+<strong>✅ 20-min Slack → 3-min form</strong><br/>
+<span class="text-xs">100% config accuracy, self-serve without infra bottleneck</span>
+</div>
 
 </div>
 
@@ -932,8 +1042,15 @@ layout: section
 name: integration
 ---
 
-# Integration with VS Code
-## Combining MCP Apps with agents, skills, and memory
+<div class="h-full flex flex-col items-center justify-center">
+<div class="text-6xl mb-6">🔗</div>
+<h1 class="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+Integration with VS Code
+</h1>
+<div class="mt-4 text-xl opacity-70">
+Combining MCP Apps with agents, skills, and memory
+</div>
+</div>
 
 ---
 layout: default
@@ -1020,65 +1137,101 @@ MCP Apps integrate seamlessly with all VS Code Copilot customization features
 layout: default
 ---
 
-# Best Practices
+# 🎨 Best Practices
 
-<div class="grid grid-cols-3 gap-4 text-xs">
+<div class="grid grid-cols-3 gap-4 text-xs mt-4">
 
-<div class="border-2 border-blue-500 p-3 rounded">
+<div class="border-2 border-blue-500/50 p-3 rounded-lg bg-blue-500/5">
 
 ### Design
 
-**Progressive disclosure**
+<div class="space-y-2 mt-2">
+
+<div class="bg-blue-900/20 p-2 rounded">
+<strong>Progressive disclosure</strong><br/>
 Show summary first, enable drill-down on interaction
+</div>
 
-**Responsive layouts**
+<div class="bg-blue-900/20 p-2 rounded">
+<strong>Responsive layouts</strong><br/>
 Components adapt to chat panel width
+</div>
 
-**Theme awareness**
+<div class="bg-blue-900/20 p-2 rounded">
+<strong>Theme awareness</strong><br/>
 Use VS Code CSS variables
 ```css
 var(--vscode-foreground)
 var(--vscode-editor-background)
 ```
+</div>
 
-**Loading states**
+<div class="bg-blue-900/20 p-2 rounded">
+<strong>Loading states</strong><br/>
 Show skeleton/spinner for async data
+</div>
 
 </div>
 
-<div class="border-2 border-green-500 p-3 rounded">
+</div>
+
+<div class="border-2 border-green-500/50 p-3 rounded-lg bg-green-500/5">
 
 ### Performance
 
-**Paginate large datasets**
+<div class="space-y-2 mt-2">
+
+<div class="bg-green-900/20 p-2 rounded">
+<strong>Paginate large datasets</strong><br/>
 Don't render 10,000 rows at once
+</div>
 
-**Lazy load images**
+<div class="bg-green-900/20 p-2 rounded">
+<strong>Lazy load images</strong><br/>
 Load visible content first
+</div>
 
-**Cache queries**
+<div class="bg-green-900/20 p-2 rounded">
+<strong>Cache queries</strong><br/>
 MCP server-side caching for repeated requests
+</div>
 
-**Optimize re-renders**
+<div class="bg-green-900/20 p-2 rounded">
+<strong>Optimize re-renders</strong><br/>
 Only update changed data
+</div>
 
 </div>
 
-<div class="border-2 border-red-500 p-3 rounded">
+</div>
+
+<div class="border-2 border-red-500/50 p-3 rounded-lg bg-red-500/5">
 
 ### Security
 
-**Sandbox custom HTML**
+<div class="space-y-2 mt-2">
+
+<div class="bg-red-900/20 p-2 rounded">
+<strong>Sandbox custom HTML</strong><br/>
 Always use `sandbox: true` for custom components
+</div>
 
-**Validate inputs**
+<div class="bg-red-900/20 p-2 rounded">
+<strong>Validate inputs</strong><br/>
 Sanitize form data before processing
+</div>
 
-**Rate limit**
+<div class="bg-red-900/20 p-2 rounded">
+<strong>Rate limit</strong><br/>
 Prevent abuse of callback tools
+</div>
 
-**No sensitive data in logs**
+<div class="bg-red-900/20 p-2 rounded">
+<strong>No sensitive data in logs</strong><br/>
 Scrub credentials from component specs
+</div>
+
+</div>
 
 </div>
 
@@ -1188,15 +1341,47 @@ Q: What's your actual goal?
 layout: end
 ---
 
-# MCP Apps
-## Rich Interactive UI in Chat
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20"></div>
 
-<div class="mt-8 text-center opacity-75">
-Eliminate context-switching<br/>
-Transform chat into visual workspace<br/>
-Explore data inline
-</div>
+  <!-- Glowing orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
 
-<div class="abs-bottom-4 text-sm opacity-50 text-center w-full">
-Questions?
+  <!-- Logo with glow -->
+  <div class="relative z-10">
+    <div class="absolute inset-0 blur-2xl opacity-50">
+      <img src="./sdp-logo.png" class="w-48" alt="" />
+    </div>
+    <img src="./sdp-logo.png" class="w-48 relative" alt="SDP Logo" />
+  </div>
+
+  <!-- Gradient text title -->
+  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent relative z-10">
+    MCP Apps
+  </h1>
+
+  <!-- Subtitle -->
+  <div class="mt-4 relative z-10">
+    <span class="px-6 py-2 bg-gradient-to-r from-purple-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-purple-500/25">
+      Rich Interactive UI in Chat
+    </span>
+  </div>
+
+  <!-- Key points -->
+  <div class="mt-8 text-center opacity-80 relative z-10 space-y-2">
+    <div class="text-lg">✨ Eliminate context-switching</div>
+    <div class="text-lg">🎨 Transform chat into visual workspace</div>
+    <div class="text-lg">📊 Explore data inline</div>
+  </div>
+
+  <!-- Questions -->
+  <div class="abs-bottom-8 text-center w-full relative z-10">
+    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+      Questions?
+    </div>
+  </div>
+
+  <!-- Decorative line -->
+  <div class="abs-bottom-4 w-32 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent rounded-full left-1/2 -translate-x-1/2"></div>
 </div>
