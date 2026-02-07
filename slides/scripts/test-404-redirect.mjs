@@ -17,7 +17,7 @@ const projectRoot = join(__dirname, '..');
 const html404Content = readFileSync(join(projectRoot, '404.html'), 'utf8');
 
 // Extract the JavaScript logic from 404.html
-const scriptMatch = html404Content.match(/<script>([\s\S]*?)<\/script>/);
+const scriptMatch = html404Content.match(/<script>([\s\S]*?)<\/script>/i);
 if (!scriptMatch) {
   console.error('❌ Could not find script tag in 404.html');
   process.exit(1);
