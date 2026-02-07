@@ -38,6 +38,8 @@ class ImageExtractor(HTMLParser):
         self.base_url = base_url
         self.images = []
         self.current_section = ""
+        self.in_heading = False
+        self.current_heading_text = ""
         
     def handle_starttag(self, tag, attrs):
         attrs_dict = dict(attrs)
@@ -252,8 +254,15 @@ def generate_markdown_report(images, output_dir):
     ]
     
     for img in images:
-        local_path = img.get('local_path', f"images/{img['filename']}")
-        rel_path = os.path.relpath(local_path, os.path.dirname(output_dir))
+        # For tech-talks, README.md is in tech-talks/[name]/README.md
+        # and images are in tech-talks/[name]/images/[file]
+        # So the markdown path should be images/[filename]
+        if 'local_path' in img:
+            # Extract just the images/filename.png part
+            filename = os.path.basename(img['local_path'])
+            rel_path = f"images/{filename}"
+        else:
+            rel_path = f"images/{img['filename']}"
         
         # Use alt text or generate caption
         caption = img['alt'] or img['title'] or img['filename'].replace('-', ' ').title()
