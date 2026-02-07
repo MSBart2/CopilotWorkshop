@@ -55,3 +55,4 @@ dev-data/
 
 # Workflow files to ignore
 .github/workflows/demo.yml
+__pycache__/
