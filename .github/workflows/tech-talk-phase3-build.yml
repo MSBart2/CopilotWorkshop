@@ -15,6 +15,9 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Comment - Starting Phase 3
         uses: actions/github-script@v7
         with:
@@ -26,11 +29,13 @@ jobs:
               body: `## 🔨 Phase 3: Build Started
               
               The tech-talk-generator agent will now:
-              1. Generate complete README.md with all sections
-              2. Download visual assets using \`scripts/download-images.py\`
-              3. Create primary artifacts (configs, code samples)
-              4. Validate against quality checklist
-              5. Create pull request with the tech talk content
+              1. Read research findings from \`phase1-research.md\`
+              2. Read content plan from \`phase2-plan.md\`
+              3. Generate complete README.md with all sections
+              4. Download visual assets using \`scripts/download-images.py\`
+              5. Create primary artifacts (configs, code samples)
+              6. Validate against quality checklist
+              7. Create pull request with the tech talk content
               
               **Estimated time**: 15-20 minutes
               
@@ -41,30 +46,91 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const issue = context.payload.issue;
+            const body = issue.body;
+            
+            // Extract topic from issue
+            const extractField = (label) => {
+              const regex = new RegExp(`### ${label}\\s*\\n\\s*([^#]+)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+            
+            const topic = extractField('Tech Talk Topic');
+            
             const instructions = `
             @copilot-swe-agent[bot]
             
-            Please complete Phase 3 (Build) for this tech talk:
+            Please complete Phase 3 (Build) for this tech talk.
             
-            1. Use the tech-talk-generator agent to generate the complete README.md
-            2. Follow the approved outline from Phase 2
-            3. Include all sections from tech-talks/TEMPLATE.md:
-               - Problem statement
-               - Solution overview
-               - Visual Assets (use \`scripts/download-images.py\` to download from source URL)
-               - Key Artifacts (2-5 primary, shown inline)
-               - Mental Model Shift (move toward/away/against)
-               - Decision Tree (when to use/not use)
-               - Major Sections (3-6 with 🎬 markers)
-               - Real-World Use Cases (3-5 with metrics)
-               - Actionable Checklist (15min/1hr/2-4hr)
-               - Related Patterns
-               - Official Documentation (minimum 2 links)
-            4. Create artifacts in appropriate locations
-            5. Validate against quality checklist
-            6. Create a pull request with all content
+            **Research Files Location**: \`tech-talks/.research/${topic}/\`
             
-            After PR is created, add label \`tech-talk:slides\` to trigger Phase 4.
+            ## Your Tasks:
+            
+            ### 1. Read Research and Plan
+            
+            - Read \`tech-talks/.research/${topic}/phase1-research.md\`
+            - Read \`tech-talks/.research/${topic}/phase2-plan.md\`
+            - Use these as the foundation for content generation
+            
+            ### 2. Generate Complete README.md
+            
+            Create \`tech-talks/${topic}/README.md\` following \`tech-talks/TEMPLATE.md\`:
+            
+            **Required Sections:**
+            - Title and question
+            - Content fitness rubric (all 🟢)
+            - Problem statement (key points + narrative)
+            - Solution overview (capabilities + architecture)
+            - Visual Assets section (if images found in research)
+            - Key Artifacts section (2-5 primary, with purposes)
+            - Mental Model Shift (move toward/away/against)
+            - Decision Tree (when to use/not use)
+            - Major Sections (3-6 with \`<!-- 🎬 MAJOR SECTION: [Name] -->\` markers)
+            - Real-World Use Cases (3-5 with metrics)
+            - Actionable Checklist (15min/1hr/2-4hr time-bounded)
+            - Related Patterns (cross-references)
+            - Official Documentation (minimum 2 links)
+            
+            ### 3. Create Artifacts
+            
+            Create artifact files in appropriate locations:
+            - Configuration files in \`tech-talks/${topic}/\`
+            - Code examples inline in major sections
+            - Supporting files as needed
+            
+            ### 4. Download Images (if applicable)
+            
+            If research identified visual assets:
+            - Use: \`python3 scripts/download-images.py <source_url> tech-talks/${topic}/images --limit 7\`
+            - Include images in Visual Assets section
+            - Use descriptive filenames and alt text
+            
+            ### 5. Validate Quality
+            
+            Check against quality checklist:
+            - [ ] Question is specific and clear
+            - [ ] Content Fitness Rubric is all 🟢
+            - [ ] Visual Assets section included if relevant images found
+            - [ ] Key Artifacts section lists 2-5 primary artifacts
+            - [ ] Primary artifacts shown inline in major sections
+            - [ ] 3-6 major sections marked with 🎬
+            - [ ] Move-Toward/Away/Against patterns are concrete
+            - [ ] Use cases show measurable outcomes
+            - [ ] Actionable items are time-bounded
+            - [ ] Decision tree includes "when NOT to use"
+            - [ ] Minimum 2 official documentation links
+            - [ ] All links are current and working
+            
+            ### 6. Create Pull Request
+            
+            - Create PR with tech talk content
+            - Include research directory in PR for reference
+            - Title: "Tech Talk: ${topic}"
+            - Link to this issue in PR description
+            - Add label \`tech-talk:slides\` to PR (not issue)
+            
+            **Important**: Use \`tech-talk-author\` skill with the approved research and plan.
             `;
             
             await github.rest.issues.createComment({
