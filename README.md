@@ -127,6 +127,10 @@ Every module connects back to these core ideas:
 - [OUTLINE.md](OUTLINE.md) — Detailed module breakdown
 - [RESOURCES.md](RESOURCES.md) — Curated links to blogs, videos, and learning paths
 
+### Working with Custom Agents
+- [URL Fetching Guide](docs/URL-FETCHING-GUIDE.md) — How to use web_fetch capabilities with Copilot agents
+- [Quick Reference: Web Fetch](docs/QUICK-REFERENCE-WEB-FETCH.md) — Fast troubleshooting for URL fetching issues
+
 ### Official Documentation
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
 - [Custom Instructions for Repositories](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)

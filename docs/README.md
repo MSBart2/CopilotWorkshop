@@ -24,15 +24,46 @@ We condensed the agent and skill files in `.github/` to essential definitions (t
 
 ### Skills (Full Documentation)
 
-- `skills-exercise-author-SKILL.md` → Referenced by `.github/skills/exercise-author/SKILL.md`
-- `skills-module-author-SKILL.md` → Referenced by `.github/skills/module-author/SKILL.md`
-- `skills-tech-talk-author-SKILL.md` → Referenced by `.github/skills/tech-talk-author/SKILL.md`
+- `exercise-author-SKILL.md` → Referenced by `.github/skills/exercise-author/SKILL.md`
+- `module-author-SKILL.md` → Referenced by `.github/skills/module-author/SKILL.md`
+- `tech-talk-author-SKILL.md` → Referenced by `.github/skills/tech-talk-author/SKILL.md`
 - `skills/slide-fixer-FULL.md` → Referenced by `.github/skills/slide-fixer/SKILL.md`
 - `skills/slide-verifier-FULL.md` → Referenced by `.github/skills/slide-verifier/SKILL.md`
 
-## When to Use This Documentation
+### Guides
 
-- **Agents working on issues:** The condensed files in `.github/` provide sufficient context
+- `URL-FETCHING-GUIDE.md` → Comprehensive guide on using web_fetch capabilities with Copilot agents
+- `QUICK-REFERENCE-WEB-FETCH.md` → Quick troubleshooting reference for URL fetching issues
+
+## Common Questions
+
+### Q: Can Copilot agents fetch remote URLs?
+
+**A**: Yes, but only specific agents have this capability:
+- ✅ `tech-talk-generator` - For researching tech talk content
+- ✅ `module-creator` - For complete module creation
+- ✅ `module-planner` - For module planning
+- ❌ `slide-generator` - Works with existing files only
+- ❌ `slide-manager` - Orchestrates local slide generation
+
+See [URL-FETCHING-GUIDE.md](URL-FETCHING-GUIDE.md) for complete details.
+
+### Q: Why don't task URLs work?
+
+**A**: GitHub Copilot Workspace task URLs (like `https://github.com/.../tasks/...`) are internal and not publicly accessible. Use the actual GitHub issue or PR URL instead.
+
+### Q: What URL types are supported?
+
+**A**: Most public web pages work well:
+- ✅ GitHub blogs, docs, and repositories
+- ✅ Public documentation sites
+- ❌ Task URLs (use issue/PR URLs)
+- ❌ Paywalled or authentication-required content
+- ❌ Dynamic JavaScript-heavy pages
+
+See [QUICK-REFERENCE-WEB-FETCH.md](QUICK-REFERENCE-WEB-FETCH.md) for troubleshooting.
+
+## When to Use This Documentation
 - **Detailed implementation:** Agents can read full docs here when more detail is needed
 - **Troubleshooting:** Complete patterns, examples, and edge cases are documented here
 - **Adding new agents/skills:** Reference these full docs for comprehensive guidance
