@@ -5,6 +5,9 @@ on:
     paths:
       - "slides/**"
 
+permissions:
+  contents: read
+
 concurrency:
   group: pr-slides-${{ github.event.pull_request.number }}
   cancel-in-progress: true
