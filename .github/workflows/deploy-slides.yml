@@ -97,13 +97,33 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Cache node_modules
+        id: npm-cache
+        uses: actions/cache@v4
+        with:
+          path: ./slides/node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('slides/package.json') }}
+
       - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         working-directory: ./slides
         run: npm install
 
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('slides/package.json') }}
+
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         working-directory: ./slides
         run: npx playwright install chromium --with-deps
+
+      - name: Install Playwright system deps only
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
 
       - name: Build presentations (incremental)
         if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != '' && steps.download.outputs.needs_rebuild != 'true'
