@@ -4,11 +4,23 @@
 
 ---
 
-## 🚀 Quick Start
+## 🧱 The Foundation: Chat + Primitives
 
-| I want to... | Start with |
-|--------------|------------|
-| Learn Copilot basics | [Copilot Chat](copilot-chat/) — context mechanisms (#file, @workspace, #codebase) |
+Every Copilot journey starts with two essentials:
+
+| Step | Talk | Why it matters |
+|------|------|----------------|
+| **1. Learn to talk to Copilot** | [Copilot Chat](copilot-chat/) | Master context mechanisms — #file, @workspace, #codebase |
+| **2. Teach Copilot your codebase** | [Copilot Primitives](copilot-primitives/) | The 4 configuration primitives (instructions, prompts, skills, agents) that transform Copilot from a generic assistant into a team-specific development partner |
+
+> 💡 **Everything else builds on these two.** Chat teaches you how to collaborate with Copilot. Primitives teaches you how to configure Copilot to work the way your team needs. Start here regardless of role.
+
+---
+
+## 🚀 Quick Start (After the Foundation)
+
+| I want to... | Go to |
+|--------------|-------|
 | Understand how Copilot works under the hood | [Copilot Chat Internals](copilot-chat-internals/) — debug view, system prompts |
 | Use Copilot in the terminal | [Copilot CLI](copilot-cli/) — natural language to shell, Plan Mode |
 | Use Copilot in the browser | [Copilot Web](copilot-web/) — cross-device, PR reviews, issue triage |
@@ -20,9 +32,11 @@
 
 ## 🗺️ By Role
 
-| Role | Recommended Talks (in order) |
-|------|------------------------------|
-| **Individual Developer** | [Copilot Chat](copilot-chat/) → [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/) |
+All paths start with [Copilot Chat](copilot-chat/) → [Copilot Primitives](copilot-primitives/), then branch:
+
+| Role | After the foundation, continue with... |
+|------|----------------------------------------|
+| **Individual Developer** | [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/) |
 | **Team / Tech Lead** | [Agent Teams](agent-teams/) → [Chat Internals](copilot-chat-internals/) → [Agentic SDLC](agentic-sdlc/) (Part 2) → [Enterprise Patterns](enterprise-patterns/) |
 | **Security / Compliance** | [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/) |
 | **Platform Engineer** | [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot SDK](copilot-sdk/) |
@@ -33,19 +47,19 @@
 ## 🧭 Learning Paths
 
 ### Path 0 — Quick Wins with Agents
-> [Agentic Journey](agentic-journey/) Phase 1 → Phase 2 → Phases 3-4 → Evaluate → [Agentic SDLC](agentic-sdlc/) when hitting limits
+> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Agentic Journey](agentic-journey/) Phases 1-4 → Evaluate → [Agentic SDLC](agentic-sdlc/) when hitting limits
 
 ### Path 1 — Individual Productivity
-> [Copilot Chat](copilot-chat/) → [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/)
+> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/)
 
 ### Path 2 — Team Orchestration
-> [Copilot Chat](copilot-chat/) → [Multi-Step Tasks](multi-step-tasks/) → [Agent Teams](agent-teams/) → [Chat Internals](copilot-chat-internals/)
+> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Multi-Step Tasks](multi-step-tasks/) → [Agent Teams](agent-teams/) → [Chat Internals](copilot-chat-internals/)
 
 ### Path 3 — Enterprise Governance
-> [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/)
+> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/)
 
 ### Path 4 — Platform Engineering
-> [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot SDK](copilot-sdk/)
+> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot SDK](copilot-sdk/)
 
 ---
 
@@ -93,10 +107,10 @@
 
 | Question | Answer |
 |----------|--------|
-| "I just want to be more productive" | [Copilot Chat](copilot-chat/) → [Copilot CLI](copilot-cli/) |
+| "I just want to be more productive" | [Copilot Chat](copilot-chat/) → [Copilot Primitives](copilot-primitives/) → [Copilot CLI](copilot-cli/) |
+| "How do I make Copilot understand my codebase?" | [Copilot Primitives](copilot-primitives/) — instructions, prompts, skills, agents |
 | "I need agents to work together" | [Multi-Step Tasks](multi-step-tasks/) (phases) or [Agent Teams](agent-teams/) (roles) |
 | "I'm worried about security" | [Terminal Sandboxing](terminal-sandboxing/) + [Copilot Hooks](copilot-hooks/) |
 | "Agents are shipping too fast and things break" | [Agentic SDLC](agentic-sdlc/) (all three parts) |
 | "I want cross-session memory" | [Copilot Memory](copilot-memory/) |
 | "I want rich UI in chat responses" | [MCP Apps](mcp-apps/) |
-| "I need the 4 config primitives explained" | [Copilot Primitives](copilot-primitives/) |
