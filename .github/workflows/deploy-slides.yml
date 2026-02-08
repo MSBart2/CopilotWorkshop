@@ -72,23 +72,24 @@ jobs:
             echo "EOF" >> $GITHUB_OUTPUT
           fi
 
-      - name: Download previous build from gh-pages
-        id: download
-        continue-on-error: true
-        run: |
-          echo "📥 Downloading previous build from gh-pages branch..."
-          mkdir -p ./slides/dist
+      - name: Restore previous build cache
+        id: dist-cache
+        uses: actions/cache@v4
+        with:
+          path: ./slides/dist
+          key: slides-dist-${{ github.sha }}
+          restore-keys: |
+            slides-dist-
 
-          # Clone only the gh-pages branch (shallow)
-          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
-            git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }}.git ./previous-build
-            cp -r ./previous-build/* ./slides/dist/ 2>/dev/null || true
-            rm -rf ./previous-build
-            echo "✅ Previous build restored"
-            echo "needs_rebuild=false" >> $GITHUB_OUTPUT
+      - name: Check previous build
+        id: prev-build
+        run: |
+          if [ -f ./slides/dist/.build-manifest.json ]; then
+            echo "has_previous=true" >> $GITHUB_OUTPUT
+            echo "✅ Previous build cache restored"
           else
-            echo "⚠️ No gh-pages branch found - will build all slides"
-            echo "needs_rebuild=true" >> $GITHUB_OUTPUT
+            echo "has_previous=false" >> $GITHUB_OUTPUT
+            echo "📋 No previous build found — will build all"
           fi
 
       - name: Setup Node.js
@@ -125,7 +126,7 @@ jobs:
         run: npx playwright install-deps chromium
 
       - name: Build presentations (incremental)
-        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != '' && steps.download.outputs.needs_rebuild != 'true'
+        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != '' && steps.prev-build.outputs.has_previous == 'true'
         working-directory: ./slides
         run: |
           echo "🚀 Building changed slides only..."
@@ -166,7 +167,7 @@ jobs:
           echo "✨ Incremental build complete!"
 
       - name: Build all presentations (full rebuild)
-        if: steps.changes.outputs.full_rebuild == 'true' || steps.download.outputs.needs_rebuild == 'true'
+        if: steps.changes.outputs.full_rebuild == 'true' || steps.prev-build.outputs.has_previous != 'true'
         working-directory: ./slides
         shell: bash {0}
         run: |
@@ -349,7 +350,7 @@ jobs:
           echo "✨ All presentations built successfully!"
 
       - name: Verify build output
-        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides == '' && steps.download.outputs.needs_rebuild != 'true'
+        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides == '' && steps.prev-build.outputs.has_previous == 'true'
         working-directory: ./slides
         run: |
           echo "⏭️ No slide changes detected - using previous build"
