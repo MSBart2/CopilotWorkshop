@@ -38,29 +38,45 @@ Thought leadership for technical leaders making strategic decisions about AI ado
 
 ---
 
-### 🔧 [Technical Deep-Dives](tech-talks/) — 17 Talks
+### 🔧 [Technical Deep-Dives](tech-talks/)
 
 Technical presentations for practitioners exploring specific capabilities and patterns.
 
+#### 💬 Copilot Surfaces
+
 | Talk | Focus |
 |------|-------|
-| [Agent Teams](tech-talks/agent-teams/) | Multi-agent orchestration and delegation |
-| [Agentic Journey](tech-talks/agentic-journey/) | End-to-end issue-to-PR automation |
-| [Agentic SDLC](tech-talks/agentic-sdlc/) | Infrastructure for AI velocity |
-| [Context Engineering](tech-talks/context-engineering-foundations/) | Building effective AI context systems |
-| [Copilot Chat](tech-talks/copilot-chat/) | Chat patterns and techniques |
-| [Copilot Chat Internals](tech-talks/copilot-chat-internals/) | Under the hood of Copilot Chat |
-| [Copilot CLI](tech-talks/copilot-cli/) | Terminal-based AI assistance |
-| [Copilot Hooks](tech-talks/copilot-hooks/) | Event-driven Copilot integration |
-| [Copilot Memory](tech-talks/copilot-memory/) | Persistent context and memory |
-| [Copilot Primitives](tech-talks/copilot-primitives/) | Configuration primitives for codebase understanding |
-| [Copilot SDK](tech-talks/copilot-sdk/) | Embedding Copilot in custom tools |
-| [Copilot Web](tech-talks/copilot-web/) | Browser-based AI assistance |
-| [Enterprise Patterns](tech-talks/enterprise-patterns/) | Organizational-scale adoption |
-| [MCP Apps](tech-talks/mcp-apps/) | Model Context Protocol applications |
-| [Multi-Step Tasks](tech-talks/multi-step-tasks/) | Complex task decomposition |
-| [Parallel Execution](tech-talks/parallel-execution/) | Concurrent agent workflows |
-| [Terminal Sandboxing](tech-talks/terminal-sandboxing/) | Safe command execution |
+| [Copilot Chat](tech-talks/copilot-chat/) | Context mastery for AI collaboration — #file, @workspace, #codebase |
+| [Copilot Chat Internals](tech-talks/copilot-chat-internals/) | Under the hood diagnostics and Chat Debug View |
+| [Copilot CLI](tech-talks/copilot-cli/) | Natural language to shell commands and scripting workflows |
+| [Copilot Web](tech-talks/copilot-web/) | AI assistance beyond the IDE — PR reviews, issue triage |
+| [Copilot Memory](tech-talks/copilot-memory/) | Cross-session context persistence and workflow patterns |
+| [Terminal Sandboxing](tech-talks/terminal-sandboxing/) | Safe agentic execution with network and filesystem controls |
+
+#### 🧩 Context & Customization
+
+| Talk | Focus |
+|------|-------|
+| [Copilot Hooks](tech-talks/copilot-hooks/) | Programmable governance — prevention, audit trails, compliance |
+| [Copilot SDK](tech-talks/copilot-sdk/) | Embedding AI agents in custom tools and applications |
+| [Copilot Primitives](tech-talks/copilot-primitives/) | The 4 configuration primitives — instructions, prompts, skills, agents |
+| [MCP Apps](tech-talks/mcp-apps/) | Rich UI in chat responses with component-based MCP tools |
+
+#### 🤖 Agent Architecture
+
+| Talk | Focus |
+|------|-------|
+| [Agent Teams](tech-talks/agent-teams/) | Coordinated specialists — planners, reviewers, testers collaborating |
+| [Multi-Step Tasks](tech-talks/multi-step-tasks/) | Context isolation with subagents for complex workflows |
+| [Parallel Execution](tech-talks/parallel-execution/) | Simultaneous agents on different branches via Git worktree |
+
+#### 🚀 Agentic Transformation
+
+| Talk | Focus |
+|------|-------|
+| [Agentic Journey](tech-talks/agentic-journey/) | The 5-phase path from "assign to copilot" to full SDLC automation |
+| [Agentic SDLC](tech-talks/agentic-sdlc/) | Rewire repos, PRs, and CI/CD for AI-as-labor delivery agents |
+| [Enterprise Patterns](tech-talks/enterprise-patterns/) | Scaling Copilot across organizations with measurable ROI |
 
 See [DECISION-GUIDE.md](tech-talks/DECISION-GUIDE.md) for choosing the right talk for your audience.
 
@@ -73,7 +89,7 @@ All content has accompanying [Slidev presentations](slides/) deployed to [GitHub
 | Category | Decks | Live URL Pattern |
 |----------|-------|-----------------|
 | Workshop | 7 | `/CopilotTraining/workshop/{module}/` |
-| Tech Talks | 17+ | `/CopilotTraining/tech-talks/{topic}/` |
+| Tech Talks | 16 | `/CopilotTraining/tech-talks/{topic}/` |
 | Exec Talks | 3 | `/CopilotTraining/exec-talks/{topic}/` |
 
 Slides are built and deployed automatically on push to `main`. PRs that touch slides are validated with a build check before merge.
