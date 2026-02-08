@@ -135,17 +135,24 @@ jobs:
           mkdir -p dist/workshop dist/tech-talks dist/exec-talks
 
           # Build only changed slides
+          mkdir -p dist/.build-logs
           while IFS= read -r SLIDE_FILE; do
             if [ -n "$SLIDE_FILE" ] && [ -f "$SLIDE_FILE" ]; then
               # Extract category and basename
               CATEGORY=$(dirname "$SLIDE_FILE")
               BASENAME=$(basename "$SLIDE_FILE" .md)
+              LOG_FILE="dist/.build-logs/${CATEGORY}--${BASENAME}.log"
 
               echo "🔨 Building ${CATEGORY}/${BASENAME}..."
 
-              npx slidev build "$SLIDE_FILE" \
+              if ! npx slidev build "$SLIDE_FILE" \
                 --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
-                --out "$(pwd)/dist/${CATEGORY}/${BASENAME}"
+                --out "$(pwd)/dist/${CATEGORY}/${BASENAME}" \
+                > "$LOG_FILE" 2>&1; then
+                echo "::error::Build failed for ${CATEGORY}/${BASENAME}. See log:"
+                tail -20 "$LOG_FILE"
+                exit 1
+              fi
 
               echo "✅ ${CATEGORY}/${BASENAME} built successfully"
             fi
@@ -177,11 +184,31 @@ jobs:
             local SLIDE_FILE="$1"
             local CATEGORY=$(dirname "$SLIDE_FILE")
             local BASENAME=$(basename "$SLIDE_FILE" .md)
-            echo "🔨 Building ${CATEGORY}/${BASENAME}..."
-            npx slidev build "$SLIDE_FILE" \
-              --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
-              --out "$(pwd)/dist/${CATEGORY}/${BASENAME}" \
-              > /dev/null 2>&1
+            local LOG_FILE="dist/.build-logs/${CATEGORY}--${BASENAME}.log"
+            local MAX_RETRIES=2
+            local ATTEMPT=0
+
+            mkdir -p "$(dirname "$LOG_FILE")"
+
+            while [ $ATTEMPT -lt $MAX_RETRIES ]; do
+              ATTEMPT=$((ATTEMPT + 1))
+              if [ $ATTEMPT -eq 1 ]; then
+                echo "🔨 Building ${CATEGORY}/${BASENAME}..."
+              else
+                echo "🔄 Retrying ${CATEGORY}/${BASENAME} (attempt ${ATTEMPT}/${MAX_RETRIES})..."
+              fi
+
+              if npx slidev build "$SLIDE_FILE" \
+                --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
+                --out "$(pwd)/dist/${CATEGORY}/${BASENAME}" \
+                > "$LOG_FILE" 2>&1; then
+                return 0
+              fi
+            done
+
+            echo "::error::Build failed for ${CATEGORY}/${BASENAME} after ${MAX_RETRIES} attempts. See log:"
+            tail -20 "$LOG_FILE"
+            return 1
           }
 
           wait_for_slot() {
