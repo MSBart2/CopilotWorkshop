@@ -13,7 +13,9 @@ jobs:
   plan:
     name: Generate Content Plan
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'tech-talk:planned'
+    if: |
+      contains(github.event.issue.labels.*.name, 'tech-talk') &&
+      contains(github.event.issue.labels.*.name, 'tech-talk:planned')
     permissions:
       issues: write
       contents: write

@@ -14,7 +14,9 @@ jobs:
   slides:
     name: Generate Slides
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'tech-talk:slides'
+    if: |
+      contains(github.event.issue.labels.*.name, 'tech-talk') &&
+      contains(github.event.issue.labels.*.name, 'tech-talk:slides')
     permissions:
       issues: write
       contents: write
