@@ -162,13 +162,13 @@ jobs:
       - name: Build all presentations (full rebuild)
         if: steps.changes.outputs.full_rebuild == 'true' || steps.download.outputs.needs_rebuild == 'true'
         working-directory: ./slides
+        shell: bash {0}
         run: |
           echo "🚀 Building all Slidev presentations..."
 
           mkdir -p dist/workshop dist/tech-talks dist/exec-talks
 
           MAX_JOBS=4
-          RUNNING=0
           PIDS=()
           LABELS=()
           FAILED=0
