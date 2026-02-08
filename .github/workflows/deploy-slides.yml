@@ -165,55 +165,61 @@ jobs:
         run: |
           echo "🚀 Building all Slidev presentations..."
 
-          # Create dist directory structure
-          mkdir -p dist/workshop
-          mkdir -p dist/tech-talks
-          mkdir -p dist/exec-talks
+          mkdir -p dist/workshop dist/tech-talks dist/exec-talks
 
-          # Build workshop slides
-          echo "📚 Building workshop slides..."
-          for SLIDE_FILE in workshop/*.md; do
+          MAX_JOBS=4
+          RUNNING=0
+          PIDS=()
+          LABELS=()
+          FAILED=0
+
+          build_slide() {
+            local SLIDE_FILE="$1"
+            local CATEGORY=$(dirname "$SLIDE_FILE")
+            local BASENAME=$(basename "$SLIDE_FILE" .md)
+            echo "🔨 Building ${CATEGORY}/${BASENAME}..."
+            npx slidev build "$SLIDE_FILE" \
+              --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
+              --out "$(pwd)/dist/${CATEGORY}/${BASENAME}" \
+              > /dev/null 2>&1
+          }
+
+          wait_for_slot() {
+            while [ ${#PIDS[@]} -ge $MAX_JOBS ]; do
+              NEW_PIDS=()
+              NEW_LABELS=()
+              for i in "${!PIDS[@]}"; do
+                if kill -0 "${PIDS[$i]}" 2>/dev/null; then
+                  NEW_PIDS+=("${PIDS[$i]}")
+                  NEW_LABELS+=("${LABELS[$i]}")
+                else
+                  wait "${PIDS[$i]}" && echo "✅ ${LABELS[$i]} built successfully" || { echo "❌ ${LABELS[$i]} FAILED"; FAILED=1; }
+                fi
+              done
+              PIDS=("${NEW_PIDS[@]}")
+              LABELS=("${NEW_LABELS[@]}")
+              [ ${#PIDS[@]} -ge $MAX_JOBS ] && sleep 1
+            done
+          }
+
+          # Queue all slide builds
+          for SLIDE_FILE in workshop/*.md tech-talks/*.md exec-talks/*.md; do
             if [ -f "$SLIDE_FILE" ]; then
+              wait_for_slot
+              CATEGORY=$(dirname "$SLIDE_FILE")
               BASENAME=$(basename "$SLIDE_FILE" .md)
-              echo "🔨 Building workshop/${BASENAME}..."
-
-              npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotTraining/workshop/${BASENAME}/" \
-                --out "$(pwd)/dist/workshop/${BASENAME}"
-
-              echo "✅ workshop/${BASENAME} built successfully"
+              build_slide "$SLIDE_FILE" &
+              PIDS+=($!)
+              LABELS+=("${CATEGORY}/${BASENAME}")
             fi
           done
 
-          # Build tech-talks slides
-          echo "🔬 Building tech-talks slides..."
-          for SLIDE_FILE in tech-talks/*.md; do
-            if [ -f "$SLIDE_FILE" ]; then
-              BASENAME=$(basename "$SLIDE_FILE" .md)
-              echo "🔨 Building tech-talks/${BASENAME}..."
-
-              npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotTraining/tech-talks/${BASENAME}/" \
-                --out "$(pwd)/dist/tech-talks/${BASENAME}"
-
-              echo "✅ tech-talks/${BASENAME} built successfully"
-            fi
+          # Wait for remaining jobs
+          for i in "${!PIDS[@]}"; do
+            wait "${PIDS[$i]}" && echo "✅ ${LABELS[$i]} built successfully" || { echo "❌ ${LABELS[$i]} FAILED"; FAILED=1; }
           done
 
-          # Build exec-talks slides
-          echo "💼 Building exec-talks slides..."
-          for SLIDE_FILE in exec-talks/*.md; do
-            if [ -f "$SLIDE_FILE" ]; then
-              BASENAME=$(basename "$SLIDE_FILE" .md)
-              echo "🔨 Building exec-talks/${BASENAME}..."
-
-              npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotTraining/exec-talks/${BASENAME}/" \
-                --out "$(pwd)/dist/exec-talks/${BASENAME}"
-
-              echo "✅ exec-talks/${BASENAME} built successfully"
-            fi
-          done
+          [ $FAILED -eq 1 ] && { echo "❌ Some builds failed"; exit 1; }
 
           # Copy custom index.html and 404.html to dist root
           echo "📄 Copying index.html and 404.html to dist root..."
