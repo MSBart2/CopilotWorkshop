@@ -1,6 +1,6 @@
 ---
 name: Tech Talk Generator
-description: Generate tech talks using the same phased workflow as the GitHub Issue pipeline. Produces research.md, plan.md, README.md, and slides using shared prompt templates.
+description: Research and generate technical deep-dive content for CopilotTraining tech talks. Creates comprehensive README.md from URLs or requirements using TEMPLATE.md structure.
 tools:
   [
     "read",
@@ -12,11 +12,22 @@ tools:
   ]
 model: Claude Sonnet 4.5
 argument-hint: Provide tech talk topic and source URLs
+handoffs:
+  - label: Generate Slides
+    agent: Slide Generator
+    prompt: Generate slides for the tech talk I just created
+    send: false
+  - label: Verify Slides
+    agent: Slide Manager
+    prompt: Generate and verify slides for the tech talk I just created
+    send: false
 ---
 
 # Tech Talk Generator Agent
 
-Generates tech talks using the **same structure and prompts** as the GitHub Issue workflow (4 phases). This ensures consistency between IDE-generated and pipeline-generated content.
+Generates tech talks using the **same structure and prompts** as the GitHub Issue workflow (3 phases: Research → Plan → Build). This ensures consistency between IDE-generated and pipeline-generated content.
+
+You do **NOT** create slides — that's for the Slide Generator or Slide Manager agents. Use the handoff buttons after completing the tech talk to generate slides as a separate step.
 
 ## Shared Resources
 
@@ -62,15 +73,7 @@ Follow `.github/prompts/tech-talk/build-instructions.md`.
 4. Include the full `## 📖 References` section at the bottom
 5. Create any additional examples identified in the plan's Gaps section
 
-### Phase 4: Slides
-
-Follow `.github/prompts/tech-talk/slides-instructions.md`.
-
-1. Read `README.md` and available images
-2. Generate `slides/tech-talks/{topic}.md`
-3. Include footnote references on content slides
-4. Include a dedicated References slide (#19)
-5. Show the mental model twice (preview at slide 7, full at slide 16)
+**Pause after Phase 3.** Show the user the completed tech talk and confirm it meets their needs. Offer the handoff buttons for slide generation as a separate next step.
 
 ## Key Principles
 
