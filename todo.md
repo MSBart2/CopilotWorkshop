@@ -30,3 +30,5 @@ new tech talk for reporting based on https://docs.github.com/en/enterprise-cloud
 investigate this :  https://search.app/1fZRT
 
 ---
+
+build tech-talk for multi-repo workspaces in VS Code.  how to set them up, best practices for using them, how they can help with working across multiple related repositories (e.g. microservices, frontend/backend, etc.) Answers the question of "how do I use copilot agents across multiple repositories?" and "how do I set up my environment to work with multiple repos at once?"  also covers the new multi-repo features in VS Code that make this easier, and any tips/tricks for getting the most out of it.
