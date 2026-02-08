@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Agent Architecture"
+---
+
 # Multi-Step Tasks: Context Isolation with Subagents
 
 > **The Question This Talk Answers:**

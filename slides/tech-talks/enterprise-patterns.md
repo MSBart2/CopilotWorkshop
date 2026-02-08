@@ -13,6 +13,8 @@ transition: slide-left
 title: Enterprise Patterns for GitHub Copilot
 module: tech-talks/enterprise-patterns
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

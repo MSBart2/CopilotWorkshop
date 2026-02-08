@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Copilot Surfaces"
+---
+
 # GitHub Copilot CLI: Terminal-Native AI for DevOps Automation
 
 > **The Question This Talk Answers:**

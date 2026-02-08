@@ -13,6 +13,8 @@ transition: slide-left
 title: Agentic Economics - Making the Business Case
 module: exec-talks/agentic-economics
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

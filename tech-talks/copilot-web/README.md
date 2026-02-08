@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Copilot Surfaces"
+---
+
 # GitHub Copilot on the Web: AI Assistance Beyond the IDE
 
 > **The Question This Talk Answers:**

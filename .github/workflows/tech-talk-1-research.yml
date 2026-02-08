@@ -59,6 +59,7 @@ jobs:
             const sourceUrls = extractField('Source URLs');
             const primaryQuestion = extractField('Primary Question');
             const audience = extractField('Target Audience');
+            const section = extractField('Index Section');
             const duration = extractField('Expected Duration');
             const guidance = extractField('Guidance \\(optional\\)');
 
@@ -66,6 +67,7 @@ jobs:
             core.setOutput('source_urls', sourceUrls);
             core.setOutput('primary_question', primaryQuestion || 'Not specified');
             core.setOutput('audience', audience || 'Mixed Audience');
+            core.setOutput('section', section || 'Context & Customization');
             core.setOutput('duration', duration || '45 minutes');
             core.setOutput('guidance', guidance || 'No specific guidance provided');
 
@@ -110,6 +112,7 @@ jobs:
               -e "s|{{AUDIENCE}}|${{ steps.extract.outputs.audience }}|g" \
               -e "s|{{DURATION}}|${{ steps.extract.outputs.duration }}|g" \
               -e "s|{{GUIDANCE}}|${{ steps.extract.outputs.guidance }}|g" \
+              -e "s|{{SECTION}}|${{ steps.extract.outputs.section }}|g" \
               -e "s|{{SOURCE_URLS}}|${SOURCE_URLS}|g" \
               .github/prompts/tech-talk/research-instructions.md > research_prompt.txt
 

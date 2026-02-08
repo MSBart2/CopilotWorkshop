@@ -80,12 +80,26 @@ build_slide() {
     fi
 }
 
+TOTAL_SKIPPED=0
+
+# Helper function to check if a slide is archived
+is_archived() {
+    local FILE=$1
+    # Check first 20 lines of frontmatter for status: archived
+    head -20 "$FILE" | grep -q '^status: archived$'
+}
+
 # Build workshop slides
 if [[ -z "$FOLDER" || "$FOLDER" == "workshop" ]]; then
     echo "📚 Building workshop slides..."
     for SLIDE_FILE in "${SLIDES_DIR}"/workshop/*.md; do
         if [ -f "$SLIDE_FILE" ]; then
             BASENAME=$(basename "$SLIDE_FILE" .md)
+            if is_archived "$SLIDE_FILE"; then
+                echo "   ⏭️  Skipping archived: workshop/${BASENAME}"
+                TOTAL_SKIPPED=$((TOTAL_SKIPPED + 1))
+                continue
+            fi
             build_slide "workshop" "${BASENAME}"
             TOTAL_BUILT=$((TOTAL_BUILT + 1))
         fi
@@ -99,6 +113,11 @@ if [[ -z "$FOLDER" || "$FOLDER" == "tech-talks" ]]; then
     for SLIDE_FILE in "${SLIDES_DIR}"/tech-talks/*.md; do
         if [ -f "$SLIDE_FILE" ]; then
             BASENAME=$(basename "$SLIDE_FILE" .md)
+            if is_archived "$SLIDE_FILE"; then
+                echo "   ⏭️  Skipping archived: tech-talks/${BASENAME}"
+                TOTAL_SKIPPED=$((TOTAL_SKIPPED + 1))
+                continue
+            fi
             build_slide "tech-talks" "${BASENAME}"
             TOTAL_BUILT=$((TOTAL_BUILT + 1))
         fi
@@ -112,6 +131,11 @@ if [[ -z "$FOLDER" || "$FOLDER" == "exec-talks" ]]; then
     for SLIDE_FILE in "${SLIDES_DIR}"/exec-talks/*.md; do
         if [ -f "$SLIDE_FILE" ]; then
             BASENAME=$(basename "$SLIDE_FILE" .md)
+            if is_archived "$SLIDE_FILE"; then
+                echo "   ⏭️  Skipping archived: exec-talks/${BASENAME}"
+                TOTAL_SKIPPED=$((TOTAL_SKIPPED + 1))
+                continue
+            fi
             build_slide "exec-talks" "${BASENAME}"
             TOTAL_BUILT=$((TOTAL_BUILT + 1))
         fi
@@ -130,7 +154,7 @@ MINUTES=$((TOTAL_ELAPSED / 60))
 SECONDS=$((TOTAL_ELAPSED % 60))
 
 echo ""
-echo "✨ All ${TOTAL_BUILT} presentations built successfully!"
+echo "✨ ${TOTAL_BUILT} presentations built, ${TOTAL_SKIPPED} archived skipped."
 if [ $MINUTES -gt 0 ]; then
     echo "⏱️  Total time: ${MINUTES}m ${SECONDS}s"
 else

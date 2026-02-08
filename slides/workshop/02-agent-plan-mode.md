@@ -12,6 +12,8 @@ transition: slide-left
 title: Module 2 - Agent Plan Mode
 module: workshop/02-agent-plan-mode
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

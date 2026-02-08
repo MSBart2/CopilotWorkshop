@@ -29,20 +29,26 @@ Verify Slidev presentation slides by running automated checks using Playwright t
 ## Three Modes
 
 ### 1. Lint Mode (FASTEST)
+
 Static analysis in milliseconds without server/browser.
+
 - ✅ Max bullets per slide (5)
 - ✅ Code block length (15 lines)
 - ✅ Text block length (200 chars)
 - ✅ Missing image files
-- ✅ Frontmatter validation
+- ✅ Frontmatter validation (including `status` and `updated` fields)
 - ✅ Empty slides
 - ✅ Heading depth
+- ✅ Archive status detection — report archived slides as "⏭️ archived" in output
 
 ### 2. Smart Mode (RECOMMENDED)
+
 Runs lint first, only uses Playwright if lint finds issues or user requests full check.
 
 ### 3. Full Mode (COMPLETE)
+
 Always runs Playwright with screenshots.
+
 - Visual overflow detection
 - Broken image detection
 - Navigation testing

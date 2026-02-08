@@ -1,3 +1,9 @@
+---
+status: archived
+updated: 2026-02-08
+section: "Context & Customization"
+---
+
 # Context Engineering Foundations Workshop
 
 ## 🎯 The Foundation That Unlocks Everything
@@ -8,8 +14,8 @@
 
 ## Workshop Overview
 
-**Duration:** 2 hours (hands-on)  
-**Format:** Customer workshop with live exercises  
+**Duration:** 2 hours (hands-on)
+**Format:** Customer workshop with live exercises
 **Prerequisites:** VS Code with GitHub Copilot extension installed
 
 This workshop establishes the **foundational skills** that determine whether Copilot delivers generic autocomplete or expert-level assistance. Participants will build real context engineering artifacts and measure the difference.

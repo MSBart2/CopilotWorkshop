@@ -58,6 +58,7 @@ jobs:
             core.setOutput('topic', topic);
             core.setOutput('primary_question', extractField('Primary Question') || 'Not specified');
             core.setOutput('audience', extractField('Target Audience') || 'Mixed Audience');
+            core.setOutput('section', extractField('Index Section') || 'Context & Customization');
             core.setOutput('duration', extractField('Expected Duration') || '45 minutes');
 
       - name: Checkout feature branch
@@ -106,6 +107,7 @@ jobs:
               -e "s|{{PRIMARY_QUESTION}}|${{ steps.extract.outputs.primary_question }}|g" \
               -e "s|{{AUDIENCE}}|${{ steps.extract.outputs.audience }}|g" \
               -e "s|{{DURATION}}|${{ steps.extract.outputs.duration }}|g" \
+              -e "s|{{SECTION}}|${{ steps.extract.outputs.section }}|g" \
               .github/prompts/tech-talk/slides-instructions.md > slides_prompt.txt
 
           # Append the README as source content

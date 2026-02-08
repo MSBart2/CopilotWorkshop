@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Copilot Surfaces"
+---
+
 # Copilot Memory: Stateful AI That Remembers Your Preferences
 
 > **The Question This Talk Answers:**

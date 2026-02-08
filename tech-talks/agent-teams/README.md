@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Agent Architecture"
+---
+
 # Agent Teams: Coordinating Specialized AI Roles for Complex Development
 
 > **The Question This Talk Answers:**

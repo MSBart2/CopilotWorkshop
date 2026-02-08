@@ -13,6 +13,8 @@ transition: slide-left
 title: Copilot Memory
 module: tech-talks/copilot-memory
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

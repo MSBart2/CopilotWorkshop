@@ -53,6 +53,7 @@ jobs:
             core.setOutput('topic', extractField('Tech Talk Topic'));
             core.setOutput('primary_question', extractField('Primary Question') || 'Not specified');
             core.setOutput('audience', extractField('Target Audience') || 'Mixed Audience');
+            core.setOutput('section', extractField('Index Section') || 'Context & Customization');
             core.setOutput('duration', extractField('Expected Duration') || '45 minutes');
             core.setOutput('guidance', extractField('Guidance \\(optional\\)') || 'No specific guidance provided');
 
@@ -105,6 +106,7 @@ jobs:
               -e "s|{{AUDIENCE}}|${{ steps.extract.outputs.audience }}|g" \
               -e "s|{{DURATION}}|${{ steps.extract.outputs.duration }}|g" \
               -e "s|{{GUIDANCE}}|${{ steps.extract.outputs.guidance }}|g" \
+              -e "s|{{SECTION}}|${{ steps.extract.outputs.section }}|g" \
               .github/prompts/tech-talk/build-instructions.md > build_prompt.txt
 
           # Append all artifacts so Copilot CLI has full context

@@ -12,6 +12,8 @@ transition: slide-left
 title: MCP Apps - Rich Interactive UI
 module: tech-talks/mcp-apps
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

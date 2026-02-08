@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-08
+section: "Context & Customization"
+---
+
 # Copilot Configuration Primitives: Making AI Understand Your Codebase
 
 > **The Question This Talk Answers:**

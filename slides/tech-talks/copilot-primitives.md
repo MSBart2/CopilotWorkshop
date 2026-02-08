@@ -12,6 +12,8 @@ transition: slide-left
 title: Copilot Configuration Primitives - Making AI Understand Your Codebase
 module: tech-talks/copilot-primitives
 mdc: true
+status: active
+updated: 2026-02-08
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

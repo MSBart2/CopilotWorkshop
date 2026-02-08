@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-03
+section: "Executive Talks"
+---
+
 # No Instruments, No Delivery: The Enterprise Agentic Imperative
 
 *A thought leadership guide for technical leaders navigating agentic AI adoption*

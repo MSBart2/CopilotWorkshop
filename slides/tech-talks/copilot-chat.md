@@ -12,6 +12,8 @@ transition: slide-left
 title: Copilot Chat - Context Mastery for AI Collaboration
 module: tech-talks/copilot-chat
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

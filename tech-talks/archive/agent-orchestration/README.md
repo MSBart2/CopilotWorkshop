@@ -1,3 +1,9 @@
+---
+status: archived
+updated: 2026-02-06
+section: "Agent Architecture"
+---
+
 # Agent Orchestration: Multi-Agent Workflows in VS Code
 
 Design and implement coordinated agent systems where specialized agents collaborate on complex development tasks

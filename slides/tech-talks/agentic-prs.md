@@ -12,6 +12,8 @@ transition: slide-left
 title: Agentic SDLC - Agentic PRs
 module: tech-talks/agentic-prs
 mdc: true
+status: archived
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

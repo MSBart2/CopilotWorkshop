@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Copilot Surfaces"
+---
+
 # Terminal Sandboxing: Safe Agentic Execution
 
 > **The Question This Talk Answers:**

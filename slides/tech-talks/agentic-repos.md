@@ -12,6 +12,8 @@ transition: slide-left
 title: Agentic Delivery Repo Topology
 module: tech-talks/agentic-repos
 mdc: true
+status: archived
+updated: 2026-02-05
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

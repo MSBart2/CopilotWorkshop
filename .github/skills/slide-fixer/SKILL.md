@@ -23,24 +23,34 @@ Automatically fix slide issues detected by verification - splits overflowing sli
 @slide-fixer fix and verify workshop/03-custom-prompts.md
 ```
 
+## Archive Guard
+
+**Before fixing any slide**, check its frontmatter for `status: archived`. If found, **skip the file** and report: "⏭️ Skipped (archived): {filename}". Never modify archived slides.
+
+When a fix is applied to an active slide, update the `updated:` field in frontmatter to today's date (YYYY-MM-DD).
+
 ## What It Fixes
 
 ### 1. Content Overflow
+
 - **Too many bullets** - Splits into multiple slides
 - **Long code blocks** - Splits or uses scrollable regions
 - **Long text** - Breaks into digestible chunks
 
 ### 2. Broken Images
+
 - Checks if image files exist
 - Updates paths if moved
 - Adds placeholder if missing
 
 ### 3. Layout Issues
+
 - Balances two-column layouts
 - Fixes nested HTML depth
 - Repairs tag mismatches
 
 ### 4. Navigation
+
 - Updates TOC slide numbers
 - Fixes `@click="$nav.go(N)"` references
 - Maintains section anchors
@@ -52,37 +62,49 @@ Automatically fix slide issues detected by verification - splits overflowing sli
 ### Splitting Patterns
 
 **Bullet overflow:**
+
 ```markdown
 # Original Slide (8 bullets - TOO MANY)
 ```
+
 → Becomes →
+
 ```markdown
 # Slide Title (Part 1)
+
 - Bullets 1-4
 
 ---
 
 # Slide Title (Part 2)
+
 - Bullets 5-8
 ```
 
 **Code overflow:**
+
 ```markdown
 # Long Code (25 lines - TOO LONG)
 ```
+
 → Becomes →
-```markdown
+
+````markdown
 # Implementation (Part 1)
+
 ```javascript
 // Lines 1-15
 ```
+````
 
 ---
 
 # Implementation (Part 2)
+
 ```javascript
 // Lines 16-25
 ```
+
 ```
 
 ## Auto-Run After Generation
@@ -90,3 +112,4 @@ Automatically fix slide issues detected by verification - splits overflowing sli
 When generating slides, automatically run fixer if verification detects issues.
 
 **Remember:** See `/docs/skills/slide-fixer-FULL.md` for complete splitting patterns, edge cases, and advanced fixes.
+```

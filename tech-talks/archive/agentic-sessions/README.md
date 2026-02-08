@@ -1,3 +1,9 @@
+---
+status: archived
+updated: 2026-02-06
+section: "Agentic Transformation"
+---
+
 # Agentic Sessions: Multi-Environment Agent Orchestration
 
 Delegate, monitor, and switch between local, background, and cloud agents from a unified interface

@@ -12,6 +12,8 @@ transition: slide-left
 title: Module 4 - Agent Skills
 module: workshop/04-agent-skills
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

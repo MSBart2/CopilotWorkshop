@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Agentic Transformation"
+---
+
 # The Agentic Journey: Incremental Path from Issue to PR Automation
 
 > **The Question This Talk Answers:**

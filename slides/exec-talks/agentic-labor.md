@@ -12,6 +12,8 @@ transition: slide-left
 title: The Labor Multiplier - What Agents Actually Do
 module: exec-talks/agentic-labor
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

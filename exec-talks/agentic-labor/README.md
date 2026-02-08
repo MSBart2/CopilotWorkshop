@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Executive Talks"
+---
+
 # The Labor Multiplier: What Agents Actually Do
 
 *A strategic guide for leaders expanding agentic AI beyond code generation*

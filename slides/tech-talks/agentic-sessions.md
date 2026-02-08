@@ -12,6 +12,8 @@ transition: slide-left
 title: Agentic Sessions - Multi-Environment Agent Orchestration
 module: tech-talks/agentic-sessions
 mdc: true
+status: archived
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

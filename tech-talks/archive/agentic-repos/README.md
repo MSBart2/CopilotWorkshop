@@ -1,3 +1,9 @@
+---
+status: archived
+updated: 2026-02-06
+section: "Agentic Transformation"
+---
+
 # Agentic Delivery Repo Topology
 
 **How to rewire repositories for AI‑as‑labor delivery agents (Gen‑4 SDLC)**

@@ -40,6 +40,14 @@ New-Item -ItemType Directory -Force -Path "$OutputDir/tech-talks" | Out-Null
 New-Item -ItemType Directory -Force -Path "$OutputDir/exec-talks" | Out-Null
 
 $TotalBuilt = 0
+$TotalSkipped = 0
+
+# Helper function to check if a slide is archived
+function Test-Archived {
+    param([string]$FilePath)
+    $head = Get-Content $FilePath -TotalCount 20
+    return ($head -contains 'status: archived')
+}
 
 # Helper function to build a slide
 function Build-Slide {
@@ -87,6 +95,11 @@ if (-not $Folder -or $Folder -eq 'workshop') {
     $WorkshopSlides = Get-ChildItem -Path "$SlidesDir/workshop" -Filter "*.md" -File
     foreach ($SlideFile in $WorkshopSlides) {
         $BaseName = $SlideFile.BaseName
+        if (Test-Archived $SlideFile.FullName) {
+            Write-Host "   ⏭️  Skipping archived: workshop/$BaseName" -ForegroundColor DarkGray
+            $TotalSkipped++
+            continue
+        }
         Build-Slide -Category "workshop" -BaseName $BaseName
         $TotalBuilt++
     }
@@ -99,6 +112,11 @@ if (-not $Folder -or $Folder -eq 'tech-talks') {
     $TechTalksSlides = Get-ChildItem -Path "$SlidesDir/tech-talks" -Filter "*.md" -File
     foreach ($SlideFile in $TechTalksSlides) {
         $BaseName = $SlideFile.BaseName
+        if (Test-Archived $SlideFile.FullName) {
+            Write-Host "   ⏭️  Skipping archived: tech-talks/$BaseName" -ForegroundColor DarkGray
+            $TotalSkipped++
+            continue
+        }
         Build-Slide -Category "tech-talks" -BaseName $BaseName
         $TotalBuilt++
     }
@@ -111,6 +129,11 @@ if (-not $Folder -or $Folder -eq 'exec-talks') {
     $ExecTalksSlides = Get-ChildItem -Path "$SlidesDir/exec-talks" -Filter "*.md" -File
     foreach ($SlideFile in $ExecTalksSlides) {
         $BaseName = $SlideFile.BaseName
+        if (Test-Archived $SlideFile.FullName) {
+            Write-Host "   ⏭️  Skipping archived: exec-talks/$BaseName" -ForegroundColor DarkGray
+            $TotalSkipped++
+            continue
+        }
         Build-Slide -Category "exec-talks" -BaseName $BaseName
         $TotalBuilt++
     }
@@ -126,7 +149,7 @@ $TotalMinutes = [math]::Floor($TotalElapsedSeconds / 60)
 $RemainingSeconds = $TotalElapsedSeconds % 60
 
 Write-Host ""
-Write-Host "✨ All $TotalBuilt presentations built successfully!" -ForegroundColor Green
+Write-Host "✨ $TotalBuilt presentations built, $TotalSkipped archived skipped." -ForegroundColor Green
 if ($TotalMinutes -gt 0) {
     Write-Host "⏱️  Total time: ${TotalMinutes}m ${RemainingSeconds}s" -ForegroundColor Cyan
 }

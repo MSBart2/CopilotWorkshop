@@ -12,6 +12,8 @@ transition: slide-left
 title: Module 0 - The Challenge
 module: workshop/00-orientation
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

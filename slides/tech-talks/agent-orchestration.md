@@ -13,6 +13,8 @@ transition: slide-left
 title: Agent Orchestration - Multi-Agent Workflows
 module: tech-talks/agent-orchestration
 mdc: true
+status: archived
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

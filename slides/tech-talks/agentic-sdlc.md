@@ -13,6 +13,8 @@ transition: slide-left
 title: Agentic SDLC - Infrastructure for AI Velocity
 module: tech-talks/agentic-sdlc
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

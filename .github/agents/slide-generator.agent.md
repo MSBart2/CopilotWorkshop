@@ -20,15 +20,23 @@ Transform module README markdown into beautiful, concise Slidev presentations (1
 2. **Quality over Quantity** - Target 15-20 slides per module
 3. **Prevent Overflow** - Follow strict content limits (see full docs)
 4. **Maintain Branding** - Use workshop color schemes and emoji vocabulary
+5. **Respect Archive Status** - Never modify slides with `status: archived` in frontmatter
 
 ## Quick Workflow
 
-1. **Parse README** - Extract: title, story, objectives, personas, before/after, key concepts, exercises, metrics
+0. **Check Status** - Read the source README frontmatter first. If `status: archived`, **STOP** and inform the user: "This content is archived and cannot be used to generate slides." Also check any existing slide file — if it has `status: archived`, refuse to modify it.
+1. **Parse README** - Extract: title, story, objectives, personas, before/after, key concepts, exercises, metrics. Note the `section` field from README frontmatter — this determines where to place the card in `index-custom.html`.
 2. **Generate Structure** - 12-20 slides: cover → TOC → objectives → personas → before/after → concepts → exercises → quote → metrics → next
 3. **Create TOC** - Look for `<!-- 🎬 MAJOR SECTION: -->` markers, create section dividers with `name:` anchors, add navigation cards with `@click="$nav.go(N)"`
 4. **Apply Layouts** - Use Slidev's built-in layouts (default, center, two-cols, etc.)
 5. **Prevent Overflow** - Max 5 bullets, 15-line code blocks, 200-char text blocks
-6. **Update Index** - Add entry to `slides/index-custom.html` navigation
+6. **Update Index** - Add entry to `slides/index-custom.html` navigation. Use the `section` field from the source README frontmatter to place the card in the correct sub-group:
+   - `Copilot Surfaces` → 💬 sub-group
+   - `Context & Customization` → 🧩 sub-group
+   - `Agent Architecture` → 🤖 sub-group
+   - `Agentic Transformation` → 🚀 sub-group
+   - `Executive Talks` → 💼 section
+7. **Set Metadata** - When creating a new slide, set `status: active` and `updated: <today's date YYYY-MM-DD>`. When modifying an existing slide, update the `updated:` field to today's date.
 
 ## Critical Rules
 
@@ -48,6 +56,7 @@ Transform module README markdown into beautiful, concise Slidev presentations (1
 ## Common Slides
 
 ### Cover
+
 ```markdown
 ---
 layout: cover
@@ -59,6 +68,7 @@ layout: cover
 ```
 
 ### Before/After
+
 ```markdown
 ---
 layout: two-cols
@@ -67,17 +77,22 @@ layout: two-cols
 # Before vs After
 
 ::left::
+
 ### ❌ Before
+
 - Old problem 1
 - Old problem 2
 
 ::right::
+
 ### ✨ After
+
 - New solution 1
 - New solution 2
 ```
 
 ### TOC (with navigation)
+
 ```markdown
 ---
 layout: center

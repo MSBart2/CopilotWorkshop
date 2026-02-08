@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Executive Talks"
+---
+
 # The Agentic Economics: Making the Business Case
 
 *A strategic guide for leaders calculating the ROI of agentic AI adoption*

@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Copilot Surfaces"
+---
+
 # Copilot Chat: Context Mastery for AI Collaboration
 
 > **The Question This Talk Answers:**

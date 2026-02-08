@@ -13,6 +13,8 @@ transition: slide-left
 title: Parallel Execution - When Agents Work Simultaneously
 module: tech-talks/parallel-execution
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

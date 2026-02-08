@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Context & Customization"
+---
+
 # GitHub Copilot Hooks: Programmable Governance for Agent Workflows
 
 > **The Question This Talk Answers:**

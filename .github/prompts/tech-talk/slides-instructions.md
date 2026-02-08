@@ -9,6 +9,7 @@ You are generating Slidev presentation slides from a tech talk README.
 - **Primary Question:** {{PRIMARY_QUESTION}}
 - **Target Audience:** {{AUDIENCE}}
 - **Duration:** {{DURATION}}
+- **Index Section:** {{SECTION}}
 
 ## Source Content
 
@@ -88,3 +89,7 @@ The README contains inline `[^n]` citations and a `## 📖 References` section. 
 Create: `slides/tech-talks/{{TOPIC}}.md`
 
 If the file already exists, overwrite it with the new version.
+
+### Update Index
+
+After creating the slide file, add a card for this talk in `slides/index-custom.html` under the **{{SECTION}}** sub-group. Match the card format used by existing entries.

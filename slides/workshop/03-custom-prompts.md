@@ -12,6 +12,8 @@ transition: slide-left
 title: Module 3 - Custom Prompts
 module: workshop/03-custom-prompts
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

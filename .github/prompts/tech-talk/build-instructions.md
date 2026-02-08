@@ -9,6 +9,7 @@ You are generating the complete tech talk README.md based on an approved content
 - **Primary Question:** {{PRIMARY_QUESTION}}
 - **Target Audience:** {{AUDIENCE}}
 - **Duration:** {{DURATION}}
+- **Index Section:** {{SECTION}}
 - **Guidance:** {{GUIDANCE}}
 
 ## Available Artifacts on Branch
@@ -81,6 +82,18 @@ Aim for 8-15 references. Every major claim and code example should cite its sour
 - [ ] Minimum 2 official documentation links
 - [ ] 8-15 numbered references with inline `[^n]` citations throughout content
 - [ ] All links are current and working
+
+### Frontmatter
+
+The README **must** begin with YAML frontmatter:
+
+```yaml
+---
+status: active
+updated: <today's date YYYY-MM-DD>
+section: "{{SECTION}}"
+---
+```
 
 ## Output
 

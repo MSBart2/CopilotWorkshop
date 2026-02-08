@@ -9,6 +9,7 @@ You are researching source material for a new tech talk. Your output will be com
 - **Primary Question:** {{PRIMARY_QUESTION}}
 - **Target Audience:** {{AUDIENCE}}
 - **Duration:** {{DURATION}}
+- **Index Section:** {{SECTION}}
 - **Guidance:** {{GUIDANCE}}
 
 ## Source URLs to Research

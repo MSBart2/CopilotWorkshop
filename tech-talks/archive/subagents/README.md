@@ -1,3 +1,9 @@
+---
+status: archived
+updated: 2026-02-06
+section: "Agent Architecture"
+---
+
 # Subagents: Context Isolation for Complex Workflows
 
 Orchestrating autonomous agents with isolated context windows for scalable AI-assisted development

@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Agentic Transformation"
+---
+
 # Scaling GitHub Copilot Across Organizations
 
 > **The Question This Talk Answers:**

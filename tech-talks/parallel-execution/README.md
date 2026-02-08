@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Agent Architecture"
+---
+
 # Parallel Execution: Autonomous Agents Working Simultaneously
 
 > **The Question This Talk Answers:**

@@ -47,6 +47,19 @@ body:
       required: true
 
   - type: dropdown
+    id: section
+    attributes:
+      label: Index Section
+      description: Which section of the slide index should this talk appear in?
+      options:
+        - "Copilot Surfaces"
+        - "Context & Customization"
+        - "Agent Architecture"
+        - "Agentic Transformation"
+    validations:
+      required: true
+
+  - type: dropdown
     id: duration
     attributes:
       label: Expected Duration

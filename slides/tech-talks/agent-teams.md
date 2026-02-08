@@ -12,6 +12,8 @@ transition: slide-left
 title: Agent Teams - Coordinating Specialized AI Roles
 module: tech-talks/agent-teams
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

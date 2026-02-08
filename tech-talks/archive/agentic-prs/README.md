@@ -1,3 +1,9 @@
+---
+status: archived
+updated: 2026-02-06
+section: "Agentic Transformation"
+---
+
 # Agentic SDLC: Agentic PRs
 
 Innovative software development powered by intelligent automation

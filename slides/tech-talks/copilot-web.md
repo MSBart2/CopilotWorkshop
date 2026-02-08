@@ -12,6 +12,8 @@ transition: slide-left
 title: GitHub Copilot on the Web
 module: tech-talks/copilot-web
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

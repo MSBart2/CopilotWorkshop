@@ -9,6 +9,7 @@ You are creating a content plan based on research artifacts. The research, image
 - **Primary Question:** {{PRIMARY_QUESTION}}
 - **Target Audience:** {{AUDIENCE}}
 - **Duration:** {{DURATION}}
+- **Index Section:** {{SECTION}}
 - **Guidance:** {{GUIDANCE}}
 
 ## Available Artifacts

@@ -110,6 +110,40 @@ When creating Slidev presentations, follow these principles:
 - **Visual hierarchy** — Use emoji vocabulary consistently (🎯, ⏰, 📊, etc.)
 - **Beautiful, polished design** — Dark cockpit-style with Tailwind CSS, never use Mermaid diagrams
 
+### Slide Frontmatter Requirements
+
+All slide files **must** include these fields in the YAML frontmatter:
+
+- `status: active` or `status: archived` — Indicates whether the deck is live or frozen
+- `updated: YYYY-MM-DD` — Date of last modification
+
+**Archived slides (`status: archived`) must never be modified, regenerated, or fixed by any agent or skill.** If an agent encounters an archived slide, it must stop and inform the user. The build scripts (`build-all.sh`, `build-all.ps1`) automatically skip archived slides — their last-built output remains deployed until manually removed.
+
+### Tech Talk / Exec Talk Frontmatter Requirements
+
+All tech talk and exec talk README.md files **must** include YAML frontmatter at the top:
+
+```yaml
+---
+status: active # or "archived"
+updated: 2026-02-08 # last modification date
+section: "Context & Customization" # index-custom.html sub-group
+---
+```
+
+**Fields:**
+
+- `status` — `active` or `archived`. Archived talks must never be modified by agents.
+- `updated` — Date of last modification (YYYY-MM-DD). Agents must update this when modifying content.
+- `section` — The sub-group in `slides/index-custom.html` where the slide card belongs. Valid values:
+  - `Copilot Surfaces` — Chat, CLI, Web, Memory, Terminal Sandboxing
+  - `Context & Customization` — Instructions, Hooks, SDK, MCP, Primitives
+  - `Agent Architecture` — Teams, Multi-Step Tasks, Parallel Execution
+  - `Agentic Transformation` — Journey, SDLC, Enterprise Patterns
+  - `Executive Talks` — Used for exec-talks only
+
+**Change detection:** When generating slides, compare the README's `updated` date against the slide file's `updated` date. If the README is newer, the slide needs regeneration. If the slide is newer or equal, it's already up to date.
+
 **For complete slide lifecycle (generation + verification):** Use the `slide-manager` agent (see `.github/agents/slide-manager.agent.md`)
 
 **For generation only:** Use the `slide-generator` agent (see `.github/agents/slide-generator.agent.md`)

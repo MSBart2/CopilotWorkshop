@@ -12,6 +12,8 @@ transition: slide-left
 title: Module 6 - Custom Agents
 module: workshop/06-custom-agents
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

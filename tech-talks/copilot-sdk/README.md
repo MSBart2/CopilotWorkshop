@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Context & Customization"
+---
+
 # GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows
 
 > **The Question This Talk Answers:**

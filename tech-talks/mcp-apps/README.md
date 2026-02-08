@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Context & Customization"
+---
+
 # MCP Apps: Rich Interactive UI in Chat
 
 > **The Question This Talk Answers:**

@@ -72,6 +72,10 @@ Follow `.github/prompts/tech-talk/build-instructions.md`.
 3. Weave inline `[^n]` citations throughout the content
 4. Include the full `## 📖 References` section at the bottom
 5. Create any additional examples identified in the plan's Gaps section
+6. **Set frontmatter** — Add YAML frontmatter to README.md with:
+   - `status: active`
+   - `updated: <today's date YYYY-MM-DD>`
+   - `section: "<index section name>"` — one of: `Copilot Surfaces`, `Context & Customization`, `Agent Architecture`, `Agentic Transformation`, or `Executive Talks`
 
 **Pause after Phase 3.** Show the user the completed tech talk and confirm it meets their needs. Offer the handoff buttons for slide generation as a separate next step.
 

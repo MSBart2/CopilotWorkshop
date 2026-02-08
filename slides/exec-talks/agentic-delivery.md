@@ -12,6 +12,8 @@ transition: slide-left
 title: No Instruments, No Delivery - Executive Briefing
 module: exec-talks/agentic-delivery
 mdc: true
+status: active
+updated: 2026-02-06
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

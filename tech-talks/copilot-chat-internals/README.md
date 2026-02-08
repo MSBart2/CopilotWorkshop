@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Copilot Surfaces"
+---
+
 # Copilot Chat Internals: Debugging AI Interactions
 
 > **The Question This Talk Answers:**

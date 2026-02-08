@@ -1,3 +1,9 @@
+---
+status: active
+updated: 2026-02-06
+section: "Agentic Transformation"
+---
+
 # Agentic SDLC: Infrastructure for AI Velocity
 
 > **The Question This Talk Answers:**
