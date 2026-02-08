@@ -1,16 +1,26 @@
 # Build Instructions for Tech Talk
 
-You are generating the complete tech talk README.md based on an approved content plan and research artifacts.
+## ⚠️ CRITICAL INSTRUCTION — READ FIRST
 
-## Issue Details
+You MUST produce the complete tech talk README.md as your output. Do NOT describe the task, summarize the prompt, or ask clarifying questions. Your entire response will be saved directly as `tech-talks/{{TOPIC}}/README.md`. Start your output with the YAML frontmatter below.
 
-- **Issue Number:** {{ISSUE_NUMBER}}
-- **Topic:** {{TOPIC}}
-- **Primary Question:** {{PRIMARY_QUESTION}}
-- **Target Audience:** {{AUDIENCE}}
-- **Duration:** {{DURATION}}
-- **Index Section:** {{SECTION}}
-- **Guidance:** {{GUIDANCE}}
+The content plan (plan.md) contains draft prose, section structures, and artifact mappings. Your job is to **expand and polish** these into the final README following the TEMPLATE structure. Most of the intellectual work has been done — you are producing the finished product.
+
+**Your output MUST be at least 500 lines and should target 800-1200 lines.**
+
+---
+
+## Issue Context
+
+| Field | Value |
+|-------|-------|
+| Issue | #{{ISSUE_NUMBER}} |
+| Topic | {{TOPIC}} |
+| Question | {{PRIMARY_QUESTION}} |
+| Audience | {{AUDIENCE}} |
+| Duration | {{DURATION}} |
+| Section | {{SECTION}} |
+| Guidance | {{GUIDANCE}} |
 
 ## Available Artifacts on Branch
 
@@ -22,26 +32,17 @@ Read these files:
 
 ## Your Task
 
-Generate `tech-talks/{{TOPIC}}/README.md` following `tech-talks/TEMPLATE.md`.
+Generate `tech-talks/{{TOPIC}}/README.md` by following TEMPLATE.md exactly. The TEMPLATE.md is appended below this prompt — it defines every section, its purpose, and the expected format.
 
-### Required Sections
+The content plan (plan.md) contains draft prose for each TEMPLATE section. Your job is to **expand the draft content into full, polished prose** that matches TEMPLATE.md structure section-by-section.
 
-1. **Title and subtitle** with the question this talk answers
-2. **Content Fitness Rubric** (all 🟢)
-3. **Slide Generation Mapping** with `<!-- 🎬 MAJOR SECTION -->` markers
-4. **Problem Statement** — key points + narrative
-5. **Solution Overview** — capabilities + architecture
-6. **Key Artifacts** section (2-5 primary artifacts with purposes)
-7. **Mental Model Shift** — Must include a standalone Core Insight one-liner (`> **The Core Insight:** From X to Y`) that works as a clean thesis statement. Then full Move Toward / Away From / Against sections. The Core Insight is used twice in slides: as an early preview and as the anchor for the full reinforcement.
-8. **Decision Tree** — when to use / when NOT to use
-9. **Major Sections** (3-6, each with `<!-- 🎬 MAJOR SECTION: [Name] -->`)
-   - Embed code examples from `examples/` inline using actual file contents
-   - Reference images from `images/` with relative paths
-10. **Real-World Use Cases** (3-5 with measurable outcomes)
-11. **Actionable Checklist** (15min / 1hr / 2-4hr time-bounded actions)
-12. **Related Patterns** (cross-references to other tech talks)
-13. **📖 References** — Numbered reference list from research.md, with inline `[^n]` citations woven throughout the content (see References section below)
-14. **📚 Official Documentation** (minimum 2 links, pulled from References where type is Official Docs)
+### Key Rules
+
+1. **Follow TEMPLATE.md section-by-section** — every section in TEMPLATE must appear in your output
+2. **Expand plan.md drafts** — the plan has draft prose; you expand, polish, and fill gaps
+3. **Embed artifacts inline** — code examples from `examples/` and images from `images/`
+4. **Inline citations** — use `[^n]` footnotes from the references plan throughout
+5. **Create missing artifacts** — if plan.md "Gaps" section identifies needed examples, create them
 
 ### Using Research Artifacts
 
@@ -99,3 +100,19 @@ section: "{{SECTION}}"
 
 - `tech-talks/{{TOPIC}}/README.md` (the complete tech talk)
 - Any additional artifact files identified in plan's Gaps section
+
+---
+
+## BEGIN YOUR OUTPUT NOW
+
+Start with this exact YAML frontmatter and continue with the full README content:
+
+```yaml
+---
+status: active
+updated: {{TODAY_DATE}}
+section: "{{SECTION}}"
+---
+```
+
+Then write the complete README following ALL required sections above. Expand the draft content from plan.md into full, polished prose. Do NOT include meta-commentary about the task — produce only the README content.

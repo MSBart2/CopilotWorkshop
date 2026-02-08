@@ -4,6 +4,22 @@ title: "[Tech Talk] "
 labels: ["tech-talk", "tech-talk:intake"]
 
 body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎤 Tech Talk Pipeline
+
+        Submitting this issue kicks off an automated 4-phase workflow:
+
+        | Phase | What Happens | Your Action |
+        |-------|-------------|-------------|
+        | **1. Research** | Copilot CLI researches URLs & web, downloads images | None — automatic |
+        | **2. Plan** | Copilot CLI creates a content plan from research | None — automatic |
+        | **3. Build** | Copilot CLI generates the full README | Comment `/approve-plan` after reviewing |
+        | **4. Slides** | Copilot CLI generates Slidev slides | Add `tech-talk:slides` label |
+
+        You'll get status updates as comments on this issue throughout the process.
+
   - type: input
     id: topic
     attributes:

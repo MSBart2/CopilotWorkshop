@@ -1,11 +1,34 @@
+# ============================================================================
+# TECH TALK PIPELINE — PHASE 3: BUILD
+# ============================================================================
+#
+# WHAT THIS DOES:
+#   Generates the final tech talk README.md from research + plan + examples.
+#   Also creates a Pull Request for review.
+#
+# WHEN IT RUNS:
+#   When a user comments "/approve-plan" on the tech talk issue.
+#   This is the only phase that requires an explicit human trigger.
+#
+# WHAT IT PRODUCES:
+#   tech-talks/{topic}/README.md — The complete, publish-ready tech talk
+#   A Pull Request on GitHub for review
+#
+# WHAT HAPPENS NEXT:
+#   A comment is posted asking the user to review the PR.
+#   When ready for slides, the user adds the "tech-talk:slides" label.
+#
+# RELATED FILES:
+#   Prompt template: .github/prompts/tech-talk/build-instructions.md
+#   Structure ref:   tech-talks/TEMPLATE.md (appended to prompt automatically)
+#   Phase 2:         .github/workflows/tech-talk-2-plan.yml
+#   Phase 4:         .github/workflows/tech-talk-4-slides.yml
+# ============================================================================
+
 name: "Tech Talk Phase 3: Build"
 
-# Phase 3 checks out the branch, reads research + plan + examples + images,
-# generates the final README.md, creates a PR, and posts completion status.
-#
-# Triggered by: /approve-plan comment on a tech-talk issue
-# Discovers branch via: origin/tech-talk/{topic}-{issue_number}
-
+# Triggers when a comment is posted on any issue.
+# The "if:" guard below filters for the /approve-plan command.
 on:
   issue_comment:
     types: [created]
@@ -14,20 +37,27 @@ jobs:
   build:
     name: Generate Tech Talk Content
     runs-on: ubuntu-latest
+
+    # Three conditions must ALL be true:
+    #   1. This is an issue (not a PR) — pull_request is null for issues
+    #   2. The comment contains "/approve-plan"
+    #   3. The issue has the "tech-talk" label
     if: |
       github.event.issue.pull_request == null &&
       contains(github.event.comment.body, '/approve-plan') &&
       contains(github.event.issue.labels.*.name, 'tech-talk')
+
     permissions:
-      issues: write
-      contents: write
-      pull-requests: write
+      issues: write # Post comments
+      contents: write # Push commits
+      pull-requests: write # Create the Pull Request
 
     steps:
+      # ── SETUP ──────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Full history needed to find the feature branch
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -37,6 +67,7 @@ jobs:
       - name: Install GitHub Copilot CLI
         run: npm install -g @github/copilot
 
+      # ── EXTRACT ISSUE DATA ────────────────────────────────────────────
       - name: Extract issue fields
         id: extract
         uses: actions/github-script@v7
@@ -57,20 +88,24 @@ jobs:
             core.setOutput('duration', extractField('Expected Duration') || '45 minutes');
             core.setOutput('guidance', extractField('Guidance \\(optional\\)') || 'No specific guidance provided');
 
+      # ── CHECKOUT FEATURE BRANCH ────────────────────────────────────────
       - name: Checkout feature branch
+        id: branch # Outputs: steps.branch.outputs.branch_name
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
           BRANCH_NAME="tech-talk/${TOPIC}-${{ github.event.issue.number }}"
 
           if git ls-remote --exit-code origin "$BRANCH_NAME" > /dev/null 2>&1; then
             git checkout "$BRANCH_NAME"
-            echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+            echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
             echo "✅ Checked out branch: $BRANCH_NAME"
           else
             echo "❌ Branch $BRANCH_NAME not found. Run Phases 1 & 2 first."
             exit 1
           fi
 
+      # ── VERIFY PREREQUISITES ────────────────────────────────────────────
+      # Both research.md and plan.md must exist before we can build
       - name: Verify artifacts exist
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
@@ -82,22 +117,50 @@ jobs:
           done
           echo "✅ All required artifacts found"
 
+      # ── STATUS COMMENT ────────────────────────────────────────────────
+      # Acknowledge the /approve-plan comment and show progress
       - name: Acknowledge approval
         uses: actions/github-script@v7
         with:
           script: |
+            const body = [
+              '## 🔨 Phase 3 of 4: Build Started',
+              '',
+              '✅ Plan approved by @${{ github.event.comment.user.login }}',
+              '',
+              'Generating full tech talk README from research + plan on branch `${{ steps.branch.outputs.branch_name }}`...',
+              '',
+              '### Workflow Progress',
+              '| Phase | Status | Trigger |',
+              '|-------|--------|---------|',
+              '| ~~1. Research~~ | ✅ Complete | — |',
+              '| ~~2. Plan~~ | ✅ Complete | — |',
+              '| **3. Build** | 🔄 In Progress | — |',
+              '| 4. Slides | ⏳ Pending | `tech-talk:slides` label |',
+              '',
+              '> 👤 **No action needed** — a PR will be created when the build completes.',
+            ].join('\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## 🔨 Phase 3: Build Started\n\n✅ Plan approved by @${{ github.event.comment.user.login }}\n\nGenerating tech talk from artifacts on branch \`${{ env.BRANCH_NAME }}\`...`
+              body,
             });
 
+      # ── COPILOT CLI: BUILD README ────────────────────────────────────
+      # This is the main AI step. Builds a comprehensive prompt by combining:
+      #   - The build instructions template (with placeholders filled in)
+      #   - TEMPLATE.md (the canonical structure to follow)
+      #   - research.md (source data)
+      #   - plan.md (content outline)
+      #   - Available images and code examples
+      # Then runs Copilot CLI to generate the final README.md (500+ lines)
       - name: Run Copilot CLI for content generation
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
+          TODAY_DATE=$(date +%Y-%m-%d)
 
           # Build prompt from template
           sed -e "s|{{ISSUE_NUMBER}}|${{ github.event.issue.number }}|g" \
@@ -107,7 +170,17 @@ jobs:
               -e "s|{{DURATION}}|${{ steps.extract.outputs.duration }}|g" \
               -e "s|{{GUIDANCE}}|${{ steps.extract.outputs.guidance }}|g" \
               -e "s|{{SECTION}}|${{ steps.extract.outputs.section }}|g" \
+              -e "s|{{TODAY_DATE}}|${TODAY_DATE}|g" \
               .github/prompts/tech-talk/build-instructions.md > build_prompt.txt
+
+          # Append TEMPLATE.md as the canonical README structure
+          echo "" >> build_prompt.txt
+          echo "---" >> build_prompt.txt
+          echo "## Target README Structure (TEMPLATE.md)" >> build_prompt.txt
+          echo "" >> build_prompt.txt
+          echo "Your output MUST follow this exact structure section-by-section:" >> build_prompt.txt
+          echo "" >> build_prompt.txt
+          cat tech-talks/TEMPLATE.md >> build_prompt.txt
 
           # Append all artifacts so Copilot CLI has full context
           echo "" >> build_prompt.txt
@@ -141,6 +214,7 @@ jobs:
 
           echo "✅ Content generation complete"
 
+      # ── COMMIT & PUSH ──────────────────────────────────────────────────
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
@@ -149,8 +223,11 @@ jobs:
           TOPIC="${{ steps.extract.outputs.topic }}"
           git add "tech-talks/${TOPIC}/"
           git commit -m "Phase 3: Tech talk README for ${TOPIC} (Issue #${{ github.event.issue.number }})"
-          git push origin "$BRANCH_NAME"
+          git push origin "${{ steps.branch.outputs.branch_name }}"
 
+      # ── CREATE PULL REQUEST ────────────────────────────────────────────
+      # Open a PR from the feature branch to main for human review.
+      # Uses the GitHub CLI (gh) rather than the API.
       - name: Create pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -181,8 +258,11 @@ jobs:
 
           Closes #${{ github.event.issue.number }}" \
             --base main \
-            --head "$BRANCH_NAME"
+            --head "${{ steps.branch.outputs.branch_name }}"
 
+      # ── UPDATE LABELS ────────────────────────────────────────────────
+      # Swap label from "tech-talk:planned" → "tech-talk:ready"
+      # (Phase 4 is triggered by a different label: "tech-talk:slides")
       - name: Update issue labels
         uses: actions/github-script@v7
         with:
@@ -203,15 +283,54 @@ jobs:
               labels: ['tech-talk:ready']
             });
 
+      # ── COMPLETION COMMENT ──────────────────────────────────────────────
+      # Post a summary with a link to the generated README and quality indicator.
+      # Quality: 🟢 ≥500 lines, 🟡 ≥300, 🔴 <300
+      # Tells user to add "tech-talk:slides" label when ready for Phase 4.
       - name: Post completion status
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require('fs');
             const topic = '${{ steps.extract.outputs.topic }}';
-            const branch = '${{ env.BRANCH_NAME }}';
+            const branch = '${{ steps.branch.outputs.branch_name }}';
+
+            // Count README lines for quality indicator
+            const readmeContent = fs.readFileSync(`tech-talks/${topic}/README.md`, 'utf8');
+            const readmeLines = readmeContent.split('\n').length;
+            const qualityEmoji = readmeLines >= 500 ? '🟢' : readmeLines >= 300 ? '🟡' : '🔴';
+
+            const body = [
+              '## ✅ Phase 3 of 4: Build Complete',
+              '',
+              '### Generated Content',
+              '| File | Details |',
+              '|------|---------|',
+              `| [\`tech-talks/${topic}/README.md\`](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${branch}/tech-talks/${topic}/README.md) | ${readmeLines} lines ${qualityEmoji} |`,
+              '',
+              'A **Pull Request** has been created for review.',
+              '',
+              '### Workflow Progress',
+              '| Phase | Status | Trigger |',
+              '|-------|--------|---------|',
+              '| ~~1. Research~~ | ✅ Complete | — |',
+              '| ~~2. Plan~~ | ✅ Complete | — |',
+              '| ~~3. Build~~ | ✅ Complete | — |',
+              '| **4. Slides** | ⏳ Waiting for you | Add `tech-talk:slides` label |',
+              '',
+              '---',
+              '',
+              '### 👤 Action Required: Review PR & Generate Slides',
+              '',
+              '1. **Review the Pull Request** — check the generated README',
+              '2. **When ready for slides**, add the `tech-talk:slides` label to this issue',
+              '3. Phase 4 will generate Slidev slides automatically',
+              '',
+              '> ⚠️ Slides will NOT be generated until you add the `tech-talk:slides` label to this issue.',
+            ].join('\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ✅ Phase 3: Build Complete\n\nTech talk generated and PR created.\n\n📄 [\`tech-talks/${topic}/README.md\`](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${branch}/tech-talks/${topic}/README.md)\n\n---\n\n**Next:** Review the PR. When ready for slides, add label \`tech-talk:slides\` to this issue.`
+              body,
             });

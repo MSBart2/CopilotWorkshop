@@ -1,28 +1,64 @@
-name: "Tech Talk Phase 1: Research"
-
-# Phase 1 creates a branch and commits research artifacts:
-#   tech-talks/{topic}/research.md    — Copilot CLI research output
+# ============================================================================
+# TECH TALK PIPELINE — PHASE 1: RESEARCH
+# ============================================================================
+#
+# WHAT THIS DOES:
+#   Automatically researches source URLs when a new tech talk issue is created.
+#   Copilot CLI fetches web content, downloads images, and extracts code examples.
+#
+# WHEN IT RUNS:
+#   When a GitHub issue is opened or labeled with BOTH:
+#     - "tech-talk"        (marks it as a tech talk issue)
+#     - "tech-talk:intake" (marks it as ready for research)
+#
+# WHAT IT PRODUCES (committed to a new branch):
+#   tech-talks/{topic}/research.md    — Full research findings from Copilot CLI
 #   tech-talks/{topic}/images/        — Downloaded images from source URLs
 #   tech-talks/{topic}/examples/      — Code samples extracted from sources
 #
-# All subsequent phases discover this branch via: origin/tech-talk/{topic}-*
+# WHAT HAPPENS NEXT:
+#   This workflow automatically swaps the label to "tech-talk:planned",
+#   which triggers Phase 2 (Content Planning) — no human action needed.
+#
+# RELATED FILES:
+#   Prompt template:  .github/prompts/tech-talk/research-instructions.md
+#   Issue template:   .github/ISSUE_TEMPLATE/tech-talk-request.yml
+#   Phase 2 workflow: .github/workflows/tech-talk-2-plan.yml
+# ============================================================================
 
+name: "Tech Talk Phase 1: Research"
+
+# "on:" defines WHEN this workflow runs.
+# This workflow triggers when a GitHub issue is opened or has a label added.
 on:
   issues:
     types: [opened, labeled]
 
+# "jobs:" contains the actual work this workflow performs.
+# Each job runs on a fresh virtual machine (ubuntu-latest).
 jobs:
   research:
     name: Research Source URLs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use a Linux VM hosted by GitHub
+
+    # "if:" is a guard — this job ONLY runs when both labels are present.
+    # This prevents the job from running on unrelated issues.
     if: |
       contains(github.event.issue.labels.*.name, 'tech-talk') &&
       contains(github.event.issue.labels.*.name, 'tech-talk:intake')
+
+    # "permissions:" controls what this workflow is allowed to do.
+    # - issues: write   → post comments on the issue
+    # - contents: write → create branches and push commits
     permissions:
       issues: write
       contents: write
 
+    # "steps:" are the individual tasks that run IN ORDER, one after another.
+    # If any step fails, the workflow stops (unless you handle the error).
     steps:
+      # ── SETUP ──────────────────────────────────────────────────────────
+      # Download the repo code so we can read/write files
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -42,9 +78,13 @@ jobs:
       - name: Install Python dependencies
         run: pip install requests
 
+      # ── EXTRACT ISSUE DATA ────────────────────────────────────────────
+      # Parse the issue body to get the topic, URLs, question, etc.
+      # These values are saved as "outputs" so later steps can use them
+      # via: ${{ steps.extract.outputs.topic }}
       - name: Extract issue fields
-        id: extract
-        uses: actions/github-script@v7
+        id: extract # "id" lets other steps reference this step's outputs
+        uses: actions/github-script@v7 # Runs JavaScript with GitHub API access
         with:
           script: |
             const body = context.payload.issue.body || '';
@@ -71,34 +111,79 @@ jobs:
             core.setOutput('duration', duration || '45 minutes');
             core.setOutput('guidance', guidance || 'No specific guidance provided');
 
+      # ── CREATE BRANCH ──────────────────────────────────────────────────
+      # Create a dedicated Git branch for this tech talk.
+      # All phases commit to this same branch. The branch name follows
+      # the pattern: tech-talk/{topic}-{issue_number}
+      # The branch name is saved as a step output so later steps can use it.
       - name: Create feature branch
+        id: branch # Other steps use ${{ steps.branch.outputs.branch_name }}
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
           BRANCH_NAME="tech-talk/${TOPIC}-${{ github.event.issue.number }}"
           git checkout -b "$BRANCH_NAME"
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
 
+      # ── PREPARE DIRECTORIES ──────────────────────────────────────────
+      # Create the folder structure where research artifacts will be saved
       - name: Create artifact directories
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
           mkdir -p "tech-talks/${TOPIC}/images"
           mkdir -p "tech-talks/${TOPIC}/examples"
 
+      # ── STATUS COMMENT ────────────────────────────────────────────────
+      # Post a comment on the issue so the user knows what's happening.
+      # This uses the GitHub API (actions/github-script) to create the comment.
+      # The comment body is built as a JavaScript array joined with newlines
+      # to avoid YAML parsing issues with markdown table syntax.
       - name: Comment - Starting Research
         uses: actions/github-script@v7
         with:
           script: |
             const topic = '${{ steps.extract.outputs.topic }}';
+            const body = [
+              '## 🔍 Phase 1 of 4: Research Started',
+              '',
+              '### Workflow Overview',
+              '| Phase | Status | Trigger |',
+              '|-------|--------|---------|',
+              '| **1. Research** | 🔄 In Progress | `tech-talk:intake` label (automatic) |',
+              '| 2. Plan | ⏳ Pending | Automatic after research completes |',
+              '| 3. Build | ⏳ Pending | `/approve-plan` comment (you review first) |',
+              '| 4. Slides | ⏳ Pending | `tech-talk:slides` label (you add it) |',
+              '',
+              "### What's Happening Now",
+              'Copilot CLI is researching source URLs, fetching web content, and gathering artifacts...',
+              '',
+              '| Field | Value |',
+              '|-------|-------|',
+              `| **Topic** | ${topic} |`,
+              '| **Branch** | `${{ steps.branch.outputs.branch_name }}` |',
+              '| **Question** | ${{ steps.extract.outputs.primary_question }} |',
+              '| **Audience** | ${{ steps.extract.outputs.audience }} |',
+              '| **Duration** | ${{ steps.extract.outputs.duration }} |',
+              '',
+              '> 👤 **No action needed from you** — Phase 2 will start automatically when research completes.',
+            ].join('\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## \uD83D\uDD0D Phase 1: Research Started\n\nCopilot CLI is researching source URLs, searching the web for additional references, and gathering artifacts...\n\n**Topic:** ${topic}\n**Branch:** \`${{ env.BRANCH_NAME }}\`\n**Question:** ${{ steps.extract.outputs.primary_question }}\n**Audience:** ${{ steps.extract.outputs.audience }} | **Duration:** ${{ steps.extract.outputs.duration }}`
+              body,
             });
 
+      # ── COPILOT CLI: RESEARCH ──────────────────────────────────────────
+      # This is the main AI step. It:
+      #   1. Builds a prompt by filling in template placeholders (sed command)
+      #   2. Runs Copilot CLI with that prompt
+      #   3. Saves the output as research.md
+      #
+      # The prompt template lives at: .github/prompts/tech-talk/research-instructions.md
+      # "sed" replaces {{TOPIC}}, {{AUDIENCE}}, etc. with actual values.
       - name: Run Copilot CLI for research
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Auth token for Copilot CLI
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
 
@@ -123,6 +208,9 @@ jobs:
 
           echo "✅ Research complete"
 
+      # ── DOWNLOAD IMAGES ──────────────────────────────────────────────
+      # Fetch images from each source URL using a Python helper script.
+      # Images are saved to tech-talks/{topic}/images/ for use in the talk.
       - name: Download images from source URLs
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
@@ -141,6 +229,9 @@ jobs:
           echo "📁 Downloaded images:"
           ls -la "tech-talks/${TOPIC}/images/" 2>/dev/null || echo "  (none)"
 
+      # ── EXTRACT CODE EXAMPLES ────────────────────────────────────────
+      # Ask Copilot CLI to pull out code snippets from the research document
+      # and save them as individual files in the examples/ directory.
       - name: Extract code examples from research
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -187,6 +278,9 @@ jobs:
           echo "📁 Extracted examples:"
           ls -la "tech-talks/${TOPIC}/examples/" 2>/dev/null || echo "  (none)"
 
+      # ── HANDLE EMPTY DIRS ──────────────────────────────────────────────
+      # Git doesn't track empty folders. Adding .gitkeep ensures the
+      # images/ and examples/ directories are committed even if empty.
       - name: Add .gitkeep to empty directories
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
@@ -194,6 +288,9 @@ jobs:
           [ -z "$(ls -A tech-talks/${TOPIC}/images/)" ] && touch "tech-talks/${TOPIC}/images/.gitkeep"
           [ -z "$(ls -A tech-talks/${TOPIC}/examples/)" ] && touch "tech-talks/${TOPIC}/examples/.gitkeep"
 
+      # ── COMMIT & PUSH ──────────────────────────────────────────────────
+      # Save all research artifacts to Git and push the branch to GitHub.
+      # This makes the research available to Phase 2.
       - name: Commit and push artifacts
         run: |
           git config user.name "github-actions[bot]"
@@ -207,15 +304,18 @@ jobs:
           - images/: Visual assets from source URLs
           - examples/: Code samples extracted from sources"
 
-          git push origin "$BRANCH_NAME"
+          git push origin "${{ steps.branch.outputs.branch_name }}"
 
+      # ── COMPLETION COMMENT ──────────────────────────────────────────────
+      # Post a summary comment with artifact links and quality indicators.
+      # Quality is based on line count: 🟢 ≥200 lines, 🟡 ≥100, 🔴 <100
       - name: Post completion status
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const topic = '${{ steps.extract.outputs.topic }}';
-            const branch = '${{ env.BRANCH_NAME }}';
+            const branch = '${{ steps.branch.outputs.branch_name }}';
 
             // Count artifacts
             const imgDir = `tech-talks/${topic}/images`;
@@ -223,26 +323,42 @@ jobs:
             const imgCount = fs.readdirSync(imgDir).filter(f => f !== '.gitkeep').length;
             const exCount = fs.readdirSync(exDir).filter(f => f !== '.gitkeep').length;
 
+            // Count research lines for quality indicator
+            const researchContent = fs.readFileSync(`tech-talks/${topic}/research.md`, 'utf8');
+            const researchLines = researchContent.split('\n').length;
+            const qualityEmoji = researchLines >= 200 ? '🟢' : researchLines >= 100 ? '🟡' : '🔴';
+
+            const body = [
+              '## ✅ Phase 1 of 4: Research Complete',
+              '',
+              '### Artifacts Committed to Branch',
+              '| File | Description | Quality |',
+              '|------|-------------|---------|',
+              `| [\`tech-talks/${topic}/research.md\`](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${branch}/tech-talks/${topic}/research.md) | Research findings (${researchLines} lines) | ${qualityEmoji} |`,
+              `| \`tech-talks/${topic}/images/\` | ${imgCount} image(s) downloaded | ${imgCount > 0 ? '🟢' : '🟡'} |`,
+              `| \`tech-talks/${topic}/examples/\` | ${exCount} example(s) extracted | ${exCount > 0 ? '🟢' : '🟡'} |`,
+              '',
+              '### Workflow Progress',
+              '| Phase | Status | Trigger |',
+              '|-------|--------|---------|',
+              '| ~~1. Research~~ | ✅ Complete | — |',
+              '| **2. Plan** | 🔄 Starting now... | Automatic |',
+              '| 3. Build | ⏳ Pending | `/approve-plan` comment |',
+              '| 4. Slides | ⏳ Pending | `tech-talk:slides` label |',
+              '',
+              '> 👤 **No action needed** — Phase 2 (Content Planning) is starting automatically.',
+            ].join('\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ✅ Phase 1: Research Complete
-
-            **Branch:** [\`${branch}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/tree/${branch})
-
-            ### Artifacts Committed
-            | File | Description |
-            |------|-------------|
-            | \`tech-talks/${topic}/research.md\` | Research findings |
-            | \`tech-talks/${topic}/images/\` | ${imgCount} image(s) downloaded |
-            | \`tech-talks/${topic}/examples/\` | ${exCount} example(s) extracted |
-
-            ---
-
-            **Next:** Phase 2 (Content Planning) starts automatically.`
+              body,
             });
 
+      # ── TRIGGER PHASE 2 ──────────────────────────────────────────────
+      # Swap the issue label from "tech-talk:intake" → "tech-talk:planned".
+      # This label change automatically triggers the Phase 2 workflow.
+      # No human action is needed between Phase 1 and Phase 2.
       - name: Progress to Phase 2
         uses: actions/github-script@v7
         with:

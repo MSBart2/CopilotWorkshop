@@ -1,6 +1,8 @@
 # Slide Generation Instructions for Tech Talk
 
-You are generating Slidev presentation slides from a tech talk README.
+## ⚠️ CRITICAL INSTRUCTION — READ FIRST
+
+You MUST produce the actual Slidev markdown file as your output. Do NOT describe the task, summarize the prompt, or ask clarifying questions. Your entire response will be saved directly as `slides/tech-talks/{{TOPIC}}.md`. Start your output with the Slidev frontmatter below.
 
 ## Details
 
@@ -93,3 +95,9 @@ If the file already exists, overwrite it with the new version.
 ### Update Index
 
 After creating the slide file, add a card for this talk in `slides/index-custom.html` under the **{{SECTION}}** sub-group. Match the card format used by existing entries.
+
+---
+
+## BEGIN YOUR OUTPUT NOW
+
+Start with Slidev frontmatter and write the complete slide deck. Do NOT include meta-commentary about the task — produce only the slide markdown content.

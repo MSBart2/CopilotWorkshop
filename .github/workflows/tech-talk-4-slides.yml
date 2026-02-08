@@ -1,11 +1,32 @@
+# ============================================================================
+# TECH TALK PIPELINE — PHASE 4: SLIDES  (Final Phase)
+# ============================================================================
+#
+# WHAT THIS DOES:
+#   Generates a Slidev slide deck (.md) from the finished README.md.
+#   Pushes the slides to the existing PR so everything is in one review.
+#
+# WHEN IT RUNS:
+#   When the "tech-talk:slides" label is added to the issue.
+#   The user adds this label after reviewing the Phase 3 PR content.
+#
+# WHAT IT PRODUCES:
+#   slides/tech-talks/{topic}.md — The Slidev presentation file
+#
+# WHAT HAPPENS NEXT:
+#   All 4 phases are done. A comment tells the user to merge the PR.
+#   After merge, the slide deployment workflow publishes to production.
+#
+# RELATED FILES:
+#   Prompt template: .github/prompts/tech-talk/slides-instructions.md
+#   Phase 3:         .github/workflows/tech-talk-3-build.yml
+#   Slide build:     slides/scripts/build-all.sh
+# ============================================================================
+
 name: "Tech Talk Phase 4: Slides"
 
-# Phase 4 checks out the feature branch, reads the README and images,
-# generates Slidev slides, and pushes to the same branch/PR.
-#
-# Triggered by: tech-talk:slides label added to issue
-# Discovers branch via: origin/tech-talk/{topic}-{issue_number}
-
+# Triggers when any label is added to an issue.
+# The "if:" guard below filters for the specific label we care about.
 on:
   issues:
     types: [labeled]
@@ -14,30 +35,40 @@ jobs:
   slides:
     name: Generate Slides
     runs-on: ubuntu-latest
+
+    # Two conditions must BOTH be true:
+    #   1. Issue has the "tech-talk" base label
+    #   2. Issue has the "tech-talk:slides" phase label
     if: |
       contains(github.event.issue.labels.*.name, 'tech-talk') &&
       contains(github.event.issue.labels.*.name, 'tech-talk:slides')
+
     permissions:
-      issues: write
-      contents: write
-      pull-requests: write
+      issues: write # Post comments and update labels
+      contents: write # Push slides to the branch
+      pull-requests: write # Update PR (if needed)
 
     steps:
+      # ── SETUP ──────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Full history needed to find the feature branch
 
+      # Install Node.js (required by Copilot CLI)
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
+      # Install GitHub’s AI assistant as a CLI tool
       - name: Install GitHub Copilot CLI
         run: npm install -g @github/copilot
 
+      # ── EXTRACT ISSUE DATA ────────────────────────────────────────────
+      # Parse the structured fields from the issue body (filled in by the template)
       - name: Extract issue fields
-        id: extract
+        id: extract # Outputs: topic, primary_question, audience, section, duration
         uses: actions/github-script@v7
         with:
           script: |
@@ -61,20 +92,24 @@ jobs:
             core.setOutput('section', extractField('Index Section') || 'Context & Customization');
             core.setOutput('duration', extractField('Expected Duration') || '45 minutes');
 
+      # ── CHECKOUT FEATURE BRANCH ────────────────────────────────────────
       - name: Checkout feature branch
+        id: branch # Outputs: steps.branch.outputs.branch_name
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
           BRANCH_NAME="tech-talk/${TOPIC}-${{ github.event.issue.number }}"
 
           if git ls-remote --exit-code origin "$BRANCH_NAME" > /dev/null 2>&1; then
             git checkout "$BRANCH_NAME"
-            echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+            echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
             echo "✅ Checked out branch: $BRANCH_NAME"
           else
             echo "❌ Branch $BRANCH_NAME not found. Run Phases 1-3 first."
             exit 1
           fi
 
+      # ── VERIFY README EXISTS ───────────────────────────────────────────
+      # The README from Phase 3 is the input for slide generation
       - name: Verify README exists
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
@@ -82,19 +117,42 @@ jobs:
             echo "❌ tech-talks/${TOPIC}/README.md not found. Run Phase 3 first."
             exit 1
           fi
-          echo "✅ README found on branch ${BRANCH_NAME}"
+          echo "✅ README found on branch ${{ steps.branch.outputs.branch_name }}"
 
+      # ── STATUS COMMENT ────────────────────────────────────────────────
+      # Let the user know slide generation has started
       - name: Comment - Starting Slides
         uses: actions/github-script@v7
         with:
           script: |
+            const body = [
+              '## 🎬 Phase 4 of 4: Slide Generation Started',
+              '',
+              'Generating Slidev slides from README on branch `${{ steps.branch.outputs.branch_name }}`...',
+              '',
+              '### Workflow Progress',
+              '| Phase | Status | Trigger |',
+              '|-------|--------|---------|',
+              '| ~~1. Research~~ | ✅ Complete | — |',
+              '| ~~2. Plan~~ | ✅ Complete | — |',
+              '| ~~3. Build~~ | ✅ Complete | — |',
+              '| **4. Slides** | 🔄 In Progress | — |',
+              '',
+              '> 👤 **No action needed** — slides will be pushed to the PR when complete.',
+            ].join('\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## 🎬 Phase 4: Slide Generation Started\n\nGenerating Slidev slides from README on branch \`${{ env.BRANCH_NAME }}\`...`
+              body,
             });
 
+      # ── COPILOT CLI: SLIDE GENERATION ────────────────────────────────
+      # Builds a prompt from:
+      #   - The slides template (with placeholders filled in)
+      #   - The full README.md content
+      #   - A list of available images for use in slides
+      # Then runs Copilot CLI to generate the Slidev markdown
       - name: Run Copilot CLI for slide generation
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -126,6 +184,8 @@ jobs:
 
           echo "✅ Slide generation complete"
 
+      # ── COMMIT & PUSH ──────────────────────────────────────────────────
+      # Push slides to the same feature branch (adds to existing PR)
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
@@ -138,9 +198,11 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Phase 4: Slides for ${TOPIC} (Issue #${{ github.event.issue.number }})"
-            git push origin "$BRANCH_NAME"
+            git push origin "${{ steps.branch.outputs.branch_name }}"
           fi
 
+      # ── UPDATE LABELS ────────────────────────────────────────────────
+      # Mark the issue as fully complete ("tech-talk:complete")
       - name: Update labels
         uses: actions/github-script@v7
         with:
@@ -152,15 +214,43 @@ jobs:
               labels: ['tech-talk:complete']
             });
 
+      # ── COMPLETION COMMENT ──────────────────────────────────────────────
+      # Post the final summary showing all 4 phases complete with links
+      # to every artifact. Tells user to review + merge the PR.
       - name: Post completion status
         uses: actions/github-script@v7
         with:
           script: |
             const topic = '${{ steps.extract.outputs.topic }}';
-            const branch = '${{ env.BRANCH_NAME }}';
+            const branch = '${{ steps.branch.outputs.branch_name }}';
+            const body = [
+              '## 🎉 Phase 4 of 4: Slides Complete — All Phases Done!',
+              '',
+              '### Workflow Progress',
+              '| Phase | Status | Artifact |',
+              '|-------|--------|----------|',
+              `| ~~1. Research~~ | ✅ Complete | \`tech-talks/${topic}/research.md\` |`,
+              `| ~~2. Plan~~ | ✅ Complete | \`tech-talks/${topic}/plan.md\` |`,
+              `| ~~3. Build~~ | ✅ Complete | \`tech-talks/${topic}/README.md\` |`,
+              `| ~~4. Slides~~ | ✅ Complete | \`slides/tech-talks/${topic}.md\` |`,
+              '',
+              '### Generated Slides',
+              `🎬 [\`slides/tech-talks/${topic}.md\`](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${branch}/slides/tech-talks/${topic}.md)`,
+              '',
+              `Pushed to branch \`${branch}\` and included in the PR.`,
+              '',
+              '---',
+              '',
+              '### 👤 Final Steps',
+              '1. **Review the PR** — all content and slides are ready',
+              '2. **Merge when satisfied** — the talk will be live after merge',
+              '3. **Deploy slides** — merge triggers the slide deployment workflow',
+              '',
+              '> ✅ **All automated phases are complete.** This issue will close when the PR is merged.',
+            ].join('\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ✅ Phase 4: Slides Complete\n\n🎬 \`slides/tech-talks/${topic}.md\`\n\nPushed to branch \`${branch}\`.\n\n---\n\n**All phases complete!** Review the PR and merge when ready.`
+              body,
             });
