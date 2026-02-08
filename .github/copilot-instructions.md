@@ -144,6 +144,18 @@ section: "Context & Customization" # index-custom.html sub-group
 
 **Change detection:** When generating slides, compare the README's `updated` date against the slide file's `updated` date. If the README is newer, the slide needs regeneration. If the slide is newer or equal, it's already up to date.
 
+### Slide Index "NEW" Badge
+
+`slides/index-custom.html` displays a **NEW** badge on cards for slides updated within the last 7 days. This is driven by a `SLIDE_DATES` JavaScript map inside the HTML file, which maps topic slugs to their `updated:` dates from frontmatter.
+
+**After any slide is created, modified, or has its `updated:` date changed**, agents must run the sync script to keep the badge data current:
+
+```bash
+node slides/scripts/sync-index-dates.mjs
+```
+
+Use `--check` to verify without modifying (useful in CI). The script reads `updated:` from all slide frontmatter and rewrites the `SLIDE_DATES` map in `index-custom.html`.
+
 **For complete slide lifecycle (generation + verification):** Use the `slide-manager` agent (see `.github/agents/slide-manager.agent.md`)
 
 **For generation only:** Use the `slide-generator` agent (see `.github/agents/slide-generator.agent.md`)

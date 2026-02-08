@@ -37,6 +37,7 @@ Transform module README markdown into beautiful, concise Slidev presentations (1
    - `Agentic Transformation` → 🚀 sub-group
    - `Executive Talks` → 💼 section
 7. **Set Metadata** - When creating a new slide, set `status: active` and `updated: <today's date YYYY-MM-DD>`. When modifying an existing slide, update the `updated:` field to today's date.
+8. **Sync Index Dates** - After creating or updating a slide, run `node slides/scripts/sync-index-dates.mjs` to update the `SLIDE_DATES` map in `index-custom.html`. This keeps the "NEW" badge in sync with frontmatter dates.
 
 ## Critical Rules
 

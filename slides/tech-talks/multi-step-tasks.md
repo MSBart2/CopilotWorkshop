@@ -14,7 +14,7 @@ title: Multi-Step Tasks - Context Isolation with Subagents
 module: tech-talks/multi-step-tasks
 mdc: true
 status: active
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

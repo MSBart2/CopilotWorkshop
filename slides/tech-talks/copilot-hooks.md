@@ -13,7 +13,7 @@ title: GitHub Copilot Hooks - Governance & Compliance
 module: tech-talks/copilot-hooks
 mdc: true
 status: active
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

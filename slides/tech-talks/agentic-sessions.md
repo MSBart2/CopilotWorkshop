@@ -13,7 +13,7 @@ title: Agentic Sessions - Multi-Environment Agent Orchestration
 module: tech-talks/agentic-sessions
 mdc: true
 status: archived
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

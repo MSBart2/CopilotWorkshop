@@ -217,6 +217,25 @@
       font-size: 0.9rem;
       color: #fcd34d;
     }
+    /* "NEW" badge — auto-applied by JS to cards updated within 7 days */
+    .badge-new {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+      color: #0f172a;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      animation: pulse-new 2s ease-in-out infinite;
+    }
+    @keyframes pulse-new {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
   </style>
 </head>
 <body>
@@ -458,5 +477,62 @@
     </div>
 
   </div>
+  <script>
+    // Auto-show "NEW" badge on cards whose slides were updated within 7 days.
+    //
+    // SOURCE OF TRUTH: the "updated:" field in each slide's YAML frontmatter.
+    // To regenerate this map, run:   node slides/scripts/sync-index-dates.mjs
+    const SLIDE_DATES = {
+      'agent-orchestration': '2026-02-01',
+      'agent-teams': '2026-02-01',
+      'agentic-ci': '2026-02-01',
+      'agentic-delivery': '2026-02-06',
+      'agentic-economics': '2026-02-06',
+      'agentic-journey': '2026-02-01',
+      'agentic-labor': '2026-02-06',
+      'agentic-prs': '2026-02-01',
+      'agentic-repos': '2026-02-01',
+      'agentic-sdlc': '2026-02-01',
+      'agentic-sessions': '2026-02-01',
+      'context-engineering-foundations': '2026-02-01',
+      'copilot-chat': '2026-02-01',
+      'copilot-chat-internals': '2026-02-01',
+      'copilot-cli': '2026-02-01',
+      'copilot-hooks': '2026-02-01',
+      'copilot-memory': '2026-02-01',
+      'copilot-primitives': '2026-02-08',
+      'copilot-sdk': '2026-02-01',
+      'copilot-web': '2026-02-01',
+      'enterprise-patterns': '2026-02-01',
+      'mcp-apps': '2026-02-01',
+      'multi-step-tasks': '2026-02-01',
+      'parallel-execution': '2026-02-01',
+      'subagents': '2026-02-01',
+      'terminal-sandboxing': '2026-02-01',
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const now = new Date();
+      const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
+      document.querySelectorAll('.card[href]').forEach(card => {
+        // Extract slug from href:  /CopilotTraining/tech-talks/copilot-cli/ → copilot-cli
+        const match = card.getAttribute('href').match(/\/([\w-]+)\/?$/);
+        if (!match) return;
+        const slug = match[1];
+        const dateStr = SLIDE_DATES[slug];
+        if (!dateStr) return;
+
+        const updated = new Date(dateStr + 'T00:00:00');
+        if (now - updated < oneWeek) {
+          const badge = document.createElement('span');
+          badge.className = 'badge-new';
+          badge.textContent = 'NEW';
+          const h2 = card.querySelector('h2');
+          if (h2) h2.appendChild(badge);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

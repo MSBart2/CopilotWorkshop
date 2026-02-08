@@ -13,7 +13,7 @@ title: Copilot CLI - Terminal AI
 module: tech-talks/copilot-cli
 mdc: true
 status: active
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

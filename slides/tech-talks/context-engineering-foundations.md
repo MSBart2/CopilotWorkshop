@@ -14,7 +14,7 @@ title: Context Engineering Foundations
 module: tech-talks/context-engineering-foundations
 mdc: true
 status: archived
-updated: 2026-02-08
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

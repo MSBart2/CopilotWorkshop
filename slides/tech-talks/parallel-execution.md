@@ -14,7 +14,7 @@ title: Parallel Execution - When Agents Work Simultaneously
 module: tech-talks/parallel-execution
 mdc: true
 status: active
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

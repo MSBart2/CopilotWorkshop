@@ -14,7 +14,7 @@ title: Agentic CI - The Trust Factory
 module: tech-talks/agentic-ci
 mdc: true
 status: archived
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">

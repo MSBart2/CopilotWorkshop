@@ -9,7 +9,7 @@ transition: slide-left
 title: Copilot Chat Internals
 mdc: true
 status: active
-updated: 2026-02-06
+updated: 2026-02-01
 ---
 
 # 🔍 Copilot Chat Internals

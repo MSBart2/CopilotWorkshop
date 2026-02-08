@@ -76,6 +76,7 @@ Follow `.github/prompts/tech-talk/build-instructions.md`.
    - `status: active`
    - `updated: <today's date YYYY-MM-DD>`
    - `section: "<index section name>"` — one of: `Copilot Surfaces`, `Context & Customization`, `Agent Architecture`, `Agentic Transformation`, or `Executive Talks`
+7. **Sync index dates** — Run `node slides/scripts/sync-index-dates.mjs` to update the NEW badge data in `slides/index-custom.html` (keeps the `SLIDE_DATES` map in sync with frontmatter dates)
 
 **Pause after Phase 3.** Show the user the completed tech talk and confirm it meets their needs. Offer the handoff buttons for slide generation as a separate next step.
 

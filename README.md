@@ -38,7 +38,7 @@ Thought leadership for technical leaders making strategic decisions about AI ado
 
 ---
 
-### 🔧 [Technical Deep-Dives](tech-talks/) — 16 Talks
+### 🔧 [Technical Deep-Dives](tech-talks/) — 17 Talks
 
 Technical presentations for practitioners exploring specific capabilities and patterns.
 
@@ -53,6 +53,7 @@ Technical presentations for practitioners exploring specific capabilities and pa
 | [Copilot CLI](tech-talks/copilot-cli/) | Terminal-based AI assistance |
 | [Copilot Hooks](tech-talks/copilot-hooks/) | Event-driven Copilot integration |
 | [Copilot Memory](tech-talks/copilot-memory/) | Persistent context and memory |
+| [Copilot Primitives](tech-talks/copilot-primitives/) | Configuration primitives for codebase understanding |
 | [Copilot SDK](tech-talks/copilot-sdk/) | Embedding Copilot in custom tools |
 | [Copilot Web](tech-talks/copilot-web/) | Browser-based AI assistance |
 | [Enterprise Patterns](tech-talks/enterprise-patterns/) | Organizational-scale adoption |
@@ -72,7 +73,7 @@ All content has accompanying [Slidev presentations](slides/) deployed to [GitHub
 | Category | Decks | Live URL Pattern |
 |----------|-------|-----------------|
 | Workshop | 7 | `/CopilotTraining/workshop/{module}/` |
-| Tech Talks | 16+ | `/CopilotTraining/tech-talks/{topic}/` |
+| Tech Talks | 17+ | `/CopilotTraining/tech-talks/{topic}/` |
 | Exec Talks | 3 | `/CopilotTraining/exec-talks/{topic}/` |
 
 Slides are built and deployed automatically on push to `main`. PRs that touch slides are validated with a build check before merge.
@@ -122,13 +123,32 @@ New tech talks are generated through an automated 4-phase workflow:
 3. **Build** — README.md generated from approved plan (`/approve-plan`)
 4. **Slides** — Slidev deck generated from README
 
-See [workflow documentation](.github/workflows/README.md) for details.
+See the [Tech Talks Creation Guide](tech-talks/README.md) for detailed instructions on both the issue-based and local IDE workflows.
+
+### Copilot Agents & Skills
+
+Content development is powered by custom Copilot agents and skills that run inside VS Code:
+
+| Agent / Skill | Purpose |
+|---------------|--------|
+| `@Module Creator` | End-to-end workshop module generation |
+| `@Module Planner` | Research and plan module outlines |
+| `@Tech Talk Generator` | Research and generate tech talk content |
+| `@Slide Generator` | Create Slidev slides from README files |
+| `@Slide Manager` | Generate + verify slides in one pass |
+| `@slide-verifier` skill | Playwright-based slide validation |
+| `@slide-fixer` skill | Auto-fix overflowing or broken slides |
+| `@exercise-author` skill | Create exercise files from module plans |
+
+Agent definitions live in `.github/agents/` and skills in `.github/skills/`.
 
 ### Authoring Resources
 
 - [Tech Talk Template](tech-talks/TEMPLATE.md) — Structure and guidelines for tech talks
+- [Tech Talk Decision Guide](tech-talks/DECISION-GUIDE.md) — Choosing the right talk for your audience
 - [Workshop Personas](workshop/00-orientation/PERSONAS.md) — Meet the training team members
 - [Slide Deployment](slides/DEPLOYMENT.md) — How slides are built and deployed
+- [Copilot Instructions](.github/copilot-instructions.md) — Repo-level conventions for Copilot
 
 ---
 
