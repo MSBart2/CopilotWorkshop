@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-02-01
+updated: 2026-02-10
 section: "Copilot Surfaces"
 ---
 
@@ -91,12 +91,15 @@ GitHub Copilot CLI brings conversational AI directly into terminal workflows wit
 ### Key Capabilities
 
 - **Plan Mode**: Collaborative planning with clarifying questions before implementation — catch misunderstandings early, reduce iteration cycles
+- **Configurable Reasoning Models**: Choose GPT-5.2-Codex and tune reasoning effort (low → extra high), with Ctrl+T to reveal reasoning steps
 - **Interactive Mode**: Terminal-native conversations with context maintained across commands — perfect for "figure this out" scenarios
 - **Programmatic Mode**: Single-command execution for scripts and pipelines — designed for headless CI/CD automation
 - **Cloud Delegation**: Background execution frees terminal for other work — delegate large tasks with `&` prefix
 - **Built-in Agents**: Specialized agents (Explore, Task, Plan, Code-review) automatically handle common patterns
 - **Automatic Context Management**: Auto-compaction at 95% token limit enables virtually infinite sessions
 - **Repository Memory**: AI remembers team conventions, patterns, and preferences across sessions
+- **Performance & UX Upgrades**: Faster, more concise responses with improved diff/timeline views and better Windows/PowerShell support
+- **MCP Registry Integration**: Discover and connect external tools/agents via GitHub MCP Registry with organization-level controls
 
 ### Architecture Overview
 
@@ -133,6 +136,7 @@ Context management is automatic: when conversations approach 95% of token limit,
 - **Programmatic CI/CD automation** — GitHub Actions workflow using `copilot -p` for build failure analysis
 - **Context management commands** — `/compact`, `/context`, `/usage` for monitoring token usage
 - **Cloud delegation example** — Using `&` prefix for background codebase analysis
+- **Reasoning configuration** — Selecting GPT-5.2-Codex and tuning reasoning effort for depth vs speed
 
 ### Supporting Files
 
@@ -140,6 +144,7 @@ Context management is automatic: when conversations approach 95% of token limit,
 
 - **[Custom instructions guide](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#use-custom-instructions)** — Repository-specific behavior configuration
 - **[MCP server setup](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#add-an-mcp-server)** — Extending functionality with external tools
+- **[Configure an MCP registry](https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry)** — Organization-wide discovery and governance for MCP tools
 - **[Built-in agents reference](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#use-custom-agents)** — Explore, Task, Plan, Code-review agent details
 
 ---
@@ -536,6 +541,17 @@ Copilot excludes shell commands from Bash/PowerShell history files — terminal 
 **Tab title display:**
 Current AI intent shows in terminal tab title — useful for monitoring multiple sessions.
 
+### Output & Navigation Upgrades
+
+**Faster, more concise output:**
+Median completion time down ~45% with fewer input/output tokens per task.
+
+**Improved timelines and diffs:**
+Richer file-diff and edit timeline displays make review loops faster.
+
+**Platform polish:**
+Better Windows/PowerShell ergonomics plus accessibility-friendly shortcuts.
+
 ---
 
 <!-- 🎬 MAJOR SECTION: Built-in Agents -->
@@ -764,7 +780,7 @@ $ copilot
 **Advanced Exploration (2-4 hours):**
 - [ ] Configure automatic build failure analysis in all CI/CD workflows
 - [ ] Create custom agents in `.github/agents/` for specialized workflows
-- [ ] Set up MCP servers for external tool integration (`/mcp add`)
+- [ ] Set up MCP servers via the GitHub MCP Registry (`/mcp add`)
 - [ ] Measure ROI: Track before/after metrics for debugging time and iteration cycles
 
 **Next Steps After Completion:**
@@ -815,6 +831,7 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 **GitHub Resources:**
 - 📋 [GitHub Blog: Plan Mode Announcement](https://github.blog/changelog/2026-01-21-github-copilot-cli-plan-before-you-build-steer-as-you-go/) — Plan Mode, reasoning models, and latest features
+- 📋 [GitHub Blog: Faster, more concise, and prettier](https://github.blog/changelog/2025-10-10-github-copilot-cli-faster-more-concise-and-prettier/) — Performance improvements and output polish
 - 🐙 [Copilot CLI Public Repository](https://github.com/github/copilot-cli) — Issue tracking and community discussions
 - 📹 [About Agent Skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) — Enhancing Copilot with specialized tasks
 
