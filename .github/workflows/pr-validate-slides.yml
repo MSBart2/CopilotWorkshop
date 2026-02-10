@@ -29,6 +29,7 @@ jobs:
         run: |
           BASE_SHA="${{ github.event.pull_request.base.sha }}"
           HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          SLIDES_TECH_TALKS_DIR="slides/tech-talks"
 
           echo "🔍 Comparing $BASE_SHA...$HEAD_SHA"
 
@@ -49,7 +50,6 @@ jobs:
           CHANGED_TECH_TALKS=$(echo "$CHANGED_FILES" \
             | grep -E "^tech-talks/[^/]+/" \
             | grep -v "^tech-talks/archive/" \
-            | grep -v "^tech-talks/README\.md$" \
             | cut -d/ -f2 \
             | sort -u || echo "")
 
@@ -57,22 +57,35 @@ jobs:
             echo "📖 Tech talk updates detected:"
             echo "$CHANGED_TECH_TALKS"
 
+            # Every updated tech-talk must have a corresponding slide update to keep decks in sync.
+            # CHANGED_TECH_TALK_SLIDES contains slide basenames (e.g., copilot-cli),
+            # derived from slides/tech-talks/copilot-cli.md paths.
+            # Assumes tech-talk folder names map to slides/tech-talks/<name>.md
+            # (e.g., tech-talks/copilot-cli/ in repo root -> slides/tech-talks/copilot-cli.md).
+            # Archived tech-talks are exempt (filtered above).
             CHANGED_TECH_TALK_SLIDES=$(echo "$CHANGED_SLIDES" \
               | grep -E "^tech-talks/[^/]+\.md$" \
               | sed 's#^tech-talks/##' \
               | sed 's/\.md$//' \
               | sort -u || echo "")
 
-            MISSING_SLIDES=""
+            MISSING_SLIDES=()
             while IFS= read -r TALK; do
-              if [ -n "$TALK" ] && ! echo "$CHANGED_TECH_TALK_SLIDES" | grep -qx "$TALK"; then
-                MISSING_SLIDES="${MISSING_SLIDES}${TALK}\n"
+              if [ -n "$TALK" ]; then
+                EXPECTED_SLIDE="${SLIDES_TECH_TALKS_DIR}/${TALK}.md"
+                EXPECTED_SLIDE_PATH="${GITHUB_WORKSPACE}/${EXPECTED_SLIDE}"
+                if [ ! -f "$EXPECTED_SLIDE_PATH" ]; then
+                  MISSING_SLIDES+=("$EXPECTED_SLIDE")
+                # Slide exists but wasn't updated alongside the tech-talk.
+                elif ! echo "$CHANGED_TECH_TALK_SLIDES" | grep -Fqx "$TALK"; then
+                  MISSING_SLIDES+=("$EXPECTED_SLIDE")
+                fi
               fi
             done <<< "$CHANGED_TECH_TALKS"
 
-            if [ -n "$MISSING_SLIDES" ]; then
-              echo "❌ Matching slide updates required in slides/tech-talks:"
-              echo -e "$MISSING_SLIDES"
+            if [ ${#MISSING_SLIDES[@]} -gt 0 ]; then
+              echo "❌ The following tech-talks require corresponding slide updates:"
+              printf '%s\n' "${MISSING_SLIDES[@]}"
               exit 1
             fi
           fi
