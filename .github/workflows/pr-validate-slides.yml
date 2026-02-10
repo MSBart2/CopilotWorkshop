@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "slides/**"
+      - "tech-talks/**"
 
 permissions:
   contents: read
@@ -31,7 +32,7 @@ jobs:
 
           echo "🔍 Comparing $BASE_SHA...$HEAD_SHA"
 
-          CHANGED_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- slides/)
+          CHANGED_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- slides/ tech-talks/)
 
           # Check if shared files changed (require full rebuild)
           SHARED_PATTERNS="slides/package\.json|slides/package-lock\.json|slides/style\.css|slides/global-top\.vue|slides/global-bottom\.vue|slides/layouts/|slides/components/|slides/setup/"
@@ -43,6 +44,38 @@ jobs:
 
           # Extract changed slide .md files
           CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^slides/(workshop|tech-talks|exec-talks)/.*\.md$" | sed 's#^slides/##' || echo "")
+
+          # Detect tech-talk updates that must update matching slides
+          CHANGED_TECH_TALKS=$(echo "$CHANGED_FILES" \
+            | grep -E "^tech-talks/[^/]+/" \
+            | grep -v "^tech-talks/archive/" \
+            | grep -v "^tech-talks/README\.md$" \
+            | cut -d/ -f2 \
+            | sort -u || echo "")
+
+          if [ -n "$CHANGED_TECH_TALKS" ]; then
+            echo "📖 Tech talk updates detected:"
+            echo "$CHANGED_TECH_TALKS"
+
+            CHANGED_TECH_TALK_SLIDES=$(echo "$CHANGED_SLIDES" \
+              | grep -E "^tech-talks/[^/]+\.md$" \
+              | sed 's#^tech-talks/##' \
+              | sed 's/\.md$//' \
+              | sort -u || echo "")
+
+            MISSING_SLIDES=""
+            while IFS= read -r TALK; do
+              if [ -n "$TALK" ] && ! echo "$CHANGED_TECH_TALK_SLIDES" | grep -qx "$TALK"; then
+                MISSING_SLIDES="${MISSING_SLIDES}${TALK}\n"
+              fi
+            done <<< "$CHANGED_TECH_TALKS"
+
+            if [ -n "$MISSING_SLIDES" ]; then
+              echo "❌ Matching slide updates required in slides/tech-talks:"
+              echo -e "$MISSING_SLIDES"
+              exit 1
+            fi
+          fi
 
           if [ -z "$CHANGED_SLIDES" ]; then
             echo "📭 No slide .md files changed (may be non-slide assets)"
