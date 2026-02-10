@@ -13,7 +13,7 @@ title: Copilot CLI - Terminal AI
 module: tech-talks/copilot-cli
 mdc: true
 status: active
-updated: 2026-02-01
+updated: 2026-02-10
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
@@ -256,6 +256,32 @@ Background execution with `&` prefix — terminal stays free while agents work
 </div>
 </div>
 
+</div>
+
+</div>
+
+---
+
+# Latest CLI Updates
+
+<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
+
+<div class="p-4 bg-emerald-900/40 rounded-lg border border-emerald-500/50">
+<div class="text-2xl mb-2">🧠</div>
+<div class="font-bold mb-2">Configurable Reasoning Models</div>
+<div class="opacity-90">GPT-5.2-Codex with effort tiers (low → extra high) and Ctrl+T reasoning visibility</div>
+</div>
+
+<div class="p-4 bg-teal-900/40 rounded-lg border border-teal-500/50">
+<div class="text-2xl mb-2">⚡</div>
+<div class="font-bold mb-2">Performance & UX Upgrades</div>
+<div class="opacity-90">Faster, more concise output plus improved diffs/timelines and Windows/PowerShell polish</div>
+</div>
+
+<div class="p-4 bg-cyan-900/40 rounded-lg border border-cyan-500/50">
+<div class="text-2xl mb-2">🧩</div>
+<div class="font-bold mb-2">MCP Registry Integration</div>
+<div class="opacity-90">Discover tools/agents via GitHub MCP Registry with org-level governance controls</div>
 </div>
 
 </div>
