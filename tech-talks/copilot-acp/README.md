@@ -641,6 +641,56 @@ await connection.prompt({
 
 ---
 
+### 🚀 Featured Project: ACP Agent Orchestrator
+
+> **Spotlight: ACP reference implementation available today** — a full web interface for orchestrating multiple Copilot agents across repositories, built entirely on the ACP protocol.
+
+The [**ACP Agent Orchestrator**](https://github.com/MSBart2/cli-acp) takes the polyrepo use case above and turns it into a production-ready tool with an **orchestrator + worker architecture**, **broadcast prompts**, and **automatic synthesis** of cross-repo results.
+
+![Multiple agents working simultaneously across repositories](images/acp-orchestrator-agents.png)
+
+**What it does:**
+- **Launches one `copilot --acp --stdio` process per repository** — each worker agent gets its own isolated ACP session
+- **Orchestrator agent** sits above workers, receives synthesized results, and coordinates cross-repo work
+- **Broadcast prompts** to all workers simultaneously with optional synthesis instructions
+- **Coalesced results panel** collects worker outputs and auto-forwards them to the orchestrator
+- **Issue/PR tracking loop** — worker issues → orchestrator issue map → coordinated PRs across repos
+- **Interactive card UI** with streaming output and real-time permission approvals
+
+![Coalesced broadcast results panel showing cross-repo synthesis](images/acp-orchestrator-results.png)
+
+**Architecture:**
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Node.js + Express + Socket.IO |
+| Frontend | React + Vite + Tailwind CSS |
+| ACP Integration | `@agentclientprotocol/sdk` |
+
+**Flagship scenario — Cross-Repo Documentation Audit:**
+
+The canonical demo script demonstrates how an orchestrator agent manages a documentation audit across four worker repos (`api-gateway`, `billing-service`, `web-dashboard`, `infra-config`):
+
+1. **Broadcast** audit prompts to all worker agents
+2. **Coalesce** worker outputs automatically
+3. **Synthesize** cross-repo findings via the orchestrator
+4. **Create issues** in each repo with coordinated tracking
+5. **Generate PRs** for README updates across all repos
+6. **Merge coordination** through the orchestrator's issue map
+
+**Try it yourself:**
+```bash
+git clone https://github.com/MSBart2/cli-acp.git
+cd cli-acp/webapp
+npm run install:all
+npm run dev
+# Open http://localhost:5173
+```
+
+> 💡 **Why this matters:** This project demonstrates that ACP isn't just a protocol spec — it's a practical foundation for building sophisticated multi-agent workflows. The orchestrator/worker pattern shows how standard ACP sessions compose into systems that are greater than the sum of their parts.
+
+---
+
 ## ✅ What You Can Do Today
 
 **Immediate Actions (15 minutes):**
@@ -655,6 +705,7 @@ await connection.prompt({
 - [ ] Try the [multi-turn example](examples/multi-turn.ts) to see session context in action
 
 **Advanced Exploration (2-4 hours):**
+- [ ] Clone and run the [ACP Agent Orchestrator](https://github.com/MSBart2/cli-acp) to see multi-agent orchestration in action
 - [ ] Build a custom ACP client for your team's preferred editor or tool
 - [ ] Implement policy-based permissions for your organization's security requirements
 - [ ] Integrate MCP servers through ACP sessions for extended tool access
