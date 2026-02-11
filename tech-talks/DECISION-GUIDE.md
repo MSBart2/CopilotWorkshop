@@ -24,6 +24,7 @@ Every Copilot journey starts with two essentials:
 | Understand how Copilot works under the hood | [Copilot Chat Internals](copilot-chat-internals/) — debug view, system prompts |
 | Use Copilot in the terminal | [Copilot CLI](copilot-cli/) — natural language to shell, Plan Mode |
 | Use Copilot in the browser | [Copilot Web](copilot-web/) — cross-device, PR reviews, issue triage |
+| Integrate Copilot into any editor or tool | [Copilot ACP](copilot-acp/) — Agent Client Protocol for universal AI integration |
 | Embed Copilot in my own apps | [Copilot SDK](copilot-sdk/) — programmatic agent integration |
 | Get quick wins with agents | [Agentic Journey](agentic-journey/) — issue-to-PR automation in hours |
 | Implement agent safety controls | [Terminal Sandboxing](terminal-sandboxing/) + [Copilot Hooks](copilot-hooks/) |
@@ -39,7 +40,7 @@ All paths start with [Copilot Chat](copilot-chat/) → [Copilot Primitives](copi
 | **Individual Developer** | [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/) |
 | **Team / Tech Lead** | [Agent Teams](agent-teams/) → [Chat Internals](copilot-chat-internals/) → [Agentic SDLC](agentic-sdlc/) (Part 2) → [Enterprise Patterns](enterprise-patterns/) |
 | **Security / Compliance** | [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/) |
-| **Platform Engineer** | [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot SDK](copilot-sdk/) |
+| **Platform Engineer** | [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot ACP](copilot-acp/) → [Copilot SDK](copilot-sdk/) |
 | **Executive / Leadership** | See [exec-talks/](../exec-talks/) — [Agentic Delivery](../exec-talks/agentic-delivery/), [Agentic Economics](../exec-talks/agentic-economics/), [Agentic Labor](../exec-talks/agentic-labor/) |
 
 ---
@@ -59,7 +60,7 @@ All paths start with [Copilot Chat](copilot-chat/) → [Copilot Primitives](copi
 > [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/)
 
 ### Path 4 — Platform Engineering
-> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot SDK](copilot-sdk/)
+> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot ACP](copilot-acp/) → [Copilot SDK](copilot-sdk/)
 
 ---
 
@@ -72,6 +73,7 @@ All paths start with [Copilot Chat](copilot-chat/) → [Copilot Primitives](copi
 | **VS Code Chat** | Interactive development, complex tasks, exploration | [Copilot Chat](copilot-chat/) |
 | **Terminal (CLI)** | DevOps automation, Plan Mode, scripting | [Copilot CLI](copilot-cli/) |
 | **Browser/Mobile** | Cross-device, lightweight queries, web workflows | [Copilot Web](copilot-web/) |
+| **Any Editor (ACP)** | Universal agent access, custom tools, multi-agent systems | [Copilot ACP](copilot-acp/) |
 | **Programmatic (SDK)** | Custom apps, embedded agents, specialized tools | [Copilot SDK](copilot-sdk/) |
 
 ### Agent Patterns
@@ -114,3 +116,4 @@ All paths start with [Copilot Chat](copilot-chat/) → [Copilot Primitives](copi
 | "Agents are shipping too fast and things break" | [Agentic SDLC](agentic-sdlc/) (all three parts) |
 | "I want cross-session memory" | [Copilot Memory](copilot-memory/) |
 | "I want rich UI in chat responses" | [MCP Apps](mcp-apps/) |
+| "I want Copilot in a non-VS Code editor" | [Copilot ACP](copilot-acp/) — Agent Client Protocol for universal editor integration |

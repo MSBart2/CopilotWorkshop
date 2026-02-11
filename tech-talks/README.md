@@ -205,6 +205,7 @@ Both workflows reference [TEMPLATE.md](TEMPLATE.md) as the canonical structure. 
 | `copilot-chat-internals/` | Under-the-hood: debug view, system prompts |
 | `copilot-cli/` | Terminal-native AI with Copilot CLI |
 | `copilot-hooks/` | Pre/post-processing hooks for Copilot |
+| `copilot-acp/` | Agent Client Protocol for universal AI integration |
 | `copilot-memory/` | Copilot memory and persistent context |
 | `copilot-primitives/` | Core Copilot building blocks |
 | `copilot-sdk/` | Programmatic Copilot integration |
