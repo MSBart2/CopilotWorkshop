@@ -184,20 +184,57 @@ jobs:
 
           echo "✅ Slide generation complete"
 
+      # ── UPDATE INDEX & SYNC DATES ─────────────────────────────────────
+      # Add a navigation card to index-custom.html and sync SLIDE_DATES
+      # so the "NEW" badge appears automatically. Both scripts are
+      # idempotent — safe to re-run.
+      - name: Update index and sync dates
+        run: |
+          TOPIC="${{ steps.extract.outputs.topic }}"
+          SECTION="${{ steps.extract.outputs.section }}"
+
+          # Derive a display title from the README H1 heading
+          TITLE=$(head -20 "tech-talks/${TOPIC}/README.md" | sed -n 's/^# *//p' | head -1)
+          if [ -z "$TITLE" ]; then
+            # Fallback: title-case the slug
+            TITLE=$(echo "$TOPIC" | sed 's/-/ /g; s/\b\(.\)/\u\1/g')
+          fi
+
+          # Derive a short description from the README subtitle / first paragraph
+          DESC=$(sed -n '/^> \*\*/,/\*\*$/{ s/^> *//; s/\*\*//g; p; }' "tech-talks/${TOPIC}/README.md" | head -1)
+          if [ -z "$DESC" ] || [ ${#DESC} -gt 200 ]; then
+            DESC="Technical deep-dive on ${TITLE}."
+          fi
+
+          # Determine category from section name
+          if [ "$SECTION" = "Executive Talks" ]; then
+            CATEGORY="exec-talks"
+          else
+            CATEGORY="tech-talks"
+          fi
+
+          # Add card (idempotent — skips if already present)
+          node slides/scripts/add-index-card.mjs \
+            --topic "$TOPIC" --title "$TITLE" --desc "$DESC" \
+            --section "$SECTION" --category "$CATEGORY"
+
+          # Sync SLIDE_DATES map for the NEW badge
+          node slides/scripts/sync-index-dates.mjs
+
       # ── COMMIT & PUSH ──────────────────────────────────────────────────
-      # Push slides to the same feature branch (adds to existing PR)
+      # Push slides + index updates to the same feature branch
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           TOPIC="${{ steps.extract.outputs.topic }}"
-          git add "slides/tech-talks/${TOPIC}.md"
+          git add "slides/tech-talks/${TOPIC}.md" "slides/index-custom.html"
 
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Phase 4: Slides for ${TOPIC} (Issue #${{ github.event.issue.number }})"
+            git commit -m "Phase 4: Slides + index card for ${TOPIC} (Issue #${{ github.event.issue.number }})"
             git push origin "${{ steps.branch.outputs.branch_name }}"
           fi
 

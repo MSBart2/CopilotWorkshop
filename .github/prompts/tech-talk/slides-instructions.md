@@ -92,9 +92,9 @@ Create: `slides/tech-talks/{{TOPIC}}.md`
 
 If the file already exists, overwrite it with the new version.
 
-### Update Index
-
-After creating the slide file, add a card for this talk in `slides/index-custom.html` under the **{{SECTION}}** sub-group. Match the card format used by existing entries.
+> **Note:** The navigation card in `index-custom.html` and the `SLIDE_DATES`
+> sync are handled automatically by the workflow after your output is saved.
+> You do NOT need to produce index HTML — only produce the slide markdown.
 
 ---
 
