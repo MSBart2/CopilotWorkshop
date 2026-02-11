@@ -60,7 +60,6 @@ updated: 2026-02-11
     <div class="text-4xl font-bold text-cyan-400">
       "How do I govern AI agent workflows<br/>without blocking their velocity?"
     </div>
-    
     <div class="text-xl text-gray-300 max-w-3xl mx-auto">
       Manual approval gates destroy speed.<br/>
       Post-incident review catches violations too late.<br/>
@@ -84,7 +83,7 @@ layout: center
       <li>✅ When to Use Hooks</li>
     </ul>
   </div>
-  
+
   <div>
     <h3 class="text-cyan-400 font-bold mb-4">Implementation</h3>
     <ul class="space-y-2 text-sm">
@@ -161,17 +160,17 @@ Hooks execute custom shell commands at key lifecycle points during agent session
     <div class="font-bold text-green-400">✅ Preventive Control</div>
     <div class="text-gray-300 mt-1"><code>PreToolUse</code> can deny execution with <code>permissionDecision: "deny"</code></div>
   </div>
-  
+
   <div class="p-3 bg-blue-900/30 rounded border-l-2 border-blue-500">
     <div class="font-bold text-blue-400">✅ Context Injection</div>
     <div class="text-gray-300 mt-1"><code>SessionStart</code> can inject project info via <code>additionalContext</code></div>
   </div>
-  
+
   <div class="p-3 bg-purple-900/30 rounded border-l-2 border-purple-500">
     <div class="font-bold text-purple-400">✅ Complete Audit Trail</div>
     <div class="text-gray-300 mt-1">All 8 lifecycle events provide full observability</div>
   </div>
-  
+
   <div class="p-3 bg-cyan-900/30 rounded border-l-2 border-cyan-500">
     <div class="font-bold text-cyan-400">✅ Agent Flow Control</div>
     <div class="text-gray-300 mt-1"><code>Stop</code> hooks can prevent agents from finishing</div>
@@ -195,7 +194,7 @@ Hooks are configured in JSON files (workspace hooks take precedence):
     <div class="font-bold text-blue-400">Workspace (Team-Shared)</div>
     <code class="text-xs text-gray-300">.github/hooks/*.json</code>
   </div>
-  
+
   <div class="p-3 bg-purple-900/30 rounded">
     <div class="font-bold text-purple-400">Workspace (Local)</div>
     <code class="text-xs text-gray-300">.claude/settings.local.json</code>
@@ -253,7 +252,7 @@ Hooks are configured in JSON files (workspace hooks take precedence):
       <li>Fast synchronous validation (keep hooks under 5 seconds)</li>
     </ul>
   </div>
-  
+
   <div>
     <h3 class="text-red-400 font-bold mb-3">🛑 Move Against</h3>
     <ul class="space-y-2 text-xs">
@@ -311,16 +310,35 @@ Q: What's your governance requirement?
 | **SubagentStop** | Subagent completes | Aggregate results, verify output, block stopping if incomplete |
 | **Stop** | Agent session ends | Generate reports, cleanup resources, block stopping if tests not run |
 
-<div class="mt-4 p-3 bg-cyan-900/40 rounded border-2 border-cyan-500">
-  <span class="font-bold text-cyan-300">NEW in 2026-02-11 Update:</span>
-  <ul class="mt-2 space-y-1">
-    <li>• Added 4 new events: <code>PreCompact</code>, <code>SubagentStart</code>, <code>SubagentStop</code>, <code>Stop</code></li>
-    <li>• Removed <code>errorOccurred</code> (deprecated)</li>
-    <li>• PascalCase naming convention now standard (<code>PreToolUse</code> not <code>preToolUse</code>)</li>
-    <li>• New capabilities: <code>updatedInput</code>, <code>additionalContext</code>, permission priority, ask decision</li>
-  </ul>
 </div>
 
+---
+
+# What's New in the 2026-02-11 Update
+
+<div class="h-full flex items-center justify-center">
+  <div class="max-w-3xl space-y-6">
+    <div class="grid grid-cols-2 gap-6 text-sm">
+      <div class="p-4 bg-cyan-900/30 rounded border border-cyan-500/50">
+        <h3 class="text-cyan-400 font-bold mb-3">✨ 4 New Events</h3>
+        <ul class="space-y-2">
+          <li><code>PreCompact</code> — Save state before truncation</li>
+          <li><code>SubagentStart</code> — Track nested agents</li>
+          <li><code>SubagentStop</code> — Verify subagent output</li>
+          <li><code>Stop</code> — Cleanup & final reports</li>
+        </ul>
+      </div>
+      <div class="p-4 bg-blue-900/30 rounded border border-blue-500/50">
+        <h3 class="text-blue-400 font-bold mb-3">🔄 Breaking Changes</h3>
+        <ul class="space-y-2">
+          <li>Removed <code>errorOccurred</code> (deprecated)</li>
+          <li>PascalCase naming: <code>PreToolUse</code> not <code>preToolUse</code></li>
+          <li>New output fields: <code>updatedInput</code>, <code>additionalContext</code></li>
+          <li>Permission priority & ask decision support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 ---
@@ -474,12 +492,14 @@ After tool completes successfully
 
 ---
 
-# SubagentStart & SubagentStop
+# SubagentStart: Subagent Initialization
 
 <div class="text-sm mt-4">
 
-### SubagentStart: When Subagent Spawns
+### When It Fires
+When a subagent is spawned by the main agent
 
+### Input JSON
 ```json
 {
   "hookEventName": "SubagentStart",
@@ -488,14 +508,25 @@ After tool completes successfully
 }
 ```
 
-**Output:** Can inject `additionalContext` into the subagent's conversation
+### Output
+Can inject `additionalContext` into the subagent's conversation
 
-<div class="mt-4 p-3 bg-cyan-900/30 rounded text-xs">
+<div class="mt-4 p-3 bg-cyan-900/30 rounded">
   <span class="font-bold text-cyan-400">Use Case:</span> Track nested agent usage, initialize subagent resources, inject guidelines
 </div>
 
-### SubagentStop: When Subagent Completes
+</div>
 
+---
+
+# SubagentStop: Subagent Completion
+
+<div class="text-sm mt-4">
+
+### When It Fires
+When a subagent completes its task
+
+### Input JSON
 ```json
 {
   "hookEventName": "SubagentStop",
@@ -505,9 +536,10 @@ After tool completes successfully
 }
 ```
 
-**Output:** Can block stopping with `decision: "block"` and `reason`
+### Output
+Can block stopping with `decision: "block"` and `reason`
 
-<div class="mt-4 p-3 bg-yellow-900/30 rounded text-xs">
+<div class="mt-4 p-3 bg-yellow-900/30 rounded">
   <span class="font-bold text-yellow-400">Use Case:</span> Verify subagent completed all required work, aggregate results
 </div>
 
@@ -541,12 +573,8 @@ When the agent session ends (or attempts to end)
 }
 ```
 
-<div class="mt-4 p-3 bg-red-900/30 rounded border-l-2 border-red-500">
-  <span class="font-bold text-red-400">NEW Capability:</span> <code>Stop</code> hook can prevent agents from finishing, directing them to complete additional work (e.g., run tests, generate documentation)
-</div>
-
-<div class="mt-4 text-xs text-gray-400">
-  <code>stop_hook_active</code> is <code>true</code> when agent is continuing from a previous stop hook (prevents infinite loops)
+<div class="mt-4 p-3 bg-red-900/30 rounded border-l-2 border-red-500 text-xs">
+  <span class="font-bold text-red-400">NEW Capability:</span> <code>Stop</code> hook can prevent agents from finishing (e.g., run tests first). Set <code>stop_hook_active: true</code> on retry to prevent infinite loops.
 </div>
 
 </div>
@@ -584,43 +612,36 @@ When the agent session ends (or attempts to end)
   <span class="font-bold text-yellow-400">BREAKING CHANGE:</span> New config format uses <code>command</code> property (not <code>bash</code>/<code>powershell</code>), <code>timeout</code> (not <code>timeoutSec</code>), and no <code>version</code> field
 </div>
 
-### OS-Specific Commands (Optional)
-
-```json
-{
-  "type": "command",
-  "command": "./scripts/format.sh",
-  "windows": "powershell -File scripts\\format.ps1",
-  "linux": "./scripts/format-linux.sh"
-}
-```
-
 </div>
 
 ---
 
 # Configuration Fields Reference
 
-<div class="text-sm mt-4">
+<div class="text-xs mt-4">
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `type` | string | Must be `"command"` |
 | `command` | string | Default command (cross-platform) |
-| `windows` | string | Windows-specific override |
-| `linux` | string | Linux-specific override |
-| `osx` | string | macOS-specific override |
+| `windows` / `linux` / `osx` | string | OS-specific command overrides |
 | `cwd` | string | Working directory (relative to repo root) |
 | `timeout` | number | Max execution time in seconds (default: 30) |
 | `env` | object | Additional environment variables |
 
-<div class="mt-4 p-3 bg-cyan-900/30 rounded">
-  <span class="font-bold text-cyan-400">Environment Variables Available:</span>
-  <ul class="mt-2 space-y-1 text-xs">
-    <li>• <code>GITHUB_TOKEN</code> — For GitHub API calls (read-only)</li>
-    <li>• <code>GITHUB_REPOSITORY</code> — Repository name (e.g., <code>owner/repo</code>)</li>
-    <li>• <code>GITHUB_ACTOR</code> — User triggering the session</li>
-  </ul>
+<div class="grid grid-cols-3 gap-3 mt-6">
+  <div class="p-3 bg-cyan-900/30 rounded text-center">
+    <code class="text-cyan-400">GITHUB_TOKEN</code>
+    <div class="text-gray-400 text-xs mt-1">API calls (read-only)</div>
+  </div>
+  <div class="p-3 bg-cyan-900/30 rounded text-center">
+    <code class="text-cyan-400">GITHUB_REPOSITORY</code>
+    <div class="text-gray-400 text-xs mt-1">owner/repo</div>
+  </div>
+  <div class="p-3 bg-cyan-900/30 rounded text-center">
+    <code class="text-cyan-400">GITHUB_ACTOR</code>
+    <div class="text-gray-400 text-xs mt-1">Triggering user</div>
+  </div>
 </div>
 
 </div>
@@ -815,14 +836,22 @@ jq -n \
 ```jsonl
 {"timestamp":"2026-02-11T17:30:00Z","event":"SessionStart","sessionId":"abc123","source":"new"}
 {"timestamp":"2026-02-11T17:30:15Z","event":"UserPromptSubmit","prompt":"Refactor authentication module"}
-{"timestamp":"2026-02-11T17:30:20Z","event":"PreToolUse","tool_name":"editFiles","path":"src/auth.js","permissionDecision":"allow"}
-{"timestamp":"2026-02-11T17:30:25Z","event":"PostToolUse","tool_name":"editFiles","response":"File edited successfully"}
-{"timestamp":"2026-02-11T17:30:28Z","event":"SubagentStart","agent_id":"sub-456","agent_type":"Plan"}
-{"timestamp":"2026-02-11T17:30:35Z","event":"SubagentStop","agent_id":"sub-456","agent_type":"Plan"}
+{"timestamp":"2026-02-11T17:30:20Z","event":"PreToolUse","tool_name":"editFiles","permissionDecision":"allow"}
+{"timestamp":"2026-02-11T17:30:25Z","event":"PostToolUse","tool_name":"editFiles","response":"File edited"}
+{"timestamp":"2026-02-11T17:30:28Z","event":"SubagentStart","agent_id":"sub-456"}
+{"timestamp":"2026-02-11T17:30:35Z","event":"SubagentStop","agent_id":"sub-456"}
 {"timestamp":"2026-02-11T17:30:30Z","event":"Stop","toolsUsed":3,"violations":0}
 ```
 
-### Querying Audit Logs
+</div>
+
+---
+
+# Querying Audit Logs
+
+<div class="text-sm mt-4">
+
+### Filter & Analyze with `jq`
 
 ```bash
 # Count tool usage by type
@@ -834,6 +863,10 @@ cat logs/audit.jsonl | jq 'select(.permissionDecision == "deny")'
 # Track subagent usage
 cat logs/audit.jsonl | jq 'select(.event == "SubagentStart" or .event == "SubagentStop")'
 ```
+
+<div class="mt-4 p-3 bg-cyan-900/30 rounded">
+  <span class="font-bold text-cyan-400">Tip:</span> JSONL format enables direct <code>jq</code> queries without parsing — import into SQLite, Elasticsearch, or Datadog for dashboards
+</div>
 
 </div>
 
@@ -1020,77 +1053,46 @@ cat logs/metrics.jsonl | jq -s 'group_by(.user) | map({user: .[0].user, totalCos
 
 ---
 
-# Advanced Integration: Slack Notifications
+# Advanced Integration: External Systems
 
-<div class="text-xs mt-4">
+<div class="text-sm mt-4">
 
-### Send Alerts on Security Violations
+### Slack Alerts on Security Violations
 
 ```bash
 #!/bin/bash
 INPUT=$(cat)
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
-# Check for security violation
 if echo "$COMMAND" | grep -qE "rm -rf|sudo|DROP TABLE"; then
-  WEBHOOK_URL="$SLACK_WEBHOOK_URL"  # Set in hook env
-
-  curl -X POST "$WEBHOOK_URL" \
+  curl -X POST "$SLACK_WEBHOOK_URL" \
     -H 'Content-Type: application/json' \
-    -d "{
-      \"text\": \"🚨 Security Violation Blocked\",
-      \"blocks\": [
-        {
-          \"type\": \"section\",
-          \"text\": {
-            \"type\": \"mrkdwn\",
-            \"text\": \"*Command:* \`$COMMAND\`\"
-          }
-        }
-      ]
-    }"
+    -d "{\"text\": \"🚨 Blocked: $COMMAND\"}"
 
-  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Security policy violation - team alerted"}}'
-  exit 0
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse",
+    "permissionDecision":"deny",
+    "permissionDecisionReason":"Security violation - team alerted"}}'
 fi
 ```
 
+### Jira Incident Creation
+
+Same pattern — call `$JIRA_BASE_URL/rest/api/3/issue` with violation details, then deny.
+
+<div class="mt-4 grid grid-cols-3 gap-3 text-xs">
+  <div class="p-2 bg-purple-900/30 rounded text-center">
+    <div class="font-bold text-purple-400">Slack</div>
+    <div class="text-gray-400">Real-time alerts</div>
+  </div>
+  <div class="p-2 bg-blue-900/30 rounded text-center">
+    <div class="font-bold text-blue-400">Jira / ServiceNow</div>
+    <div class="text-gray-400">Incident creation</div>
+  </div>
+  <div class="p-2 bg-green-900/30 rounded text-center">
+    <div class="font-bold text-green-400">PagerDuty</div>
+    <div class="text-gray-400">On-call escalation</div>
+  </div>
 </div>
-
----
-
-# Advanced Integration: Ticketing Systems
-
-<div class="text-xs mt-2">
-
-### Create Jira Incidents on Violations
-
-```bash
-#!/bin/bash
-INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
-
-# Create incident for blocked dangerous operations
-if echo "$COMMAND" | grep -qE "rm -rf|DROP TABLE|sudo"; then
-  JIRA_API="$JIRA_BASE_URL/rest/api/3/issue"
-
-  curl -X POST "$JIRA_API" \
-    -H "Authorization: Bearer $JIRA_TOKEN" \
-    -H "Content-Type: application/json" \
-    -d "{
-      \"fields\": {
-        \"project\": {\"key\": \"SEC\"},
-        \"summary\": \"Security Violation Blocked: runTerminalCommand\",
-        \"description\": \"Blocked command: $COMMAND\",
-        \"issuetype\": {\"name\": \"Incident\"},
-        \"priority\": {\"name\": \"P1\"}
-      }
-    }"
-
-  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Dangerous operation blocked - incident created"}}'
-  exit 0
-fi
-```
 
 </div>
 
@@ -1100,28 +1102,28 @@ fi
 
 <div class="text-sm mt-4">
 
-### The Problem
-Healthcare app development requires complete audit trail for HIPAA compliance. Manual log collection takes 2-3 hours per audit with 60-70% completeness.
-
-### The Solution
-Hooks log every session event to JSON Lines with S3 archival:
-
-```json
-{
-  "hooks": {
-    "SessionStart": [{"type": "command", "command": "./audit/log-session-start.sh"}],
-    "UserPromptSubmit": [{"type": "command", "command": "./audit/log-prompt.sh"}],
-    "PreToolUse": [{"type": "command", "command": "./audit/log-tool-pre.sh"}],
-    "PostToolUse": [{"type": "command", "command": "./audit/log-tool-post.sh"}],
-    "Stop": [{"type": "command", "command": "./audit/archive-to-s3.sh"}]
-  }
-}
-```
-
-### Outcome
-- Audit time: 2-3 hours → 5 minutes
-- Coverage: 60-70% → 100%
-- Retention: Manual → Automated S3 (7-year retention)
+<div class="grid grid-cols-2 gap-6">
+  <div>
+    <h3 class="text-red-400 font-bold">The Problem</h3>
+    <p class="text-gray-300 text-xs mt-2">Manual log collection takes 2-3 hours per audit with 60-70% completeness. Healthcare requires complete evidence.</p>
+    <h3 class="text-green-400 font-bold mt-4">The Solution</h3>
+    <p class="text-gray-300 text-xs mt-2">All 8 lifecycle hooks log to JSONL. <code>Stop</code> hook archives to S3 with 7-year retention.</p>
+  </div>
+  <div>
+    <h3 class="text-cyan-400 font-bold">Outcome</h3>
+    <div class="mt-2 space-y-2 text-xs">
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Audit time</span><span class="text-green-400">2-3 hrs → 5 min</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Coverage</span><span class="text-green-400">60-70% → 100%</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Retention</span><span class="text-green-400">Manual → Automated S3</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -1131,29 +1133,28 @@ Hooks log every session event to JSON Lines with S3 archival:
 
 <div class="text-sm mt-4">
 
-### The Problem
-SaaS company needs SOC 2 proof that dangerous operations are prevented before execution. Manual review catches violations after-the-fact.
-
-### The Solution
-`PreToolUse` hook blocks dangerous operations with real-time denial:
-
-```bash
-#!/bin/bash
-INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
-
-# Block operations that violate SOC 2 requirements
-if echo "$COMMAND" | grep -qE 'rm -rf|DROP|TRUNCATE|sudo|chmod 777'; then
-  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"SOC 2 policy: Dangerous operation requires approval ticket"}}'
-  echo "$INPUT" | jq -c '. + {violation: "SOC2_DANGEROUS_OP"}' >> logs/violations.jsonl
-  exit 0
-fi
-```
-
-### Outcome
-- Violations: Post-incident → Real-time prevention
-- Audit evidence: Manual → Automated log
-- Security incidents: 3/year → 0
+<div class="grid grid-cols-2 gap-6">
+  <div>
+    <h3 class="text-red-400 font-bold">The Problem</h3>
+    <p class="text-gray-300 text-xs mt-2">SaaS company needs SOC 2 proof that dangerous operations are prevented before execution.</p>
+    <h3 class="text-green-400 font-bold mt-4">The Solution</h3>
+    <p class="text-gray-300 text-xs mt-2"><code>PreToolUse</code> blocks destructive commands (<code>rm -rf</code>, <code>DROP</code>, <code>sudo</code>) and logs violations to JSONL.</p>
+  </div>
+  <div>
+    <h3 class="text-cyan-400 font-bold">Outcome</h3>
+    <div class="mt-2 space-y-2 text-xs">
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Violations</span><span class="text-green-400">Post-incident → Real-time</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Audit evidence</span><span class="text-green-400">Manual → Automated</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Security incidents</span><span class="text-green-400">3/year → 0</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -1163,31 +1164,25 @@ fi
 
 <div class="text-sm mt-4">
 
-### The Problem
-Agent-generated code averaging 15 linting violations per PR. Rework cycles cost 7.5 hours per sprint.
-
-### The Solution
-`PreToolUse` hook runs linter before file edits, denies non-compliant code:
-
-```bash
-#!/bin/bash
-INPUT=$(cat)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.path // empty')
-
-# Run ESLint on proposed changes
-TEMP_FILE=$(mktemp)
-echo "$INPUT" | jq -r '.tool_input.newContent // empty' > "$TEMP_FILE"
-
-if ! npx eslint --no-eslintrc -c .eslintrc.json "$TEMP_FILE" > /dev/null 2>&1; then
-  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Code fails linting. Fix violations before applying."}}'
-  rm "$TEMP_FILE"
-  exit 0
-fi
-```
-
-### Outcome
-- Rework time: 7.5 hours/sprint → 0
-- CI failures: 15/sprint → 0
+<div class="grid grid-cols-2 gap-6">
+  <div>
+    <h3 class="text-red-400 font-bold">The Problem</h3>
+    <p class="text-gray-300 text-xs mt-2">Agent-generated code averaging 15 linting violations per PR. Rework costs 7.5 hours per sprint.</p>
+    <h3 class="text-green-400 font-bold mt-4">The Solution</h3>
+    <p class="text-gray-300 text-xs mt-2"><code>PreToolUse</code> runs ESLint on proposed changes and denies non-compliant code before it's written.</p>
+  </div>
+  <div>
+    <h3 class="text-cyan-400 font-bold">Outcome</h3>
+    <div class="mt-2 space-y-2 text-xs">
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Rework time</span><span class="text-green-400">7.5 hrs/sprint → 0</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>CI failures</span><span class="text-green-400">15/sprint → 0</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -1197,29 +1192,28 @@ fi
 
 <div class="text-sm mt-4">
 
-### The Problem
-Bank requires separation of duties — junior engineers can't modify production config. Manual PR review catches violations post-implementation.
-
-### The Solution
-`PreToolUse` hook enforces role-based permissions:
-
-```bash
-#!/bin/bash
-INPUT=$(cat)
-USER_ROLE=${COPILOT_USER_ROLE:-"junior"}  # Set via environment
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.path // empty')
-
-# Junior engineers can't edit production configs
-if [ "$USER_ROLE" = "junior" ] && [[ "$FILE_PATH" =~ ^(production/|config/prod) ]]; then
-  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Junior engineers require senior approval for production changes"}}'
-  exit 0
-fi
-```
-
-### Outcome
-- Policy enforcement: Post-review → Real-time prevention
-- Wasted effort: 2-3 hours/week → 0
-- Regulatory risk: Medium → Low
+<div class="grid grid-cols-2 gap-6">
+  <div>
+    <h3 class="text-red-400 font-bold">The Problem</h3>
+    <p class="text-gray-300 text-xs mt-2">Bank requires separation of duties — juniors can't modify production config. Manual PR review catches violations post-implementation.</p>
+    <h3 class="text-green-400 font-bold mt-4">The Solution</h3>
+    <p class="text-gray-300 text-xs mt-2"><code>PreToolUse</code> checks <code>$COPILOT_USER_ROLE</code> env var and denies access to <code>production/</code> paths for junior engineers.</p>
+  </div>
+  <div>
+    <h3 class="text-cyan-400 font-bold">Outcome</h3>
+    <div class="mt-2 space-y-2 text-xs">
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Enforcement</span><span class="text-green-400">Post-review → Real-time</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Wasted effort</span><span class="text-green-400">2-3 hrs/week → 0</span>
+      </div>
+      <div class="p-2 bg-green-900/30 rounded flex justify-between">
+        <span>Regulatory risk</span><span class="text-green-400">Medium → Low</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -1229,23 +1223,35 @@ fi
 
 <div class="text-sm mt-4">
 
-### Immediate Actions (15 minutes)
-- ✅ Review [official hooks documentation](https://code.visualstudio.com/docs/copilot/customization/hooks)
-- ✅ Create `.github/hooks/` directory in your repository
-- ✅ Copy the security-check script to start with basic protection
-- ✅ Try the `/hooks` slash command in VS Code chat
-
-### Short-Term Implementation (1-2 hours)
-- ✅ Deploy security enforcement hooks with dangerous command blocking
-- ✅ Set up `SessionStart` context injection for project info
-- ✅ Test hooks locally: `echo '{"tool_name":"runTerminalCommand","tool_input":{"command":"rm -rf /"}}' | ./security-check.sh`
-- ✅ Verify `PreToolUse` successfully denies dangerous operations
-
-### Advanced Exploration (2-4 hours)
-- ✅ Implement complete audit trail with all 8 lifecycle hooks
-- ✅ Use `SubagentStart`/`SubagentStop` to track nested agents
-- ✅ Use `Stop` hook to enforce test suite execution before completion
-- ✅ Integrate with Slack/Datadog/PagerDuty for alerts
+<div class="grid grid-cols-3 gap-4">
+  <div class="p-4 bg-green-900/20 rounded border border-green-500/30">
+    <h3 class="text-green-400 font-bold mb-3">⏱️ 15 Minutes</h3>
+    <ul class="space-y-2 text-xs">
+      <li>✅ Review <a href="https://code.visualstudio.com/docs/copilot/customization/hooks">official docs</a></li>
+      <li>✅ Create <code>.github/hooks/</code></li>
+      <li>✅ Copy security-check script</li>
+      <li>✅ Try <code>/hooks</code> slash command</li>
+    </ul>
+  </div>
+  <div class="p-4 bg-blue-900/20 rounded border border-blue-500/30">
+    <h3 class="text-blue-400 font-bold mb-3">🔧 1-2 Hours</h3>
+    <ul class="space-y-2 text-xs">
+      <li>✅ Deploy security enforcement</li>
+      <li>✅ Set up context injection</li>
+      <li>✅ Test hooks locally</li>
+      <li>✅ Verify deny decisions</li>
+    </ul>
+  </div>
+  <div class="p-4 bg-purple-900/20 rounded border border-purple-500/30">
+    <h3 class="text-purple-400 font-bold mb-3">🚀 2-4 Hours</h3>
+    <ul class="space-y-2 text-xs">
+      <li>✅ Full audit trail (8 hooks)</li>
+      <li>✅ Subagent tracking</li>
+      <li>✅ Stop hook enforcement</li>
+      <li>✅ Slack/Datadog alerts</li>
+    </ul>
+  </div>
+</div>
 
 </div>
 
@@ -1262,7 +1268,7 @@ fi
     <div class="font-bold text-blue-400">Terminal Sandboxing</div>
     <div class="text-gray-300 text-xs mt-1">OS-level restrictions (network/filesystem) that complement hooks</div>
   </div>
-  
+
   <div class="p-3 bg-purple-900/30 rounded">
     <div class="font-bold text-purple-400">Custom Instructions</div>
     <div class="text-gray-300 text-xs mt-1">Define agent behavior that hooks enforce through validation</div>
@@ -1282,7 +1288,7 @@ fi
 
 ---
 
-# Performance & Troubleshooting
+# Performance & Exit Codes
 
 <div class="text-sm mt-4">
 
@@ -1299,13 +1305,37 @@ fi
 | `2` | Blocking error: stops processing, shows error to model |
 | Other | Non-blocking warning: shows warning to user, continues |
 
-### Troubleshooting
+<div class="mt-4 p-3 bg-yellow-900/30 rounded">
+  <span class="font-bold text-yellow-400">Tip:</span> Keep hooks fast — slow hooks (>30s) degrade agent responsiveness and user experience
+</div>
 
-<div class="mt-4 space-y-2 text-xs">
-  <div>✅ <strong>View diagnostics:</strong> Right-click in Chat view → Diagnostics → hooks section</div>
-  <div>✅ <strong>View hook output:</strong> Output panel → "GitHub Copilot Chat Hooks" channel</div>
-  <div>✅ <strong>Hook not executing:</strong> Verify file is in <code>.github/hooks/*.json</code> with <code>type: "command"</code></div>
-  <div>✅ <strong>Permission denied:</strong> Ensure scripts have execute permissions (<code>chmod +x</code>)</div>
+</div>
+
+---
+
+# Troubleshooting
+
+<div class="text-sm mt-4">
+
+### Debugging Hooks
+
+<div class="space-y-4">
+  <div class="p-3 bg-blue-900/30 rounded border-l-2 border-blue-500">
+    <div class="font-bold text-blue-400">View diagnostics</div>
+    <div class="text-gray-300 text-xs mt-1">Right-click in Chat view → Diagnostics → hooks section</div>
+  </div>
+  <div class="p-3 bg-purple-900/30 rounded border-l-2 border-purple-500">
+    <div class="font-bold text-purple-400">View hook output</div>
+    <div class="text-gray-300 text-xs mt-1">Output panel → "GitHub Copilot Chat Hooks" channel</div>
+  </div>
+  <div class="p-3 bg-green-900/30 rounded border-l-2 border-green-500">
+    <div class="font-bold text-green-400">Hook not executing?</div>
+    <div class="text-gray-300 text-xs mt-1">Verify file is in <code>.github/hooks/*.json</code> with <code>type: "command"</code></div>
+  </div>
+  <div class="p-3 bg-orange-900/30 rounded border-l-2 border-orange-500">
+    <div class="font-bold text-orange-400">Permission denied?</div>
+    <div class="text-gray-300 text-xs mt-1">Ensure scripts have execute permissions (<code>chmod +x</code>)</div>
+  </div>
 </div>
 
 </div>
@@ -1325,4 +1355,3 @@ class: text-center
   📧 Contact: <span class="text-cyan-400">sdp@github.com</span><br/>
   📚 Slides: <span class="text-cyan-400">github.com/microsoft/CopilotTraining</span>
 </div>
-
