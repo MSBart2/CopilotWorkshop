@@ -11,6 +11,10 @@ build/
 out/
 *.tsbuildinfo
 
+# Backup files
+*.backup
+*.backup-*
+
 # Test coverage
 coverage/
 .nyc_output/
