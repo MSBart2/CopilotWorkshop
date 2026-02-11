@@ -25,6 +25,8 @@ AI-native developer skills value:
 - **Context curation** ("I give AI the information it needs to help me well")
 
 > **The best developers aren't "Syntax Wizards"—they're "Clarity Champions."**
+>
+> **Markdown is the medium.** Every `.md` file you write—architecture docs, instructions, prompts, agents—is a direct conversation with AI. The most effective teams won't be those with the most elegant syntax; they'll be those with the best prose. Syntax is what AI writes for you. Markdown is what you write for AI.
 
 ---
 

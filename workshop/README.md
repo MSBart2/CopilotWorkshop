@@ -91,6 +91,8 @@ This training embraces the fundamental shift in what makes developers excellent:
 
 **Why it matters**: In the age of AI assistance, the bottleneck isn't "can you write the code?"—it's "do you know what to build?" Clarity of thought beats knowledge of syntax.
 
+> 💡 **Markdown Is the Medium**: The most effective teams won't be those with the most elegant syntax—they'll be those with the best prose. Every `.md` file you write (instructions, prompts, agents, skills) is a direct conversation with AI. Syntax is what AI writes for you. Markdown is what you write for AI.
+
 ### The Four Principles
 
 Every module connects back to these core ideas:

@@ -119,6 +119,8 @@ Slides are built and deployed automatically on push to `main`. PRs that touch sl
 
 In the age of AI assistance, the bottleneck isn't "can you write the code?" — it's "do you know what to build?"
 
+> 💡 **Markdown Is the Medium**: Every `.md` file you write—instructions, prompts, agents, skills—is a direct conversation with AI. The most effective teams won't be those with the most elegant syntax; they'll be those with the best prose. Syntax is what AI writes for you. Markdown is what you write for AI.
+
 ### Four Principles
 
 | Principle | Core Message |

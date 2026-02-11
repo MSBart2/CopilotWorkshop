@@ -200,6 +200,14 @@ layout: two-cols
   </div>
 </div>
 
+<div class="mt-4 p-3 bg-gradient-to-r from-purple-600/40 to-blue-600/40 rounded-lg border border-purple-400/50 text-center">
+  <div class="text-xs font-bold text-purple-200">💡 Markdown Is the Medium</div>
+  <div class="text-[10px] text-gray-300 mt-1">
+    Syntax is what AI writes for you.<br/>
+    Markdown is what you write for AI.
+  </div>
+</div>
+
 </div>
 
 ---
@@ -245,6 +253,9 @@ layout: center
 <div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-center">
   <div class="text-xl font-bold text-white">
     Experience doesn't become obsolete—it becomes the quality filter
+  </div>
+  <div class="text-sm text-blue-200 mt-2 italic">
+    💡 Markdown is the medium — the best teams will be those with the best prose, not the most elegant syntax
   </div>
 </div>
 

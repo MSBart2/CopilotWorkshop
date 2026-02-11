@@ -191,7 +191,7 @@ Create copilot instructions for my project
 - Real patterns from your codebase (not generic examples)
 - Concrete anti-patterns based on your tech stack
 
-**This demonstrates the "Markdown Whisperer" principle:** Clear, specific intent → Better output.
+**This demonstrates the "Markdown Whisperer" principle:** Clear, specific intent → Better output. Remember: **markdown is the medium**—the quality of the prose you write in these `.md` files directly determines the quality of AI assistance your entire team receives.
 
 ---
 
