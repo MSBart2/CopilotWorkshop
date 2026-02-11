@@ -13,7 +13,7 @@ title: GitHub Copilot Hooks - Governance & Compliance
 module: tech-talks/copilot-hooks
 mdc: true
 status: active
-updated: 2026-02-01
+updated: 2026-02-11
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
@@ -39,7 +39,7 @@ updated: 2026-02-01
   <!-- Pill subtitle -->
   <div class="mt-4 relative z-10">
     <span class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-lg font-medium shadow-lg shadow-cyan-500/25">
-      Programmable Governance and Lifecycle Control
+      Programmable Governance for Agent Workflows
     </span>
   </div>
 
@@ -53,169 +53,128 @@ updated: 2026-02-01
 
 ---
 
-# The Governance Problem (1/2)
+# The Question This Talk Answers
 
-<div class="mt-8">
+<div class="h-full flex items-center justify-center">
+  <div class="text-center space-y-8">
+    <div class="text-4xl font-bold text-cyan-400">
+      "How do I govern AI agent workflows<br/>without blocking their velocity?"
+    </div>
+    
+    <div class="text-xl text-gray-300 max-w-3xl mx-auto">
+      Manual approval gates destroy speed.<br/>
+      Post-incident review catches violations too late.<br/>
+      We need programmable governance at the moment of action.
+    </div>
+  </div>
+</div>
 
-### 🤖 The Challenge
+---
+layout: center
+---
 
-<div class="space-y-4 text-sm">
+# Table of Contents
+
+<div class="grid grid-cols-2 gap-8 text-left max-w-4xl mx-auto">
+  <div>
+    <h3 class="text-cyan-400 font-bold mb-4">Fundamentals</h3>
+    <ul class="space-y-2 text-sm">
+      <li>✅ The Problem & Solution</li>
+      <li>✅ Lifecycle Control (8 Events)</li>
+      <li>✅ When to Use Hooks</li>
+    </ul>
+  </div>
+  
+  <div>
+    <h3 class="text-cyan-400 font-bold mb-4">Implementation</h3>
+    <ul class="space-y-2 text-sm">
+      <li>✅ Preventive Enforcement</li>
+      <li>✅ Observability & Audit</li>
+      <li>✅ Real-World Patterns</li>
+      <li>✅ Advanced Integration</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+# The Problem (1/2)
+
+<div class="space-y-4 text-sm mt-6">
+
 <div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
   <div class="font-bold text-red-400">AI agents operate autonomously</div>
-  <div class="text-gray-300 mt-2">Copilot creates files, runs commands, accesses APIs—without pre-approval gates</div>
+  <div class="text-gray-300 mt-2">Copilot creates files, runs commands, accesses APIs — all without pre-approval gates or manual review</div>
 </div>
 
 <div class="p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
   <div class="font-bold text-yellow-400">Compliance requires audit trails</div>
-  <div class="text-gray-300 mt-2">Regulated environments need evidence of what happened, when, and who authorized it</div>
+  <div class="text-gray-300 mt-2">Regulated environments (finance, healthcare, government) need complete evidence of what happened, when, and who authorized it</div>
 </div>
 
 <div class="p-4 bg-orange-900/30 rounded-lg border-l-4 border-orange-500">
-  <div class="font-bold text-orange-400">Security policies must be enforced</div>
-  <div class="text-gray-300 mt-2">Can't rely on post-incident review to catch <code>rm -rf /</code> or <code>DROP TABLE</code></div>
+  <div class="font-bold text-orange-400">Security policies must be enforced in real-time</div>
+  <div class="text-gray-300 mt-2">Can't rely on post-incident review to catch <code>rm -rf /</code> or <code>DROP TABLE</code> — violations must be prevented</div>
 </div>
+
+</div>
+
+---
+
+# The Problem (2/2)
+
+<div class="space-y-4 text-sm mt-6">
 
 <div class="p-4 bg-blue-900/30 rounded-lg border-l-4 border-blue-500">
-  <div class="font-bold text-blue-400">Quality standards need validation</div>
-  <div class="text-gray-300 mt-2">Style violations should block commits at creation, not in CI review</div>
-</div>
-</div>
-
+  <div class="font-bold text-blue-400">Quality standards need validation at creation</div>
+  <div class="text-gray-300 mt-2">Style violations, test failures, and policy breaches should block commits before they're created, not in CI review</div>
 </div>
 
----
-
-# The Governance Problem (2/2)
-
-<div class="mt-8">
-
-### 💡 The Solution
-
-<div class="p-6 bg-gradient-to-br from-green-900/60 to-blue-900/60 rounded-lg border-2 border-green-400">
-  <div class="text-2xl font-bold text-green-300 mb-4">GitHub Copilot Hooks</div>
-  <div class="text-gray-200 space-y-3 text-sm">
-    <div>✅ Programmable control points at critical moments</div>
-    <div>✅ Session start, before/after tool execution, on errors</div>
-    <div>✅ Real-time prevention, not post-incident review</div>
-    <div>✅ Complete audit trail with structured logging</div>
-  </div>
+<div class="p-4 bg-purple-900/30 rounded-lg border-l-4 border-purple-500">
+  <div class="font-bold text-purple-400">Agents need context injection</div>
+  <div class="text-gray-300 mt-2">Project-specific information, environment details, and guidelines should be available without manual setup</div>
 </div>
 
-<div class="mt-8 p-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Velocity with visibility</div>
-  <div class="text-blue-200 text-sm mt-1">Automation with accountability</div>
+<div class="mt-8 p-6 bg-gradient-to-r from-red-900/40 to-orange-900/40 rounded-lg border-2 border-red-500">
+  <div class="text-lg font-bold text-red-300">The Core Issue</div>
+  <div class="text-gray-200 mt-2">Manual approval gates destroy velocity. Static policies in CI catch violations too late. We need <span class="text-cyan-400 font-bold">programmable governance at the moment of action</span>.</div>
 </div>
 
 </div>
 
 ---
 
-# Hook Architecture: Lifecycle Events (1/2)
+# The Solution: GitHub Copilot Hooks
 
-<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
+<div class="mt-6">
 
-<div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-  <div class="text-2xl mb-2">🚀</div>
-  <div class="font-bold text-blue-300 text-sm mb-2">sessionStart</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Validate project state</div>
-    <div>• Initialize logging</div>
-    <div>• Set environment variables</div>
+### What It Does
+
+<div class="text-sm text-gray-300 mb-6">
+Hooks execute custom shell commands at key lifecycle points during agent sessions — before tool execution, after completion, on session start/stop, when subagents spawn, and before context compaction.
+</div>
+
+### Key Capabilities
+
+<div class="grid grid-cols-2 gap-4 text-sm">
+  <div class="p-3 bg-green-900/30 rounded border-l-2 border-green-500">
+    <div class="font-bold text-green-400">✅ Preventive Control</div>
+    <div class="text-gray-300 mt-1"><code>PreToolUse</code> can deny execution with <code>permissionDecision: "deny"</code></div>
   </div>
-  <div class="mt-3 text-blue-400 italic text-xs">Ensure known-good state</div>
-</div>
-
-<div class="p-4 bg-purple-900/60 rounded-lg border-2 border-purple-400">
-  <div class="text-2xl mb-2">📝</div>
-  <div class="font-bold text-purple-300 text-sm mb-2">userPromptSubmitted</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Log original request</div>
-    <div>• Track prompt patterns</div>
-    <div>• Record user context</div>
+  
+  <div class="p-3 bg-blue-900/30 rounded border-l-2 border-blue-500">
+    <div class="font-bold text-blue-400">✅ Context Injection</div>
+    <div class="text-gray-300 mt-1"><code>SessionStart</code> can inject project info via <code>additionalContext</code></div>
   </div>
-  <div class="mt-3 text-purple-400 italic text-xs">Compliance audit trails</div>
-</div>
-
-<div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
-  <div class="text-2xl mb-2">🛡️</div>
-  <div class="font-bold text-green-300 text-sm mb-2">preToolUse</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• <strong>Approve or deny</strong> execution</div>
-    <div>• Enforce security policies</div>
-    <div>• Validate restrictions</div>
+  
+  <div class="p-3 bg-purple-900/30 rounded border-l-2 border-purple-500">
+    <div class="font-bold text-purple-400">✅ Complete Audit Trail</div>
+    <div class="text-gray-300 mt-1">All 8 lifecycle events provide full observability</div>
   </div>
-  <div class="mt-3 text-green-400 italic text-xs font-bold">⭐ MOST POWERFUL</div>
-</div>
-
-</div>
-
----
-
-# Hook Architecture: Lifecycle Events (2/2)
-
-<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
-
-<div class="p-4 bg-orange-900/60 rounded-lg border-2 border-orange-400">
-  <div class="text-2xl mb-2">📊</div>
-  <div class="font-bold text-orange-300 text-sm mb-2">postToolUse</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Log tool results</div>
-    <div>• Collect metrics</div>
-    <div>• Trigger alerts</div>
-  </div>
-  <div class="mt-3 text-orange-400 italic text-xs">Observability & monitoring</div>
-</div>
-
-<div class="p-4 bg-red-900/60 rounded-lg border-2 border-red-400">
-  <div class="text-2xl mb-2">⚠️</div>
-  <div class="font-bold text-red-300 text-sm mb-2">errorOccurred</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Capture error details</div>
-    <div>• Alert teams</div>
-    <div>• Log stack traces</div>
-  </div>
-  <div class="mt-3 text-red-400 italic text-xs">Operational monitoring</div>
-</div>
-
-<div class="p-4 bg-gray-700 rounded-lg border-2 border-gray-500">
-  <div class="text-2xl mb-2">🏁</div>
-  <div class="font-bold text-gray-300 text-sm mb-2">sessionEnd</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Archive logs</div>
-    <div>• Send summary reports</div>
-    <div>• Release resources</div>
-  </div>
-  <div class="mt-3 text-gray-400 italic text-xs">Resource management</div>
-</div>
-
-</div>
-
-<div class="mt-8 p-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-center">
-  <span class="text-white font-bold text-lg">Only <code class="text-yellow-300">preToolUse</code> can PREVENT actions</span>
-  <span class="text-blue-200 text-sm ml-3">All others are observational</span>
-</div>
-
----
-
-# Hook Execution Flow (Part 1/2)
-
-<div class="flex flex-col gap-4 mt-6">
-
-<div class="flex items-center gap-4">
-  <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
-  <div class="flex-1 p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400">
-    <div class="font-bold text-blue-300">Event Detection</div>
-    <div class="text-gray-300 text-sm">Agent detects lifecycle event (session start, tool request, etc.)</div>
-  </div>
-</div>
-
-<div class="text-3xl text-gray-400 text-center">↓</div>
-
-<div class="flex items-center gap-4">
-  <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
-  <div class="flex-1 p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
-    <div class="font-bold text-purple-300">Hook Discovery & Invocation</div>
-    <div class="text-gray-300 text-sm">Reads <code>.github/hooks/*.json</code> and spawns shell process with event context</div>
+  
+  <div class="p-3 bg-cyan-900/30 rounded border-l-2 border-cyan-500">
+    <div class="font-bold text-cyan-400">✅ Agent Flow Control</div>
+    <div class="text-gray-300 mt-1"><code>Stop</code> hooks can prevent agents from finishing</div>
   </div>
 </div>
 
@@ -223,1140 +182,1130 @@ updated: 2026-02-01
 
 ---
 
-# Hook Execution Flow (Part 2/2)
+# Solution Architecture
 
-<div class="flex flex-col gap-4 mt-6">
+<div class="text-sm mt-4">
 
-<div class="flex items-center gap-4">
-  <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
-  <div class="flex-1 p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400">
-    <div class="font-bold text-green-300">Context Passing via JSON</div>
-    <div class="text-gray-300 text-sm mt-2">
-      <pre class="text-xs"><code>{
-  "timestamp": "2025-06-15T17:30:00Z",
-  "workingDirectory": "/workspace/project",
-  "toolName": "bash",
-  "args": {"command": "rm -rf data/"}
-}</code></pre>
-    </div>
+### Configuration Locations
+
+Hooks are configured in JSON files (workspace hooks take precedence):
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+  <div class="p-3 bg-blue-900/30 rounded">
+    <div class="font-bold text-blue-400">Workspace (Team-Shared)</div>
+    <code class="text-xs text-gray-300">.github/hooks/*.json</code>
+  </div>
+  
+  <div class="p-3 bg-purple-900/30 rounded">
+    <div class="font-bold text-purple-400">Workspace (Local)</div>
+    <code class="text-xs text-gray-300">.claude/settings.local.json</code>
   </div>
 </div>
 
-<div class="text-3xl text-gray-400 text-center">↓</div>
+### Execution Flow
 
-<div class="flex items-center gap-4">
-  <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
-  <div class="flex-1 p-4 bg-orange-900/40 rounded-lg border-l-4 border-orange-400">
-    <div class="font-bold text-orange-300">Execution & Decision</div>
-    <div class="text-gray-300 text-sm">For <code>preToolUse</code>, reads stdout for permission:
-      <code class="text-red-400">{"permissionDecision": "deny"}</code>
-    </div>
+<div class="mt-4 space-y-2 text-xs">
+  <div class="flex items-center gap-2">
+    <div class="w-6 h-6 rounded-full bg-cyan-600 flex items-center justify-center font-bold">1</div>
+    <div>Event Detection → Agent detects lifecycle event</div>
+  </div>
+  <div class="flex items-center gap-2">
+    <div class="w-6 h-6 rounded-full bg-cyan-600 flex items-center justify-center font-bold">2</div>
+    <div>Hook Discovery → Reads hook configurations</div>
+  </div>
+  <div class="flex items-center gap-2">
+    <div class="w-6 h-6 rounded-full bg-cyan-600 flex items-center justify-center font-bold">3</div>
+    <div>Script Invocation → Spawns shell process with JSON context via stdin</div>
+  </div>
+  <div class="flex items-center gap-2">
+    <div class="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center font-bold">4</div>
+    <div>Output Parsing → For PreToolUse, reads <code>permissionDecision</code> (allow/deny/ask)</div>
   </div>
 </div>
 
+<div class="mt-4 p-3 bg-yellow-900/30 rounded border-l-2 border-yellow-500 text-xs">
+  <span class="font-bold text-yellow-400">⚡ Critical:</span> <code>PreToolUse</code> is the only hook that can prevent actions before they happen
 </div>
 
-<div class="mt-6 text-center text-sm text-gray-400 italic">
-  ⚡ Keep hooks fast (&lt;5s) to avoid degrading agent responsiveness
 </div>
 
 ---
 
-# Use Case 1: Security Policy Enforcement
+# Mental Model Shift
 
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-
-### ❌ The Problem
-
-<div class="p-4 bg-red-900/40 rounded-lg border-l-4 border-red-500 mb-4">
-  <div class="text-sm text-gray-300 space-y-2">
-    <div>• Manual review catches violations <strong>after execution</strong></div>
-    <div>• <strong>2 violations per sprint</strong></div>
-    <div>• <strong>30 min</strong> manual investigation each</div>
-    <div>• Too late for prevention</div>
+<div class="text-center my-8">
+  <div class="text-2xl font-bold text-cyan-400">
+    From "agents work and we review their output"
+  </div>
+  <div class="text-4xl my-4">↓</div>
+  <div class="text-2xl font-bold text-green-400">
+    To "agents propose actions and governance approves them in real-time"
   </div>
 </div>
 
-### 🛡️ The Solution
+<div class="grid grid-cols-2 gap-6 text-sm mt-8">
+  <div>
+    <h3 class="text-green-400 font-bold mb-3">✅ Move Toward</h3>
+    <ul class="space-y-2 text-xs">
+      <li>Preventive governance (<code>PreToolUse</code> denies before execution)</li>
+      <li>Context injection (<code>SessionStart</code> adds project info)</li>
+      <li>Structured logging (JSON Lines for direct querying)</li>
+      <li>Fast synchronous validation (keep hooks under 5 seconds)</li>
+    </ul>
+  </div>
+  
+  <div>
+    <h3 class="text-red-400 font-bold mb-3">🛑 Move Against</h3>
+    <ul class="space-y-2 text-xs">
+      <li>Post-incident review (too late to prevent damage)</li>
+      <li>Manual approval gates (destroys velocity)</li>
+      <li>CI-only validation (catches violations after creation)</li>
+      <li>Slow hooks (>30s degrades agent responsiveness)</li>
+    </ul>
+  </div>
+</div>
 
-<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-500">
-  <div class="font-bold text-green-300 mb-2">preToolUse Hook</div>
-  <div class="text-xs text-gray-300 space-y-1">
-    <div>✓ Block destructive file operations</div>
-    <div>✓ Prevent privilege escalation</div>
-    <div>✓ Stop database destruction</div>
-    <div>✓ Control network exposure</div>
-    <div>✓ Protect credential access</div>
+---
+
+# When to Use This Pattern
+
+<div class="text-sm mt-4">
+
+### Decision Tree
+
+```
+Q: What's your governance requirement?
+├─ "Prevent dangerous operations before execution"
+│  → Use: PreToolUse hook with security policies
+│  └─ Best for: Security enforcement, regulated environments
+│
+├─ "Complete audit trail for compliance"
+│  → Use: All 8 lifecycle hooks with JSON Lines logging
+│  └─ Best for: Finance, healthcare, government compliance
+│
+├─ "Enforce code quality before commits"
+│  → Use: PostToolUse hook with linter validation
+│  └─ Best for: Quality gates, shift-left enforcement
+│
+└─ "Inject project context into agent sessions"
+   → Use: SessionStart hook with additionalContext
+   └─ Best for: Environment-aware agents, project metadata
+```
+
+</div>
+
+---
+
+# Lifecycle Control: The 8 Hook Events
+
+<div class="text-xs mt-4">
+
+| Hook Event | When It Fires | Key Use Cases |
+|------------|---------------|---------------|
+| **SessionStart** | First prompt of new session | Initialize resources, inject context, validate state |
+| **UserPromptSubmit** | User submits a prompt | Audit user requests, inject system context |
+| **PreToolUse** ⚡ | Before agent invokes tool | **Block dangerous operations, require approval** |
+| **PostToolUse** | After tool completes | Run formatters, log results, inject context about results |
+| **PreCompact** | Before context compaction | Export important context, save state before truncation |
+| **SubagentStart** | Subagent spawns | Track nested agent usage, inject subagent guidelines |
+| **SubagentStop** | Subagent completes | Aggregate results, verify output, block stopping if incomplete |
+| **Stop** | Agent session ends | Generate reports, cleanup resources, block stopping if tests not run |
+
+<div class="mt-4 p-3 bg-cyan-900/40 rounded border-2 border-cyan-500">
+  <span class="font-bold text-cyan-300">NEW in 2026-02-11 Update:</span>
+  <ul class="mt-2 space-y-1">
+    <li>• Added 4 new events: <code>PreCompact</code>, <code>SubagentStart</code>, <code>SubagentStop</code>, <code>Stop</code></li>
+    <li>• Removed <code>errorOccurred</code> (deprecated)</li>
+    <li>• PascalCase naming convention now standard (<code>PreToolUse</code> not <code>preToolUse</code>)</li>
+    <li>• New capabilities: <code>updatedInput</code>, <code>additionalContext</code>, permission priority, ask decision</li>
+  </ul>
+</div>
+
+</div>
+
+---
+
+# SessionStart: Session Initialization
+
+<div class="text-sm mt-4">
+
+### When It Fires
+When a new agent session begins (first user prompt)
+
+### Input JSON
+```json
+{
+  "timestamp": "2026-02-11T10:30:00.000Z",
+  "cwd": "/path/to/workspace",
+  "sessionId": "session-abc123",
+  "hookEventName": "SessionStart",
+  "source": "new"
+}
+```
+
+### Output: Inject Context
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "Project: myapp v2.1.0 | Branch: main | Node: v20.0.0"
+  }
+}
+```
+
+<div class="mt-4 p-3 bg-blue-900/30 rounded">
+  <span class="font-bold text-blue-400">Use Case:</span> Inject project-specific context (version, branch, environment) so agents make better decisions without manual setup
+</div>
+
+</div>
+
+---
+
+# PreToolUse: Pre-Execution Validation ⚡
+
+<div class="text-xs mt-2">
+
+### Why It's Most Powerful
+The **only hook that can deny tool execution** before it happens. Can also modify input and inject context.
+
+### Input JSON
+```json
+{
+  "timestamp": "2026-02-11T10:30:00.000Z",
+  "cwd": "/workspace/project",
+  "sessionId": "abc123",
+  "hookEventName": "PreToolUse",
+  "tool_name": "runTerminalCommand",
+  "tool_input": { "command": "rm -rf dist" },
+  "tool_use_id": "tool-123"
+}
+```
+
+### Output: Deny Execution
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "deny",
+    "permissionDecisionReason": "Destructive operations outside approved directories"
+  }
+}
+```
+
+<div class="mt-2 grid grid-cols-3 gap-2">
+  <div class="p-2 bg-green-900/30 rounded text-center">
+    <code class="text-green-400">allow</code><br/>Auto-approve
+  </div>
+  <div class="p-2 bg-yellow-900/30 rounded text-center">
+    <code class="text-yellow-400">ask</code><br/>Require user confirmation
+  </div>
+  <div class="p-2 bg-red-900/30 rounded text-center">
+    <code class="text-red-400">deny</code><br/>Block execution
   </div>
 </div>
 
 </div>
 
-<div>
+---
 
-### 📝 Implementation
+# PreToolUse: Modify Input & Inject Context
 
-<div class="text-sm">
+<div class="text-sm mt-4">
 
-```bash {1-4|6-10|12-16|18-20}
+### Output: Modify Tool Input
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "allow",
+    "updatedInput": { "command": "rm -rf dist --dry-run" },
+    "additionalContext": "Modified to dry-run mode per security policy"
+  }
+}
+```
+
+### Permission Decision Priority
+When multiple hooks run for the same tool:
+1. **`deny`** (most restrictive): blocks tool execution immediately
+2. **`ask`**: requires user confirmation
+3. **`allow`** (least restrictive): auto-approves execution
+
+<div class="mt-4 p-3 bg-cyan-900/30 rounded border-l-2 border-cyan-500">
+  <span class="font-bold text-cyan-400">NEW Capability:</span> <code>updatedInput</code> lets you enforce safe defaults (add flags, sanitize paths) while allowing execution
+</div>
+
+</div>
+
+---
+
+# PostToolUse: Post-Execution Tracking
+
+<div class="text-sm mt-4">
+
+### When It Fires
+After tool completes successfully
+
+### Input JSON (includes response)
+```json
+{
+  "timestamp": "2026-02-11T10:30:25.000Z",
+  "hookEventName": "PostToolUse",
+  "tool_name": "editFiles",
+  "tool_input": { "path": "src/auth.js" },
+  "tool_response": "File edited successfully"
+}
+```
+
+### Output: Inject Context About Results
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PostToolUse",
+    "additionalContext": "The edited file has lint errors: missing semicolon line 42"
+  }
+}
+```
+
+<div class="mt-4 p-3 bg-purple-900/30 rounded">
+  <span class="font-bold text-purple-400">Use Case:</span> Run formatters, validate output, inject context back to agent (e.g., lint errors to fix)
+</div>
+
+</div>
+
+---
+
+# SubagentStart & SubagentStop
+
+<div class="text-sm mt-4">
+
+### SubagentStart: When Subagent Spawns
+
+```json
+{
+  "hookEventName": "SubagentStart",
+  "agent_id": "sub-456",
+  "agent_type": "Plan"
+}
+```
+
+**Output:** Can inject `additionalContext` into the subagent's conversation
+
+<div class="mt-4 p-3 bg-cyan-900/30 rounded text-xs">
+  <span class="font-bold text-cyan-400">Use Case:</span> Track nested agent usage, initialize subagent resources, inject guidelines
+</div>
+
+### SubagentStop: When Subagent Completes
+
+```json
+{
+  "hookEventName": "SubagentStop",
+  "agent_id": "sub-456",
+  "agent_type": "Plan",
+  "stop_hook_active": false
+}
+```
+
+**Output:** Can block stopping with `decision: "block"` and `reason`
+
+<div class="mt-4 p-3 bg-yellow-900/30 rounded text-xs">
+  <span class="font-bold text-yellow-400">Use Case:</span> Verify subagent completed all required work, aggregate results
+</div>
+
+</div>
+
+---
+
+# Stop: Agent Session End
+
+<div class="text-sm mt-4">
+
+### When It Fires
+When the agent session ends (or attempts to end)
+
+### Input JSON
+```json
+{
+  "hookEventName": "Stop",
+  "stop_hook_active": false
+}
+```
+
+### Output: Block Stopping
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "Stop",
+    "decision": "block",
+    "reason": "Run the test suite before finishing"
+  }
+}
+```
+
+<div class="mt-4 p-3 bg-red-900/30 rounded border-l-2 border-red-500">
+  <span class="font-bold text-red-400">NEW Capability:</span> <code>Stop</code> hook can prevent agents from finishing, directing them to complete additional work (e.g., run tests, generate documentation)
+</div>
+
+<div class="mt-4 text-xs text-gray-400">
+  <code>stop_hook_active</code> is <code>true</code> when agent is continuing from a previous stop hook (prevents infinite loops)
+</div>
+
+</div>
+
+---
+
+# Hook Configuration Format
+
+<div class="text-xs mt-4">
+
+### JSON Configuration (.github/hooks/security-hooks.json)
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "./scripts/validate-tool.sh",
+        "timeout": 15,
+        "cwd": ".github/hooks"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "type": "command",
+        "command": "npx prettier --write \"$TOOL_INPUT_FILE_PATH\""
+      }
+    ]
+  }
+}
+```
+
+<div class="mt-4 p-3 bg-yellow-900/30 rounded border-l-2 border-yellow-500">
+  <span class="font-bold text-yellow-400">BREAKING CHANGE:</span> New config format uses <code>command</code> property (not <code>bash</code>/<code>powershell</code>), <code>timeout</code> (not <code>timeoutSec</code>), and no <code>version</code> field
+</div>
+
+### OS-Specific Commands (Optional)
+
+```json
+{
+  "type": "command",
+  "command": "./scripts/format.sh",
+  "windows": "powershell -File scripts\\format.ps1",
+  "linux": "./scripts/format-linux.sh"
+}
+```
+
+</div>
+
+---
+
+# Configuration Fields Reference
+
+<div class="text-sm mt-4">
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | Must be `"command"` |
+| `command` | string | Default command (cross-platform) |
+| `windows` | string | Windows-specific override |
+| `linux` | string | Linux-specific override |
+| `osx` | string | macOS-specific override |
+| `cwd` | string | Working directory (relative to repo root) |
+| `timeout` | number | Max execution time in seconds (default: 30) |
+| `env` | object | Additional environment variables |
+
+<div class="mt-4 p-3 bg-cyan-900/30 rounded">
+  <span class="font-bold text-cyan-400">Environment Variables Available:</span>
+  <ul class="mt-2 space-y-1 text-xs">
+    <li>• <code>GITHUB_TOKEN</code> — For GitHub API calls (read-only)</li>
+    <li>• <code>GITHUB_REPOSITORY</code> — Repository name (e.g., <code>owner/repo</code>)</li>
+    <li>• <code>GITHUB_ACTOR</code> — User triggering the session</li>
+  </ul>
+</div>
+
+</div>
+
+---
+
+# Preventive Enforcement: Security Check
+
+<div class="text-xs mt-2">
+
+### Block Dangerous Operations (.github/hooks/scripts/security-check.sh)
+
+```bash
 #!/bin/bash
 INPUT=$(cat)
-TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
-COMMAND=$(echo "$INPUT" | jq -r '.args.command')
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
+COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+
+# Only validate terminal commands
+if [ "$TOOL_NAME" != "runTerminalCommand" ]; then
+  echo '{"continue":true}'
+  exit 0
+fi
 
 # Block dangerous delete operations
-if echo "$COMMAND" | grep -qE 'rm -rf /'; then
-  echo '{"permissionDecision": "deny"}'
+if echo "$COMMAND" | grep -qE 'rm -rf /|del /s /q|format'; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Destructive file operation blocked by security policy"}}'
   exit 0
 fi
 
 # Block privilege escalation
-if echo "$COMMAND" | grep -qE '^sudo '; then
-  echo '{"permissionDecision": "deny"}'
+if echo "$COMMAND" | grep -qE '^sudo |^runas |^su '; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Privilege escalation not allowed"}}'
+  exit 0
+fi
+
+# Block database destruction
+if echo "$COMMAND" | grep -qiE 'DROP TABLE|DROP DATABASE|TRUNCATE TABLE'; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Database destructive operations require manual approval"}}'
   exit 0
 fi
 
 # Default: allow
+echo '{"continue":true}'
 exit 0
 ```
 
 </div>
 
-</div>
-
-</div>
-
 ---
 
-# Use Case 1: Results
+# Preventive Enforcement: File Path Restrictions
 
-<div class="grid grid-cols-3 gap-6 mt-12">
-  <div class="p-6 bg-blue-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-blue-300">0 min</div>
-    <div class="text-gray-400 mt-2">Review time</div>
-    <div class="text-gray-500 text-sm mt-1">was 60 min</div>
-  </div>
-  <div class="p-6 bg-green-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-green-300">0</div>
-    <div class="text-gray-400 mt-2">Violations</div>
-    <div class="text-gray-500 text-sm mt-1">was 2/sprint</div>
-  </div>
-  <div class="p-6 bg-purple-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-purple-300">&lt;2s</div>
-    <div class="text-gray-400 mt-2">Detection</div>
-    <div class="text-gray-500 text-sm mt-1">was 30 min</div>
-  </div>
-</div>
+<div class="text-sm mt-4">
 
-<div class="mt-12 p-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Security policies as code, enforced at runtime</div>
-</div>
-
----
-
-# Use Case 2: Compliance Audit Trail
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-
-### ❌ The Problem
-
-<div class="p-4 bg-red-900/40 rounded-lg border-l-4 border-red-500 mb-4 text-sm">
-  <div class="text-gray-300 space-y-2">
-    <div>• Manual audit extraction: <strong>20 min per request</strong></div>
-    <div>• Incomplete coverage: <strong>~70%</strong></div>
-    <div>• Ad-hoc logging inconsistent</div>
-  </div>
-</div>
-
-### 🎯 The Solution
-
-<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-500 text-sm">
-  <div class="font-bold text-green-300 mb-2">Structured JSON Lines Logging</div>
-  <div class="text-gray-300 space-y-1 text-xs">
-    <div>✓ Every session, prompt, tool execution logged</div>
-    <div>✓ One JSON object per line (append-safe)</div>
-    <div>✓ Direct querying with <code>jq</code></div>
-    <div>✓ 100% coverage guaranteed</div>
-  </div>
-</div>
-
-### 📊 Example Queries
-
-<div class="text-sm">
+### Restrict Agent to Approved Directories
 
 ```bash
-# Count tool usage
-cat audit.jsonl | jq -r '.toolName' | sort | uniq -c
-
-# Find denied operations
-cat audit.jsonl | jq 'select(.permissionDecision == "deny")'
-
-# Export to CSV
-cat audit.jsonl | jq -r '[.timestamp, .toolName] | @csv'
-```
-
-</div>
-
-</div>
-
-<div>
-
-### 📋 Audit Log Format
-
-<div class="text-sm">
-
-```jsonl
-{"timestamp":"2025-06-15T17:30:00Z",
- "event":"sessionStart","sessionId":"abc123"}
-
-{"timestamp":"2025-06-15T17:30:15Z",
- "event":"userPromptSubmitted",
- "prompt":"Refactor authentication module"}
-
-{"timestamp":"2025-06-15T17:30:20Z",
- "event":"preToolUse","toolName":"edit",
- "args":{"path":"src/auth.js"},
- "permissionDecision":"allow"}
-
-{"timestamp":"2025-06-15T17:30:25Z",
- "event":"postToolUse","toolName":"edit",
- "result":"success"}
-
-{"timestamp":"2025-06-15T17:30:30Z",
- "event":"sessionEnd",
- "toolsUsed":3,"violations":0}
-```
-
-</div>
-
-</div>
-
-</div>
-
----
-
-# Use Case 2: Results
-
-<div class="grid grid-cols-3 gap-6 mt-12">
-  <div class="p-6 bg-blue-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-blue-300">2 min</div>
-    <div class="text-gray-400 mt-2">Audit time</div>
-    <div class="text-gray-500 text-sm mt-1">was 20 min</div>
-  </div>
-  <div class="p-6 bg-green-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-green-300">100%</div>
-    <div class="text-gray-400 mt-2">Coverage</div>
-    <div class="text-gray-500 text-sm mt-1">was ~70%</div>
-  </div>
-  <div class="p-6 bg-purple-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-purple-300">SQL</div>
-    <div class="text-gray-400 mt-2">Query capability</div>
-    <div class="text-gray-500 text-sm mt-1">was none</div>
-  </div>
-</div>
-
-<div class="mt-12 p-6 bg-gradient-to-r from-purple-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Programmatic compliance replaces manual log parsing</div>
-</div>
-
----
-
-# Use Case 3: Quality Gate Integration
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-
-### ❌ The Problem
-
-<div class="p-4 bg-red-900/40 rounded-lg border-l-4 border-red-500 mb-4 text-sm">
-  <div class="text-gray-300 space-y-2">
-    <div>• Style violations reach CI, requiring rework</div>
-    <div>• <strong>12 violations per sprint</strong></div>
-    <div>• <strong>3 rework rounds</strong> × 25 min = 75 min</div>
-  </div>
-</div>
-
-### 🎯 The Solution
-
-<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-500 text-sm">
-  <div class="font-bold text-green-300 mb-2">Shift-Left Validation</div>
-  <div class="text-gray-300 text-xs space-y-1">
-    <div>✓ Run linter <strong>before</strong> code edits</div>
-    <div>✓ Deny non-compliant changes</div>
-    <div>✓ Standards enforced at creation</div>
-    <div>✓ Zero CI violations</div>
-  </div>
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-br from-yellow-900/60 to-orange-900/60 rounded-lg border-2 border-yellow-500">
-  <div class="text-yellow-300 font-bold mb-2">💡 Key Insight</div>
-  <div class="text-gray-300 text-sm">
-    Validate at point of creation, not post-commit cleanup
-  </div>
-</div>
-
-</div>
-
-<div>
-
-### 📝 Implementation
-
-<div class="text-sm">
-
-```bash {1-5|7-10|12-17|19-23}
 #!/bin/bash
 INPUT=$(cat)
-TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
-FILE_PATH=$(echo "$INPUT" | jq -r '.args.path')
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
 
-# Only lint code file edits
-if [[ "$TOOL_NAME" != "edit" ]] ||
-   [[ ! "$FILE_PATH" =~ \.(js|ts)$ ]]; then
+# Only validate file editing tools
+if [ "$TOOL_NAME" != "editFiles" ] && [ "$TOOL_NAME" != "createFile" ]; then
+  echo '{"continue":true}'
   exit 0
 fi
 
-# Create temp file with proposed changes
-TEMP_FILE=$(mktemp)
-echo "$INPUT" | jq -r '.args.new_str' > "$TEMP_FILE"
+# Extract file path
+PATH_ARG=$(echo "$INPUT" | jq -r '.tool_input.path // .tool_input.files[0] // empty')
 
-# Run linter
-if ! npx eslint "$TEMP_FILE" > /dev/null 2>&1; then
-  echo '{"permissionDecision": "deny",
-         "permissionDecisionReason":
-         "Code fails linting"}'
+# Check if path is in approved directories
+if [[ ! "$PATH_ARG" =~ ^(src/|test/|docs/) ]]; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Can only edit files in src/, test/, or docs/ directories"}}'
+  exit 0
+fi
+
+# Allow approved paths
+echo '{"continue":true}'
+exit 0
+```
+
+</div>
+
+---
+
+# Preventive Enforcement: Environment-Aware Policies
+
+<div class="text-sm mt-4">
+
+### Stricter Rules in Production
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+CWD=$(echo "$INPUT" | jq -r '.cwd')
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
+
+# Stricter policies in production
+if [[ "$CWD" =~ /production/ ]]; then
+  # Require approval for all file writes
+  if [[ "$TOOL_NAME" == "editFiles" || "$TOOL_NAME" == "createFile" ]]; then
+    echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"Production changes require manual approval"}}'
+    exit 0
+  fi
+fi
+
+# Permissive in development
+echo '{"continue":true}'
+exit 0
+```
+
+<div class="mt-4 p-3 bg-purple-900/30 rounded text-xs">
+  <span class="font-bold text-purple-400">Use Case:</span> Apply environment-specific policies — strict in prod, permissive in dev, <code>"ask"</code> in staging
+</div>
+
+</div>
+
+---
+
+# Observability: Structured Logging
+
+<div class="text-sm mt-4">
+
+### JSON Lines Format (.jsonl)
+
+One JSON object per line — provides:
+- ✅ Direct querying with `jq` (SQL-like filtering without parsing)
+- ✅ Append safety (concurrent writes don't corrupt file)
+- ✅ Tool compatibility (import to SQLite, Elasticsearch, Datadog)
+- ✅ Incremental streaming (process logs as they're written)
+
+### Session Lifecycle Logging
+
+```bash
+#!/bin/bash
+# .github/hooks/scripts/log-session-start.sh
+INPUT=$(cat)
+LOG_FILE="logs/audit.jsonl"
+mkdir -p logs
+
+# Append structured log entry
+echo "$INPUT" | jq -c '. + {
+  event: "SessionStart",
+  loggedAt: (now | todate)
+}' >> "$LOG_FILE"
+```
+
+</div>
+
+---
+
+# Observability: Tool Usage Logging
+
+<div class="text-sm mt-4">
+
+### Track Every Tool Execution
+
+```bash
+#!/bin/bash
+# .github/hooks/scripts/log-tool-use.sh
+INPUT=$(cat)
+LOG_FILE="logs/audit.jsonl"
+mkdir -p logs
+
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
+TOOL_RESPONSE=$(echo "$INPUT" | jq -r '.tool_response // "N/A"')
+
+# Log tool execution
+jq -n \
+  --arg tool "$TOOL_NAME" \
+  --arg response "$TOOL_RESPONSE" \
+  --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  '{
+    timestamp: $ts,
+    event: "PostToolUse",
+    tool_name: $tool,
+    response: $response
+  }' >> "$LOG_FILE"
+```
+
+</div>
+
+---
+
+# Observability: Example Audit Log
+
+<div class="text-xs mt-4">
+
+### logs/audit.jsonl
+
+```jsonl
+{"timestamp":"2026-02-11T17:30:00Z","event":"SessionStart","sessionId":"abc123","source":"new"}
+{"timestamp":"2026-02-11T17:30:15Z","event":"UserPromptSubmit","prompt":"Refactor authentication module"}
+{"timestamp":"2026-02-11T17:30:20Z","event":"PreToolUse","tool_name":"editFiles","path":"src/auth.js","permissionDecision":"allow"}
+{"timestamp":"2026-02-11T17:30:25Z","event":"PostToolUse","tool_name":"editFiles","response":"File edited successfully"}
+{"timestamp":"2026-02-11T17:30:28Z","event":"SubagentStart","agent_id":"sub-456","agent_type":"Plan"}
+{"timestamp":"2026-02-11T17:30:35Z","event":"SubagentStop","agent_id":"sub-456","agent_type":"Plan"}
+{"timestamp":"2026-02-11T17:30:30Z","event":"Stop","toolsUsed":3,"violations":0}
+```
+
+### Querying Audit Logs
+
+```bash
+# Count tool usage by type
+cat logs/audit.jsonl | jq -r '.tool_name // empty' | sort | uniq -c
+
+# Find all denied operations
+cat logs/audit.jsonl | jq 'select(.permissionDecision == "deny")'
+
+# Track subagent usage
+cat logs/audit.jsonl | jq 'select(.event == "SubagentStart" or .event == "SubagentStop")'
+```
+
+</div>
+
+---
+
+# Observability: Context Injection
+
+<div class="text-sm mt-4">
+
+### Inject Project Context on Session Start
+
+```bash
+#!/bin/bash
+# .github/hooks/scripts/inject-context.sh
+
+PROJECT_INFO=$(cat package.json 2>/dev/null | jq -r '.name + " v" + .version' || echo "Unknown")
+BRANCH=$(git branch --show-current 2>/dev/null || echo "unknown")
+
+cat <<EOF
+{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "Project: $PROJECT_INFO | Branch: $BRANCH | Node: $(node -v 2>/dev/null || echo 'not installed')"
+  }
+}
+EOF
+```
+
+<div class="mt-4 p-3 bg-cyan-900/30 rounded">
+  <span class="font-bold text-cyan-400">Use Case:</span> Add project-specific information to the agent's conversation without manual setup — environment variables, project versions, branch info, team guidelines
+</div>
+
+</div>
+
+---
+
+# Real-World Pattern: Multi-Layer Security
+
+<div class="text-sm mt-4">
+
+### Combine Multiple Security Checks
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "./scripts/security-dangerous-commands.sh",
+        "timeout": 3
+      },
+      {
+        "type": "command",
+        "command": "./scripts/security-file-permissions.sh",
+        "timeout": 3
+      },
+      {
+        "type": "command",
+        "command": "./scripts/security-secret-scanning.sh",
+        "timeout": 5
+      }
+    ]
+  }
+}
+```
+
+<div class="mt-4 p-3 bg-green-900/30 rounded text-xs">
+  <span class="font-bold text-green-400">Execution:</span> Hooks run in order. The most restrictive permission decision wins — first <code>deny</code> blocks execution immediately.
+</div>
+
+</div>
+
+---
+
+# Real-World Pattern: Code Quality Gates
+
+<div class="text-sm mt-4">
+
+### Enforce Formatting After Code Changes
+
+```bash
+#!/bin/bash
+# .github/hooks/scripts/format-changed-files.sh
+INPUT=$(cat)
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
+
+if [ "$TOOL_NAME" = "editFiles" ] || [ "$TOOL_NAME" = "createFile" ]; then
+  FILES=$(echo "$INPUT" | jq -r '.tool_input.files[]? // .tool_input.path // empty')
+
+  for FILE in $FILES; do
+    if [ -f "$FILE" ]; then
+      npx prettier --write "$FILE" 2>/dev/null
+    fi
+  done
+fi
+
+echo '{"continue":true}'
+```
+
+<div class="mt-4 p-3 bg-blue-900/30 rounded text-xs">
+  <span class="font-bold text-blue-400">Use Case:</span> Automatically format agent-created files with Prettier/Black/Go fmt after edit
+</div>
+
+</div>
+
+---
+
+# Real-World Pattern: Lint Validation with Context
+
+<div class="text-sm mt-4">
+
+### Inject Lint Errors Back to Agent
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
+
+if [ "$TOOL_NAME" = "editFiles" ]; then
+  FILE=$(echo "$INPUT" | jq -r '.tool_input.files[0] // empty')
+  if [ -f "$FILE" ]; then
+    LINT_OUTPUT=$(npx eslint "$FILE" --quiet 2>&1)
+    if [ $? -ne 0 ]; then
+      echo "{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"The edited file has lint errors that need to be fixed: $LINT_OUTPUT\"}}"
+      exit 0
+    fi
+  fi
+fi
+
+echo '{"continue":true}'
+```
+
+<div class="mt-4 p-3 bg-purple-900/30 rounded text-xs">
+  <span class="font-bold text-purple-400">NEW Capability:</span> <code>PostToolUse</code> can inject context about results, allowing agents to self-correct lint errors
+</div>
+
+</div>
+
+---
+
+# Real-World Pattern: Cost Tracking
+
+<div class="text-xs mt-2">
+
+### Track Tool Usage for Cost Allocation
+
+```bash
+#!/bin/bash
+# .github/hooks/scripts/metrics-tracker.sh
+INPUT=$(cat)
+LOG_FILE="logs/metrics.jsonl"
+mkdir -p logs
+
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
+TIMESTAMP=$(echo "$INPUT" | jq -r '.timestamp')
+SESSION_ID=$(echo "$INPUT" | jq -r '.sessionId')
+USER=${GITHUB_ACTOR:-unknown}
+
+# Calculate cost estimate (example: $0.01 per tool use)
+COST=0.01
+
+# Log usage metrics
+jq -n \
+  --arg ts "$TIMESTAMP" \
+  --arg user "$USER" \
+  --arg tool "$TOOL_NAME" \
+  --arg cost "$COST" \
+  '{
+    timestamp: $ts,
+    user: $user,
+    toolName: $tool,
+    estimatedCost: ($cost | tonumber)
+  }' >> "$LOG_FILE"
+```
+
+### Query Monthly Costs
+
+```bash
+# Sum costs by user for current month
+cat logs/metrics.jsonl | jq -s 'group_by(.user) | map({user: .[0].user, totalCost: (map(.estimatedCost) | add)})'
+```
+
+</div>
+
+---
+
+# Advanced Integration: Slack Notifications
+
+<div class="text-xs mt-4">
+
+### Send Alerts on Security Violations
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+
+# Check for security violation
+if echo "$COMMAND" | grep -qE "rm -rf|sudo|DROP TABLE"; then
+  WEBHOOK_URL="$SLACK_WEBHOOK_URL"  # Set in hook env
+
+  curl -X POST "$WEBHOOK_URL" \
+    -H 'Content-Type: application/json' \
+    -d "{
+      \"text\": \"🚨 Security Violation Blocked\",
+      \"blocks\": [
+        {
+          \"type\": \"section\",
+          \"text\": {
+            \"type\": \"mrkdwn\",
+            \"text\": \"*Command:* \`$COMMAND\`\"
+          }
+        }
+      ]
+    }"
+
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Security policy violation - team alerted"}}'
+  exit 0
+fi
+```
+
+</div>
+
+---
+
+# Advanced Integration: Ticketing Systems
+
+<div class="text-xs mt-2">
+
+### Create Jira Incidents on Violations
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+
+# Create incident for blocked dangerous operations
+if echo "$COMMAND" | grep -qE "rm -rf|DROP TABLE|sudo"; then
+  JIRA_API="$JIRA_BASE_URL/rest/api/3/issue"
+
+  curl -X POST "$JIRA_API" \
+    -H "Authorization: Bearer $JIRA_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d "{
+      \"fields\": {
+        \"project\": {\"key\": \"SEC\"},
+        \"summary\": \"Security Violation Blocked: runTerminalCommand\",
+        \"description\": \"Blocked command: $COMMAND\",
+        \"issuetype\": {\"name\": \"Incident\"},
+        \"priority\": {\"name\": \"P1\"}
+      }
+    }"
+
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Dangerous operation blocked - incident created"}}'
+  exit 0
+fi
+```
+
+</div>
+
+---
+
+# Use Case: HIPAA Compliance Audit Trail
+
+<div class="text-sm mt-4">
+
+### The Problem
+Healthcare app development requires complete audit trail for HIPAA compliance. Manual log collection takes 2-3 hours per audit with 60-70% completeness.
+
+### The Solution
+Hooks log every session event to JSON Lines with S3 archival:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [{"type": "command", "command": "./audit/log-session-start.sh"}],
+    "UserPromptSubmit": [{"type": "command", "command": "./audit/log-prompt.sh"}],
+    "PreToolUse": [{"type": "command", "command": "./audit/log-tool-pre.sh"}],
+    "PostToolUse": [{"type": "command", "command": "./audit/log-tool-post.sh"}],
+    "Stop": [{"type": "command", "command": "./audit/archive-to-s3.sh"}]
+  }
+}
+```
+
+### Outcome
+- Audit time: 2-3 hours → 5 minutes
+- Coverage: 60-70% → 100%
+- Retention: Manual → Automated S3 (7-year retention)
+
+</div>
+
+---
+
+# Use Case: SOC 2 Security Enforcement
+
+<div class="text-sm mt-4">
+
+### The Problem
+SaaS company needs SOC 2 proof that dangerous operations are prevented before execution. Manual review catches violations after-the-fact.
+
+### The Solution
+`PreToolUse` hook blocks dangerous operations with real-time denial:
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+
+# Block operations that violate SOC 2 requirements
+if echo "$COMMAND" | grep -qE 'rm -rf|DROP|TRUNCATE|sudo|chmod 777'; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"SOC 2 policy: Dangerous operation requires approval ticket"}}'
+  echo "$INPUT" | jq -c '. + {violation: "SOC2_DANGEROUS_OP"}' >> logs/violations.jsonl
+  exit 0
+fi
+```
+
+### Outcome
+- Violations: Post-incident → Real-time prevention
+- Audit evidence: Manual → Automated log
+- Security incidents: 3/year → 0
+
+</div>
+
+---
+
+# Use Case: Code Quality Gates
+
+<div class="text-sm mt-4">
+
+### The Problem
+Agent-generated code averaging 15 linting violations per PR. Rework cycles cost 7.5 hours per sprint.
+
+### The Solution
+`PreToolUse` hook runs linter before file edits, denies non-compliant code:
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.path // empty')
+
+# Run ESLint on proposed changes
+TEMP_FILE=$(mktemp)
+echo "$INPUT" | jq -r '.tool_input.newContent // empty' > "$TEMP_FILE"
+
+if ! npx eslint --no-eslintrc -c .eslintrc.json "$TEMP_FILE" > /dev/null 2>&1; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Code fails linting. Fix violations before applying."}}'
   rm "$TEMP_FILE"
   exit 0
 fi
 ```
 
-</div>
-
-</div>
+### Outcome
+- Rework time: 7.5 hours/sprint → 0
+- CI failures: 15/sprint → 0
 
 </div>
 
 ---
 
-# Use Case 3: Results
+# Use Case: Financial Services Role-Based Access
 
-<div class="grid grid-cols-3 gap-6 mt-12">
-  <div class="p-6 bg-blue-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-blue-300">0 min</div>
-    <div class="text-gray-400 mt-2">Rework time</div>
-    <div class="text-gray-500 text-sm mt-1">was 75 min</div>
-  </div>
-  <div class="p-6 bg-green-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-green-300">1</div>
-    <div class="text-gray-400 mt-2">Rounds</div>
-    <div class="text-gray-500 text-sm mt-1">was 3</div>
-  </div>
-  <div class="p-6 bg-purple-900/60 rounded-lg text-center">
-    <div class="text-4xl font-bold text-purple-300">0</div>
-    <div class="text-gray-400 mt-2">CI violations</div>
-    <div class="text-gray-500 text-sm mt-1">was 12</div>
-  </div>
-</div>
+<div class="text-sm mt-4">
 
-<div class="mt-12 p-6 bg-gradient-to-r from-green-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Agents generate compliant code on first attempt</div>
-</div>
+### The Problem
+Bank requires separation of duties — junior engineers can't modify production config. Manual PR review catches violations post-implementation.
 
----
-
-# Best Practices: Performance
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### ⚡ Target Execution Times
-
-<div class="space-y-3">
-  <div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-500">
-    <div class="font-bold text-green-300">&lt; 2 seconds</div>
-    <div class="text-gray-300 text-sm">Security checks, logging</div>
-  </div>
-
-  <div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-500">
-    <div class="font-bold text-blue-300">&lt; 5 seconds</div>
-    <div class="text-gray-300 text-sm">Linting, validation</div>
-  </div>
-
-  <div class="p-4 bg-yellow-900/40 rounded-lg border-l-4 border-yellow-500">
-    <div class="font-bold text-yellow-300">&lt; 120 seconds</div>
-    <div class="text-gray-300 text-sm">External API calls (use <code>timeoutSec</code>)</div>
-  </div>
-</div>
-
-</div>
-
-<div>
-
-### 🚀 Optimization Patterns
-
-<div class="space-y-3 text-sm">
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">💾</span>
-  <div>
-    <div class="text-white font-bold">Cache expensive computations</div>
-    <div class="text-gray-400 text-xs">Compiled regex, policy lookups</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">⚡</span>
-  <div>
-    <div class="text-white font-bold">Asynchronous logging</div>
-    <div class="text-gray-400 text-xs">Append to file, don't wait for I/O</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">🔄</span>
-  <div>
-    <div class="text-white font-bold">Background processing</div>
-    <div class="text-gray-400 text-xs">Offload slow work to jobs triggered by hooks</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">📊</span>
-  <div>
-    <div class="text-white font-bold">Profile scripts</div>
-    <div class="text-gray-400 text-xs"><code>time ./hook.sh &lt; test-input.json</code></div>
-  </div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-red-900/40 to-gray-800 rounded-lg text-center">
-  <span class="text-white font-bold">⚠️ Slow hooks degrade agent responsiveness</span>
-</div>
-
----
-
-# Best Practices: Security
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### 🛡️ Deny by Default
-
-<div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400 mb-4">
-  <div class="font-bold text-blue-300 mb-3">Security Principle</div>
-  <div class="text-gray-300 text-sm space-y-2">
-    <div>✓ Deny operations unless <strong>explicitly approved</strong></div>
-    <div>✓ Safer than allow-by-default with filtering</div>
-    <div>✓ Reduces attack surface for policy bypass</div>
-  </div>
-</div>
-
-### 🔐 Secret Handling
-
-<div class="space-y-3 text-sm">
-  <div class="p-3 bg-red-900/40 rounded-lg border-l-4 border-red-500">
-    <div class="font-bold text-red-400">❌ Never</div>
-    <div class="text-gray-300">Log credentials, tokens, sensitive data</div>
-  </div>
-
-  <div class="p-3 bg-green-900/40 rounded-lg border-l-4 border-green-500">
-    <div class="font-bold text-green-400">✓ Always</div>
-    <div class="text-gray-300">Use environment variables for secrets</div>
-  </div>
-
-  <div class="p-3 bg-green-900/40 rounded-lg border-l-4 border-green-500">
-    <div class="font-bold text-green-400">✓ Always</div>
-    <div class="text-gray-300">Scrub sensitive fields before logging</div>
-  </div>
-</div>
-
-</div>
-
-<div>
-
-### 🔒 Script Security
-
-<div class="space-y-4 text-sm">
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">✅</span>
-  <div>
-    <div class="text-white font-bold">Validate all input</div>
-    <div class="text-gray-400">Don't trust JSON field values</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">✅</span>
-  <div>
-    <div class="text-white font-bold">Use parameterized commands</div>
-    <div class="text-gray-400">Avoid shell injection</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">✅</span>
-  <div>
-    <div class="text-white font-bold">Restrict file system access</div>
-    <div class="text-gray-400">Validate paths, prevent traversal</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">✅</span>
-  <div>
-    <div class="text-white font-bold">Error handling</div>
-    <div class="text-gray-400">Fail securely, log failures</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-2xl">✅</span>
-  <div>
-    <div class="text-white font-bold">Least privilege</div>
-    <div class="text-gray-400">Run scripts with minimal permissions</div>
-  </div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-red-900/40 to-gray-800 rounded-lg text-center">
-  <span class="text-white font-bold">🔐 Security is not optional—hooks run with repository access</span>
-</div>
-
----
-
-# Testing & Debugging Hooks
-
-<div class="mt-8">
-
-### 🧪 Local Testing
-
-<div class="text-sm">
+### The Solution
+`PreToolUse` hook enforces role-based permissions:
 
 ```bash
-# Test hooks with sample input
-echo '{"toolName":"bash","args":{"command":"rm -rf /"}}' \
-  | ./security-check.sh
+#!/bin/bash
+INPUT=$(cat)
+USER_ROLE=${COPILOT_USER_ROLE:-"junior"}  # Set via environment
+FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.path // empty')
 
-# Verify permission decision
-echo '{"toolName":"edit","args":{"path":"src/app.js"}}' \
-  | ./pre-tool-use.sh
-```
-
-</div>
-
-### 🐛 Debugging Techniques
-
-<div class="space-y-3 text-sm mt-4">
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">📝</span>
-  <div>
-    <div class="text-white font-bold">Enable verbose logging</div>
-    <div class="text-gray-400 text-xs"><code>export DEBUG=true</code></div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">⏱️</span>
-  <div>
-    <div class="text-white font-bold">Monitor execution time</div>
-    <div class="text-gray-400 text-xs"><code>time ./hook.sh &lt; test-input.json</code></div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-  <span class="text-xl">🔍</span>
-  <div>
-    <div class="text-white font-bold">Check outputs and exit codes</div>
-    <div class="text-gray-400 text-xs">Validate JSON format and decisions</div>
-  </div>
-</div>
-
-</div>
-
-</div>
-
----
-
-# Metrics and Observability
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div>
-
-### 📊 Governance Effectiveness
-
-<div class="space-y-3 text-xs">
-
-<div class="p-3 bg-red-900/40 rounded-lg">
-  <div class="font-bold text-red-300 mb-2">🔒 Security Enforcement</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Blocked operations by type</div>
-    <div>• Time to detection (real-time vs. post-incident)</div>
-    <div>• Policy coverage (% patterns caught)</div>
-  </div>
-</div>
-
-<div class="p-3 bg-blue-900/40 rounded-lg">
-  <div class="font-bold text-blue-300 mb-2">📋 Compliance Audit</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Audit log completeness (% sessions logged)</div>
-    <div>• Query response time</div>
-    <div>• Retention compliance</div>
-  </div>
-</div>
-
-<div class="p-3 bg-green-900/40 rounded-lg">
-  <div class="font-bold text-green-300 mb-2">✨ Quality Gates</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Violations prevented at creation</div>
-    <div>• Rework time saved</div>
-    <div>• Standards enforcement coverage</div>
-  </div>
-</div>
-
-</div>
-
-</div>
-
-<div>
-
-### ⚡ Operational Metrics
-
-<div class="space-y-3 text-xs">
-
-<div class="p-3 bg-purple-900/40 rounded-lg">
-  <div class="font-bold text-purple-300 mb-2">🎯 Hook Performance</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Execution time (p50, p95, p99)</div>
-    <div>• Timeout rate</div>
-    <div>• Failure rate</div>
-  </div>
-</div>
-
-<div class="p-3 bg-orange-900/40 rounded-lg">
-  <div class="font-bold text-orange-300 mb-2">🤖 Agent Impact</div>
-  <div class="text-gray-300 space-y-1">
-    <div>• Session latency with/without hooks</div>
-    <div>• User satisfaction</div>
-    <div>• Adoption rate (% teams using hooks)</div>
-  </div>
-</div>
-
-</div>
-
-### 📈 Example Dashboard Queries
-
-```bash
-# Security blocks (last 7 days)
-jq -r 'select(.permissionDecision == "deny")
-  | .permissionDecisionReason' audit.jsonl \
-  | sort | uniq -c
-
-# Tool usage distribution
-jq -r '.toolName' audit.jsonl \
-  | sort | uniq -c | sort -rn
-
-# Session metrics
-jq -s 'group_by(.sessionId)
-  | map({tools: length,
-         violations: map(select(
-           .permissionDecision == "deny"))
-         | length})' audit.jsonl
-```
-
-</div>
-
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  Measurement drives improvement—track what's prevented, how fast, and coverage gaps
-</div>
-
----
-
-# Integration Patterns (Part 1/2)
-
-### 🔗 Combining with Other Customizations
-
-<div class="space-y-4 text-sm mt-8">
-
-<div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-500">
-  <div class="font-bold text-blue-300 mb-2">Hooks + Custom Instructions</div>
-  <div class="text-gray-300">
-    • Instructions define <strong>what</strong> agents should do<br/>
-    • Hooks enforce <strong>boundaries</strong> on how they do it<br/>
-    • Example: "Follow coding standards" + lint validation
-  </div>
-</div>
-
-<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-500">
-  <div class="font-bold text-green-300 mb-2">Hooks + Agent Skills</div>
-  <div class="text-gray-300">
-    • Skills provide domain capabilities<br/>
-    • Hooks audit skill usage, enforce policies<br/>
-    • Example: Deployment skill + production logs
-  </div>
-</div>
-
-<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-500">
-  <div class="font-bold text-purple-300 mb-2">Hooks + Custom Agents</div>
-  <div class="text-gray-300">
-    • Agents orchestrate complex workflows<br/>
-    • Hooks ensure governance at each step<br/>
-    • Example: PR agent + commit message validation
-  </div>
-</div>
-
-</div>
-
----
-
-# Integration Patterns (Part 2/2)
-
-### 🌐 External System Integration
-
-<div class="space-y-4 text-xs mt-8">
-
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-2">💬 Slack Notifications</div>
-  <div class="text-gray-400">
-    <pre class="text-xs"><code>curl -X POST "$SLACK_WEBHOOK" \
-  -d '{"text":"Security violation blocked"}'</code></pre>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-2">📊 Metrics (Datadog, New Relic)</div>
-  <div class="text-gray-400">
-    <pre class="text-xs"><code>echo "hook.execution.time:$DURATION|ms" \
-  | nc -u -w0 statsd-host 8125</code></pre>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-2">🎫 Ticketing (Jira, ServiceNow)</div>
-  <div class="text-gray-400">
-    <pre class="text-xs"><code>curl -X POST "$JIRA_API/issue" \
-  -d '{"fields":{"project":{"key":"SEC"}}}'</code></pre>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-br from-blue-900/60 to-purple-900/60 rounded-lg border-2 border-blue-400">
-  <div class="text-blue-300 font-bold mb-2">💡 Integration Philosophy</div>
-  <div class="text-gray-300 text-sm">
-    Hooks extend existing workflows—not replacing them.<br/>
-    Enterprise observability through existing tools.
-  </div>
-</div>
-
----
-
-# Advanced Patterns (1/2)
-
-<div class="mt-8">
-
-### 🎯 Conditional Policies by Context
-
-<div class="mb-6">
-<div class="font-bold text-blue-300 mb-2 text-sm">Environment-Aware Enforcement</div>
-
-<div class="text-sm">
-
-```bash
-# Stricter policies in production
-if [[ "$WORKING_DIR" =~ /production/ ]]; then
-  if [[ "$TOOL_NAME" == "edit" ]]; then
-    echo '{"permissionDecision": "deny",
-           "permissionDecisionReason":
-           "Production requires approval"}'
-    exit 0
-  fi
-fi
-```
-
-</div>
-</div>
-
-<div>
-<div class="font-bold text-green-300 mb-2 text-sm">User-Based Permissions</div>
-
-<div class="text-sm">
-
-```bash
-# Junior developers restricted
-if [[ "$USER_ROLE" == "junior" ]] &&
-   echo "$COMMAND" | grep -q "deploy"; then
-  echo '{"permissionDecision": "deny"}'
+# Junior engineers can't edit production configs
+if [ "$USER_ROLE" = "junior" ] && [[ "$FILE_PATH" =~ ^(production/|config/prod) ]]; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Junior engineers require senior approval for production changes"}}'
   exit 0
 fi
 ```
 
+### Outcome
+- Policy enforcement: Post-review → Real-time prevention
+- Wasted effort: 2-3 hours/week → 0
+- Regulatory risk: Medium → Low
+
 </div>
+
+---
+
+# What You Can Do Today
+
+<div class="text-sm mt-4">
+
+### Immediate Actions (15 minutes)
+- ✅ Review [official hooks documentation](https://code.visualstudio.com/docs/copilot/customization/hooks)
+- ✅ Create `.github/hooks/` directory in your repository
+- ✅ Copy the security-check script to start with basic protection
+- ✅ Try the `/hooks` slash command in VS Code chat
+
+### Short-Term Implementation (1-2 hours)
+- ✅ Deploy security enforcement hooks with dangerous command blocking
+- ✅ Set up `SessionStart` context injection for project info
+- ✅ Test hooks locally: `echo '{"tool_name":"runTerminalCommand","tool_input":{"command":"rm -rf /"}}' | ./security-check.sh`
+- ✅ Verify `PreToolUse` successfully denies dangerous operations
+
+### Advanced Exploration (2-4 hours)
+- ✅ Implement complete audit trail with all 8 lifecycle hooks
+- ✅ Use `SubagentStart`/`SubagentStop` to track nested agents
+- ✅ Use `Stop` hook to enforce test suite execution before completion
+- ✅ Integrate with Slack/Datadog/PagerDuty for alerts
+
+</div>
+
+---
+
+# Related Patterns & Documentation
+
+<div class="mt-6">
+
+### Complementary Features
+
+<div class="grid grid-cols-2 gap-4 text-sm">
+  <div class="p-3 bg-blue-900/30 rounded">
+    <div class="font-bold text-blue-400">Terminal Sandboxing</div>
+    <div class="text-gray-300 text-xs mt-1">OS-level restrictions (network/filesystem) that complement hooks</div>
+  </div>
+  
+  <div class="p-3 bg-purple-900/30 rounded">
+    <div class="font-bold text-purple-400">Custom Instructions</div>
+    <div class="text-gray-300 text-xs mt-1">Define agent behavior that hooks enforce through validation</div>
+  </div>
+</div>
+
+### Official Documentation
+
+<div class="mt-4 text-xs space-y-1">
+  <div>📖 <a href="https://code.visualstudio.com/docs/copilot/customization/hooks">Agent Hooks in VS Code</a> — Complete configuration reference</div>
+  <div>📖 <a href="https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-hooks">About Hooks</a> — Core concepts and hook types</div>
+  <div>📖 <a href="https://docs.github.com/en/copilot/reference/hooks-configuration">Hooks Configuration Reference</a> — Complete JSON schema</div>
+  <div>📖 <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/use-hooks">Using Hooks</a> — Step-by-step setup guide</div>
 </div>
 
 </div>
 
 ---
 
-# Advanced Patterns (2/2)
+# Performance & Troubleshooting
 
-<div class="mt-8">
+<div class="text-sm mt-4">
 
-### 🔄 Multi-Hook Coordination
+### Performance Targets
+- **<2 seconds** for security checks and logging
+- **<5 seconds** for linting and validation
+- **<30 seconds** only for external API calls (use `timeout` override)
 
-<div class="flex flex-col gap-2 text-xs">
+### Exit Code Behavior
 
-<div class="p-2 bg-blue-900/60 rounded border-l-4 border-blue-400">
-  <span class="font-bold text-blue-300">1. sessionStart</span>
-  <span class="text-gray-400"> → Validate prerequisites</span>
-</div>
+| Exit Code | Behavior |
+|-----------|----------|
+| `0` | Success: VS Code parses stdout as JSON |
+| `2` | Blocking error: stops processing, shows error to model |
+| Other | Non-blocking warning: shows warning to user, continues |
 
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="p-2 bg-green-900/60 rounded border-l-4 border-green-400">
-  <span class="font-bold text-green-300">2. preToolUse</span>
-  <span class="text-gray-400"> → Check policies</span>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="p-2 bg-orange-900/60 rounded border-l-4 border-orange-400">
-  <span class="font-bold text-orange-300">3. postToolUse</span>
-  <span class="text-gray-400"> → Log results</span>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="p-2 bg-red-900/60 rounded border-l-4 border-red-400">
-  <span class="font-bold text-red-300">4. errorOccurred</span>
-  <span class="text-gray-400"> → Alert on failure</span>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="p-2 bg-gray-700 rounded border-l-4 border-gray-500">
-  <span class="font-bold text-gray-300">5. sessionEnd</span>
-  <span class="text-gray-400"> → Archive logs</span>
-</div>
-
-</div>
-
-### 📈 Policy Evolution Strategy
+### Troubleshooting
 
 <div class="mt-4 space-y-2 text-xs">
-  <div class="p-2 bg-gray-800 rounded">
-    <span class="text-yellow-400">1️⃣</span> Start with <code>postToolUse</code> logging (observe)
-  </div>
-  <div class="p-2 bg-gray-800 rounded">
-    <span class="text-yellow-400">2️⃣</span> Analyze patterns to define policies
-  </div>
-  <div class="p-2 bg-gray-800 rounded">
-    <span class="text-yellow-400">3️⃣</span> Promote to <code>preToolUse</code> (prevent)
-  </div>
-  <div class="p-2 bg-gray-800 rounded">
-    <span class="text-yellow-400">4️⃣</span> Monitor for false positives, iterate
-  </div>
-</div>
-
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  Crawl → Walk → Run: Log first, analyze patterns, enforce gradually
-</div>
-
----
-
-# Key Takeaways: Technical
-
-<div class="grid grid-cols-2 gap-6 mt-8">
-
-<div class="space-y-4">
-
-<div class="p-4 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="text-2xl mb-2">🔗</div>
-  <div class="font-bold text-blue-300 mb-2">Lifecycle Control Points</div>
-  <div class="text-gray-300 text-sm">
-    Hooks provide control at strategic points: session start, before/after tool use, on errors
-  </div>
-</div>
-
-<div class="p-4 bg-green-900/60 rounded-lg border-l-4 border-green-400">
-  <div class="text-2xl mb-2">🛡️</div>
-  <div class="font-bold text-green-300 mb-2">Real-time Prevention</div>
-  <div class="text-gray-300 text-sm">
-    <code>preToolUse</code> is uniquely powerful for real-time prevention via <code>permissionDecision: "deny"</code>
-  </div>
-</div>
-
-</div>
-
-<div class="space-y-4">
-
-<div class="p-4 bg-purple-900/60 rounded-lg border-l-4 border-purple-400">
-  <div class="text-2xl mb-2">📋</div>
-  <div class="font-bold text-purple-300 mb-2">Programmatic Compliance</div>
-  <div class="text-gray-300 text-sm">
-    JSON Lines format enables direct querying and append-safe logging
-  </div>
-</div>
-
-<div class="p-4 bg-orange-900/60 rounded-lg border-l-4 border-orange-400">
-  <div class="text-2xl mb-2">⚡</div>
-  <div class="font-bold text-orange-300 mb-2">Performance Matters</div>
-  <div class="text-gray-300 text-sm">
-    Keep hooks fast (&lt;5s typical) to avoid degrading agent responsiveness
-  </div>
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Governance as code enables velocity with visibility</div>
-  <div class="text-blue-200 text-lg mt-2">Automation with accountability</div>
-</div>
-
----
-
-# Key Takeaways: Strategic
-
-<div class="space-y-6 mt-10">
-
-<div class="p-5 bg-green-900/60 rounded-lg border-l-4 border-green-400">
-  <div class="text-3xl mb-2">⬅️</div>
-  <div class="font-bold text-green-300 text-lg mb-2">Shift-Left Enforcement</div>
-  <div class="text-gray-300">
-    Validate at creation, not in post-commit review—eliminate rework cycles
-  </div>
-</div>
-
-<div class="p-5 bg-red-900/60 rounded-lg border-l-4 border-red-400">
-  <div class="text-3xl mb-2">🔒</div>
-  <div class="font-bold text-red-300 text-lg mb-2">Deny-by-Default Security</div>
-  <div class="text-gray-300">
-    Safer than allow-with-filtering—reduce attack surface for policy bypass
-  </div>
-</div>
-
-<div class="p-5 bg-blue-900/60 rounded-lg border-l-4 border-blue-400">
-  <div class="text-3xl mb-2">📊</div>
-  <div class="font-bold text-blue-300 text-lg mb-2">Measurement Drives Improvement</div>
-  <div class="text-gray-300">
-    Track what's prevented, how fast, and coverage gaps—justify investment
-  </div>
-</div>
-
-<div class="p-5 bg-purple-900/60 rounded-lg border-l-4 border-purple-400">
-  <div class="text-3xl mb-2">🎯</div>
-  <div class="font-bold text-purple-300 text-lg mb-2">Governance as Code</div>
-  <div class="text-gray-300">
-    Automated compliance, self-enforcing security, creation-time quality gates
-  </div>
-</div>
-
-</div>
-
-<div class="mt-8 p-5 bg-gradient-to-r from-green-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Prevention over detection</div>
-  <div class="text-green-200 text-lg mt-2">Real-time governance for autonomous AI agents</div>
-</div>
-
----
-
-# Key Takeaways: Organizational
-
-<div class="space-y-5 mt-10">
-
-<div class="p-5 bg-gradient-to-br from-blue-900/60 to-blue-800/40 rounded-lg border-2 border-blue-400">
-  <div class="text-3xl mb-3">🤖</div>
-  <div class="font-bold text-blue-300 text-lg mb-3">Automated Compliance</div>
-  <div class="text-gray-300 text-sm">
-    Replace manual audit extraction with instant queries. 100% coverage guaranteed.
-  </div>
-</div>
-
-<div class="p-5 bg-gradient-to-br from-green-900/60 to-green-800/40 rounded-lg border-2 border-green-400">
-  <div class="text-3xl mb-3">🔐</div>
-  <div class="font-bold text-green-300 text-lg mb-3">Self-Enforcing Security</div>
-  <div class="text-gray-300 text-sm">
-    Policies enforce themselves in real-time—no reliance on manual review processes.
-  </div>
-</div>
-
-<div class="p-5 bg-gradient-to-br from-purple-900/60 to-purple-800/40 rounded-lg border-2 border-purple-400">
-  <div class="text-3xl mb-3">✨</div>
-  <div class="font-bold text-purple-300 text-lg mb-3">Zero-Rework Quality</div>
-  <div class="text-gray-300 text-sm">
-    Standards validated at creation. Agents generate compliant code on first attempt.
-  </div>
-</div>
-
-<div class="p-5 bg-gradient-to-br from-orange-900/60 to-orange-800/40 rounded-lg border-2 border-orange-400">
-  <div class="text-3xl mb-3">🚀</div>
-  <div class="font-bold text-orange-300 text-lg mb-3">Trusted Autonomy</div>
-  <div class="text-gray-300 text-sm">
-    AI agents operate within guardrails—trusted for autonomous work in regulated environments.
-  </div>
-</div>
-
-</div>
-
-<div class="mt-8 p-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg text-center">
-  <div class="text-3xl font-bold text-white mb-2">Enable AI velocity in regulated industries</div>
-  <div class="text-blue-200 text-xl">Finance · Healthcare · Government</div>
-</div>
-
----
-
-# Implementation Roadmap
-
-<div class="flex flex-col gap-3 mt-8">
-
-<div class="flex items-center gap-4">
-  <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">1</div>
-  <div class="flex-1 p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400">
-    <div class="font-bold text-blue-300 text-lg">Start with Observability</div>
-    <div class="text-gray-300 text-sm">Implement <code>postToolUse</code> logging for audit trails—observe patterns without blocking</div>
-  </div>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="flex items-center gap-4">
-  <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl">2</div>
-  <div class="flex-1 p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400">
-    <div class="font-bold text-green-300 text-lg">Define Security Policies</div>
-    <div class="text-gray-300 text-sm">Analyze logs to identify dangerous patterns—create <code>preToolUse</code> blocklist</div>
-  </div>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="flex items-center gap-4">
-  <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">3</div>
-  <div class="flex-1 p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
-    <div class="font-bold text-purple-300 text-lg">Enforce Quality Gates</div>
-    <div class="text-gray-300 text-sm">Add linting/validation hooks—prevent violations at creation</div>
-  </div>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="flex items-center gap-4">
-  <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xl">4</div>
-  <div class="flex-1 p-4 bg-orange-900/40 rounded-lg border-l-4 border-orange-400">
-    <div class="font-bold text-orange-300 text-lg">Integrate External Systems</div>
-    <div class="text-gray-300 text-sm">Connect to Slack, metrics platforms, ticketing—enterprise observability</div>
-  </div>
-</div>
-
-<div class="text-2xl text-gray-400 text-center">↓</div>
-
-<div class="flex items-center gap-4">
-  <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl">5</div>
-  <div class="flex-1 p-4 bg-red-900/40 rounded-lg border-l-4 border-red-400">
-    <div class="font-bold text-red-300 text-lg">Iterate Based on Metrics</div>
-    <div class="text-gray-300 text-sm">Monitor performance, adjust policies, optimize for velocity with safety</div>
-  </div>
-</div>
-
-</div>
-
----
-
-# Resources & Documentation
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### 📖 Official Documentation
-
-<div class="space-y-3 text-sm">
-
-<div class="p-3 bg-blue-900/40 rounded-lg border-l-4 border-blue-500">
-  <div class="font-bold text-blue-300">About Hooks</div>
-  <div class="text-gray-400 text-xs mt-1">Conceptual overview and hook types</div>
-  <div class="text-blue-400 text-xs mt-2">docs.github.com/copilot/concepts/agents/coding-agent/about-hooks</div>
-</div>
-
-<div class="p-3 bg-green-900/40 rounded-lg border-l-4 border-green-500">
-  <div class="font-bold text-green-300">Configuration Reference</div>
-  <div class="text-gray-400 text-xs mt-1">Complete spec with input/output formats</div>
-  <div class="text-green-400 text-xs mt-2">docs.github.com/copilot/reference/hooks-configuration</div>
-</div>
-
-<div class="p-3 bg-purple-900/40 rounded-lg border-l-4 border-purple-500">
-  <div class="font-bold text-purple-300">Implementation Guide</div>
-  <div class="text-gray-400 text-xs mt-1">Step-by-step how-to with examples</div>
-  <div class="text-purple-400 text-xs mt-2">docs.github.com/copilot/how-tos/use-copilot-agents/coding-agent/use-hooks</div>
-</div>
-
-</div>
-
-</div>
-
-<div>
-
-### 💻 Example Implementations
-
-<div class="space-y-3 text-sm">
-
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="flex items-center gap-2 mb-2">
-    <span class="text-2xl">📋</span>
-    <div class="font-bold text-white">audit-hooks.json</div>
-  </div>
-  <div class="text-gray-400 text-xs">Complete audit trail setup with JSON Lines logging</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="flex items-center gap-2 mb-2">
-    <span class="text-2xl">🔒</span>
-    <div class="font-bold text-white">security-hooks.json</div>
-  </div>
-  <div class="text-gray-400 text-xs">Security policy enforcement with deny-by-default patterns</div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg">
-  <div class="flex items-center gap-2 mb-2">
-    <span class="text-2xl">📜</span>
-    <div class="font-bold text-white">Hook Scripts Library</div>
-  </div>
-  <div class="text-gray-400 text-xs">Reusable shell scripts for common governance patterns</div>
-</div>
-
-</div>
-
-### 🔗 Related Topics
-
-<div class="mt-4 flex flex-wrap gap-2 text-xs">
-  <div class="px-3 py-1 bg-blue-900/60 rounded-full text-blue-300">Custom Instructions</div>
-  <div class="px-3 py-1 bg-green-900/60 rounded-full text-green-300">Agent Skills</div>
-  <div class="px-3 py-1 bg-purple-900/60 rounded-full text-purple-300">Enterprise Patterns</div>
-</div>
-
+  <div>✅ <strong>View diagnostics:</strong> Right-click in Chat view → Diagnostics → hooks section</div>
+  <div>✅ <strong>View hook output:</strong> Output panel → "GitHub Copilot Chat Hooks" channel</div>
+  <div>✅ <strong>Hook not executing:</strong> Verify file is in <code>.github/hooks/*.json</code> with <code>type: "command"</code></div>
+  <div>✅ <strong>Permission denied:</strong> Ensure scripts have execute permissions (<code>chmod +x</code>)</div>
 </div>
 
 </div>
@@ -1366,37 +1315,14 @@ layout: center
 class: text-center
 ---
 
-# Questions?
+# Thank You!
 
-<div class="mt-12 space-y-4">
-
-<div class="text-4xl">🔒</div>
-
-<div class="text-2xl font-bold text-blue-300">
-  GitHub Copilot Hooks
+<div class="mt-8 text-xl text-gray-300">
+  Questions?
 </div>
 
-<div class="text-lg text-gray-400">
-  Programmable governance for AI agent workflows
+<div class="mt-8 text-sm text-gray-400">
+  📧 Contact: <span class="text-cyan-400">sdp@github.com</span><br/>
+  📚 Slides: <span class="text-cyan-400">github.com/microsoft/CopilotTraining</span>
 </div>
 
-<div class="mt-8 flex gap-4 justify-center text-sm">
-  <div class="px-4 py-2 bg-blue-900/60 rounded-lg text-blue-300">
-    📖 docs.github.com/copilot
-  </div>
-  <div class="px-4 py-2 bg-green-900/60 rounded-lg text-green-300">
-    💻 examples/completed-config/hooks
-  </div>
-</div>
-
-</div>
-
----
-layout: end
----
-
-# Thank You
-
-<div class="absolute bottom-10 right-10 text-sm opacity-50">
-  CopilotTraining Tech Talk
-</div>
