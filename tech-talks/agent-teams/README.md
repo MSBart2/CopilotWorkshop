@@ -303,7 +303,7 @@ The coordinator pattern separates "what to do" (orchestration logic) from "how t
 
 **Repository:** [github.com/bradygaster/squad](https://github.com/bradygaster/squad)
 
-Squad gives you an AI development team through GitHub Copilot. Describe what you're building, and Squad proposes a team of specialists—lead, frontend, backend, tester—that persist as files in your repo. Each agent runs in its own context window, reads only its own knowledge, and writes back what it learned. They share decisions and compound knowledge across sessions.
+Squad gives you an AI development team through GitHub Copilot. Describe what you're building, and Squad proposes a team of specialists—lead, frontend, backend, tester—that persist as files in your repo. Each agent runs in its own context window, reads its own history and shared team decisions, and writes back what it learned. Knowledge compounds across sessions.
 
 It's not a chatbot wearing hats. Each team member is spawned as a real subagent with its own tools, memory, and area of expertise.
 
