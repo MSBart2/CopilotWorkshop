@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-02-01
+updated: 2026-02-12
 section: "Agent Architecture"
 ---
 
@@ -18,8 +18,8 @@ section: "Agent Architecture"
 | Criterion | Assessment | Notes |
 |-----------|-----------|-------|
 | **Relevant** | 🟢 High | Complex development tasks require specialization—team patterns enable coordination without context pollution |
-| **Compelling** | 🟢 High | Community-proven systems (Orchestra, Atlas) available today; working agent definitions you can deploy in < 1 hour |
-| **Actionable** | 🟢 High | 4-agent conductor system deployable immediately; clear upgrade paths to larger teams |
+| **Compelling** | 🟢 High | Production-ready system ([Squad](https://github.com/bradygaster/squad)) available today; persistent AI teams you can deploy in < 10 minutes |
+| **Actionable** | 🟢 High | `npx github:bradygaster/squad` gives you a full team immediately; agents learn your codebase and compound knowledge over time |
 
 **Overall Status:** 🟢 Ready to use
 
@@ -38,8 +38,8 @@ section: "Agent Architecture"
 7. **Mental Model Shift** ← Move-Toward/Away/Against
 8. **When to Use Decision Tree** ← "When to Use This Pattern"
 9. **Core Architecture** ← 🎬 Section 1 (2-3 slides)
-10. **Community Systems** ← 🎬 Section 2 (3-4 slides)
-11. **Building Your Team** ← 🎬 Section 3 (4-5 slides)
+10. **Squad: Production-Ready Agent Teams** ← 🎬 Section 2 (3-4 slides)
+11. **Getting Started with Squad** ← 🎬 Section 3 (4-5 slides)
 12. **Orchestration Patterns** ← 🎬 Section 4 (3-4 slides)
 13. **Use Cases** ← Real-World Use Cases (1-2 slides)
 14. **Actionable Outcomes** ← What You Can Do Today
@@ -51,8 +51,8 @@ section: "Agent Architecture"
 
 ```markdown
 <!-- 🎬 MAJOR SECTION: Core Architecture -->
-<!-- 🎬 MAJOR SECTION: Community Systems -->
-<!-- 🎬 MAJOR SECTION: Building Your Team -->
+<!-- 🎬 MAJOR SECTION: Squad: Production-Ready Agent Teams -->
+<!-- 🎬 MAJOR SECTION: Getting Started with Squad -->
 <!-- 🎬 MAJOR SECTION: Orchestration Patterns -->
 ```
 
@@ -88,22 +88,25 @@ The solution isn't a smarter single agent—it's coordinated specialists. An orc
 
 ### What It Does
 
-Agent team orchestration distributes complex development workflows across specialized AI agents, each optimized for a specific cognitive mode (planning, implementation, review, testing). A conductor agent coordinates the team, maintaining clean separation between phases while enabling parallel execution of independent tasks.
+Agent team orchestration distributes complex development workflows across specialized AI agents, each optimized for a specific cognitive mode (planning, implementation, review, testing). A coordinator agent manages the team, maintaining clean separation between phases while enabling parallel execution of independent tasks.
+
+[Squad](https://github.com/bradygaster/squad) is a production-ready implementation of this pattern. It gives you a persistent AI development team through GitHub Copilot—specialists that live in your repo as files, learn your codebase, share decisions, and compound knowledge across sessions.
 
 ### Key Capabilities
 
-- **Role-Based Specialization**: Each agent has dedicated tools, model selection, and instructions tuned for its domain—planners research, implementers code, reviewers validate
-- **Context Isolation**: Subagents operate in separated context windows (70-80% reduction in main agent context), preventing information overflow and cross-contamination
-- **Parallel Execution**: Independent agents run simultaneously (VS Code 1.109+), enabling 3-5x throughput on parallelizable work
-- **Quality Checkpoints**: Dedicated review agents catch issues before they compound, with structured approval gates between phases
+- **Role-Based Specialization**: Each agent has a charter defining its identity, expertise, boundaries, and voice—lead architects, frontend devs, backend devs, and testers each operate within their domain
+- **Context Isolation**: Each agent runs in its own context window (6.6% coordinator overhead, 93%+ available for work), preventing information overflow and cross-contamination
+- **Parallel Execution**: Independent agents run simultaneously—"Team, build the login page" fans out to frontend, backend, tester, and scribe in parallel
+- **Persistent Memory**: Agents write learnings to `history.md` after every session, read shared `decisions.md` before every task—knowledge compounds over time
+- **Quality Checkpoints**: Reviewer protocol enforces that rejected work must be revised by a *different* agent—no self-review loops
 
 ### Architecture Overview
 
-The conductor pattern separates "what to do" (orchestration logic in the conductor) from "how to do it" (specialized execution in worker agents). The conductor never implements directly—it receives user requests, breaks them into phases, delegates to specialists, validates outputs, and aggregates results.
+The coordinator pattern separates "what to do" (orchestration logic) from "how to do it" (specialized execution in worker agents). The coordinator never implements directly—it routes work based on defined rules, spawns specialists, validates outputs, and aggregates results.
 
-Each worker agent is intentionally constrained: planners have read-only tools and can't edit code; implementers have edit tools but can't access planning documentation; reviewers have analysis tools but can't modify files. These constraints prevent agents from mixing concerns and ensure clean phase boundaries.
+Each agent is intentionally scoped: charters define identity, expertise, boundaries, and voice. Agents read their own `history.md` (personal knowledge) and team `decisions.md` (shared knowledge) before working. This ensures domain focus without cross-contamination.
 
-Subagents run in isolated context windows, so research by the Explorer agent doesn't consume tokens from the Implementer's context. When agents complete, they return structured findings (not raw data), preserving the conductor's context for coordination, not storage.
+Agents run in isolated context windows — the coordinator uses only 6.6% of its 200K context, leaving 93%+ for coordination. Each spawned agent gets nearly its entire 200K window for the actual task. Fan out to 5 agents and you're working with ~1M tokens of total reasoning capacity.
 
 **Official Documentation:**
 - 📖 [Custom Agents in VS Code](https://code.visualstudio.com/docs/copilot/customization/custom-agents) — Agent structure, frontmatter configuration, and handoffs
@@ -114,23 +117,24 @@ Subagents run in isolated context windows, so research by the Explorer agent doe
 
 ## 📦 Key Artifacts
 
-**This talk includes complete, working agent definitions from two community-proven systems** that you can adapt for your own multi-agent workflows.
+**This talk references [Squad](https://github.com/bradygaster/squad)**, a complete agent team system that implements all patterns discussed here with persistent, learning agents.
 
-### Primary Artifacts
+### Primary Artifacts (Squad)
 
 *Shown inline with detailed explanation in the major sections*
 
-- **[`conductor.agent.md`](#conductor-agent-definition)** — Orchestrates workflow phases, delegates to specialists, never implements directly
-- **[`planner-subagent.agent.md`](#planner-subagent-definition)** — Creates implementation plans from research findings with read-only tools
-- **[`implementer-subagent.agent.md`](#implementer-subagent-definition)** — Executes plans with TDD enforcement using edit/create tools
-- **[`reviewer-subagent.agent.md`](#reviewer-subagent-definition)** — Validates implementation quality with analysis tools, returns structured feedback
+- **[`.ai-team/team.md`](#squad-file-structure)** — Team roster with roles, capabilities, and project context
+- **[`.ai-team/agents/{name}/charter.md`](#squad-agent-charters)** — Identity, expertise, boundaries, voice, and model preferences per agent
+- **[`.ai-team/agents/{name}/history.md`](#squad-memory-system)** — Personal knowledge accumulated across sessions
+- **[`.ai-team/routing.md`](#squad-routing)** — Work routing table defining who handles what
+- **[`.ai-team/decisions.md`](#squad-memory-system)** — Shared decision log all agents read before working
 
 ### Supporting Files
 
-*Referenced but not shown inline — available in community repositories*
+*Referenced but not shown inline — available in the Squad repository*
 
-- **[Copilot Orchestra](https://github.com/ShepAlderson/copilot-orchestra)** — Complete 4-agent system with ADR generation, TDD enforcement, phase tracking
-- **[GitHub Copilot Atlas](https://github.com/bigguy345/Github-Copilot-Atlas)** — Extended 6-agent system with parallel research, context conservation focus, mythology-themed personas
+- **[Squad Repository](https://github.com/bradygaster/squad)** — Complete agent team system with persistent memory, parallel execution, GitHub Issues integration, ceremonies, and skills system
+- **[Squad Product Guide](https://github.com/bradygaster/squad/blob/main/docs/guide.md)** — Comprehensive usage guide covering all features
 - **[workshop/06-custom-agents](../../workshop/06-custom-agents/)** — Hands-on exercises for building custom agents
 
 ---
@@ -206,7 +210,7 @@ Q: Does your task exceed single-agent capacity?
 | **Best For** | Role-based specialization | Sequential phases | Branch-level concurrency | Simple features |
 | **Coordination** | High (conductor required) | Medium (phase handoffs) | Low (independent branches) | None |
 | **Context Isolation** | High (subagent contexts) | Medium (phase separation) | High (separate worktrees) | None |
-| **Setup Time** | 4-6 hours (agent definitions) | 2-3 hours (phase configs) | 1-2 hours (branch setup) | 0 (built-in) |
+| **Setup Time** | 10 minutes (Squad) | 2-3 hours (phase configs) | 1-2 hours (branch setup) | 0 (built-in) |
 | **Throughput** | 3-5x (parallel specialists) | 1.5-2x (phased execution) | 5-10x (branch parallelism) | 1x (baseline) |
 
 ---
@@ -214,38 +218,46 @@ Q: Does your task exceed single-agent capacity?
 <!-- 🎬 MAJOR SECTION: Core Architecture -->
 ## The Team Orchestration Pattern
 
-*How conductor-delegate architecture enables specialized agents to collaborate without context pollution*
+*How coordinator-delegate architecture enables specialized agents to collaborate without context pollution*
 
 ### The Core Architecture
+
+The coordinator pattern separates "what to do" (orchestration logic) from "how to do it" (specialized execution). The coordinator never implements directly—it receives user requests, routes to specialists based on defined rules, validates outputs, and aggregates results. [Squad](https://github.com/bradygaster/squad) implements this pattern as a complete, production-ready system.
 
 ```
 ┌─────────────────────────────────────────────────┐
 │              USER / ENTRY POINT                 │
-│         "Build user authentication system"      │
+│     "Team, build user authentication system"    │
 └─────────────────────────────────────────────────┘
                          │
                          ▼
 ┌─────────────────────────────────────────────────┐
-│              CONDUCTOR AGENT                    │
-│  • Interprets high-level request                │
-│  • Breaks down into phases                      │
-│  • Delegates to specialists (sequential/parallel)│
-│  • Validates phase outputs                      │
-│  • Aggregates and returns final results         │
+│              COORDINATOR AGENT                  │
+│  • Routes work via routing table                │
+│  • Spawns specialists (sequential/parallel)     │
+│  • Enforces reviewer protocol                   │
+│  • Selects models per-task (cost-first)         │
 │  • NEVER implements directly                    │
 └─────────────────────────────────────────────────┘
          │           │           │
          ▼           ▼           ▼
     ┌─────────┐ ┌─────────┐ ┌─────────┐
-    │ PLANNER │ │ CODER   │ │REVIEWER │
-    │ Agent   │ │ Agent   │ │ Agent   │
+    │  LEAD   │ │ DEV(S)  │ │ TESTER  │
+    │ Agent   │ │ Agents  │ │ Agent   │
     │         │ │         │ │         │
-    │ • Read  │ │ • Edit  │ │ • Read  │
-    │   only  │ │ • Create│ │ • Lint  │
-    │ • Plan  │ │ • Delete│ │ • Analyze│
+    │ • Scope │ │ • Build │ │ • Test  │
+    │ • Review│ │ • Code  │ │ • QA    │
+    │ • Decide│ │ • Debug │ │ • Edge  │
     └─────────┘ └─────────┘ └─────────┘
       Isolated     Isolated     Isolated
       Context      Context      Context
+         │           │           │
+         ▼           ▼           ▼
+    ┌─────────────────────────────────┐
+    │       🧠 SHARED MEMORY         │
+    │  decisions.md + history.md     │
+    │  (persistent across sessions)  │
+    └─────────────────────────────────┘
 ```
 
 **Key Design Principles:**
@@ -260,15 +272,15 @@ Q: Does your task exceed single-agent capacity?
 
 ### Why This Works
 
-**Focused Context**: Each subagent receives only information relevant to its task. Explorer gets user request + codebase context. Planner gets exploration results. Implementer gets plan + affected files. Reviewer gets implementation + quality criteria. No agent carries accumulated context from previous phases.
+**Focused Context**: Each agent receives only information relevant to its task. In Squad, each agent loads its charter + history + team decisions — nothing from other agents' work. The Lead gets architecture context, the Frontend Dev gets UI context, the Backend Dev gets API context. No agent carries accumulated context from other domains.
 
-**Right Tools, Right Time**: Planners with read-only tools can't accidentally edit during research. Implementers with edit tools can't waste time on investigative reading. Reviewers with analysis tools focus on validation, not modification. Tool constraints = role enforcement.
+**Right Tools, Right Time**: Squad's routing table ensures work goes to the right specialist. The coordinator answers quick questions directly (no agent spawn), routes domain work to specialists, and fans out "Team, ..." requests to all relevant agents in parallel.
 
-**Parallel When Possible**: VS Code 1.109+ supports parallel subagent execution. Independent tasks run simultaneously: Explorer researches auth patterns while Oracle researches database schemas. Security reviewer and performance reviewer analyze implementation in parallel. 3-5x throughput on parallelizable work.
+**Parallel When Possible**: When you say "Team, build the login page," Squad launches Lead, Frontend, Backend, Tester, and Scribe simultaneously. When agents finish, the coordinator immediately chains follow-up work — tests reveal edge cases, the backend agent picks them up. 3-5x throughput on parallelizable work.
 
-**Quality Checkpoints**: Dedicated review agent validates each phase output against criteria before proceeding. Issues caught early cost minutes to fix; issues caught late cost hours. Structured review gates reduce rework by 40-60%.
+**Quality Checkpoints**: Squad's reviewer protocol prevents the common failure mode where an agent keeps "fixing" its own work in circles. On rejection, the original author is locked out — a different agent must revise. If that revision is also rejected, a third agent takes over.
 
-**Specialization Advantage**: An agent tuned for planning (strategic thinking, architectural decisions) outperforms a generalist at planning by 20-30%. Same for implementation (execution focus, code generation) and review (critical analysis, quality assessment). Team of specialists beats single generalist.
+**Specialization Advantage**: An agent with a charter tuned for backend development (API design, data modeling, auth patterns) outperforms a generalist by 20-30% within that domain. Same for frontend (UI components, state management) and testing (edge cases, integration patterns). Team of specialists beats single generalist — especially when their knowledge compounds over time.
 
 ### Tool Assignment Guidelines
 
@@ -282,387 +294,311 @@ Q: Does your task exceed single-agent capacity?
 
 ---
 
-<!-- 🎬 MAJOR SECTION: Community Systems -->
-## Community-Proven Team Systems
+<!-- 🎬 MAJOR SECTION: Squad: Production-Ready Agent Teams -->
+## Squad: Production-Ready Agent Teams
 
-*Two production-ready multi-agent systems you can deploy today*
+*A persistent AI development team that lives in your repo and grows with your code*
 
-### Copilot Orchestra: ADR-Driven Development Workflow
+### What Is Squad?
 
-**Repository:** [github.com/ShepAlderson/copilot-orchestra](https://github.com/ShepAlderson/copilot-orchestra)
+**Repository:** [github.com/bradygaster/squad](https://github.com/bradygaster/squad)
 
-A complete 4-agent orchestration system focused on structured planning and TDD enforcement:
+Squad gives you an AI development team through GitHub Copilot. Describe what you're building, and Squad proposes a team of specialists—lead, frontend, backend, tester—that persist as files in your repo. Each agent runs in its own context window, reads only its own knowledge, and writes back what it learned. They share decisions and compound knowledge across sessions.
 
-**Architecture:**
+It's not a chatbot wearing hats. Each team member is spawned as a real subagent with its own tools, memory, and area of expertise.
 
-```
-┌──────────────────────────────────────────────────┐
-│                 CONDUCTOR                        │
-│  "Build a REST API for user management"          │
-│  - Breaks request into 3-10 phases               │
-│  - Enforces TDD: write tests → see fail → code   │
-│  - Tracks progress in plans/ directory           │
-└──────────────────────────────────────────────────┘
-        │              │              │
-        ▼              ▼              ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│   PLANNER    │ │ IMPLEMENTER  │ │   REVIEWER   │
-│              │ │              │ │              │
-│ • Researches │ │ • Follows    │ │ • Validates  │
-│   codebase   │ │   plan steps │ │   vs. plan   │
-│ • Creates    │ │ • TDD cycle  │ │ • Returns    │
-│   ADR docs   │ │ • Git commit │ │   APPROVED/  │
-│ • 3-10 phase │ │   per phase  │ │   REVISION   │
-│   plan       │ │              │ │   /FAILED    │
-└──────────────┘ └──────────────┘ └──────────────┘
-```
-
-**Key Features:**
-
-- **ADR-Driven Planning**: Planner delegates to `planning-subagent` for research, generates Architecture Decision Records documenting choices
-- **Strict TDD Enforcement**: Implementer (`implement-subagent`) must write failing tests, see them fail, write minimal code, verify pass—enforced in instructions
-- **Validation Loops**: Reviewer can return `NEEDS_REVISION` → Conductor re-invokes Implementer with feedback
-- **Human Checkpoints**: Mandatory stops for plan approval and phase commits—user stays in control
-- **Progress Documentation**: Generates `plans/<task>-plan.md`, `plans/<task>-phase-N-complete.md`, `plans/<task>-complete.md` for audit trail
-
-**Workflow Sequence:**
-
-1. **Planning Phase**: User describes request → Conductor invokes `planning-subagent` → Subagent researches codebase → Returns findings → Conductor creates multi-phase plan → User reviews and approves
-2. **Implementation Phases (per phase)**: Conductor invokes `implement-subagent` with phase objective → Subagent writes failing tests → Runs tests (fail) → Writes code → Runs tests (pass) → Returns summary
-3. **Review Phase (per phase)**: Conductor invokes `code-review-subagent` → Subagent examines changes → Returns `APPROVED` / `NEEDS_REVISION` / `FAILED`
-4. **Commit Phase (per phase)**: Conductor presents summary + commit message → User commits → Conductor proceeds to next phase
-5. **Completion**: All phases done → Conductor generates completion report → User has fully tested, reviewed, committed feature
-
-**Metrics from Community Use:**
-
-| Metric | Before Orchestra | After | Improvement |
-|--------|------------------|-------|-------------|
-| Implementation quality | 70% first-pass | >90% first-pass | 28% improvement |
-| Rework iterations | 3-5 per feature | 1-2 per feature | 60% reduction |
-| Test coverage | 60% | >85% | TDD enforcement |
-| Audit trail | None | Complete | Plan + phase docs |
-
-### GitHub Copilot Atlas: Context-Conscious Multi-Agent System
-
-**Repository:** [github.com/bigguy345/Github-Copilot-Atlas](https://github.com/bigguy345/Github-Copilot-Atlas)
-
-An extended 6-agent system optimized for context conservation and parallel research:
-
-**Agent Roster:**
-
-| Agent | Cognitive Mode | Tools | Model | Specialty |
-|-------|---------------|-------|-------|-----------|
-| **Atlas** | Orchestrator | `agent` (delegates only) | Claude Sonnet 4.5 | Coordinates full lifecycle |
-| **Prometheus** | Strategic Planner | `agent`, `search`, `fetch` | GPT-5.2 High | Requirements analysis, plan creation |
-| **Oracle** | Researcher | `agent`, `search`, `fetch` | GPT-5.2 | Knowledge gathering, can delegate to Explorer |
-| **Sisyphus** | Implementer | `edit`, `create`, `runTests` | Claude Sonnet 4.5 | Persistent TDD-driven coding |
-| **Explorer** | Scout | `search`, `fetch`, `usages` | Gemini 3 Flash | Rapid file discovery (read-only) |
-| **Code-Review** | Validator | `search`, `fetch`, `analysis` | GPT-5.2 | Quality + coverage assessment |
-
-**Architecture:**
+### Squad Architecture
 
 ```
-User Request
-     │
-     ▼
-┌─────────────┐
-│    ATLAS    │ ← Orchestrator (never implements)
-└─────────────┘
-     │
-     ├─→ Prometheus (plan) ─→ [Oracle + Explorer in parallel] → Plan with context
-     │
-     ├─→ Sisyphus (implement) → TDD cycle → Changes
-     │
-     └─→ Code-Review (validate) → APPROVED/REVISION/FAILED
+┌─────────────────────────────────────────────────┐
+│              YOU / ENTRY POINT                   │
+│   "Team, build the login page"                  │
+└─────────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────┐
+│              SQUAD COORDINATOR                   │
+│  • Routes work based on routing.md              │
+│  • Spawns agents in parallel                    │
+│  • Enforces reviewer protocol                   │
+│  • Selects models per task (cost-first)         │
+│  • NEVER implements directly                    │
+└─────────────────────────────────────────────────┘
+     │          │          │          │
+     ▼          ▼          ▼          ▼
+┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
+│🏗️ Lead │ │⚛️ FE   │ │🔧 BE   │ │🧪 Test │
+│        │ │ Dev    │ │ Dev    │ │ er     │
+│ Scope  │ │ UI     │ │ APIs   │ │ Tests  │
+│ Review │ │ Comps  │ │ Data   │ │ QA     │
+└────────┘ └────────┘ └────────┘ └────────┘
+  Own        Own        Own        Own
+  Context    Context    Context    Context
+     │          │          │          │
+     ▼          ▼          ▼          ▼
+┌─────────────────────────────────────────────────┐
+│              📋 SCRIBE (silent)                  │
+│  • Merges decisions from inbox                  │
+│  • Logs sessions to log/                        │
+│  • Propagates cross-agent updates               │
+│  • Never speaks to user                         │
+└─────────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────┐
+│              🧠 SHARED MEMORY                    │
+│  decisions.md — team-wide decisions (all read)  │
+│  history.md — per-agent learnings (personal)    │
+│  log/ — session history (searchable archive)    │
+│  skills/ — reusable knowledge (earned over time)│
+└─────────────────────────────────────────────────┘
 ```
 
-**Key Innovation — Context Conservation:**
+### Squad File Structure
 
-Traditional single-agent: 80-90% context consumed by research → 10-20% left for implementation
-Atlas system: Each subagent runs in isolated context → Main agent retains 70-80% context for coordination
-
-Quantified savings:
-- Oracle researches 50+ files, returns 2-page summary → Main agent sees summary only
-- Explorer discovers 30+ files in parallel searches → Returns file list + brief analysis
-- Sisyphus implements 500 LOC → Main agent sees "Phase 1 complete" status
-- Code-Review analyzes changes → Returns structured APPROVED/findings
-
-**Additional Features:**
-
-- **Parallel Research**: Oracle can launch 3-10 parallel Explorer searches in first batch
-- **Iterative Refinement**: Sisyphus loops on implementation until quality threshold met (can be invoked multiple times with feedback)
-- **Handoff from Prometheus to Atlas**: Prometheus can auto-invoke Atlas after plan creation (optional `send: true` in handoff)
-
-**When to Use Each System:**
-
-- **Use Copilot Orchestra when**: You need structured ADR documentation, strict TDD enforcement, or audit trail for compliance
-- **Use GitHub Copilot Atlas when**: Context window is constraining, you need parallel research, or you want mythology-themed personas
-
-Both systems provide complete, working agent definitions you can adapt for your needs.
-
----
-
-<!-- 🎬 MAJOR SECTION: Building Your Team -->
-## Building Your Own Agent Team
-
-*Step-by-step guide to creating a 4-agent conductor system from scratch*
-
-### Step 1: Define Workflow Phases
-
-Identify distinct cognitive modes in your development process:
-
-| Phase | Cognitive Mode | Example Activities | Tools Needed |
-|-------|----------------|-------------------|--------------|
-| **Discovery** | Exploration | File discovery, pattern identification, architecture analysis | `search`, `fetch`, `usages` |
-| **Planning** | Strategic Thinking | Requirements breakdown, task sequencing, risk assessment | `search`, `fetch`, `create` |
-| **Implementation** | Execution Focus | Code generation, test writing, file modifications | `edit`, `create`, `delete` |
-| **Review** | Critical Analysis | Quality validation, security check, coverage assessment | `search`, `fetch`, `analysis` |
-| **Testing** | Verification | Test creation, execution, result interpretation | `create`, `runTests` |
-| **Documentation** | Communication | README updates, API docs, architecture diagrams | `create`, `edit` |
-
-**Start with 3-4 phases** (Discovery → Planning → Implementation → Review). Add more as you validate the pattern.
-
-### Step 2: Create the Conductor Agent
-
-The conductor is user-invokable only—it never implements directly:
-
-```yaml
-# .github/agents/conductor.agent.md
----
-name: Conductor
-description: Orchestrates development workflow
-user-invokable: true
-disable-model-invocation: true  # Only users can start
-tools: ['agent']  # Required for subagent delegation
-agents:
-  allow: ['explorer', 'planner', 'implementer', 'reviewer']
-model:
-  - Claude Opus 4.5
-  - Claude Sonnet 4
-handoffs:
-  - label: Start Discovery
-    agent: explorer
-    prompt: Analyze the codebase for relevant structures
-    send: false
----
-
-# Conductor: Multi-Phase Workflow Orchestrator
-
-You orchestrate complex development workflows by delegating to specialist agents.
-You NEVER implement directly—you coordinate.
-
-## Your Role
-- Receive user requests and clarify requirements
-- Break work into distinct phases (Discovery → Planning → Implementation → Review)
-- Delegate each phase to the appropriate specialist agent
-- Validate phase outputs before proceeding
-- Aggregate results and present final summary
-
-## Delegation Strategy
-1. **Discovery**: Use @explorer for codebase analysis
-2. **Planning**: Use @planner to create implementation plan from findings
-3. **Implementation**: Use @implementer to execute the plan
-4. **Review**: Use @reviewer to validate against plan + quality standards
-
-## Parallel Execution (VS Code 1.109+)
-When tasks are independent, invoke multiple agents simultaneously:
-- "In parallel: @explorer analyze auth patterns, @explorer analyze data models"
-- "In parallel: @reviewer check security, @reviewer check performance"
-
-## Constraints
-- NEVER edit files yourself
-- NEVER execute implementation directly
-- Always validate subagent outputs before next phase
-- Include context from previous phases in next delegation
-- Ask user for approval between major phase transitions
+```
+.ai-team/
+├── team.md              # Roster — who's on the team
+├── routing.md           # Who handles what (routing table)
+├── ceremonies.md        # Team meeting definitions
+├── decisions.md         # Shared brain — team decisions
+├── decisions/inbox/     # Drop-box for parallel decision writes
+├── casting/
+│   ├── policy.json      # Universe allowlist and capacity
+│   ├── registry.json    # Persistent agent name registry
+│   └── history.json     # Universe usage history
+├── agents/
+│   ├── {name}/
+│   │   ├── charter.md   # Identity, expertise, boundaries, voice
+│   │   └── history.md   # What they know about YOUR project
+│   └── scribe/
+│       └── charter.md   # Silent memory manager
+├── skills/              # Shared skill files (earned over time)
+├── orchestration-log/   # Per-spawn log entries
+└── log/                 # Session history
 ```
 
-### Step 3: Create Specialist Worker Agents
+**Commit this folder.** Anyone who clones your repo gets the team—with all their accumulated knowledge.
 
-**Planner Subagent:**
+### Squad Agent Charters
 
-```yaml
-# .github/agents/planner.agent.md
----
-name: Planner
-description: Creates detailed implementation plans from research findings
-user-invokable: false
-tools: ['search', 'fetch', 'create']
-model: Claude Opus 4.5
----
+Each agent gets a charter defining identity, expertise, boundaries, and voice. This is far richer than a simple system prompt:
 
-# Planner: Strategic Implementation Planning
+```markdown
+# Ripley — Lead
 
-You create structured implementation plans based on codebase findings.
+> The one who keeps everyone honest and the scope tight.
 
-## Your Outputs
-Generate plans in this format:
+## Identity
+- **Name:** Ripley
+- **Role:** Lead
+- **Expertise:** Architecture, scope management, code review
+- **Style:** Direct. Doesn't sugarcoat. Asks hard questions.
 
-IMPLEMENTATION PLAN: [Feature Name]
+## What I Own
+- Architecture decisions and trade-offs
+- Scope and priority management
+- Code review and quality gates
 
-Context:
-- Relevant files identified by Explorer
-- Existing patterns to follow
-- Dependencies to consider
+## Boundaries
+**I handle:** Scope, decisions, code review, architecture.
+**I don't handle:** Implementation. That belongs to the devs.
+**When I'm unsure:** I say so and suggest who might know.
+**If I review others' work:** On rejection, I may require a
+different agent to revise (not the original author).
 
-Phases: (3-10 phases, each completable in 1-3 hours)
-1. Phase Name
-   - Files to modify
-   - Changes required
-   - Tests to write
-   - Risks
+## Model
+- **Preferred:** auto
+- **Rationale:** Cost first unless writing code
 
-Success Criteria:
-- Specific validation points
-- Expected test outcomes
-- Performance/security requirements
-
-## Constraints
-- Planning only—no implementation
-- Reference Explorer findings explicitly
-- Be specific: exact file paths, function names
-- Each phase should compile/test independently
+## Voice
+Opinionated about architecture. Will push back if scope creeps.
+Prefers small PRs over big bangs. Thinks "YAGNI" is a feature.
 ```
 
-**Implementer Subagent:**
+### Squad Routing
 
-```yaml
-# .github/agents/implementer.agent.md
+The routing table determines which agent handles each type of work:
+
+| Work Type | Route To | Examples |
+|-----------|----------|----------|
+| UI/Frontend | Frontend Dev | Components, layouts, styling |
+| APIs/Backend | Backend Dev | Endpoints, data models, auth |
+| Code review | Lead | Review PRs, architecture decisions |
+| Testing | Tester | Write tests, find edge cases |
+| Scope & priorities | Lead | What to build next, trade-offs |
+| `"Team, ..."` | All relevant | Fan-out parallel execution |
+| Quick questions | Coordinator | Answers directly, no agent spawn |
+
+**Routing rules:**
+1. **Eager by default** — spawn all agents who could usefully start work, including anticipatory downstream work
+2. **"Team, ..." → fan-out** — spawn all relevant agents in parallel
+3. **Quick facts → coordinator answers directly** — don't spawn an agent for "what port does the server run on?"
+4. **Anticipate downstream work** — if a feature is being built, spawn tester to write test cases from requirements simultaneously
+
+### Squad Memory System
+
+Memory is layered. Knowledge compounds with use.
+
+| Layer | What | Who Writes | Who Reads |
+|-------|------|-----------|-----------|
+| `charter.md` | Identity, expertise, voice | Squad (at init) | The agent itself |
+| `history.md` | Project-specific learnings | Each agent, after every session | That agent only |
+| `decisions.md` | Team-wide decisions | Any agent (via inbox) | All agents |
+| `skills/` | Reusable patterns (earned) | Agents from real work | All agents |
+| `log/` | Session history | Scribe | Anyone (searchable archive) |
+
+**How knowledge compounds over time:**
+
+| Stage | What Agents Know |
+|-------|-----------------|
+| 🌱 First session | Project description, tech stack, user name |
+| 🌿 After a few sessions | Conventions, component patterns, API design, test strategies |
+| 🌳 Mature project | Full architecture, tech debt map, regression patterns, performance conventions |
+
+### Key Innovations in Squad
+
+**Per-Agent Model Selection (Cost-First):**
+
+| Task Output | Model | Tier |
+|-------------|-------|------|
+| Writing code (implementation, refactoring, tests) | `claude-sonnet-4.5` | Standard |
+| Writing prompts or agent designs | `claude-sonnet-4.5` | Standard |
+| Non-code work (docs, planning, triage) | `claude-haiku-4.5` | Fast |
+| Visual/design work requiring image analysis | `claude-opus-4.5` | Premium |
+
+**Reviewer Protocol — No Self-Review Loops:**
+1. Agent A submits work → Reviewer rejects
+2. Agent A is **locked out** — cannot revise their own rejected work
+3. Agent B must handle the revision
+4. If Agent B is also rejected, Agent C takes over
+5. If all agents are locked out, Squad escalates to you
+
+**Ralph — Autonomous Work Monitor:**
+Ralph continuously checks for pending work—open issues, draft PRs, review feedback, CI failures—and keeps the squad moving. He self-chains: agents complete work → Ralph checks for more → triage → assign → spawn → repeat. The team never sits idle when there's work to do.
+
+**Ceremonies — Structured Team Meetings:**
+- **Design Review** (automatic): Triggers before multi-agent tasks. Lead facilitates, gets each agent's perspective on interfaces, risks, and contracts.
+- **Retrospective** (automatic): Triggers after build failures or reviewer rejections. Focused root-cause analysis.
+
 ---
-name: Implementer
-description: Executes implementation plans with TDD enforcement
-user-invokable: false
-tools: ['edit', 'create', 'delete', 'search', 'runTests']
-model: Claude Sonnet 4
----
 
-# Implementer: Plan Execution Specialist
+<!-- 🎬 MAJOR SECTION: Getting Started with Squad -->
+## Getting Started with Squad
 
-You execute implementation plans created by Planner.
+*From zero to a working AI team in under 10 minutes*
 
-## Your Process
-1. Read the plan phase carefully
-2. Write failing tests first (TDD)
-3. Run tests to verify failure
-4. Implement minimal code to pass tests
-5. Run tests to verify pass
-6. Report completion with file changes
-
-## Quality Standards
-- Follow existing code style and patterns
-- Keep functions focused and single-purpose
-- Add error handling for edge cases
-- Use descriptive variable/function names
-- Make atomic commits per logical change
-
-## Constraints
-- Execute plan exactly as specified
-- Don't add unrequested features
-- Don't skip test-first approach
-- Report blockers immediately (missing dependencies, ambiguous requirements)
-```
-
-**Reviewer Subagent:**
-
-```yaml
-# .github/agents/reviewer.agent.md
----
-name: Reviewer
-description: Validates implementation quality against plan and standards
-user-invokable: false
-tools: ['search', 'fetch', 'analysis', 'linter', 'runTests']
-model: Claude Sonnet 4
----
-
-# Reviewer: Quality Validation Specialist
-
-You validate implementations against the original plan and quality standards.
-
-## Review Checklist
-1. **Plan Adherence**: Does implementation match plan objectives?
-2. **Code Quality**: Clean, readable, follows project patterns?
-3. **Test Coverage**: All new code covered by tests?
-4. **Error Handling**: Edge cases handled appropriately?
-5. **Security**: No hardcoded secrets, SQL injection, XSS vulnerabilities?
-6. **Performance**: No obvious inefficiencies (N+1 queries, O(n²) algorithms)?
-
-## Return Structure
-STATUS: [APPROVED | NEEDS_REVISION | FAILED]
-
-FINDINGS:
-- [Critical issues that block approval]
-- [Suggestions for improvement]
-- [Praise for good practices]
-
-DECISION RATIONALE:
-- [Why this status was chosen]
-
-## Status Meanings
-- APPROVED: Ready to proceed, meets all criteria
-- NEEDS_REVISION: Fixable issues, specific feedback provided
-- FAILED: Fundamental problems, may need re-planning
-```
-
-### Step 4: Test Your Agents Individually
-
-Before orchestration, verify each specialist works correctly:
+### Step 1: Install Squad
 
 ```bash
-# Explorer test
-@explorer Analyze authentication patterns in src/auth/
-
-# Planner test
-@planner Create plan for adding OAuth support based on [Explorer findings]]
-
-# Implementer test
-@implementer Execute Phase 1 of the OAuth plan
-
-# Reviewer test
-@reviewer Validate the OAuth implementation against plan criteria
+mkdir my-project && cd my-project
+git init
+npx github:bradygaster/squad
 ```
 
-### Step 5: Enable Parallel Execution (VS Code 1.109+)
+This copies `squad.agent.md` into `.github/agents/` and installs templates. Your actual team (`.ai-team/`) is created at runtime when you first talk to Squad.
 
-Update conductor instructions to use parallel invocation:
+### Step 2: Form Your Team
 
-```yaml
-## Parallel Execution Patterns
+Open Copilot, select **Squad**, and describe your project:
 
-# Research multiple subsystems simultaneously
-"In parallel: @explorer analyze src/auth/, @explorer analyze src/database/"
-
-# Review multiple aspects independently
-"In parallel: @reviewer check security, @reviewer check performance"
-
-# Maximum 10 parallel agents per phase
 ```
+You: "I'm starting a new project. Set up the team.
+      Here's what I'm building: a recipe sharing app with React and Node."
+
+Squad proposes:
+  🏗️ Ripley   — Lead          Scope, decisions, code review
+  ⚛️ Dallas   — Frontend Dev  React, UI, components
+  🔧 Kane     — Backend Dev   APIs, database, services
+  🧪 Lambert  — Tester        Tests, quality, edge cases
+  📋 Scribe   — (silent)      Memory, decisions, session logs
+```
+
+You confirm (or adjust roles/add someone), and Squad creates the full `.ai-team/` directory structure with charters, histories, and routing rules. Each agent's `history.md` is seeded with your project description and tech stack for day-1 context.
+
+### Step 3: Put the Team to Work
+
+**Name an agent directly:**
+```
+> Ripley, fix the error handling in the API
+```
+Squad spawns Ripley specifically.
+
+**Fan out to the whole team:**
+```
+> Team, build the login page
+
+  🏗️ Lead — analyzing requirements...          ⎤
+  ⚛️ Frontend — building login form...          ⎥ all launched
+  🔧 Backend — setting up auth endpoints...     ⎥ in parallel
+  🧪 Tester — writing test cases from spec...   ⎥
+  📋 Scribe — logging everything...             ⎦
+```
+
+When agents finish, the coordinator immediately chains follow-up work—tests reveal edge cases, the backend agent picks them up, no waiting for you to ask.
+
+**General requests get smart routing:**
+```
+> Add input validation to the form
+```
+Squad checks `routing.md`, picks the best match, and may launch anticipatory agents (e.g., tester writes validation test cases while the implementer builds).
+
+### Step 4: Grow the Team as Needed
+
+**Add new members:**
+```
+> I need a DevOps person
+```
+Squad allocates a name from the current casting universe, generates a charter and history seeded with project context. Immediately productive.
+
+**Remove members gracefully:**
+```
+> Remove the designer — we're past that phase
+```
+Agents are never deleted. Charter and history move to `.ai-team/agents/_alumni/`. If you need them back later, they remember everything.
+
+**Integrate with GitHub Issues:**
+```
+> Connect to myorg/myrepo
+> Show the backlog
+> Work on #12
+```
+Squad supports label-based triage (`squad` label → Lead triages → assigns `squad:{member}`), branch creation, PR generation, and even autonomous work via `@copilot` coding agent integration.
+
+### Step 5: Export and Share Teams
+
+```bash
+# Export your trained team
+npx github:bradygaster/squad export
+
+# Import to another repo
+npx github:bradygaster/squad import squad-export.json
+```
+
+Agent histories are split into **portable knowledge** (general learnings that transfer) and **project-specific learnings** (which stay context-tagged). Imported agents bring their skills without assuming your project works the same way.
 
 ### Advanced Configuration
 
-**Agent Restrictions** — Control which agents can invoke which:
+**Response Modes** — Squad uses tiered response modes automatically:
 
-```yaml
-# Conductor with explicit allow list
-agents:
-  allow: ['explorer', 'planner', 'implementer', 'reviewer']
+| Mode | Time | What Happens | When Used |
+|------|------|-------------|-----------|
+| **Direct** | ~2–3s | Coordinator answers from memory | Quick factual questions |
+| **Lightweight** | ~8–12s | Agent spawned with reduced overhead | Simple tasks |
+| **Standard** | ~25–35s | Full agent spawn with charter/history/decisions | Most work |
+| **Full** | ~40–60s | Multi-agent parallel spawn with design review | Complex multi-domain tasks |
 
-# Worker that can only hand off to conductor
-agents:
-  allow: ['conductor']  # Only reports back
-
-# Block dangerous agents
-agents:
-  deny: ['production-deploy', 'database-admin']
+**Model Overrides:**
+```
+> "use opus for this"            — one-off premium
+> "always use haiku"             — session-wide cost savings
+> "use gpt-5.2-codex for Kane"  — agent-specific override
 ```
 
-**Model Fallback** — Ensure availability across models:
-
-```yaml
-model:
-  - Claude Opus 4.5     # Preferred for complex reasoning
-  - Claude Sonnet 4     # Fallback
-  - GPT-5               # Final fallback
-```
+**Skills System** — Agents earn reusable knowledge over time:
+- **Starter skills**: Bundled at init (e.g., Squad conventions)
+- **Earned skills**: Written by agents from real work, with confidence lifecycle: `low → medium → high`
+- Agents read relevant skill files before working on a task
 
 ---
 
@@ -816,93 +752,101 @@ Master Conductor
 
 ## Real-World Use Cases
 
-### Use Case 1: OAuth Provider Integration
+### Use Case 1: Full-Stack Feature with Squad
 
-**The Problem:** Adding a new OAuth provider (Microsoft) to an existing auth system required researching existing providers (Google, GitHub), understanding token refresh patterns, planning database schema changes, implementing the integration, and validating security. Developer estimated 12 hours; actual time was 18 hours with 3 rounds of rework.
+**The Problem:** Building a user authentication system requires coordinated work across frontend (login form, session management), backend (auth endpoints, token handling), testing (security edge cases), and architecture (token refresh, session storage). A single agent juggling all four domains loses context and produces mediocre results.
 
-**The Solution:** Conductor agent orchestrates 4-phase workflow:
-1. Explorer researches existing OAuth implementations (Google, GitHub) → identifies common patterns
-2. Planner creates 5-phase plan based on findings → includes token refresh edge cases from history
-3. Implementer executes plan → TDD cycle for each phase
-4. Reviewer validates security, token handling, error cases → catches race condition in token refresh
+**The Solution:** Squad fan-out with parallel specialists:
+
+```
+You: "Team, build the authentication system"
+
+  🏗️ Lead — scoping requirements, defining contracts...
+  ⚛️ Frontend — building login form, session UI...
+  🔧 Backend — setting up auth endpoints, JWT handling...
+  🧪 Tester — writing test cases from spec...
+  📋 Scribe — logging decisions...
+
+  ↓ (agents finish, coordinator chains follow-up)
+
+  🧪 Tester — edge cases from backend reveal token refresh gap
+  🔧 Backend — picks up edge case, no waiting for you to ask
+  🏗️ Lead — reviews contracts between frontend/backend
+```
 
 **Outcome:**
-- Planning time: 4 hours → 30 minutes (research + plan generation)
-- Implementation time: 10 hours → 6 hours (TDD + structured plan)
-- Rework iterations: 3 → 1 (reviewer caught race condition before commit)
-- Total: 18 hours → 7 hours (61% time savings)
-- Quality: 0 production incidents vs. 1 in previous OAuth integration
+- Parallel execution: 4 agents working simultaneously vs. 1 agent context-switching
+- Knowledge compounds: After a few sessions, agents know your auth patterns, conventions, and preferences
+- Quality gate: Lead reviews and can reject → different agent must revise (no self-review loops)
+- Decision trail: `decisions.md` captures JWT format, session storage strategy, endpoint contracts
 
 ---
 
-### Use Case 2: API Redesign for Performance
+### Use Case 2: Issue-Driven Development at Scale
+
+**The Problem:** Team has 30+ open issues in the backlog. Manually triaging, assigning, implementing, and reviewing each one creates a bottleneck. Developers spend more time on coordination than coding.
+
+**The Solution:** Squad with Ralph (work monitor) + GitHub Issues integration:
+
+1. Label issues with `squad` → Lead auto-triages, assigns `squad:{member}`
+2. Ralph monitors the board: untriaged issues, stalled PRs, failing CI
+3. Agents pick up assigned issues, create branches, implement, open PRs
+4. Simple issues routed to `@copilot` coding agent for fully autonomous work
+5. Ralph keeps cycling: work done → check for more → triage → assign → repeat
+
+**Outcome:**
+- Triage time: Hours → seconds (Lead auto-analyzes and assigns)
+- Idle time: Zero (Ralph ensures team never sits idle when work exists)
+- Autonomous loop: `@copilot` handles well-defined bugs, test coverage, lint fixes without human intervention
+- Full audit trail: Every decision, every session, every triage note logged and searchable
+
+---
+
+### Use Case 3: API Redesign for Performance
 
 **The Problem:** Legacy API had N+1 query problems causing 3-5 second response times. Needed comprehensive analysis of 15 endpoints, performance profiling, redesign plan, implementation, and validation. Cross-cutting concern: changes affected multiple subsystems (API layer, data access, caching).
 
-**The Solution:** Parallel Specialists pattern with 3 reviewers:
+**The Solution:** Squad parallel specialists with design review ceremony:
 
-1. Explorer identifies all endpoint implementations → 15 files
-2. Planner creates phased optimization plan → Groups related endpoints
-3. Implementer executes optimizations → Query batching, caching layer
-4. **Parallel Validation:**
-   - Performance Reviewer → Validates query counts, response times
-   - Security Reviewer → Ensures caching doesn't leak data
-   - Code Quality Reviewer → Validates maintainability
+1. Design Review ceremony triggers before work begins — Lead gets each agent's perspective on interfaces and risks
+2. Backend Dev analyzes all endpoint implementations → identifies N+1 patterns
+3. Lead creates phased optimization plan → groups related endpoints
+4. Backend Dev executes optimizations → query batching, caching layer
+5. Tester validates performance, edge cases, and data integrity in parallel
 
 **Outcome:**
 - Analysis time: 6 hours → 2 hours (automated pattern detection)
 - Validation time: 8 hours (serial) → 3 hours (parallel)
 - Response times: 3-5s → 200-400ms (90% improvement)
-- Coverage: 15/15 endpoints optimized vs. 9/15 in previous manual attempt
-- Security incidents: 0 (caching reviewer caught potential user data leak)
-
----
-
-### Use Case 3: Compliance Documentation Generation
-
-**The Problem:** Required security compliance audit docs for 20 backend services. Each service needed: architecture diagram, data flow documentation, security controls inventory, and test coverage report. Manual process: 2 hours per service × 20 = 40 hours.
-
-**The Solution:** Hierarchical Orchestration with domain-specific sub-conductors:
-
-1. Master Conductor delegates per-service documentation to Service Conductors
-2. Each Service Conductor coordinates 4 specialists:
-   - Architecture Analyzer
-   - Security Controls Auditor
-   - Test Coverage Reporter
-   - Documentation Writer
-
-**Outcome:**
-- Total time: 40 hours → 12 hours (70% reduction)
-- Consistency: 100% (same format across all services vs. 60% in manual approach)
-- Coverage gaps identified: 23 (automated test reviewer vs. 8 found manually)
-- Audit result: Pass first attempt (previous audit required 2 remediation rounds)
-- Reusability: Templates generated, future audits < 4 hours
+- Knowledge captured: Backend agent's `history.md` now contains caching patterns, query optimization strategies — future optimizations start faster
+- Retrospective: If tests fail, automatic retro identifies root cause
 
 ---
 
 ## ✅ What You Can Do Today
 
-**Immediate Actions (15 minutes):**
-- [ ] Review the 4-agent conductor system definition in [Building Your Team](#building-your-own-agent-team)
-- [ ] Choose a community system to explore: [Copilot Orchestra](https://github.com/ShepAlderson/copilot-orchestra) or [GitHub Copilot Atlas](https://github.com/bigguy345/Github-Copilot-Atlas)
-- [ ] Identify one complex task in your backlog that requires 3+ cognitive modes (planning, coding, reviewing)
+**Immediate Actions (10 minutes):**
+- [ ] Install Squad in a project: `npx github:bradygaster/squad`
+- [ ] Form your team by describing your project to the Squad agent
+- [ ] Give your first task: `"Team, build [something small]"` and watch parallel execution in action
 
-**Short-Term Implementation (2-4 hours):**
-- [ ] Create `.github/agents/` directory in your workspace
-- [ ] Implement the Conductor agent definition from Step 2 above
-- [ ] Create 2-3 specialist agents (Planner, Implementer, Reviewer minimum)
-- [ ] Test each agent individually with isolated prompts before orchestrating
-- [ ] Run your first orchestrated workflow on a small feature
+**Short-Term Exploration (1-2 hours):**
+- [ ] Run 3-5 tasks to let agents accumulate `history.md` knowledge — notice how they stop asking questions they've already answered
+- [ ] Try naming agents directly (`"Ripley, fix the error handling"`) vs. fan-out (`"Team, build the dashboard"`)
+- [ ] Check `.ai-team/decisions.md` to see captured team decisions
+- [ ] Add a new team member: `"I need a DevOps person"`
+- [ ] Try the reviewer protocol: have Lead review work and observe the rejection/reassignment flow
 
-**Advanced Exploration (1-2 weeks):**
-- []] Deploy Copilot Orchestra or Atlas system in your repo
-- [ ] Customize agent models based on your budget (Opus for planning, Sonnet for implementation, Haiku for simple reviews)
-- [Add domain-specific specialists (Security Reviewer, Performance Analyzer, Documentation Writer)
-- [ ] Measure before/after metrics: implementation time, rework iterations, test coverage, defect density
-- [ ] Monitor for graduation signals (>50% tasks orchestrated, coordination overhead exceeds benefits)
+**Advanced Adoption (1-2 weeks):**
+- [ ] Enable GitHub Issues integration with `squad` label-based triage
+- [ ] Add `@copilot` coding agent for autonomous handling of well-defined tasks
+- [ ] Activate Ralph (work monitor) for continuous backlog processing
+- [ ] Export your trained team (`npx github:bradygaster/squad export`) and import into another project
+- [ ] Measure before/after metrics: implementation time, rework iterations, test coverage, context switching overhead
+- [ ] Monitor knowledge compounding: compare agent behavior at week 1 vs. week 4
 
 **Next Steps After Completion:**
-1. ✅ Complete 4-agent conductor deployment and validate on 3-5 tasks
+1. ✅ Validate Squad on 3-5 real tasks and observe knowledge compounding
 2. 📖 Review [Agentic SDLC](../agentic-sdlc/) for organization-wide scaling patterns
 3. 📊 Track team velocity improvements (tasks/week, time-to-delivery, quality metrics)
 4. 🚀 Present results to leadership using [Agentic Delivery](../../exec-talks/agentic-delivery/) framing
@@ -942,15 +886,17 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 - 📖 **[Subagents](https://code.visualstudio.com/docs/copilot/agents/subagents)** — Subagent invocation, parallel execution, context isolation benefits
 - 📖 **[VS Code 1.109 Release Notes](https://code.visualstudio.com/updates/v1_109#_agent-orchestration)** — Agent orchestration features, invocation controls, parallel execution support
 
+**Squad Resources:**
+- 🐙 **[Squad Repository](https://github.com/bradygaster/squad)** — Production-ready agent team system with persistent memory, parallel execution, GitHub Issues integration
+- 📖 [Squad Product Guide](https://github.com/bradygaster/squad/blob/main/docs/guide.md) — Comprehensive usage guide covering all features
+- 📖 [Squad Model Selection](https://github.com/bradygaster/squad/blob/main/docs/features/model-selection.md) — Cost-first per-agent model routing
+- 📖 [Squad Skills System](https://github.com/bradygaster/squad/blob/main/docs/features/skills.md) — Earned knowledge with confidence lifecycle
+- 📖 [Ralph Work Monitor](https://github.com/bradygaster/squad/blob/main/docs/features/ralph.md) — Autonomous backlog processing
+
 **Additional Resources:**
 - 🎓 [Chat Sessions](https://code.visualstudio.com/docs/copilot/chat/chat-sessions) — Managing context windows and agent sessions
 - 🔧 [Agent Invocation Controls](https://code.visualstudio.com/updates/v1_109#_control-how-custom-agents-are-invoked) — `user-invokable`, `disable-model-invocation`, `agents` field
 - 💬 [VS Code Discussions - Agent Teams](https://github.com/microsoft/vscode-discussions/discussions) — Community questions and patterns
-
-**Community Resources:**
-- 🐙 [Copilot Orchestra Repository](https://github.com/ShepAlderson/copilot-orchestra) — Complete 4-agent system with ADR generation, TDD enforcement
-- 🐙 [GitHub Copilot Atlas Repository](https://github.com/bigguy345/Github-Copilot-Atlas) — Extended 6-agent system with parallel research, context conservation
-- 📋 [VS Code Agent Orchestration Diagram](https://github.com/ShepAlderson/copilot-orchestra) — Visual reference from Orchestra author
 
 ---
 
@@ -968,24 +914,24 @@ Available for implementation: 80K (40%)
 Output quality: 70% (context pollution from phases 1-2)
 ```
 
-**Agent Teams (Orchestration):**
+**Agent Teams (Orchestration — Squad):**
 ```
-Conductor context: 200K tokens
-Delegation overhead: 20K (10%) - Coordinating phases
-Available for aggregation: 180K (90%)
+Coordinator context: 200K tokens
+Squad coordinator overhead: ~13,200 tokens (6.6%)
+Available for coordination: ~187,000 (93%+)
 
-Each subagent: Fresh 200K context
-Explorer: 200K fully focused on codebase analysis
-Planner: 200K fully focused on strategic planning
-Implementer: 200K fully focused on code generation
-Reviewer: 200K fully focused on quality validation
+Each spawned agent: Own 200K context window
+Agent at Week 1:  ~1,250 tokens (0.6%) — charter + seed history
+Agent at Week 4:  ~3,300 tokens (1.7%) — + 15 learnings, 8 decisions
+Agent at Week 12: ~9,000 tokens (4.5%) — + 50 learnings, 47 decisions
+Remaining per agent: ~191,000-199,000 (95%+) for actual work
 ↓
 Output quality per agent: 90-95% (no context pollution)
-Total system tokens: 800K (4 agents × 200K)
-Effective utilization: 85-90% vs. 40% for single agent
+Fan out to 5 agents: ~1M tokens total reasoning capacity
+Effective utilization: 93%+ vs. 40% for single agent
 ```
 
-**ROI: 70-80% context savings in conductor + 4x parallel specialist capacity**
+**ROI: 93%+ context available for work + 5x parallel specialist capacity**
 
 ---
 
