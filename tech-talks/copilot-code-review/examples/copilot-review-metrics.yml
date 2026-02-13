@@ -1,0 +1,122 @@
+name: Copilot Review Metrics
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+
+jobs:
+  track-review-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Wait for Copilot Review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            const copilotReview = reviews.find(r => r.user.login === 'github-copilot[bot]');
+            
+            if (!copilotReview) {
+              console.log('Waiting for Copilot review...');
+              // Retry logic would go here
+            }
+      
+      - name: Extract Review Metrics
+        id: metrics
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: comments } = await github.rest.pulls.listReviewComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            const copilotComments = comments.filter(c => 
+              c.user.login === 'github-copilot[bot]'
+            );
+            
+            // Categorize by severity
+            const critical = copilotComments.filter(c => 
+              c.body.includes('🔴') || c.body.includes('Critical')
+            ).length;
+            
+            const high = copilotComments.filter(c => 
+              c.body.includes('🟠') || c.body.includes('High')
+            ).length;
+            
+            const medium = copilotComments.filter(c => 
+              c.body.includes('🟡') || c.body.includes('Medium')
+            ).length;
+            
+            core.setOutput('total_findings', copilotComments.length);
+            core.setOutput('critical_findings', critical);
+            core.setOutput('high_findings', high);
+            core.setOutput('medium_findings', medium);
+            
+            return {
+              total: copilotComments.length,
+              critical,
+              high,
+              medium,
+              pr_number: context.issue.number
+            };
+      
+      - name: Post Metrics Summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const metrics = ${{ steps.metrics.outputs.result }};
+            
+            const summary = `
+            ## 📊 Copilot Review Summary
+            
+            **Total Findings:** ${metrics.total}
+            - 🔴 Critical: ${metrics.critical}
+            - 🟠 High: ${metrics.high}
+            - 🟡 Medium: ${metrics.medium}
+            
+            ${metrics.critical > 0 ? '⚠️ **Action Required:** Critical issues must be resolved before merge.' : '✅ No critical issues found.'}
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: summary
+            });
+      
+      - name: Block Merge on Critical Issues
+        if: steps.metrics.outputs.critical_findings > 0
+        run: |
+          echo "::error::Critical security or quality issues found. Resolve before merging."
+          exit 1
+      
+      - name: Log Metrics to Analytics
+        if: github.event.action == 'closed' && github.event.pull_request.merged
+        env:
+          ANALYTICS_ENDPOINT: ${{ secrets.ANALYTICS_ENDPOINT }}
+          ANALYTICS_KEY: ${{ secrets.ANALYTICS_KEY }}
+        run: |
+          curl -X POST $ANALYTICS_ENDPOINT \
+            -H "Authorization: Bearer $ANALYTICS_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "pr_merged",
+              "pr_number": "${{ github.event.pull_request.number }}",
+              "review_findings": {
+                "total": "${{ steps.metrics.outputs.total_findings }}",
+                "critical": "${{ steps.metrics.outputs.critical_findings }}",
+                "high": "${{ steps.metrics.outputs.high_findings }}",
+                "medium": "${{ steps.metrics.outputs.medium_findings }}"
+              },
+              "pr_duration_hours": "${{ github.event.pull_request.merged_at - github.event.pull_request.created_at }}",
+              "commits_count": "${{ github.event.pull_request.commits }}"
+            }'

@@ -57,26 +57,53 @@ Follow `.github/prompts/tech-talk/research-instructions.md`.
 Follow `.github/prompts/tech-talk/planning-instructions.md`.
 
 1. Read `research.md`, review images and examples
-2. Generate `tech-talks/{topic}/plan.md` with content outline
+2. Generate `tech-talks/{topic}/plan.md` with **near-final prose** for every section
 3. Map each artifact and reference to its target section
 4. Identify gaps in research or missing examples
+5. Create any missing example files identified in the Gaps section (save to `examples/`)
+
+The plan should be 300+ lines and contain ready-to-assemble prose for Problem, Solution, Mental Model, Decision Tree, Major Sections, Use Cases, and Actionable Checklist. **Phase 3 should be assembly, not content creation.**
 
 **Pause after Phase 2.** Show the user the plan and ask for approval before building.
 
-### Phase 3: Build
+### Phase 3: Build (Incremental Assembly)
 
-Follow `.github/prompts/tech-talk/build-instructions.md`.
+Follow `.github/prompts/tech-talk/build-instructions.md`. **Build the README in sections, not as one massive generation.** This is critical for performance — writing incrementally avoids the bottleneck of generating 800+ lines in a single pass.
 
-1. Read `research.md`, `plan.md`, all examples and images
-2. Generate `tech-talks/{topic}/README.md` following `TEMPLATE.md`
-3. Weave inline `[^n]` citations throughout the content
-4. Include the full `## 📖 References` section at the bottom
-5. Create any additional examples identified in the plan's Gaps section
-6. **Set frontmatter** — Add YAML frontmatter to README.md with:
-   - `status: active`
-   - `updated: <today's date YYYY-MM-DD>`
-   - `section: "<index section name>"` — one of: `Copilot Surfaces`, `Context & Customization`, `Agent Architecture`, `Agentic Transformation`, or `Executive Talks`
-7. **Sync index dates** — Run `node slides/scripts/sync-index-dates.mjs` to update the NEW badge data in `slides/index-custom.html` (keeps the `SLIDE_DATES` map in sync with frontmatter dates)
+#### Step 3a: Scaffold + Front Sections
+
+1. Read `plan.md` (this is your primary source — it has near-final prose)
+2. Read `TEMPLATE.md` for structure reference
+3. Create `tech-talks/{topic}/README.md` with:
+   - YAML frontmatter (`status`, `updated`, `section`)
+   - Title, Question, Content Fitness Assessment
+   - Problem section (assemble from plan)
+   - Solution section (assemble from plan)
+   - Key Artifacts section
+   - Mental Model Shift preview (Core Insight one-liner)
+   - Decision Tree (assemble from plan)
+
+#### Step 3b: Major Sections
+
+1. Read the `examples/` files needed for embedding
+2. **Append** to the README the 3-6 major sections:
+   - Use the plan's near-final prose for each section
+   - Embed code examples inline from `examples/`
+   - Embed images from `images/`
+   - Add `[^n]` inline citations from the references plan
+   - Add transitions between sections
+
+#### Step 3c: Closing Sections
+
+1. **Append** to the README:
+   - Real-World Use Cases (assemble from plan)
+   - Full Mental Model Shift section (assemble from plan)
+   - What You Can Do Today checklist (assemble from plan)
+   - Related Patterns
+   - References section (compile from plan's reference mapping)
+   - Behind the Scenes (if applicable)
+2. Remove any Authoring Guidelines section from TEMPLATE
+3. Run `node slides/scripts/sync-index-dates.mjs` to update badge data
 
 **Pause after Phase 3.** Show the user the completed tech talk and confirm it meets their needs. Offer the handoff buttons for slide generation as a separate next step.
 
@@ -86,3 +113,5 @@ Follow `.github/prompts/tech-talk/build-instructions.md`.
 - **References throughout** — every major claim cites its source
 - **Intermediate artifacts** — research.md and plan.md are preserved for reviewability
 - **Pause for review** — don't skip from research straight to final output
+- **Plan does the thinking, build does the assembly** — plan.md contains near-final prose; Phase 3 assembles and polishes, it doesn't invent content
+- **Incremental build** — write README in 3 steps (scaffold, major sections, closing) to avoid slow monolithic generation

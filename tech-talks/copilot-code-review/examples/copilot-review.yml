@@ -1,0 +1,41 @@
+# Enable automatic Copilot code reviews on pull requests
+version: 1
+
+review:
+  # Trigger automatic review on these events
+  triggers:
+    - pull_request_opened      # When PR is first created
+    - pull_request_synchronize # When new commits are pushed
+    - pull_request_reopened    # When closed PR is reopened
+  
+  # Minimum severity level to report (info, low, medium, high, critical)
+  severity_threshold: medium
+  
+  # File patterns to include in review
+  include_patterns:
+    - "src/**/*.{js,ts,jsx,tsx}"
+    - "lib/**/*.py"
+    - "**/*.java"
+  
+  # File patterns to exclude from review
+  exclude_patterns:
+    - "**/*.test.js"
+    - "**/*.spec.ts"
+    - "**/__mocks__/**"
+    - "dist/**"
+    - "build/**"
+    - "*.md"
+  
+  # Focus areas for review
+  focus:
+    - security          # Security vulnerabilities
+    - performance       # Performance issues
+    - maintainability   # Code quality and readability
+    - testing           # Test coverage and quality
+    - best_practices    # Language-specific best practices
+  
+  # Integration with required status checks
+  status_check:
+    enabled: true
+    required: true     # Block merge if critical issues found
+    context: "Copilot Code Review"

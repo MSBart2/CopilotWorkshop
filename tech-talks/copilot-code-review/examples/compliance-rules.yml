@@ -1,0 +1,97 @@
+# Organization-wide compliance rules for code review
+rules:
+  - id: "pii-encryption"
+    name: "PII Data Encryption"
+    severity: critical
+    description: "All PII fields must be encrypted at rest and in transit"
+    pattern: 
+      language: "javascript,typescript,python"
+      match: "(email|ssn|phone|address|dob)\\s*[:=]"
+      require_context: ["encrypt", "cipher", "crypto"]
+    message: |
+      Personal Identifiable Information (PII) detected without encryption.
+      
+      Required actions:
+      1. Use approved encryption library (AES-256 or RSA-2048)
+      2. Add audit log entry for PII access
+      3. Document encryption key management
+      
+      Reference: Security Policy Section 4.2
+      Compliance: GDPR Article 32, SOC2 CC6.1
+    
+    suggested_fix: |
+      const crypto = require('crypto');
+      const encryptedEmail = crypto.encrypt(email, process.env.ENCRYPTION_KEY);
+
+  - id: "api-error-handling"
+    name: "API Error Handling Required"
+    severity: high
+    files: "src/api/**/*.{js,ts}"
+    pattern:
+      match: "app\\.(get|post|put|delete|patch)"
+      require_context: ["try", "catch", "error"]
+    message: |
+      All API endpoints must include comprehensive error handling.
+      
+      Required:
+      - try/catch blocks for async operations
+      - Structured error logging with request ID
+      - Appropriate HTTP status codes (400, 500, etc.)
+      - No sensitive data in error responses
+    
+    suggested_fix: |
+      app.post('/api/users', async (req, res) => {
+        try {
+          const user = await createUser(req.body);
+          res.status(201).json(user);
+        } catch (error) {
+          logger.error('User creation failed', { 
+            requestId: req.id, 
+            error: error.message 
+          });
+          res.status(500).json({ 
+            error: 'User creation failed',
+            requestId: req.id 
+          });
+        }
+      });
+
+  - id: "database-transaction"
+    name: "Database Transaction Safety"
+    severity: high
+    pattern:
+      language: "javascript,typescript"
+      match: "(INSERT|UPDATE|DELETE).*\\n.*(INSERT|UPDATE|DELETE)"
+      require_context: ["transaction", "commit", "rollback"]
+    message: |
+      Multiple database operations detected without transaction wrapper.
+      
+      Risk: Partial failures can leave database in inconsistent state.
+      Required: Wrap multi-step operations in database transaction.
+    
+    suggested_fix: |
+      const transaction = await db.transaction();
+      try {
+        await transaction.run('INSERT INTO users...');
+        await transaction.run('INSERT INTO profiles...');
+        await transaction.commit();
+      } catch (error) {
+        await transaction.rollback();
+        throw error;
+      }
+
+  - id: "test-required"
+    name: "Test Coverage Required"
+    severity: medium
+    files: "src/**/*.{js,ts}"
+    exclude: "**/*.test.{js,ts}"
+    condition: "new_file"  # Only trigger for new files
+    message: |
+      New source file created without corresponding test file.
+      
+      Required: Create test file with minimum coverage:
+      - Happy path test cases
+      - Error handling test cases
+      - Edge case validation
+      
+      Expected location: src/**/*.test.{js,ts} or __tests__/**/*.{js,ts}
